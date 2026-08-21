@@ -1,0 +1,48 @@
+Hero Content validation
+=======================
+Checks: 41/41
+[OK] React import
+[OK] framer-motion explicit
+[OK] lottie-web dynamic import
+[OK] no _framer-runtime
+[OK] no _responsive-runtime
+[OK] no RichText
+[OK] no useVariantState
+[OK] no data-framer
+[OK] 12 realisations
+[OK] ticker velocity 50 px/s
+[OK] ticker gap 16
+[OK] desktop realisation 607x405
+[OK] tablet realisation 475
+[OK] phone realisation 365
+[OK] realisation image fit fill
+[OK] realisation border 7
+[OK] realisation radius 32
+[OK] root padding 128 48 48
+[OK] inner max width 1324
+[OK] desktop title 80
+[OK] tablet title 56
+[OK] phone title 32
+[OK] subtitle phone 16
+[OK] title OpenType source features
+[OK] title word tokenization retained
+[OK] CTA exact main shadow
+[OK] CTA avatar 28
+[OK] CTA avatar white border 1
+[OK] CTA hover rotate 10 spring
+[OK] decorative stroke 85
+[OK] lottie source exact
+[OK] no invented lottie fallback
+[OK] profile tooltip width 174
+[OK] profile hover -5
+[OK] availability formula
+[OK] phone/tablet breakpoints
+[OK] source confirms text features
+[OK] source confirms CTA avatar white border
+[OK] source confirms ticker 50
+[OK] source confirms word tokenization
+[OK] source confirms line tokenization subtitle
+
+JSX syntax parser: OK (TypeScript transpileModule, HeroContent.jsx/App.jsx/main.jsx).
+npm/Vite build: NOT EXECUTED — npm registry DNS failed with EAI_AGAIN in this environment on 2026-08-18.
+This is recorded as an environment/network limitation, not silently counted as a passing build.

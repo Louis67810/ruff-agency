@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Plus+Jakarta+Sans:wght@700&display=swap");
+
+.processus,
+.processus * {
+  box-sizing: border-box;
+}
+
+.processus {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 1287px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 32px;
+  background: rgb(251, 251, 251);
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.processus__topLeftLine {
+  position: absolute;
+  z-index: 1;
+  top: -686px;
+  left: -653px;
+  width: 1362px;
+  height: 1311px;
+  flex: none;
+  transform: rotate(31deg);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.processus__bottomLine {
+  position: absolute;
+  z-index: 1;
+  left: -533px;
+  right: -80px;
+  bottom: -330px;
+  width: auto;
+  height: 636px;
+  flex: none;
+  pointer-events: none;
+}
+
+.processus__rightLine {
+  position: absolute;
+  z-index: 1;
+  top: -512px;
+  right: -506px;
+  width: 1032px;
+  height: 1046px;
+  flex: none;
+  pointer-events: none;
+}
+
+.processus__fade {
+  position: absolute;
+  z-index: 1;
+  top: 74px;
+  right: 250px;
+  width: 118px;
+  height: 163px;
+  flex: none;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(251, 251, 251, 0) 0%,
+    rgba(251, 251, 251, 0.56) 53%,
+    rgb(251, 251, 251) 100%
+  );
+  transform: rotate(76deg);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.processus__content {
+  position: relative;
+  display: flex;
+  z-index: 2;
+  flex: 1 0 0;
+  width: 1px;
+  max-width: 1324px;
+  height: min-content;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 48px;
+  overflow: visible;
+  padding: 0;
+}
+
+.processus__heading {
+  position: relative;
+  display: flex;
+  width: min-content;
+  height: min-content;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  overflow: visible;
+  padding: 0;
+}
+
+.processus__title {
+  position: relative;
+  width: 1002px;
+  height: auto;
+  flex: none;
+  margin: 0;
+  color: rgb(18, 26, 46);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.4em;
+  letter-spacing: -0.04em;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-feature-settings: "blwf" 1, "cv09" 1, "cv03" 1, "cv04" 1, "cv11" 1;
+}
+
+.processus__titlePhone {
+  display: none;
+}
+
+/*
+ * CTA = variante Framer "bleu sans carré" (SAAAO21_a).
+ * Le wrapper gris de 6px et le bouton interne sont conservés séparément
+ * car ils existent réellement dans l'export.
+ */
+.processus__cta {
+  position: relative;
+  display: flex;
+  width: min-content;
+  height: 60px;
+  flex: none;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  overflow: visible;
+  padding: 6px;
+  color: inherit;
+  text-decoration: none;
+  cursor: auto;
+  background: rgb(225, 228, 237);
+  border-radius: 15px;
+  box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.processus__ctaInner {
+  position: relative;
+  display: flex;
+  width: min-content;
+  height: 48px;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  overflow: hidden;
+  padding: 10px 24px;
+  border: 1px solid rgb(46, 77, 156);
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgb(78, 125, 250) 0%, rgb(1, 71, 255) 100%);
+  box-shadow:
+    inset 0 3px 0 0 rgba(255, 255, 255, 0.5),
+    inset 0 2px 6px 4px rgba(0, 0, 0, 0.08),
+    inset 0 -3px 0 0 rgb(14, 65, 199),
+    0 2.445551872253418px 3.2154479026794434px 0 rgba(0, 18, 54, 0.07),
+    0 6.761638164520264px 8.890301704406738px 0 rgba(0, 18, 54, 0.1),
+    0 16.2794189453125px 21.404420852661133px 0 rgba(0, 18, 54, 0.13),
+    0 54px 71px 0 rgba(0, 40, 54, 0.16);
+  will-change: background;
+}
+
+.processus__cta:hover .processus__ctaInner {
+  background: linear-gradient(161deg, rgb(67, 108, 222) 0%, rgb(36, 77, 181) 100%);
+}
+
+.processus__ctaText {
+  position: relative;
+  width: auto;
+  height: auto;
+  flex: none;
+  color: rgb(255, 255, 255);
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 102.88%;
+  white-space: pre;
+}
+
+.processus__separator {
+  position: relative;
+  width: 1326px;
+  height: 3px;
+  flex: none;
+}
+
+.processus__panel {
+  position: relative;
+  width: 100%;
+  height: 633px;
+  flex: none;
+  overflow: visible;
+  background: transparent;
+}
+
+.processus__panel > div { height: 100%; }
+
+.processus-reveal { --processus-delay: 0s; }
+.processus-reveal--title { filter: blur(15px); opacity: .001; transform: translateY(10px); }
+.processus-reveal--rise { opacity: 0; transform: translateY(45px); }
+.processus-reveal--title.is-visible { animation: processus-title-in .4s cubic-bezier(.44,0,.56,1) var(--processus-delay) both; }
+.processus-reveal--rise.is-visible { animation: processus-rise-in .4s cubic-bezier(.44,0,.56,1) var(--processus-delay) both; }
+.processus__titleReveal { width: 1002px; }
+@keyframes processus-title-in { to { filter: blur(0); opacity: 1; transform: translateY(0); } }
+@keyframes processus-rise-in { to { opacity: 1; transform: translateY(0); } }
+
+/* Tablet — variante Framer s0FwJI2CV */
+@media (max-width: 1399px) and (min-width: 810px) {
+  .processus__topLeftLine {
+    top: -566px;
+    left: -1063px;
+  }
+
+  .processus__rightLine {
+    right: -696px;
+  }
+
+  .processus__fade {
+    display: none;
+  }
+
+  .processus__heading {
+    width: 100%;
+    gap: 34px;
+    order: 0;
+  }
+
+  .processus__title {
+    width: 100%;
+    max-width: 746px;
+    font-size: 42px;
+  }
+
+  .processus__titleReveal { width: 100%; }
+
+  .processus__panel {
+    order: 1;
+  }
+
+  .processus__separator {
+    display: none;
+  }
+}
+
+/* Phone — variante Framer xVtu4vq6l */
+@media (max-width: 809px) {
+  .processus {
+    height: 1028px;
+    padding: 64px 24px 32px;
+  }
+
+  .processus__topLeftLine {
+    top: -746px;
+    left: -643px;
+    right: -329px;
+    width: auto;
+  }
+
+  .processus__rightLine,
+  .processus__fade {
+    display: none;
+  }
+
+  .processus__heading {
+    width: 100%;
+    gap: 25px;
+  }
+
+  .processus__title {
+    width: 100%;
+    font-size: 32px;
+    line-height: 1.2em;
+  }
+
+  .processus__titleReveal { width: 100%; }
+
+  .processus__titleDesktop {
+    display: none;
+  }
+
+  .processus__titlePhone {
+    display: inline;
+  }
+
+  .processus__separator {
+    display: none;
+  }
+
+  .processus__ctaText {
+    font-size: 14px;
+  }
+}

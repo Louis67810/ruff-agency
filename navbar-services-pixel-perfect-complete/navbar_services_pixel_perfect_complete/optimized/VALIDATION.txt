@@ -1,0 +1,21 @@
+VALIDATION — NAVBAR SERVICES PIXEL PERFECT V2
+
+PASS — JSX/TSX syntax: 0 parse error (TypeScript transpileModule)
+PASS — CSS brace balance: valid
+PASS — 26/26 targeted source-to-output checks
+PASS — _framer-runtime.js imports: 0
+PASS — _responsive-runtime.js imports: 0
+PASS — RichText references: 0
+PASS — useVariantState references: 0
+PASS — data-framer-* in JSX: 0
+PASS — TextHover exact chevron path restored
+PASS — TextHover timing values restored
+PASS — popup y/opacity Spring transition restored using framer-motion
+PASS — 40px safe hover bridge / offset preserved
+PASS — CTA from original Services panel restored
+PASS — hero image Framer fit=fill restored
+PASS — bottom and extra dark SVG restored
+PASS — desktop service cards dimensions, borders, shadows and rotations restored
+PASS — dark variant order restored: Landing Page / Site Internet / Développement Web
+
+ENVIRONMENT NOTE — npm install/build could not be executed in this sandbox because registry.npmjs.org DNS returned EAI_AGAIN. This is an environment/network limitation, not a parser/build diagnostic. The preview package contains no @vitejs/plugin-react and pins React 18.3.1, React DOM 18.3.1, Framer Motion 12.43.0 and Vite 6.1.0.

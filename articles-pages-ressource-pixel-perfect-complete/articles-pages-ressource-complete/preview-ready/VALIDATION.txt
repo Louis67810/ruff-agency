@@ -1,0 +1,16 @@
+VALIDATION — Articles page Ressources
+
+- 70/70 contrôles source → sortie passent.
+- 6/6 contrôles de nettoyage Framer passent.
+- Parsing TypeScript/JSX de ArticlesRessource.jsx + main.jsx : OK (tsc, exit code 0 avec déclarations de modules de test).
+- `_framer-runtime.js` : 0 import restant.
+- `_responsive-runtime.js` : 0 import restant.
+- RichText : 0 restant.
+- useVariantState : 0 restant.
+- QueryEngine/CMS runtime : 0 restant.
+- data-framer-* : 0 restant.
+- Lottie : JSON original conservé, lu via lottie-web.
+- Spring disponibilité : framer-motion conservé avec bounce 0.2 / duration 0.4 / y 35 / opacity 0.001.
+- Responsive : Desktop ≥ 1400, Tablet 810–1399, Phone < 810.
+- `npm install && npm run build` a été tenté dans l'environnement de génération mais `npm install` a expiré avant création de node_modules ; le build Vite n'a donc pas été prétendu comme validé.
+- Limite de source : les deux Collections CMS sont explicitement vidées par l'exporteur (`__FRAMER_CMS_DATA__` vide). Les vraies données article/tag ne sont pas récupérables depuis ce ZIP.

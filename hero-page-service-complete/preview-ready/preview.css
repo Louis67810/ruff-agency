@@ -1,0 +1,13 @@
+html, body, #root { margin: 0; min-height: 100%; width: 100%; }
+body { background: rgb(18, 26, 46); overflow-x: hidden; }
+.preview-error {
+  box-sizing: border-box;
+  color: #b42318;
+  background: #fff;
+  border: 1px solid #f04438;
+  border-radius: 12px;
+  font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  margin: 24px;
+  padding: 20px;
+  white-space: pre-wrap;
+}

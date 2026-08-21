@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fbfbfb;
+  overflow-x: clip;
+}
+
+/* Decorative SVGs fade in without translating or changing their layout. */
+.hero-decoration,
+.h2-shape,
+.hero-deco,
+.hsr-deco,
+.realisations-decoration,
+.avis-vectors,
+.avis-vector,
+.cprs-vector-675,
+.cprs-vector-674 {
+  animation: svg-soft-appear 0.9s 1s ease-out both;
+}
+
+@keyframes svg-soft-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

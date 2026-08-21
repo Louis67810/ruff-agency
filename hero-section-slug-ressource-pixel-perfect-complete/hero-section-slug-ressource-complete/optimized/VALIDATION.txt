@@ -1,0 +1,21 @@
+VALIDATION
+- Composant reconstruit depuis HeroSectionSlug.js, sans assets inventés dans la version finale.
+- 3 variantes source mappées: desktop / Tablet / mobile.
+- Breakpoints visuels: Phone < 810px, Tablet 810–1399px, Desktop >= 1400px.
+- Fond exact: rgb(255, 251, 239).
+- Max-width exact: 1054px.
+- Titre: 56 / 42 / 32px.
+- Image principale: ratio 1.5080645161290323, fit fill, border 5.84px, radius 32px.
+- Cinq ombres de l'image principale conservées.
+- Photo auteur: 48px, border 2px, radius 79.76, cinq ombres conservées.
+- Tag Actualités et bloc auteur masqués sur mobile comme dans le source.
+- Les deux SVG décoratifs utilisent les paths exacts du source et sont masqués sur mobile.
+- framer-motion: 0 import.
+- _framer-runtime.js: 0 import.
+- _responsive-runtime.js: 0 import.
+- RichText: 0.
+- useVariantState: 0.
+- data-framer-*: 0.
+- Contrôles ciblés de valeurs source/sortie: 26/26 valeurs numériques/visuelles vérifiées.
+- Contrôles de nettoyage: 7/7 (runtime Framer, responsive runtime, framer-motion, RichText, useVariantState, data-framer-*, LayoutGroup absents).
+- npm install / build Vite tenté: expiration réseau avant création de node_modules ; build non revendiqué comme exécuté.

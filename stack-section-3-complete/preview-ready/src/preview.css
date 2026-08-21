@@ -1,0 +1,4 @@
+html, body, #root { margin: 0; min-height: 100%; width: 100%; }
+body { background: #fff; }
+.preview-error { margin: 32px; padding: 24px; border: 2px solid #d00; border-radius: 12px; color: #900; font-family: Arial, sans-serif; white-space: pre-wrap; }
+.preview-error pre { overflow: auto; }

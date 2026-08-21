@@ -1,0 +1,12 @@
+{
+  "name": "stack-section-3-optimized",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "main": "./StackSection3.jsx",
+  "types": "./StackSection3.d.ts",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  }
+}

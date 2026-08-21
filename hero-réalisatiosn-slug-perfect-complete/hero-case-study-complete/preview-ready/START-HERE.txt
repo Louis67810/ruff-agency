@@ -1,0 +1,5 @@
+1. Décompresse complètement le ZIP.
+2. Double-clique sur START.bat.
+3. Garde la fenêtre du terminal ouverte.
+
+La grande image du site n’est pas contenue dans le ZIP source : son cadre pixel-perfect apparaît volontairement sans faux asset. Passe `photoDuSite` pour afficher l’image réelle.

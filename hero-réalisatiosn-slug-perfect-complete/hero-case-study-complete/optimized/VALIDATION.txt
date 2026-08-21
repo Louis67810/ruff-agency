@@ -1,0 +1,11 @@
+VALIDATION SOURCE → VERSION OPTIMISÉE
+
+- Valeurs ciblées contrôlées dans la sortie : 44/44 OK
+- Faits ciblés contrôlés dans le React Framer source : 24/24 OK
+- Contrôles de nettoyage JSX : 5/5 OK
+
+Manquants sortie : aucun
+Manquants source : aucun
+Références Framer indésirables restantes dans JSX : aucune
+
+Limite prouvée de l’export : `photoDeProfil` et `photoDuSite` sont des propriétés externes du composant. Le ZIP ne contient pas les deux assets d’instance ; ils ne peuvent donc pas être recréés honnêtement à partir de ce fichier seul.

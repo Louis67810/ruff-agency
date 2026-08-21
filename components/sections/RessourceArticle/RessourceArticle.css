@@ -1,0 +1,15 @@
+/* Page article : contenu à gauche, sidebar (prénoms / CTA) à droite */
+@media (min-width: 1400px){
+  .cprs-root-article .cprs-layout{flex-direction:row-reverse}
+}
+
+.cprs-projects-card{align-items:flex-start;background:#fff;border:1px solid rgba(0,0,0,.13);border-radius:32px;display:flex;flex:none;flex-direction:column;gap:16px;justify-content:flex-start;overflow:clip;padding:24px;position:relative;text-decoration:none;width:100%}
+.cprs-projects-thumbs{align-items:center;display:flex;flex:none;flex-direction:row;gap:10px;justify-content:flex-start;overflow:hidden;width:100%}
+.cprs-projects-thumb{display:block;flex:1 0 0;height:96px;object-fit:cover;border-radius:14px;border:3px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.12);min-width:0}
+.cprs-projects-label{color:#121a2e;font-family:Inter,sans-serif;font-size:16px;font-weight:600;line-height:1.4em}
+
+.ra-article{align-items:flex-start;display:flex;flex:none;flex-direction:column;gap:32px;justify-content:flex-start;overflow:visible;width:100%}
+.ra-article h2{font-family:"Plus Jakarta Sans",sans-serif;font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:114%;color:#121a2e;margin:0;width:100%}
+.ra-article p{font-family:Inter,sans-serif;font-size:16px;font-weight:500;line-height:1.9em;margin:0;text-align:left;width:100%;color:rgba(18,26,46,.7)}
+.ra-image{display:block;width:100%;height:auto;object-fit:cover;border:6px solid #fff;border-radius:32px;box-shadow:0 2px 5px rgba(0,0,0,.05),0 9px 9px rgba(0,0,0,.04),0 20px 12px rgba(0,0,0,.03),0 35px 14px rgba(0,0,0,.01),0 54px 15px rgba(0,0,0,0)}
+@media (max-width:809px){.ra-article h2{font-size:32px}.ra-article p{font-size:14px;line-height:2.2em}}

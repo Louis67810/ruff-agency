@@ -1,0 +1,9 @@
+@echo off
+setlocal
+cd /d "%~dp0"
+if not exist node_modules (
+ echo Installation des dependances...
+ call npm install
+ if errorlevel 1 (pause & exit /b 1)
+)
+call npx vite --host 127.0.0.1 --port 4173 --open

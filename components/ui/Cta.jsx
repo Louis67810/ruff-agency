@@ -1,0 +1,26 @@
+"use client";
+
+import "./Cta.css";
+
+const PROFILE_IMAGE =
+  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693";
+
+export default function Cta({
+  kind = "primary",
+  href = "#",
+  children,
+  label,
+  avatarSrc = PROFILE_IMAGE,
+  className = "",
+}) {
+  return (
+    <a className={`cta ${kind === "primary" ? "cta-primary" : "cta-secondary"} ${className}`.trim()} href={href}>
+      <span className="cta-inner">
+        <span className="cta-label">{children ?? label}</span>
+        {kind === "primary" ? (
+          <img className="cta-avatar" src={avatarSrc} alt="" width={28} height={28} />
+        ) : null}
+      </span>
+    </a>
+  );
+}

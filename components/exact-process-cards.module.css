@@ -1,0 +1,186 @@
+.section {
+  background: #fbfbfb;
+  color: #121a2e;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+}
+
+.grid {
+  background: transparent;
+  color: #121a2e;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+}
+
+.carousel { width: 100%; }
+.viewport { width: 100%; }
+
+.section {
+  padding: 185px 24px 160px;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 1303px;
+}
+
+.heading {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 120px;
+}
+
+.heading h2 {
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 920px;
+}
+
+.heading a {
+  background: #0147ff;
+  border-radius: 10px;
+  color: #fff;
+  flex: none;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 17px 20px;
+  text-decoration: none;
+}
+
+.grid {
+  align-items: flex-start;
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.navigation { display: none; }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.cardReveal { --card-delay: 0s; min-width: 0; opacity: 0; transform: translateY(45px); }
+.cardReveal.isVisible { animation: card-rise-in .4s cubic-bezier(.44,0,.56,1) var(--card-delay) both; }
+
+@keyframes card-rise-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.label {
+  align-self: flex-start;
+  border-radius: 12px;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.46;
+  padding: 12px 16px;
+}
+
+.copy h3 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.46;
+  margin: 0 0 10px;
+}
+
+.copy p {
+  color: rgba(18, 26, 46, 0.7);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.66;
+  margin: 0;
+  min-height: 90px;
+}
+
+.visual {
+  background: rgba(186, 190, 199, 0.08);
+  border: 1px solid rgba(1, 71, 255, 0.12);
+  border-radius: 28px;
+  height: 429px;
+  overflow: hidden;
+  position: relative;
+}
+
+.canvas {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 1399px) and (min-width: 810px) {
+  .heading h2 { font-size: 46px; }
+
+  /* Le rail peut dépasser le contenu : seule la section le coupe au bord de l'écran. */
+  .viewport { overflow: visible; }
+
+  .grid {
+    display: flex;
+    gap: 16px;
+    transition: transform 420ms cubic-bezier(.22, .61, .36, 1);
+  }
+
+  .grid[data-active-step="0"] { transform: translate3d(0, 0, 0); }
+  .grid[data-active-step="1"] { transform: translate3d(calc(-50% - 8px), 0, 0); }
+
+  .cardReveal { flex: 0 0 calc((100% - 16px) / 2); }
+  .navigation { display: flex; justify-content: flex-start; gap: 12px; margin-top: 32px; }
+}
+
+@media (max-width: 809px) {
+  .section { padding: 82px 16px; }
+
+  .heading { display: block; margin-bottom: 58px; }
+  .heading h2 { font-size: 35px; }
+  .heading a { display: inline-block; margin-top: 28px; width: auto; }
+
+  .grid {
+    display: flex;
+    gap: 16px;
+    transition: transform 420ms cubic-bezier(.22, .61, .36, 1);
+  }
+
+  .grid[data-active-step="0"] { transform: translate3d(0, 0, 0); }
+  .grid[data-active-step="1"] { transform: translate3d(-331px, 0, 0); }
+  .grid[data-active-step="2"] { transform: translate3d(-662px, 0, 0); }
+
+  /* Sur téléphone seulement, les cartes ont une largeur plafonnée et partent à gauche. */
+  .viewport { overflow: visible; touch-action: pan-y; }
+  .cardReveal { flex: 0 0 315px; }
+  .card { width: 315px; max-width: 315px; }
+  .copy p { font-size: 16px; min-height: auto; }
+  .visual { height: 349px; }
+  .navigation { display: flex; justify-content: flex-start; gap: 12px; margin-top: 28px; }
+}
+
+.arrow {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  padding: 0;
+  color: #121a2e;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid rgba(18, 26, 46, .16);
+  border-radius: 50%;
+  transition: opacity 180ms ease;
+}
+
+.arrow svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.75; }
+.arrow:disabled { cursor: default; opacity: .5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cardReveal,
+  .cardReveal.isVisible { animation: none; opacity: 1; transform: none; }
+}

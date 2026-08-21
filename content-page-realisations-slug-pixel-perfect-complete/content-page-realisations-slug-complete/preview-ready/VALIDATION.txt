@@ -1,0 +1,64 @@
+VALIDATION SOURCE -> SORTIE
+
+Contrôles sortie: 45/45
+Contrôles présence source: 12/12
+
+[OK] root padding 156/48/128
+[OK] root background #fbfbfb
+[OK] max width 1592
+[OK] layout gap 128
+[OK] sidebar height 800
+[OK] sidebar sticky top 128
+[OK] sidebar max width 517
+[OK] review radius 32
+[OK] profile 63
+[OK] profile border 3
+[OK] blue width 516
+[OK] blue padding 48
+[OK] blue radius 40
+[OK] blue gradient
+[OK] lottie source exact
+[OK] blue title 32
+[OK] blue phone title 24
+[OK] decor image 1 exact
+[OK] decor image 2 exact
+[OK] challenge heading
+[OK] solution heading
+[OK] results heading
+[OK] section heading 40
+[OK] section phone 32
+[OK] body line 1.9
+[OK] body phone 14/2.2
+[OK] info padding 16
+[OK] info radius 13
+[OK] info icon 34
+[OK] info title 20
+[OK] info phone 18
+[OK] gallery border 6
+[OK] gallery radius 32
+[OK] gallery object fill
+[OK] gallery gap 24
+[OK] before after padding
+[OK] before after radius
+[OK] phone root padding
+[OK] phone main gap 96
+[OK] phone blue padding
+[OK] no framer runtime
+[OK] no responsive runtime
+[OK] no RichText
+[OK] no useVariantState
+[OK] no data-framer
+
+SOURCE
+[OK] source Desktop/Tablet/Phone IDs
+[OK] source 1592
+[OK] source sidebar 800
+[OK] source blue 516
+[OK] source SVG 675
+[OK] source SVG 674
+[OK] source Lottie
+[OK] source decor 1
+[OK] source decor 2
+[OK] source gallery border 6
+[OK] source gallery radius 32
+[OK] source labels

@@ -1,0 +1,1 @@
+import React from "react";import{createRoot}from"react-dom/client";import SectionAgenceEnQuelquesMots from "./SectionAgenceEnQuelquesMots.jsx";createRoot(document.getElementById("root")).render(<SectionAgenceEnQuelquesMots callHref="#"/>);

@@ -1,0 +1,274 @@
+@font-face {
+  font-family: "PF Inter";
+  src: local("Inter Medium"), local("Inter-Medium"), url("https://framerusercontent.com/assets/UjlFhCnUjxhNfep4oYBPqnEssyo.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PF Plus Jakarta Sans";
+  src: local("Plus Jakarta Sans Bold"), local("PlusJakartaSans-Bold"), url("https://framerusercontent.com/third-party-assets/fontshare/wf/AJVGEOXGB2ALQKAZEK2LDOLCVBCMCOIT/LDEP4R7SNNABDEG433DCQGM2A7YCBHLU/OWABOLGBAKFVLPZ756IYS6EKYKU54K3I.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+.pf-section,
+.pf-section * {
+  box-sizing: border-box;
+}
+
+.pf-section {
+  align-items: center;
+  background: rgb(253, 253, 253);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 49px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 96px 48px 128px;
+  position: relative;
+  width: 100%;
+}
+
+.pf-heading-wrap {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1324px;
+  position: relative;
+  width: 100%;
+}
+
+.pf-heading {
+  color: #121a2e;
+  font-family: "PF Plus Jakarta Sans", "Plus Jakarta Sans", sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0.001;
+  transform: translateY(10px);
+  filter: blur(15px);
+  animation: pf-heading-in 0.4s cubic-bezier(0.44, 0, 0.56, 1) 0.1s forwards;
+  white-space: pre;
+}
+
+.pf-grid {
+  background: rgb(255, 255, 255);
+  display: grid;
+  gap: 10px;
+  grid-auto-rows: minmax(0, 1fr);
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  justify-content: center;
+  max-width: 1324px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.pf-card {
+  align-items: flex-start;
+  align-self: start;
+  background: rgb(251, 251, 251);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 21px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: min-content;
+  justify-content: center;
+  justify-self: start;
+  opacity: 0;
+  overflow: hidden;
+  padding: 48px;
+  position: relative;
+  transform: translateY(30px);
+  transition: opacity 0.4s cubic-bezier(0.44, 0, 0.56, 1) var(--pf-delay), transform 0.4s cubic-bezier(0.44, 0, 0.56, 1) var(--pf-delay);
+  width: 100%;
+}
+
+.pf-card-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pf-icon-box {
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  display: flex;
+  flex: 0 0 auto;
+  height: 64px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: 64px;
+  z-index: 2;
+}
+
+.pf-icon-svg {
+  display: block;
+  height: 36px;
+  position: relative;
+  width: 36px;
+}
+
+.pf-card-title {
+  color: #121a2e;
+  font-family: "PF Plus Jakarta Sans", "Plus Jakarta Sans", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.4;
+  margin: 0;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.pf-card-text {
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "PF Inter", Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 2.22;
+  margin: 0;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.pf-decor {
+  display: block;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.pf-decor-1 {
+  bottom: -300px;
+  height: 502px;
+  left: -30px;
+  right: -123px;
+  width: calc(100% + 153px);
+}
+
+.pf-decor-2 {
+  height: 394px;
+  left: -211px;
+  top: -189px;
+  width: 501px;
+}
+
+.pf-decor-4 {
+  bottom: -162px;
+  height: 364px;
+  left: -162px;
+  width: 399px;
+}
+
+.pf-decor-5 {
+  bottom: -212px;
+  height: 445px;
+  right: -273px;
+  width: 653px;
+}
+
+.pf-decor-6 {
+  bottom: -322px;
+  height: 550px;
+  left: -322px;
+  width: 551px;
+}
+
+@keyframes pf-heading-in {
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1399px) and (min-width: 810px) {
+  .pf-heading-wrap {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: flex-start;
+  }
+
+  .pf-heading {
+    font-size: 42px;
+    text-align: center;
+    white-space: pre-wrap;
+    width: 714px;
+  }
+
+  .pf-grid {
+    grid-template-columns: repeat(2, minmax(50px, 1fr));
+  }
+
+  .pf-card-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 809px) {
+  .pf-section {
+    padding: 96px 16px 64px;
+  }
+
+  .pf-heading-wrap {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: flex-start;
+  }
+
+  .pf-heading {
+    font-size: 32px;
+    text-align: center;
+    white-space: pre-wrap;
+    width: 100%;
+  }
+
+  .pf-grid {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: flex-start;
+  }
+
+  .pf-card {
+    align-self: stretch;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .pf-card-title {
+    font-size: 22px;
+  }
+
+  .pf-card-text {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-heading,
+  .pf-card {
+    animation: none;
+    filter: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "navbar-services-pixel-perfect-preview",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --open",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --open"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "framer-motion": "12.43.0"
+  },
+  "devDependencies": {
+    "vite": "6.1.0"
+  }
+}

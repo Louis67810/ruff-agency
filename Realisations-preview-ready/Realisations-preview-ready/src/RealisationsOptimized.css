@@ -1,0 +1,335 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap");
+
+.realisations-section,
+.realisations-section * {
+  box-sizing: border-box;
+}
+
+.realisations-section {
+  width: 100%;
+  padding: 0 32px 64px;
+  position: relative;
+}
+
+.realisations-panel {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  overflow: clip;
+  border-radius: 85px;
+  padding: 128px 0 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.realisations-content {
+  position: relative;
+  width: 100%;
+  max-width: 1324px;
+  padding: 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.realisations-heading-wrap {
+  width: 100%;
+  overflow: clip;
+}
+
+.realisations-heading {
+  width: 100%;
+  margin: 0;
+  color: #121a2e;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.realisations-heading-word {
+  display: inline-block;
+  opacity: 0.001;
+  filter: blur(15px);
+  transform: translateY(10px);
+  animation: realisations-heading-in 0.4s cubic-bezier(0.44, 0, 0.56, 1) forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes realisations-heading-in {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.realisations-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+.realisations-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(50px, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 48px;
+}
+
+.realisations-card {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 32px;
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.realisations-card.is-visible {
+  animation: realisations-card-in 0.4s cubic-bezier(0.44, 0, 0.56, 1) forwards;
+}
+
+@keyframes realisations-card-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.realisations-image-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.5769230769230769 / 1;
+  overflow: hidden;
+  border-radius: 32px;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.05),
+    0 9px 9px rgba(0, 0, 0, 0.04),
+    0 20px 12px rgba(0, 0, 0, 0.03),
+    0 35px 14px rgba(0, 0, 0, 0.01),
+    0 54px 15px rgba(0, 0, 0, 0);
+}
+
+.realisations-image-frame::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border: 5px solid #fff;
+  border-radius: inherit;
+}
+
+.realisations-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  user-select: none;
+}
+
+.realisations-card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+.realisations-title-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.realisations-project-title {
+  flex: 1 1 0;
+  width: 1px;
+  max-width: 75%;
+  margin: 0;
+  color: #121a2e;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.realisations-category {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 10px 18px;
+  border-radius: 11px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.realisations-category-agence {
+  background: rgb(255, 237, 214);
+  color: rgb(148, 110, 13);
+}
+
+.realisations-category-saas {
+  background: rgb(225, 231, 250);
+  color: rgb(91, 109, 171);
+}
+
+.realisations-category-pme {
+  background: rgb(242, 248, 250);
+  color: rgb(63, 134, 158);
+}
+
+.realisations-category-independant {
+  background: rgb(233, 247, 233);
+  color: rgb(72, 153, 72);
+}
+
+.realisations-description {
+  width: 100%;
+  margin: 0;
+  color: rgba(18, 26, 46, 0.8);
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+.realisations-more {
+  position: relative;
+  z-index: 8;
+  appearance: none;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #121a2e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.realisations-more::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: inherit;
+}
+
+.realisations-decoration {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.realisations-decoration-left {
+  width: 1264px;
+  height: 1327px;
+  left: -879px;
+  top: -616px;
+}
+
+.realisations-decoration-right {
+  width: 1392px;
+  height: 1389px;
+  right: -802px;
+  bottom: -838px;
+}
+
+@media (max-width: 1399px) and (min-width: 810px) {
+  .realisations-heading {
+    font-size: 48px;
+  }
+
+  .realisations-grid {
+    grid-template-columns: repeat(1, minmax(50px, 1fr));
+    gap: 24px 48px;
+  }
+
+  .realisations-project-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 809px) {
+  .realisations-section {
+    padding: 0 32px 64px;
+  }
+
+  .realisations-panel {
+    border-radius: 41px;
+    padding: 64px 0 48px;
+  }
+
+  .realisations-content {
+    padding: 24px;
+  }
+
+  .realisations-heading {
+    font-size: 32px;
+  }
+
+  .realisations-grid {
+    grid-template-columns: repeat(1, minmax(50px, 1fr));
+    gap: 24px 48px;
+  }
+
+  .realisations-project-title {
+    font-size: 22px;
+  }
+
+  .realisations-description {
+    font-size: 16px;
+  }
+
+  .realisations-decoration-left {
+    left: -944px;
+    top: -637px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .realisations-heading-word,
+  .realisations-card,
+  .realisations-card.is-visible {
+    animation: none !important;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}

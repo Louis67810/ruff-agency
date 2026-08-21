@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Section Bénéfices Framer → React — Preview</title>
+    <style>
+      :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#151922;background:#eef0f4}
+      *{box-sizing:border-box}html,body{margin:0;min-height:100%}body{min-width:320px}.app{min-height:100vh;display:flex;flex-direction:column}
+      .toolbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;min-height:66px;padding:12px 18px;border-bottom:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.94);backdrop-filter:blur(14px)}
+      .brand{margin-right:auto;display:flex;flex-direction:column;gap:2px}.brand strong{font-size:14px}.brand span{font-size:12px;color:#6b7280}.controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+      button{appearance:none;border:1px solid rgba(0,0,0,.11);background:#fff;color:#20242d;border-radius:9px;padding:9px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}button:hover{background:#f6f7f9}button.active{color:#fff;background:#111827;border-color:#111827}
+      .stage{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:28px;overflow:auto}.device{background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:16px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.14);transition:width .28s ease,height .28s ease}
+      iframe{display:block;width:100%;height:100%;border:0;background:#fdfdfd}.size{min-width:112px;text-align:center;font-size:12px;color:#6b7280;font-variant-numeric:tabular-nums}
+      .hint{font-size:12px;color:#6b7280;padding:0 2px}
+      @media(max-width:760px){.toolbar{align-items:flex-start;flex-direction:column}.brand{margin-right:0}.controls{justify-content:flex-start}.stage{padding:14px;justify-content:flex-start}}
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <header class="toolbar">
+        <div class="brand"><strong>Section Bénéfices optimisée — preview isolée</strong><span>Cette preview ne touche pas à ton projet Next.js.</span></div>
+        <div class="controls">
+          <button data-mode="desktop" class="active">Desktop</button>
+          <button data-mode="tablet">Tablet</button>
+          <button data-mode="mobile">Mobile</button>
+          <button id="reload">↻ Rejouer les animations</button>
+          <span class="size" id="size">1440 × 1000</span>
+        </div>
+      </header>
+      <section class="stage">
+        <div class="device" id="device" style="width:1440px;height:1000px">
+          <iframe id="preview" src="/benefits.html" title="Preview de la section Bénéfices"></iframe>
+        </div>
+      </section>
+    </main>
+    <script>
+      const sizes={desktop:[1440,1000],tablet:[1024,1100],mobile:[390,900]};
+      const device=document.getElementById('device');const preview=document.getElementById('preview');const label=document.getElementById('size');const buttons=[...document.querySelectorAll('[data-mode]')];
+      function setMode(mode){const [width,height]=sizes[mode];device.style.width=width+'px';device.style.height=height+'px';label.textContent=width+' × '+height;buttons.forEach(btn=>btn.classList.toggle('active',btn.dataset.mode===mode));}
+      buttons.forEach(btn=>btn.addEventListener('click',()=>setMode(btn.dataset.mode)));
+      document.getElementById('reload').addEventListener('click',()=>{preview.src='/benefits.html?reload='+Date.now();});
+    </script>
+  </body>
+</html>

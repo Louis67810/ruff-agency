@@ -1,0 +1,6 @@
+1. Décompresse complètement le ZIP.
+2. Double-clique sur START.bat.
+3. Laisse la fenêtre noire ouverte.
+4. Vite ouvrira automatiquement le navigateur sur le bon port.
+
+La preview utilise exactement StackSection3.jsx + StackSection3.css de la version optimisée.

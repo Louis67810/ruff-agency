@@ -1,0 +1,20 @@
+VALIDATION DU PACK FOOTER
+=========================
+
+- Footer.jsx : parsing JSX/TypeScript = 0 erreur
+- Preview src/Footer.jsx : parsing JSX/TypeScript = 0 erreur
+- Preview src/main.jsx : parsing JSX/TypeScript = 0 erreur
+- Footer.css : parsing PostCSS = OK
+- 59/59 règles CSS de layout de base directement extraites du bloc css8 : présentes
+- Références interdites restantes : 0
+  framer-motion: 0
+  @motionone/dom: 0
+  _framer-runtime.js: 0
+  _responsive-runtime.js: 0
+  RichText: 0
+  useVariantState: 0
+  motion.: 0
+  data-framer-*: 0
+- @vitejs/plugin-react dans la preview : 0
+
+Note : le build Vite n'a pas pu être exécuté dans l'environnement de génération car l'installation npm réseau y est bloquée/timeout. La syntaxe source et CSS a été validée localement avec les parseurs installés. Le START.bat utilise les mêmes versions/patterns que la preview autonome précédente.

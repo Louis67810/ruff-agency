@@ -1,0 +1,32 @@
+VALIDATION SOURCE -> SORTIE
+
+[PASS] source: root padding
+[PASS] source: max width 1324
+[PASS] source: header padding
+[PASS] source: title 48
+[PASS] source: title tablet 42
+[PASS] source: title phone 32
+[PASS] source: ticker velocity 50
+[PASS] source: ticker gap 10
+[PASS] source: ticker width 1494
+[PASS] source: desktop stage 1304
+[PASS] source: desktop stage height 986
+[PASS] source: desktop image width 872
+[PASS] source: card radius 26
+[PASS] source: card padding 32
+[PASS] source: cta avatar
+[PASS] source: central image
+[PASS] source: profile rotate 10
+[PASS] source: text effect blur15
+[PASS] source: subtitle blur10
+[PASS] source: 3 variants
+
+NETTOYAGE
+[PASS] _framer-runtime
+[PASS] _responsive-runtime
+[PASS] RichText
+[PASS] useVariantState
+[PASS] data-framer
+
+Source checks: 20/20
+Cleanup checks: 5/5

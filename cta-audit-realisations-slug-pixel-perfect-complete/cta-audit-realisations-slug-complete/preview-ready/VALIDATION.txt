@@ -1,0 +1,47 @@
+VALIDATION — source -> optimized
+
+PASS - outer padding 96
+PASS - card max 1324
+PASS - card padding 80
+PASS - card radius 40
+PASS - gradient 65deg
+PASS - card shadow end 100px
+PASS - copy width 732
+PASS - copy height 505
+PASS - title 48
+PASS - title tablet 42
+PASS - title phone 32
+PASS - form max 363
+PASS - form shell minheight
+PASS - form shell shadow
+PASS - form radius 309
+PASS - form two-line radius24
+PASS - submit minheight72
+PASS - submit gradient
+PASS - availability width585
+PASS - avatar desktop42
+PASS - avatar phone31
+PASS - product 1302
+PASS - product 1171
+PASS - product object fit fill
+PASS - tablet max682
+PASS - phone max390
+PASS - phone padding48
+PASS - phone copy height474
+PASS - svg path1
+PASS - svg path2
+PASS - webhook exact
+PASS - source phrase 48h
+PASS - source title
+PASS - source availability
+
+CLEANUP
+PASS - no framer runtime import
+PASS - no responsive runtime import
+PASS - no framer-motion
+PASS - no data-framer
+PASS - no RichText
+PASS - no useVariantState
+
+Visual/source checks: 34/34
+Cleanup checks: 6/6

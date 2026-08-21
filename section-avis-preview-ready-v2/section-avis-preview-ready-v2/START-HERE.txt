@@ -1,0 +1,13 @@
+PREVIEW AUTONOME - SECTION AVIS + MISSION (V2)
+
+1. Decompresse COMPLETEMENT le ZIP.
+2. Double-clique sur START.bat.
+3. Laisse la fenetre noire ouverte.
+4. Vite ouvre automatiquement le BON port dans ton navigateur.
+
+IMPORTANT :
+- Ne tape pas toi-meme http://127.0.0.1:4173 : si ce port est deja utilise,
+  Vite peut choisir 4174, 4175, etc. START.bat ouvre maintenant automatiquement
+  l'adresse correcte.
+- Si le composant rencontre une erreur JavaScript, la page l'affiche en rouge au
+  lieu de rester blanche. Copie alors le message et envoie-le moi.

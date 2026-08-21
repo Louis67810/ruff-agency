@@ -1,0 +1,516 @@
+@font-face {
+  font-family: "Plus Jakarta Sans S3";
+  src: url("https://fonts.gstatic.com/s/plusjakartasans/v12/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_TknNTxXUEKi4Rw.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans S3";
+  src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/ZLH2B3SFZRQ3US4ZUYG2367OYUMTVTGK/RSOPFK2EORTGBCOBZRY42GDLXFFB4IQW/JZ35FM4UJSKC7X2PM65RH75Q5KLE552S.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter S3";
+  src: url("https://framerusercontent.com/assets/UjlFhCnUjxhNfep4oYBPqnEssyo.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+.stack-section-3,
+.stack-section-3 * {
+  box-sizing: border-box;
+}
+
+.stack-section-3 {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: min-content;
+  justify-content: center;
+  overflow: clip;
+  padding: var(--s3-padding, 196px 48px 300px 48px);
+  position: relative;
+  width: 100%;
+}
+
+.s3-content {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1 0 0px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 64px;
+  height: min-content;
+  justify-content: flex-start;
+  max-width: 1324px;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  width: 1px;
+}
+
+.s3-layout {
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 128px;
+  height: min-content;
+  justify-content: flex-start;
+  max-width: 1324px;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.s3-copy {
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 16px;
+  height: min-content;
+  justify-content: center;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  width: min-content;
+  z-index: 1;
+}
+
+.s3-title-wrap {
+  flex: none;
+  height: 134px;
+  max-width: 417px;
+  position: relative;
+  white-space: pre-wrap;
+  width: 417px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.s3-title {
+  color: #000;
+  font-family: "Plus Jakarta Sans S3", "Plus Jakarta Sans", sans-serif;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 114%;
+  margin: 0;
+  padding: 0;
+}
+
+.s3-description-wrap {
+  align-self: stretch;
+  flex: none;
+  height: auto;
+  max-width: 370px;
+  position: relative;
+  white-space: pre-wrap;
+  width: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.s3-description {
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "Inter S3", Inter, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 146%;
+  margin: 0;
+  padding: 0;
+}
+
+.s3-description a {
+  color: #404040;
+  text-decoration: underline;
+}
+
+.s3-description a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.s3-cta-reveal {
+  flex: none;
+  height: auto;
+  position: relative;
+  width: auto;
+  z-index: 0;
+}
+
+.s3-cta {
+  align-content: flex-start;
+  align-items: flex-start;
+  background-color: rgb(225, 228, 237);
+  border-radius: 15px;
+  box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: min-content;
+  justify-content: flex-start;
+  overflow: visible;
+  padding: 6px;
+  position: relative;
+  text-decoration: none;
+  width: min-content;
+}
+
+.s3-cta-inner {
+  --border-color: rgb(46, 77, 156);
+  align-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgb(78, 125, 250) 0%, rgb(1, 71, 255) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: inset 0 3px 0 0 rgba(255, 255, 255, 0.5), inset 0 2px 6px 4px rgba(0, 0, 0, 0.08), inset 0 -3px 0 0 rgb(14, 65, 199), 0 2.445551872253418px 3.2154479026794434px 0 rgba(0, 18, 54, 0.07), 0 6.761638164520264px 8.890301704406738px 0 rgba(0, 18, 54, 0.1), 0 16.2794189453125px 21.404420852661133px 0 rgba(0, 18, 54, 0.13), 0 54px 71px 0 rgba(0, 40, 54, 0.16);
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 12px;
+  height: 48px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px 10px 10px 24px;
+  position: relative;
+  width: min-content;
+  transition: background 0.4s cubic-bezier(.22,.61,.36,1);
+}
+
+.s3-cta:hover .s3-cta-inner {
+  background: linear-gradient(161deg, rgb(67, 108, 222) 0%, rgb(36, 77, 181) 100%);
+}
+
+.s3-cta-label {
+  color: rgb(255, 255, 255);
+  flex: none;
+  font-family: "Inter S3", Inter, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  height: auto;
+  line-height: 102.88%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  white-space: pre;
+  width: auto;
+}
+
+.s3-cta-avatar {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 6px;
+  box-shadow: 0 1px 2.9000000953674316px 0 rgba(0, 0, 0, 0.25);
+  display: block;
+  flex: none;
+  height: 28px;
+  object-fit: fill;
+  overflow: hidden;
+  position: relative;
+  transform: rotate(0deg);
+  transition: transform 0.4s cubic-bezier(.22,.61,.36,1);
+  width: 28px;
+}
+
+.s3-cta:hover .s3-cta-avatar {
+  transform: rotate(10deg);
+}
+
+.s3-faq-list {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1 0 0px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 32px;
+  height: min-content;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  width: 1px;
+}
+
+.s3-faq-item {
+  align-content: flex-start;
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 32px;
+  height: min-content;
+  justify-content: flex-start;
+  list-style: none;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.s3-faq-header {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: min-content;
+  justify-content: space-between;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.s3-faq-question {
+  color: rgb(18, 26, 46);
+  flex: 1 0 0px;
+  font-family: "Plus Jakarta Sans S3", "Plus Jakarta Sans", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.4em;
+  margin: 0;
+  max-width: 90%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  white-space: pre-wrap;
+  width: 1px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-feature-settings: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on;
+}
+
+.s3-faq-chevron-wrap {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: min-content;
+  justify-content: flex-start;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  width: min-content;
+}
+
+.s3-faq-chevron {
+  display: block;
+  flex: none;
+  height: 24px;
+  position: relative;
+  transform: rotate(180deg);
+  transition: transform 0.32s cubic-bezier(.2,.8,.2,1);
+  width: 24px;
+}
+
+.s3-faq-chevron path {
+  fill: transparent;
+  stroke: rgb(0, 0, 0);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.s3-faq-chevron.is-open {
+  transform: rotate(0deg);
+}
+
+.s3-answer-clip {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-bottom: -32px;
+  opacity: 0;
+  overflow: hidden;
+  position: relative;
+  transition: grid-template-rows .36s cubic-bezier(.2,.8,.2,1), opacity .2s ease, margin-bottom .36s cubic-bezier(.2,.8,.2,1);
+  width: 100%;
+}
+
+.s3-answer-inner {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 40px 0 0;
+  position: relative;
+  width: 100%;
+}
+
+.s3-faq-item.is-open .s3-answer-clip {
+  grid-template-rows: 1fr;
+  margin-bottom: 0;
+  opacity: 1;
+}
+
+.s3-faq-answer {
+  color: rgba(18, 26, 46, 0.7);
+  flex: 1 0 0px;
+  font-family: "Inter S3", Inter, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  height: auto;
+  line-height: 1.8em;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  white-space: pre-wrap;
+  width: 1px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.s3-faq-line {
+  background-color: rgba(18, 26, 46, 0.1);
+  flex: none;
+  height: 1px;
+  opacity: 0.7;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.s3-reveal-title,
+.s3-reveal-copy,
+.s3-cta-reveal,
+.s3-reveal-up {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.s3-reveal-title {
+  transform: translateY(18px);
+  transition: opacity .4s cubic-bezier(.44,0,.56,1), transform .4s cubic-bezier(.44,0,.56,1);
+}
+
+.s3-reveal-copy {
+  transform: translateY(26px);
+  transition: opacity .4s .2s cubic-bezier(.44,0,.56,1), transform .4s .2s cubic-bezier(.44,0,.56,1);
+}
+
+.s3-cta-reveal {
+  transform: translateY(26px);
+  transition: opacity .4s .4s cubic-bezier(.44,0,.56,1), transform .4s .4s cubic-bezier(.44,0,.56,1);
+}
+
+.s3-reveal-up {
+  transform: translateY(-40px);
+  transition: opacity .45s cubic-bezier(.2,.8,.2,1), transform .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.s3-reveal-title.is-visible,
+.s3-reveal-copy.is-visible,
+.s3-cta-reveal.is-visible,
+.s3-reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1399px) and (min-width: 810px) {
+  .s3-layout {
+    flex-direction: column;
+  }
+
+  .s3-faq-list {
+    flex: none;
+    width: 100%;
+  }
+
+  .s3-faq-question {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 809px) {
+  .stack-section-3 {
+    flex-direction: column;
+  }
+
+  .s3-content,
+  .s3-faq-list {
+    flex: none;
+    width: 100%;
+  }
+
+  .s3-layout {
+    flex-direction: column;
+  }
+
+  .s3-copy {
+    width: 100%;
+  }
+
+  .s3-title-wrap {
+    height: auto;
+    max-width: 258px;
+    width: 100%;
+  }
+
+  .s3-title {
+    font-size: 32px;
+  }
+
+  .s3-description-wrap {
+    align-self: unset;
+    width: 100%;
+  }
+
+  .s3-faq-question {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s3-reveal-title,
+  .s3-reveal-copy,
+  .s3-cta-reveal,
+  .s3-reveal-up,
+  .s3-faq-chevron,
+  .s3-answer-clip,
+  .s3-cta-inner,
+  .s3-cta-avatar {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

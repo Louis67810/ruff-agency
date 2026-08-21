@@ -1,0 +1,112 @@
+Hero Réalisations — validation technique
+===========================================
+Targeted checks: 98/98 PASS
+Original local JS/TSX audited: 5 102 311 bytes
+Optimized JSX: 14 683 bytes
+Optimized CSS: 14 599 bytes
+JS source reduction vs audited local JS/TSX: 99.71%
+
+[PASS] variant zxyWVOw1p retained
+[PASS] variant pAlaKLU0v retained
+[PASS] variant KDtq0un6E retained
+[PASS] phone cutoff 809
+[PASS] tablet cutoff 1399
+[PASS] tablet CSS range
+[PASS] phone CSS range
+[PASS] copy retained: Nos réalisations
+[PASS] copy retained: Découvrez des projets que no
+[PASS] copy retained: Voir nos offres
+[PASS] copy retained: Réserver un appel
+[PASS] copy retained: +30 clients satisfaits
+[PASS] root background
+[PASS] root padding desktop
+[PASS] inner max width 1324
+[PASS] main max width 918
+[PASS] desktop title 80
+[PASS] tablet title 56
+[PASS] phone title 32
+[PASS] title tracking
+[PASS] Plus Jakarta 700
+[PASS] subtitle 18
+[PASS] phone main gap 110
+[PASS] client retained: Dominique Zenglein
+[PASS] client retained: Sacha Tassart
+[PASS] client retained: Martin Riedweg
+[PASS] client retained: Noé eltm
+[PASS] client retained: Julie Zagula
+[PASS] client retained: Antoine Troovy
+[PASS] client avatar 34
+[PASS] client avatar white ring
+[PASS] tooltip 174 width
+[PASS] client hover y -5
+[PASS] offers border
+[PASS] offers 48 height
+[PASS] call outer radius 15
+[PASS] call exact base gradient
+[PASS] call hover gradient
+[PASS] call deep shadow 54/71
+[PASS] CTA avatar 28
+[PASS] CTA avatar white border
+[PASS] CTA avatar hover rotate 10
+[PASS] original lottie URL retained
+[PASS] lottie-web dynamic import
+[PASS] availability exact formula
+[PASS] availability locale fr-FR
+[PASS] availability icon 33
+[PASS] left image retained
+[PASS] right image retained
+[PASS] actual video srcFile retained
+[PASS] side cards 7px white border
+[PASS] side cards 725x487
+[PASS] side radius 43
+[PASS] images object-fit fill
+[PASS] video object-fit cover
+[PASS] video width 948
+[PASS] video aspect ratio
+[PASS] video radius 48
+[PASS] tablet left width exact
+[PASS] tablet video width 635
+[PASS] tablet right width exact
+[PASS] phone video width 345
+[PASS] phone video border 3.21
+[PASS] phone video radius 21.43
+[PASS] phone hides side cards structurally
+[PASS] video autoplay loop muted inline
+[PASS] right SVG path retained
+[PASS] left SVG path retained
+[PASS] SVG stroke opacity
+[PASS] SVG stroke width
+[PASS] title blur 15
+[PASS] title y10
+[PASS] title tween delay .15 duration .5
+[PASS] subtitle blur 10
+[PASS] subtitle line tokenization wrapper
+[PASS] subtitle source startDelay .6 + line stagger .15
+[PASS] subtitle phone effect disabled
+[PASS] CTA entry y45
+[PASS] CTA delay 1 duration .4
+[PASS] media entry y58
+[PASS] video delay .4 duration .6
+[PASS] tablet right no initial animation
+[PASS] phone video motion disabled
+[PASS] removed _framer-runtime
+[PASS] removed _responsive-runtime
+[PASS] removed RichText
+[PASS] removed useVariantState
+[PASS] removed data-framer-
+[PASS] removed LayoutGroup
+[PASS] removed @motionone/dom
+[PASS] tokens CSS not used
+[PASS] tokens.css physically removed
+[PASS] React dependency import
+[PASS] framer-motion dependency import
+[PASS] CSS braces balanced
+[PASS] invalid unicode-range typo removed
+[PASS] valid unicode-range fragment
+[PASS] JSX syntax via TypeScript transpileModule
+
+Preview packaging checks
+------------------------
+[PASS] HeroRealisations.jsx / App.jsx / main.jsx syntax parsed with TypeScript transpileModule
+[PASS] package.json is valid JSON
+[NOT COMPLETED] npm install + vite build: dependency installation timed out in the sandbox before node_modules/package-lock were created; no build success is claimed.

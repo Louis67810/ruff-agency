@@ -1,0 +1,25 @@
+@import url("../../../section-avis-preview-ready-v2/section-avis-preview-ready-v2/src/SectionAvis.css");
+
+/* Mission card: keep the Framer tilt from the first paint and avoid the unanimated flash. */
+.framer-5cue29 .framer-7lfb5g p:nth-child(2) {
+  display: none;
+}
+
+.framer-5cue29 .framer-7lfb5g p:nth-child(3) {
+  margin-top: 24px !important;
+}
+.framer-lfjzk7 {
+  transform: translateY(-32px) rotate(-4deg) !important;
+}
+
+
+/* Sacha Tassart's testimonial keeps its exact copy but is not displayed as a link. */
+.framer-16ldcsz a,
+.framer-16ldcsz a:visited,
+.framer-16ldcsz a:hover,
+.framer-16ldcsz a:active {
+  color: inherit;
+  text-decoration: none;
+  cursor: default;
+  pointer-events: none;
+}

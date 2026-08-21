@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Plus+Jakarta+Sans:wght@700&display=swap");
+
+.avis-section,
+.avis-section * {
+  box-sizing: border-box;
+}
+
+.avis-section {
+  align-content: center;
+  align-items: center;
+  background: rgb(11, 19, 39);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0;
+  height: auto;
+  justify-content: center;
+  overflow: hidden;
+  padding: 64px 32px;
+  position: relative;
+  width: 100%;
+}
+
+.avis-vectors {
+  bottom: -152px;
+  left: -421px;
+  overflow: clip;
+  position: absolute;
+  right: -317px;
+  top: -151px;
+  z-index: 1;
+  transition:
+    inset 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    left 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    right 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    top 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    bottom 0.4s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+.avis-vector {
+  display: block;
+  flex: none;
+  position: absolute;
+}
+
+.avis-vector-right {
+  height: 706px;
+  right: 0;
+  top: 0;
+  width: 441px;
+}
+
+.avis-vector-left {
+  bottom: 0;
+  height: 641px;
+  left: 0;
+  width: 669px;
+  transition:
+    width 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    height 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    left 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    top 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    bottom 0.4s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+.avis-content {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 32px;
+  height: min-content;
+  justify-content: center;
+  overflow: clip;
+  padding: 0;
+  position: relative;
+  width: min-content;
+}
+
+.avis-avatar-wrap {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 16px;
+  height: min-content;
+  justify-content: center;
+  overflow: clip;
+  padding: 0;
+  position: relative;
+  width: min-content;
+}
+
+.avis-avatar {
+  border-radius: 300px;
+  box-shadow:
+    inset 0 0 0 6px rgb(255, 255, 255),
+    0 6px 13px rgba(0, 0, 0, 0.1),
+    0 24px 24px rgba(0, 0, 0, 0.09),
+    0 54px 32px rgba(0, 0, 0, 0.05),
+    0 95px 38px rgba(0, 0, 0, 0.01),
+    0 149px 42px rgba(0, 0, 0, 0);
+  flex: none;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  width: 200px;
+  z-index: 2;
+  transition:
+    width 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    height 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    border-radius 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    box-shadow 0.4s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+.avis-avatar::after {
+  border: 6px solid rgb(255, 255, 255);
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  inset: 0;
+  left: auto;
+  pointer-events: none;
+  position: absolute;
+  top: auto;
+  width: 100%;
+  z-index: 3;
+  box-sizing: border-box;
+  transition: border-width 0.4s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+.avis-avatar img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.avis-copy {
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 24px;
+  height: min-content;
+  justify-content: center;
+  overflow: clip;
+  padding: 0;
+  position: relative;
+  width: 791px;
+}
+
+.avis-quote,
+.avis-author-name,
+.avis-author-role {
+  margin: 0;
+}
+
+.avis-quote {
+  color: rgb(255, 255, 255);
+  flex: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  height: auto;
+  letter-spacing: -0.03em;
+  line-height: 152%;
+  position: relative;
+  white-space: pre-wrap;
+  width: 791px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.avis-author {
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 8px;
+  height: min-content;
+  justify-content: flex-start;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.avis-author-name,
+.avis-author-role {
+  flex: none;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  height: auto;
+  letter-spacing: -0.03em;
+  line-height: 146%;
+  position: relative;
+  white-space: pre-wrap;
+  width: 598px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.avis-author-name {
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+.avis-author-role {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+/* Tablet: export helper maps Tablet from 810px to 1199px. */
+@media (min-width: 810px) and (max-width: 1199px) {
+  .avis-section {
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 64px 32px;
+  }
+
+  .avis-content {
+    align-content: flex-start;
+    align-items: flex-start;
+    flex: 1 0 0;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/* Phone: exact Phone variant values from the Framer export. */
+@media (max-width: 809px) {
+  .avis-section {
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 64px 24px;
+  }
+
+  .avis-vectors {
+    bottom: -322px;
+    left: -378px;
+    right: -360px;
+    top: -39px;
+  }
+
+  .avis-vector-left {
+    bottom: auto;
+    height: 569px;
+    left: 205px;
+    top: -394px;
+    width: 594px;
+  }
+
+  .avis-content {
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .avis-avatar-wrap {
+    order: 0;
+  }
+
+  .avis-avatar {
+    border-radius: 194.25px;
+    box-shadow:
+      inset 0 0 0 6px rgb(255, 255, 255),
+      0 3.89px 13px rgba(0, 0, 0, 0.1),
+      0 15.54px 24px rgba(0, 0, 0, 0.09),
+      0 34.97px 32px rgba(0, 0, 0, 0.05),
+      0 61.51px 38px rgba(0, 0, 0, 0.01),
+      0 96.48px 42px rgba(0, 0, 0, 0);
+    height: 130px;
+    width: 130px;
+  }
+
+  .avis-avatar::after {
+    border-width: 4px;
+    height: 100%;
+    inset: 0;
+    top: auto;
+    width: 100%;
+  }
+
+  .avis-copy {
+    order: 1;
+    width: 100%;
+  }
+
+  .avis-quote {
+    font-size: 24px;
+    width: 100%;
+  }
+}
