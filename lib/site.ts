@@ -4,30 +4,41 @@ export const SITE_URL =
 
 export const ROUTES = {
   home: "/",
-  services: "/services",
   landingPage: "/services/landing-page",
-  siteInternet: "/services/site-internet",
+  siteInternet: "/services/website",
+  branding: "/services/branding",
+  productDesign: "/services/product-design",
+  copywriting: "/services/copywriting",
+  seoGeo: "/services/seo-geo",
+  conversionOptimisation: "/services/optimisation-conversion",
+  developpementFramer: "/services/developpement-framer",
   developpementWeb: "/services/developpement-web",
   realisations: "/realisations",
   realisation: (slug: string) => `/realisations/${slug}`,
   ressources: "/ressources",
   ressource: (slug: string) => `/ressources/${slug}`,
+  freeTools: "/outils-gratuits",
   agence: "/agence",
-  contact: "/contact",
+  contact: "/30-min",
 };
 
 /** Props communs de la navbar, utilisés sur toutes les pages. */
 export const NAV_PROPS = {
   homeHref: ROUTES.home,
-  servicesHref: ROUTES.services,
   projectsHref: ROUTES.realisations,
   resourcesHref: ROUTES.ressources,
+  freeToolsHref: ROUTES.freeTools,
   aboutHref: ROUTES.agence,
   ctaHref: ROUTES.contact,
   landingHref: ROUTES.landingPage,
   websiteHref: ROUTES.siteInternet,
+  brandingHref: ROUTES.branding,
+  productDesignHref: ROUTES.productDesign,
+  copywritingHref: ROUTES.copywriting,
+  seoGeoHref: ROUTES.seoGeo,
+  conversionOptimisationHref: ROUTES.conversionOptimisation,
+  framerHref: ROUTES.developpementFramer,
   developmentHref: ROUTES.developpementWeb,
-  allServicesHref: ROUTES.services,
 };
 
 /**
@@ -37,11 +48,18 @@ export const NAV_PROPS = {
  */
 export const FOOTER_LINKS = {
   home: ROUTES.home,
-  services: ROUTES.services,
   work: ROUTES.realisations,
   resources: ROUTES.ressources,
+  freeTools: ROUTES.freeTools,
   about: ROUTES.agence,
   booking: ROUTES.contact,
   landingPage: ROUTES.landingPage,
   website: ROUTES.siteInternet,
+  branding: ROUTES.branding,
+  productDesign: ROUTES.productDesign,
+  seoGeo: ROUTES.seoGeo,
+  conversionOptimisation: ROUTES.conversionOptimisation,
+  copywriting: ROUTES.copywriting,
+  developpementFramer: ROUTES.developpementFramer,
+  developpementWeb: ROUTES.developpementWeb,
 };

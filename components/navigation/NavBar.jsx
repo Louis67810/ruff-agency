@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRightIcon, ChartBarSquareIcon, CodeBracketSquareIcon, PencilIcon } from "@heroicons/react/24/solid";
 
 const LOGO_SVG = `<svg width="69" height="44" viewBox="0 0 69 44" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_ii_1_860)">
@@ -96,6 +97,12 @@ const SERVICES = [
   ]},
 ];
 
+const MOBILE_SERVICE_ITEMS = [
+  ["Landing Page", "landingHref"], ["Website", "websiteHref"], ["Branding", "brandingHref"], ["Product design", "productDesignHref"],
+  ["SEO / GEO", "seoGeoHref"], ["Optimisation conversion", "conversionOptimisationHref"], ["Copywriting", "copywritingHref"],
+  ["Développement Framer", "framerHref"], ["Développement code (React)", "developmentHref"],
+];
+
 function SafeLink({ href = "#", className, children, ...props }) {
   return <a href={href || "#"} className={className} {...props}>{children}</a>;
 }
@@ -107,6 +114,7 @@ function Chevron({ open = false, color = "currentColor" }) {
 }
 
 function NavLink({ href, children, services = false, onMouseEnter, onMouseLeave, dark = false, small = false, open = false, onClick }) {
+  if (services) return <button type="button" onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="navbar-link navbar-link-services" style={{ color: dark ? "rgb(255,255,255)" : "rgb(18,26,46)" }} aria-expanded={open}><span>{children}</span><Chevron open={open} color={dark ? "#fff" : "#000"} /></button>;
   return <SafeLink href={href} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={`navbar-link ${services ? "navbar-link-services" : ""} ${small ? "navbar-link-small" : ""}`} style={{ color: dark ? "rgb(255,255,255)" : "rgb(18,26,46)" }}>
     <span>{children}</span>{services && <Chevron open={open} color={dark ? "#fff" : "#000"} />}
   </SafeLink>;
@@ -159,7 +167,7 @@ function ServiceCard({ service, href, compact = false }) {
   // Cette correction cible uniquement le mega-menu desktop demandé.
   if (compact) return <SafeLink href={href} className="framer-GuRpl framer-1qhm5hn framer-ogey0s navbar-service-card navbar-service-card-compact">
     <span className="framer-17q3nr5 navbar-service-images">
-      {service.images.map(([src, srcSet], i) => <span className={`${imageClassNames[i]} navbar-service-image`} key={src} style={{ transform: `rotate(${SERVICE_ROTATIONS[i][0]}deg)` }}><img src={src} srcSet={srcSet} sizes="26px" alt="" loading="lazy" /></span>)}
+      {service.images.map(([src, srcSet], i) => <span className={`${imageClassNames[i]} navbar-service-image`} key={src} style={{ transform: `rotate(${SERVICE_ROTATIONS[i][0]}deg)` }}><img src={src} srcSet={srcSet} sizes="26px" alt={`Illustration du service ${service.title}`} loading="lazy" /></span>)}
     </span>
     <span className="framer-zpkpa0 navbar-service-title">{service.title}</span>
   </SafeLink>;
@@ -181,19 +189,11 @@ function ServiceCard({ service, href, compact = false }) {
         animate={{ rotate: hovered ? SERVICE_ROTATIONS[i][1] : SERVICE_ROTATIONS[i][0] }}
         transition={SERVICE_SPRING}
       >
-        <img src={src} srcSet={srcSet} sizes="43px" alt="" loading="lazy" />
+        <img src={src} srcSet={srcSet} sizes="43px" alt="Aperçu visuel du projet" loading="lazy" />
       </motion.span>)}
     </span>
     <span className="framer-zpkpa0 navbar-service-title">{service.title}</span>
   </motion.a>;
-}
-
-function ServicesCTA({ href }) {
-  return <SafeLink href={href} className="framer-e9T8u framer-18l5q9i framer-v-gyq8zy navbar-services-cta">
-    <span className="framer-b8x0of navbar-services-cta-inner">
-      <span className="framer-1k4ajre navbar-services-cta-text">Voir tous nos services</span>
-    </span>
-  </SafeLink>;
 }
 
 function DecorativeLine({ className = "" }) {
@@ -204,26 +204,95 @@ function DecorativeLine({ className = "" }) {
   </div>;
 }
 
-function DesktopServices({ links }) {
-  return <div className="navbar-services-popover-positioner">
+const DEFAULT_OVERLAY_MOTION = { duration: 0.49, startY: -80, startHeight: 0, easing: "smooth" };
+const OVERLAY_EASINGS = { smooth: [0.22, 1, 0.36, 1], snappy: [0.16, 1, 0.3, 1], linear: "linear" };
+const OVERLAY_TRANSITION = { exitDuration: .15, enterDuration: .15, enterDelay: 0, panelDuration: .4, easing: "easeInOut", resourcesHeight: 600, servicesHeight: 501 };
+
+function DesktopResources({ links, onNavigate, onPointerEnter, onPanelLeave }) {
+  const cards = [
+    { title: "Nos articles", subtitle: "Découvrez tous nos articles", href: links.resourcesHref, image: "/images/navigation/resources-articles.jpg" },
+    { title: "Nos outils gratuits", subtitle: "Découvrez tous nos outils gratuits", href: links.freeToolsHref, image: "/images/navigation/resources-free-tools.png" },
+  ];
+  return <div className="navbar-resources-panel" onMouseEnter={onPointerEnter} onMouseLeave={onPanelLeave}>
+    {cards.map((card) => <SafeLink className="navbar-resources-card" href={card.href} key={card.title} onClick={onNavigate}>
+      <span className="navbar-resources-image"><img src={card.image} alt={`Illustration de la ressource ${card.title}`} /></span>
+      <span className="navbar-resources-copy"><strong>{card.title}</strong><small>{card.subtitle}</small></span>
+    </SafeLink>)}
+  </div>;
+}
+
+function DesktopServices({ links, onPointerEnter, onPanelLeave, onNavigate, motionSettings, onBlurChange, contentType = "services" }) {
+  const panelHeight = contentType === "resources" ? OVERLAY_TRANSITION.resourcesHeight : OVERLAY_TRANSITION.servicesHeight;
+  const categories = [
+    { id: "design", label: "Design", icon: PencilIcon, items: ["Landing Page", "Website", "Product design", "Branding"] },
+    { id: "growth", label: "Conversion / Croissance", icon: ChartBarSquareIcon, items: ["Landing Page", "SEO / GEO", "Optimisation conversion", "Copywriting"] },
+    { id: "development", label: "Développement", icon: CodeBracketSquareIcon, items: ["Développement Framer", "Développement code (React)"] },
+  ];
+  const serviceLinks = { "Landing Page": links.landingHref, Website: links.websiteHref, Branding: links.brandingHref, "Product design": links.productDesignHref, "SEO / GEO": links.seoGeoHref, "Optimisation conversion": links.conversionOptimisationHref, Copywriting: links.copywritingHref, "Développement Framer": links.framerHref, "Développement code (React)": links.developmentHref };
+  const categoryImages = {
+    design: {
+      "Landing Page": "/images/services-menu/landing-page.png",
+      Website: "/images/services-menu/website.png",
+      // Associations visuelles : Product Design avec le tableau, Branding avec le logo Ruff.
+      "Product design": "/images/services-menu/product-design.png",
+      Branding: "/images/services-menu/branding.png",
+    },
+    growth: {
+      "Landing Page": "/images/services-menu/conversion-landing-page.png",
+      "SEO / GEO": "/images/services-menu/seo-geo.png",
+      "Optimisation conversion": "/images/services-menu/conversion-optimisation.png",
+      Copywriting: "/images/services-menu/copywriting.png",
+    },
+    development: {
+      "Développement Framer": "/images/services-menu/website.png",
+      "Développement code (React)": "/images/services-menu/development-react.png",
+    },
+  };
+  const [activeCategory, setActiveCategory] = useState("design");
+  const [activeService, setActiveService] = useState("Branding");
+  const [isEntering, setIsEntering] = useState(true);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsEntering(false), 900);
+    return () => window.clearTimeout(timer);
+  }, []);
+  const active = categories.find((category) => category.id === activeCategory) || categories[0];
+  const activeImages = categoryImages[active.id] || {};
+  const carouselItems = active.items.map((service) => activeImages[service] || "/images/services-menu/landing-page.png");
+  const slideIndex = Math.max(0, active.items.indexOf(activeService));
+  const carouselSlides = [...carouselItems, ...carouselItems, ...carouselItems];
+  const carouselOffset = (carouselItems.length + slideIndex) * 299 - 58.5;
+  const selectCategory = (category) => { setActiveCategory(category.id); setActiveService(category.items[0]); };
+  // Le panneau maintient l'ouverture en annulant sa fermeture ; il ne doit jamais
+  // déclencher lui-même une réouverture lorsque le pointeur le traverse.
+  const handlePointerEnter = () => { onBlurChange(true); onPointerEnter(); };
+  const handlePanelLeave = (event) => { onBlurChange(false); onPanelLeave(event); };
+  return <div className="navbar-services-popover-positioner" onMouseEnter={handlePointerEnter}>
     <motion.div
       className="navbar-services-popover"
       role="dialog"
-      initial={{ opacity: 0, y: -25 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -25 }}
-      transition={SERVICE_SPRING}
+      initial={{ height: (panelHeight * motionSettings.startHeight) / 100, y: motionSettings.startY }}
+      animate={{ height: panelHeight, y: 0 }}
+      exit={{ height: (panelHeight * motionSettings.startHeight) / 100, y: motionSettings.startY }}
+      transition={{ duration: OVERLAY_TRANSITION.panelDuration, ease: OVERLAY_TRANSITION.easing }}
+      style={{ overflow: "hidden", willChange: "height, transform" }}
     >
-      <div className="framer-AO6Cg framer-hkmdr2 framer-v-1fc9i16 navbar-services-panel">
+      <AnimatePresence mode="wait">
+      <motion.div key={contentType} className="navbar-overlay-content" style={{ "--navbar-overlay-height": `${panelHeight}px` }} initial={contentType === "resources" ? { opacity: 0 } : false} animate={{ opacity: 1, transition: { duration: OVERLAY_TRANSITION.enterDuration, delay: contentType === "resources" ? OVERLAY_TRANSITION.enterDelay : 0, ease: OVERLAY_TRANSITION.easing } }} exit={{ opacity: 0, transition: { duration: OVERLAY_TRANSITION.exitDuration, ease: OVERLAY_TRANSITION.easing } }}>
+      {contentType === "resources" ? <DesktopResources links={links} onNavigate={onNavigate} onPointerEnter={handlePointerEnter} onPanelLeave={handlePanelLeave} /> : <><div className={`navbar-services-panel navbar-services-panel-new${isEntering ? " is-entering" : ""}`} onMouseEnter={handlePointerEnter} onMouseLeave={handlePanelLeave}>
+        <div className="navbar-services-categories">{categories.map((category) => { const Icon = category.icon; return <button key={category.id} type="button" className={`navbar-services-category ${activeCategory === category.id ? "is-active" : ""}`} onMouseEnter={() => selectCategory(category)} onFocus={() => selectCategory(category)}><span><Icon aria-hidden="true" />{category.label}</span><ArrowRightIcon aria-hidden="true" /></button>; })}</div>
+        <div className="navbar-services-divider" aria-hidden="true" />
+        <div className="navbar-services-list">{active.items.map((service) => <SafeLink key={service} href={serviceLinks[service]} className={`navbar-services-item ${activeService === service ? "is-active" : ""}`} onMouseEnter={() => setActiveService(service)} onFocus={() => setActiveService(service)} onClick={onNavigate}><span>{service}</span><ArrowRightIcon aria-hidden="true" /></SafeLink>)}</div>
+        <div className="navbar-services-carousel" aria-label={`Aperçu ${activeService}`}><div className="navbar-services-carousel-track" style={{ transform: `translateY(-${carouselOffset}px)` }}>{carouselSlides.map((src, index) => <div className="navbar-services-carousel-card" key={`${src}-${index}`}><img src={src} alt={`Aperçu visuel du service ${activeService}`} /></div>)}</div></div>
+      </div>
+      <div className="framer-AO6Cg framer-hkmdr2 framer-v-1fc9i16 navbar-services-panel navbar-services-panel-legacy">
         <div className="framer-1gxuoah navbar-services-left">
           <DecorativeLine className="framer-5078ai navbar-services-line navbar-services-line-top" />
           <div className="framer-k3m18l navbar-services-copy">
             <p className="framer-yofu9j navbar-services-heading">Tous nos services</p>
             <p className="framer-fu4set navbar-services-desc">Trois offres claires, pensées pour élever votre image et générer des demandes</p>
-            <div className="framer-13xep5d-container"><ServicesCTA href={links.allServicesHref} /></div>
           </div>
           <div className="framer-19ukg5c navbar-services-hero-wrap">
-            <img className="navbar-services-hero" alt="" loading="lazy"
+            <img className="navbar-services-hero" alt="Aperçu visuel des services" loading="lazy"
               sizes="calc(49vw + 441px)"
               src="https://framerusercontent.com/images/BX0tBEEQuslybBvZlIhj9b9o2M.png?width=3764&height=2310"
               srcSet="https://framerusercontent.com/images/BX0tBEEQuslybBvZlIhj9b9o2M.png?scale-down-to=512&width=3764&height=2310 512w,https://framerusercontent.com/images/BX0tBEEQuslybBvZlIhj9b9o2M.png?scale-down-to=1024&width=3764&height=2310 1024w,https://framerusercontent.com/images/BX0tBEEQuslybBvZlIhj9b9o2M.png?scale-down-to=2048&width=3764&height=2310 2048w,https://framerusercontent.com/images/BX0tBEEQuslybBvZlIhj9b9o2M.png?width=3764&height=2310 3764w" />
@@ -242,26 +311,29 @@ function DesktopServices({ links }) {
             <div className="framer-u63by7-container"><ServiceCard service={SERVICES[2]} href={links.developmentHref} /></div>
           </div>
         </div>
-      </div>
+      </div></>}
+      </motion.div>
+      </AnimatePresence>
     </motion.div>
   </div>;
 }
 
-function MobileMenu({ dark, links, onClose }) {
+function MobileMenu({ dark, links, onClose, locale = "fr" }) {
+  const t = (fr, en) => locale === "en" ? en : fr;
   const [servicesOpen, setServicesOpen] = useState(false);
   const click = () => onClose?.();
   return <div className="framer-1stnlcj navbar-mobile-menu">
     <div className="framer-brs9hv navbar-mobile-links">
-      <NavLink small dark={dark} href={links.homeHref} onClick={click}>Accueil</NavLink><div className="navbar-mobile-separator" />
+      <NavLink small dark={dark} href={links.homeHref} onClick={click}>{t("Accueil", "Home")}</NavLink><div className="navbar-mobile-separator" />
       <NavLink small dark={dark} href={links.projectsHref} onClick={click}>Études de cas</NavLink><div className="navbar-mobile-separator" />
       <button className="navbar-mobile-services-toggle" type="button" onClick={() => setServicesOpen(v => !v)} style={{ color: dark ? "#fff" : "rgb(18,26,46)" }}><span>Services</span><Chevron open={servicesOpen} color={dark ? "#fff" : "#000"} /></button>
       <div className={`navbar-mobile-services ${servicesOpen ? "is-open" : ""}`}>
         <div className="navbar-mobile-services-inner">
-          {SERVICES.map((service) => <ServiceCard key={service.title} compact service={service} href={links[service.key]} />)}
+          {MOBILE_SERVICE_ITEMS.map(([label, key]) => <SafeLink key={label} href={links[key]} className="navbar-mobile-service-link" onClick={click}>{label}<ArrowRightIcon aria-hidden="true" /></SafeLink>)}
         </div>
       </div>
-      <div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.resourcesHref} onClick={click}>Ressources</NavLink>
-      <div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.aboutHref} onClick={click}>Qui sommes nous </NavLink>
+      <div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.resourcesHref} onClick={click}>{t("Ressources", "Resources")}</NavLink>
+      <div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.aboutHref} onClick={click}>{t("Qui sommes nous ", "Who we are")}</NavLink>
     </div>
     <div className="framer-9b3gdf-container navbar-mobile-cta"><CTA full href={links.ctaHref} shell={dark ? "rgba(225,228,237,.08)" : "rgb(225,228,237)"} /></div>
   </div>;
@@ -269,10 +341,12 @@ function MobileMenu({ dark, links, onClose }) {
 
 export default function NavBar({
   variant = "auto", fill = "rgb(251, 251, 251)", fill2 = "rgb(251, 251, 251)", color = "rgb(0,0,0)", theme = "light",
-  homeHref = "#", projectsHref = "#", servicesHref = "#", resourcesHref = "#", aboutHref = "#", ctaHref = "#",
-  landingHref = "#", websiteHref = "#", developmentHref = "#", allServicesHref = "#", whatsappHref = DEFAULT_WHATSAPP,
+  homeHref = "#", projectsHref = "#", resourcesHref = "#", aboutHref = "#", ctaHref = "#",
+  landingHref = "#", websiteHref = "#", brandingHref = "#", productDesignHref = "#", copywritingHref = "#", seoGeoHref = "#", conversionOptimisationHref = "#", framerHref = "#", developmentHref = "#", whatsappHref = DEFAULT_WHATSAPP,
   className = "", style,
+  locale = "fr",
 }) {
+  const t = (fr, en) => locale === "en" ? en : fr;
   // Valeur initiale constante (identique serveur/clients) pour éviter tout mismatch d'hydratation :
   // la vraie largeur est lue après montage dans l'effet ci-dessous.
   const [viewport, setViewport] = useState(1800);
@@ -281,12 +355,15 @@ export default function NavBar({
   const initialId = autoMobile ? "Ip59pHhO5" : (variant === "auto" ? (viewport < 1200 ? "oVuA0Rdqu" : "ZbjNrHK9l") : (VARIANT_CLASS[requested] ? requested : "ZbjNrHK9l"));
   const [menuOpen, setMenuOpen] = useState(["PR5O_TX2L", "pslIWKY0N", "lG_gYiE5L", "apN8iNd4y"].includes(initialId));
   const [servicesOpen, setServicesOpen] = useState(false);
-  const servicesCloseTime = useRef(0);
+  const [overlayType, setOverlayType] = useState("services");
+  const [servicesBlurActive, setServicesBlurActive] = useState(false);
+  const servicesCloseTimer = useRef(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => { const fn = () => setViewport(window.innerWidth); fn(); window.addEventListener("resize", fn); return () => window.removeEventListener("resize", fn); }, []);
   useEffect(() => { const onScroll = () => setScrolled(window.scrollY > 8); onScroll(); window.addEventListener("scroll", onScroll, { passive: true }); return () => window.removeEventListener("scroll", onScroll); }, []);
   useEffect(() => { if (!menuOpen) return; const previous = document.documentElement.style.overflow; const previousBody = document.body.style.overflow; document.documentElement.style.overflow = "hidden"; document.body.style.overflow = "hidden"; return () => { document.documentElement.style.overflow = previous; document.body.style.overflow = previousBody; }; }, [menuOpen]);
+  useEffect(() => () => { if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current); }, []);
   useEffect(() => { if (viewport >= 810 && variant === "auto") setMenuOpen(false); }, [viewport, variant]);
 
   let baseId = variant === "auto" ? (viewport < 810 ? "Ip59pHhO5" : viewport < 1200 ? "oVuA0Rdqu" : "ZbjNrHK9l") : (VARIANT_CLASS[requested] ? requested : "ZbjNrHK9l");
@@ -297,7 +374,9 @@ export default function NavBar({
   }
   const dark = DARK.has(baseId) || theme === "dark";
   const scrolledActive = scrolled && !menuOpen;
-  const mobile = MOBILE_IDS.has(baseId) || (variant === "auto" && viewport < 810);
+  // Certaines pages utilisent une variante desktop explicite : à petite largeur,
+  // elles doivent malgré tout toujours basculer sur la navigation burger.
+  const mobile = MOBILE_IDS.has(baseId) || viewport < 810;
   // Le menu mobile ouvert reprend volontairement l'apparence claire de la barre au scroll.
   const menuUsesScrollTheme = menuOpen && mobile;
   const navDark = dark && !scrolledActive && !menuUsesScrollTheme;
@@ -306,25 +385,48 @@ export default function NavBar({
   const logoOnly = LOGO_ONLY.has(baseId);
   const border = ["IekeHhisv","MOuhdlnSq","nXvvpRJPs"].includes(baseId);
   const bg = (scrolledActive || menuUsesScrollTheme) ? "rgb(251, 251, 251)" : (DARK.has(baseId) ? "rgb(18, 26, 46)" : (baseId === "lG_gYiE5L" || baseId === "nXvvpRJPs" ? fill2 : fill));
-  const links = useMemo(() => ({homeHref, projectsHref, servicesHref, resourcesHref, aboutHref, ctaHref, landingHref, websiteHref, developmentHref, allServicesHref}), [homeHref,projectsHref,servicesHref,resourcesHref,aboutHref,ctaHref,landingHref,websiteHref,developmentHref,allServicesHref]);
+  const links = useMemo(() => ({homeHref, projectsHref, resourcesHref, freeToolsHref: "/outils-gratuits", aboutHref, ctaHref, landingHref, websiteHref, brandingHref, productDesignHref, copywritingHref, seoGeoHref, conversionOptimisationHref, framerHref, developmentHref}), [homeHref,projectsHref,resourcesHref,aboutHref,ctaHref,landingHref,websiteHref,brandingHref,productDesignHref,copywritingHref,seoGeoHref,conversionOptimisationHref,framerHref,developmentHref]);
+  const openServices = () => { if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current); setOverlayType("services"); setServicesBlurActive(true); setServicesOpen(true); };
+  const openResources = () => { if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current); setOverlayType("resources"); setServicesBlurActive(true); setServicesOpen(true); };
+  const keepServicesOpen = () => { if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current); setServicesBlurActive(true); };
+  const closeServices = (event) => {
+    const nextTarget = event?.relatedTarget;
+    if (nextTarget instanceof Node && event?.currentTarget?.contains(nextTarget)) return;
+    // Le panneau est en position fixed, donc il est un frère du lien dans le DOM.
+    // Le reconnaître explicitement évite une fermeture entre le lien et l'overlay.
+    if (nextTarget instanceof Element && nextTarget.closest(".navbar-services-popover-positioner")) return;
+    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
+    const movingToAnotherNavLink = nextTarget instanceof Element
+      && !!nextTarget.closest(".navbar-desktop-links")
+      && !nextTarget.closest(".navbar-services-anchor");
+    if (movingToAnotherNavLink) { setServicesBlurActive(false); setServicesOpen(false); return; }
+    servicesCloseTimer.current = setTimeout(() => {
+      // La zone animée appartient au lien Services : on ne ferme que lorsque le
+      // pointeur a réellement quitté le lien ET le panneau, pas pendant l'entrée.
+      if (!document.querySelector(".navbar-services-anchor:hover, .navbar-services-popover-positioner:hover")) { setServicesBlurActive(false); setServicesOpen(false); }
+    }, 120);
+  };
 
   return <>
     <div className="navbar-spacer" aria-hidden="true" />
-    <nav className={`framer-4kwVz framer-qkr4e3 ${VARIANT_CLASS[baseId] || ""} navbar-native ${menuOpen && mobile ? "navbar-menu-open" : ""} ${scrolledActive ? "navbar-scrolled" : ""} ${className}`} style={{ backgroundColor: bg, color, borderBottom: border ? `1px solid ${baseId === "nXvvpRJPs" ? "rgb(34,34,34)" : "rgba(0,0,0,.13)"}` : `1px solid ${scrolledActive ? "rgba(0,0,0,.1)" : "rgba(0,0,0,0)"}`, ...style }}>
-      {mobile && menuOpen && <MobileMenu dark={navDark} links={links} onClose={() => setMenuOpen(false)} />}
+    <nav className={`framer-4kwVz framer-qkr4e3 ${VARIANT_CLASS[baseId] || ""} navbar-native ${menuOpen ? "navbar-menu-open" : ""} ${scrolledActive ? "navbar-scrolled" : ""} ${className}`} style={{ "--navbar-layer-bg": bg, backgroundColor: bg, color, borderBottom: border ? `1px solid ${baseId === "nXvvpRJPs" ? "rgb(34,34,34)" : "rgba(0,0,0,.13)"}` : `1px solid ${scrolledActive ? "rgba(0,0,0,.1)" : "rgba(0,0,0,0)"}`, ...style }}>
+      {menuOpen && <MobileMenu dark={navDark} links={links} locale={locale} onClose={() => setMenuOpen(false)} />}
+      {servicesOpen && <div className="navbar-services-backdrop" aria-hidden="true" />}
       <div className="framer-5yfpdr navbar-main-row">
         <Logo href={homeHref} dark={navDark} mobile={mobile} mobileUnique={baseId === "BG0nmz4mC"} />
         {showDesktopLinks && <div className="framer-1rupvmq navbar-desktop-links">
-          <NavLink dark={navDark} href={homeHref}>Accueil</NavLink>
-          <NavLink dark={navDark} href={projectsHref}>Réalisations</NavLink>
-          <div className={`framer-1egwlrv navbar-services-anchor ${servicesOpen ? "is-open" : ""}`} onMouseEnter={() => { if (Date.now() - servicesCloseTime.current < 400) return; setServicesOpen(true); }} onMouseLeave={() => { setServicesOpen(false); servicesCloseTime.current = Date.now(); }}>
-            <NavLink dark={navDark} services open={servicesOpen} href={servicesHref}>Services</NavLink>
-            <AnimatePresence>{servicesOpen && <DesktopServices key="services-popover" links={links} />}</AnimatePresence>
+          <NavLink dark={navDark} href={homeHref}>{t("Accueil", "Home")}</NavLink>
+          <NavLink dark={navDark} href={projectsHref}>{t("Réalisations", "Our work")}</NavLink>
+          <div className={`framer-1egwlrv navbar-services-anchor ${servicesOpen && overlayType === "services" ? "is-open" : ""}`} onMouseLeave={closeServices}>
+            <NavLink dark={navDark} services open={servicesOpen && overlayType === "services"} onMouseEnter={openServices} onClick={() => servicesOpen && overlayType === "services" ? (setServicesBlurActive(false), setServicesOpen(false)) : openServices()}>Services</NavLink>
           </div>
-          <NavLink dark={navDark} href={resourcesHref}>Ressources</NavLink>
-          <NavLink dark={navDark} href={aboutHref}>Qui sommes nous </NavLink>
+          <div className={`framer-1egwlrv navbar-services-anchor ${servicesOpen && overlayType === "resources" ? "is-open" : ""}`} onMouseLeave={closeServices}>
+            <NavLink dark={navDark} services open={servicesOpen && overlayType === "resources"} onMouseEnter={openResources} onClick={() => servicesOpen && overlayType === "resources" ? (setServicesBlurActive(false), setServicesOpen(false)) : openResources()}>{t("Ressources", "Resources")}</NavLink>
+          </div>
+          <AnimatePresence>{servicesOpen && <DesktopServices key="services-popover" contentType={overlayType} links={links} motionSettings={DEFAULT_OVERLAY_MOTION} onBlurChange={setServicesBlurActive} onPointerEnter={keepServicesOpen} onPanelLeave={closeServices} onNavigate={() => { setServicesBlurActive(false); setServicesOpen(false); }} />}</AnimatePresence>
+          <NavLink dark={navDark} href={aboutHref}>{t("Qui sommes nous ", "Who we are")}</NavLink>
         </div>}
-        {mobile && !logoOnly && <div className="framer-ufyq2u-container navbar-burger-container"><Burger open={menuOpen} dark={navDark} onClick={() => setMenuOpen(v => !v)} /></div>}
+        {!logoOnly && <div className="framer-ufyq2u-container navbar-burger-container"><Burger open={menuOpen} dark={navDark} onClick={() => setMenuOpen(v => !v)} /></div>}
         {showRight && <div className="framer-184c6kw navbar-right"><div className="navbar-right-actions"><div className="framer-1u5ere7-container"><WhatsApp href={whatsappHref} /></div><div className="framer-1d2rod8-container"><CTA href={ctaHref} shell={navDark ? "rgba(255,255,255,.15)" : "rgb(225,228,237)"} /></div></div></div>}
       </div>
     </nav>

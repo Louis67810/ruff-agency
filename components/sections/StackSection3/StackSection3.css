@@ -95,7 +95,8 @@
 
 .s3-title-wrap {
   flex: none;
-  height: 134px;
+  height: auto;
+  min-height: 134px;
   max-width: 417px;
   position: relative;
   white-space: pre-wrap;
@@ -464,6 +465,8 @@
 @media (max-width: 809px) {
   .stack-section-3 {
     flex-direction: column;
+    /* La FAQ précède directement le footer : éviter les 300 px du réglage desktop. */
+    padding-bottom: 96px;
   }
 
   .s3-content,

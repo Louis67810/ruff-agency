@@ -8,6 +8,7 @@ export type ArticlesRessourceItem = {
   tagId?: string;
   tag?: string;
   title?: string;
+  description?: string;
   image?: ArticlesRessourceImage;
   author?: string;
   authorPhoto?: string | { src?: string; srcSet?: string };
@@ -15,6 +16,7 @@ export type ArticlesRessourceItem = {
 };
 
 export type ArticlesRessourceProps = {
+  locale?: "fr" | "en";
   tags?: Array<{ id?: string; label?: string; value?: string; title?: string }>;
   articles?: ArticlesRessourceItem[];
   initialTag?: string;
@@ -23,6 +25,8 @@ export type ArticlesRessourceProps = {
   className?: string;
   showFilters?: boolean;
   showSidebar?: boolean;
+  variant?: "resources" | "tools";
+  heading?: string;
 };
 
 declare const ArticlesRessource: React.FC<ArticlesRessourceProps>;

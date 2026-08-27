@@ -22,7 +22,7 @@ const CLIENTS = [
     name: " Sacha Tassart",
     role: "Fondateur de Spreak",
     src: "https://framerusercontent.com/images/nLqNRYI5crcY5jbusSqlos90rs.png?width=200&height=200",
-    alt: "",
+    alt: "Illustration décorative du service",
   },
   {
     name: "Martin Riedweg",
@@ -47,7 +47,7 @@ const CLIENTS = [
     name: "Antoine Troovy",
     role: "CEO de Keyframe.agency",
     src: "https://framerusercontent.com/images/V58PO9cFrXoX2nvvXl1unLY5Zps.png?width=512&height=512",
-    alt: "",
+    alt: "Illustration décorative du service",
   },
 ];
 

@@ -12,6 +12,7 @@ export type Project = {
   category: RealisationCategory;
   href: string;
   heroTitle?: string;
+  heroVideoSrc?: string;
   photoDuSite?: ProjectImage;
   logo?: ProjectImage;
   siteHref?: string;
@@ -76,8 +77,9 @@ export const projects: Project[] = [
       "SaaS",
     ),
     heroTitle: "Refonte d’une Landing Page pour un aspect haut de gamme",
+    heroVideoSrc: "/videos/site-internet-landing.mp4",
     photoDuSite: { src: "https://framerusercontent.com/images/k9hqKDSdmfT6DjeoPRo5cmQHLFM.png?width=1202&height=672" },
-    siteHref: "https://spreak.com",
+    siteHref: "",
     about: "Spreak est un SaaS qui centralise avis et enquêtes, aide à bâtir des plans d’action concrets et clarifie ce que vos clients pensent vraiment, pour décider plus vite et mieux.",
     review:
       "Je recommande vivement Louis pour son travail remarquable sur Spreak. Toute entreprise souhaitant collaborer avec un designer à la fois rigoureux, créatif et fiable fera un excellent choix en travaillant avec lui. Je le recommande sans réserve.",
@@ -166,6 +168,7 @@ export const projects: Project[] = [
       "SaaS",
     ),
     heroTitle: "Refonte du design d’un SaaS pour maximiser la crédibilité et la conversion",
+    heroVideoSrc: "/videos/landing-page-hero.mp4",
     photoDuSite: { src: "https://framerusercontent.com/images/k2fFX7w22E4ad4xjzAICuBvwo68.png?width=1346&height=716" },
     logo: { src: "https://framerusercontent.com/images/zUMzwc5AG9FujzVhCrU1x8QuRg.png?width=536&height=152" },
     siteHref: "https://rentala.com",
@@ -211,6 +214,7 @@ export const projects: Project[] = [
       "PME",
     ),
     heroTitle: "Refonte d’un site d’un cabinet comptable pour une image moderne et différenciante",
+    heroVideoSrc: "/videos/development-react.mp4",
     photoDuSite: { src: "https://framerusercontent.com/images/V407ZbzjU6Fh0wdazSh60SGJBf0.png?width=1650&height=922" },
     about: "Le cabinet Zorgniotti est un cabinet d’expertise comptable qui accompagne entreprises et entrepreneurs dans la gestion et le développement de leur activité.",
     review:

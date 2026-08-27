@@ -1,5 +1,5 @@
 import SiteNav from "@/components/navigation/SiteNav";
-import Footer from "@/components/footer/Footer";
+import Footer from "@/components/footer/FooterServer";
 import Hero2Optimized from "@/components/sections/Hero2Optimized/Hero2Optimized";
 import { NAV_PROPS, FOOTER_LINKS, ROUTES } from "@/lib/site";
 

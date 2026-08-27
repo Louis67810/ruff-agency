@@ -15,6 +15,7 @@
 
 .textContent{align-content:flex-start;align-items:flex-start;display:flex;flex:none;flex-direction:column;flex-wrap:nowrap;gap:16px;height:min-content;justify-content:center;overflow:visible;padding:0;position:relative;width:100%}
 .title{flex:none;height:auto;position:relative;white-space:pre-wrap;width:100%;word-break:break-word;overflow-wrap:break-word;margin:0;color:var(--ink);font-family:"Plus Jakarta Sans","Plus Jakarta Sans Placeholder",sans-serif;font-size:64px;font-style:normal;font-weight:700;letter-spacing:-.04em;line-height:1.1;font-feature-settings:'blwf' on,'cv09' on,'cv03' on,'cv04' on,'cv11' on}
+.englishTitle{font-size:64px;max-width:none;width:850px}
 .titleWord{display:inline-block;animation:titleWordIn .5s calc(var(--word-index) * .15s) cubic-bezier(.44,0,.56,1) both}
 .subtitle{flex:none;height:auto;max-width:595px;position:relative;white-space:pre-wrap;width:100%;word-break:break-word;overflow-wrap:break-word;margin:0;color:rgba(18,26,46,.7);font-family:Inter,"Inter Placeholder",sans-serif;font-size:18px;font-style:normal;font-weight:500;letter-spacing:-.04em;line-height:1.6;font-feature-settings:'blwf' on,'cv09' on,'cv03' on,'cv04' on,'cv11' on}
 .subtitleWord{display:inline-block;animation:subtitleLineIn .5s calc(.6s + var(--line-index,0) * .15s) cubic-bezier(.44,0,.56,1) both}
@@ -85,6 +86,7 @@
   .heroSection{flex-direction:column;padding:60px 0 0}
   .leftSection{flex:none;gap:64px;height:min-content;justify-content:center;width:100%;z-index:8}
   .title{font-size:48px;max-width:586px}
+  .englishTitle{font-size:48px;max-width:none;width:586px}
   .subtitle{font-size:18px;max-width:538px}
   /* La tablette reprend le ticker horizontal du téléphone ; le mur vertical est retiré. */
   .wallViewport{align-content:center;align-items:center;height:min-content;padding:48px 0 0;width:100%;overflow:visible}
@@ -101,6 +103,7 @@
   .topContent{width:100%}
   .availability{width:100%;animation:none}
   .title{font-size:32px;max-width:416px;order:0}
+  .englishTitle{font-size:32px;max-width:100%;width:100%}
   .titleWord{animation:none}
   .subtitle{font-size:16px;max-width:530px;order:1}
   .subtitleWord{animation:none}

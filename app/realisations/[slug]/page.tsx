@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import SiteNav from "@/components/navigation/SiteNav";
-import Footer from "@/components/footer/Footer";
+import Footer from "@/components/footer/FooterServer";
 import HeroCaseStudy from "@/components/sections/HeroCaseStudy/HeroCaseStudy";
 import ContentPageRealisationsSlug from "@/components/sections/ContentPageRealisationsSlug/ContentPageRealisationsSlug";
 import CtaAuditRealisationsSlug from "@/components/sections/CtaAuditRealisationsSlug/CtaAuditRealisationsSlug";
@@ -9,16 +9,19 @@ import RealisationsOptimized from "@/components/sections/RealisationsOptimized/R
 import { NAV_PROPS, FOOTER_LINKS, ROUTES, SITE_URL } from "@/lib/site";
 import { projects, getProject } from "@/lib/data/projects";
 import JsonLd from "@/components/JsonLd";
+import { headers } from "next/headers";
+import { getEnglishProject } from "@/lib/data/projects-en";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+function legacyGenerateMetadata({ params }: { params: { slug: string } }): Metadata {
   const project = getProject(params.slug);
   if (!project) return {};
-  const title = `${project.heroTitle || project.title} — Ruff Agency`;
-  const description = project.about || project.description;
+  const title = `${project.title} — Étude de cas | Ruff Agency`;
+  const rawDescription = project.about || project.description;
+  const description = rawDescription.length > 155 ? `${rawDescription.slice(0, 152).replace(/\s+\S*$/u, "").replace(/[\s,;:]+$/u, "")}…` : rawDescription;
   const image = project.photoDuSite?.src || project.image;
   const url = `${SITE_URL}/realisations/${project.slug}`;
   return {
@@ -35,8 +38,24 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const sourceProject = getProject(params.slug);
+  if (!sourceProject) return {};
+  const english = headers().get("x-site-locale") === "en";
+  const project = english ? getEnglishProject(sourceProject) : sourceProject;
+  const title = `${project.title} — ${english ? "Case study" : "Étude de cas"} | Ruff Agency`;
+  const description = (project.about || project.description).slice(0, 155);
+  const path = `/realisations/${project.slug}`;
+  const frenchUrl = `${SITE_URL}${path}`;
+  const englishUrl = `${SITE_URL}/en${path}`;
+  const url = english ? englishUrl : frenchUrl;
+  return { title, description, alternates: { canonical: url, languages: { fr: frenchUrl, en: englishUrl } }, openGraph: { title, description, url, type: "website" } };
+}
+
 export default function RealisationSlugPage({ params }: { params: { slug: string } }) {
-  const project = getProject(params.slug);
+  const locale = headers().get("x-site-locale") === "en" ? "en" : "fr";
+  const sourceProject = getProject(params.slug);
+  const project = sourceProject ? (locale === "en" ? getEnglishProject(sourceProject) : sourceProject) : undefined;
   if (!project) notFound();
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -51,14 +70,18 @@ export default function RealisationSlugPage({ params }: { params: { slug: string
     <>
       <SiteNav {...NAV_PROPS} fill="rgb(249, 251, 255)" fill2="rgb(249, 251, 255)" />
       <HeroCaseStudy
+        locale={locale}
         slug={project.slug}
         title={project.heroTitle || project.title}
         photoDuSite={project.photoDuSite}
+        videoSrc={project.heroVideoSrc}
+        imageSlides={project.photos}
         realisationsHref={ROUTES.realisations}
-        offersHref={ROUTES.services}
+        offersHref={ROUTES.landingPage}
         callHref={ROUTES.contact}
       />
       <ContentPageRealisationsSlug
+        locale={locale}
         logo={project.logo}
         about={project.about}
         siteHref={project.siteHref}
@@ -85,9 +108,10 @@ export default function RealisationSlugPage({ params }: { params: { slug: string
         visibiliteAvantApres={project.visibiliteAvantApres}
         callHref={ROUTES.contact}
       />
-      <CtaAuditRealisationsSlug />
+      <CtaAuditRealisationsSlug locale={locale} />
       <RealisationsOptimized
-        projects={projects}
+        locale={locale}
+        projects={locale === "en" ? projects.map(getEnglishProject) : projects}
         title="Nos dernières réalisations"
         background="transparent"
         showDecorations={false}

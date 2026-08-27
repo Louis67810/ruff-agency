@@ -7,8 +7,9 @@ import AvisOptimized from "@/components/sections/AvisOptimized/AvisOptimized";
 import SectionAvis from "@/components/sections/SectionAvis";
 import StackSection3 from "@/components/sections/StackSection3/StackSection3";
 import { NAV_PROPS, FOOTER_LINKS, ROUTES, SITE_URL } from "@/lib/site";
+import { localizedMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const legacyMetadata: Metadata = {
   title: "Services — Ruff Agency",
   description:
     "Landing pages, sites internet et développement web sur-mesure : on crée des sites World-class pensés pour la conversion.",
@@ -16,11 +17,13 @@ export const metadata: Metadata = {
   openGraph: { url: `${SITE_URL}/services`, type: "website" },
 };
 
+export function generateMetadata(): Promise<Metadata> { return localizedMetadata({ path: "/services", frTitle: "Services — Ruff Agency", frDescription: "Landing pages, sites internet et développement web sur-mesure : on crée des sites World-class pensés pour la conversion.", enTitle: "Services — Ruff Agency", enDescription: "Landing pages, websites and custom web development designed for conversion." }); }
+
 export default function ServicesPage() {
   return (
     <>
       <SiteNav {...NAV_PROPS} className="services-page-nav" fill="rgb(18, 26, 46)" fill2="rgb(18, 26, 46)" theme="dark" />
-      <HeroContent servicesHref={ROUTES.services} callHref={ROUTES.contact} />
+      <HeroContent servicesHref="/services" callHref={ROUTES.contact} />
       <Benefices2Optimized
         bookingHref={ROUTES.contact}
         landingPageHref={ROUTES.landingPage}

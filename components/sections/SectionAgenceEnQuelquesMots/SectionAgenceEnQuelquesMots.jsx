@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import "./SectionAgenceEnQuelquesMots.css";
@@ -99,7 +99,7 @@ function DesktopStage() {
         src={DESKTOP_IMAGE_SRC}
         srcSet={DESKTOP_IMAGE_SRCSET}
         sizes="872px"
-        alt=""
+        alt="Illustration décorative de l’agence"
       />
       <RawSvg markup={GRID} className="agency-desktop-grid" />
       <RawSvg markup={ARROW1} className="agency-arrow agency-arrow-1" />

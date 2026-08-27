@@ -1,4 +1,4 @@
-.cta{align-items:flex-start;cursor:pointer;display:flex;flex-direction:row;gap:10px;height:min-content;justify-content:flex-start;overflow:visible;position:relative;text-decoration:none;width:min-content}
+.cta{align-items:flex-start;cursor:pointer;display:flex;flex:none;flex-direction:row;gap:10px;height:min-content;justify-content:flex-start;max-width:none;overflow:visible;position:relative;text-decoration:none;width:max-content}
 .cta-inner{align-items:center;display:flex;flex:none;flex-direction:row;height:48px;justify-content:center;overflow:hidden;position:relative;width:min-content}
 .cta-label{font-family:Inter,sans-serif;font-size:16px;font-weight:500;line-height:102.88%;white-space:pre}
 .cta-secondary{padding:0}
@@ -9,5 +9,5 @@
 .cta-primary .cta-inner{background:linear-gradient(90deg,rgb(78,125,250) 0%,rgb(1,71,255) 100%);border:1px solid rgb(46,77,156);border-radius:10px;box-shadow:inset 0 3px 0 rgba(255,255,255,.5),inset 0 2px 6px 4px rgba(0,0,0,.08),inset 0 -3px 0 rgb(14,65,199),0 2.4455518723px 3.2154479027px rgba(0,18,54,.07),0 6.7616381645px 8.8903017044px rgba(0,18,54,.1),0 16.2794189453px 21.4044208527px rgba(0,40,54,.16);gap:12px;padding:10px 10px 10px 24px;transition:background .25s ease}
 .cta-primary .cta-label{color:#fff}
 .cta-primary:hover .cta-inner{background:linear-gradient(161deg,rgb(67,108,222) 0%,rgb(36,77,181) 100%);box-shadow:inset 0 3px 0 rgba(255,255,255,.5),inset 0 2px 6px 4px rgba(0,0,0,.08),inset 0 -3px 0 rgb(14,65,199),0 2.4455518723px 3.2154479027px rgba(0,18,54,.07),0 6.7616381645px 8.8903017044px rgba(0,18,54,.1),0 16.2794189453px 21.4044208527px rgba(0,18,54,.13),0 54px 71px rgba(0,40,54,.16)}
-.cta-avatar{border:1px solid #fff;border-radius:6px;box-shadow:0 1px 2.9000000954px rgba(0,0,0,.25);display:block;height:28px;object-fit:cover;overflow:hidden;transition:transform .4s cubic-bezier(.2,.7,.2,1);width:28px}
+.cta-avatar{border:1px solid #fff;border-radius:6px;box-shadow:0 1px 2.9000000954px rgba(0,0,0,.25);display:block;flex:0 0 28px;height:28px;max-width:none;object-fit:cover;overflow:hidden;transition:transform .4s cubic-bezier(.2,.7,.2,1);width:28px}
 .cta-primary:hover .cta-avatar{transform:rotate(10deg)}

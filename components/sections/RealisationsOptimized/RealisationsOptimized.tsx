@@ -2,6 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./RealisationsOptimized.css";
+import { useLocale } from "@/components/LocaleProvider";
+import { localizeHref } from "@/lib/i18n";
+import { getEnglishProject } from "@/lib/data/projects-en";
 
 export type RealisationCategory = "Agence" | "SaaS" | "PME" | "Indépendant";
 
@@ -22,6 +25,7 @@ export type RealisationsOptimizedProps = {
   background?: string;
   showDecorations?: boolean;
   showAll?: boolean;
+  locale?: "fr" | "en";
 };
 
 const categoryClass: Record<RealisationCategory, string> = {
@@ -31,7 +35,15 @@ const categoryClass: Record<RealisationCategory, string> = {
   Indépendant: "realisations-category-independant",
 };
 
-function ProjectCard({ project, index }: { project: RealisationProject; index: number }) {
+function ProjectCard({
+  project,
+  index,
+  locale,
+}: {
+  project: RealisationProject;
+  index: number;
+  locale: "fr" | "en";
+}) {
   const ref = useRef<HTMLAnchorElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -51,7 +63,7 @@ function ProjectCard({ project, index }: { project: RealisationProject; index: n
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     observer.observe(node);
@@ -61,7 +73,7 @@ function ProjectCard({ project, index }: { project: RealisationProject; index: n
   return (
     <a
       ref={ref}
-      href={project.href || "#"}
+      href={localizeHref(project.href, locale) || "#"}
       className={`realisations-card${visible ? " is-visible" : ""}`}
       onClick={(event) => {
         if (!project.href || project.href === "#") event.preventDefault();
@@ -71,7 +83,7 @@ function ProjectCard({ project, index }: { project: RealisationProject; index: n
         <img
           className="realisations-image"
           src={project.image}
-          alt={project.imageAlt || ""}
+          alt={project.imageAlt || `Image du projet ${project.title}`}
           loading="lazy"
           draggable={false}
         />
@@ -80,8 +92,17 @@ function ProjectCard({ project, index }: { project: RealisationProject; index: n
       <div className="realisations-card-content">
         <div className="realisations-title-row">
           <h3 className="realisations-project-title">{project.title}</h3>
-          <span className={`realisations-category ${categoryClass[project.category]}`}>
-            {project.category}
+          <span
+            className={`realisations-category ${categoryClass[project.category]}`}
+          >
+            {locale === "en"
+              ? {
+                  Agence: "Agency",
+                  SaaS: "SaaS",
+                  PME: "SMB",
+                  Indépendant: "Independent",
+                }[project.category] || project.category
+              : project.category}
           </span>
         </div>
         <p className="realisations-description">{project.description}</p>
@@ -139,13 +160,32 @@ export default function RealisationsOptimized({
   background = "rgb(246, 248, 255)",
   showDecorations = true,
   showAll = false,
+  locale: localeProp,
 }: RealisationsOptimizedProps) {
+  const locale = localeProp ?? useLocale();
+  const english = locale === "en";
+  const localizedTitle =
+    english && title === "Nos dernières réalisations"
+      ? "Our latest work"
+      : title;
   const [expanded, setExpanded] = useState(false);
-  const visibleProjects = useMemo(
-    () => (showAll || expanded ? projects : projects.slice(0, 4)),
-    [showAll, expanded, projects]
+  const localizedProjects = useMemo(
+    () =>
+      english
+        ? projects.map((project) =>
+            getEnglishProject(project as Parameters<typeof getEnglishProject>[0]),
+          )
+        : projects,
+    [english, projects],
   );
-  const words = title.split(/\s+/);
+  const visibleProjects = useMemo(
+    () =>
+      showAll || expanded
+        ? localizedProjects
+        : localizedProjects.slice(0, 4),
+    [showAll, expanded, localizedProjects],
+  );
+  const words = localizedTitle.split(/\s+/);
 
   useEffect(() => {
     setExpanded(false);
@@ -153,12 +193,15 @@ export default function RealisationsOptimized({
 
   return (
     <section className={`realisations-section ${className}`.trim()}>
-      <div className="realisations-panel" style={{ backgroundColor: background }}>
+      <div
+        className="realisations-panel"
+        style={{ backgroundColor: background }}
+      >
         {showDecorations && <DecorativeLeft />}
 
         <div className="realisations-content">
           <div className="realisations-heading-wrap">
-            <h2 className="realisations-heading" aria-label={title}>
+            <h2 className="realisations-heading" aria-label={localizedTitle}>
               {words.map((word, index) => (
                 <span
                   key={`${word}-${index}`}
@@ -175,17 +218,22 @@ export default function RealisationsOptimized({
           <div className="realisations-list">
             <div className="realisations-grid">
               {visibleProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  locale={locale}
+                />
               ))}
             </div>
 
-            {!showAll && !expanded && projects.length > 4 && (
+            {!showAll && !expanded && localizedProjects.length > 4 && (
               <button
                 type="button"
                 className="realisations-more"
                 onClick={() => setExpanded(true)}
               >
-                Afficher plus de réalisations
+                {english ? "Show more work" : "Afficher plus de réalisations"}
               </button>
             )}
           </div>

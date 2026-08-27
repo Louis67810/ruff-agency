@@ -9,6 +9,7 @@ import React, {
   useState,
 } from "react";
 import styles from "./HeroOptimized.module.css";
+import { localizeHref } from "@/lib/i18n";
 
 const LOTTIE_PLAYER_SRC =
   "https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.js";
@@ -51,31 +52,163 @@ const desktopColumnC = [
 ] as const;
 
 const mobileCards = [
-  { src: "https://framerusercontent.com/images/89SDpeYm9KEXxaHH1EeT0lZHneo.png?width=1339&height=1069", alt: "Hero section du site de Spreak", width: 296 },
-  { src: "https://framerusercontent.com/images/uuaFUZpL3fVhRaGlSV5bBUBCapU.png?width=2206&height=1223", alt: "Hero section du site : Clovarex", width: 297 },
-  { src: "https://framerusercontent.com/images/RyWM4bax5mzqIS95PvmCIH54M.png?width=1071&height=854", alt: "Section processus du site de Spreak", width: 296 },
-  { src: "https://framerusercontent.com/images/87MpF94DhPdyYmKVnC6zXJuEFgc.png?width=2288&height=1189", alt: "Hero section du site de Keyframe agency", width: 296 },
-  { src: "https://framerusercontent.com/images/aONP6DTlxxTAGxNKuzFV84mvpA.png?width=1331&height=884", alt: "Hero section du site de Keyframe agency", width: 296 },
-  { src: "https://framerusercontent.com/images/nNEynNmBhmT1N7UdbSGrSZVXC4.png?width=1650&height=922", alt: "Hero section du site de keyframe agency", width: 297 },
-  { src: "https://framerusercontent.com/images/bCPuRQA1Qd2O5OzVFGenHbW2gt4.png?width=2355&height=1126", alt: "Hero section du site de Getly", width: 296 },
-  { src: "https://framerusercontent.com/images/wOfEwcZxQ4z81VQslBCNK1V9Q2s.png?width=1346&height=716", alt: "Hero section du site de Rentala", width: 296 },
-  { src: "https://framerusercontent.com/images/sQTv5J42VPuoBjGNWLqLWTNAT6k.png?width=1252&height=862", alt: "Section problèmes du site de Spreak", width: 297 },
-  { src: "https://framerusercontent.com/images/OGFuWWnH5m3pxtWVxDD98Iy9wI.jpg?width=1600&height=1015", alt: "Design d'un concept de hero section", width: 296 },
-  { src: "https://framerusercontent.com/images/ed7YUU8EBDlbwFigwv3N0cFQ.png?width=2335&height=1137", alt: "Hero section du site en dark mode pour un graphiste indépendant", width: 296 },
-  { src: "https://framerusercontent.com/images/5VTG0ey1sYXgrBXyTylalHaGtU.jpg?width=6064&height=4060", alt: "Hero section du site de Initly", width: 296 },
+  {
+    src: "https://framerusercontent.com/images/89SDpeYm9KEXxaHH1EeT0lZHneo.png?width=1339&height=1069",
+    alt: "Hero section du site de Spreak",
+    width: 296,
+  },
+  {
+    src: "https://framerusercontent.com/images/uuaFUZpL3fVhRaGlSV5bBUBCapU.png?width=2206&height=1223",
+    alt: "Hero section du site : Clovarex",
+    width: 297,
+  },
+  {
+    src: "https://framerusercontent.com/images/RyWM4bax5mzqIS95PvmCIH54M.png?width=1071&height=854",
+    alt: "Section processus du site de Spreak",
+    width: 296,
+  },
+  {
+    src: "https://framerusercontent.com/images/87MpF94DhPdyYmKVnC6zXJuEFgc.png?width=2288&height=1189",
+    alt: "Hero section du site de Keyframe agency",
+    width: 296,
+  },
+  {
+    src: "https://framerusercontent.com/images/aONP6DTlxxTAGxNKuzFV84mvpA.png?width=1331&height=884",
+    alt: "Hero section du site de Keyframe agency",
+    width: 296,
+  },
+  {
+    src: "https://framerusercontent.com/images/nNEynNmBhmT1N7UdbSGrSZVXC4.png?width=1650&height=922",
+    alt: "Hero section du site de keyframe agency",
+    width: 297,
+  },
+  {
+    src: "https://framerusercontent.com/images/bCPuRQA1Qd2O5OzVFGenHbW2gt4.png?width=2355&height=1126",
+    alt: "Hero section du site de Getly",
+    width: 296,
+  },
+  {
+    src: "https://framerusercontent.com/images/wOfEwcZxQ4z81VQslBCNK1V9Q2s.png?width=1346&height=716",
+    alt: "Hero section du site de Rentala",
+    width: 296,
+  },
+  {
+    src: "https://framerusercontent.com/images/sQTv5J42VPuoBjGNWLqLWTNAT6k.png?width=1252&height=862",
+    alt: "Section problèmes du site de Spreak",
+    width: 297,
+  },
+  {
+    src: "https://framerusercontent.com/images/OGFuWWnH5m3pxtWVxDD98Iy9wI.jpg?width=1600&height=1015",
+    alt: "Design d'un concept de hero section",
+    width: 296,
+  },
+  {
+    src: "https://framerusercontent.com/images/ed7YUU8EBDlbwFigwv3N0cFQ.png?width=2335&height=1137",
+    alt: "Hero section du site en dark mode pour un graphiste indépendant",
+    width: 296,
+  },
+  {
+    src: "https://framerusercontent.com/images/5VTG0ey1sYXgrBXyTylalHaGtU.jpg?width=6064&height=4060",
+    alt: "Hero section du site de Initly",
+    width: 296,
+  },
 ] as const;
 
 const reviews = [
-  { text: "Un vrai professionnel, malgré son jeune âge. Louis m’a livré un site soigné, fluide et parfaitement conforme à mes attentes. Il écoute, il ajuste, il vise juste. Une très belle rigueur, et surtout une vraie volonté de bien faire.", name: "Julie Zagula", role: "CEO of Keyframe agency" },
-  { text: "Je suis ravi d'avoir commandé ma landing page. Le service était très rapide et fiable. Ils ont une réponse à toutes mes problématiques, je les recommande.", name: "Noe eltm", role: "CEO de Myminia" },
-  { text: "10/10 Ruff agency m'a délivré mon site très rapidement et ont été très réactifs. Les assets et les animations sont magnifiques.", name: "Antoine", role: "CEO de Keyframe agency" },
-  { text: "En plus de la rapidité, leur service client est top ! Ils ont toujours été à l'écoute, et le design de notre site est tout simplement unique. Bravo à toute l'équipe !", name: "William ", role: "CEO de Star Agency" },
-  { text: "J’ai fait appel à Ruff Agency pour le redesign de Rentala et je suis ravi du résultat. Le design est moderne et clair. Mention spéciale pour le copywriting : les textes sont percutants et mettent parfaitement en valeur notre proposition.", name: "Martin Riedweg", role: "Fondateur de Rentala" },
-  { text: "Nous avons commandé un site multi-page et l’expérience a été excellente du début à la fin. Le site a été livré rapidement, avec un design clair et professionnel. ", name: "Dominique ZENGLEIN", role: "Expert-comptable" },
-  { text: "I opted for their premium package and the competitor analysis was a game changer. The insights they provided gave us a significant edge. Highly recommended!", name: "Jake D.", role: "Fondateur de SAG" },
-  { text: "Le site est non seulement beau, mais il a aussi boosté notre taux de conversion. Chaque détail a été pensé pour maximiser notre efficacité. Merci Ruff Agency !", name: "Nicolas H.", role: "Fondateur de Gourdy" },
+  {
+    text: "Un vrai professionnel, malgré son jeune âge. Louis m’a livré un site soigné, fluide et parfaitement conforme à mes attentes. Il écoute, il ajuste, il vise juste. Une très belle rigueur, et surtout une vraie volonté de bien faire.",
+    name: "Julie Zagula",
+    role: "CEO of Keyframe agency",
+  },
+  {
+    text: "Je suis ravi d'avoir commandé ma landing page. Le service était très rapide et fiable. Ils ont une réponse à toutes mes problématiques, je les recommande.",
+    name: "Noe eltm",
+    role: "CEO de Myminia",
+  },
+  {
+    text: "10/10 Ruff agency m'a délivré mon site très rapidement et ont été très réactifs. Les assets et les animations sont magnifiques.",
+    name: "Antoine",
+    role: "CEO de Keyframe agency",
+  },
+  {
+    text: "En plus de la rapidité, leur service client est top ! Ils ont toujours été à l'écoute, et le design de notre site est tout simplement unique. Bravo à toute l'équipe !",
+    name: "William ",
+    role: "CEO de Star Agency",
+  },
+  {
+    text: "J’ai fait appel à Ruff Agency pour le redesign de Rentala et je suis ravi du résultat. Le design est moderne et clair. Mention spéciale pour le copywriting : les textes sont percutants et mettent parfaitement en valeur notre proposition.",
+    name: "Martin Riedweg",
+    role: "Fondateur de Rentala",
+  },
+  {
+    text: "Nous avons commandé un site multi-page et l’expérience a été excellente du début à la fin. Le site a été livré rapidement, avec un design clair et professionnel. ",
+    name: "Dominique ZENGLEIN",
+    role: "Expert-comptable",
+  },
+  {
+    text: "I opted for their premium package and the competitor analysis was a game changer. The insights they provided gave us a significant edge. Highly recommended!",
+    name: "Jake D.",
+    role: "Fondateur de SAG",
+  },
+  {
+    text: "Le site est non seulement beau, mais il a aussi boosté notre taux de conversion. Chaque détail a été pensé pour maximiser notre efficacité. Merci Ruff Agency !",
+    name: "Nicolas H.",
+    role: "Fondateur de Gourdy",
+  },
   // Framer contains a ninth transition state that visually returns to Julie before cycling to Noe.
-  { text: "Un vrai professionnel, malgré son jeune âge. Louis m’a livré un site soigné, fluide et parfaitement conforme à mes attentes. Il écoute, il ajuste, il vise juste. Une très belle rigueur, et surtout une vraie volonté de bien faire.", name: "Julie Zagula", role: "CEO of Keyframe agency" },
+  {
+    text: "Un vrai professionnel, malgré son jeune âge. Louis m’a livré un site soigné, fluide et parfaitement conforme à mes attentes. Il écoute, il ajuste, il vise juste. Une très belle rigueur, et surtout une vraie volonté de bien faire.",
+    name: "Julie Zagula",
+    role: "CEO of Keyframe agency",
+  },
+] as const;
+
+const englishReviews = [
+  {
+    text: "A true professional, despite his young age. Louis delivered a polished, smooth website that perfectly met my expectations. He listens, adapts and gets it right. Remarkable rigour, and above all a genuine desire to do things well.",
+    name: "Julie Zagula",
+    role: "CEO of Keyframe Agency",
+  },
+  {
+    text: "I am delighted with my landing page. The service was fast and reliable, and they had an answer to every challenge I brought them. I highly recommend them.",
+    name: "Noe eltm",
+    role: "CEO of Myminia",
+  },
+  {
+    text: "10/10. Ruff Agency delivered my website very quickly and was highly responsive. The assets and animations are beautiful.",
+    name: "Antoine",
+    role: "CEO of Keyframe Agency",
+  },
+  {
+    text: "On top of being fast, their customer service is excellent. They were always attentive, and our website design is simply unique. Well done to the whole team!",
+    name: "William",
+    role: "CEO of Star Agency",
+  },
+  {
+    text: "I hired Ruff Agency to redesign Rentala and I am delighted with the result. The design is modern and clear. Special mention for the copywriting: the wording is impactful and perfectly highlights our value proposition.",
+    name: "Martin Riedweg",
+    role: "Founder of Rentala",
+  },
+  {
+    text: "We ordered a multi-page website and the experience was excellent from start to finish. The website was delivered quickly, with a clear and professional design.",
+    name: "Dominique ZENGLEIN",
+    role: "Chartered accountant",
+  },
+  {
+    text: "I opted for their premium package and the competitor analysis was a game changer. The insights they provided gave us a significant edge. Highly recommended!",
+    name: "Jake D.",
+    role: "Founder of SAG",
+  },
+  {
+    text: "The website is not only beautiful, it also boosted our conversion rate. Every detail was designed to maximise our efficiency. Thank you, Ruff Agency!",
+    name: "Nicolas H.",
+    role: "Founder of Gourdy",
+  },
+  {
+    text: "A true professional, despite his young age. Louis delivered a polished, smooth website that perfectly met my expectations. He listens, adapts and gets it right. Remarkable rigour, and above all a genuine desire to do things well.",
+    name: "Julie Zagula",
+    role: "CEO of Keyframe Agency",
+  },
 ] as const;
 
 const reviewAvatars = [
@@ -146,9 +279,10 @@ export type HeroOptimizedProps = {
   reviewsHref?: string;
   title?: string;
   subtitle?: string;
+  locale?: "fr" | "en";
 };
 
-function Availability() {
+function Availability({ english = false }: { english?: boolean }) {
   const [month, setMonth] = useState("");
   const [remaining, setRemaining] = useState(6);
   const [lottieReady, setLottieReady] = useState(false);
@@ -161,7 +295,9 @@ function Availability() {
       0,
     ).getDate();
 
-    setMonth(date.toLocaleDateString("fr-FR", { month: "long" }));
+    setMonth(
+      date.toLocaleDateString(english ? "en-US" : "fr-FR", { month: "long" }),
+    );
     setRemaining(Math.ceil(6 - ((date.getDate() - 1) / totalDays) * 5));
 
     if (customElements.get("dotlottie-player")) {
@@ -183,7 +319,7 @@ function Availability() {
     const ready = () => setLottieReady(true);
     script.addEventListener("load", ready, { once: true });
     return () => script?.removeEventListener("load", ready);
-  }, []);
+  }, [english]);
 
   return (
     <div className={styles.availability}>
@@ -195,6 +331,7 @@ function Availability() {
             loop: true,
             speed: 1,
             background: "transparent",
+            renderConfig: { autoResize: false },
           })
         ) : (
           <span className={styles.availabilityFallback} />
@@ -202,16 +339,20 @@ function Availability() {
       </div>
       <div className={styles.availabilityText}>
         <span className={styles.availabilityNumber}>{remaining}</span>
-        <span>places restantes pour {month}</span>
+        <span>
+          {english
+            ? `spots left for ${month}`
+            : `places restantes pour ${month}`}
+        </span>
       </div>
     </div>
   );
 }
 
-function AnimatedTitle({ text = TITLE }: { text?: string }) {
+function AnimatedTitle({ text = TITLE, english = false }: { text?: string; english?: boolean }) {
   const words = text.split(" ");
   return (
-    <h1 className={styles.title}>
+    <h1 className={`${styles.title} ${english ? styles.englishTitle : ""}`}>
       {words.map((word, index) => (
         <React.Fragment key={`${word}-${index}`}>
           <span
@@ -243,7 +384,9 @@ function AnimatedSubtitle({ text = SUBTITLE }: { text?: string }) {
 
       for (const span of spans) {
         const top = Math.round(span.offsetTop);
-        let lineIndex = lineTops.findIndex((lineTop) => Math.abs(lineTop - top) <= 1);
+        let lineIndex = lineTops.findIndex(
+          (lineTop) => Math.abs(lineTop - top) <= 1,
+        );
         if (lineIndex === -1) {
           lineTops.push(top);
           lineIndex = lineTops.length - 1;
@@ -350,7 +493,11 @@ function ReviewPointer() {
                 type="matrix"
                 values="0 0 0 0 0.360784 0 0 0 0 0.360784 0 0 0 0 0.360784 0 0 0 0.1 0"
               />
-              <feBlend mode="normal" in2="BackgroundImageFix" result="shadow1" />
+              <feBlend
+                mode="normal"
+                in2="BackgroundImageFix"
+                result="shadow1"
+              />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -390,7 +537,12 @@ function ReviewPointer() {
                 values="0 0 0 0 0.360784 0 0 0 0 0.360784 0 0 0 0 0.360784 0 0 0 0.01 0"
               />
               <feBlend mode="normal" in2="shadow3" result="shadow4" />
-              <feBlend mode="normal" in="SourceGraphic" in2="shadow4" result="shape" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="shadow4"
+                result="shape"
+              />
             </filter>
             <linearGradient
               id={gradientId}
@@ -418,7 +570,7 @@ function ReviewPointer() {
   );
 }
 
-function ReviewCard({ href }: { href: string }) {
+function ReviewCard({ href, english = false }: { href: string; english?: boolean }) {
   const [variant, setVariant] = useState(0);
 
   useEffect(() => {
@@ -437,7 +589,7 @@ function ReviewCard({ href }: { href: string }) {
     };
   }, []);
 
-  const current = reviews[variant];
+  const current = (english ? englishReviews : reviews)[variant];
 
   return (
     <div className={styles.reviewRoot}>
@@ -456,7 +608,7 @@ function ReviewCard({ href }: { href: string }) {
             key={src}
             className={styles.reviewAvatar}
             src={src}
-            alt=""
+            alt="Illustration décorative de l’agence"
             width={48}
             height={48}
             style={{
@@ -474,7 +626,7 @@ function ReviewCard({ href }: { href: string }) {
         </div>
 
         <a className={styles.reviewLink} href={href}>
-          Tout voir
+          {english ? "View all" : "Tout voir"}
         </a>
       </div>
     </div>
@@ -486,7 +638,7 @@ function SmallPortfolioCard({ src }: { src: string }) {
     <img
       className={styles.smallPortfolioCard}
       src={src}
-      alt=""
+      alt="Illustration décorative de l’agence"
       loading="lazy"
       decoding="async"
     />
@@ -549,7 +701,10 @@ function PortfolioWall() {
     <div className={styles.wallViewport}>
       <div className={styles.desktopWall}>
         <VerticalTicker items={desktopColumnA} />
-        <VerticalTicker items={desktopColumnA} extraClass={styles.tabletOnlyColumn} />
+        <VerticalTicker
+          items={desktopColumnA}
+          extraClass={styles.tabletOnlyColumn}
+        />
         <VerticalTicker items={desktopColumnB} reverse />
         <VerticalTicker items={desktopColumnC} />
       </div>
@@ -566,18 +721,20 @@ function PortfolioWall() {
         }
       >
         <div className={styles.mobileTrack}>
-          {[...mobileCards, ...mobileCards, ...mobileCards].map((item, index) => (
-            <img
-              key={`${item.src}-${index}`}
-              className={styles.mobileCard}
-              src={item.src}
-              alt={index < mobileCards.length ? item.alt : ""}
-              width={item.width}
-              style={{ width: item.width }}
-              loading="lazy"
-              decoding="async"
-            />
-          ))}
+          {[...mobileCards, ...mobileCards, ...mobileCards].map(
+            (item, index) => (
+              <img
+                key={`${item.src}-${index}`}
+                className={styles.mobileCard}
+                src={item.src}
+                alt={index < mobileCards.length ? item.alt : "Illustration décorative de l’agence"}
+                width={item.width}
+                style={{ width: item.width }}
+                loading="lazy"
+                decoding="async"
+              />
+            ),
+          )}
         </div>
       </div>
     </div>
@@ -592,31 +749,47 @@ export default function HeroOptimized({
   reviewsHref = "#",
   title,
   subtitle,
+  locale = "fr",
 }: HeroOptimizedProps) {
+  const englishTitle = "We create world-class landing pages and websites";
+  const englishSubtitle =
+    "Turn visitors into customers and strengthen your credibility with a premium landing page or website designed for conversion.";
+  realisationsHref = localizeHref(realisationsHref, locale) || "#";
+  bookingHref = localizeHref(bookingHref, locale) || "#";
+  reviewsHref = localizeHref(reviewsHref, locale) || "#";
   return (
     <section className={`${styles.root} ${className}`} style={style}>
       <div className={styles.heroSection}>
         <div className={styles.leftSection}>
           <div className={styles.topContent}>
-            <Availability />
+            <Availability english={locale === "en"} />
 
             <div className={styles.textContent}>
-              <AnimatedTitle text={title} />
-              <AnimatedSubtitle text={subtitle} />
+              <AnimatedTitle
+                english={locale === "en"}
+                text={
+                  locale === "en"
+                    ? englishTitle
+                    : title
+                }
+              />
+              <AnimatedSubtitle
+                text={locale === "en" ? englishSubtitle : subtitle}
+              />
             </div>
 
             <div className={styles.ctaRow}>
               <CTA kind="secondary" href={realisationsHref}>
-                Voir nos réalisations
+                {locale === "en" ? "View our work" : "Voir nos réalisations"}
               </CTA>
               <CTA kind="primary" href={bookingHref}>
-                Réserver un appel
+                {locale === "en" ? "Book a call" : "Réserver un appel"}
               </CTA>
             </div>
           </div>
 
           <div className={styles.reviewWrap}>
-            <ReviewCard href={reviewsHref} />
+            <ReviewCard href={reviewsHref} english={locale === "en"} />
           </div>
         </div>
 

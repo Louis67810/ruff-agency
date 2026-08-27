@@ -2,10 +2,12 @@
 
 import React from "react";
 import "./AvisOptimized.css";
+import { useLocale } from "@/components/LocaleProvider";
 
 export type AvisOptimizedProps = {
   className?: string;
   avatarSrc?: string;
+  locale?: "fr" | "en";
 };
 
 const DEFAULT_AVATAR =
@@ -14,7 +16,9 @@ const DEFAULT_AVATAR =
 export default function AvisOptimized({
   className = "",
   avatarSrc = DEFAULT_AVATAR,
+  locale,
 }: AvisOptimizedProps) {
+  const english = (locale ?? useLocale()) === "en";
   return (
     <section className={`avis-section ${className}`.trim()}>
       <div className="avis-vectors" aria-hidden="true">
@@ -56,7 +60,11 @@ export default function AvisOptimized({
           <div className="avis-avatar">
             <img
               src={avatarSrc}
-              alt="Photo de profil de Antoine fondateur de Keyframe agency"
+              alt={
+                english
+                  ? "Profile photo of Antoine, founder of Keyframe Agency"
+                  : "Photo de profil de Antoine fondateur de Keyframe agency"
+              }
               width={200}
               height={200}
               loading="lazy"
@@ -67,12 +75,18 @@ export default function AvisOptimized({
 
         <div className="avis-copy">
           <p className="avis-quote">
-            &quot;10/10 Ruff agency m&apos;a délivré mon site très rapidement et ont été très réactifs. Les assets et les animations sont magnifiques.&quot;
+            {english
+              ? '"10/10. Ruff agency delivered my website very quickly and was incredibly responsive. The assets and animations are beautiful."'
+              : '"10/10 Ruff agency m\'a délivré mon site très rapidement et ont été très réactifs. Les assets et les animations sont magnifiques."'}
           </p>
 
           <div className="avis-author">
             <p className="avis-author-name">Antoine Troovy</p>
-            <p className="avis-author-role">Fondateur de Keyframe agency</p>
+            <p className="avis-author-role">
+              {english
+                ? "Founder of Keyframe Agency"
+                : "Fondateur de Keyframe agency"}
+            </p>
           </div>
         </div>
       </div>

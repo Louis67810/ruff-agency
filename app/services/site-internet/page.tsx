@@ -1,52 +1,38 @@
 import type { Metadata } from "next";
 import SiteNav from "@/components/navigation/SiteNav";
-import Footer from "@/components/footer/Footer";
-import Hero2Optimized from "@/components/sections/Hero2Optimized/Hero2Optimized";
-import PointsFocusOptimized from "@/components/sections/PointsFocusOptimized/PointsFocusOptimized";
-import ProcessusOptimized from "@/components/sections/ProcessusOptimized/ProcessusOptimized";
+import Footer from "@/components/footer/FooterServer";
+import ServicePageTop from "@/components/sections/ServicePageTop/ServicePageTop";
 import AvisOptimized from "@/components/sections/AvisOptimized/AvisOptimized";
 import ComparatifOptimized from "@/components/sections/ComparatifOptimized/ComparatifOptimized";
 import RealisationsOptimized from "@/components/sections/RealisationsOptimized/RealisationsOptimized";
-import PrixOptimized from "@/components/sections/PrixOptimized/PrixOptimized";
+import PrixOptimized from "@/components/sections/PrixOptimized/PrixOptimizedServer";
 import SectionAvis from "@/components/sections/SectionAvis";
-import StackSection3 from "@/components/sections/StackSection3/StackSection3";
+import StackSection3 from "@/components/sections/StackSection3/StackSection3Server";
 import { NAV_PROPS, FOOTER_LINKS, ROUTES, SITE_URL } from "@/lib/site";
 import { projects } from "@/lib/data/projects";
+import { headers } from "next/headers";
+import { localizedMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Site Internet — Ruff Agency",
+const websiteProcess = [["Cadrage", "2 jours"], ["Stratégie", "3 jours"], ["Design", "6 jours"], ["Développement", "7 jours"], ["Mise en ligne", "2 jours"]] as const;
+
+const legacyMetadata: Metadata = {
+  title: "Website — Ruff Agency",
   description:
-    "On crée des sites internet World-class : un site complet pour présenter votre activité et convertir vos visiteurs.",
-  alternates: { canonical: `${SITE_URL}/services/site-internet` },
-  openGraph: { url: `${SITE_URL}/services/site-internet`, type: "website" },
+    "On crée des sites Website World-class : un site complet pour présenter votre activité et convertir vos visiteurs.",
+  alternates: { canonical: `${SITE_URL}/services/website` },
+  openGraph: { url: `${SITE_URL}/services/website`, type: "website" },
 };
+
+export function generateMetadata(): Promise<Metadata> { return localizedMetadata({ path: "/services/website", frTitle: "Création de site internet — Ruff Agency", frDescription: "On crée des sites internet World-class : un site complet pour présenter votre activité et convertir vos visiteurs.", enTitle: "Website design — Ruff Agency", enDescription: "Complete websites designed to present your business clearly and turn visitors into customers." }); }
 
 export default function SiteInternetService() {
   return (
     <>
-      <SiteNav {...NAV_PROPS} fill="rgb(255, 251, 239)" fill2="rgb(255, 251, 239)" />
-      <Hero2Optimized
-        realisationsHref={ROUTES.realisations}
-        bookingHref={ROUTES.contact}
-        className="h2-site-internet"
-        title="On crée des sites internet World-class"
-        subtitle="Un site complet pour présenter votre activité et convertir."
-      />
-      <PointsFocusOptimized
-        heading="Nos points de focus"
-        points={[
-          { title: "Message clair", text: "Votre offre est présentée de façon simple et évidente : ce que vous faites, pour qui, et pourquoi vous choisir." },
-          { title: "Image de marque forte", text: "Un site qui donne une impression sérieuse et premium, et qui installe votre crédibilité durablement." },
-          { title: "Offre mieux organisée", text: "Vos services deviennent faciles à comprendre et à comparer, ce qui réduit les abandons et les questions inutiles." },
-          { title: "Visibilité Google", text: "Un contenu organisé et pertinent aide votre page à gagner des opportunités de visibilité sur vos requêtes clés." },
-          { title: "Différenciation", text: "Un design qui reflète votre niveau et votre positionnement, sans effet « site générique »." },
-          { title: "Évolutif et durable", text: "Un site pensé pour grandir : ajouter des pages, clarifier une offre, lancer une campagne, sans repartir de zéro." },
-        ]}
-      />
-      <ProcessusOptimized projectHref={ROUTES.contact} />
-      <AvisOptimized />
-      <ComparatifOptimized bookingHref={ROUTES.contact} />
-      <RealisationsOptimized projects={projects} />
+      <SiteNav {...NAV_PROPS} theme="dark" fill="transparent" fill2="transparent" className="service-page-nav" />
+      <ServicePageTop locale={headers().get("x-site-locale") === "en" ? "en" : "fr"} bookingHref={ROUTES.contact} realisationsHref={ROUTES.realisations} processCopyOverride={websiteProcess} />
+      <AvisOptimized locale={headers().get("x-site-locale") === "en" ? "en" : "fr"} />
+      <ComparatifOptimized locale={headers().get("x-site-locale") === "en" ? "en" : "fr"} bookingHref={ROUTES.contact} />
+      <RealisationsOptimized locale={headers().get("x-site-locale") === "en" ? "en" : "fr"} projects={projects} className="service-realisations-section" />
       <PrixOptimized bookingHref={ROUTES.contact} secondaryHref={ROUTES.realisations} />
       <SectionAvis />
       <StackSection3 ctaHref={ROUTES.contact} />
@@ -54,3 +40,4 @@ export default function SiteInternetService() {
     </>
   );
 }
+

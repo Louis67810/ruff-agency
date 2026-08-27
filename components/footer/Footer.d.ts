@@ -1,6 +1,7 @@
 import * as React from "react";
 
 export type FooterProps = {
+  locale?: "fr" | "en";
   padding?: string;
   visible?: boolean;
   bookingHref?: string;

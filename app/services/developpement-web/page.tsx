@@ -1,52 +1,65 @@
 import type { Metadata } from "next";
 import SiteNav from "@/components/navigation/SiteNav";
-import Footer from "@/components/footer/Footer";
-import Hero2Optimized from "@/components/sections/Hero2Optimized/Hero2Optimized";
-import PointsFocusOptimized from "@/components/sections/PointsFocusOptimized/PointsFocusOptimized";
-import ProcessusOptimized from "@/components/sections/ProcessusOptimized/ProcessusOptimized";
+import Footer from "@/components/footer/FooterServer";
+import ServicePageTop from "@/components/sections/ServicePageTop/ServicePageTop";
 import AvisOptimized from "@/components/sections/AvisOptimized/AvisOptimized";
 import ComparatifOptimized from "@/components/sections/ComparatifOptimized/ComparatifOptimized";
 import RealisationsOptimized from "@/components/sections/RealisationsOptimized/RealisationsOptimized";
-import PrixOptimized from "@/components/sections/PrixOptimized/PrixOptimized";
+import PrixOptimized from "@/components/sections/PrixOptimized/PrixOptimizedServer";
 import SectionAvis from "@/components/sections/SectionAvis";
-import StackSection3 from "@/components/sections/StackSection3/StackSection3";
+import StackSection3 from "@/components/sections/StackSection3/StackSection3Server";
 import { NAV_PROPS, FOOTER_LINKS, ROUTES, SITE_URL } from "@/lib/site";
 import { projects } from "@/lib/data/projects";
+import { headers } from "next/headers";
+import { localizedMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Développement web — Ruff Agency",
-  description:
-    "Développement web sur-mesure : des intégrations propres et maintenables, pensées pour durer et performer.",
+const legacyMetadata: Metadata = {
+  title: "Développement code (React) — Ruff Agency",
+  description: "Des sites React et Next.js rapides, robustes et pensés pour évoluer avec votre activité.",
   alternates: { canonical: `${SITE_URL}/services/developpement-web` },
   openGraph: { url: `${SITE_URL}/services/developpement-web`, type: "website" },
 };
 
+const developmentBenefits = [
+  ["Code sur mesure", "Une base technique adaptée à votre produit, sans compromis sur la qualité ni la maintenabilité."],
+  ["Rapidité d'exécution", "Des interfaces rapides et fluides pour offrir une expérience fiable sur chaque écran."],
+  ["Architecture solide", "Une structure claire qui facilite les évolutions, les intégrations et le travail en équipe."],
+  ["SEO technique", "Un socle propre pour aider vos pages à être comprises et indexées efficacement."],
+  ["Évolutif par nature", "Ajoutez des fonctionnalités et des pages sans repartir de zéro."],
+  ["Mise en ligne maîtrisée", "Un déploiement propre, documenté et prêt pour la production."],
+] as const;
+
+const developmentProcess = [
+  ["Cadrage technique", "1 jour"],
+  ["Architecture", "1 jour"],
+  ["Développement React", "1 jour"],
+  ["Intégrations", "1 jour"],
+  ["Mise en production", "1 jour"],
+] as const;
+
+export function generateMetadata(): Promise<Metadata> { return localizedMetadata({ path: "/services/developpement-web", frTitle: "Développement code (React) — Ruff Agency", frDescription: "Des sites React et Next.js rapides, robustes et pensés pour évoluer avec votre activité.", enTitle: "React web development — Ruff Agency", enDescription: "Fast, robust React and Next.js websites built to evolve with your business." }); }
+
 export default function DeveloppementWebService() {
   return (
     <>
-      <SiteNav {...NAV_PROPS} fill="rgb(241, 255, 239)" fill2="rgb(241, 255, 239)" />
-      <Hero2Optimized
-        realisationsHref={ROUTES.realisations}
+      <SiteNav {...NAV_PROPS} theme="dark" fill="transparent" fill2="transparent" className="service-page-nav" />
+      <ServicePageTop
+        locale={headers().get("x-site-locale") === "en" ? "en" : "fr"}
         bookingHref={ROUTES.contact}
-        className="h2-developpement-web"
-        title="Développement web sur-mesure"
-        subtitle="Des intégrations propres et maintenables, pensées pour durer."
+        realisationsHref={ROUTES.realisations}
+        heroVideoSrc="/videos/development-react.mp4"
+        wideHeroTitle
+        heroTitle="On développe des sites World-class en code React"
+        heroTitleLines={["On développe des sites", "World-class en code React."]}
+        showHeroTitleTuner
+        heroSubtitle="Des interfaces rapides, robustes et évolutives, conçues pour transformer votre vision en produit digital."
+        showPlayer={false}
+        benefitCopyOverride={developmentBenefits}
+        processCopyOverride={developmentProcess}
       />
-      <PointsFocusOptimized
-        heading="Nos points de focus"
-        points={[
-          { title: "Intégration Framer", text: "Un rendu net et soigné, fidèle à votre direction artistique, pour une perception haut de gamme." },
-          { title: "Contenu modifiable", text: "Votre site ou landing est pensé pour que vous puissiez ajuster textes et visuels sans galère, directement dans Framer." },
-          { title: "Vitesse & fluidité", text: "Une page rapide donne une meilleure première impression et aide à garder l'attention jusqu'à l'action." },
-          { title: "Mise en ligne simple", text: "Un process clair pour publier proprement, avec une structure facile à gérer au quotidien." },
-          { title: "Visibilité Google", text: "On prépare la page pour être mieux comprise et plus facilement trouvée sur les requêtes cohérentes avec votre offre." },
-          { title: "Suivi & mesure", text: "Mise en place du nécessaire pour suivre ce qui fonctionne (demandes, clics, sources) et améliorer en continu." },
-        ]}
-      />
-      <ProcessusOptimized projectHref={ROUTES.contact} />
-      <AvisOptimized />
-      <ComparatifOptimized bookingHref={ROUTES.contact} />
-      <RealisationsOptimized projects={projects} />
+      <AvisOptimized locale={headers().get("x-site-locale") === "en" ? "en" : "fr"} />
+      <ComparatifOptimized locale={headers().get("x-site-locale") === "en" ? "en" : "fr"} bookingHref={ROUTES.contact} />
+      <RealisationsOptimized locale={headers().get("x-site-locale") === "en" ? "en" : "fr"} projects={projects} />
       <PrixOptimized bookingHref={ROUTES.contact} secondaryHref={ROUTES.realisations} />
       <SectionAvis />
       <StackSection3 ctaHref={ROUTES.contact} />
@@ -54,3 +67,4 @@ export default function DeveloppementWebService() {
     </>
   );
 }
+

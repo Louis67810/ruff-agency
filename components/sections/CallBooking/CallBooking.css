@@ -1,0 +1,21 @@
+.call-booking{background:#fbfbfb;color:#121a2e;padding:108px 48px 64px}
+.call-booking__intro{align-items:center;display:flex;flex-direction:column;margin:0 auto 48px;max-width:1324px;text-align:center}
+.call-booking__intro h1{font:700 clamp(42px,5.1vw,72px)/1.1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.045em;margin:24px 0 20px}
+.call-booking__intro>p{color:rgba(18,26,46,.7);font:500 18px/1.6 Inter,sans-serif;letter-spacing:-.03em;margin:0;max-width:580px}
+.call-booking__availability{margin-top:24px}
+.call-booking__calendar{margin:0 auto;max-width:1054px;min-height:665px;width:100%}
+.call-booking__calendar>div{height:665px;overflow:visible;width:100%}
+/* Cal réserve 95 px transparents dans son embed avant l'iframe : le calendrier visible commence donc à 48 px de la disponibilité. */
+.call-booking__calendar>div>cal-inline{height:760px!important;margin-top:-95px}
+
+@media(max-width:809px){
+  .call-booking{padding:64px 24px 96px}
+  .call-booking__intro{margin-bottom:48px}
+  .call-booking__intro .h2-clients{gap:6px}
+  .call-booking__intro .h2-clients>p{font-size:16px}
+  .call-booking__intro h1{font-size:40px;margin:22px 0 16px}
+  .call-booking__intro>p{font-size:16px;line-height:1.7}
+  .call-booking__calendar{min-height:680px}
+  .call-booking__calendar>div{height:680px}
+  .call-booking__calendar>div>cal-inline{height:680px!important}
+}

@@ -117,20 +117,33 @@
 }
 
 @media (max-width:809px) {
-  .cta-audit-card { width:min(100%,390px); min-height:0; align-items:flex-start; flex-direction:column; padding:48px; }
+  .cta-audit-card { width:min(100%,390px); min-height:680px; align-items:flex-start; flex-direction:column; padding:48px; }
   .cta-audit-vector-one { left:-1617px; top:-171px; bottom:-172px; order:0; }
-  .cta-audit-copy-column { width:100%; height:474px; justify-content:flex-start; gap:0; z-index:3; }
+  .cta-audit-copy-column { width:100%; height:584px; justify-content:flex-start; gap:0; z-index:3; }
   .cta-audit-copy-top { width:100%; }
   .cta-audit-title { font-size:32px; line-height:1.4em; }
   .cta-audit-form-slot { width:100%; }
   .cta-audit-form-wrapper { min-width:0; }
   .cta-audit-form-shell, .cta-audit-submit-outer { width:100%; max-width:363px; }
-  .cta-audit-availability { width:372px; height:27px; }
+  .cta-audit-availability { align-items:center; background:rgba(13,21,42,.35); backdrop-filter:blur(8px); border-radius:999px; bottom:0; display:flex; height:43px; left:0; padding:8px 14px 8px 8px; position:absolute; width:max-content; z-index:4; }
+  .cta-audit-availability .cta-audit-status-wrap { flex:0 0 27px; left:auto; position:relative; top:auto; }
+  .cta-audit-availability > span:last-child { left:auto; margin-left:8px; position:relative; top:auto; width:auto; }
   .cta-audit-avatars { left:calc(54.45292620865142% - 46px); top:251px; width:92px; height:43px; z-index:2; }
   .cta-audit-avatar { width:31px; height:31px; top:calc(50.877192982456165% - 15.705px); border-width:1.38px; border-radius:6.6px; box-shadow:0 .94px 2.521569px rgba(0,0,0,.1),0 3.77px 5.043137px rgba(0,0,0,.09),0 9.43px 7.564706px rgba(0,0,0,.05),0 16.97px 8.825491px rgba(0,0,0,.01),0 26.4px 10.086274px rgba(0,0,0,0); }
   .cta-audit-avatar.one { left:7px; right:auto; }
   .cta-audit-avatar.two { left:calc(52.84552845528457% - 15.705px); right:auto; }
   .cta-audit-avatar.three { right:2px; }
-  .cta-audit-product { left:-106px; right:-276px; bottom:-260px; width:auto; height:697px; }
+  .cta-audit-product { bottom:-230px; height:620px; left:24px; right:-246px; width:auto; }
   .cta-audit-vector-two { right:-1257px; top:-762px; bottom:-656px; }
 }
+
+/* Variante éditoriale : même CTA, calibré pour la colonne d'un article (1 054 px). */
+.cta-audit-section--compact{border:0;overflow:visible;padding:24px 0}.cta-audit-section--compact .cta-audit-card{min-height:540px;padding:64px;width:100%}.cta-audit-section--compact .cta-audit-copy-column{height:412px}.cta-audit-section--compact .cta-audit-copy-top{gap:24px;width:650px}.cta-audit-section--compact .cta-audit-title{font-size:40px}.cta-audit-section--compact .cta-audit-availability{width:520px}.cta-audit-section--compact .cta-audit-product{bottom:-665px;right:-630px}.cta-audit-section--compact .cta-audit-avatars{display:none}
+@media (max-width:1399px) and (min-width:810px){.cta-audit-section--compact .cta-audit-card{align-items:center;flex-direction:row;min-height:540px;padding:64px;width:100%}.cta-audit-section--compact .cta-audit-copy-column{height:412px;max-width:none;width:min-content}.cta-audit-section--compact .cta-audit-copy-top{gap:24px;width:650px}.cta-audit-section--compact .cta-audit-availability{display:block;height:27px;width:520px}.cta-audit-section--compact .cta-audit-status-wrap{left:0;position:absolute;top:0}.cta-audit-section--compact .cta-audit-availability>span:last-child{left:37px;position:absolute;top:1px;width:auto}.cta-audit-section--compact .cta-audit-product{bottom:-665px;height:1171px;left:auto;right:-630px;width:1302px}}
+@media (max-width:809px){.cta-audit-section--compact{padding:8px 0}.cta-audit-section--compact .cta-audit-card{min-height:620px;padding:32px;width:100%}.cta-audit-section--compact .cta-audit-copy-column{height:556px}.cta-audit-section--compact .cta-audit-copy-top{gap:24px;width:100%}.cta-audit-section--compact .cta-audit-title{font-size:30px}.cta-audit-section--compact .cta-audit-product{bottom:-330px;height:620px;left:24px;right:-246px;width:auto}}
+
+/* Le titre ne doit jamais hériter de la marge des H2 de l'article : le seul écart est le gap de 24 px. */
+.ra-prose .cta-audit-title,.aq-root .cta-audit-title{margin:0}.cta-audit-copy-top{gap:24px}.cta-audit-section--compact .cta-audit-product{bottom:-745px}@media(max-width:809px){.cta-audit-section--compact .cta-audit-product{bottom:-410px}}
+
+/* Dans la variante article, le formulaire reste calé sur la colonne de texte. */
+.cta-audit-section--compact .cta-audit-form-slot{width:100%}.cta-audit-section--compact .cta-audit-form-wrapper{align-items:flex-start}.cta-audit-section--compact .cta-audit-form-shell,.cta-audit-section--compact .cta-audit-submit-outer{margin-left:0;margin-right:0}

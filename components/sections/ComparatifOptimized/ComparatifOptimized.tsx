@@ -1,6 +1,14 @@
 "use client";
 
-import React, { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
+import React, {
+  CSSProperties,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useLocale } from "@/components/LocaleProvider";
+import { localizeHref } from "@/lib/i18n";
 import "./ComparatifOptimized.css";
 
 export type ComparatifOptimizedProps = {
@@ -8,6 +16,7 @@ export type ComparatifOptimizedProps = {
   avatarSrc?: string;
   className?: string;
   style?: CSSProperties;
+  locale?: "fr" | "en";
 };
 
 type ColumnData = {
@@ -48,6 +57,42 @@ const COLUMNS: ColumnData[] = [
       "Non optimisé",
       "Dépend de vous",
       "Nécessite de vous former au logiciel",
+    ],
+  },
+];
+
+const ENGLISH_COLUMNS: ColumnData[] = [
+  {
+    title: "Ruff agency",
+    positive: true,
+    items: [
+      "Starting at €1,490",
+      "Conversion-first design",
+      "Conversion-optimized",
+      "Delivered in 14 days",
+      "An easy-to-manage site you can run yourself",
+    ],
+  },
+  {
+    title: "Traditional agency",
+    positive: false,
+    items: [
+      "Starting at €5,000+",
+      "Aesthetic design only",
+      "Variable results",
+      "2–3 months on average",
+      "A complex site: you depend on the agency",
+    ],
+  },
+  {
+    title: "Do it yourself",
+    positive: false,
+    items: [
+      "70+ hours of work",
+      "Generic design",
+      "Not optimized",
+      "It all depends on you",
+      "You need to learn the software",
     ],
   },
 ];
@@ -114,7 +159,12 @@ function Reveal({
 
 function RuffIcon() {
   return (
-    <svg className="cmp-row-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+    <svg
+      className="cmp-row-icon"
+      viewBox="0 0 34 34"
+      fill="none"
+      aria-hidden="true"
+    >
       <rect width="34" height="34" rx="17" fill="#0147FF" />
       <path
         d="M11 17.3356V24.4692L13.294 24.7769L15.0361 25.0106V22.2415V20.0889H15.9935C16.5355 20.0537 16.7344 20.0889 17.1725 20.527C17.5319 20.8834 17.4614 21.0432 17.9151 22.2415L18.6498 25.4964L21.1127 25.827L24 26.2148L22.7798 22.9205L21.5627 20.2767L21.1122 19.4006L21.6628 18.8249C22.7141 17.7486 23.1646 16.1217 22.9018 14.3946C22.5764 12.1669 21.309 9.47533 19.1188 8.99976L14.7076 9.59194L11 10.0891V17.3356ZM17.8051 13.8627C18.2118 14.2694 18.168 15.5209 17.8051 15.9715C17.5923 16.2343 17.2262 16.3219 16.3502 16.3595H15.0361V15.2832V13.4403H16.3502C17.0886 13.4403 17.5704 13.628 17.8051 13.8627Z"
@@ -126,7 +176,12 @@ function RuffIcon() {
 
 function CrossIcon() {
   return (
-    <svg className="cmp-row-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+    <svg
+      className="cmp-row-icon"
+      viewBox="0 0 34 34"
+      fill="none"
+      aria-hidden="true"
+    >
       <rect width="34" height="34" rx="17" fill="black" fillOpacity="0.12" />
       <path
         fillRule="evenodd"
@@ -138,12 +193,30 @@ function CrossIcon() {
   );
 }
 
-function BookingButton({ href, avatarSrc }: { href: string; avatarSrc: string }) {
+function BookingButton({
+  href,
+  avatarSrc,
+  english,
+}: {
+  href: string;
+  avatarSrc: string;
+  english: boolean;
+}) {
   return (
     <a className="cmp-cta-shell" href={href}>
       <span className="cmp-cta-inner">
-        <span className="cmp-cta-label">Réserver un appel</span>
-        <img className="cmp-cta-avatar" src={avatarSrc} alt="Photo de profil de Louis Staub" />
+        <span className="cmp-cta-label">
+          {english ? "Book a call" : "Réserver un appel"}
+        </span>
+        <img
+          className="cmp-cta-avatar"
+          src={avatarSrc}
+          alt={
+            english
+              ? "Profile photo of Louis Staub"
+              : "Photo de profil de Louis Staub"
+          }
+        />
       </span>
     </a>
   );
@@ -172,33 +245,56 @@ export default function ComparatifOptimized({
   avatarSrc = DEFAULT_AVATAR,
   className = "",
   style,
+  locale,
 }: ComparatifOptimizedProps) {
+  const english = (locale ?? useLocale()) === "en";
+  bookingHref = localizeHref(bookingHref, english ? "en" : "fr") || "#";
   return (
     <section className={`cmp-section ${className}`} style={style}>
       <div className="cmp-heading">
         <Reveal kind="title" delay={0.1} className="cmp-title-reveal">
-          <h2>Pourquoi nous choisir ?</h2>
+          <h2>{english ? "Why choose us?" : "Pourquoi nous choisir ?"}</h2>
         </Reveal>
 
         <Reveal kind="subtitle" delay={0.75} className="cmp-subtitle-reveal">
-          <p>Moins de flou, plus de clarté : prix, délai et résultat au centre.</p>
+          <p>
+            {english
+              ? "Less guesswork, more clarity: price, timing and results at the centre."
+              : "Moins de flou, plus de clarté : prix, délai et résultat au centre."}
+          </p>
         </Reveal>
 
         <Reveal delay={1} className="cmp-cta-reveal">
-          <BookingButton href={bookingHref} avatarSrc={avatarSrc} />
+          <BookingButton
+            href={bookingHref}
+            avatarSrc={avatarSrc}
+            english={english}
+          />
         </Reveal>
       </div>
 
       <div className="cmp-content-wrap">
         <div className="cmp-columns">
-          <Reveal delay={0.8} disableOnPhone className="cmp-column-reveal cmp-column-reveal--1">
-            <CompareColumn data={COLUMNS[0]} />
+          <Reveal
+            delay={0.8}
+            disableOnPhone
+            className="cmp-column-reveal cmp-column-reveal--1"
+          >
+            <CompareColumn data={(english ? ENGLISH_COLUMNS : COLUMNS)[0]} />
           </Reveal>
-          <Reveal delay={1} disableOnPhone className="cmp-column-reveal cmp-column-reveal--2">
-            <CompareColumn data={COLUMNS[1]} />
+          <Reveal
+            delay={1}
+            disableOnPhone
+            className="cmp-column-reveal cmp-column-reveal--2"
+          >
+            <CompareColumn data={(english ? ENGLISH_COLUMNS : COLUMNS)[1]} />
           </Reveal>
-          <Reveal delay={1.2} disableOnPhone className="cmp-column-reveal cmp-column-reveal--3">
-            <CompareColumn data={COLUMNS[2]} />
+          <Reveal
+            delay={1.2}
+            disableOnPhone
+            className="cmp-column-reveal cmp-column-reveal--3"
+          >
+            <CompareColumn data={(english ? ENGLISH_COLUMNS : COLUMNS)[2]} />
           </Reveal>
         </div>
       </div>

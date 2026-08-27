@@ -1,9 +1,61 @@
 export type ArticleTag = { id: string; label: string };
 
+export type ArticleInlineInfo = { term: string; explanation: string };
+
+export type ArticleChartData = {
+  series?: Array<{ label: string; value: number; secondary?: number; date?: string }>;
+  nodes?: Array<{ name: string; category?: "source" | "landing" | "outcome" }>;
+  links?: Array<{ source: number; target: number; value: number }>;
+  cells?: Array<{ date: string; value: number }>;
+  regions?: Record<string, number>;
+};
+
 export type ArticleBlock =
-  | { type: "heading"; text: string }
-  | { type: "paragraph"; text: string }
-  | { type: "image"; src: string; alt?: string };
+  | { type: "heading"; text: string; level?: 2 | 3 }
+  | { type: "paragraph"; text: string; inlineInfo?: ArticleInlineInfo[] }
+  | { type: "image"; src: string; alt?: string }
+  | { type: "before-after"; before: { src: string; alt?: string }; after: { src: string; alt?: string }; beforeLabel?: string; afterLabel?: string }
+  | { type: "video"; src: string; poster?: string; title?: string }
+  | { type: "table"; columns: string[]; rows: string[][]; highlightFirstColumn?: boolean }
+  | { type: "inline-info"; text: string; explanation: string }
+  | { type: "article-link"; slug: string; label?: string }
+  | { type: "chart"; variant: "bar" | "area" | "sankey" | "heatmap" | "funnel" | "choropleth"; title: string; description?: string; data?: ArticleChartData; valueLabel?: string; unit?: string; source?: string }
+  | { type: "callout"; variant: "info" | "education" | "warning"; title: string; text: string; icon?: "info" | "education" | "warning" | "academic" }
+  | { type: "quote"; text: string }
+  | { type: "point-cards"; items: Array<{ title: string; text: string; icon?: "info" | "education" | "warning" | "academic" }> }
+  | { type: "content-list"; variant: "summary" | "sources"; title: string; items: Array<{ label: string; href?: string }> }
+  | { type: "faq"; title?: string; items: Array<{ question: string; answer: string }> }
+  | { type: "cta"; variant: "audit" | "quiz"; eyebrow?: string; title?: string; description?: string; label?: string; href?: string; availability?: string }
+  | { type: "highlight-list" | "bullet-list"; items: Array<{ label: string; children?: string[] }> }
+  | { type: "divider" };
+
+export type ArticleQuizCta = {
+  variant?: "recommendation" | "audit";
+  badge?: string;
+  title?: string;
+  description?: string;
+  label?: string;
+  href?: string;
+  availability?: string;
+  images?: string[];
+};
+
+export type ArticleQuizResult = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta?: ArticleQuizCta;
+};
+
+export type ArticleQuiz = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  questions: Array<{ question: string; answers: Array<string | { label: string; resultId?: string }> }>;
+  result: ArticleQuizResult;
+  results?: Record<string, ArticleQuizResult>;
+  cta?: ArticleQuizCta;
+};
 
 export type Article = {
   id: string;
@@ -17,16 +69,42 @@ export type Article = {
   href: string;
   breadcrumbTitle: string;
   updatedAt: string;
-  mainImage: { src: string };
+  metaDescription?: string;
+  publishedAt?: string;
+  modifiedAt?: string;
+  noIndex?: boolean;
+  hiddenFromListing?: boolean;
+  mainImage?: { src: string; alt?: string };
+  mainVideo?: { src: string; poster?: string; title?: string };
   profilePhoto: { src: string };
   about: string;
   authorRole: string;
   authorBio: string;
+  sources?: Array<{ label: string; href: string }>;
   content: ArticleBlock[];
+  quiz?: ArticleQuiz;
+  hiddenContentTypes?: ArticleBlock["type"][];
 };
 
 const LOUIS = "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693";
 const LOUIS_PROFILE = "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693";
+
+export type RuffArticleInput = Omit<Article, "href" | "author" | "authorPhoto" | "profilePhoto" | "about" | "authorRole" | "authorBio"> &
+  Partial<Pick<Article, "href" | "author" | "authorPhoto" | "profilePhoto" | "about" | "authorRole" | "authorBio">>;
+
+/** Fabrique un article avec les valeurs Ruff communes, sans recopier le profil auteur ni l'URL. */
+export function createRuffArticle(input: RuffArticleInput): Article {
+  return {
+    author: "Louis Staub",
+    authorPhoto: { src: LOUIS },
+    href: `/ressources/${input.slug}`,
+    profilePhoto: { src: LOUIS_PROFILE },
+    about: "",
+    authorRole: "Expert web designer",
+    authorBio: "J’aide les entreprises à transformer leur site en un outil clair, crédible et pensé pour convertir grâce au web design, à la stratégie et à l’expérience utilisateur.",
+    ...input,
+  };
+}
 
 export const articleTags: ArticleTag[] = [
   { id: "acquisition", label: "Acquisition" },
@@ -55,6 +133,12 @@ export const articles: Article[] = [
     about: "",
     authorRole: "",
     authorBio: "",
+    sources: [
+      { label: "Bonduelle — Que le Bon l’emporte", href: "https://www.bonduelle.com/fr/campagne-que-le-bon-lemporte-bonduelle/" },
+      { label: "Bonduelle — Dossier de presse : une nouvelle identité visuelle assumée", href: "https://www.bonduelle.com/app/uploads/2026/04/1.-DP-RELANCEMENT-BONDUELLE-FRANCE-1.pdf" },
+      { label: "Bonduelle — Découvrez le nouveau visage du Groupe", href: "https://www.bonduelle.com/fr/decouvrez-le-nouveau-visage-du-groupe-bonduelle/" },
+    ],
+    hiddenContentTypes: ["table", "callout", "quote", "point-cards", "content-list"],
     content: [
       { type: "heading", text: "Une histoire graphique ancrée dans le végétal" },
       { type: "paragraph", text: "Depuis sa création, l'identité visuelle de Bonduelle a toujours cherché à refléter son héritage agricole et sa proximité avec la nature. Dès les années 1950, la marque introduit des symboles forts : la feuille et l'arc de cercle, évoquant l'univers végétal et la croissance continue. Au fil des décennies, cette feuille s'est stylisée pour devenir la clé de voûte de la reconnaissance de la marque en rayon. Elle a su instaurer un véritable code couleur et une symbolique indissociable des produits de la terre." },
@@ -69,6 +153,16 @@ export const articles: Article[] = [
       { type: "paragraph", text: "Il ne faut pas oublier que le logo constitue le point de repère numéro un sur un packaging alimentaire. Transposé sur des boîtes de conserve ou des sachets de salade fraîche, ce nouveau design noyé sous des couleurs uniformes risque de générer une moins bonne identification visuelle de la part des clients pressés. La visibilité et la reconnaissance immédiate sont indispensables dans des supermarchés saturés de déclinaisons. Simplifier une marque pour la moderniser ne devrait jamais se faire au détriment de son pouvoir d'évocation premier." },
       { type: "heading", text: "En conclusion" },
       { type: "paragraph", text: "Si la démarche de modernisation était compréhensible face à la digitalisation des supports, le nouveau logo Bonduelle frôle aujourd'hui une uniformisation excessive. En coupant le lien iconographique avec son héritage, l'entreprise devra redoubler d'efforts sur ses autres supports médiatiques pour prouver que, derrière cette identité lissée, bat toujours le cœur d'un géant du légume." },
+      { type: "heading", text: "Exemples de blocs pour les contenus SEO" },
+      { type: "paragraph", text: "Les éléments suivants sont volontairement fictifs : ils servent à visualiser les nouveaux formats disponibles dans les contenus d’articles." },
+      { type: "table", columns: ["Critère", "Avant", "Après", "Impact", "Priorité"], rows: [["Reconnaissance", "Élevée", "À confirmer", "Fort", "Haute"], ["Différenciation", "Marquée", "Plus faible", "Moyen", "Moyenne"], ["Déclinaison digitale", "Limitée", "Simplifiée", "Positif", "Haute"], ["Cohérence de marque", "Historique", "À consolider", "Fort", "Haute"], ["Lisibilité en rayon", "Établie", "À mesurer", "Fort", "Haute"]] },
+      { type: "callout", variant: "info", icon: "info", title: "Point pédagogique", text: "Un tableau aide à comparer des critères précis sans interrompre la lecture. Ce contenu est un exemple de mise en forme éditoriale." },
+      { type: "callout", variant: "education", icon: "education", title: "À retenir", text: "Les encadrés peuvent prendre une couleur, une icône et un niveau de priorité différents selon l’intention du contenu." },
+      { type: "callout", variant: "warning", icon: "warning", title: "Point de vigilance", text: "Cet encadré est réservé aux risques, limites ou informations nécessitant une attention particulière." },
+      { type: "quote", text: "Une identité efficace ne se contente pas d’être moderne : elle doit aussi préserver les repères qui permettent à une marque d’être reconnue immédiatement." },
+      { type: "point-cards", items: [{ icon: "academic", title: "Clarté de lecture", text: "Présenter une idée clé dans une carte isole l’information et facilite son repérage." }, { icon: "academic", title: "Hiérarchisation", text: "Les cartes peuvent mettre en avant deux points complémentaires, sans alourdir le corps de l’article." }] },
+      { type: "content-list", variant: "summary", title: "Sommaire", items: [{ label: "Une histoire graphique ancrée dans le végétal" }, { label: "La stratégie de l’hyper-simplification" }, { label: "Les dangers d’une identité visuelle trop générique" }, { label: "L’incohérence avec la stratégie végétale" }, { label: "En conclusion" }] },
+      { type: "content-list", variant: "sources", title: "Sources", items: [{ label: "Site officiel de Bonduelle", href: "https://www.bonduelle.com/" }, { label: "Étude de cas et éléments de marque", href: "https://www.bonduelle.com/" }, { label: "Références visuelles de l’article" }] },
     ],
   },
   {
@@ -272,35 +366,62 @@ export const articles: Article[] = [
     about: "",
     authorRole: "",
     authorBio: "",
+    quiz: {
+      eyebrow: "Quiz express",
+      title: "Quelle section optimiser en priorité ?",
+      description: "Répondez à quelques questions pour identifier le point le plus important à travailler sur votre landing page.",
+      questions: [
+        { question: "Quel est aujourd’hui votre principal objectif ?", answers: ["Obtenir plus de demandes", "Vendre une offre", "Présenter mon activité"] },
+        { question: "Que comprennent le moins vos visiteurs ?", answers: ["Ce que je propose", "Pourquoi ils devraient me choisir", "Comment passer à l’action"] },
+        { question: "Quelle partie de votre page vous semble la moins convaincante ?", answers: ["Le haut de page", "Les bénéfices et preuves", "L’offre ou le formulaire"] },
+      ],
+      result: { eyebrow: "Votre piste prioritaire", title: "Clarifier votre proposition de valeur", description: "Commencez par rendre votre promesse, votre audience et le bénéfice principal immédiatement compréhensibles dans le hero de votre landing page." },
+      cta: {
+        badge: "Recommandé pour vous",
+        title: "Faites une refonte de votre landing page maintenant",
+        description: "Une refonte claire et orientée conversion peut transformer vos visiteurs en demandes qualifiées.",
+        label: "Réserver un appel",
+        href: "/contact",
+      },
+    },
     content: [
-      { type: "paragraph", text: "Une landing page qui convertit ne répond pas au hasard. Chaque section a un rôle précis : lever une question dans la tête du visiteur. Si une question reste sans réponse, la conversion chute. Voici la checklist complète des questions mentales que votre site doit résoudre, section par section." },
+      { type: "paragraph", text: "Une landing page qui convertit ne répond pas au hasard. Chaque section a un rôle précis : **répondre à une question précise dans l’esprit du visiteur**. Si cette question reste sans réponse, le doute s’installe et la conversion chute. Voici les points à traiter, section par section." },
       { type: "heading", text: "Hero section" },
-      { type: "paragraph", text: "👉 Qu’est-ce que c’est ? Est-ce que j’en ai besoin ?" },
-      { type: "paragraph", text: "Le visiteur doit comprendre en quelques secondes ce que vous proposez et pourquoi c’est pertinent pour lui." },
+      { type: "paragraph", text: "**Question à résoudre :** qu’est-ce que vous proposez, pour qui, et pourquoi est-ce utile maintenant ?" },
+      { type: "image", src: "https://framerusercontent.com/images/F34W82YeZYoBqjCTLkxVy7nmNvk.png?lossless=1&width=960&height=712", alt: "Exemple de hero section de landing page" },
+      { type: "paragraph", text: "Dès les premières secondes, le visiteur doit comprendre **ce que vous faites**, **à qui vous vous adressez** et **le bénéfice principal** qu’il peut obtenir. Un titre trop vague force à chercher l’information ; une promesse claire donne immédiatement une raison de continuer." },
       { type: "heading", text: "À propos" },
-      { type: "paragraph", text: "👉 Qui êtes-vous ? Puis-je vous faire confiance ?" },
-      { type: "paragraph", text: "Cette section humanise la marque et renforce la crédibilité." },
+      { type: "paragraph", text: "**Question à résoudre :** qui êtes-vous et pourquoi devrais-je vous faire confiance ?" },
+      { type: "image", src: "/images/resource-article/landing-page-a-propos.png", alt: "Exemple de section à propos" },
+      { type: "paragraph", text: "Cette partie donne un visage à votre entreprise. Elle doit expliquer votre **expertise**, votre manière de travailler et les raisons concrètes qui vous rendent crédible. Une photo, un point de vue clair et des preuves tangibles rendent la promesse plus humaine." },
       { type: "heading", text: "Fonctionnalités" },
-      { type: "paragraph", text: "👉 Que peut faire le produit ? Comment ça fonctionne ?" },
-      { type: "paragraph", text: "On entre dans le concret. Le visiteur veut comprendre ce qu’il va réellement utiliser." },
+      { type: "paragraph", text: "**Question à résoudre :** que permet réellement votre produit ou votre service ?" },
+      { type: "image", src: "https://framerusercontent.com/images/R4LWb6dE5ErAebka0CNaIoZjo.png?lossless=1&width=1171&height=789", alt: "Exemple de présentation de fonctionnalités" },
+      { type: "paragraph", text: "On entre ici dans le concret. Montrez ce que la personne va utiliser, voir ou recevoir, avec des exemples simples. Le visiteur doit pouvoir relier chaque fonctionnalité à un **usage réel**, sans devoir interpréter un jargon technique." },
       { type: "heading", text: "Bénéfices" },
-      { type: "paragraph", text: "👉 En quoi ça m’aide ? Qu’est-ce que j’y gagne ?" },
-      { type: "paragraph", text: "Ici, on parle transformation, résultats et valeur réelle pour l’utilisateur." },
+      { type: "paragraph", text: "**Question à résoudre :** qu’est-ce que cela change concrètement pour moi ?" },
+      { type: "image", src: "/images/resource-article/landing-page-benefices.png", alt: "Exemple de section bénéfices : pourquoi Rentala change la donne" },
+      { type: "paragraph", text: "Ne répétez pas les fonctionnalités : traduisez-les en résultats. Cette section doit projeter le visiteur dans un avant/après clair, avec les **gains de temps**, de sérénité, de chiffre d’affaires ou de simplicité qu’il peut attendre." },
       { type: "heading", text: "Comment ça marche" },
-      { type: "paragraph", text: "👉 Que se passe-t-il après l’inscription ? Est-ce simple ?" },
-      { type: "paragraph", text: "Cette section réduit la peur de la complexité et du temps perdu." },
+      { type: "paragraph", text: "**Question à résoudre :** que se passe-t-il après le clic et est-ce vraiment simple ?" },
+      { type: "image", src: "https://framerusercontent.com/images/mZi5uW5TqqOtcd6GTIpxOqG5YV0.png?lossless=1&width=1453&height=844", alt: "Exemple de section comment ça marche" },
+      { type: "paragraph", text: "Décrivez les étapes de manière rassurante : ce que la personne fait, ce qu’elle reçoit et le temps nécessaire. En rendant le parcours **prévisible et concret**, vous réduisez la peur de la complexité et du temps perdu." },
       { type: "heading", text: "Services / Offre" },
-      { type: "paragraph", text: "👉 Qu’est-ce qui est exactement inclus ?" },
-      { type: "paragraph", text: "Clarifie l’offre et évite toute ambiguïté." },
+      { type: "paragraph", text: "**Question à résoudre :** qu’est-ce qui est inclus, pour quel niveau d’accompagnement et à quelles conditions ?" },
+      { type: "image", src: "/images/resource-article/landing-page-offre.png", alt: "Exemple de présentation d’offre et de tarifs" },
+      { type: "paragraph", text: "Une offre lisible évite les interprétations. Faites apparaître les livrables, le périmètre, le rythme et ce qui distingue chaque option. Le visiteur doit savoir **exactement ce qu’il obtient** avant d’envisager le passage à l’action." },
       { type: "heading", text: "Témoignages" },
-      { type: "paragraph", text: "👉 Qui l’a déjà utilisé ? Quelle a été leur expérience ?" },
-      { type: "paragraph", text: "Preuve sociale directe, essentielle pour rassurer." },
+      { type: "paragraph", text: "**Question à résoudre :** est-ce que des personnes comme moi ont déjà obtenu un résultat ?" },
+      { type: "image", src: "/images/resource-article/landing-page-temoignages.png", alt: "Exemple de section témoignages" },
+      { type: "paragraph", text: "La preuve sociale rassure lorsqu’elle est précise. Préférez un témoignage qui décrit le contexte, la décision prise et le résultat observé. Des exemples proches de votre audience rendent la promesse **plus crédible et plus concrète**." },
       { type: "heading", text: "Études de cas" },
-      { type: "paragraph", text: "👉 Puis-je voir un vrai exemple de réussite ?" },
-      { type: "paragraph", text: "On passe du témoignage au résultat concret." },
+      { type: "paragraph", text: "**Question à résoudre :** pouvez-vous me montrer une réussite comparable à mon besoin ?" },
+      { type: "image", src: "/images/resource-article/landing-page-etude-de-cas.png", alt: "Exemple d’étude de cas" },
+      { type: "paragraph", text: "Une étude de cas transforme une affirmation en démonstration. Présentez le problème initial, les choix faits et les résultats, avec des éléments visuels ou chiffrés. Le visiteur doit se dire : **cette méthode peut aussi fonctionner pour moi**." },
       { type: "heading", text: "Footer" },
-      { type: "paragraph", text: "👉 Où trouver les infos légales, politiques et liens importants ?" },
-      { type: "paragraph", text: "Clôture le parcours et renforce le sérieux du site." },
+      { type: "paragraph", text: "**Question à résoudre :** où trouver les informations importantes si je veux vérifier, comparer ou revenir plus tard ?" },
+      { type: "image", src: "/images/resource-article/landing-page-footer.png", alt: "Exemple de footer et d’appel à l’action" },
+      { type: "paragraph", text: "Le footer clôt le parcours sans le casser. Il rassemble les accès essentiels — contact, pages légales, ressources et réseaux — et prouve que l’entreprise est structurée. C’est le dernier repère de **sérieux et de confiance** avant le départ." },
       { type: "paragraph", text: "Pour approfondir ce sujet, consultez également préparer votre landing page avec neuf questions essentielles et découvrez comment mieux diriger le visiteur dans la page." },
     ],
   },
@@ -623,8 +744,211 @@ export const articles: Article[] = [
     ],
   },
 
+  {
+    id: "component-library",
+    slug: "bibliotheque-composants-article",
+    tagId: "outils",
+    tag: "Outils",
+    title: "Bibliothèque des composants éditoriaux",
+    image: { src: "https://framerusercontent.com/images/OVfCDhMUEww8O5ZIxogVtPljViM.png", alt: "Bibliothèque des composants éditoriaux" },
+    author: "Louis Staub",
+    authorPhoto: { src: LOUIS },
+    href: "/ressources/bibliotheque-composants-article",
+    breadcrumbTitle: "Bibliothèque de composants",
+    updatedAt: "Dernière mise à jour le 25 août 2026",
+    modifiedAt: "2026-08-25",
+    noIndex: true,
+    hiddenFromListing: true,
+    metaDescription: "Bibliothèque interne des composants éditoriaux disponibles pour construire et vérifier les articles Ruff Agency.",
+    mainVideo: { src: "/videos/landing-page-hero.mp4", poster: "https://framerusercontent.com/images/OVfCDhMUEww8O5ZIxogVtPljViM.png", title: "Exemple de vidéo principale d’un article" },
+    profilePhoto: { src: LOUIS_PROFILE },
+    about: "",
+    authorRole: "Expert web designer",
+    authorBio: "J’aide les entreprises à transformer leur site en un outil clair, crédible et pensé pour convertir grâce au web design, à la stratégie et à l’expérience utilisateur.",
+    quiz: {
+      eyebrow: "Quiz intégré au contenu",
+      title: "Quel format éditorial convient le mieux ?",
+      description: "Un exemple complet pour vérifier le quiz sous le média principal.",
+      questions: [
+        { question: "Vous voulez comparer plusieurs catégories.", answers: ["Graphique en barres", "Citation", "Avertissement"] },
+        { question: "Vous voulez montrer une progression dans le temps.", answers: ["Area chart", "Tableau", "Carte"] },
+      ],
+      result: { eyebrow: "Résultat", title: "Le format doit servir l’idée", description: "Choisissez le composant qui réduit le plus vite l’effort de compréhension." },
+      cta: { variant: "audit", badge: "Réponse en moins de 48h", title: "Recevez un audit personnalisé de votre site par des experts", availability: "3 places disponibles pour Juin" },
+    },
+    content: [
+      { type: "paragraph", text: "Cette page rassemble **tous les composants éditoriaux disponibles**. Chaque bloc est nommé pour faciliter la revue puis la création de nouveaux articles." },
+      { type: "heading", text: "Texte et information contextuelle" },
+      { type: "paragraph", text: "Le paragraphe est le format par défaut. Le gras sert à mettre en avant une idée sans créer un nouveau bloc." },
+      { type: "inline-info", text: "Taux de conversion", explanation: "Part des visiteurs qui réalisent l’action attendue, par exemple envoyer un formulaire ou réserver un appel." },
+      { type: "heading", text: "Image et vidéo dans le contenu" },
+      { type: "image", src: "https://framerusercontent.com/images/OVfCDhMUEww8O5ZIxogVtPljViM.png", alt: "Exemple d’image éditoriale" },
+      { type: "before-after", before: { src: "/images/resource-article/landing-page-a-propos.png", alt: "Version avant de la section" }, after: { src: "/images/resource-article/landing-page-benefices.png", alt: "Version après de la section" }, beforeLabel: "Avant", afterLabel: "Après" },
+      { type: "video", src: "/videos/landing-page-hero.mp4", title: "Exemple de vidéo éditoriale" },
+      { type: "heading", text: "Listes éditoriales" },
+      { type: "highlight-list", items: [{ label: "Idée prioritaire mise en évidence", children: ["Le détail reste lisible sans prendre le dessus."] }, { label: "Deuxième idée forte" }] },
+      { type: "bullet-list", items: [{ label: "Point de lecture classique", children: ["Sous-point optionnel"] }, { label: "Autre point utile" }] },
+      { type: "heading", text: "Tableaux comparatifs" },
+      { type: "table", columns: ["Format", "Objectif", "Densité"], rows: [["Paragraphe", "Expliquer", "Moyenne"], ["Encadré", "Faire retenir", "Faible"], ["Graphique", "Montrer une relation", "Variable"]] },
+      { type: "table", highlightFirstColumn: true, columns: ["Canal", "Découverte", "Évaluation", "Décision"], rows: [["SEO", "Fort", "Moyen", "Faible"], ["Email", "Moyen", "Fort", "Fort"], ["Social", "Fort", "Moyen", "Moyen"]] },
+      { type: "heading", text: "Encadrés et citation" },
+      { type: "callout", variant: "info", title: "Information importante", text: "À utiliser lorsqu’un contexte mérite d’être isolé du fil principal." },
+      { type: "callout", variant: "education", title: "À retenir", text: "À utiliser pour synthétiser une règle ou une méthode actionnable." },
+      { type: "callout", variant: "warning", title: "Point de vigilance", text: "À réserver aux risques, limites et erreurs coûteuses." },
+      { type: "quote", text: "Un composant éditorial est utile quand il rend une relation plus évidente que le texte seul." },
+      { type: "point-cards", items: [{ title: "Clarté", text: "Un point complémentaire avec une hiérarchie forte.", icon: "academic" }, { title: "Action", text: "Une seconde idée directement liée à la première.", icon: "education" }] },
+      { type: "heading", text: "Listes de contenu et liens internes" },
+      { type: "content-list", variant: "summary", title: "Résumé du chapitre", items: [{ label: "Une idée essentielle" }, { label: "Une décision à prendre" }] },
+      { type: "content-list", variant: "sources", title: "Références", items: [{ label: "Documentation Bklit", href: "https://bklit.com/docs/installation" }] },
+      { type: "article-link", slug: "questions-sections-landing-page", label: "Lire aussi : les questions à traiter dans chaque section" },
+      { type: "heading", text: "Graphique en barres — Bar chart" },
+      { type: "chart", variant: "bar", title: "Comparer des catégories", description: "Pour comparer clairement des valeurs distinctes." },
+      { type: "heading", text: "Graphique de surface — Area chart" },
+      { type: "chart", variant: "area", title: "Montrer une évolution", description: "Pour visualiser une tendance ou un volume dans le temps." },
+      { type: "heading", text: "Flux — Sankey chart" },
+      { type: "chart", variant: "sankey", title: "Comprendre les flux", description: "Pour montrer comment un volume se répartit entre plusieurs destinations." },
+      { type: "heading", text: "Intensité — Heatmap chart" },
+      { type: "chart", variant: "heatmap", title: "Repérer les zones d’intensité", description: "Pour faire apparaître des rythmes et concentrations dans une matrice." },
+      { type: "heading", text: "Étapes — Funnel chart" },
+      { type: "chart", variant: "funnel", title: "Visualiser une conversion", description: "Pour suivre la perte de volume entre plusieurs étapes." },
+      { type: "heading", text: "Géographie — Choropleth chart" },
+      { type: "chart", variant: "choropleth", title: "Comparer des zones géographiques", description: "Pour comparer un indicateur par territoire, avec zoom et infobulle." },
+      { type: "heading", text: "CTA audit dans le contenu" },
+      { type: "cta", variant: "audit", eyebrow: "Réponse en moins de 48h", title: "Recevez un audit personnalisé de votre site par des experts", availability: "3 places disponibles pour Juin" },
+      { type: "heading", text: "CTA de recommandation du quiz" },
+      { type: "cta", variant: "quiz", eyebrow: "Recommandé pour vous", title: "Votre landing page mérite une refonte pensée pour convertir.", description: "Réservez un appel pour identifier les opportunités les plus importantes sur votre site.", label: "Réserver un appel", href: "/contact" },
+      { type: "faq", title: "FAQ liée à l’article", items: [
+        { question: "La FAQ est-elle obligatoire dans un article ?", answer: "Non. Ce bloc est entièrement optionnel : ajoutez-le seulement lorsqu’il permet de répondre à des questions utiles qui prolongent vraiment la lecture de l’article." },
+        { question: "Comment ajouter une nouvelle question ?", answer: "Dans le CMS, ajoutez simplement une entrée avec une question et sa réponse dans la liste du bloc FAQ. L’accordéon et les séparateurs sont générés automatiquement." },
+      ] },
+    ],
+  },
+
 ];
+
+const FRENCH_MONTHS: Record<string, string> = {
+  janvier: "01", fevrier: "02", février: "02", mars: "03", avril: "04", mai: "05", juin: "06",
+  juillet: "07", aout: "08", août: "08", septembre: "09", octobre: "10", novembre: "11", decembre: "12", décembre: "12",
+};
+
+export function stripArticleFormatting(value: string) {
+  return value.replace(/\*\*([^*]+)\*\*/gu, "$1").replace(/\s+/gu, " ").trim();
+}
+
+export function getArticleDescription(article: Pick<Article, "author" | "title" | "metaDescription" | "content">) {
+  const firstParagraph = article.content.find(
+    (block): block is Extract<ArticleBlock, { type: "paragraph" }> => block.type === "paragraph" && Boolean(block.text)
+  )?.text ?? "";
+  const description = stripArticleFormatting(article.metaDescription || firstParagraph || `Article de ${article.author} sur ${article.title}.`);
+  if (description.length <= 155) return description;
+  const shortened = description.slice(0, 156);
+  const lastSpace = shortened.lastIndexOf(" ");
+  return shortened.slice(0, lastSpace > 120 ? lastSpace : 155).replace(/[\s,;:]+$/u, "");
+}
+
+export function getArticleModifiedDate(article: Pick<Article, "modifiedAt" | "updatedAt">) {
+  if (article.modifiedAt) return article.modifiedAt;
+  const normalized = article.updatedAt.normalize("NFD").replace(/[\u0300-\u036f]/gu, "").toLowerCase();
+  const match = normalized.match(/(\d{1,2})\s+([a-z]+)\s+(\d{4})/u);
+  if (!match) return undefined;
+  const month = FRENCH_MONTHS[match[2]];
+  return month ? `${match[3]}-${month}-${match[1].padStart(2, "0")}` : undefined;
+}
+
+/** Bloque au build les erreurs de contenu qui produiraient une page incohérente. */
+export function validateArticles(list: Article[] = articles) {
+  const errors: string[] = [];
+  const slugs = new Set<string>();
+  const ids = new Set<string>();
+
+  list.forEach((article) => {
+    if (slugs.has(article.slug)) errors.push(`slug dupliqué : ${article.slug}`);
+    if (ids.has(article.id)) errors.push(`id dupliqué : ${article.id}`);
+    slugs.add(article.slug);
+    ids.add(article.id);
+    if (article.href !== `/ressources/${article.slug}`) errors.push(`${article.slug} : href incohérent`);
+
+    article.content.forEach((block, blockIndex) => {
+      if (block.type === "table") {
+        block.rows.forEach((row, rowIndex) => {
+          if (row.length !== block.columns.length) errors.push(`${article.slug} : tableau ${blockIndex + 1}, ligne ${rowIndex + 1} (${row.length}/${block.columns.length} cellules)`);
+        });
+      }
+      if (block.type === "paragraph" && block.inlineInfo) {
+        block.inlineInfo.forEach(({ term }) => {
+          if (!block.text.includes(term)) errors.push(`${article.slug} : le terme inline-info « ${term} » est absent du paragraphe ${blockIndex + 1}`);
+        });
+      }
+      if (block.type === "faq") {
+        if (!block.items.length) errors.push(`${article.slug} : la FAQ ${blockIndex + 1} doit contenir au moins une question`);
+        block.items.forEach((item, itemIndex) => {
+          if (!item.question.trim() || !item.answer.trim()) errors.push(`${article.slug} : FAQ ${blockIndex + 1}, question ${itemIndex + 1} incomplète`);
+        });
+      }
+      if (block.type === "cta" && block.variant === "quiz" && (!block.title?.trim() || !block.description?.trim() || !block.label?.trim() || !block.href?.trim())) {
+        errors.push(`${article.slug} : CTA quiz ${blockIndex + 1} incomplet`);
+      }
+      if (block.type === "chart" && block.data?.series && block.variant === "area") {
+        block.data.series.forEach((point) => {
+          if (!point.date || Number.isNaN(Date.parse(point.date))) errors.push(`${article.slug} : l’area chart « ${block.title} » exige une date ISO par point`);
+        });
+      }
+      if (block.type === "chart" && !article.noIndex && !block.data) errors.push(`${article.slug} : le graphique « ${block.title} » ne peut pas utiliser les données de démonstration sur un article public`);
+      if (block.type === "chart" && block.variant === "sankey" && block.data && (!block.data.nodes?.length || !block.data.links?.length)) errors.push(`${article.slug} : le Sankey « ${block.title} » exige nodes et links`);
+      if (block.type === "chart" && block.data?.cells) block.data.cells.forEach((cell) => {
+        if (Number.isNaN(Date.parse(cell.date))) errors.push(`${article.slug} : date de heatmap invalide « ${cell.date} »`);
+      });
+    });
+
+    if (article.quiz?.results) {
+      const resultIds = new Set(Object.keys(article.quiz.results));
+      if (!resultIds.size) errors.push(`${article.slug} : quiz.results est vide`);
+      article.quiz.questions.flatMap((question) => question.answers).forEach((answer) => {
+        if (typeof answer !== "string" && answer.resultId && !resultIds.has(answer.resultId)) errors.push(`${article.slug} : résultat de quiz inconnu « ${answer.resultId} »`);
+      });
+    }
+  });
+
+  list.forEach((article) => article.content.forEach((block) => {
+    if (block.type === "article-link" && !slugs.has(block.slug)) errors.push(`${article.slug} : lien interne inconnu « ${block.slug} »`);
+  }));
+
+  if (errors.length) throw new Error(`Articles invalides :\n- ${errors.join("\n- ")}`);
+  return true;
+}
+
+validateArticles();
 
 export function getArticle(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);
+}
+
+/** Registre dérivé des articles : il reste à jour dès qu’un article est ajouté. */
+export const listedArticles = articles.filter((article) => !article.hiddenFromListing);
+
+export const articleLinks = listedArticles.map(({ slug, title, tag }) => ({
+  slug,
+  title,
+  tag,
+  href: `/ressources/${slug}`,
+}));
+
+/** Calcule automatiquement le temps de lecture depuis le contenu du CMS. */
+export function getArticleReadingMinutes(article: Pick<Article, "title" | "content" | "hiddenContentTypes">) {
+  const text = [
+    article.title,
+    ...article.content.filter((block) => !article.hiddenContentTypes?.includes(block.type)).flatMap((block) => {
+      if (block.type === "image") return [];
+      if (block.type === "table") return [...block.columns, ...block.rows.flat()];
+      if (block.type === "point-cards") return block.items.flatMap((item) => [item.title, item.text]);
+      if (block.type === "content-list") return [block.title, ...block.items.map((item) => item.label)];
+      if (block.type === "faq") return [block.title || "Questions fréquentes", ...block.items.flatMap((item) => [item.question, item.answer])];
+      if (block.type === "cta") return [block.eyebrow || "", block.title || "", block.description || "", block.label || ""];
+      if (block.type === "highlight-list" || block.type === "bullet-list") return block.items.flatMap((item) => [item.label, ...(item.children || [])]);
+      if (block.type === "divider") return [];
+      return "text" in block ? [block.text] : [];
+    }),
+  ].join(" ");
+  const wordCount = text.trim().split(/\s+/u).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
 }

@@ -18,7 +18,7 @@ export default function Cta({
       <span className="cta-inner">
         <span className="cta-label">{children ?? label}</span>
         {kind === "primary" ? (
-          <img className="cta-avatar" src={avatarSrc} alt="" width={28} height={28} />
+          <img className="cta-avatar" src={avatarSrc} alt="Photo de profil" width={28} height={28} />
         ) : null}
       </span>
     </a>
