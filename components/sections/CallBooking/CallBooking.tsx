@@ -16,7 +16,7 @@ declare global {
 
 const CAL_SCRIPT = "https://app.cal.com/embed/embed.js";
 
-function initialiseCalAfterHydration() {
+function initialiseCalAfterHydration(locale: "fr" | "en") {
   (function (C: Window, A: string, L: string) {
     const push = (api: any, args: IArguments | unknown[]) => {
       api.q.push(args);
@@ -58,7 +58,7 @@ function initialiseCalAfterHydration() {
   cal.config.forwardQueryParams = true;
   cal.ns["discovery-call"]("inline", {
     elementOrSelector: "#my-cal-inline-discovery-call",
-    config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+    config: { layout: "month_view", locale, useSlotsViewOnSmallScreen: "true" },
     calLink: "ruffagency/discovery-call",
   });
   cal.ns["discovery-call"]("ui", {
@@ -70,8 +70,8 @@ function initialiseCalAfterHydration() {
 export default function CallBooking({ locale }: { locale?: "fr" | "en" }) {
   const english = (locale ?? useLocale()) === "en";
   useEffect(() => {
-    initialiseCalAfterHydration();
-  }, []);
+    initialiseCalAfterHydration(english ? "en" : "fr");
+  }, [english]);
 
   return (
     <main className="call-booking">

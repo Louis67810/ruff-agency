@@ -8,13 +8,14 @@ const PROFILE_IMAGE =
 export default function Cta({
   kind = "primary",
   href = "#",
-  children,
-  label,
+  children = undefined,
+  label = undefined,
   avatarSrc = PROFILE_IMAGE,
   className = "",
+  onClick = undefined,
 }) {
   return (
-    <a className={`cta ${kind === "primary" ? "cta-primary" : "cta-secondary"} ${className}`.trim()} href={href}>
+    <a className={`cta ${kind === "primary" ? "cta-primary" : "cta-secondary"} ${className}`.trim()} href={href} onClick={onClick}>
       <span className="cta-inner">
         <span className="cta-label">{children ?? label}</span>
         {kind === "primary" ? (

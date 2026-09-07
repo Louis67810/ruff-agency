@@ -113,7 +113,7 @@ const SmartComponentScopedContainer2 = React.forwardRef(function SmartContainer(
     const dom = cleanDomProps(props);
     return _jsx3(Tag, { ...dom, ref, className, style, children });
 });
-function VideoReviewCard({ RceipbT2y, ChPJcClC0 = "rgb(255, 228, 158)", style, className }) {
+function VideoReviewCard({ RceipbT2y, ChPJcClC0 = "rgb(255, 228, 158)", style, className = "" }) {
     const [active, setActive] = React.useState(false);
     const [hover, setHover] = React.useState(false);
     const videoRef = React.useRef(null);
@@ -137,6 +137,7 @@ function VideoReviewCard({ RceipbT2y, ChPJcClC0 = "rgb(255, 228, 158)", style, c
         ] });
 }
 const ttCuLOnZE_default = VideoReviewCard;
+export { VideoReviewCard };
 const REVEALS = [
     [".framer-dw19sl", 32, 0, .5], [".framer-12tfa6t", 19, 200, .5], [".framer-1kjkzuc", 50, 600, 0],
     [".framer-1wg2jeu", 18, 0, .5], [".framer-m876hn", 18, 200, .5], [".framer-lfjzk7", 18, 400, .5],

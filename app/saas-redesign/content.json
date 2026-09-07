@@ -1,0 +1,384 @@
+{
+  "realizations": [
+    {
+      "id": "zorgniotti-home",
+      "title": "Home page",
+      "copy": "A clearer, more modern first impression for Zorgniotti.",
+      "before": "/landing-assets/zorgniotti/after-home.png",
+      "after": "/landing-assets/zorgniotti/before-home.png"
+    },
+    {
+      "id": "zorgniotti-about",
+      "title": "About page",
+      "copy": "A more structured presentation of the firm and its team.",
+      "before": "/landing-assets/zorgniotti/after-about.png",
+      "after": "/landing-assets/zorgniotti/before-about.png"
+    },
+    {
+      "id": "zorgniotti-reviews",
+      "title": "Client reviews",
+      "copy": "Social proof reorganised into a confident, modern system.",
+      "before": "/landing-assets/zorgniotti/after-reviews.png",
+      "after": "/landing-assets/zorgniotti/before-reviews.png"
+    },
+    {
+      "id": "zorgniotti-contact",
+      "title": "Contact page",
+      "copy": "A simpler contact experience with clearer information.",
+      "before": "/landing-assets/zorgniotti/after-contact.png",
+      "after": "/landing-assets/zorgniotti/before-contact.png"
+    },
+    {
+      "id": "zorgniotti-faq",
+      "title": "FAQ page",
+      "copy": "A cleaner question-and-answer experience.",
+      "before": "/landing-assets/zorgniotti/after-faq.png",
+      "after": "/landing-assets/zorgniotti/before-faq.png"
+    },
+    {
+      "id": "spreak-home",
+      "title": "Spreak — Home page",
+      "copy": "A sharper hero that makes Spreak's value immediately clear.",
+      "before": "/landing-assets/spreak/before-01-home.png",
+      "after": "/landing-assets/spreak/after-01-home.png"
+    },
+    {
+      "id": "spreak-problem",
+      "title": "Spreak — Problem",
+      "copy": "A stronger problem section with a clearer narrative and hierarchy.",
+      "before": "/landing-assets/spreak/before-02-problem.png",
+      "after": "/landing-assets/spreak/after-02-problem.png"
+    },
+    {
+      "id": "spreak-solution",
+      "title": "Spreak — Solution",
+      "copy": "The product benefits are easier to understand and scan.",
+      "before": "/landing-assets/spreak/before-03-solution.png",
+      "after": "/landing-assets/spreak/after-03-solution.png"
+    },
+    {
+      "id": "spreak-benefits",
+      "title": "Spreak — Benefits",
+      "copy": "A direct comparison that makes the value of Spreak tangible.",
+      "before": "/landing-assets/spreak/before-04-benefits.png",
+      "after": "/landing-assets/spreak/after-04-benefits.png"
+    },
+    {
+      "id": "spreak-modules",
+      "title": "Spreak — Modules",
+      "copy": "A visual presentation of every module in the platform.",
+      "before": "/landing-assets/spreak/before-05-modules.png",
+      "after": "/landing-assets/spreak/after-05-modules.png"
+    },
+    {
+      "id": "spreak-testimonials",
+      "title": "Spreak — Testimonials",
+      "copy": "Customer proof presented with more impact and credibility.",
+      "before": "/landing-assets/spreak/before-06-testimonials.png",
+      "after": "/landing-assets/spreak/after-06-testimonials.png"
+    },
+    {
+      "id": "spreak-pricing",
+      "title": "Spreak — Pricing",
+      "copy": "A clearer offer structure that makes the next step obvious.",
+      "before": "/landing-assets/spreak/before-07-pricing.png",
+      "after": "/landing-assets/spreak/after-07-pricing.png"
+    },
+    {
+      "id": "spreak-integrations",
+      "title": "Spreak — Integrations",
+      "copy": "A simpler and more reassuring presentation of integrations and security.",
+      "before": "/landing-assets/spreak/before-08-integrations.png",
+      "after": "/landing-assets/spreak/after-08-integrations.png"
+    },
+    {
+      "id": "artan-home",
+      "title": "Artan — Home page",
+      "copy": "A stronger first impression designed to turn attention into clicks.",
+      "before": "/landing-assets/artan/before-01-home.png",
+      "after": "/landing-assets/artan/after-01-home.png"
+    },
+    {
+      "id": "artan-creators",
+      "title": "Artan — Creators",
+      "copy": "A clearer presentation of the creators who already trust the studio.",
+      "before": "/landing-assets/artan/before-02-creators.png",
+      "after": "/landing-assets/artan/after-02-creators.png"
+    },
+    {
+      "id": "artan-work",
+      "title": "Artan — Work",
+      "copy": "A portfolio section that lets the thumbnails speak for themselves.",
+      "before": "/landing-assets/artan/before-03-work.png",
+      "after": "/landing-assets/artan/after-03-work.png"
+    },
+    {
+      "id": "artan-benefits",
+      "title": "Artan — Benefits",
+      "copy": "A more visual explanation of the value delivered by the studio.",
+      "before": "/landing-assets/artan/before-04-benefits.png",
+      "after": "/landing-assets/artan/after-04-benefits.png"
+    },
+    {
+      "id": "artan-process",
+      "title": "Artan — Process",
+      "copy": "A simple three-step process that is easier to understand.",
+      "before": "/landing-assets/artan/before-05-process.png",
+      "after": "/landing-assets/artan/after-05-process.png"
+    },
+    {
+      "id": "artan-pricing",
+      "title": "Artan — Pricing",
+      "copy": "A clearer offer structure that makes choosing a package easier.",
+      "before": "/landing-assets/artan/before-06-pricing.png",
+      "after": "/landing-assets/artan/after-06-pricing.png"
+    },
+    {
+      "id": "artan-comparison",
+      "title": "Artan — Comparison",
+      "copy": "A direct comparison that makes the studio's difference obvious.",
+      "before": "/landing-assets/artan/before-07-comparison.png",
+      "after": "/landing-assets/artan/after-07-comparison.png"
+    },
+    {
+      "id": "rentala-home",
+      "title": "Rentala — Home page",
+      "copy": "A clearer introduction to a simpler rental management experience.",
+      "before": "/landing-assets/rentala/before-01-home.png",
+      "after": "/landing-assets/rentala/after-01-home.png"
+    },
+    {
+      "id": "rentala-benefits",
+      "title": "Rentala — Benefits",
+      "copy": "The product benefits are organised around the landlord's real workload.",
+      "before": "/landing-assets/rentala/before-02-benefits.png",
+      "after": "/landing-assets/rentala/after-02-benefits.png"
+    },
+    {
+      "id": "rentala-process",
+      "title": "Rentala — Process",
+      "copy": "A three-step process that makes getting started feel immediate.",
+      "before": "/landing-assets/rentala/before-03-process.png",
+      "after": "/landing-assets/rentala/after-03-process.png"
+    },
+    {
+      "id": "rentala-comparison",
+      "title": "Rentala — Comparison",
+      "copy": "A focused comparison between Rentala and traditional property tools.",
+      "before": "/landing-assets/rentala/before-04-comparison.png",
+      "after": "/landing-assets/rentala/after-04-comparison.png"
+    },
+    {
+      "id": "rentala-pricing",
+      "title": "Rentala — Pricing",
+      "copy": "A simpler pricing structure built around the size of each portfolio.",
+      "before": "/landing-assets/rentala/before-05-pricing.png",
+      "after": "/landing-assets/rentala/after-05-pricing.png"
+    },
+    {
+      "id": "rentala-reviews",
+      "title": "Rentala — Reviews",
+      "copy": "Customer proof presented with more clarity and credibility.",
+      "before": "/landing-assets/rentala/before-06-reviews.png",
+      "after": "/landing-assets/rentala/after-06-reviews.png"
+    },
+    {
+      "id": "rentala-cta",
+      "title": "Rentala — Final CTA",
+      "copy": "A final call to action that closes the page with a clear next step.",
+      "before": "/landing-assets/rentala/before-07-cta.png",
+      "after": "/landing-assets/rentala/after-07-cta.png"
+    },
+    {
+      "id": "keyframe-home",
+      "title": "Keyframe — Home page",
+      "copy": "A more focused hero for a motion design agency.",
+      "before": "/landing-assets/keyframe/before-02-types.png",
+      "after": "/landing-assets/keyframe/after-01-home.png"
+    },
+    {
+      "id": "keyframe-types",
+      "title": "Keyframe — Video types",
+      "copy": "A clearer overview of the video formats available.",
+      "before": "/landing-assets/keyframe/before-03-portfolio.png",
+      "after": "/landing-assets/keyframe/after-02-types.png"
+    },
+    {
+      "id": "keyframe-portfolio",
+      "title": "Keyframe — Portfolio",
+      "copy": "Recent work presented with stronger visual hierarchy.",
+      "before": "/landing-assets/keyframe/before-04-comparison.png",
+      "after": "/landing-assets/keyframe/after-03-portfolio.png"
+    },
+    {
+      "id": "keyframe-comparison",
+      "title": "Keyframe — Comparison",
+      "copy": "A direct comparison that clarifies the agency's value.",
+      "before": "/landing-assets/keyframe/before-05-process.png",
+      "after": "/landing-assets/keyframe/after-04-comparison.png"
+    },
+    {
+      "id": "keyframe-process",
+      "title": "Keyframe — Process",
+      "copy": "A simpler five-step production process.",
+      "before": "/landing-assets/keyframe/before-06-pricing.png",
+      "after": "/landing-assets/keyframe/after-05-process.png"
+    },
+    {
+      "id": "keyframe-pricing",
+      "title": "Keyframe — Pricing",
+      "copy": "A more structured and readable project estimator.",
+      "before": "/landing-assets/keyframe/before-07-booking.png",
+      "after": "/landing-assets/keyframe/after-06-pricing.png"
+    },
+    {
+      "id": "keyframe-booking",
+      "title": "Keyframe — Booking",
+      "copy": "A clearer booking experience for strategy calls.",
+      "before": "/landing-assets/keyframe/before-08-blueprint.png",
+      "after": "/landing-assets/keyframe/after-07-booking.png"
+    },
+    {
+      "id": "keyframe-blueprint",
+      "title": "Keyframe — Blueprint",
+      "copy": "The complete production offer explained at a glance.",
+      "before": "/landing-assets/keyframe/before-01-home.png",
+      "after": "/landing-assets/keyframe/after-08-blueprint.png"
+    },
+    {
+      "id": "zagula-home",
+      "title": "Julie Zagula — Home page",
+      "copy": "A clearer introduction to the accounting firm's expertise.",
+      "before": "/landing-assets/julie-zagula/before-01-home.png",
+      "after": "/landing-assets/julie-zagula/after-01-home.png"
+    },
+    {
+      "id": "zagula-benefits",
+      "title": "Julie Zagula — Benefits",
+      "copy": "The firm's key advantages presented in a more structured way.",
+      "before": "/landing-assets/julie-zagula/before-02-benefits.png",
+      "after": "/landing-assets/julie-zagula/after-02-benefits.png"
+    },
+    {
+      "id": "zagula-reviews",
+      "title": "Julie Zagula — Client reviews",
+      "copy": "Customer proof organised into a clear and credible presentation.",
+      "before": "/landing-assets/julie-zagula/before-03-reviews.png",
+      "after": "/landing-assets/julie-zagula/after-03-reviews.png"
+    },
+    {
+      "id": "zagula-contact",
+      "title": "Julie Zagula — Contact",
+      "copy": "A simpler contact experience with the essential information up front.",
+      "before": "/landing-assets/julie-zagula/before-04-contact.png",
+      "after": "/landing-assets/julie-zagula/after-04-contact.png"
+    },
+    {
+      "id": "zagula-faq",
+      "title": "Julie Zagula — FAQ",
+      "copy": "Frequently asked questions arranged into a more accessible layout.",
+      "before": "/landing-assets/julie-zagula/before-05-faq.png",
+      "after": "/landing-assets/julie-zagula/after-05-faq.png"
+    },
+    {
+      "id": "scall-home",
+      "title": "Scall — Home page",
+      "copy": "A stronger first impression for an independent art director.",
+      "before": "/landing-assets/scall/before-01-home.png",
+      "after": "/landing-assets/scall/after-01-home.png"
+    },
+    {
+      "id": "scall-clients",
+      "title": "Scall — Clients",
+      "copy": "Creators, brands and projects presented through a more visual showcase.",
+      "before": "/landing-assets/scall/before-02-clients.png",
+      "after": "/landing-assets/scall/after-02-clients.png"
+    },
+    {
+      "id": "scall-about",
+      "title": "Scall — About",
+      "copy": "A clearer personal introduction to the designer and his expertise.",
+      "before": "/landing-assets/scall/before-03-about.png",
+      "after": "/landing-assets/scall/after-03-about.png"
+    },
+    {
+      "id": "scall-case-study",
+      "title": "Scall — Case study",
+      "copy": "Project results organised into a more focused case study.",
+      "before": "/landing-assets/scall/before-04-case-study.png",
+      "after": "/landing-assets/scall/after-04-case-study.png"
+    },
+    {
+      "id": "scall-reviews",
+      "title": "Scall — Reviews",
+      "copy": "Client feedback displayed with stronger hierarchy and impact.",
+      "before": "/landing-assets/scall/before-05-reviews.png",
+      "after": "/landing-assets/scall/after-05-reviews.png"
+    },
+    {
+      "id": "scall-faq",
+      "title": "Scall — FAQ",
+      "copy": "Essential questions presented in a clearer, easier-to-scan format.",
+      "before": "/landing-assets/scall/before-06-faq.png",
+      "after": "/landing-assets/scall/after-06-faq.png"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "artan",
+      "name": "Artan",
+      "role": "CEO of Artan",
+      "quote": "Outstanding work. Louis immediately understood my vision and positioning, and translated them into a premium, polished design built to convert. Highly professional and responsive, with clear communication and fast turnaround on feedback. The result is exactly what I wanted—high-end and impactful. I recommend him 100%! 🔥",
+      "avatar": "/landing-assets/artan/avatar.svg"
+    },
+    {
+      "id": "sacha-tassart",
+      "name": "Sacha Tassart",
+      "role": "Founder of Spreak",
+      "quote": "I highly recommend Louis for his remarkable work on Spreak. Any company looking to work with a rigorous, creative and reliable designer will make an excellent choice.",
+      "avatar": "https://framerusercontent.com/images/DqobaWrM96jw0NYRqTutldOZM.jpg?width=200&height=200"
+    },
+    {
+      "id": "antoine-troovy",
+      "name": "Antoine Troovy",
+      "role": "Founder of Keyframe Agency",
+      "quote": "Ruff Agency delivered my website quickly and was incredibly responsive. The assets and animations are beautiful.",
+      "avatar": "https://framerusercontent.com/images/OyAwqa9YP58MVuHUk2Wbjbb2Ijo.jpg?width=200&height=200"
+    },
+    {
+      "id": "noe-e",
+      "name": "Noé E.",
+      "role": "CEO of Myminia",
+      "quote": "I am delighted with my landing page. The service was fast and reliable, and they had an answer to every challenge I brought them. I highly recommend them.",
+      "avatar": "https://framerusercontent.com/images/WLy8MmakiTBDk8q7dyr11OTsaJk.webp?width=512&height=512"
+    },
+    {
+      "id": "dominique-zenglein",
+      "name": "Dominique Zenglein",
+      "role": "Partner at Zorgniotti",
+      "quote": "We ordered a multi-page website and the experience was excellent from start to finish. It was delivered quickly with a clear, professional design and a result beyond our expectations.",
+      "avatar": "https://framerusercontent.com/images/nDeWJMtJPkakkMFDMXaoNWTTAMw.webp?width=167&height=167"
+    },
+    {
+      "id": "martin-riedweg",
+      "name": "Martin Riedweg",
+      "role": "Founder of Rentala",
+      "quote": "I hired Ruff Agency to redesign Rentala and I am delighted with the result. The design is modern and clear, and the copy perfectly highlights our value proposition.",
+      "avatar": "https://framerusercontent.com/images/1An8qbppTr2JICZ6YfDZZ7BWY.jpg?width=640&height=640"
+    },
+    {
+      "id": "julie-zagula",
+      "name": "Julie Zagula",
+      "role": "Founder of Clovarex",
+      "quote": "A true professional. Louis delivered a polished, smooth website that perfectly met my expectations. He listens, adapts and gets it right.",
+      "avatar": "https://framerusercontent.com/images/AH1BhliY7qwLdbhFi1HqZoEyBs.webp?width=344&height=333"
+    },
+    {
+      "id": "nicolas-h",
+      "name": "Nicolas H.",
+      "role": "Founder of Gourdy",
+      "quote": "The website is not only beautiful, it also boosted our conversion rate. Every detail was designed to maximise our efficiency.",
+      "avatar": "https://framerusercontent.com/images/kYFWB25gUuDFLeJ4G2sMsKyBd0.webp?width=472&height=472"
+    }
+  ]
+}

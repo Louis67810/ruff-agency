@@ -318,12 +318,12 @@ function DesktopServices({ links, onPointerEnter, onPanelLeave, onNavigate, moti
   </div>;
 }
 
-function MobileMenu({ dark, links, onClose, locale = "fr" }) {
+function MobileMenu({ dark, links, onClose, locale = "fr", landingMode = false, landingLinks = [], ctaLabel }) {
   const t = (fr, en) => locale === "en" ? en : fr;
   const [servicesOpen, setServicesOpen] = useState(false);
   const click = () => onClose?.();
   return <div className="framer-1stnlcj navbar-mobile-menu">
-    <div className="framer-brs9hv navbar-mobile-links">
+    {!landingMode && <div className="framer-brs9hv navbar-mobile-links">
       <NavLink small dark={dark} href={links.homeHref} onClick={click}>{t("Accueil", "Home")}</NavLink><div className="navbar-mobile-separator" />
       <NavLink small dark={dark} href={links.projectsHref} onClick={click}>Études de cas</NavLink><div className="navbar-mobile-separator" />
       <button className="navbar-mobile-services-toggle" type="button" onClick={() => setServicesOpen(v => !v)} style={{ color: dark ? "#fff" : "rgb(18,26,46)" }}><span>Services</span><Chevron open={servicesOpen} color={dark ? "#fff" : "#000"} /></button>
@@ -334,8 +334,14 @@ function MobileMenu({ dark, links, onClose, locale = "fr" }) {
       </div>
       <div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.resourcesHref} onClick={click}>{t("Ressources", "Resources")}</NavLink>
       <div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.aboutHref} onClick={click}>{t("Qui sommes nous ", "Who we are")}</NavLink>
-    </div>
-    <div className="framer-9b3gdf-container navbar-mobile-cta"><CTA full href={links.ctaHref} shell={dark ? "rgba(225,228,237,.08)" : "rgb(225,228,237)"} /></div>
+    </div>}
+    {landingMode && landingLinks.length > 0 && <div className="framer-brs9hv navbar-mobile-links navbar-mobile-landing-links">
+      {landingLinks.map((item, index) => <React.Fragment key={`${item.href}-${item.label}`}>
+        {index > 0 && <div className="navbar-mobile-separator" />}
+        <NavLink small dark={dark} href={item.href} onClick={click}>{item.label}</NavLink>
+      </React.Fragment>)}
+    </div>}
+    <div className="framer-9b3gdf-container navbar-mobile-cta"><CTA full href={links.ctaHref} title={ctaLabel || "Book a call"} shell={dark ? "rgba(225,228,237,.08)" : "rgb(225,228,237)"} /></div>
   </div>;
 }
 
@@ -343,6 +349,7 @@ export default function NavBar({
   variant = "auto", fill = "rgb(251, 251, 251)", fill2 = "rgb(251, 251, 251)", color = "rgb(0,0,0)", theme = "light",
   homeHref = "#", projectsHref = "#", resourcesHref = "#", aboutHref = "#", ctaHref = "#",
   landingHref = "#", websiteHref = "#", brandingHref = "#", productDesignHref = "#", copywritingHref = "#", seoGeoHref = "#", conversionOptimisationHref = "#", framerHref = "#", developmentHref = "#", whatsappHref = DEFAULT_WHATSAPP,
+  landingMode = false, landingLinks = [], ctaLabel,
   className = "", style,
   locale = "fr",
 }) {
@@ -380,7 +387,7 @@ export default function NavBar({
   // Le menu mobile ouvert reprend volontairement l'apparence claire de la barre au scroll.
   const menuUsesScrollTheme = menuOpen && mobile;
   const navDark = dark && !scrolledActive && !menuUsesScrollTheme;
-  const showDesktopLinks = !DESKTOP_LINKS_HIDDEN.has(baseId) && !mobile;
+  const showDesktopLinks = !landingMode && !DESKTOP_LINKS_HIDDEN.has(baseId) && !mobile;
   const showRight = !RIGHT_HIDDEN.has(baseId) && !mobile;
   const logoOnly = LOGO_ONLY.has(baseId);
   const border = ["IekeHhisv","MOuhdlnSq","nXvvpRJPs"].includes(baseId);
@@ -410,7 +417,7 @@ export default function NavBar({
   return <>
     <div className="navbar-spacer" aria-hidden="true" />
     <nav className={`framer-4kwVz framer-qkr4e3 ${VARIANT_CLASS[baseId] || ""} navbar-native ${menuOpen ? "navbar-menu-open" : ""} ${scrolledActive ? "navbar-scrolled" : ""} ${className}`} style={{ "--navbar-layer-bg": bg, backgroundColor: bg, color, borderBottom: border ? `1px solid ${baseId === "nXvvpRJPs" ? "rgb(34,34,34)" : "rgba(0,0,0,.13)"}` : `1px solid ${scrolledActive ? "rgba(0,0,0,.1)" : "rgba(0,0,0,0)"}`, ...style }}>
-      {menuOpen && <MobileMenu dark={navDark} links={links} locale={locale} onClose={() => setMenuOpen(false)} />}
+      {menuOpen && <MobileMenu dark={navDark} links={links} locale={locale} landingMode={landingMode} landingLinks={landingLinks} ctaLabel={ctaLabel} onClose={() => setMenuOpen(false)} />}
       {servicesOpen && <div className="navbar-services-backdrop" aria-hidden="true" />}
       <div className="framer-5yfpdr navbar-main-row">
         <Logo href={homeHref} dark={navDark} mobile={mobile} mobileUnique={baseId === "BG0nmz4mC"} />
@@ -427,7 +434,7 @@ export default function NavBar({
           <NavLink dark={navDark} href={aboutHref}>{t("Qui sommes nous ", "Who we are")}</NavLink>
         </div>}
         {!logoOnly && <div className="framer-ufyq2u-container navbar-burger-container"><Burger open={menuOpen} dark={navDark} onClick={() => setMenuOpen(v => !v)} /></div>}
-        {showRight && <div className="framer-184c6kw navbar-right"><div className="navbar-right-actions"><div className="framer-1u5ere7-container"><WhatsApp href={whatsappHref} /></div><div className="framer-1d2rod8-container"><CTA href={ctaHref} shell={navDark ? "rgba(255,255,255,.15)" : "rgb(225,228,237)"} /></div></div></div>}
+        {showRight && <div className="framer-184c6kw navbar-right"><div className="navbar-right-actions">{!landingMode && <div className="framer-1u5ere7-container"><WhatsApp href={whatsappHref} /></div>}<div className="framer-1d2rod8-container"><CTA href={ctaHref} title={ctaLabel || t("Commencer mon projet", "Start my project")} shell={navDark ? "rgba(255,255,255,.15)" : "rgb(225,228,237)"} /></div></div></div>}
       </div>
     </nav>
   </>;

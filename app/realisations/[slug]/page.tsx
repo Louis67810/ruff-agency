@@ -7,7 +7,7 @@ import ContentPageRealisationsSlug from "@/components/sections/ContentPageRealis
 import CtaAuditRealisationsSlug from "@/components/sections/CtaAuditRealisationsSlug/CtaAuditRealisationsSlug";
 import RealisationsOptimized from "@/components/sections/RealisationsOptimized/RealisationsOptimized";
 import { NAV_PROPS, FOOTER_LINKS, ROUTES, SITE_URL } from "@/lib/site";
-import { projects, getProject } from "@/lib/data/projects";
+import { projects, getProject, getProjectHeroPhotos } from "@/lib/data/projects";
 import JsonLd from "@/components/JsonLd";
 import { headers } from "next/headers";
 import { getEnglishProject } from "@/lib/data/projects-en";
@@ -57,6 +57,7 @@ export default function RealisationSlugPage({ params }: { params: { slug: string
   const sourceProject = getProject(params.slug);
   const project = sourceProject ? (locale === "en" ? getEnglishProject(sourceProject) : sourceProject) : undefined;
   if (!project) notFound();
+  const heroPhotos = getProjectHeroPhotos(project);
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -75,7 +76,7 @@ export default function RealisationSlugPage({ params }: { params: { slug: string
         title={project.heroTitle || project.title}
         photoDuSite={project.photoDuSite}
         videoSrc={project.heroVideoSrc}
-        imageSlides={project.photos}
+        imageSlides={heroPhotos}
         realisationsHref={ROUTES.realisations}
         offersHref={ROUTES.landingPage}
         callHref={ROUTES.contact}

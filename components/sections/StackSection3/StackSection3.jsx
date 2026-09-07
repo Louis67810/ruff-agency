@@ -186,12 +186,17 @@ function PrimaryCTA({ href, onClick, locale = "fr" }) {
 }
 
 export function StackSection3({
+  id,
   className = "",
   style,
   padding = "196px 48px 300px 48px",
   ctaHref = "#",
   onCtaClick,
   locale = "fr",
+  showDescription = true,
+  showCta = true,
+  showSectionDivider = false,
+  faqs,
 }) {
   const [titleRef, titleVisible] = useInViewOnce(0.5);
   const [copyRef, copyVisible] = useInViewOnce(0.5);
@@ -199,6 +204,7 @@ export function StackSection3({
 
   return (
     <section
+      id={id}
       className={`stack-section-3 ${className}`.trim()}
       style={{ "--s3-padding": padding, ...style }}
     >
@@ -216,37 +222,45 @@ export function StackSection3({
               </h2>
             </div>
 
-            <div
-              ref={copyRef}
-              className={`s3-description-wrap s3-reveal-copy${copyVisible ? " is-visible" : ""}`}
-            >
-              <p className="s3-description">
-                {english ? (
-                  "Still have questions? Book a call or"
-                ) : (
-                  <>
-                    Vous avez encore des questions&nbsp;? Réservez un appel ou
-                  </>
-                )}
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+            {showDescription && (
+              <div
+                ref={copyRef}
+                className={`s3-description-wrap s3-reveal-copy${copyVisible ? " is-visible" : ""}`}
+              >
+                <p className="s3-description">
                   {english ? (
-                    " send us a message here"
+                    "Still have questions? Book a call or"
                   ) : (
-                    <> envoyez-nous un message ici</>
+                    <>
+                      Vous avez encore des questions&nbsp;? Réservez un appel ou
+                    </>
                   )}
-                </a>
-              </p>
-            </div>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {english ? (
+                      " send us a message here"
+                    ) : (
+                      <> envoyez-nous un message ici</>
+                    )}
+                  </a>
+                </p>
+              </div>
+            )}
 
-            <PrimaryCTA href={ctaHref} onClick={onCtaClick} locale={locale} />
+            {showCta && (
+              <PrimaryCTA href={ctaHref} onClick={onCtaClick} locale={locale} />
+            )}
           </div>
 
+          {showSectionDivider && (
+            <div className="s3-section-divider" aria-hidden="true" />
+          )}
+
           <ul className="s3-faq-list">
-            {(english ? ENGLISH_FAQS : FAQS).map((faq) => (
+            {(faqs ?? (english ? ENGLISH_FAQS : FAQS)).map((faq) => (
               <FAQItem key={faq.question} {...faq} />
             ))}
           </ul>

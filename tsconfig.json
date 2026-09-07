@@ -18,5 +18,31 @@
     "paths": { "@/*": ["./*"] }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    ".data",
+    ".freebuff",
+    "agence-en-quelques-mots-page-a-propos",
+    "articles-pages-ressource-pixel-perfect-complete",
+    "Avis-preview-ready",
+    "Benefices2-page-service-COMPLETE",
+    "Benefits-preview-ready",
+    "Comparatif-preview-ready",
+    "content-page-realisations-slug-pixel-perfect-complete",
+    "cta-audit-realisations-slug-pixel-perfect-complete",
+    "footer-complete",
+    "hero-page-service-complete",
+    "Hero-preview-ready",
+    "hero-realisations-page-pixel-perfect-complete",
+    "hero-réalisatiosn-slug-perfect-complete",
+    "hero-section-slug-ressource-pixel-perfect-complete",
+    "Hero-service-landingpage-COMPLETE",
+    "navbar-services-pixel-perfect-complete",
+    "PointsFocus-landing-page-COMPLETE",
+    "Prix-preview-ready-COMPAT",
+    "Processus-preview-ready",
+    "Realisations-preview-ready",
+    "section-avis-preview-ready-v2",
+    "stack-section-3-complete"
+  ]
 }

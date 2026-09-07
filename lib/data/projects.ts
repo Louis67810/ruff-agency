@@ -40,6 +40,27 @@ export type Project = {
   visibiliteAvantApres?: boolean;
 };
 
+const BEFORE_IMAGE_PATTERN = /(?:^|[\\/_-])before(?:[\\/_-]|\.|$)/i;
+
+/**
+ * Images displayed by the automatically rotating hero gallery.
+ *
+ * The project gallery keeps its complete source array because its first two
+ * entries can form the dedicated Before / After comparison. The hero must
+ * only show the finished work, so it excludes that first "before" entry and
+ * also guards against explicitly named before assets in future projects.
+ */
+export function getProjectHeroPhotos(project: Project): ProjectImage[] {
+  const photos = project.photos ?? [];
+  const photosWithoutComparisonBefore = project.visibiliteAvantApres
+    ? photos
+    : photos.slice(1);
+
+  return photosWithoutComparisonBefore.filter(
+    (photo) => !BEFORE_IMAGE_PATTERN.test(photo.src),
+  );
+}
+
 function card(
   slug: string,
   title: string,

@@ -1,0 +1,43 @@
+.sce .sce-tweet-list article {
+  grid-template-columns: minmax(0, 1fr) auto;
+  cursor: default;
+}
+
+.sce .sce-tweet-list article > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sce .sce-tweet-list article small {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.43);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sce .sce-item-actions {
+  display: flex !important;
+  grid-auto-flow: column;
+  gap: 5px !important;
+}
+
+.sce input[type="checkbox"] {
+  width: auto;
+}
+
+.sce input[type="color"] {
+  height: 44px;
+  padding: 5px;
+}
+
+@media (max-width: 600px) {
+  .sce .sce-tweet-list article {
+    grid-template-columns: 1fr;
+  }
+
+  .sce .sce-item-actions {
+    justify-content: flex-start;
+  }
+}
