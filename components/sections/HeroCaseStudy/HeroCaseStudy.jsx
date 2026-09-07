@@ -287,7 +287,7 @@ export default function HeroCaseStudy({
                   loop
                   muted
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   role="button"
                   tabIndex={0}
                   aria-label={
@@ -298,6 +298,9 @@ export default function HeroCaseStudy({
                   aria-pressed={isVideoPaused}
                   onClick={toggleVideo}
                   onKeyDown={handleVideoKeyDown}
+                  onCanPlay={(event) => {
+                    void event.currentTarget.play().catch(() => {});
+                  }}
                   onPlay={() => setIsVideoPaused(false)}
                   onPause={() => setIsVideoPaused(true)}
                   initial={{ opacity: 0.001 }}

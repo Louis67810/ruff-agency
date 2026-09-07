@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
@@ -11,26 +11,30 @@ function run(command, args) {
 
 run(npmCommand, ["opennextjs-cloudflare", "build"]);
 
-const video = path.join(root, ".open-next", "assets", "videos", "site-internet-landing.mp4");
-if (existsSync(video) && statSync(video).size > 25 * 1024 * 1024) {
-  const compressed = `${video}.compressed.mp4`;
-  run("ffmpeg", [
-    "-y",
-    "-i",
-    video,
-    "-vf",
-    "scale=-2:720",
-    "-c:v",
-    "libx264",
-    "-preset",
-    "fast",
-    "-crf",
-    "30",
-    compressed,
-  ]);
-  run(process.platform === "win32" ? "cmd.exe" : "mv", process.platform === "win32"
-    ? ["/c", "move", "/Y", compressed, video]
-    : [compressed, video]);
+const videosDirectory = path.join(root, ".open-next", "assets", "videos");
+if (existsSync(videosDirectory)) {
+  for (const name of readdirSync(videosDirectory)) {
+    const video = path.join(videosDirectory, name);
+    if (!name.endsWith(".mp4") || statSync(video).size <= 10 * 1024 * 1024) continue;
+    const compressed = `${video}.compressed.mp4`;
+    run("ffmpeg", [
+      "-y",
+      "-i",
+      video,
+      "-vf",
+      "scale=-2:720",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "fast",
+      "-crf",
+      "30",
+      compressed,
+    ]);
+    run(process.platform === "win32" ? "cmd.exe" : "mv", process.platform === "win32"
+      ? ["/c", "move", "/Y", compressed, video]
+      : [compressed, video]);
+  }
 }
 
 // OpenNext 1.x can emit an empty Windows working directory. The generated

@@ -35,6 +35,14 @@ const categoryClass: Record<RealisationCategory, string> = {
   Indépendant: "realisations-category-independant",
 };
 
+function optimizedFramerImage(src: string, maxWidth: number) {
+  if (!src.includes("framerusercontent.com")) return src;
+  if (/[?&]scale-down-to=\d+/.test(src)) {
+    return src.replace(/([?&]scale-down-to=)\d+/, `$1${maxWidth}`);
+  }
+  return `${src}${src.includes("?") ? "&" : "?"}scale-down-to=${maxWidth}`;
+}
+
 function ProjectCard({
   project,
   index,
@@ -82,9 +90,10 @@ function ProjectCard({
       <div className="realisations-image-frame">
         <img
           className="realisations-image"
-          src={project.image}
+          src={optimizedFramerImage(project.image, 1024)}
           alt={project.imageAlt || `Image du projet ${project.title}`}
           loading="lazy"
+          decoding="async"
           draggable={false}
         />
       </div>

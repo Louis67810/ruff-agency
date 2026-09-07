@@ -68,8 +68,7 @@ function ProcessAnimation({ step }: { step: Step }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(max-width: 809px)").matches || !canvasRef.current)
-      return;
+    if (!canvasRef.current) return;
 
     let player: DotLottie | undefined;
     let cancelled = false;

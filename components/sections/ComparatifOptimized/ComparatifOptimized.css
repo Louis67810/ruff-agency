@@ -397,6 +397,18 @@
   .cmp-reveal--phone-off.is-visible {
     animation: none !important;
   }
+
+  .cmp-title-reveal,
+  .cmp-subtitle-reveal,
+  .cmp-cta-reveal,
+  .cmp-title-reveal.is-visible,
+  .cmp-subtitle-reveal.is-visible,
+  .cmp-cta-reveal.is-visible {
+    animation: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

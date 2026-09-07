@@ -156,7 +156,13 @@
 
   /* Sur téléphone seulement, les cartes ont une largeur plafonnée et partent à gauche. */
   .viewport { overflow: visible; touch-action: pan-y; }
-  .cardReveal { flex: 0 0 315px; }
+  .cardReveal,
+  .cardReveal.isVisible {
+    animation: none;
+    flex: 0 0 315px;
+    opacity: 1;
+    transform: none;
+  }
   .card { width: 315px; max-width: 315px; }
   .copy p { font-size: 16px; min-height: auto; }
   .visual { height: 349px; }
