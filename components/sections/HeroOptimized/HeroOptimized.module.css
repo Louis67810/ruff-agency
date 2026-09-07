@@ -30,6 +30,16 @@
 .ctaPrimary{padding:6px;background:rgb(225,228,237);border-radius:15px;box-shadow:inset 0 0 2px rgba(0,0,0,.1);color:#fff}
 .ctaPrimary .ctaInner{padding:10px 10px 10px 24px;border:1px solid rgb(46,77,156);border-radius:10px;background:linear-gradient(90deg,rgb(78,125,250) 0%,rgb(1,71,255) 100%);box-shadow:inset 0 3px 0 rgba(255,255,255,.5),inset 0 2px 6px 4px rgba(0,0,0,.08),inset 0 -3px 0 rgb(14,65,199),0 2.445551872253418px 3.2154479026794434px rgba(0,18,54,.07),0 6.761638164520264px 8.890301704406738px rgba(0,18,54,.1),0 16.2794189453125px 21.404420852661133px rgba(0,18,54,.13),0 54px 71px rgba(0,40,54,.16)}
 .ctaPrimary:hover .ctaInner{background:linear-gradient(161deg,rgb(67,108,222) 0%,rgb(36,77,181) 100%)}
+.ctaLabel{white-space:nowrap}
+
+/*
+ * Lighthouse identified the English primary CTA as the sole CLS source.
+ * Its final desktop footprint is reserved before Inter finishes loading;
+ * the existing translateY entrance animation remains untouched.
+ */
+@media (min-width:810px){
+  :global(html[lang="en"]) .ctaPrimary{min-inline-size:163px}
+}
 .ctaAvatar{flex:none;width:28px;height:28px;border:1px solid #fff;border-radius:6px;box-shadow:0 1px 2.9000000953674316px rgba(0,0,0,.25);object-fit:cover;box-sizing:border-box;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
 .ctaPrimary:hover .ctaAvatar{transform:rotate(10deg)}
 
@@ -45,7 +55,7 @@
 .reviewMeta p{flex:none;height:auto;position:relative;white-space:pre;width:auto;margin:0;font-family:Inter,"Inter Placeholder",sans-serif;font-size:14px;font-weight:500;letter-spacing:-.03em;line-height:146%;color:#000;font-feature-settings:'blwf' on,'cv09' on,'cv03' on,'cv04' on,'cv11' on}
 .reviewMeta p:last-child{text-align:right}
 .reviewRail{flex:none;height:62px;overflow:visible;position:relative;width:100%}
-.reviewAvatar{position:absolute;top:0;width:48px;height:48px;border:2px solid #fff;border-radius:61.47px;object-fit:cover;box-sizing:border-box;box-shadow:0 0 .8421052098274231px rgba(0,0,0,.1),0 1.6842104196548462px 1.6842104196548462px rgba(0,0,0,.09),.8421052098274231px 3.3684208393096924px 1.6842104196548462px rgba(0,0,0,.05),.8421052098274231px 5.05263090133667px 2.526315450668335px rgba(0,0,0,.01),1.6842104196548462px 8.421051979064941px 2.526315450668335px rgba(0,0,0,0);transition:left .7s cubic-bezier(.44,0,.56,1),opacity .7s cubic-bezier(.44,0,.56,1),filter .7s cubic-bezier(.44,0,.56,1);will-change:left,opacity,filter}
+.reviewAvatar{position:absolute;top:0;left:0;width:48px;height:48px;border:2px solid #fff;border-radius:61.47px;object-fit:cover;box-sizing:border-box;box-shadow:0 0 .8421052098274231px rgba(0,0,0,.1),0 1.6842104196548462px 1.6842104196548462px rgba(0,0,0,.09),.8421052098274231px 3.3684208393096924px 1.6842104196548462px rgba(0,0,0,.05),.8421052098274231px 5.05263090133667px 2.526315450668335px rgba(0,0,0,.01),1.6842104196548462px 8.421051979064941px 2.526315450668335px rgba(0,0,0,0);transition:transform .7s cubic-bezier(.44,0,.56,1),opacity .7s cubic-bezier(.44,0,.56,1),filter .7s cubic-bezier(.44,0,.56,1);will-change:transform,opacity,filter}
 .reviewProgress{bottom:0;flex:none;height:4px;left:0;position:absolute;width:48px;background:rgb(223,223,223);border-radius:6px;overflow:hidden}
 .reviewProgress span{position:absolute;bottom:0;left:-1px;top:0;width:1px;background:rgb(1,71,255);border-radius:6px;box-shadow:1px 1px 2px rgba(1,71,255,.1),3px 3px 4px rgba(1,71,255,.09),6px 6px 5px rgba(1,71,255,.05),11px 11px 6px rgba(1,71,255,.01),17px 18px 7px rgba(1,71,255,0);animation:reviewProgress 5.7s infinite}
 .reviewLink{position:absolute;right:0;top:48%;transform:translateY(-50%);align-content:center;align-items:center;display:flex;flex-direction:row;flex-wrap:nowrap;gap:8px;height:min-content;justify-content:center;overflow:hidden;padding:12px 18px;text-decoration:none;width:min-content;white-space:pre;color:#000;font-family:Inter,"Inter Placeholder",sans-serif;font-size:14px;font-weight:500;letter-spacing:-.03em;line-height:146%;border:1px solid rgba(0,0,0,.11);border-radius:34px;background:rgba(255,255,255,0);box-sizing:border-box;transition:background-color .4s cubic-bezier(.34,1.2,.64,1);font-feature-settings:'blwf' on,'cv09' on,'cv03' on,'cv04' on,'cv11' on}

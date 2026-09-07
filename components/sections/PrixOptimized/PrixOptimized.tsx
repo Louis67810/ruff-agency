@@ -119,7 +119,7 @@ const EN_UPSELL_COPY: Record<UpsellId, [string, string]> = {
 };
 
 const DEFAULT_AVATAR =
-  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?width=693&height=693";
+  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=64&width=693&height=693";
 
 const DEFAULT_TICKER_IMAGES = [
   "https://framerusercontent.com/images/uuaFUZpL3fVhRaGlSV5bBUBCapU.png?scale-down-to=1024&width=2206&height=1223",

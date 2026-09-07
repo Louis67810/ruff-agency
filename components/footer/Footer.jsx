@@ -269,23 +269,31 @@ function Availability({ english = false }) {
     );
     setRemaining(Math.ceil(6 - ((date.getDate() - 1) / totalDays) * 5));
 
-    if (customElements.get("dotlottie-player")) {
-      setLottieReady(true);
-      return;
-    }
-
-    let script = document.querySelector(`script[src="${LOTTIE_PLAYER_SRC}"]`);
-    if (!script) {
-      script = document.createElement("script");
-      script.src = LOTTIE_PLAYER_SRC;
-      script.type = "module";
-      script.async = true;
-      document.head.appendChild(script);
-    }
-
     const ready = () => setLottieReady(true);
-    script.addEventListener("load", ready, { once: true });
-    return () => script.removeEventListener("load", ready);
+    let script = null;
+    const loadPlayer = () => {
+      if (customElements.get("dotlottie-player")) {
+        ready();
+        return;
+      }
+      script = document.querySelector(`script[src="${LOTTIE_PLAYER_SRC}"]`);
+      if (!script) {
+        script = document.createElement("script");
+        script.src = LOTTIE_PLAYER_SRC;
+        script.type = "module";
+        script.async = true;
+        document.head.appendChild(script);
+      }
+      script.addEventListener("load", ready, { once: true });
+    };
+
+    window.addEventListener("pointerdown", loadPlayer, { once: true, passive: true });
+    window.addEventListener("keydown", loadPlayer, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", loadPlayer);
+      window.removeEventListener("keydown", loadPlayer);
+      script?.removeEventListener("load", ready);
+    };
   }, [english]);
 
   return (

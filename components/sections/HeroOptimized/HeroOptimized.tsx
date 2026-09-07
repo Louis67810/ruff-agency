@@ -16,7 +16,15 @@ const LOTTIE_PLAYER_SRC =
 const AVAILABILITY_LOTTIE =
   "https://framerusercontent.com/assets/7Us0KKzHO2n8Jsf36VlImXFCQQ.json";
 const PROFILE_IMAGE =
-  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693";
+  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=64&width=693&height=693";
+
+function optimizedFramerImage(src: string, maxWidth: number) {
+  if (!src.includes("framerusercontent.com")) return src;
+  if (/[?&]scale-down-to=\d+/.test(src)) {
+    return src.replace(/([?&]scale-down-to=)\d+/, `$1${maxWidth}`);
+  }
+  return `${src}${src.includes("?") ? "&" : "?"}scale-down-to=${maxWidth}`;
+}
 
 const TITLE = "On crée des landing pages et des sites World-class";
 const SUBTITLE =
@@ -300,25 +308,35 @@ function Availability({ english = false }: { english?: boolean }) {
     );
     setRemaining(Math.ceil(6 - ((date.getDate() - 1) / totalDays) * 5));
 
-    if (customElements.get("dotlottie-player")) {
-      setLottieReady(true);
-      return;
-    }
-
-    let script = document.querySelector<HTMLScriptElement>(
-      `script[src="${LOTTIE_PLAYER_SRC}"]`,
-    );
-    if (!script) {
-      script = document.createElement("script");
-      script.src = LOTTIE_PLAYER_SRC;
-      script.type = "module";
-      script.async = true;
-      document.head.appendChild(script);
-    }
-
     const ready = () => setLottieReady(true);
-    script.addEventListener("load", ready, { once: true });
-    return () => script?.removeEventListener("load", ready);
+    let script: HTMLScriptElement | null = null;
+    const loadPlayer = () => {
+      if (customElements.get("dotlottie-player")) {
+        ready();
+        return;
+      }
+      script = document.querySelector<HTMLScriptElement>(
+        `script[src="${LOTTIE_PLAYER_SRC}"]`,
+      );
+      if (!script) {
+        script = document.createElement("script");
+        script.src = LOTTIE_PLAYER_SRC;
+        script.type = "module";
+        script.async = true;
+        document.head.appendChild(script);
+      }
+      script.addEventListener("load", ready, { once: true });
+    };
+
+    // The CSS fallback keeps the same visible indicator while the expensive
+    // decorative player waits until the visitor actually interacts.
+    window.addEventListener("pointerdown", loadPlayer, { once: true, passive: true });
+    window.addEventListener("keydown", loadPlayer, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", loadPlayer);
+      window.removeEventListener("keydown", loadPlayer);
+      script?.removeEventListener("load", ready);
+    };
   }, [english]);
 
   return (
@@ -607,12 +625,12 @@ function ReviewCard({ href, english = false }: { href: string; english?: boolean
           <img
             key={src}
             className={styles.reviewAvatar}
-            src={src}
+            src={optimizedFramerImage(src, 96)}
             alt="Illustration décorative de l’agence"
             width={48}
             height={48}
             style={{
-              left: avatarLeft[variant][index],
+              transform: `translateX(${avatarLeft[variant][index]}px)`,
               opacity: avatarOpacity[variant][index],
               filter: `saturate(${avatarSaturation[variant][index]})`,
               WebkitFilter: `saturate(${avatarSaturation[variant][index]})`,
@@ -637,7 +655,7 @@ function SmallPortfolioCard({ src }: { src: string }) {
   return (
     <img
       className={styles.smallPortfolioCard}
-      src={src}
+      src={optimizedFramerImage(src, 768)}
       alt="Illustration décorative de l’agence"
       loading="lazy"
       decoding="async"

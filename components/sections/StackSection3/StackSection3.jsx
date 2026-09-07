@@ -82,7 +82,7 @@ const ENGLISH_FAQS = [
 ];
 
 const PROFILE_IMAGE =
-  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693";
+  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=64&width=693&height=693";
 const WHATSAPP_URL =
   "https://api.whatsapp.com/send/?phone=33636465091&text=Bonjour%2C+je+vous+contacte+par+rapport+%C3%A0+vos+landing+pages.&type=phone_number&app_absent=0";
 

@@ -84,17 +84,11 @@ export default function LocaleEnhancer() {
     if (!pathname?.startsWith("/en") && document.body.dataset.siteLocale !== "en") return;
     document.documentElement.lang = "en";
     translateTree(document.body);
-    const prefixLinks = () => document.body.querySelectorAll<HTMLAnchorElement>('a[href^="/"]:not([href^="/en"])').forEach((link) => { const href = link.getAttribute("href"); if (href && !href.startsWith("//") && !href.startsWith("/api")) link.setAttribute("href", `/en${href}`); });
+    const prefixLinks = (root: ParentNode = document.body) => root.querySelectorAll<HTMLAnchorElement>('a[href^="/"]:not([href^="/en"])').forEach((link) => { const href = link.getAttribute("href"); if (href && !href.startsWith("//") && !href.startsWith("/api")) link.setAttribute("href", `/en${href}`); });
     prefixLinks();
-    const observer = new MutationObserver((records) => { records.forEach((record) => record.addedNodes.forEach(translateTree)); prefixLinks(); });
+    const observer = new MutationObserver((records) => { records.forEach((record) => record.addedNodes.forEach((node) => { translateTree(node); if (node instanceof Element) prefixLinks(node); else if (node.parentElement) prefixLinks(node.parentElement); })); });
     observer.observe(document.body, { childList: true, characterData: true, subtree: true });
-    let refreshCount = 0;
-    const refresh = window.setInterval(() => {
-      translateTree(document.body);
-      refreshCount += 1;
-      if (refreshCount >= 12) window.clearInterval(refresh);
-    }, 750);
-    return () => { observer.disconnect(); window.clearInterval(refresh); };
+    return () => { observer.disconnect(); };
   }, [pathname]);
   return null;
 }

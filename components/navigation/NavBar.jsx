@@ -125,8 +125,7 @@ function CTA({ href, full = false, shell = "rgb(225, 228, 237)", title = "Commen
     <span className="navbar-cta-inner">
       <span className="navbar-cta-text">{title}</span>
       <img className="navbar-cta-avatar" alt="Photo de profil de Louis Staub" loading="lazy" sizes="28px"
-        src="https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693"
-        srcSet="https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=512&lossless=1&width=693&height=693 512w,https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693 693w" />
+        src="https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=64&width=693&height=693" />
     </span>
   </SafeLink>;
 }

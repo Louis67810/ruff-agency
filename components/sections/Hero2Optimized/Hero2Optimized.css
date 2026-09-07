@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700&display=swap");
-
 .h2-root,.h2-root *{box-sizing:border-box}
 .h2-root.h2-site-internet{background:rgb(255,251,239)}
 .h2-root.h2-site-internet .h2-shape path{stroke:rgb(214,176,92);stroke-opacity:.1}

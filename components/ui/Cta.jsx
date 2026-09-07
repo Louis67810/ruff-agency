@@ -3,7 +3,7 @@
 import "./Cta.css";
 
 const PROFILE_IMAGE =
-  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693";
+  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=64&width=693&height=693";
 
 export default function Cta({
   kind = "primary",

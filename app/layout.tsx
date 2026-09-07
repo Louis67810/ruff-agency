@@ -19,6 +19,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const locale = headers().get("x-site-locale") === "en" ? "en" : "fr";
   return (
     <html lang={locale}>
+      <head>
+        {/**
+         * The hero CTA enters one second after first paint.  Preloading its
+         * exact Inter face prevents a late font swap from changing the CTA's
+         * dimensions while that entrance animation is running.
+         */}
+        <link
+          rel="preload"
+          href="https://framerusercontent.com/assets/UjlFhCnUjxhNfep4oYBPqnEssyo.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body data-site-locale={locale}>
         <LocaleProvider locale={locale as Locale}>{children}</LocaleProvider>
         <LocaleEnhancer />

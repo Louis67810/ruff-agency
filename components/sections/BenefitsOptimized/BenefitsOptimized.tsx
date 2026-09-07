@@ -267,7 +267,7 @@ function BookingCta({ href, english }: { href: string; english: boolean }) {
         <span className="benefitsCtaAvatarWrap">
           <img
             className="benefitsCtaAvatar"
-            src="https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693"
+            src="https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=64&width=693&height=693"
             alt={
               english
                 ? "Profile photo of Louis Staub"
