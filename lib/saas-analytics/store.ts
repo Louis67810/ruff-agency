@@ -192,6 +192,28 @@ export function summarizeAnalytics(
       .map(([label, value]) => ({ label, value }))
       .sort((a, b) => b.value - a.value);
   };
+  const pageViewsFor = (key: string) =>
+    counts((event) =>
+      event.eventType === "page_view"
+        ? String(event.metadata?.[key] ?? "Unknown")
+        : undefined,
+    );
+  const paths = counts((event) =>
+    event.eventType === "page_view" ? event.path : undefined,
+  );
+  const exitLinks = counts((event) =>
+    event.eventType === "site_navigation" && event.metadata?.exitLink
+      ? String(event.metadata.exitLink)
+      : undefined,
+  );
+  const sessionDurations = events
+    .filter((event) => event.eventType === "session_end" && event.durationMs)
+    .map((event) => event.durationMs ?? 0);
+  const recentSessions = new Set(
+    events
+      .filter((event) => Date.now() - Date.parse(event.createdAt) < 5 * 60_000)
+      .map((event) => event.sessionId),
+  );
 
   const sectionViews = new Map<string, Set<string>>();
   const sectionTimes = new Map<string, number[]>();
@@ -265,6 +287,21 @@ export function summarizeAnalytics(
     conversionRate: visitorIds.size
       ? (conversions.length / visitorIds.size) * 100
       : 0,
+    averageSessionSeconds: sessionDurations.length
+      ? sessionDurations.reduce((total, duration) => total + duration, 0) /
+          sessionDurations.length /
+          1000
+      : 0,
+    online: recentSessions.size,
+    sources: pageViewsFor("channel"),
+    referrers: pageViewsFor("referrer"),
+    campaigns: pageViewsFor("campaign"),
+    paths,
+    entryPages: pageViewsFor("entryPath"),
+    exitLinks,
+    browsers: pageViewsFor("browser"),
+    operatingSystems: pageViewsFor("operatingSystem"),
+    devices: pageViewsFor("device"),
     countries: counts((event) =>
       event.eventType === "page_view" ? event.countryCode : undefined,
     ),

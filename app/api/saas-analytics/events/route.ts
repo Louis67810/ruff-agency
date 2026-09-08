@@ -22,7 +22,8 @@ function parseEvent(value: unknown): AnalyticsEventInput | null {
     !idPattern.test(event.visitorId) ||
     typeof event.sessionId !== "string" ||
     !idPattern.test(event.sessionId) ||
-    event.path !== "/saas-redesign"
+    typeof event.path !== "string" ||
+    (!event.path.startsWith("/") || event.path.length > 240)
   ) {
     return null;
   }

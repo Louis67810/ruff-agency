@@ -39,6 +39,17 @@ export type AnalyticsSummary = {
   mainSiteVisits: number;
   conversions: number;
   conversionRate: number;
+  averageSessionSeconds: number;
+  online: number;
+  sources: Array<{ label: string; value: number }>;
+  referrers: Array<{ label: string; value: number }>;
+  campaigns: Array<{ label: string; value: number }>;
+  paths: Array<{ label: string; value: number }>;
+  entryPages: Array<{ label: string; value: number }>;
+  exitLinks: Array<{ label: string; value: number }>;
+  browsers: Array<{ label: string; value: number }>;
+  operatingSystems: Array<{ label: string; value: number }>;
+  devices: Array<{ label: string; value: number }>;
   countries: Array<{ label: string; value: number }>;
   ctas: Array<{ label: string; value: number }>;
   interactions: Array<{ label: string; value: number }>;

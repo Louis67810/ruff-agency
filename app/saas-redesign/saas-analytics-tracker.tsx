@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import type { AnalyticsEventInput } from "@/lib/saas-analytics/types";
 
 type ClientEvent = Omit<
@@ -40,8 +41,11 @@ export function trackSaasEvent(detail: ClientEvent) {
 }
 
 export function SaasAnalyticsTracker() {
+  const pathname = usePathname();
   useEffect(() => {
-    if (window.location.pathname !== "/saas-redesign") return;
+    // The dashboard and its management tools are intentionally excluded: they
+    // must never pollute the acquisition data they display.
+    if (pathname.startsWith("/saas-redesign/analytics") || pathname.startsWith("/saas-redesign/tweets-admin") || pathname.startsWith("/saas-redesign/content-editor")) return;
     const visitorId = getStableId(localStorage, "ruff_saas_visitor_id");
     const sessionId = getStableId(sessionStorage, "ruff_saas_session_id");
     const visitCount =
@@ -55,11 +59,24 @@ export function SaasAnalyticsTracker() {
     let interactionCount = 0;
     let ended = false;
 
+    const referrerUrl = document.referrer;
+    const referrer = referrerUrl ? (() => { try { return new URL(referrerUrl).hostname; } catch { return "Direct"; } })() : "Direct";
+    const campaign = new URLSearchParams(window.location.search).get("utm_campaign") ?? "None";
+    const channel = !referrerUrl ? "Direct" : /google|bing|duckduckgo|yahoo/i.test(referrer) ? "Organic search" : /facebook|instagram|linkedin|x[.]com|twitter|tiktok/i.test(referrer) ? "Organic social" : referrer === window.location.hostname ? "Internal" : "Referral";
+    const agent = navigator.userAgent;
+    const browser = /Edg\//.test(agent) ? "Edge" : /Firefox\//.test(agent) ? "Firefox" : /Safari\//.test(agent) && !/Chrome\//.test(agent) ? "Safari" : /Chrome\//.test(agent) ? "Chrome" : "Other";
+    const operatingSystem = /Windows/i.test(agent) ? "Windows" : /Android/i.test(agent) ? "Android" : /iPhone|iPad|iPod/i.test(agent) ? "iOS" : /Mac OS/i.test(agent) ? "macOS" : /Linux/i.test(agent) ? "Linux" : "Other";
+    const device = /Mobi|Android|iPhone/i.test(agent) ? "Mobile" : /iPad|Tablet/i.test(agent) ? "Tablet" : "Desktop";
+    const entryPath = sessionStorage.getItem("ruff_saas_entry_path") ?? pathname;
+    sessionStorage.setItem("ruff_saas_entry_path", entryPath);
+    const commonMetadata = { visitCount, referrer, channel, campaign, browser, operatingSystem, device, entryPath };
+
     const decorate = (event: ClientEvent): AnalyticsEventInput => ({
       ...event,
       visitorId,
       sessionId,
-      path: "/saas-redesign",
+      path: pathname,
+      metadata: { ...commonMetadata, ...event.metadata },
     });
     const send = (event: ClientEvent) => {
       void fetch("/api/saas-analytics/events", {
@@ -86,13 +103,19 @@ export function SaasAnalyticsTracker() {
       }
     };
 
-    send({ eventType: "page_view", metadata: { visitCount } });
+    send({ eventType: "page_view" });
 
     const sectionByElement = new Map<Element, string>();
     sectionSelectors.forEach(([id, selector]) => {
       const element = document.querySelector(selector);
       if (element) sectionByElement.set(element, id);
     });
+    if (!sectionByElement.size) {
+      document.querySelectorAll("main section[id], main [data-analytics-section]").forEach((element, index) => {
+        const html = element as HTMLElement;
+        sectionByElement.set(element, html.dataset.analyticsSection || html.id || `section-${index + 1}`);
+      });
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         const now = performance.now();
@@ -154,13 +177,15 @@ export function SaasAnalyticsTracker() {
       }
       if (
         url.origin === window.location.origin &&
-        url.pathname !== "/saas-redesign"
+        url.pathname !== pathname
       ) {
         send({
           eventType: "site_navigation",
           sectionId,
           metadata: { destination: url.pathname },
         });
+      } else if (url.origin !== window.location.origin) {
+        send({ eventType: "site_navigation", sectionId, metadata: { destination: url.hostname, exitLink: url.hostname } });
       }
     };
     document.addEventListener("click", click, true);
@@ -204,7 +229,7 @@ export function SaasAnalyticsTracker() {
       document.removeEventListener("visibilitychange", visibility);
       endSession();
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

@@ -25,7 +25,7 @@ import { HomepageReviewCard } from "@/components/sections/SectionAvis/HomepageRe
 import { StackSection3 } from "@/components/sections/StackSection3/StackSection3";
 import ExistingCta from "@/components/ui/Cta";
 import { ConversionMetricsSection } from "./conversion-metrics-section";
-import { SaasAnalyticsTracker, trackSaasEvent } from "./saas-analytics-tracker";
+import { trackSaasEvent } from "./saas-analytics-tracker";
 import { defaultTweets, type SaasTweet } from "./tweets";
 import customContent from "./content.json";
 import "@/components/sections/RessourceArticle/RessourceArticle.css";
@@ -1106,7 +1106,6 @@ export default function SaasRedesignLanding({
 
   return (
     <main className="sr">
-      <SaasAnalyticsTracker />
       <section className="sr-hero" id="top">
         <div className="sr-eyebrow sr-intro sr-intro--eyebrow">
           <SparklesIcon /> FOR SAAS OWNERS
