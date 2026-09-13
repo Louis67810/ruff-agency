@@ -165,4 +165,5 @@
 @media(max-width:809px){
   .footer-reset.framer-M7Fsn.framer-1e9n470.footer--with-cta{padding-top:672px!important}
   .footer-reset.framer-M7Fsn.framer-1e9n470.footer--with-cta .framer-1noh2n{top:0!important}
+  body:has(.sr) .framer-M7Fsn .framer-p3ugz3 h2{font-size:32px;line-height:1.08;letter-spacing:-.035em}
 }

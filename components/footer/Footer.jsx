@@ -604,7 +604,7 @@ export default function Footer({
                 />
                 <SocialRow
                   kind="wa"
-                  label="Whatsaap"
+                  label="WhatsApp"
                   href="https://api.whatsapp.com/send/?phone=33636465091&text=Bonjour%2C+je+vous+contacte+par+rapport+%C3%A0+vos+landing+pages.&type=phone_number&app_absent=0"
                   svg={WHATSAPP_SVG}
                 />
@@ -639,7 +639,7 @@ export default function Footer({
           style={{ backgroundColor: "rgba(255,255,255,.13)" }}
         />
         <p className="framer-1b5zpj footer-copyright">
-          Ruff agency {t("tous droits réservés", "all rights reserved")}
+          Ruff Agency {t("tous droits réservés", "all rights reserved")}
         </p>
       </div>
     </footer>

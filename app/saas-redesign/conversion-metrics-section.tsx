@@ -20,7 +20,7 @@ const metricProfiles: MetricProfile[] = [
   {
     id: "keyframe",
     name: "Antoine Troovy",
-    role: "Founder of Keyframe Agency",
+    role: "Founder of Keyframe",
     avatar:
       "https://framerusercontent.com/images/OyAwqa9YP58MVuHUk2Wbjbb2Ijo.jpg?width=200&height=200",
     values: [

@@ -4020,6 +4020,8 @@ body:has(.sr) {
 
 .sr .sr-review-grid .homepage-review-card.sr-review-card {
   border: 1px solid rgba(0, 0, 0, 0.07);
+  height: auto;
+  min-height: 487px;
 }
 
 .sr .sr-guarantee {
@@ -4745,6 +4747,108 @@ html:has(.sr) {
 
   .sr > .stack-section-3.sr-final-faq {
     padding: 64px 24px 56px;
+  }
+}
+
+/* Mobile polish: compact type rhythm and progressive review disclosure. */
+.sr .sr-proof-reviews[data-review-step="1"] .sr-more-cta {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .sr .sr-hero h1,
+  .sr .sr-problems-heading h2,
+  .sr .sr-trust-choice > h2,
+  .sr .sr-solution > h2,
+  .sr .sr-results > h2,
+  .sr .sr-proof-reviews > h2,
+  .sr .sr-book > h2 {
+    line-height: 1.08;
+  }
+
+  .sr .sr-hero > p,
+  .sr .sr-problems-heading > p,
+  .sr .sr-social-proof .sr-muted,
+  .sr .sr-solution > p,
+  .sr .sr-book > p {
+    line-height: 1.55;
+  }
+
+  .sr .sr-problem-title {
+    min-height: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .sr .sr-problem-grid .sr-problem-title h3 {
+    font-size: 21px;
+    line-height: 1.2;
+  }
+  .sr .sr-problem-grid article p {
+    line-height: 1.6;
+  }
+
+  .sr .sr-social-proof {
+    margin-bottom: 0;
+    padding-bottom: 32px;
+  }
+  .sr .sr-solution {
+    padding-top: 72px;
+  }
+  .sr .sr-solution > h2 {
+    font-size: 36px;
+  }
+  .sr .sr-solution > p {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 17px;
+  }
+
+  .sr .sr-review-rating {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .sr .sr-rating-stars {
+    justify-content: center;
+  }
+
+  .sr .sr-review-grid .homepage-review-card.sr-review-card--2,
+  .sr .sr-review-grid .homepage-review-card.sr-review-card--3,
+  .sr .sr-review-grid .homepage-review-card.sr-review-card--4,
+  .sr .sr-review-grid .homepage-review-card.sr-review-card--5,
+  .sr .sr-review-grid .homepage-review-card.sr-review-card--6,
+  .sr .sr-review-grid .homepage-review-card.sr-review-card--7 {
+    display: none !important;
+  }
+  .sr .sr-review-grid--step-1 .homepage-review-card.sr-review-card--2,
+  .sr .sr-review-grid--step-1 .homepage-review-card.sr-review-card--3,
+  .sr .sr-review-grid--step-1 .homepage-review-card.sr-review-card--4,
+  .sr .sr-review-grid--step-2 .homepage-review-card.sr-review-card--2,
+  .sr .sr-review-grid--step-2 .homepage-review-card.sr-review-card--3,
+  .sr .sr-review-grid--step-2 .homepage-review-card.sr-review-card--4,
+  .sr .sr-review-grid--step-2 .homepage-review-card.sr-review-card--5,
+  .sr .sr-review-grid--step-2 .homepage-review-card.sr-review-card--6,
+  .sr .sr-review-grid--step-2 .homepage-review-card.sr-review-card--7 {
+    display: block !important;
+    animation: sr-reveal 0.45s ease;
+  }
+  .sr .sr-proof-reviews[data-review-step="1"] .sr-more-cta {
+    display: flex;
+  }
+  .sr .sr-review-grid .homepage-review-card.sr-review-card > p {
+    line-height: 1.6;
+  }
+
+  .sr .sr-guarantee h3 {
+    font-size: 30px;
+    line-height: 1.08;
+  }
+  .sr .sr-guarantee p {
+    font-size: 16px;
+    line-height: 1.55;
   }
 }
 

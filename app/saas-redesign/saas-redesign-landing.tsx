@@ -165,7 +165,7 @@ const defaultReviews = [
   ],
   [
     "Antoine Troovy",
-    "Founder of Keyframe Agency",
+    "Founder of Keyframe",
     "Ruff Agency delivered my website quickly and was incredibly responsive. The assets and animations are beautiful.",
     "https://framerusercontent.com/images/OyAwqa9YP58MVuHUk2Wbjbb2Ijo.jpg?width=200&height=200",
   ],
@@ -299,7 +299,7 @@ const comparisonProjects = [
   },
   {
     project: "Keyframe",
-    before: "/landing-assets/keyframe/before-01-home.png",
+    before: "/landing-assets/keyframe/before-02-types.png",
     after: "/landing-assets/keyframe/after-01-home.png",
     afterSide: "b",
     afterPercent: 97,
@@ -383,8 +383,8 @@ const SparklesIcon = () => null;
 
 function Cta() {
   return (
-    <ExistingCta kind="primary" href="#book" label="Book a Strategic Call">
-      Book a Strategic Call
+    <ExistingCta kind="primary" href="#book" label="Book a Call">
+      Book a Call
     </ExistingCta>
   );
 }
@@ -571,7 +571,7 @@ function Marquee({
   return (
     <div
       className={`sr-marquee ${className}`}
-      onMouseEnter={() => tweenPlaybackRate(0.08)}
+      onMouseEnter={() => tweenPlaybackRate(0)}
       onMouseLeave={() => tweenPlaybackRate(1)}
     >
       <div className="sr-marquee__track" ref={trackRef}>
@@ -662,9 +662,8 @@ function Choice() {
       </div>
       <h3>And you’re not the only one who thinks that</h3>
       <p className="sr-muted">
-        Only tweets from the last 24 hours · that tells that an ai website is
-        hindering conversion and does not encourage people to buy anything from
-        it.
+        Only tweets from the last 24 hours showing that AI-generated websites
+        hurt conversions and discourage people from buying.
       </p>
       <div className="sr-tweet-window">
         <div className="sr-tweet-placeholder-row">
@@ -728,9 +727,9 @@ function TweetWall({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
       />
       <h3>And you’re not the only one who thinks that</h3>
       <p className="sr-muted">
-        <strong>Only tweets from the last 24 hours</strong> : that tells that an
-        AI website is hindering conversion and does not encourage people to buy
-        anything from it.
+        <strong>Only tweets from the last 24 hours</strong> showing that
+        AI-generated websites hurt conversions and discourage people from
+        buying.
       </p>
       <div
         className="sr-embed-ticker"
@@ -1018,19 +1017,22 @@ function FaqPlaceholder() {
 }
 
 function ProofReviews() {
-  const [open, setOpen] = useState(false);
+  const [reviewStep, setReviewStep] = useState(0);
 
   return (
     <section
       className="sr-reviews sr-proof-reviews"
       id="reviews"
       data-sr-reveal="section"
+      data-review-step={reviewStep}
     >
       <div className="sr-review-rating">
         <RatingStars /> Rated 5/5 based on over 30 reviews
       </div>
       <h2>What they think of it</h2>
-      <div className={`sr-review-grid ${open ? "sr-review-grid--open" : ""}`}>
+      <div
+        className={`sr-review-grid ${reviewStep > 0 ? "sr-review-grid--open" : ""} sr-review-grid--step-${reviewStep}`}
+      >
         <VideoReviewCard
           RceipbT2y="https://framerusercontent.com/assets/edTM2GQjvjlTaWLPl9LWzwa6qw.mp4"
           style={{ height: 487 }}
@@ -1042,18 +1044,18 @@ function ProofReviews() {
             name={name}
             role={role}
             quote={quote}
-            className={`sr-review-card ${index > 5 ? "sr-review--extra" : ""}`}
+            className={`sr-review-card sr-review-card--${index} ${index > 6 ? "sr-review--extra" : ""}`}
           />
         ))}
       </div>
-      {!open && (
+      {reviewStep < 2 && (
         <ExistingCta
           className="sr-more-cta"
           href="#reviews"
           kind="secondary"
           onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
             event.preventDefault();
-            setOpen(true);
+            setReviewStep((currentStep) => Math.min(currentStep + 1, 2));
           }}
         >
           Show more
@@ -1116,7 +1118,7 @@ export default function SaasRedesignLanding({
         </h1>
         <p className="sr-intro sr-intro--copy">
           Custom-designed, conversion-focused website. We redesign SaaS websites
-          to match the product you’ve built, delivered in 10 days not months.
+          to match the product you’ve built, delivered in 10 days, not months.
         </p>
         <div className="sr-hero-ctas sr-intro sr-intro--actions">
           <ExistingCta
@@ -1225,7 +1227,7 @@ export default function SaasRedesignLanding({
           <h3>100% risk-free satisfaction guarantee</h3>
           <p>
             We’re committed to your success. If you’re not completely thrilled
-            with your logo, we’ll keep working until you are, or provide a
+            with your website, we’ll keep working until you are, or provide a
             refund.
           </p>
         </div>

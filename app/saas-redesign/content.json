@@ -325,13 +325,6 @@
   ],
   "reviews": [
     {
-      "id": "artan",
-      "name": "Artan",
-      "role": "CEO of Artan",
-      "quote": "Outstanding work. Louis immediately understood my vision and positioning, and translated them into a premium, polished design built to convert. Highly professional and responsive, with clear communication and fast turnaround on feedback. The result is exactly what I wanted—high-end and impactful. I recommend him 100%! 🔥",
-      "avatar": "/landing-assets/artan/avatar.svg"
-    },
-    {
       "id": "sacha-tassart",
       "name": "Sacha Tassart",
       "role": "Founder of Spreak",
@@ -341,7 +334,7 @@
     {
       "id": "antoine-troovy",
       "name": "Antoine Troovy",
-      "role": "Founder of Keyframe Agency",
+      "role": "Founder of Keyframe",
       "quote": "Ruff Agency delivered my website quickly and was incredibly responsive. The assets and animations are beautiful.",
       "avatar": "https://framerusercontent.com/images/OyAwqa9YP58MVuHUk2Wbjbb2Ijo.jpg?width=200&height=200"
     },
@@ -379,6 +372,13 @@
       "role": "Founder of Gourdy",
       "quote": "The website is not only beautiful, it also boosted our conversion rate. Every detail was designed to maximise our efficiency.",
       "avatar": "https://framerusercontent.com/images/kYFWB25gUuDFLeJ4G2sMsKyBd0.webp?width=472&height=472"
+    },
+    {
+      "id": "artan",
+      "name": "Artan",
+      "role": "CEO of Artan",
+      "quote": "Outstanding work. Louis immediately understood my vision and positioning, and translated them into a premium, polished design built to convert. Highly professional and responsive, with clear communication and fast turnaround on feedback. The result is exactly what I wanted—high-end and impactful. I recommend him 100%! 🔥",
+      "avatar": "/landing-assets/artan/avatar.svg"
     }
   ]
 }

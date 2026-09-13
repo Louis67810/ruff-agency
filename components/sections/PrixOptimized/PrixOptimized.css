@@ -6,6 +6,7 @@
 }
 
 .prx-section {
+  scroll-margin-top: 96px;
   width: 100%;
   padding: 96px 64px 64px;
   color: #121a2e;

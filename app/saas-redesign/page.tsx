@@ -20,7 +20,7 @@ export default async function SaasRedesignPage() {
         locale="en"
         homeHref="#top"
         ctaHref="#book"
-        ctaLabel="Book a Strategic Call"
+        ctaLabel="Book a Call"
         landingMode
         landingLinks={[
           { label: "Problems", href: "#problems" },

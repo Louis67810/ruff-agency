@@ -319,7 +319,7 @@ export default function PrixOptimized({
   }, []);
 
   return (
-    <section className={`prx-section ${className}`.trim()}>
+    <section id="pricing" className={`prx-section ${className}`.trim()}>
       <div className="prx-sectionInner">
         <h2 className="prx-sectionTitle">
           {english
