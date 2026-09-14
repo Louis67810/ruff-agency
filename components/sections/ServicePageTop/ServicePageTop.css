@@ -66,3 +66,25 @@
 .sp-actions .cta-primary{background:rgba(0,0,0,.31);border-radius:15px;box-shadow:inset 0 0 2px rgba(0,0,0,.1);padding:6px}
 .sp-actions .cta-primary .cta-inner{background:linear-gradient(90deg,rgb(78,125,250) 0%,rgb(1,71,255) 100%);border:1px solid rgb(46,77,156);border-radius:10px;box-shadow:inset 0 3px 0 rgba(255,255,255,.5),inset 0 2px 6px 4px rgba(0,0,0,.08),inset 0 -3px 0 rgb(14,65,199),0 2.4455518723px 3.2154479027px rgba(0,18,54,.07),0 6.7616381645px 8.8903017044px rgba(0,18,54,.1),0 16.2794189453px 21.4044208527px rgba(0,40,54,.16)}
 .sp-actions .cta-primary:hover .cta-inner{background:linear-gradient(161deg,rgb(67,108,222) 0%,rgb(36,77,181) 100%)}
+
+/* Le viewport porte le débordement horizontal de la timeline. La grille garde
+   ainsi sa largeur de maquette tandis que le titre reste fixe. */
+.sp-process-scroll{width:100%}
+
+@media(max-width:900px){
+  .sp-process{overflow:visible}
+  .sp-process-scroll{-webkit-overflow-scrolling:touch;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+  .sp-process-grid{margin-left:0;overflow:visible}
+}
+
+@media(max-width:809px){
+  /* Le hero grandit avec son contenu : les deux CTA restent dans le fond vidéo,
+     même sur les petits écrans et avec une police agrandie. */
+  .sp-hero{box-sizing:border-box;display:flex;height:auto;min-height:100svh;padding:176px 24px 64px}
+  .sp-hero-content{left:auto;max-width:none;position:relative;right:auto;top:auto;width:100%}
+  .sp-hero h1{margin-top:26px}
+  .sp-ticker{display:none}
+
+  .sp-process-scroll{margin-left:-24px;padding-left:24px;padding-right:24px;width:calc(100% + 48px)}
+  .sp-process-grid{overflow:visible}
+}

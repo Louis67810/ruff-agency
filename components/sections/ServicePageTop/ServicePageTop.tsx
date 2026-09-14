@@ -711,62 +711,69 @@ export default function ServicePageTop({
           <p>{sectionProcessText}</p>
         </header>
         <div
-          className="sp-process-grid"
-          ref={processRef}
-          onPointerMove={handleProcessPointerMove}
+          className="sp-process-scroll"
+          role="region"
+          aria-label={translateText("Étapes du processus", locale)}
+          tabIndex={0}
         >
-          <span className="sp-process-line" aria-hidden="true" />
-          <img
-            className="sp-process-start"
-            src="/images/service-page/1824-2921.svg"
-            alt="Illustration décorative du service"
-            aria-hidden="true"
-            style={{ transform: `translateY(${timelineOffset}px)` }}
-          />
-          {Array.from({ length: 6 }, (_, index) => (
-            <span className="sp-process-rail" key={index} aria-hidden="true" />
-          ))}
-          {process.map(
-            (
-              [fallbackTitle, fallbackDuration, background, iconBg, color],
-              index,
-            ) => {
-              const [title, duration] = activeProcessCopy[index] ?? [
-                fallbackTitle,
-                fallbackDuration,
-              ];
-              return (
-                <article
-                  className={`sp-process-card sp-process-card-${index}`}
-                  style={{
-                    backgroundColor: background,
-                    borderColor: `${color}2B`,
-                    color,
-                  }}
-                  key={title}
-                >
-                  <span
-                    className="sp-process-icon"
+          <div
+            className="sp-process-grid"
+            ref={processRef}
+            onPointerMove={handleProcessPointerMove}
+          >
+            <span className="sp-process-line" aria-hidden="true" />
+            <img
+              className="sp-process-start"
+              src="/images/service-page/1824-2921.svg"
+              alt="Illustration décorative du service"
+              aria-hidden="true"
+              style={{ transform: `translateY(${timelineOffset}px)` }}
+            />
+            {Array.from({ length: 6 }, (_, index) => (
+              <span className="sp-process-rail" key={index} aria-hidden="true" />
+            ))}
+            {process.map(
+              (
+                [fallbackTitle, fallbackDuration, background, iconBg, color],
+                index,
+              ) => {
+                const [title, duration] = activeProcessCopy[index] ?? [
+                  fallbackTitle,
+                  fallbackDuration,
+                ];
+                return (
+                  <article
+                    className={`sp-process-card sp-process-card-${index}`}
                     style={{
-                      backgroundColor: iconBg,
-                      borderColor: `${color}1C`,
+                      backgroundColor: background,
+                      borderColor: `${color}2B`,
+                      color,
                     }}
+                    key={title}
                   >
-                    <PresentationChartLineIcon />
-                  </span>
-                  <strong>{title}</strong>
-                  {showProcessDurations && (
-                    <small
-                      className="sp-process-duration"
-                      style={{ color: `${color}B3` }}
+                    <span
+                      className="sp-process-icon"
+                      style={{
+                        backgroundColor: iconBg,
+                        borderColor: `${color}1C`,
+                      }}
                     >
-                      {duration}
-                    </small>
-                  )}
-                </article>
-              );
-            },
-          )}
+                      <PresentationChartLineIcon />
+                    </span>
+                    <strong>{title}</strong>
+                    {showProcessDurations && (
+                      <small
+                        className="sp-process-duration"
+                        style={{ color: `${color}B3` }}
+                      >
+                        {duration}
+                      </small>
+                    )}
+                  </article>
+                );
+              },
+            )}
+          </div>
         </div>
       </section>
     </>
