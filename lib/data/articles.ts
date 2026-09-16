@@ -92,6 +92,41 @@ const LOUIS_PROFILE = "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr
 export type RuffArticleInput = Omit<Article, "href" | "author" | "authorPhoto" | "profilePhoto" | "about" | "authorRole" | "authorBio"> &
   Partial<Pick<Article, "href" | "author" | "authorPhoto" | "profilePhoto" | "about" | "authorRole" | "authorBio">>;
 
+/**
+ * Converts legacy plain-text markers into the editorial blocks rendered by the
+ * article template. New article content must be authored with these blocks
+ * directly; this migration keeps existing entries clean without losing copy.
+ */
+function normalizeArticleContent(content: ArticleBlock[]): ArticleBlock[] {
+  const normalized: ArticleBlock[] = [];
+
+  for (let index = 0; index < content.length; index += 1) {
+    const block = content[index];
+
+    if (block.type === "paragraph" && block.text.startsWith("🔹 ")) {
+      normalized.push({ type: "heading", level: 3, text: block.text.slice(3) });
+      continue;
+    }
+
+    if (block.type !== "paragraph" || !block.text.startsWith("• ")) {
+      normalized.push(block);
+      continue;
+    }
+
+    const items: Array<{ label: string }> = [];
+    while (index < content.length) {
+      const candidate = content[index];
+      if (candidate.type !== "paragraph" || !candidate.text.startsWith("• ")) break;
+      items.push({ label: candidate.text.slice(2) });
+      index += 1;
+    }
+    normalized.push({ type: "bullet-list", items });
+    index -= 1;
+  }
+
+  return normalized;
+}
+
 /** Fabrique un article avec les valeurs Ruff communes, sans recopier le profil auteur ni l'URL. */
 export function createRuffArticle(input: RuffArticleInput): Article {
   return {
@@ -115,19 +150,20 @@ export const articleTags: ArticleTag[] = [
 ];
 
 // Articles importés depuis le site de référence (CMS).
-export const articles: Article[] = [
+const legacyArticles: Article[] = [
   {
     id: "1",
     slug: "nouveau-logo-bonduelle",
     tagId: "actualites",
     tag: "Actualités",
-    title: "Nouveau logo Bonduelle : analyse d'une refonte d'identité visuelle risquée",
+    title: "Nouveau logo Bonduelle : analyse du rebranding et de ses risques en rayon",
     image: { src: "https://framerusercontent.com/images/rNSpJqDhR94j7O7OpTQKCbdp7cg.jpg?width=1280&height=715", alt: "Nouveau logo de Bonduelle" },
     author: "Louis Staub",
     authorPhoto: { src: LOUIS },
     href: "/ressources/nouveau-logo-bonduelle",
     breadcrumbTitle: "Actualités",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Analyse du nouveau logo Bonduelle : signes supprimés, cohérence avec la promesse végétale et risques de reconnaissance en rayon.",
     mainImage: { src: "https://framerusercontent.com/images/rNSpJqDhR94j7O7OpTQKCbdp7cg.jpg?width=1280&height=715" },
     profilePhoto: { src: LOUIS_PROFILE },
     about: "",
@@ -140,6 +176,7 @@ export const articles: Article[] = [
     ],
     hiddenContentTypes: ["table", "callout", "quote", "point-cards", "content-list"],
     content: [
+      { type: "paragraph", text: "Le nouveau logo Bonduelle simplifie les signes historiques de la marque. Cette analyse examine ce que ce rebranding peut apporter au numérique — et ce qu’il risque de coûter en reconnaissance visuelle, notamment en rayon." },
       { type: "heading", text: "Une histoire graphique ancrée dans le végétal" },
       { type: "paragraph", text: "Depuis sa création, l'identité visuelle de Bonduelle a toujours cherché à refléter son héritage agricole et sa proximité avec la nature. Dès les années 1950, la marque introduit des symboles forts : la feuille et l'arc de cercle, évoquant l'univers végétal et la croissance continue. Au fil des décennies, cette feuille s'est stylisée pour devenir la clé de voûte de la reconnaissance de la marque en rayon. Elle a su instaurer un véritable code couleur et une symbolique indissociable des produits de la terre." },
       { type: "heading", text: "La stratégie de l'hyper-simplification" },
@@ -170,20 +207,21 @@ export const articles: Article[] = [
     slug: "nouveau-logo-kfc-rebranding-bucketverse-jkr",
     tagId: "actualites",
     tag: "Actualités",
-    title: "Nouveau logo KFC : analyse du rebranding « Bucketverse » signé JKR",
+    title: "Nouveau logo KFC et Bucketverse : analyse du rebranding signé JKR",
     image: { src: "https://framerusercontent.com/images/mvu7DCcIcjQf5xbUlCvf3YNscNg.jpg?width=2880&height=1620", alt: "Nouveau logo KFC : analyse du rebranding « Bucketverse » signé JKR" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/nouveau-logo-kfc-rebranding-bucketverse-jkr",
     breadcrumbTitle: "Actualités",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Analyse du nouveau logo KFC et du Bucketverse conçu par JKR : bucket, typographies, packaging et système de marque mondial.",
     mainImage: { src: "https://framerusercontent.com/images/mvu7DCcIcjQf5xbUlCvf3YNscNg.jpg?width=2880&height=1620" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
     authorRole: "",
     authorBio: "",
     content: [
-      { type: "paragraph", text: "Pendant des décennies, KFC s’est appuyé sur trois signes immédiatement reconnaissables : le rouge et le blanc, le portrait du Colonel Sanders et son fameux seau de poulet. La nouvelle identité conçue par JKR ne cherche pas à effacer cet héritage. Elle le transforme en un langage beaucoup plus vaste, capable de fonctionner sur une façade, un emballage, une application ou une campagne culturelle." },
+      { type: "paragraph", text: "Le nouveau logo KFC transforme le bucket en signature de marque, système graphique et repère spatial. Conçu par JKR, le Bucketverse étend les codes historiques de l’enseigne du packaging aux interfaces et aux restaurants." },
       { type: "heading", text: "Avant/après : le bucket devient officiellement le logo" },
       { type: "image", src: "https://framerusercontent.com/images/mvu7DCcIcjQf5xbUlCvf3YNscNg.jpg", alt: "Avant après du nouveau logo KFC conçu par JKR en 2026" },
       { type: "paragraph", text: "L’ancien logo plaçait le Colonel dans une forme plate, encadrée de deux bandes rouges, avec le nom KFC disposé horizontalement sous le portrait. Cette composition restait identifiable, mais elle utilisait mal l’espace et manquait d’impact lorsqu’elle était observée rapidement ou à distance." },
@@ -237,19 +275,21 @@ export const articles: Article[] = [
     slug: "developper-site-efficacement",
     tagId: "conseils",
     tag: "Conseils",
-    title: "Comment développer son site efficacement sans perdre en qualité",
+    title: "Créer un site internet efficacement : méthode Figma, Framer et priorités",
     image: { src: "https://framerusercontent.com/images/JKjlHJDb7urmEsf6oppCkNwca1c.jpg?width=6009&height=4278", alt: "Comment développer son site efficacement sans perdre en qualité" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/developper-site-efficacement",
     breadcrumbTitle: "Conseils",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Comment créer un site internet efficacement : méthode Figma et Framer pour cadrer, concevoir, publier et faire évoluer un site performant.",
     mainImage: { src: "https://framerusercontent.com/images/JKjlHJDb7urmEsf6oppCkNwca1c.jpg?width=6009&height=4278" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
     authorRole: "",
     authorBio: "",
     content: [
+      { type: "paragraph", text: "Pour créer un site internet efficacement, commencez par cadrer le message et l’expérience, concevez-les dans Figma, puis produisez et améliorez le site par itérations. Cette méthode limite les retours coûteux sans sacrifier la qualité." },
       { type: "heading", text: "Étape 1 : Toujours commencer par Figma" },
       { type: "paragraph", text: "Avant de toucher à un outil de développement, la meilleure décision est de passer par Figma." },
       { type: "paragraph", text: "Pourquoi ? Parce que Figma permet de travailler sans contraintes techniques sur :" },
@@ -312,13 +352,14 @@ export const articles: Article[] = [
     slug: "sous-cta-booster-conversions",
     tagId: "conseils",
     tag: "Conseils",
-    title: "Sous-CTA : comment booster vos conversions",
+    title: "Sous-CTA : 7 micro-réassurances pour augmenter les conversions",
     image: { src: "https://framerusercontent.com/images/8PdWCxSP3vfwJJsSMzonZVh0vsA.jpg?width=6009&height=4278", alt: "Sous-CTA : comment booster vos conversions" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/sous-cta-booster-conversions",
     breadcrumbTitle: "Conseils",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Sept sous-CTA et micro-réassurances pour réduire les freins sur une landing page, un pricing ou une inscription à un essai gratuit.",
     mainImage: { src: "https://framerusercontent.com/images/8PdWCxSP3vfwJJsSMzonZVh0vsA.jpg?width=6009&height=4278" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
@@ -354,13 +395,14 @@ export const articles: Article[] = [
     slug: "questions-sections-landing-page",
     tagId: "conseils",
     tag: "Conseils",
-    title: "Les questions auxquelles chaque section de landing page doit répondre",
+    title: "Structure de landing page : les questions auxquelles chaque section doit répondre",
     image: { src: "https://framerusercontent.com/images/d2Og5Iav1jT2lAb60F50FoBURqQ.jpg?width=6009&height=4278", alt: "Les questions auxquelles chaque section de landing page doit répondre" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/questions-sections-landing-page",
     breadcrumbTitle: "Conseils",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Structurez une landing page qui convertit : les questions à traiter dans le hero, les bénéfices, les preuves, l’offre et le CTA.",
     mainImage: { src: "https://framerusercontent.com/images/d2Og5Iav1jT2lAb60F50FoBURqQ.jpg?width=6009&height=4278" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
@@ -385,7 +427,7 @@ export const articles: Article[] = [
       },
     },
     content: [
-      { type: "paragraph", text: "Une landing page qui convertit ne répond pas au hasard. Chaque section a un rôle précis : **répondre à une question précise dans l’esprit du visiteur**. Si cette question reste sans réponse, le doute s’installe et la conversion chute. Voici les points à traiter, section par section." },
+      { type: "paragraph", text: "Une landing page efficace répond aux questions que le visiteur se pose avant même de cliquer. Du hero au CTA, chaque section doit lever un doute précis : comprendre l’offre, croire à la promesse et savoir quoi faire ensuite." },
       { type: "heading", text: "Hero section" },
       { type: "paragraph", text: "**Question à résoudre :** qu’est-ce que vous proposez, pour qui, et pourquoi est-ce utile maintenant ?" },
       { type: "image", src: "https://framerusercontent.com/images/F34W82YeZYoBqjCTLkxVy7nmNvk.png?lossless=1&width=960&height=712", alt: "Exemple de hero section de landing page" },
@@ -430,20 +472,21 @@ export const articles: Article[] = [
     slug: "sourcils-de-texte-conversions",
     tagId: "conseils",
     tag: "Conseils",
-    title: "Sourcils de texte : comment augmenter les conversions",
+    title: "Sourcil de texte : comment clarifier une landing page et augmenter les conversions",
     image: { src: "https://framerusercontent.com/images/5Iq89plOmzymOprhJkXd8dzbTw.jpg?width=6009&height=4278", alt: "Sourcils de texte : comment augmenter les conversions" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/sourcils-de-texte-conversions",
     breadcrumbTitle: "Conseils",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Découvrez comment utiliser un sourcil de texte pour donner du contexte, renforcer une preuve et clarifier le message d’une landing page.",
     mainImage: { src: "https://framerusercontent.com/images/5Iq89plOmzymOprhJkXd8dzbTw.jpg?width=6009&height=4278" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
     authorRole: "",
     authorBio: "",
     content: [
-      { type: "paragraph", text: "Une simple ligne placée au-dessus d’un titre peut transformer vos résultats. Ces micro-messages créent preuve sociale, confiance, urgence, ou mettent en avant un bénéfice clair, en quelques mots seulement. Ils vous permettent aussi de mieux cibler vos clients, sans alourdir votre page. Résultat : une phrase, et vos conversions peuvent grimper." },
+      { type: "paragraph", text: "Un sourcil de texte est une courte ligne au-dessus d’un titre : il donne immédiatement une catégorie, un contexte ou une preuve. Bien utilisé, il clarifie une landing page sans alourdir le message principal." },
       { type: "heading", text: "Annuler à tout moment :" },
       { type: "paragraph", text: "Réduit la peur de l’engagement et rassure les visiteurs hésitants. Idéal pour abonnements ou essais." },
       { type: "heading", text: "Paiement sécurisé :" },
@@ -468,20 +511,21 @@ export const articles: Article[] = [
     slug: "illustrations-hero-section-business",
     tagId: "conseils",
     tag: "Conseils",
-    title: "Quelles illustrations choisir pour le hero de son site ?",
+    title: "Visuel de hero : quelles images choisir selon votre activité ?",
     image: { src: "https://framerusercontent.com/images/aKOBm22k82Pia4WUiZihroyRQ8.jpg?width=6009&height=4278", alt: "Quelles illustrations choisir pour le hero de son site ?" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/illustrations-hero-section-business",
     breadcrumbTitle: "Conseils",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Choisissez le bon visuel de hero pour un SaaS, une agence, un commerce, une application ou un e-commerce afin de rendre votre offre claire.",
     mainImage: { src: "https://framerusercontent.com/images/aKOBm22k82Pia4WUiZihroyRQ8.jpg?width=6009&height=4278" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
     authorRole: "",
     authorBio: "",
     content: [
-      { type: "paragraph", text: "Le Hero est la première impression visuelle. Avant même de lire ton titre, l’utilisateur perçoit une chose : ton visuel. Et ce visuel doit immédiatement valider ces 3 points : “Je suis au bon endroit” “Je comprends ce que cette entreprise fait” “Je fais confiance à ce que je vois” Problème : beaucoup de business utilisent des images totalement génériques, abstraites ou non adaptées à leur secteur — ce qui affaiblit la crédibilité et la clarté du message." },
+      { type: "paragraph", text: "Le visuel de hero doit confirmer en quelques secondes que le visiteur est au bon endroit, qu’il comprend l’offre et qu’il peut lui faire confiance. Le bon choix dépend de votre activité : un SaaS, une agence ou un commerce local ne doit pas montrer les mêmes preuves." },
       { type: "heading", text: "1. SaaS (Software-as-a-Service)" },
       { type: "paragraph", text: "• Vidéo ou illustration d’une fonctionnalité clé" },
       { type: "paragraph", text: "• Zooms de features importantes" },
@@ -520,19 +564,21 @@ export const articles: Article[] = [
     slug: "guide-copywriting-page-qui-convertit",
     tagId: "guide",
     tag: "Guide",
-    title: "Guide de copywriting : écrire une page qui fait passer à l’action",
+    title: "Copywriting de landing page : structurer une page qui convertit",
     image: { src: "https://framerusercontent.com/images/v5hwE4GBukVAfUYJYgoFRgl3us.jpg?width=6009&height=4278", alt: "Guide de copywriting : écrire une page qui fait passer à l’action" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/guide-copywriting-page-qui-convertit",
     breadcrumbTitle: "Guide",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Guide de copywriting pour landing page : structurez le message, les preuves, les objections et les appels à l’action sans promesses artificielles.",
     mainImage: { src: "https://framerusercontent.com/images/v5hwE4GBukVAfUYJYgoFRgl3us.jpg?width=6009&height=4278" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
     authorRole: "",
     authorBio: "",
     content: [
+      { type: "paragraph", text: "Le copywriting d’une landing page sert d’abord à rendre l’offre claire, crédible et facile à choisir. Ce guide présente les leviers de message à utiliser avec discernement : promesse, preuve, objection et passage à l’action." },
       { type: "heading", text: "Le choix binaire : agir ou subir" },
       { type: "paragraph", text: "À ce stade, le visiteur a compris le problème et la solution. Il faut maintenant lui montrer qu’il n’existe que deux options :" },
       { type: "paragraph", text: "• Continuer comme avant" },
@@ -598,20 +644,21 @@ export const articles: Article[] = [
     slug: "capter-attention-visiteur-landing-page",
     tagId: "guide",
     tag: "Guide",
-    title: "Comment capter l’attention d’un visiteur sur une landing page",
+    title: "Capter l’attention sur une landing page : 6 principes de design et de conversion",
     image: { src: "https://framerusercontent.com/images/ZIGOnBSBx1rmv0U9MtaO0Q2nc.jpg?width=6009&height=4278", alt: "Comment capter l’attention d’un visiteur sur une landing page" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/capter-attention-visiteur-landing-page",
     breadcrumbTitle: "Guide",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Six principes de design et de conversion pour capter l’attention sur une landing page, clarifier l’offre et guider le visiteur vers le CTA.",
     mainImage: { src: "https://framerusercontent.com/images/ZIGOnBSBx1rmv0U9MtaO0Q2nc.jpg?width=6009&height=4278" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
     authorRole: "",
     authorBio: "",
     content: [
-      { type: "paragraph", text: "Les visiteurs ne lisent pas tout. Ils scannent. Ils repèrent quelques mots clés. Et prennent une décision très vite. Ton rôle n’est donc pas de tout expliquer, mais de diriger leur regard." },
+      { type: "paragraph", text: "Pour capter l’attention sur une landing page, rendez l’offre, la hiérarchie et le CTA compréhensibles dès le scan. Les visiteurs ne lisent pas tout : ils repèrent des signaux qui les aident à décider s’ils continuent." },
       { type: "image", src: "https://framerusercontent.com/images/27DQ3W9Lc2QOcQAv9scQsvbYA.png", alt: "Comment capter l’attention d’un visiteur sur une landing page — illustration 1" },
       { type: "heading", text: "1. Un design épuré pour capter l’attention immédiatement" },
       { type: "paragraph", text: "Quand on parle de “bon design”, on ne parle pas de quelque chose de spectaculaire. On parle d’un design clair, lisible et compréhensible instantanément." },
@@ -697,20 +744,21 @@ export const articles: Article[] = [
     slug: "trouver-avatar-client-guide",
     tagId: "guide",
     tag: "Guide",
-    title: "Comment trouver son avatar client : le guide ultime",
+    title: "Comment définir son avatar client pour écrire une landing page plus convaincante",
     image: { src: "https://framerusercontent.com/images/jmaC3nMJCrF0OvoTJL9X8VH3QyQ.jpg?width=6009&height=4278", alt: "Comment trouver son avatar client : le guide ultime" },
     author: "Louis Staub",
     authorPhoto: { src: "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?lossless=1&width=693&height=693" },
     href: "/ressources/trouver-avatar-client-guide",
     breadcrumbTitle: "Guide",
     updatedAt: "Dernière mise à jour le 15 juin 2026",
+    metaDescription: "Définissez un avatar client exploitable pour votre landing page : besoins, objections, vocabulaire, données disponibles et questions à poser.",
     mainImage: { src: "https://framerusercontent.com/images/jmaC3nMJCrF0OvoTJL9X8VH3QyQ.jpg?width=6009&height=4278" },
     profilePhoto: { src: "https://framerusercontent.com/images/BifUCVJ8SFvwIJhc7EDr43Gc.jpg?width=693&height=693" },
     about: "",
     authorRole: "",
     authorBio: "",
     content: [
-      { type: "paragraph", text: "Pas de design magique. Pas de “phrases copywriting” copiées sur les autres. Juste la vérité : celui qui comprend le mieux son audience gagne. Ce guide rassemble toutes les étapes, toutes les questions et toutes les méthodes pour créer un avatar clair, exploitable et prêt à transformer ton copywriting." },
+      { type: "paragraph", text: "Un avatar client utile ne se limite pas à un âge ou à un poste. Il rassemble les besoins, objections, mots et situations qui vous permettent d’écrire une landing page réellement convaincante." },
       { type: "heading", text: "1) Comprendre profondément son client" },
       { type: "paragraph", text: "La pire erreur : observer les concurrents… et les copier. La bonne démarche : comprendre pourquoi leur message fonctionne et surtout à qui il s’adresse." },
       { type: "paragraph", text: "Avant d’écrire une seule ligne, on doit savoir précisément :" },
@@ -826,6 +874,12 @@ export const articles: Article[] = [
 
 ];
 
+/** Public CMS entries, normalized to semantic article components. */
+export const articles: Article[] = legacyArticles.map((article) => ({
+  ...article,
+  content: normalizeArticleContent(article.content),
+}));
+
 const FRENCH_MONTHS: Record<string, string> = {
   janvier: "01", fevrier: "02", février: "02", mars: "03", avril: "04", mai: "05", juin: "06",
   juillet: "07", aout: "08", août: "08", septembre: "09", octobre: "10", novembre: "11", decembre: "12", décembre: "12",
@@ -869,6 +923,9 @@ export function validateArticles(list: Article[] = articles) {
     if (article.href !== `/ressources/${article.slug}`) errors.push(`${article.slug} : href incohérent`);
 
     article.content.forEach((block, blockIndex) => {
+      if (block.type === "paragraph" && /^(?:•|🔹)\s/u.test(block.text)) {
+        errors.push(`${article.slug} : le paragraphe ${blockIndex + 1} utilise un marqueur de liste ; utilisez bullet-list ou heading`);
+      }
       if (block.type === "table") {
         block.rows.forEach((row, rowIndex) => {
           if (row.length !== block.columns.length) errors.push(`${article.slug} : tableau ${blockIndex + 1}, ligne ${rowIndex + 1} (${row.length}/${block.columns.length} cellules)`);

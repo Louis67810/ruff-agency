@@ -439,7 +439,7 @@ export default function RessourceArticle({
                 const Tag = block.level === 3 ? "h3" : "h2";
                 return (
                   <React.Fragment key={`${heading?.id}-${index}`}>
-                    {index > 0 && index !== lastHeadingBlockIndex ? (
+                    {block.level !== 3 && index > 0 && index !== lastHeadingBlockIndex ? (
                       <ArticleDivider />
                     ) : null}
                     <Tag id={heading?.id}>{block.text}</Tag>

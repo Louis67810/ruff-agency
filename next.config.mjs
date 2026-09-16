@@ -9,6 +9,15 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/ressources/nouveau-logo-bonduelle-analyse-refonte-identite-visuelle",
+        destination: "/ressources/nouveau-logo-bonduelle",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
