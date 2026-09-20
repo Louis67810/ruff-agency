@@ -25,6 +25,7 @@ yarn-error.log*
 # local env files
 .env*.local
 .data/
+.secrets/
 
 # vercel
 .vercel
@@ -35,6 +36,7 @@ next-env.d.ts
 
 .vercel
 .env*
+.secrets/
 
 .open-next/
 .wrangler/

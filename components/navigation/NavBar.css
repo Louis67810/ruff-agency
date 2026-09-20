@@ -205,7 +205,7 @@
 .navbar-spacer{height:113px}
 @media(min-width:810px){.navbar-native.navbar-scrolled{padding-top:16px;padding-bottom:16px}}
 @media(max-width:809px){.navbar-spacer{height:96px}.navbar-native.navbar-scrolled .navbar-main-row{padding:16px}}
-.navbar-right-actions{align-items:center;display:flex;flex-direction:row;gap:16px}
+.navbar-right-actions{align-items:center;display:flex;flex-direction:row;gap:8px}
 
 /* Mega-menu services — d'après la frame Figma 2147260778. */
 .navbar-services-panel-legacy{display:none!important}
@@ -312,4 +312,135 @@
   .navbar-service-card-compact .navbar-service-image::after{border-width:1.25px}
   .navbar-service-card-compact .navbar-service-title{color:#121a2e;font-family:Inter,"Inter Placeholder",sans-serif;font-size:18px;font-weight:600;letter-spacing:-.03em;line-height:146%;transform:none;white-space:normal}
   .navbar-mobile-services-toggle .navbar-chevron{transform-origin:center}
+}
+
+/* Language picker — geometry and surfaces grounded in Figma group 2259:714. */
+.navbar-language{
+  align-items:center;
+  display:flex;
+  flex:0 0 88px;
+  height:54px;
+  position:relative;
+  width:88px;
+  z-index:50;
+}
+.navbar-language-trigger{
+  align-items:center;
+  appearance:none;
+  background:transparent;
+  border:0;
+  border-radius:15px;
+  color:#121a2e;
+  cursor:pointer;
+  display:flex;
+  gap:6px;
+  height:54px;
+  justify-content:center;
+  padding:0;
+  transition:background-color .3s cubic-bezier(.44,0,.56,1),color .35s cubic-bezier(.44,0,.56,1);
+  width:72px;
+}
+.navbar-language-trigger:hover,
+.navbar-language:focus-within .navbar-language-trigger,
+.navbar-language:has(.navbar-language-menu) .navbar-language-trigger{background:#eee}
+.navbar-language.is-dark .navbar-language-trigger{color:#fff}
+.navbar-language.is-dark .navbar-language-trigger:hover,
+.navbar-language.is-dark:focus-within .navbar-language-trigger,
+.navbar-language.is-dark:has(.navbar-language-menu) .navbar-language-trigger{background:rgba(255,255,255,.1)}
+.navbar-language-icon{display:block;flex:none;height:24px;width:24px}
+.navbar-language .navbar-chevron{height:16px;transition:transform .32s cubic-bezier(.22,1,.36,1);width:16px}
+.navbar-language-divider{
+  background:rgba(0,0,0,.16);
+  border-radius:999px;
+  height:16px;
+  left:76px;
+  position:absolute;
+  top:19px;
+  transition:background-color .35s cubic-bezier(.44,0,.56,1);
+  width:1px;
+}
+.navbar-language.is-dark .navbar-language-divider{background:rgba(255,255,255,.22)}
+.navbar-language-menu{
+  align-items:stretch;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.15);
+  border-radius:32px;
+  box-shadow:0 2px 3px rgba(0,0,0,.04),0 6px 6px rgba(0,0,0,.03),0 14px 8px rgba(0,0,0,.02),0 24px 10px rgba(0,0,0,.01);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  height:128px;
+  left:auto;
+  padding:16px 12px;
+  position:absolute;
+  right:0;
+  top:42px;
+  transform-origin:top left;
+  width:226px;
+  z-index:30;
+}
+.navbar-language.is-up .navbar-language-menu{
+  bottom:42px;
+  top:auto;
+  transform-origin:bottom left;
+}
+.navbar-language-option{
+  align-items:center;
+  appearance:none;
+  background:transparent;
+  border:0;
+  border-radius:15px;
+  color:#121a2e;
+  cursor:pointer;
+  display:flex;
+  flex:0 0 44px;
+  gap:10px;
+  height:44px;
+  padding:14px 18px;
+  text-align:left;
+  transition:background-color .22s ease;
+  width:200px;
+}
+.navbar-language-option:hover,
+.navbar-language-option:focus-visible{background:rgba(0,0,0,.035);outline:none}
+.navbar-language-option.is-selected{background:rgba(0,0,0,.05)}
+.navbar-language-code{
+  color:rgba(0,0,0,.46);
+  flex:0 0 auto;
+  font-family:Inter,"Inter Placeholder",sans-serif;
+  font-size:12px;
+  font-weight:400;
+  line-height:102.88%;
+  min-width:17px;
+}
+.navbar-language-name{
+  color:#121a2e;
+  font-family:Inter,"Inter Placeholder",sans-serif;
+  font-size:16px;
+  font-weight:400;
+  line-height:102.88%;
+  white-space:nowrap;
+}
+.navbar-mobile-actions{align-items:center;display:flex;flex:none;gap:8px;width:100%}
+.navbar-mobile-actions .navbar-mobile-cta{flex:1 1 auto;min-width:0;width:auto}
+.navbar-mobile-actions .navbar-language{flex:0 0 88px}
+
+@media(min-width:810px) and (max-width:1439px){
+  .navbar-right .framer-1u5ere7-container{display:none}
+  .navbar-native .navbar-desktop-links>.navbar-link,
+  .navbar-native .navbar-services-anchor>.navbar-link{font-size:16px;padding-left:9px;padding-right:9px}
+  .navbar-native .navbar-services-anchor>.navbar-link{gap:4px;padding-right:6px}
+  .navbar-native .navbar-right-actions{gap:8px}
+}
+
+@media(max-width:809px){
+  .navbar-mobile-actions{position:relative;z-index:6}
+  .navbar-mobile-actions .navbar-language-menu{left:0;right:auto}
+  .navbar-mobile-actions .navbar-language-trigger:hover{background:transparent}
+  .navbar-mobile-actions .navbar-language:focus-within .navbar-language-trigger,
+  .navbar-mobile-actions .navbar-language:has(.navbar-language-menu) .navbar-language-trigger{background:#eee}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .navbar-language-trigger,.navbar-language .navbar-chevron,.navbar-language-option{transition:none}
 }

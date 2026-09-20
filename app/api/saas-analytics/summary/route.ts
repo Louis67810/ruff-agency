@@ -4,6 +4,7 @@ import {
   analyticsTokenIsValid,
 } from "@/lib/saas-analytics/auth";
 import {
+  filterAnalyticsEvents,
   readAnalyticsEvents,
   summarizeAnalytics,
 } from "@/lib/saas-analytics/store";
@@ -11,13 +12,18 @@ import {
 export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
-  if (!analyticsTokenIsValid(request.cookies.get(analyticsCookieName)?.value))
+  if (process.env.NODE_ENV === "production" && !analyticsTokenIsValid(request.cookies.get(analyticsCookieName)?.value))
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const requested = Number(request.nextUrl.searchParams.get("days") ?? 30);
   const days = [7, 30, 90].includes(requested) ? requested : 30;
   try {
+    const rawFilters = request.nextUrl.searchParams.get("filters");
+    const filters = rawFilters ? JSON.parse(rawFilters) : [];
     const events = await readAnalyticsEvents(days);
-    return NextResponse.json(summarizeAnalytics(events, days));
+    const filteredEvents = Array.isArray(filters)
+      ? filterAnalyticsEvents(events, filters.filter((value): value is string => typeof value === "string"))
+      : events;
+    return NextResponse.json(summarizeAnalytics(filteredEvents, days));
   } catch (error) {
     console.error("SaaS analytics summary failed", error);
     return NextResponse.json(

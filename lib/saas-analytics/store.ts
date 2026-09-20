@@ -6,6 +6,7 @@ import type {
   AnalyticsEvent,
   AnalyticsEventInput,
   AnalyticsSummary,
+  AnalyticsViewport,
 } from "./types";
 
 const localDirectory = path.join(process.cwd(), ".data");
@@ -137,6 +138,37 @@ export async function readAnalyticsEvents(days: number) {
   }
 }
 
+const countryAliases: Record<string, string[]> = {
+  "united states": ["us", "usa", "united states"],
+  "united kingdom": ["gb", "uk", "united kingdom"],
+  france: ["fr", "france"],
+  germany: ["de", "germany"],
+  india: ["in", "india"],
+  australia: ["au", "australia"],
+};
+
+function eventMatchesFilter(event: AnalyticsEvent, filter: string) {
+  const wanted = filter.trim().toLowerCase();
+  if (!wanted) return true;
+  if (event.path.toLowerCase() === wanted) return true;
+  const countryValues = countryAliases[wanted] ?? [wanted];
+  if (countryValues.includes(event.countryCode.toLowerCase())) return true;
+  return Object.values(event.metadata ?? {}).some((value) => String(value ?? "").toLowerCase() === wanted);
+}
+
+/** Keeps only people who satisfy every selected criterion. */
+export function filterAnalyticsEvents(events: AnalyticsEvent[], filters: string[]) {
+  if (!filters.length) return events;
+  const matchingVisitors = filters.map((filter) => new Set(
+    events.filter((event) => eventMatchesFilter(event, filter)).map((event) => event.visitorId),
+  ));
+  const visitors = matchingVisitors[0] ?? new Set<string>();
+  for (const visitorId of [...visitors]) {
+    if (matchingVisitors.some((set) => !set.has(visitorId))) visitors.delete(visitorId);
+  }
+  return events.filter((event) => visitors.has(event.visitorId));
+}
+
 const sectionLabels: Record<string, string> = {
   hero: "Hero",
   problems: "Problems",
@@ -158,6 +190,11 @@ function median(values: number[]) {
     : (sorted[middle - 1] + sorted[middle]) / 2;
 }
 
+function eventViewport(event: AnalyticsEvent): AnalyticsViewport {
+  const viewport = event.metadata?.viewport;
+  return viewport === "mobile" || viewport === "tablet" ? viewport : "desktop";
+}
+
 export function summarizeAnalytics(
   events: AnalyticsEvent[],
   rangeDays: number,
@@ -173,6 +210,22 @@ export function summarizeAnalytics(
   const conversions = events.filter(
     (event) => event.eventType === "conversion",
   );
+  const ctaClicks = events.filter((event) => event.eventType === "cta_click");
+  const bookedCalls = conversions.filter(
+    (event) => event.metadata?.conversionType === "booked_call",
+  );
+  const engagedSessionIds = new Set(
+    events
+      .filter((event) => ["cta_click", "conversion", "section_view", "scroll_depth"].includes(event.eventType))
+      .map((event) => event.sessionId),
+  );
+  const scrollDepthBySession = new Map<string, number>();
+  events
+    .filter((event) => event.eventType === "scroll_depth")
+    .forEach((event) => {
+      const depth = Number(event.metadata?.depth ?? 0);
+      scrollDepthBySession.set(event.sessionId, Math.max(scrollDepthBySession.get(event.sessionId) ?? 0, depth));
+    });
   const bouncedSessions = new Set(
     events
       .filter(
@@ -201,11 +254,63 @@ export function summarizeAnalytics(
   const paths = counts((event) =>
     event.eventType === "page_view" ? event.path : undefined,
   );
+  const pageSessions = new Map<string, Set<string>>();
+  pageViews.forEach((event) => {
+    if (!pageSessions.has(event.path)) pageSessions.set(event.path, new Set());
+    pageSessions.get(event.path)?.add(event.sessionId);
+  });
+  const pageSessionTotals = [...pageSessions.entries()]
+    .map(([path, sessions]) => ({ path, value: sessions.size }))
+    .sort((a, b) => b.value - a.value);
   const exitLinks = counts((event) =>
     event.eventType === "site_navigation" && event.metadata?.exitLink
       ? String(event.metadata.exitLink)
       : undefined,
   );
+  const ctaDetails = [...ctaClicks.reduce((map, event) => {
+    const id = String(event.metadata?.ctaId ?? event.metadata?.label ?? "unknown-cta");
+    const label = String(event.metadata?.label ?? id);
+    const key = `${event.path}::${id}`;
+    const current = map.get(key) ?? { id, label, value: 0, path: event.path, section: event.sectionId };
+    current.value += 1;
+    map.set(key, current);
+    return map;
+  }, new Map<string, { id: string; label: string; value: number; path: string; section?: string }>()).values()]
+    .sort((a, b) => b.value - a.value);
+  const navigationClicks = [...events.filter((event) => event.eventType === "site_navigation").reduce((map, event) => {
+    const destination = String(event.metadata?.destination ?? event.metadata?.exitLink ?? "Unknown");
+    const label = String(event.metadata?.label ?? destination);
+    const key = `${event.path}::${destination}`;
+    const current = map.get(key) ?? { label, value: 0, path: event.path, destination };
+    current.value += 1;
+    map.set(key, current);
+    return map;
+  }, new Map<string, { label: string; value: number; path: string; destination: string }>()).values()]
+    .sort((a, b) => b.value - a.value);
+  const scrollZoneMap = new Map<string, { path: string; zone: number; section?: string; viewport: AnalyticsViewport; people: Set<string> }>();
+  const scrollZonePeople = new Map<string, Set<string>>();
+  events
+    .filter((event) => event.eventType === "scroll_zone")
+    .forEach((event) => {
+      const zone = Math.max(0, Math.min(7, Number(event.metadata?.zone ?? event.value ?? 0)));
+      const viewport = eventViewport(event);
+      const key = `${event.path}::${viewport}::${zone}::${event.sectionId ?? ""}`;
+      const current = scrollZoneMap.get(key) ?? { path: event.path, zone, section: event.sectionId, viewport, people: new Set<string>() };
+      current.people.add(event.visitorId);
+      scrollZoneMap.set(key, current);
+      const totalKey = `${event.path}::${viewport}`;
+      if (!scrollZonePeople.has(totalKey)) scrollZonePeople.set(totalKey, new Set());
+      scrollZonePeople.get(totalKey)?.add(event.visitorId);
+    });
+  const scrollZones = [...scrollZoneMap.values()]
+    .map(({ people, ...zone }) => ({ ...zone, value: people.size }))
+    .sort((a, b) => a.path.localeCompare(b.path) || a.viewport.localeCompare(b.viewport) || a.zone - b.zone);
+  const scrollZoneTotals = [...scrollZonePeople.entries()]
+    .map(([key, people]) => {
+      const [path, viewport] = key.split("::");
+      return { path, viewport: viewport as AnalyticsViewport, value: people.size };
+    })
+    .sort((a, b) => b.value - a.value);
   const sessionDurations = events
     .filter((event) => event.eventType === "session_end" && event.durationMs)
     .map((event) => event.durationMs ?? 0);
@@ -218,9 +323,12 @@ export function summarizeAnalytics(
   const sectionViews = new Map<string, Set<string>>();
   const sectionTimes = new Map<string, number[]>();
   const sectionConversions = new Map<string, number>();
+  const sectionSessions = new Map<string, Set<string>>();
   events.forEach((event) => {
     const section = event.sectionId;
     if (!section) return;
+    if (!sectionSessions.has(section)) sectionSessions.set(section, new Set());
+    sectionSessions.get(section)?.add(event.sessionId);
     if (event.eventType === "section_view") {
       if (!sectionViews.has(section)) sectionViews.set(section, new Set());
       sectionViews.get(section)?.add(event.sessionId);
@@ -243,6 +351,8 @@ export function summarizeAnalytics(
     const views = sectionViews.get(id)?.size ?? 0;
     const nextViews = sectionViews.get(orderedIds[index + 1])?.size ?? views;
     const times = sectionTimes.get(id) ?? [];
+    const sectionSessionIds = sectionSessions.get(id) ?? new Set<string>();
+    const bouncedInSection = [...sectionSessionIds].filter((sessionId) => bouncedSessions.has(sessionId)).length;
     return {
       id,
       label: sectionLabels[id],
@@ -252,9 +362,49 @@ export function summarizeAnalytics(
         ? times.reduce((total, value) => total + value, 0) / times.length / 1000
         : 0,
       medianSeconds: median(times) / 1000,
+      bounceRate: sectionSessionIds.size ? (bouncedInSection / sectionSessionIds.size) * 100 : 0,
       conversions: sectionConversions.get(id) ?? 0,
     };
   });
+
+  const pageSectionMap = new Map<string, {
+    path: string;
+    id: string;
+    label: string;
+    reachedPeople: Set<string>;
+    durations: number[];
+    conversions: number;
+    viewport: AnalyticsViewport;
+  }>();
+  events.forEach((event) => {
+    if (!event.sectionId) return;
+    const viewport = eventViewport(event);
+    const key = `${event.path}::${viewport}::${event.sectionId}`;
+    const current = pageSectionMap.get(key) ?? {
+      path: event.path,
+      id: event.sectionId,
+      label: String(event.metadata?.sectionLabel ?? sectionLabels[event.sectionId] ?? event.sectionId),
+      reachedPeople: new Set<string>(),
+      durations: [],
+      conversions: 0,
+      viewport,
+    };
+    if (event.eventType === "section_view" || event.eventType === "scroll_zone") {
+      current.reachedPeople.add(event.visitorId);
+    }
+    if (event.eventType === "section_time" && event.durationMs) current.durations.push(event.durationMs);
+    if (event.eventType === "conversion") current.conversions += 1;
+    pageSectionMap.set(key, current);
+  });
+  const pageSections = [...pageSectionMap.values()]
+    .map(({ reachedPeople, durations, ...section }) => ({
+      ...section,
+      reachedPeople: reachedPeople.size,
+      averageSeconds: durations.length
+        ? durations.reduce((total, value) => total + value, 0) / durations.length / 1000
+        : 0,
+    }))
+    .sort((a, b) => a.path.localeCompare(b.path) || a.id.localeCompare(b.id));
 
   const dailyMap = new Map<
     string,
@@ -275,6 +425,13 @@ export function summarizeAnalytics(
     rangeDays,
     visitors: visitorIds.size,
     sessions: sessionIds.size,
+    pageViews: pageViews.length,
+    engagedSessions: engagedSessionIds.size,
+    scrollDepth: scrollDepthBySession.size
+      ? [...scrollDepthBySession.values()].reduce((total, depth) => total + depth, 0) / scrollDepthBySession.size
+      : 0,
+    ctaClicks: ctaClicks.length,
+    bookedCalls: bookedCalls.length,
     returningVisitors: returning.size,
     returnRate: visitorIds.size ? (returning.size / visitorIds.size) * 100 : 0,
     bounceRate: sessionIds.size
@@ -307,9 +464,15 @@ export function summarizeAnalytics(
     ),
     ctas: counts((event) =>
       event.eventType === "cta_click"
-        ? String(event.metadata?.label ?? "Unknown CTA")
+        ? String(event.metadata?.ctaId ?? event.metadata?.label ?? "Unknown CTA")
         : undefined,
     ),
+    ctaDetails,
+    navigationClicks,
+    scrollZones,
+    scrollZoneTotals,
+    pageSessionTotals,
+    pageSections,
     interactions: counts((event) => {
       if (event.eventType === "vote") return "Votes";
       if (event.eventType === "before_after_interaction")

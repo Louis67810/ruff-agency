@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRightIcon, ChartBarSquareIcon, CodeBracketSquareIcon, PencilIcon } from "@heroicons/react/24/solid";
+import { LanguageIcon } from "@heroicons/react/24/outline";
 
 const LOGO_SVG = `<svg width="69" height="44" viewBox="0 0 69 44" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_ii_1_860)">
@@ -128,6 +129,117 @@ function CTA({ href, full = false, shell = "rgb(225, 228, 237)", title = "Commen
         src="https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=64&width=693&height=693" />
     </span>
   </SafeLink>;
+}
+
+const LANGUAGE_OPTIONS = [
+  { code: "FR", label: "Français", locale: "fr" },
+  { code: "EN", label: "English", locale: "en" },
+];
+
+function localeHref(targetLocale) {
+  if (typeof window === "undefined") return targetLocale === "en" ? "/en" : "/";
+  const { pathname, search, hash } = window.location;
+  let nextPath = pathname;
+  if (targetLocale === "en" && pathname !== "/en" && !pathname.startsWith("/en/")) {
+    nextPath = pathname === "/" ? "/en" : `/en${pathname}`;
+  }
+  if (targetLocale === "fr") {
+    if (pathname === "/en") nextPath = "/";
+    else if (pathname.startsWith("/en/")) nextPath = pathname.slice(3) || "/";
+  }
+  return `${nextPath}${search}${hash}`;
+}
+
+function LanguageSwitcher({ locale = "fr", dark = false, direction = "down" }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+  const closeTimer = useRef(null);
+  const t = (fr, en) => locale === "en" ? en : fr;
+
+  const cancelClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => {
+      closeTimer.current = null;
+      setOpen(false);
+    }, 55);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (event) => {
+      if (!rootRef.current?.contains(event.target)) setOpen(false);
+    };
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  useEffect(() => () => cancelClose(), []);
+
+  const chooseLocale = (nextLocale) => {
+    setOpen(false);
+    if (nextLocale === locale) return;
+    window.location.assign(localeHref(nextLocale));
+  };
+
+  return <div
+    ref={rootRef}
+    className={`navbar-language ${dark ? "is-dark" : "is-light"} is-${direction}`}
+    onPointerEnter={direction === "down" ? () => { cancelClose(); setOpen(true); } : undefined}
+    onPointerLeave={direction === "down" ? scheduleClose : undefined}
+    onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}
+  >
+    <button
+      type="button"
+      className="navbar-language-trigger"
+      aria-label={t("Changer la langue", "Change language")}
+      aria-haspopup="menu"
+      aria-expanded={open}
+      onClick={() => setOpen((value) => !value)}
+    >
+      <LanguageIcon className="navbar-language-icon" aria-hidden="true" />
+      <Chevron open={open} color="currentColor" />
+    </button>
+    <span className="navbar-language-divider" aria-hidden="true" />
+    <AnimatePresence>
+      {open && <motion.div
+        className="navbar-language-menu"
+        role="menu"
+        aria-label={t("Choisir la langue", "Choose language")}
+        initial={{ opacity: 0, y: direction === "up" ? 10 : -10, scale: .96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: direction === "up" ? 5 : -5, scale: .985, transition: { duration: .12, ease: [0.4, 0, 1, 1] } }}
+        transition={{ duration: .2, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {LANGUAGE_OPTIONS.map((option) => {
+          const selected = option.locale === locale;
+          return <button
+            type="button"
+            role="menuitemradio"
+            aria-checked={selected}
+            className={`navbar-language-option ${selected ? "is-selected" : ""}`}
+            key={option.locale}
+            onClick={() => chooseLocale(option.locale)}
+          >
+            <span className="navbar-language-code">{option.code}</span>
+            <span className="navbar-language-name">{option.label}</span>
+          </button>;
+        })}
+      </motion.div>}
+    </AnimatePresence>
+  </div>;
 }
 
 function WhatsApp({ href }) {
@@ -332,7 +444,7 @@ function MobileMenu({ dark, links, onClose, locale = "fr", landingMode = false, 
         </div>
       </div>
       <div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.resourcesHref} onClick={click}>{t("Ressources", "Resources")}</NavLink>
-      <div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.aboutHref} onClick={click}>{t("Qui sommes nous ", "Who we are")}</NavLink>
+      {locale === "en" && <><div className="navbar-mobile-separator" /><NavLink small dark={dark} href={links.aboutHref} onClick={click}>Who we are</NavLink></>}
     </div>}
     {landingMode && landingLinks.length > 0 && <div className="framer-brs9hv navbar-mobile-links navbar-mobile-landing-links">
       {landingLinks.map((item, index) => <React.Fragment key={`${item.href}-${item.label}`}>
@@ -340,7 +452,10 @@ function MobileMenu({ dark, links, onClose, locale = "fr", landingMode = false, 
         <NavLink small dark={dark} href={item.href} onClick={click}>{item.label}</NavLink>
       </React.Fragment>)}
     </div>}
-    <div className="framer-9b3gdf-container navbar-mobile-cta"><CTA full href={links.ctaHref} title={ctaLabel || "Book a call"} shell={dark ? "rgba(225,228,237,.08)" : "rgb(225,228,237)"} /></div>
+    <div className="navbar-mobile-actions">
+      <LanguageSwitcher locale={locale} dark={dark} direction="up" />
+      <div className="framer-9b3gdf-container navbar-mobile-cta"><CTA full href={links.ctaHref} title={ctaLabel || t("Réserver un appel", "Book a call")} shell={dark ? "rgba(225,228,237,.08)" : "rgb(225,228,237)"} /></div>
+    </div>
   </div>;
 }
 
@@ -430,10 +545,10 @@ export default function NavBar({
             <NavLink dark={navDark} services open={servicesOpen && overlayType === "resources"} onMouseEnter={openResources} onClick={() => servicesOpen && overlayType === "resources" ? (setServicesBlurActive(false), setServicesOpen(false)) : openResources()}>{t("Ressources", "Resources")}</NavLink>
           </div>
           <AnimatePresence>{servicesOpen && <DesktopServices key="services-popover" contentType={overlayType} links={links} motionSettings={DEFAULT_OVERLAY_MOTION} onBlurChange={setServicesBlurActive} onPointerEnter={keepServicesOpen} onPanelLeave={closeServices} onNavigate={() => { setServicesBlurActive(false); setServicesOpen(false); }} />}</AnimatePresence>
-          <NavLink dark={navDark} href={aboutHref}>{t("Qui sommes nous ", "Who we are")}</NavLink>
+          {locale === "en" && <NavLink dark={navDark} href={aboutHref}>Who we are</NavLink>}
         </div>}
         {!logoOnly && <div className="framer-ufyq2u-container navbar-burger-container"><Burger open={menuOpen} dark={navDark} onClick={() => setMenuOpen(v => !v)} /></div>}
-        {showRight && <div className="framer-184c6kw navbar-right"><div className="navbar-right-actions">{!landingMode && <div className="framer-1u5ere7-container"><WhatsApp href={whatsappHref} /></div>}<div className="framer-1d2rod8-container"><CTA href={ctaHref} title={ctaLabel || t("Commencer mon projet", "Start my project")} shell={navDark ? "rgba(255,255,255,.15)" : "rgb(225,228,237)"} /></div></div></div>}
+        {showRight && <div className="framer-184c6kw navbar-right"><div className="navbar-right-actions">{!landingMode && <div className="framer-1u5ere7-container"><WhatsApp href={whatsappHref} /></div>}<LanguageSwitcher locale={locale} dark={navDark} /><div className="framer-1d2rod8-container"><CTA href={ctaHref} title={ctaLabel || t("Commencer mon projet", "Start my project")} shell={navDark ? "rgba(255,255,255,.15)" : "rgb(225,228,237)"} /></div></div></div>}
       </div>
     </nav>
   </>;

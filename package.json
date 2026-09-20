@@ -9,7 +9,8 @@
     "cf:build": "opennextjs-cloudflare build",
     "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "deploy:cloudflare": "node scripts/deploy-cloudflare.mjs"
+    "deploy:cloudflare": "node scripts/deploy-cloudflare.mjs",
+    "seo:pull": "node scripts/pull-google-seo-data.mjs"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -40,6 +41,7 @@
     "d3-sankey": "^0.12.3",
     "d3-shape": "^3.2.0",
     "framer-motion": "12.43.0",
+    "googleapis": "^180.0.0",
     "lottie-web": "5.12.2",
     "lucide-react": "0.468.0",
     "motion": "^13.1.1",

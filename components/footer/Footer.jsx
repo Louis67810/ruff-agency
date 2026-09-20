@@ -217,10 +217,14 @@ const navItems = [
   ["Outils gratuits", "freeTools"],
   ["Guide", "guide"],
   ["Outil", "tool"],
-  ["A propos", "about"],
-  ["30-min", "booking"],
+  ["À propos", "about"],
+  ["30 minutes", "booking"],
   ["Lead magnet", "leadMagnet", true],
 ];
+const fallbackNavHrefs = {
+  about: "/agence",
+  booking: "/30-min",
+};
 const legacyServiceItems = [
   ["Landing Page", "landingPage"],
   ["Site Internet", "website"],
@@ -390,7 +394,7 @@ function PhoneTicker() {
 }
 
 function FooterLink({ label, idKey, links, ghost = false, locale = "fr" }) {
-  const href = localizeHref(links?.[idKey], locale) || "#";
+  const href = localizeHref(links?.[idKey] || fallbackNavHrefs[idKey], locale) || "#";
   return (
     <p className="footer-links">
       <a
@@ -451,8 +455,8 @@ export default function Footer({
         "Outils gratuits": "Free tools",
         Guide: "Guide",
         Outil: "Tool",
-        "A propos": "About us",
-        "30-min": "30 min",
+        "À propos": "About us",
+        "30 minutes": "30 minutes",
         "Lead magnet": "Lead magnet",
       }[label] || label,
     ),

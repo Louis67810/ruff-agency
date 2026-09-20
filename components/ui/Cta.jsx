@@ -15,7 +15,7 @@ export default function Cta({
   onClick = undefined,
 }) {
   return (
-    <a className={`cta ${kind === "primary" ? "cta-primary" : "cta-secondary"} ${className}`.trim()} href={href} onClick={onClick}>
+    <a className={`cta ${kind === "primary" ? "cta-primary" : "cta-secondary"} ${className}`.trim()} href={href} onClick={onClick} data-analytics-cta={label || (typeof children === "string" ? children : "cta")} data-analytics-cta-type={kind}>
       <span className="cta-inner">
         <span className="cta-label">{children ?? label}</span>
         {kind === "primary" ? (
