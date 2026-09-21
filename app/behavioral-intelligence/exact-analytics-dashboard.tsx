@@ -26,7 +26,7 @@ import {
 
 type Row = { name: string; value: number; icon?: string; path?: string };
 type DashboardMode = "home" | "page" | "profile" | "ad";
-export type MetricKey = "visitors" | "views" | "sessions" | "engaged" | "scroll" | "cta" | "bookings" | "bounce" | "session" | "conversion" | "share" | "calls" | "impressions" | "clicks" | "ctr" | "cpa" | "spend";
+export type MetricKey = "visitors" | "views" | "sessions" | "engaged" | "scroll" | "cta" | "bookings" | "bounce" | "session" | "conversion" | "share" | "calls" | "impressions" | "clicks" | "ctr" | "cpa" | "spend" | "returning" | "returnRate" | "mainSiteVisits" | "conversions" | "online" | "pagesPerSession" | "conversionsPerVisitor" | "conversionsPerSession" | "preConversionTime" | "engagementRate";
 
 const visitorSeries = [455, 455, 415, 386, 365, 409, 364, 414, 367, 378, 348, 305, 287, 282, 210, 170, 131, 139, 150, 128, 159, 188, 251, 274, 27];
 const baseSeries: Record<MetricKey, number[]> = {
@@ -47,6 +47,16 @@ const baseSeries: Record<MetricKey, number[]> = {
   ctr: [4.1, 4.3, 4.0, 4.5, 4.8, 4.4, 5.0, 5.2, 4.9, 5.4, 5.1, 5.7, 5.5, 5.9, 6.1, 5.8, 6.3, 6.0, 6.5, 6.7, 6.4, 6.9, 7.1, 7.4, 6.8],
   cpa: [74, 71, 78, 69, 66, 72, 63, 61, 65, 58, 62, 55, 57, 52, 49, 53, 47, 50, 45, 43, 46, 41, 39, 37, 42],
   spend: [420, 438, 451, 466, 472, 489, 503, 518, 532, 541, 558, 571, 587, 599, 614, 628, 641, 656, 672, 689, 703, 718, 734, 749, 762],
+  returning: visitorSeries.map((value) => value * 0.22),
+  returnRate: visitorSeries.map(() => 22),
+  mainSiteVisits: visitorSeries.map((value) => value * 0.62),
+  conversions: visitorSeries.map((value) => value * 0.08),
+  online: visitorSeries.map((value) => value * 0.01),
+  pagesPerSession: visitorSeries.map(() => 2.6),
+  conversionsPerVisitor: visitorSeries.map(() => 0.08),
+  conversionsPerSession: visitorSeries.map(() => 0.1),
+  preConversionTime: [84, 88, 91, 86, 94, 100, 96, 102, 98, 91, 87, 83, 78, 74, 71, 68, 72, 76, 79, 82, 88, 92, 97, 104, 69],
+  engagementRate: visitorSeries.map(() => 70),
 };
 
 const sourceData: Record<string, Row[]> = {
@@ -391,6 +401,7 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
       <div className="df-grid">
         <SourceCard data={liveSourceData} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         <BarsCard tabs={livePathData} initial="Page" total={analyticsView ? compact(analyticsView.pageViews) : "5.8k"} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
+        {mode === "home" && <PageInsightCards analytics={analyticsView} comparisonPair={comparisonPair} comparisonAnalytics={comparisonAnalyticsPair} />}
         <LocationCard data={liveLocationData} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         <BarsCard tabs={liveSystemData} initial="Browser" comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} icons onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         {mode === "home" && pageFunnelTabs && <FunnelCard tabs={pageFunnelTabs} initial="Section reach" />}
@@ -527,6 +538,16 @@ function MainAnalytics({ mode, scope, analytics, metric, setMetric, compareMetri
         { key: "conversion", label: "Conversion rate", value: `${((analytics?.conversionRate ?? 8.7) * factor).toFixed(1)}%`, change: analytics ? "live" : "2.1%", arrow: "up" },
         { key: "cta", label: "CTA clicks", value: compact(Math.round((analytics?.ctaClicks ?? 684) * periodFactor * factor)), change: analytics ? "live" : "11%", arrow: "up" },
         { key: "bookings", label: "Booked calls", value: compact(Math.round((analytics?.bookedCalls ?? 180) * periodFactor * factor)), change: analytics ? "live" : "9%", arrow: "up" },
+        { key: "returning", label: "Returning visitors", value: compact(Math.round((analytics?.returningVisitors ?? 1272) * periodFactor * factor)), change: analytics ? "live" : "8%", arrow: "up" },
+        { key: "returnRate", label: "Return rate", value: `${(analytics?.returnRate ?? 22).toFixed(1)}%`, change: analytics ? "live" : "4%", arrow: "up" },
+        { key: "mainSiteVisits", label: "Main site visits", value: compact(Math.round((analytics?.mainSiteVisits ?? 3584) * periodFactor * factor)), change: analytics ? "live" : "6%", arrow: "up" },
+        { key: "conversions", label: "Conversions", value: compact(Math.round((analytics?.conversions ?? 462) * periodFactor * factor)), change: analytics ? "live" : "7%", arrow: "up" },
+        { key: "online", label: "Online now", value: String(analytics?.online ?? 1), change: "now", online: true },
+        { key: "pagesPerSession", label: "Pages per session", value: ((analytics?.pageViews ?? 8124) / Math.max(1, analytics?.sessions ?? 4521)).toFixed(2), change: analytics ? "live" : "—" },
+        { key: "conversionsPerVisitor", label: "Conversions / visitor", value: `${(((analytics?.conversions ?? 462) / Math.max(1, analytics?.visitors ?? 5783)) * 100).toFixed(1)}%`, change: analytics ? "live" : "—" },
+        { key: "conversionsPerSession", label: "Conversions / session", value: `${(((analytics?.conversions ?? 462) / Math.max(1, analytics?.sessions ?? 4521)) * 100).toFixed(1)}%`, change: analytics ? "live" : "—" },
+        { key: "preConversionTime", label: "Avg. time before conversion", value: analytics ? `${Math.floor(analytics.averageSessionSeconds / 60)}m ${Math.round(analytics.averageSessionSeconds % 60)}s` : "1m 09s", change: analytics ? "live" : "—" },
+        { key: "engagementRate", label: "Engagement rate", value: `${(((analytics?.engagedSessions ?? 3180) / Math.max(1, analytics?.sessions ?? 4521)) * 100).toFixed(1)}%`, change: analytics ? "live" : "—" },
       ]
     : mode === "ad"
     ? [
@@ -595,6 +616,49 @@ function MainAnalytics({ mode, scope, analytics, metric, setMetric, compareMetri
       <InteractiveChart metric={metric} compareMetric={compareMetric} compareLabel={compareLabel} compareScale={compareScale} compareRelative={compareRelative} scope={scope} period={period} granularity={granularity} factor={factor} filter={filter} revision={revision} />
     </article>
   );
+}
+
+function PageInsightCards({ analytics, comparisonPair, comparisonAnalytics = [] }: { analytics?: AnalyticsSummary | null; comparisonPair?: string | null; comparisonAnalytics?: AnalyticsSummary[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => setActiveIndex(0), [comparisonPair]);
+  const active = comparisonAnalytics[activeIndex] ?? analytics;
+  const sections = active?.sections ?? [];
+  const scrollRows = Object.values((active?.scrollZones ?? []).reduce<Record<string, Row>>((result, item) => {
+    const label = `${Math.round(item.zone)}% scroll`;
+    result[label] = { name: label, value: (result[label]?.value ?? 0) + item.value };
+    return result;
+  }, {}));
+  const cards = [
+    { title: "Sections les plus vues", rows: sections.map((item) => ({ name: item.label, value: item.views })).sort((a, b) => b.value - a.value), visual: "pie" as const, tone: "primary" as const },
+    { title: "Temps moyen par section", rows: sections.map((item) => ({ name: item.label, value: Math.round(item.averageSeconds) })).sort((a, b) => b.value - a.value), suffix: "s", tone: "primary" as const },
+    { title: "Taux de rebond par section", rows: sections.map((item) => ({ name: item.label, value: Math.round(item.bounceRate) })).sort((a, b) => b.value - a.value), suffix: "%", tone: "primary" as const },
+    { title: "Conversions par section", rows: sections.map((item) => ({ name: item.label, value: item.conversions })).sort((a, b) => b.value - a.value), tone: "primary" as const },
+    { title: "Profondeur de scroll par zone", rows: scrollRows.sort((a, b) => b.value - a.value), tone: "primary" as const },
+  ];
+
+  return <>{cards.map((card) => <PageInsightCard key={card.title} {...card} comparisonPair={comparisonPair} comparisonAnalytics={comparisonAnalytics} activeIndex={activeIndex} onComparisonChange={setActiveIndex} />)}</>;
+}
+
+function PageInsightCard({ title, rows, suffix = "", visual = "list", comparisonPair, comparisonAnalytics, activeIndex, onComparisonChange }: { title: string; rows: Row[]; suffix?: string; visual?: "list" | "pie"; comparisonPair?: string | null; comparisonAnalytics: AnalyticsSummary[]; activeIndex: number; onComparisonChange: (index: number) => void }) {
+  const comparisonNames = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
+  const comparisonSummary = comparisonAnalytics[activeIndex];
+  const comparisonRows = comparisonSummary ? (() => {
+    if (title === "Sections les plus vues") return comparisonSummary.sections.map((item) => ({ name: item.label, value: item.views })).sort((a, b) => b.value - a.value);
+    if (title === "Temps moyen par section") return comparisonSummary.sections.map((item) => ({ name: item.label, value: Math.round(item.averageSeconds) })).sort((a, b) => b.value - a.value);
+    if (title === "Taux de rebond par section") return comparisonSummary.sections.map((item) => ({ name: item.label, value: Math.round(item.bounceRate) })).sort((a, b) => b.value - a.value);
+    if (title === "Conversions par section") return comparisonSummary.sections.map((item) => ({ name: item.label, value: item.conversions })).sort((a, b) => b.value - a.value);
+    return Object.values(comparisonSummary.scrollZones.reduce<Record<string, Row>>((result, item) => {
+      const label = `${Math.round(item.zone)}% scroll`;
+      result[label] = { name: label, value: (result[label]?.value ?? 0) + item.value };
+      return result;
+    }, {})).sort((a, b) => b.value - a.value);
+  })() : rows;
+  const visibleRows = comparisonSummary ? comparisonRows : rows;
+  return <article className="df-card df-page-insight-card">
+    <CardHead><strong className="df-page-insight-title">{title}</strong></CardHead>
+    <div className="df-card-body">{visual === "pie" ? <DatafastPie rows={visibleRows.length ? visibleRows : [{ name: "Aucune donnée", value: 0 }]} selectedFilter={null} onSelect={() => undefined} tone={activeIndex === 1 ? "compare" : "primary"} /> : <BarList rows={visibleRows.length ? visibleRows : [{ name: "Aucune donnée", value: 0 }]} onSelect={() => undefined} action="inspect" seriesTone={activeIndex === 1 ? "compare" : "primary"} valueSuffix={suffix} />}</div>
+    {comparisonPair && comparisonNames.length === 2 && comparisonAnalytics.length === 2 && <ComparisonTabs comparisonPair={comparisonPair} activeIndex={activeIndex} onChange={onComparisonChange} />}
+  </article>;
 }
 
 function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 1, compareRelative, scope, period, granularity, factor, filter, revision }: { metric: MetricKey; compareMetric: MetricKey | null; compareLabel?: string | null; compareScale?: number; compareRelative: boolean; scope?: string; period: string; granularity: string; factor: number; filter: string | null; revision: number }) {
@@ -699,23 +763,47 @@ function metricValue(analytics: AnalyticsSummary, metric: MetricKey) {
     conversion: analytics.conversionRate,
     calls: analytics.conversions,
     session: analytics.averageSessionSeconds,
+    returning: analytics.returningVisitors,
+    returnRate: analytics.returnRate,
+    mainSiteVisits: analytics.mainSiteVisits,
+    conversions: analytics.conversions,
+    online: analytics.online,
+    pagesPerSession: analytics.pageViews / Math.max(1, analytics.sessions),
+    conversionsPerVisitor: (analytics.conversions / Math.max(1, analytics.visitors)) * 100,
+    conversionsPerSession: (analytics.conversions / Math.max(1, analytics.sessions)) * 100,
+    preConversionTime: analytics.averageSessionSeconds,
+    engagementRate: (analytics.engagedSessions / Math.max(1, analytics.sessions)) * 100,
   };
   return values[metric] ?? analytics.visitors;
 }
 
 function metricLabel(metric: MetricKey) {
-  return ({ visitors: "Visitors", views: "Page views", sessions: "Sessions", engaged: "Engaged sessions", scroll: "Scroll depth", cta: "CTA clicks", bookings: "Booked calls", bounce: "Bounce rate", session: "Session time", conversion: "Conversion rate", share: "Audience share", calls: "Conversions", impressions: "Impressions", clicks: "Clicks", ctr: "CTR", cpa: "Cost / conversion", spend: "Spend" } as Record<MetricKey, string>)[metric];
+  return ({ visitors: "Visitors", views: "Page views", sessions: "Sessions", engaged: "Engaged sessions", scroll: "Scroll depth", cta: "CTA clicks", bookings: "Booked calls", bounce: "Bounce rate", session: "Session time", conversion: "Conversion rate", share: "Audience share", calls: "Conversions", impressions: "Impressions", clicks: "Clicks", ctr: "CTR", cpa: "Cost / conversion", spend: "Spend", returning: "Returning visitors", returnRate: "Return rate", mainSiteVisits: "Main site visits", conversions: "Conversions", online: "Online now", pagesPerSession: "Pages per session", conversionsPerVisitor: "Conversions / visitor", conversionsPerSession: "Conversions / session", preConversionTime: "Avg. time before conversion", engagementRate: "Engagement rate" } as Record<MetricKey, string>)[metric];
 }
 
 function formatChartValue(metric: MetricKey, value: number) {
-  if (["bounce", "conversion", "share", "ctr", "scroll"].includes(metric)) return `${value.toFixed(1)}%`;
-  if (metric === "session") return `${Math.round(value)}s`;
+  if (["bounce", "conversion", "share", "ctr", "scroll", "returnRate", "conversionsPerVisitor", "conversionsPerSession", "engagementRate"].includes(metric)) return `${value.toFixed(1)}%`;
+  if (metric === "session" || metric === "preConversionTime") return `${Math.floor(value / 60)}m ${Math.round(value % 60)}s`;
+  if (metric === "pagesPerSession") return value.toFixed(2);
   if (metric === "cpa" || metric === "spend") return `${compact(Math.round(value))} €`;
   return compact(Math.round(value));
 }
 
-function Tabs({ items, active, onChange }: { items: string[]; active: string; onChange: (value: string) => void }) {
-  return <div className="df-tabs">{items.map((item) => <button key={item} className={item === active ? "is-active" : ""} onClick={() => onChange(item)}>{item}</button>)}</div>;
+function Tabs({ items, active, onChange, ariaLabel = "Dashboard tabs" }: { items: string[]; active: string; onChange: (value: string) => void; ariaLabel?: string }) {
+  const activateWithKeyboard = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const key = event.key;
+    const nextIndex = key === "ArrowRight" ? (index + 1) % items.length : key === "ArrowLeft" ? (index - 1 + items.length) % items.length : key === "Home" ? 0 : key === "End" ? items.length - 1 : -1;
+    if (nextIndex < 0) return;
+    event.preventDefault();
+    onChange(items[nextIndex]);
+    window.requestAnimationFrame(() => document.getElementById(`dashboard-tab-${items[nextIndex]}`)?.focus());
+  };
+  return <div className="dashboard-tabs" role="tablist" aria-label={ariaLabel} data-dashboard-tabs>
+    {items.map((item, index) => <button key={item} id={`dashboard-tab-${item}`} className="dashboard-tab" type="button" role="tab" aria-selected={item === active} tabIndex={item === active ? 0 : -1} onClick={() => onChange(item)} onKeyDown={(event) => activateWithKeyboard(event, index)}>
+      <span className="dashboard-tab-active-indicator" aria-hidden="true" />
+      <span className="dashboard-tab-label">{item}</span>
+    </button>)}
+  </div>;
 }
 
 function piePoint(radius: number, angle: number) {
@@ -731,11 +819,11 @@ function pieArcPath(innerRadius: number, outerRadius: number, start: number, end
   return `M${outerStart.x.toFixed(2)},${outerStart.y.toFixed(2)} A${outerRadius},${outerRadius} 0 ${largeArc} 1 ${outerEnd.x.toFixed(2)},${outerEnd.y.toFixed(2)} L${innerEnd.x.toFixed(2)},${innerEnd.y.toFixed(2)} A${innerRadius},${innerRadius} 0 ${largeArc} 0 ${innerStart.x.toFixed(2)},${innerStart.y.toFixed(2)}Z`;
 }
 
-function DatafastPie({ rows, selectedFilter, comparisonPair, onSelect }: { rows: Row[]; selectedFilter: string | null; comparisonPair?: string | null; onSelect: (row: Row) => void }) {
+function DatafastPie({ rows, selectedFilter, onSelect, tone = "primary" }: { rows: Row[]; selectedFilter: string | null; onSelect: (row: Row) => void; tone?: "primary" | "compare" }) {
   const [hovered, setHovered] = useState<Row | null>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const pieColors = tone === "compare" ? ["#F6DF8E", "#F6DF8E", "#F6DF8E", "#F6DF8E", "#F6DF8E"] : datafastPieColors;
   const total = rows.reduce((sum, row) => sum + row.value, 0) || 1;
-  const comparisonNames = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
   const center = { x: 190, y: 192 };
   const outerRadius = 116;
   const innerRadius = 69;
@@ -773,12 +861,12 @@ function DatafastPie({ rows, selectedFilter, comparisonPair, onSelect }: { rows:
     <svg viewBox="0 0 536 384" role="img" aria-label="Channel par source" onPointerMove={onMove} onPointerLeave={() => setHovered(null)}>
       <g transform={`translate(${center.x},${center.y})`}>
         {slices.map((slice) => {
-          const isActive = hovered?.name === slice.row.name || selectedFilter === slice.row.name || comparisonNames.includes(slice.row.name);
+          const isActive = hovered?.name === slice.row.name || selectedFilter === slice.row.name;
           const isMuted = Boolean(hovered) && !isActive;
           return <path
             key={slice.row.name}
             d={pieArcPath(innerRadius, outerRadius, slice.start, slice.end)}
-            fill={datafastPieColors[slice.index % datafastPieColors.length]}
+            fill={pieColors[slice.index % pieColors.length]}
             stroke="#d2e6f4"
             strokeWidth="1"
             className={`df-datafast-pie-arc ${isMuted ? "is-muted" : ""} ${isActive ? "is-active" : ""}`}
@@ -789,7 +877,7 @@ function DatafastPie({ rows, selectedFilter, comparisonPair, onSelect }: { rows:
         <circle r={innerRadius - 1} fill="#fff" />
       </g>
       {labels.map((label) => {
-        const isActive = hovered?.name === label.row.name || selectedFilter === label.row.name || comparisonNames.includes(label.row.name);
+        const isActive = hovered?.name === label.row.name || selectedFilter === label.row.name;
         const isMuted = Boolean(hovered) && !isActive;
         const iconDomain = label.row.name.includes(".") ? label.row.name.replace(/^www\./, "") : "";
         return <g key={`label-${label.row.name}`} className={`df-datafast-pie-label ${isMuted ? "is-muted" : ""} ${isActive ? "is-active" : ""}`}>
@@ -828,30 +916,60 @@ function comparisonSummaryFallbackRows(summaries: AnalyticsSummary[], comparison
   });
 }
 
+function ComparisonTabs({ comparisonPair, activeIndex, onChange }: { comparisonPair?: string | null; activeIndex: number; onChange: (index: number) => void }) {
+  const names = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
+  if (names.length !== 2) return null;
+  return <Tabs items={names} active={names[activeIndex] ?? names[0]} onChange={(name) => onChange(names.indexOf(name))} ariaLabel="Choisir la comparaison" />;
+}
+
+function comparisonDataRows(summaries: AnalyticsSummary[], index: number, key: keyof AnalyticsSummary, fallback: Row[]) {
+  const collection = summaries[index]?.[key];
+  if (Array.isArray(collection) && collection.length > 0) return (collection as Array<{ label: string; value: number }>).map((row) => ({ name: row.label, value: row.value }));
+  const factor = index === 0 ? 0.82 : 1.14;
+  return fallback.map((row, rowIndex) => ({ ...row, value: Math.max(1, Math.round(row.value * (factor + rowIndex * 0.015))) }));
+}
+
+function comparisonRowsForTab(rows: Row[], comparisonPair?: string | null, comparisonAnalytics: AnalyticsSummary[] = [], activeIndex = 0, fallbackKey?: keyof AnalyticsSummary) {
+  if (!comparisonPair || !fallbackKey || comparisonAnalytics.length < 2) return rows;
+  return comparisonDataRows(comparisonAnalytics, activeIndex, fallbackKey, rows);
+}
+
 function ComparisonSummary({ rows, comparisonPair, comparisonAnalytics = [], comparisonContextRows = [], fallbackKey }: { rows: Row[]; comparisonPair?: string | null; comparisonAnalytics?: AnalyticsSummary[]; comparisonContextRows?: Array<Row | null>; fallbackKey?: keyof AnalyticsSummary }) {
+  const [activeIndex, setActiveIndex] = useState(0);
   const selected = comparisonRows(rows, comparisonPair);
   const fallback = selected.some((row) => !row) && fallbackKey ? comparisonSummaryFallbackRows(comparisonAnalytics, comparisonPair, fallbackKey) : [];
   const resolved = selected.map((row, index) => row ?? fallback[index] ?? comparisonContextRows[index] ?? null);
   if (resolved.length !== 2 || resolved.some((row) => !row)) return null;
   const [first, second] = resolved as [Row, Row];
-  const delta = second.value - first.value;
-  const percentage = (delta / Math.max(1, first.value)) * 100;
+  const active = activeIndex === 0 ? first : second;
   return <div className="df-card-comparison" aria-label={`Comparaison ${first.name} et ${second.name}`}>
-    <div><i className="df-comparison-dot is-first" /><span>{first.name}</span><b>{compact(first.value)}</b></div>
-    <div><i className="df-comparison-dot is-second" /><span>{second.name}</span><b>{compact(second.value)}</b></div>
-    <small className={delta >= 0 ? "is-positive" : "is-negative"}>{delta >= 0 ? "+" : ""}{compact(Math.abs(delta))} · {delta >= 0 ? "+" : ""}{percentage.toFixed(1)}%</small>
+    <div className="df-comparison-tabs" role="tablist" aria-label="Choisir la comparaison">
+      {[first, second].map((row, index) => <button key={row.name} type="button" role="tab" aria-selected={activeIndex === index} className={`df-comparison-tab ${activeIndex === index ? "is-active" : ""}`} onClick={() => setActiveIndex(index)}>
+        <i className={`df-comparison-dot ${index === 0 ? "is-first" : "is-second"}`} />
+        <span>{row.name}</span>
+      </button>)}
+    </div>
+    <div className="df-comparison-selected" role="tabpanel">
+      <i className={`df-comparison-dot ${activeIndex === 0 ? "is-first" : "is-second"}`} />
+      <span>{active.name}</span>
+      <b>{compact(active.value)}</b>
+    </div>
   </div>;
 }
 
 function SourceCard({ data = sourceData, comparisonPair, comparisonContextRows = [], comparisonAnalytics = [], onFilter, selectedFilter, onSearch, onSelectFilter }: { data?: Record<string, Row[]>; comparisonPair?: string | null; comparisonContextRows?: Array<Row | null>; comparisonAnalytics?: AnalyticsSummary[]; onFilter: (value: string) => void; selectedFilter: string | null; onSearch?: (tab: string, rows: Row[]) => void; onSelectFilter?: (tab: string, rows: Row[], row: Row) => void }) {
   const [tab, setTab] = useState("Channel");
+  const [comparisonIndex, setComparisonIndex] = useState(0);
   const rows = data[tab] ?? [];
-  const total = rows.reduce((sum, row) => sum + row.value, 0);
+  useEffect(() => setComparisonIndex(0), [comparisonPair, tab]);
+  const fallbackKey = tab === "Channel" ? "sources" : tab === "Referrer" ? "referrers" : "campaigns";
+  const chartRows = comparisonRowsForTab(rows, comparisonPair, comparisonAnalytics, comparisonIndex, fallbackKey);
+  const total = chartRows.reduce((sum, row) => sum + row.value, 0);
   return <article className="df-card">
     <CardHead><Tabs items={Object.keys(data)} active={tab} onChange={setTab} /><span className="df-head-total"><b>All</b> ({compact(total)})</span></CardHead>
       <div className={`df-card-body df-source-body ${tab === "Channel" ? "is-channel" : "is-list"}`}>
-        {tab === "Channel" ? <DatafastPie rows={rows} selectedFilter={selectedFilter} comparisonPair={comparisonPair} onSelect={(row) => onSelectFilter ? onSelectFilter(tab, rows, row) : onFilter(row.name)} /> : <BarList rows={rows} comparisonPair={comparisonPair} onSelect={(row) => onSelectFilter ? onSelectFilter(tab, rows, row) : onFilter(row.name)} selectedFilter={selectedFilter} />}
-      </div><ComparisonSummary rows={rows} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalytics} fallbackKey={tab === "Channel" ? "sources" : tab === "Referrer" ? "referrers" : "campaigns"} /><button className="df-details" onClick={() => onSearch?.(tab, rows)}>Details</button>
+        {tab === "Channel" ? <DatafastPie rows={chartRows} selectedFilter={selectedFilter} tone={comparisonIndex === 1 ? "compare" : "primary"} onSelect={(row) => onSelectFilter ? onSelectFilter(tab, chartRows, row) : onFilter(row.name)} /> : <BarList rows={chartRows} seriesTone={comparisonIndex === 1 ? "compare" : "primary"} onSelect={(row) => onSelectFilter ? onSelectFilter(tab, chartRows, row) : onFilter(row.name)} selectedFilter={selectedFilter} />}
+      </div><ComparisonTabs comparisonPair={comparisonPair} activeIndex={comparisonIndex} onChange={setComparisonIndex} /><button className="df-details" onClick={() => onSearch?.(tab, chartRows)}>Details</button>
   </article>;
 }
 
@@ -859,11 +977,15 @@ function CardHead({ children }: { children: React.ReactNode }) { return <div cla
 
 function BarsCard({ tabs, initial, total, comparisonPair, comparisonContextRows = [], comparisonAnalytics = [], onFilter, selectedFilter, icons: showIcons = false, interaction = "filter", onSearch, onSelectFilter }: { tabs: Record<string, Row[]>; initial: string; total?: string; comparisonPair?: string | null; comparisonContextRows?: Array<Row | null>; comparisonAnalytics?: AnalyticsSummary[]; onFilter?: (value: string) => void; selectedFilter?: string | null; icons?: boolean; interaction?: "filter" | "inspect"; onSearch?: (tab: string, rows: Row[]) => void; onSelectFilter?: (tab: string, rows: Row[], row: Row) => void }) {
   const [tab, setTab] = useState(initial);
+  const [comparisonIndex, setComparisonIndex] = useState(0);
   const [selected, setSelected] = useState<Row | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const rows = tabs[tab];
+  useEffect(() => setComparisonIndex(0), [comparisonPair, tab]);
+  const fallbackKey = tab === "Page" ? "paths" : tab === "Entry page" ? "entryPages" : tab === "Exit link" ? "exitLinks" : tab === "Browser" ? "browsers" : tab === "OS" ? "operatingSystems" : "devices";
+  const chartRows = comparisonRowsForTab(rows, comparisonPair, comparisonAnalytics, comparisonIndex, fallbackKey);
   const select = (row: Row) => {
-    if (interaction === "filter") onSelectFilter ? onSelectFilter(tab, rows, row) : onFilter?.(row.name);
+    if (interaction === "filter") onSelectFilter ? onSelectFilter(tab, chartRows, row) : onFilter?.(row.name);
     else {
       setSelected(row);
       setDetailsOpen(true);
@@ -871,9 +993,9 @@ function BarsCard({ tabs, initial, total, comparisonPair, comparisonContextRows 
   };
   return <article className="df-card">
     <CardHead><Tabs items={Object.keys(tabs)} active={tab} onChange={setTab} />{total && <span className="df-head-total"><b>All</b> ({total})</span>}</CardHead>
-    <div className="df-card-body"><BarList rows={rows} comparisonPair={comparisonPair} onSelect={select} icons={showIcons} action={interaction} selectedFilter={selectedFilter} systemTab={showIcons ? tab : undefined} /></div><ComparisonSummary rows={rows} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalytics} fallbackKey={tab === "Page" ? "paths" : tab === "Entry page" ? "entryPages" : tab === "Exit link" ? "exitLinks" : tab === "Browser" ? "browsers" : tab === "OS" ? "operatingSystems" : "devices"} />
-    <button className="df-details" onClick={() => onSearch ? onSearch(tab, rows) : setDetailsOpen((value) => !value)}>{detailsOpen ? "Close details" : "Details"}</button>
-    {detailsOpen && <CardDetails row={selected ?? rows[0]} total={rows.reduce((sum, row) => sum + row.value, 0)} close={() => setDetailsOpen(false)} />}
+    <div className="df-card-body"><BarList rows={chartRows} seriesTone={comparisonIndex === 1 ? "compare" : "primary"} onSelect={select} icons={showIcons} action={interaction} selectedFilter={selectedFilter} systemTab={showIcons ? tab : undefined} /></div><ComparisonTabs comparisonPair={comparisonPair} activeIndex={comparisonIndex} onChange={setComparisonIndex} />
+    <button className="df-details" onClick={() => onSearch ? onSearch(tab, chartRows) : setDetailsOpen((value) => !value)}>{detailsOpen ? "Close details" : "Details"}</button>
+    {detailsOpen && <CardDetails row={selected ?? chartRows[0]} total={chartRows.reduce((sum, row) => sum + row.value, 0)} close={() => setDetailsOpen(false)} />}
   </article>;
 }
 
@@ -886,10 +1008,10 @@ function CardDetails({ row, total, close }: { row: Row; total: number; close: ()
   </div>;
 }
 
-function BarList({ rows, comparisonPair, onSelect, icons: showIcons = false, flags: showFlags = false, action = "filter", selectedFilter, systemTab }: { rows: Row[]; comparisonPair?: string | null; onSelect: (value: Row) => void; icons?: boolean; flags?: boolean; action?: "filter" | "inspect"; selectedFilter?: string | null; systemTab?: string }) {
+function BarList({ rows, comparisonPair, onSelect, icons: showIcons = false, flags: showFlags = false, action = "filter", selectedFilter, systemTab, seriesTone = "primary", valueSuffix = "" }: { rows: Row[]; comparisonPair?: string | null; onSelect: (value: Row) => void; icons?: boolean; flags?: boolean; action?: "filter" | "inspect"; selectedFilter?: string | null; systemTab?: string; seriesTone?: "primary" | "compare"; valueSuffix?: string }) {
   const max = Math.max(...rows.map((row) => row.value));
   const comparisonNames = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
-  return <div className="df-bar-list">{rows.map((row) => <button className={`df-bar-row ${selectedFilter === row.name ? "is-filtered" : ""} ${comparisonNames.includes(row.name) ? "is-comparing" : ""}`} key={row.name} onClick={() => onSelect(row)}><i className="df-bar-fill" style={{ width: `${Math.max(4, (row.value / max) * 86)}%` }} />{showFlags && countryCodes[row.name] && <img className="df-flag-icon" src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${countryCodes[row.name]}.svg`} alt={`${row.name} flag`} />}{showIcons && <span className="df-system-icon">{systemIcon(systemTab, row.name)}</span>}<span>{row.name}</span><b>{compact(row.value)}</b><span className="df-bar-action">{action === "filter" ? <Filter /> : <Search />}<em>{action === "filter" ? `Filter by ${row.name}` : `View ${row.name} details`}</em></span></button>)}</div>;
+  return <div className="df-bar-list">{rows.map((row) => <button className={`df-bar-row ${selectedFilter === row.name ? "is-filtered" : ""} ${comparisonNames.includes(row.name) ? "is-comparing" : ""} ${seriesTone === "compare" ? "is-comparison-series" : ""}`} key={row.name} onClick={() => onSelect(row)}><i className="df-bar-fill" style={{ width: `${Math.max(4, max ? (row.value / max) * 86 : 4)}%` }} />{showFlags && countryCodes[row.name] && <img className="df-flag-icon" src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${countryCodes[row.name]}.svg`} alt={`${row.name} flag`} />}{showIcons && <span className="df-system-icon">{systemIcon(systemTab, row.name)}</span>}<span>{row.name}</span><b>{compact(row.value)}{valueSuffix}</b><span className="df-bar-action">{action === "filter" ? <Filter /> : <Search />}<em>{action === "filter" ? `Filter by ${row.name}` : `View ${row.name} details`}</em></span></button>)}</div>;
 }
 
 function systemIcon(tab: string | undefined, name: string) {
@@ -911,13 +1033,16 @@ function systemIcon(tab: string | undefined, name: string) {
 
 function LocationCard({ data = locationData, comparisonPair, comparisonContextRows = [], comparisonAnalytics = [], onFilter, selectedFilter, onSearch, onSelectFilter }: { data?: Record<string, Row[]>; comparisonPair?: string | null; comparisonContextRows?: Array<Row | null>; comparisonAnalytics?: AnalyticsSummary[]; onFilter: (value: string) => void; selectedFilter: string | null; onSearch?: (tab: string, rows: Row[]) => void; onSelectFilter?: (tab: string, rows: Row[], row: Row) => void }) {
   const [tab, setTab] = useState("Map");
+  const [comparisonIndex, setComparisonIndex] = useState(0);
+  useEffect(() => setComparisonIndex(0), [comparisonPair, tab]);
   const selectMapCountry = (name: string) => {
     const row = (data.Country ?? []).find((item) => item.name === name) ?? { name, value: 0 };
     if (onSelectFilter) onSelectFilter("Country", data.Country ?? [], row);
     else onFilter(name);
   };
   const locationRows = data[tab] ?? [];
-  return <article className="df-card"><CardHead><Tabs items={["Map", "Country", "Region", "City"]} active={tab} onChange={setTab} /></CardHead><div className="df-card-body df-location-body">{tab === "Map" ? <WorldMap onFilter={selectMapCountry} comparisonPair={comparisonPair} /> : <BarList rows={locationRows} comparisonPair={comparisonPair} onSelect={(row) => onSelectFilter ? onSelectFilter(tab, locationRows, row) : onFilter(row.name)} selectedFilter={selectedFilter} flags={tab === "Country"} />}</div><ComparisonSummary rows={locationRows} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalytics} fallbackKey={tab === "Country" ? "countries" : undefined} /></article>;
+  const chartRows = tab === "Country" ? comparisonRowsForTab(locationRows, comparisonPair, comparisonAnalytics, comparisonIndex, "countries") : locationRows;
+  return <article className="df-card"><CardHead><Tabs items={["Map", "Country", "Region", "City"]} active={tab} onChange={setTab} /></CardHead><div className="df-card-body df-location-body">{tab === "Map" ? <WorldMap onFilter={selectMapCountry} comparisonPair={comparisonPair} /> : <BarList rows={chartRows} seriesTone={comparisonIndex === 1 ? "compare" : "primary"} onSelect={(row) => onSelectFilter ? onSelectFilter(tab, chartRows, row) : onFilter(row.name)} selectedFilter={selectedFilter} flags={tab === "Country"} />}</div>{tab === "Country" && <ComparisonTabs comparisonPair={comparisonPair} activeIndex={comparisonIndex} onChange={setComparisonIndex} />}</article>;
 }
 
 function WorldMap({ onFilter, comparisonPair }: { onFilter: (value: string) => void; comparisonPair?: string | null }) {
