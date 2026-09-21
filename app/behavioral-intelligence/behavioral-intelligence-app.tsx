@@ -276,6 +276,168 @@ const factor: Record<Range, number> = {
     session: 0.62,
     online: 0.28,
   };
+
+function parseComparisonRequest(input: string): { pair: string; metric: MetricKey } {
+  const normalized = input.toLocaleLowerCase("fr-FR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const countries = [
+    { aliases: ["etats-unis", "etats unis", "united states", "usa", "us"], label: "États-Unis" },
+    { aliases: ["france"], label: "France" },
+    { aliases: ["royaume-uni", "united kingdom", "uk"], label: "United Kingdom" },
+    { aliases: ["allemagne", "germany"], label: "Germany" },
+    { aliases: ["inde", "india"], label: "India" },
+    { aliases: ["canada"], label: "Canada" },
+    { aliases: ["australie", "australia"], label: "Australia" },
+  ];
+  const found = countries
+    .flatMap((country) => country.aliases.map((alias) => ({ ...country, alias, index: normalized.indexOf(alias) })))
+    .filter((item) => item.index >= 0)
+    .sort((a, b) => a.index - b.index)
+    .filter((item, index, list) => list.findIndex((candidate) => candidate.label === item.label) === index)
+    .slice(0, 2);
+  const metric = /\b(trafic|traffic|visiteurs?|visits?)\b/.test(normalized) ? "visitors"
+    : /\bsessions?\b/.test(normalized) ? "sessions"
+      : /\b(page views?|pages?)\b/.test(normalized) ? "views"
+        : /\b(engagement|engagees?|engaged)\b/.test(normalized) ? "engaged"
+          : /\b(conversions?|conversion)\b/.test(normalized) ? "conversion"
+            : /\b(rebond|bounce)\b/.test(normalized) ? "bounce"
+              : /\b(scroll|defilement)\b/.test(normalized) ? "scroll"
+                : /\b(cta|clics?|clicks?)\b/.test(normalized) ? "cta"
+                  : "visitors";
+  if (found.length === 2) return { pair: `${found[0].label} avec ${found[1].label}`, metric };
+  const fallback = input.replace(/^(compare(?:-moi)?|comparer)\s*/i, "").replace(/\b(le|la|les|du|de|des|trafic|traffic|visiteurs?|sessions?|pages?|conversion|rebond|scroll)\b/gi, "").split(/,|\s+avec\s+|\s+vs\s+|\s+et\s+/i).map((value) => value.trim()).filter(Boolean);
+  return { pair: fallback.length >= 2 ? `${fallback[0]} avec ${fallback[1]}` : input.trim(), metric };
+}
+
+type ComparisonCandidate = { label: string; kind: string; value?: number };
+type JevInterpretation = {
+  targets: string[];
+  metric: MetricKey;
+  suggestions?: ComparisonCandidate[];
+  provider?: "jev" | "local";
+};
+
+const defaultCountries: ComparisonCandidate[] = [
+  "France", "États-Unis", "United Kingdom", "Germany", "India", "Canada", "Australia",
+].map((label) => ({ label, kind: "Pays" }));
+
+function buildComparisonCandidates(analytics: AnalyticsSummary | null): ComparisonCandidate[] {
+  const from = (items: Array<{ label: string; value?: number }> | undefined, kind: string) =>
+    (items ?? []).map((item) => ({ label: item.label, kind, value: item.value }));
+  const candidates: ComparisonCandidate[] = [
+    ...defaultCountries,
+    ...from(analytics?.countries, "Pays"),
+    ...from(analytics?.paths, "Page"),
+    ...from(analytics?.entryPages, "Page d’entrée"),
+    ...from(analytics?.exitLinks, "Lien de sortie"),
+    ...from(analytics?.sources, "Source"),
+    ...from(analytics?.referrers, "Référent"),
+    ...from(analytics?.campaigns, "Campagne"),
+    ...from(analytics?.browsers, "Navigateur"),
+    ...from(analytics?.operatingSystems, "Système"),
+    ...from(analytics?.devices, "Appareil"),
+    ...from(analytics?.ctas, "CTA"),
+    ...from(analytics?.interactions, "Interaction"),
+    ...(analytics?.sections ?? []).map((item) => ({ label: item.label, kind: "Section", value: item.views })),
+    ...(analytics?.pageSections ?? []).map((item) => ({ label: `${item.path} · ${item.label}`, kind: "Section", value: item.reachedPeople })),
+    ...profiles.map((item) => ({ label: item.name, kind: "Profil", value: item.share })),
+    ...ads.flatMap((item) => [
+      { label: item.name, kind: "Publicité", value: item.clicks },
+      { label: item.network, kind: "Réseau publicitaire" },
+    ]),
+    ...pages.flatMap((item) => [
+      { label: item.path, kind: "Page", value: item.visitors },
+      { label: item.name, kind: "Page", value: item.visitors },
+    ]),
+  ];
+  return candidates.filter((candidate, index, list) =>
+    candidate.label.trim() && list.findIndex((item) => item.label === candidate.label && item.kind === candidate.kind) === index,
+  );
+}
+
+function normalizeSearch(value: string) {
+  return value
+    .toLocaleLowerCase("fr-FR")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function rankComparisonCandidates(query: string, candidates: ComparisonCandidate[]) {
+  const normalizedQuery = normalizeSearch(query);
+  const tokens = normalizedQuery.split(/[^a-z0-9]+/).filter((token) => token.length > 1);
+  return candidates
+    .map((candidate, index) => {
+      const haystack = normalizeSearch(`${candidate.label} ${candidate.kind}`);
+      const matches = tokens.filter((token) => haystack.includes(token)).length;
+      const exact = normalizedQuery.includes(normalizeSearch(candidate.label)) ? 30 : 0;
+      const popularity = Math.min(7, Math.log10(Math.max(1, candidate.value ?? 1)) * 2);
+      return { candidate, score: exact + matches * 9 + popularity - index / 10000 };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 10)
+    .map((item) => item.candidate);
+}
+
+function useComparisonSuggestions(query: string, candidates: ComparisonCandidate[]) {
+  const [suggestions, setSuggestions] = useState(() => rankComparisonCandidates("", candidates));
+  const [loading, setLoading] = useState(false);
+  const [provider, setProvider] = useState<"jev" | "local">("local");
+  useEffect(() => {
+    if (!query.trim()) {
+      setSuggestions(rankComparisonCandidates("", candidates));
+      setProvider("local");
+      return;
+    }
+    setSuggestions(rankComparisonCandidates(query, candidates));
+    setProvider("local");
+    const controller = new AbortController();
+    const timer = window.setTimeout(async () => {
+      setLoading(true);
+      try {
+        const response = await fetch("/api/jev", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          signal: controller.signal,
+          body: JSON.stringify({ query, candidates }),
+        });
+        const result = await response.json() as JevInterpretation;
+        setSuggestions(result.suggestions?.length ? result.suggestions : rankComparisonCandidates(query, candidates));
+        setProvider(result.provider ?? "local");
+      } catch (error) {
+        if (!(error instanceof DOMException && error.name === "AbortError")) {
+          setSuggestions(rankComparisonCandidates(query, candidates));
+          setProvider("local");
+        }
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    }, 220);
+    return () => {
+      window.clearTimeout(timer);
+      controller.abort();
+    };
+  }, [query, candidates]);
+  return { suggestions, loading, provider };
+}
+
+async function interpretComparisonRequest(input: string, analytics: AnalyticsSummary | null): Promise<{ pair: string; metric: MetricKey }> {
+  const fallback = parseComparisonRequest(input);
+  const candidates = buildComparisonCandidates(analytics);
+  try {
+    const response = await fetch("/api/jev", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ query: input, candidates }) });
+    if (!response.ok) return fallback;
+    const result = await response.json() as JevInterpretation;
+    if (!Array.isArray(result.targets) || result.targets.length < 2) return fallback;
+    const resolvedTargets = result.targets.slice(0, 2).map((target) => candidates.find((candidate) => candidate.label === target));
+    if (!resolvedTargets[0] || !resolvedTargets[1] || resolvedTargets[0].kind !== resolvedTargets[1].kind) return fallback;
+    return { pair: `${result.targets[0]} avec ${result.targets[1]}`, metric: result.metric ?? fallback.metric };
+  } catch {
+    return fallback;
+  }
+}
+
 export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalytics: AnalyticsSummary | null }) {
   const [view, setView] = useState<View>("home"),
     [detail, setDetail] = useState<Detail>(null),
@@ -284,6 +446,8 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
     [searchOpen, setSearchOpen] = useState(false),
     [compare, setCompare] = useState(false),
     [compareMetric, setCompareMetric] = useState<MetricKey | null>(null),
+    [searchMetric, setSearchMetric] = useState<MetricKey | null>(null),
+    [searchFilter, setSearchFilter] = useState<string | null>(null),
     [comparisonPair, setComparisonPair] = useState<string | null>(null),
     [compareRelative, setCompareRelative] = useState(false),
     [notificationsOpen, setNotificationsOpen] = useState(false),
@@ -297,9 +461,14 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
     [stickyAnalyticsControls, setStickyAnalyticsControls] = useState<ReactNode | null>(null);
   const title = detail?.name ?? nav.find((n) => n.id === view)?.label ?? "Home",
     ctx = { range, granularity, offset };
+  const comparisonCandidates = useMemo(() => buildComparisonCandidates(initialAnalytics), [initialAnalytics]);
   const activeComparisonPair = comparisonPair ?? chips.find((chip) => /\s+avec\s+/i.test(chip)) ?? null;
   const updateChips = (next: string[]) => {
     setChips(next);
+    if (next.length === 0) {
+      setSearchFilter(null);
+      setSearchMetric(null);
+    }
     if (!activeComparisonPair || next.includes(activeComparisonPair)) return;
     setComparisonPair(null);
     setCompareMetric(null);
@@ -314,8 +483,16 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
     setStickyAnalyticsControls(null);
     setMobile(false);
   };
-  const submit = (v: string) => {
-    if (v.trim()) setChips((c) => [...new Set([...c, v.trim()])]);
+  const submit = async (v: string, selectedTargets: string[] = []) => {
+    if (v.trim()) {
+      const parsed = await interpretComparisonRequest(v, initialAnalytics);
+      const pair = selectedTargets.length === 2 ? `${selectedTargets[0]} avec ${selectedTargets[1]}` : parsed.pair;
+      setChips([pair]);
+      setComparisonPair(pair);
+      setCompareMetric(parsed.metric);
+      setSearchFilter(null);
+      setSearchMetric(null);
+    }
     setSearchOpen(false);
     setQuery("");
   };
@@ -394,6 +571,8 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
                   onCompareMetricChange={setCompareMetric}
                   compareRelative={compareRelative}
                   comparisonPair={activeComparisonPair}
+                  externalFilter={searchFilter}
+                  externalMetric={searchMetric}
                 />
               )}{" "}
               {view === "ads" && (
@@ -432,6 +611,25 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
           setQuery={setQuery}
           close={() => setSearchOpen(false)}
           submit={submit}
+          candidates={comparisonCandidates}
+          onFilter={(value) => {
+            setChips([value]);
+            setSearchFilter(value);
+            setSearchMetric(null);
+            setComparisonPair(null);
+            setCompareMetric(null);
+            setSearchOpen(false);
+            setQuery("");
+          }}
+          onMetric={(metric, label) => {
+            setChips([`Graphique · ${label}`]);
+            setSearchMetric(metric);
+            setSearchFilter(null);
+            setComparisonPair(null);
+            setCompareMetric(null);
+            setSearchOpen(false);
+            setQuery("");
+          }}
         />
       )}{" "}
       {compare && (
@@ -439,7 +637,10 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
           close={() => setCompare(false)}
           compareRelative={compareRelative}
           setCompareRelative={setCompareRelative}
-          setComparisonPair={(value) => { setComparisonPair(value); setCompareMetric(value ? "visitors" : null); }}
+          setMetric={setCompareMetric}
+          interpret={async (value) => interpretComparisonRequest(value, initialAnalytics)}
+          candidates={comparisonCandidates}
+          setComparisonPair={(value) => setComparisonPair(value)}
           apply={(v) => {
             setChips(v);
             setCompare(false);
@@ -541,7 +742,8 @@ function SearchBar({
       </button>
       <div className="fw-command-actions">
         {chips.slice(0, 2).map((c) => (
-          <span key={c}>
+          <span key={c} className={/\s+avec\s+/i.test(c) ? "is-comparison" : "is-filter"}>
+            <i>{/\s+avec\s+/i.test(c) ? <FigmaCompareIcon /> : <Filter size={14} />}</i>
             {c}
             <button
               aria-label={`Retirer ${c}`}
@@ -569,6 +771,8 @@ function Home({
   onCompareMetricChange,
   compareRelative,
   comparisonPair,
+  externalFilter,
+  externalMetric,
 }: {
   ctx: Ctx;
   openProfile: (n: string) => void;
@@ -579,12 +783,14 @@ function Home({
   onCompareMetricChange: (value: MetricKey | null) => void;
   compareRelative: boolean;
   comparisonPair: string | null;
+  externalFilter: string | null;
+  externalMetric: MetricKey | null;
 }) {
   const pageOptions = useMemo(() => pages.map(({ name, path }) => ({ name, path })), []);
   return (
     <div className="fw-view">
       <ProfileRail open={openProfile} />
-      <ExactAnalyticsDashboard analytics={initialAnalytics} compareMetric={compareMetric} onCompareMetricChange={onCompareMetricChange} compareRelative={compareRelative} comparisonPair={comparisonPair} pageOptions={pageOptions} onStickyControlsChange={onStickyControlsChange} onSelectPage={openPage} />
+      <ExactAnalyticsDashboard analytics={initialAnalytics} compareMetric={compareMetric} onCompareMetricChange={onCompareMetricChange} compareRelative={compareRelative} comparisonPair={comparisonPair} externalFilter={externalFilter} externalMetric={externalMetric} pageOptions={pageOptions} onStickyControlsChange={onStickyControlsChange} onSelectPage={openPage} />
     </div>
   );
 }
@@ -1889,20 +2095,61 @@ function SearchOverlay({
   setQuery,
   close,
   submit,
+  candidates,
+  onFilter,
+  onMetric,
 }: {
   query: string;
   setQuery: (v: string) => void;
   close: () => void;
-  submit: (v: string) => void;
+  submit: (v: string, selectedTargets?: string[]) => void | Promise<void>;
+  candidates: ComparisonCandidate[];
+  onFilter: (value: string) => void;
+  onMetric: (metric: MetricKey, label: string) => void;
 }) {
-  const suggestions = [
-    "Comparer /pricing à /work",
-    "X Ads vs Google Ads sur la conversion",
-    "Visiteurs France avec UTM founder-04",
-    "Profils qui rebondissent sur les tarifs",
-  ];
+  const { suggestions } = useComparisonSuggestions(query, candidates);
+  const normalizedQuery = normalizeSearch(query);
+  const compareRequested = /\b(compar|compare|versus|vs|contre)\w*\b|\savec\s/.test(normalizedQuery);
+  const metricRequested = /\b(graph|graphique|evolution|tendance|courbe|taux|trafic|visiteurs?|sessions?|pages?|conversion|rebond|scroll|cta|clics?)\b/.test(normalizedQuery);
+  const metric = parseComparisonRequest(query).metric;
+  const metricLabels: Partial<Record<MetricKey, string>> = {
+    visitors: "Visiteurs", sessions: "Sessions", views: "Pages vues", engaged: "Sessions engagées",
+    conversion: "Taux de conversion", bounce: "Taux de rebond", scroll: "Profondeur de scroll", cta: "Clics CTA", bookings: "Réservations",
+  };
+  const commandWords = new Set(["comparer", "compare", "comparaison", "details", "close details", "ouvrir le menu"]);
+  const exactTargets = candidates
+    .map((candidate) => ({ candidate, normalizedLabel: normalizeSearch(candidate.label), index: normalizedQuery.indexOf(normalizeSearch(candidate.label)) }))
+    .filter((item) => item.normalizedLabel.length > 1 && item.index >= 0 && !commandWords.has(item.normalizedLabel))
+    .sort((a, b) => a.index - b.index || Number(b.candidate.kind === "Pays") - Number(a.candidate.kind === "Pays"))
+    .filter((item, index, list) => list.findIndex((other) => other.candidate.label === item.candidate.label) === index)
+    .map((item) => item.candidate);
+  const uniqueSuggestions = suggestions.filter((candidate, index, list) => list.findIndex((item) => item.label === candidate.label) === index);
+  const firstComparisonTarget = exactTargets[0] ?? uniqueSuggestions[0];
+  const compatibleTargets = firstComparisonTarget
+    ? [...exactTargets.slice(1), ...uniqueSuggestions, ...candidates]
+        .filter((candidate) => candidate.kind === firstComparisonTarget.kind && candidate.label !== firstComparisonTarget.label)
+        .filter((candidate, index, list) => list.findIndex((item) => item.label === candidate.label) === index)
+    : [];
+  const exactCompatibleTarget = exactTargets.slice(1).find((candidate) => candidate.kind === firstComparisonTarget?.kind);
+  const comparisonPairs: Array<[ComparisonCandidate, ComparisonCandidate]> = firstComparisonTarget
+    ? (exactCompatibleTarget
+        ? [[firstComparisonTarget, exactCompatibleTarget]]
+        : compatibleTargets.slice(0, 5).map((candidate) => [firstComparisonTarget, candidate]))
+    : [];
+  const displaySuggestions = suggestions
+    .filter((candidate, index, list) => {
+      const first = list.findIndex((item) => item.label === candidate.label);
+      if (first === index) return !list.some((item, itemIndex) => itemIndex > index && item.label === candidate.label && item.kind === "Pays");
+      return candidate.kind === "Pays" && !list.slice(0, index).some((item) => item.label === candidate.label && item.kind === "Pays");
+    })
+    .slice(0, 8);
+  const runPrimary = () => {
+    if (compareRequested && comparisonPairs[0]) return submit(query, comparisonPairs[0].map((item) => item.label));
+    if (metricRequested) return onMetric(metric, metricLabels[metric] ?? "Visiteurs");
+    if (displaySuggestions[0]) return onFilter(displaySuggestions[0].label);
+  };
   return (
-    <div className="fw-overlay" onMouseDown={close}>
+    <div className="fw-overlay fw-command-layer" onMouseDown={close}>
       <section
         className="fw-command-modal"
         onMouseDown={(e) => e.stopPropagation()}
@@ -1913,21 +2160,26 @@ function SearchOverlay({
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && submit(query)}
-            placeholder="Demande une comparaison en langage naturel…"
+            onKeyDown={(e) => e.key === "Escape" ? close() : e.key === "Enter" && runPrimary()}
+            placeholder="Rechercher avec Jeff…"
           />
-          <button aria-label="Fermer" onClick={close}>
-            <X size={18} />
-          </button>
+          <kbd>Esc</kbd>
         </div>
-        <div className="fw-suggestions">
-          {suggestions.map((i) => (
-            <button key={i} onClick={() => submit(i)}>
-              <Sparkles size={15} />
-              <span>{i}</span>
-              <ArrowRight size={14} />
-            </button>
-          ))}
+        <div className="fw-command-results" role="listbox" aria-label="Résultats de recherche">
+          {compareRequested && comparisonPairs.map((pair, index) => <button key={`${pair[0].kind}-${pair[0].label}-${pair[1].label}`} className={index === 0 ? "is-primary" : ""} onClick={() => submit(query, pair.map((item) => item.label))} role="option">
+            <i className="is-compare"><FigmaCompareIcon /></i>
+            <span><b>Comparer {pair[0].label} et {pair[1].label}</b><small>Comparaison · {pair[0].kind} · {metricLabels[metric] ?? "Visiteurs"}</small></span>
+          </button>)}
+          {!compareRequested && metricRequested && <button onClick={() => onMetric(metric, metricLabels[metric] ?? "Visiteurs")} role="option">
+            <i><BarChart3 size={18} /></i>
+            <span><b>Afficher l’évolution — {metricLabels[metric] ?? "Visiteurs"}</b><small>Graphique principal</small></span>
+          </button>}
+          {!compareRequested && displaySuggestions.map((candidate) => <button key={`${candidate.kind}-${candidate.label}`} onClick={() => onFilter(candidate.label)} role="option">
+            <i><Filter size={17} /></i>
+            <span><b>{candidate.label}</b><small>Filtrer par {candidate.kind.toLocaleLowerCase("fr-FR")}</small></span>
+            {typeof candidate.value === "number" && <em>{num(candidate.value)}</em>}
+          </button>)}
+          {!query.trim() && <p>Tapez un pays, une page, une métrique ou une comparaison.</p>}
         </div>
       </section>
     </div>
@@ -2018,25 +2270,38 @@ function QuickCompare({
   close,
   compareRelative,
   setCompareRelative,
+  setMetric,
+  interpret,
+  candidates,
   setComparisonPair,
   apply,
 }: {
   close: () => void;
   compareRelative: boolean;
   setCompareRelative: (value: boolean) => void;
+  setMetric: (value: MetricKey | null) => void;
+  interpret: (value: string) => Promise<{ pair: string; metric: MetricKey }>;
+  candidates: ComparisonCandidate[];
   setComparisonPair: (value: string | null) => void;
   apply: (v: string[]) => void;
 }) {
   const [value, setValue] = useState("");
-  const suggestions = [
-    "/pricing avec /work",
-    "X Ads avec Google Ads",
-    "France avec États-Unis",
-  ];
-  const submit = (text: string) => {
+  const [selected, setSelected] = useState<ComparisonCandidate[]>([]);
+  const { suggestions, loading, provider } = useComparisonSuggestions(value, candidates);
+  const toggle = (candidate: ComparisonCandidate) => setSelected((current) => {
+    const exists = current.some((item) => item.label === candidate.label && item.kind === candidate.kind);
+    if (exists) return current.filter((item) => item.label !== candidate.label || item.kind !== candidate.kind);
+    if (current[0] && current[0].kind !== candidate.kind) return [candidate];
+    return current.length < 2 ? [...current, candidate] : [current[1], candidate];
+  });
+  const submit = async (text: string, selectedTargets = selected.map((item) => item.label)) => {
     if (text.trim()) {
-      setComparisonPair(text.trim());
-      apply([text.trim()]);
+      const parsed = await interpret(text);
+      const pair = selectedTargets.length === 2 ? `${selectedTargets[0]} avec ${selectedTargets[1]}` : parsed.pair;
+      setComparisonPair(pair);
+      setMetric(parsed.metric);
+      setCompareRelative(false);
+      apply([pair]);
     }
   };
   return (
@@ -2051,7 +2316,7 @@ function QuickCompare({
             autoFocus
             value={value}
             onChange={(event) => setValue(event.target.value)}
-            onKeyDown={(event) => event.key === "Enter" && submit(value)}
+            onKeyDown={(event) => event.key === "Enter" && submit(value || selected.map((item) => item.label).join(" avec "))}
             placeholder="Comparer n’importe quelle donnée"
           />
           <button aria-label="Fermer" onClick={close}>
@@ -2062,17 +2327,26 @@ function QuickCompare({
           <span>Comparer relativement</span>
           <button className={`fw-chart-compare-toggle ${compareRelative ? "is-on" : ""}`} aria-label="Comparer relativement" aria-pressed={compareRelative} onClick={() => setCompareRelative(!compareRelative)}><i /></button>
         </div>
-        {suggestions
-          .filter(
-            (item) =>
-              !value || item.toLowerCase().includes(value.toLowerCase()),
-          )
-          .map((item) => (
-            <button key={item} onClick={() => submit(item)}>
-              {item}
-              <ArrowRight size={13} />
-            </button>
-          ))}
+        <div className="fw-smart-search-head fw-smart-search-head-compact">
+          <span><Sparkles size={13} />{loading ? "Recherche…" : `${suggestions.length} options`}</span>
+          <small>{provider === "jev" ? "Jeff" : "Données disponibles"}</small>
+        </div>
+        {selected.length > 0 && <div className="fw-smart-selected">
+          {selected.map((item) => <button key={`${item.kind}-${item.label}`} onClick={() => toggle(item)}>{item.label}<X size={11} /></button>)}
+          <span>{selected.length}/2</span>
+        </div>}
+        <div className="fw-smart-results fw-smart-results-compact" role="listbox" aria-label="Options de comparaison">
+          {suggestions.filter((candidate) => !selected[0] || candidate.kind === selected[0].kind).map((candidate) => {
+            const active = selected.some((item) => item.label === candidate.label && item.kind === candidate.kind);
+            return <button key={`${candidate.kind}-${candidate.label}`} className={active ? "is-selected" : ""} onClick={() => toggle(candidate)} role="option" aria-selected={active}>
+              <span><b>{candidate.label}</b><small>{candidate.kind}</small></span>
+              {active ? <Check size={14} /> : <Plus size={14} />}
+            </button>;
+          })}
+        </div>
+        <button className="fw-smart-apply" disabled={selected.length !== 2 && !value.trim()} onClick={() => submit(value || selected.map((item) => item.label).join(" avec "))}>
+          {selected.length === 2 ? `Comparer ${selected[0].label} et ${selected[1].label}` : "Laisser Jeff choisir"}<ArrowRight size={13} />
+        </button>
       </section>
     </div>
   );
