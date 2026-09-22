@@ -4,6 +4,7 @@ import { analyticsCookieName, analyticsTokenIsValid } from "@/lib/saas-analytics
 import { readAnalyticsEvents, summarizeAnalytics } from "@/lib/saas-analytics/store";
 import { BehavioralIntelligenceApp } from "./behavioral-intelligence-app";
 import "./behavioral-intelligence.css";
+import "./visitor-history.css";
 
 export const metadata: Metadata = {
   title: "Behavioral Intelligence OS | Ruff Agency",

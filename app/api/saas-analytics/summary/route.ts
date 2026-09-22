@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   if (process.env.NODE_ENV === "production" && !analyticsTokenIsValid(request.cookies.get(analyticsCookieName)?.value))
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const requested = Number(request.nextUrl.searchParams.get("days") ?? 30);
-  const days = [7, 30, 90].includes(requested) ? requested : 30;
+  const days = [1, 7, 30, 90].includes(requested) ? requested : 30;
   try {
     const rawFilters = request.nextUrl.searchParams.get("filters");
     const filters = rawFilters ? JSON.parse(rawFilters) : [];

@@ -28,6 +28,13 @@ type Row = { name: string; value: number; icon?: string; path?: string };
 type DashboardMode = "home" | "page" | "profile" | "ad";
 export type MetricKey = "visitors" | "views" | "sessions" | "engaged" | "scroll" | "cta" | "bookings" | "bounce" | "session" | "conversion" | "share" | "calls" | "impressions" | "clicks" | "ctr" | "cpa" | "spend" | "returning" | "returnRate" | "mainSiteVisits" | "conversions" | "online" | "pagesPerSession" | "conversionsPerVisitor" | "conversionsPerSession" | "preConversionTime" | "engagementRate";
 
+const comparisonPalette = ["#8DCDFF", "#8DA8FF", "#AA99FF", "#FAC666", "#FA9C66", "#E16540", "#95EB73", "#DBEB73", "#FF8DA0", "#F78DFF"];
+
+function comparisonChartColors(seriesCount: number) {
+  const count = Math.max(1, seriesCount);
+  return Array.from({ length: count }, (_, index) => comparisonPalette[Math.round((index * comparisonPalette.length) / count) % comparisonPalette.length]);
+}
+
 const visitorSeries = [455, 455, 415, 386, 365, 409, 364, 414, 367, 378, 348, 305, 287, 282, 210, 170, 131, 139, 150, 128, 159, 188, 251, 274, 27];
 const baseSeries: Record<MetricKey, number[]> = {
   visitors: visitorSeries,
@@ -243,14 +250,23 @@ function smoothPath(points: Array<[number, number]>) {
   }, "");
 }
 
-export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, analytics, compareMetric = null, onCompareMetricChange, compareRelative = false, comparisonPair = null, externalFilter = null, externalMetric = null, onStickyControlsChange, onSelectPage, pageOptions = [] }: { mode?: DashboardMode; scope?: string; linkedPagePath?: string; analytics?: AnalyticsSummary | null; compareMetric?: MetricKey | null; onCompareMetricChange?: (value: MetricKey | null) => void; compareRelative?: boolean; comparisonPair?: string | null; externalFilter?: string | null; externalMetric?: MetricKey | null; onStickyControlsChange?: (controls: ReactNode | null) => void; onSelectPage?: (page: string) => void; pageOptions?: Array<{ name: string; path: string }> }) {
+export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, analytics, compareMetric = null, onCompareMetricChange, compareRelative = false, comparisonPair = null, externalFilter = null, externalMetric = null, onStickyControlsChange, onSelectPage, pageOptions = [], selectedPagePath = "", onSelectedPagePathChange, analyticsPeriod, onAnalyticsPeriodChange, analyticsGranularity, onAnalyticsGranularityChange }: { mode?: DashboardMode; scope?: string; linkedPagePath?: string; analytics?: AnalyticsSummary | null; compareMetric?: MetricKey | null; onCompareMetricChange?: (value: MetricKey | null) => void; compareRelative?: boolean; comparisonPair?: string | null; externalFilter?: string | null; externalMetric?: MetricKey | null; onStickyControlsChange?: (controls: ReactNode | null) => void; onSelectPage?: (page: string) => void; pageOptions?: Array<{ name: string; path: string }>; selectedPagePath?: string; onSelectedPagePathChange?: (path: string) => void; analyticsPeriod?: string; onAnalyticsPeriodChange?: (period: "Last 24 hours" | "Last 7 days" | "Last 30 days") => void; analyticsGranularity?: string; onAnalyticsGranularityChange?: (granularity: string) => void }) {
   const firstMetric: MetricKey = mode === "ad" ? "impressions" : "visitors";
   const [metric, setMetric] = useState<MetricKey>(firstMetric);
   const activeCompareMetric = comparisonPair ? metric : compareMetric;
-  const [granularity, setGranularity] = useState(granularities[0]);
+  const [localGranularity, setLocalGranularity] = useState(granularities[0]);
+  const granularity = analyticsGranularity ?? localGranularity;
+  const setGranularity = onAnalyticsGranularityChange ?? setLocalGranularity;
   const [periodOpen, setPeriodOpen] = useState(false);
   const [granularityOpen, setGranularityOpen] = useState(false);
-  const [periodIndex, setPeriodIndex] = useState(0);
+  const [localPeriodIndex, setLocalPeriodIndex] = useState(0);
+  const periodIndex = analyticsPeriod ? Math.max(0, periods.indexOf(analyticsPeriod)) : localPeriodIndex;
+  const setPeriodIndex = (next: number | ((current: number) => number)) => {
+    const index = typeof next === "function" ? next(periodIndex) : next;
+    if (onAnalyticsPeriodChange) onAnalyticsPeriodChange(periods[index] as "Last 24 hours" | "Last 7 days" | "Last 30 days");
+    else setLocalPeriodIndex(index);
+  };
+  const [pageOpen, setPageOpen] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [revision, setRevision] = useState(0);
   const [filters, setFilters] = useState<string[]>([]);
@@ -258,7 +274,8 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   const [filterRemoving, setFilterRemoving] = useState<string | null>(null);
   const [filterPicker, setFilterPicker] = useState<{ title: string; rows: Row[]; onChoose: (row: Row) => void } | null>(null);
   const [filterPickers, setFilterPickers] = useState<Record<string, { title: string; rows: Row[]; onChoose: (row: Row) => void }>>({});
-  const [filteredAnalytics, setFilteredAnalytics] = useState<AnalyticsSummary | null>(null);
+  const [filteredAnalytics, setFilteredAnalytics] = useState<{ key: string; summary: AnalyticsSummary } | null>(null);
+  const [filterError, setFilterError] = useState(false);
   const [comparisonAnalytics, setComparisonAnalytics] = useState<AnalyticsSummary | null>(null);
   const [comparisonAnalyticsPair, setComparisonAnalyticsPair] = useState<AnalyticsSummary[]>([]);
   const toolbarRef = useRef<HTMLDivElement>(null);
@@ -266,9 +283,11 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   // Filtered summaries come from the event store; never shrink values with a
   // visual factor, otherwise the dashboard would show invented numbers.
   const filterFactor = 1;
-  const filterKey = filters.join("|") || null;
+  const appliedFilters = selectedPagePath ? [...filters.filter((filter) => filter !== selectedPagePath), selectedPagePath] : filters;
+  const filterDays = analyticsPeriod === "Last 24 hours" ? 1 : analyticsPeriod === "Last 7 days" ? 7 : 30;
+  const filterKey = appliedFilters.length ? `${filterDays}:${appliedFilters.join("|")}` : null;
   const selectedFilter = filters.at(-1) ?? null;
-  const selectedPagePath = filters.find((value) => value.startsWith("/")) ?? null;
+  const pageFilterPath = selectedPagePath || filters.find((value) => value.startsWith("/")) || null;
   useEffect(() => {
     setFilters(externalFilter ? [externalFilter] : []);
   }, [externalFilter]);
@@ -276,18 +295,20 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
     if (externalMetric) setMetric(externalMetric);
   }, [externalMetric]);
   useEffect(() => {
-    if (!filters.length) {
+    if (!appliedFilters.length) {
       setFilteredAnalytics(null);
+      setFilterError(false);
       return;
     }
     const controller = new AbortController();
-    fetch(`/api/saas-analytics/summary?days=30&filters=${encodeURIComponent(JSON.stringify(filters))}`, { signal: controller.signal, cache: "no-store" })
-      .then((response) => response.ok ? response.json() : null)
-      .then((summary: AnalyticsSummary | null) => { if (summary) setFilteredAnalytics(summary); })
-      .catch(() => undefined);
+    setFilterError(false);
+    fetch(`/api/saas-analytics/summary?days=${filterDays}&match=${selectedPagePath ? "event" : "visitor"}&filters=${encodeURIComponent(JSON.stringify(appliedFilters))}`, { signal: controller.signal, cache: "no-store" })
+      .then((response) => response.ok ? response.json() : Promise.reject(new Error("Analytics unavailable")))
+      .then((summary: AnalyticsSummary | null) => { if (summary) setFilteredAnalytics({ key: filterKey ?? "", summary }); })
+      .catch(() => { if (!controller.signal.aborted) setFilterError(true); });
     return () => controller.abort();
   }, [filterKey]);
-  const analyticsView = filteredAnalytics ?? analytics;
+  const analyticsView = filteredAnalytics?.key === filterKey ? filteredAnalytics.summary : filterKey ? null : analytics;
   const comparisonNames = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
   useEffect(() => {
     const targets = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
@@ -315,13 +336,8 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
       ? metricValue(comparisonAnalyticsPair[index + 1], activeCompareMetric) / Math.max(1, metricValue(analyticsView, activeCompareMetric))
       : 1,
   }));
-  const pageFunnelTabs = useMemo(() => pageSectionFunnelTabs(selectedPagePath, analyticsView), [selectedPagePath, analyticsView]);
+  const pageFunnelTabs = useMemo(() => pageSectionFunnelTabs(pageFilterPath, analyticsView), [pageFilterPath, analyticsView]);
   const linkedPageFunnelTabs = useMemo(() => pageSectionFunnelTabs(linkedPagePath ?? null, analyticsView), [linkedPagePath, analyticsView]);
-  const pageRows = useMemo(() => pageOptions.map((page) => ({
-    name: page.name,
-    path: page.path,
-    value: Math.max(1, Math.round((analyticsView?.paths.find((item) => item.label === page.path)?.value ?? 0))),
-  })), [pageOptions, analyticsView?.paths]);
   const liveSourceData: Record<string, Row[]> = analyticsView ? {
     Channel: analyticsView.sources.map((item) => ({ name: item.label, value: item.value })),
     Referrer: analyticsView.referrers.map((item) => ({ name: item.label, value: item.value })),
@@ -382,19 +398,13 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
     }, 180);
   };
 
-  const openPagePicker = () => {
-    const picker = {
-      title: "Page",
-      rows: pageRows,
-      onChoose: (row: Row) => {
-        applyFilter(row.path ?? row.name);
-        onSelectPage?.(row.name);
-        setSearchOverlay(null);
-      },
-    };
-    setFilterPicker(picker);
-    setSearchOverlay(picker);
+  const chooseDashboardPage = (path: string) => {
+    onSelectedPagePathChange?.(path);
+    setPageOpen(false);
   };
+  const toolbarPageProps = mode === "home" && onSelectedPagePathChange
+    ? { selectedPagePath, pageOptions, pageOpen, setPageOpen, onPageChange: chooseDashboardPage }
+    : {};
 
   const refresh = () => {
     setRefreshing(true);
@@ -406,18 +416,18 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
 
   useEffect(() => {
     if (!onStickyControlsChange) return;
-    onStickyControlsChange(<AnalyticsToolbar {...{ scope: scopeActive ? scope : undefined, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick: (value: string) => { const picker = filterPickers[value] ?? filterPicker; if (picker) setSearchOverlay(picker); }, clearFilter, filterRemoving, onPagePicker: mode === "home" ? openPagePicker : undefined }} />);
-  }, [onStickyControlsChange, mode, scope, scopeActive, periodIndex, granularity, periodOpen, granularityOpen, refreshing, filters, filterPicker, filterPickers, filterRemoving, pageRows]);
+    onStickyControlsChange(<AnalyticsToolbar {...{ scope: scopeActive ? scope : undefined, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick: (value: string) => { const picker = filterPickers[value] ?? filterPicker; if (picker) setSearchOverlay(picker); }, clearFilter, filterRemoving, ...toolbarPageProps }} />);
+  }, [onStickyControlsChange, mode, scope, scopeActive, periodIndex, granularity, periodOpen, granularityOpen, refreshing, filters, filterPicker, filterPickers, filterRemoving, selectedPagePath, pageOpen]);
 
   return (
     <section className="df-dashboard">
       <div ref={toolbarRef} className={onStickyControlsChange ? "df-home-toolbar-source" : undefined}>
-        <AnalyticsToolbar {...{ scope: scopeActive ? scope : undefined, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick: (value: string) => { const picker = filterPickers[value] ?? filterPicker; if (picker) setSearchOverlay(picker); }, clearFilter, filterRemoving, onPagePicker: mode === "home" ? openPagePicker : undefined }} />
+        <AnalyticsToolbar {...{ scope: scopeActive ? scope : undefined, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick: (value: string) => { const picker = filterPickers[value] ?? filterPicker; if (picker) setSearchOverlay(picker); }, clearFilter, filterRemoving, ...toolbarPageProps }} />
       </div>
 
-      <MainAnalytics mode={mode} scope={scope} analytics={analyticsView} metric={metric} setMetric={setMetric} compareMetric={activeCompareMetric} compareLabel={comparisonNames[1] ?? comparisonPair} compareValue={comparisonValue} compareScale={comparisonScale} comparisonSeries={comparisonSeries} compareRelative={compareRelative} onCompareMetricChange={onCompareMetricChange} period={periods[periodIndex]} granularity={granularity} factor={filterFactor * scopeFactor} filter={filterKey} revision={revision} />
+      {filterKey && !analyticsView ? <div className="df-filter-status" role="status">{filterError ? "Statistiques indisponibles pour ce filtre." : "Chargement des statistiques de la page…"}</div> : <MainAnalytics mode={mode} scope={scope} analytics={analyticsView} metric={metric} setMetric={setMetric} compareMetric={activeCompareMetric} compareLabel={comparisonNames[1] ?? comparisonPair} compareValue={comparisonValue} compareScale={comparisonScale} comparisonSeries={comparisonSeries} compareRelative={compareRelative} onCompareMetricChange={onCompareMetricChange} period={periods[periodIndex]} granularity={granularity} factor={filterFactor * scopeFactor} filter={filterKey} revision={revision} />}
 
-      <div className="df-grid">
+      {(!filterKey || analyticsView) && <div className="df-grid">
         <SourceCard data={liveSourceData} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         <BarsCard tabs={livePathData} initial="Page" total={analyticsView ? compact(analyticsView.pageViews) : "5.8k"} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         {mode === "home" && <PageInsightCards analytics={analyticsView} comparisonPair={comparisonPair} comparisonAnalytics={comparisonAnalyticsPair} onSearch={(title, rows) => openSearch(title, rows)} />}
@@ -425,7 +435,7 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
         <BarsCard tabs={liveSystemData} initial="Browser" comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} icons onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         {mode === "home" && pageFunnelTabs && <FunnelCard tabs={pageFunnelTabs} initial="Section reach" />}
         {mode !== "home" && <DetailInsightCards mode={mode} onFilter={applyFilter} pageFunnelTabs={linkedPageFunnelTabs} />}
-      </div>
+      </div>}
       {searchOverlay && <AnalyticsSearchOverlay title={searchOverlay.title} rows={searchOverlay.rows} onChoose={searchOverlay.onChoose} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} close={() => setSearchOverlay(null)} />}
     </section>
   );
@@ -498,7 +508,7 @@ function pagePathFromScope(scope?: string) {
   return ({ Home: "/", Services: "/services", Agency: "/agence", "Réalisations": "/realisations", "30 min": "/30-min", "SaaS redesign": "/saas-redesign" } as Record<string, string>)[scope ?? ""] ?? "/";
 }
 
-function AnalyticsToolbar({ scope, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick, clearFilter, filterRemoving = null, onPagePicker, compact = false }: {
+function AnalyticsToolbar({ scope, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick, clearFilter, filterRemoving = null, selectedPagePath, pageOptions, pageOpen, setPageOpen, onPageChange, compact = false }: {
   scope?: string;
   periodIndex: number;
   setPeriodIndex: (value: number | ((current: number) => number)) => void;
@@ -514,11 +524,24 @@ function AnalyticsToolbar({ scope, periodIndex, setPeriodIndex, granularity, set
   onFilterClick?: (value: string) => void;
   clearFilter?: (value: string) => void;
   filterRemoving?: string | null;
-  onPagePicker?: () => void;
+  selectedPagePath?: string;
+  pageOptions?: Array<{ name: string; path: string }>;
+  pageOpen?: boolean;
+  setPageOpen?: (open: boolean | ((current: boolean) => boolean)) => void;
+  onPageChange?: (path: string) => void;
   compact?: boolean;
 }) {
   return <div className={`df-toolbar ${compact ? "df-toolbar-compact" : ""}`} role="toolbar" aria-label="Analytics controls">
-    <button className="df-domain-pill" onClick={onPagePicker} aria-label={onPagePicker ? "Choisir une page" : "Domaine ruff.agency"}><img className="df-domain-icon" src="/icon.png" alt="" />ruff.agency</button>
+    <button className="df-domain-pill" type="button" aria-label="Domaine ruff.agency"><img className="df-domain-icon" src="/icon.png" alt="" />ruff.agency</button>
+    {onPageChange && <div className="df-control-anchor">
+      <button className="df-page-select" type="button" aria-label={`Page : ${pageOptions?.find((option) => option.path === selectedPagePath)?.name ?? "All"}`} aria-expanded={pageOpen} onClick={() => setPageOpen?.((open) => !open)}>
+        {pageOptions?.find((option) => option.path === selectedPagePath)?.name ?? "All"}
+        {!selectedPagePath && <ChevronDown />}
+      </button>
+      {pageOpen && <div className="df-picker df-page-picker">
+        {[{ name: "All", path: "" }, ...(pageOptions ?? [])].map((option) => <button key={option.path} className={option.path === selectedPagePath ? "is-active" : ""} onClick={() => onPageChange(option.path)}>{option.name}</button>)}
+      </div>}
+    </div>}
     <div className="df-period-group">
       <button className="df-icon-btn" aria-label="Previous period" disabled={periodIndex === 0} onClick={() => setPeriodIndex((value) => Math.max(0, value - 1))}><ChevronLeft /></button>
       <div className="df-control-anchor">
@@ -544,7 +567,7 @@ function Picker({ items, active, choose }: { items: string[]; active: string; ch
 }
 
 function MainAnalytics({ mode, scope, analytics, metric, setMetric, compareMetric = null, compareLabel = null, compareValue = null, compareScale = 1, comparisonSeries = [], compareRelative = false, onCompareMetricChange, period, granularity, factor, filter, revision }: { mode: DashboardMode; scope?: string; analytics?: AnalyticsSummary | null; metric: MetricKey; setMetric: (value: MetricKey) => void; compareMetric?: MetricKey | null; compareLabel?: string | null; compareValue?: number | null; compareScale?: number; comparisonSeries?: Array<{ label: string; scale: number }>; compareRelative?: boolean; onCompareMetricChange?: (value: MetricKey | null) => void; period: string; granularity: string; factor: number; filter: string | null; revision: number }) {
-  const periodFactor = period === periods[0] ? 1 : period === periods[1] ? 6.8 : 27.2;
+  const periodFactor = filter ? 1 : period === periods[0] ? 1 : period === periods[1] ? 6.8 : 27.2;
   const metrics: Array<{ key: MetricKey; label: string; value: string; change: string; arrow?: string; online?: boolean }> = mode === "home"
     ? [
         { key: "visitors", label: "Visitors", value: compact(Math.round((analytics?.visitors ?? 5783) * periodFactor * factor)), change: "12.4%", arrow: "up" },
@@ -722,8 +745,9 @@ function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 
   });
   const values = useMemo(() => makeValues(metric), [metric, target, factor, filter, filterSeed, scope, revision]);
   const compareValues = useMemo(() => compareMetric ? makeValues(compareMetric, compareScale) : null, [compareMetric, compareLabel, compareScale, target, factor, filter, filterSeed, scope, revision]);
-  const comparisonColors = ["#F6DF8E", "#c58cff", "#ff9d76", "#79d8b0", "#f28fb3", "#8fb8ff"];
-  const extraCompareSeries = useMemo(() => comparisonSeries.slice(1).map((series, seriesIndex) => ({ ...series, color: comparisonColors[seriesIndex % comparisonColors.length], values: makeValues(metric, series.scale) })), [comparisonSeries, metric, target, factor, filter, filterSeed, scope, revision]);
+  const seriesColors = comparisonChartColors(compareValues ? Math.max(2, comparisonSeries.length + 1) : 1);
+  const compareColor = seriesColors[1] ?? comparisonPalette[5];
+  const extraCompareSeries = comparisonSeries.slice(1).map((series, seriesIndex) => ({ ...series, color: seriesColors[seriesIndex + 2] ?? comparisonPalette[(seriesIndex + 2) % comparisonPalette.length], values: makeValues(metric, series.scale) }));
   const percentageMetric = ["bounce", "conversion", "share", "ctr", "scroll"].includes(metric);
   const maxValue = Math.max(...values, ...(compareValues ?? []), ...extraCompareSeries.flatMap((series) => series.values));
   const max = percentageMetric ? Math.max(10, Math.ceil(maxValue / 10) * 10) : Math.max(10, Math.ceil(maxValue / 100) * 100);
@@ -768,20 +792,20 @@ function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 
   } : null;
   return <div className="df-chart-wrap" ref={wrapRef}>
     <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id={`df-gradient-${metric}`} x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#8dcdff" stopOpacity=".5" /><stop offset="45%" stopColor="#8dcdff" stopOpacity=".08" /><stop offset="100%" stopColor="#8dcdff" stopOpacity="0" /></linearGradient>{compareValues && <linearGradient id={`df-gradient-compare-${compareMetric}`} x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#e4b928" stopOpacity=".34" /><stop offset="45%" stopColor="#e4b928" stopOpacity=".08" /><stop offset="100%" stopColor="#e4b928" stopOpacity="0" /></linearGradient>}</defs>
+      <defs><linearGradient id={`df-gradient-${metric}`} x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#8DCDFF" stopOpacity=".5" /><stop offset="45%" stopColor="#8DCDFF" stopOpacity=".08" /><stop offset="100%" stopColor="#8DCDFF" stopOpacity="0" /></linearGradient>{compareValues && <linearGradient id={`df-gradient-compare-${compareMetric}`} x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor={compareColor} stopOpacity=".34" /><stop offset="45%" stopColor={compareColor} stopOpacity=".08" /><stop offset="100%" stopColor={compareColor} stopOpacity="0" /></linearGradient>}</defs>
       {yLabels.map((label, index) => { const y = top + (index / (yLabels.length - 1)) * innerH; return <g key={label}><line x1={left} x2={width - right} y1={y} y2={y} className="df-grid-line" /><text x="8" y={y + 4}>{label}</text></g>; })}
       <path d={area} fill={`url(#df-gradient-${metric})`} />
       {compareValues && <path d={`${smoothPath(compareValues.map((value, i) => [left + (i / Math.max(1, compareValues.length - 1)) * innerW, top + innerH - (value / max) * innerH] as [number, number]))} L${left + innerW},${top + innerH} L${left},${top + innerH} Z`} fill={`url(#df-gradient-compare-${compareMetric})`} />}
       <path d={solidLine} className="df-chart-line" />
-      {compareValues && <path d={smoothPath(compareValues.map((value, i) => [left + (i / Math.max(1, compareValues.length - 1)) * innerW, top + innerH - (value / max) * innerH] as [number, number]))} className="df-chart-line is-compare" />}
+      {compareValues && <path d={smoothPath(compareValues.map((value, i) => [left + (i / Math.max(1, compareValues.length - 1)) * innerW, top + innerH - (value / max) * innerH] as [number, number]))} className="df-chart-line is-compare" style={{ stroke: compareColor }} />}
       {extraCompareSeries.map((series, seriesIndex) => <path key={series.label} d={smoothPath(series.values.map((value, i) => [left + (i / Math.max(1, series.values.length - 1)) * innerW, top + innerH - (value / max) * innerH] as [number, number]))} className={`df-chart-line df-chart-line-extra extra-${seriesIndex}`} style={{ stroke: series.color }} />)}
       <path d={`${smoothPath(points.slice(-2))}`} className="df-chart-line is-dashed" />
-      {hover !== null && <g><rect x={Math.max(left, points[hover][0] - innerW / values.length / 2)} y={top} width={innerW / values.length} height={innerH} className="df-hover-band" /><line x1={points[hover][0]} x2={points[hover][0]} y1={top} y2={top + innerH} className="df-hover-line" /><circle cx={points[hover][0]} cy={points[hover][1]} r="5" className="df-hover-dot" />{compareValues && <circle cx={points[hover][0]} cy={top + innerH - (compareValues[hover] / max) * innerH} r="5" className="df-hover-dot is-compare" />}{extraCompareSeries.map((series, seriesIndex) => <circle key={series.label} cx={points[hover][0]} cy={top + innerH - (series.values[hover] / max) * innerH} r="5" className={`df-hover-dot extra-${seriesIndex}`} style={{ fill: series.color }} />)}</g>}
+      {hover !== null && <g><rect x={Math.max(left, points[hover][0] - innerW / values.length / 2)} y={top} width={innerW / values.length} height={innerH} className="df-hover-band" /><line x1={points[hover][0]} x2={points[hover][0]} y1={top} y2={top + innerH} className="df-hover-line" /><circle cx={points[hover][0]} cy={points[hover][1]} r="5" className="df-hover-dot" />{compareValues && <circle cx={points[hover][0]} cy={top + innerH - (compareValues[hover] / max) * innerH} r="5" className="df-hover-dot is-compare" style={{ fill: compareColor }} />}{extraCompareSeries.map((series, seriesIndex) => <circle key={series.label} cx={points[hover][0]} cy={top + innerH - (series.values[hover] / max) * innerH} r="5" className={`df-hover-dot extra-${seriesIndex}`} style={{ fill: series.color }} />)}</g>}
       {selectedRange && <rect x={points[selectedRange[0]][0]} y={top} width={points[selectedRange[1]][0] - points[selectedRange[0]][0]} height={innerH} className="df-selection-band" />}
       <rect x={left} y={top} width={innerW} height={innerH} fill="transparent" onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={() => { if (dragStart === null) setHover(null); }} />
       {labels.map((label, index) => <text key={`${label}-${index}`} x={left + (index / (labels.length - 1)) * innerW} y={height - 8} textAnchor="middle">{label}</text>)}
     </svg>
-    {hover !== null && <div className="df-chart-tooltip" style={{ left: `${Math.min(89, Math.max(11, (points[hover][0] / width) * 100))}%`, top: `${Math.max(22, (points[hover][1] / height) * 100)}%` }}><b>{labelForIndex(hover)} · {period}</b><span><i />{metricLabel(metric)}<strong>{primaryDisplay(hover)}</strong></span>{compareValues && <span className="df-tooltip-compare"><i />{compareLabel ?? metricLabel(compareMetric!)}<strong>{compareDisplay(hover)}</strong></span>}{extraCompareSeries.map((series) => <span key={series.label} className="df-tooltip-compare df-tooltip-extra"><i style={{ background: series.color }} />{series.label}<strong>{compareRelative ? formatDelta(values[hover], series.values[hover]) : formatChartValue(metric, series.values[hover])}</strong></span>)}{rangeSummary && <div className="df-tooltip-range"><b>Zone sélectionnée</b><span className="df-tooltip-range-period">{labelForIndex(rangeSummary.start)} <em>→</em> {labelForIndex(rangeSummary.end)}</span><span><i className="df-tooltip-primary-dot" />{metricLabel(metric)}<strong>{rangeSummary.primary}</strong></span>{rangeSummary.compare !== null && <span className="df-tooltip-compare"><i />{compareLabel ?? metricLabel(compareMetric!)}<strong>{rangeSummary.compare}</strong></span>}{extraCompareSeries.map((series) => <span key={series.label} className="df-tooltip-compare df-tooltip-extra"><i style={{ background: series.color }} />{series.label}<strong>{formatDelta(series.values[rangeSummary.start], series.values[rangeSummary.end])}</strong></span>)}</div>}</div>}
+    {hover !== null && <div className="df-chart-tooltip" style={{ left: `${Math.min(89, Math.max(11, (points[hover][0] / width) * 100))}%`, top: `${Math.max(22, (points[hover][1] / height) * 100)}%` }}><b>{labelForIndex(hover)} · {period}</b><span><i />{metricLabel(metric)}<strong>{primaryDisplay(hover)}</strong></span>{compareValues && <span className="df-tooltip-compare"><i style={{ background: compareColor }} />{compareLabel ?? metricLabel(compareMetric!)}<strong>{compareDisplay(hover)}</strong></span>}{extraCompareSeries.map((series) => <span key={series.label} className="df-tooltip-compare df-tooltip-extra"><i style={{ background: series.color }} />{series.label}<strong>{compareRelative ? formatDelta(values[hover], series.values[hover]) : formatChartValue(metric, series.values[hover])}</strong></span>)}{rangeSummary && <div className="df-tooltip-range"><b>Zone sélectionnée</b><span className="df-tooltip-range-period">{labelForIndex(rangeSummary.start)} <em>→</em> {labelForIndex(rangeSummary.end)}</span><span><i className="df-tooltip-primary-dot" />{metricLabel(metric)}<strong>{rangeSummary.primary}</strong></span>{rangeSummary.compare !== null && <span className="df-tooltip-compare"><i style={{ background: compareColor }} />{compareLabel ?? metricLabel(compareMetric!)}<strong>{rangeSummary.compare}</strong></span>}{extraCompareSeries.map((series) => <span key={series.label} className="df-tooltip-compare df-tooltip-extra"><i style={{ background: series.color }} />{series.label}<strong>{formatDelta(series.values[rangeSummary.start], series.values[rangeSummary.end])}</strong></span>)}</div>}</div>}
   </div>;
 }
 

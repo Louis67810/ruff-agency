@@ -47,7 +47,7 @@ function explicitTargets(query: string, candidates: Candidate[]) {
   const countryAliases: Record<string, string[]> = {
     "etats unis": ["etats unis", "united states", "usa", "us"],
     france: ["france"],
-    "united kingdom": ["united kingdom", "royaume uni", "uk", "gb"],
+    "united kingdom": ["united kingdom", "royaume uni", "angleterre", "england", "uk", "gb"],
     germany: ["germany", "allemagne", "de"],
     india: ["india", "inde", "in"],
     canada: ["canada"],

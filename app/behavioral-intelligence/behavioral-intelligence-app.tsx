@@ -7,6 +7,7 @@ import { geoGraticule, geoOrthographic, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import world from "world-atlas/countries-110m.json";
 import { ExactAnalyticsDashboard, type MetricKey } from "./exact-analytics-dashboard";
+import { VisitorHistory, VisitorHistoryControls, VisitorHistoryDetail, visitorHistoryName, type HistoryPeriod } from "./visitor-history";
 import {
   ArrowLeft,
   ArrowRight,
@@ -19,7 +20,9 @@ import {
   Filter,
   Globe2,
   House,
+  History,
   Layers3,
+  LoaderCircle,
   Menu,
   Megaphone,
   MousePointer2,
@@ -34,7 +37,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-type View = "home" | "ads" | "pages" | "profiles" | "live";
+type View = "home" | "ads" | "pages" | "profiles" | "live" | "history";
 type Detail = { type: "ad" | "page" | "profile"; name: string } | null;
 type Metric = "visitors" | "conversion" | "bounce" | "session" | "online";
 type Range =
@@ -52,6 +55,7 @@ const nav = [
   { id: "pages", label: "Pages", icon: FileText },
   { id: "profiles", label: "Profils", icon: UserRound },
   { id: "live", label: "En direct", icon: Globe2 },
+  { id: "history", label: "Historique", icon: History },
 ] as const;
 
 // Kept in the codebase for the next tracking iteration, but intentionally
@@ -277,12 +281,12 @@ const factor: Record<Range, number> = {
     online: 0.28,
   };
 
-function parseComparisonRequest(input: string): { pair: string; metric: MetricKey } {
+function parseComparisonRequest(input: string): { pair: string; metric: MetricKey; recognizedCountries?: string[] } {
   const normalized = input.toLocaleLowerCase("fr-FR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   const countries = [
     { aliases: ["etats-unis", "etats unis", "united states", "usa", "us"], label: "États-Unis" },
     { aliases: ["france"], label: "France" },
-    { aliases: ["royaume-uni", "united kingdom", "uk"], label: "United Kingdom" },
+    { aliases: ["royaume-uni", "royaume uni", "angleterre", "england", "united kingdom", "uk", "gb"], label: "United Kingdom" },
     { aliases: ["allemagne", "germany"], label: "Germany" },
     { aliases: ["inde", "india"], label: "India" },
     { aliases: ["canada"], label: "Canada" },
@@ -302,7 +306,10 @@ function parseComparisonRequest(input: string): { pair: string; metric: MetricKe
               : /\b(scroll|defilement)\b/.test(normalized) ? "scroll"
                 : /\b(cta|clics?|clicks?)\b/.test(normalized) ? "cta"
                   : "visitors";
-  if (found.length >= 2) return { pair: found.map((item) => item.label).join(" avec "), metric };
+  if (found.length >= 2) {
+    const recognizedCountries = found.map((item) => item.label);
+    return { pair: recognizedCountries.join(" avec "), metric, recognizedCountries };
+  }
   const fallback = input.replace(/^(compare(?:-moi)?|comparer)\s*/i, "").replace(/\b(le|la|les|du|de|des|trafic|traffic|visiteurs?|sessions?|pages?|conversion|rebond|scroll)\b/gi, "").split(/,|\s+avec\s+|\s+vs\s+|\s+et\s+/i).map((value) => value.trim()).filter(Boolean);
   return { pair: fallback.length >= 2 ? `${fallback[0]} avec ${fallback[1]}` : input.trim(), metric };
 }
@@ -399,10 +406,12 @@ function useComparisonSuggestions(query: string, candidates: ComparisonCandidate
     if (!query.trim()) {
       setSuggestions(rankComparisonCandidates("", candidates));
       setProvider("local");
+      setLoading(false);
       return;
     }
     setSuggestions(rankComparisonCandidates(query, candidates));
     setProvider("local");
+    setLoading(false);
     const controller = new AbortController();
     const timer = window.setTimeout(async () => {
       setLoading(true);
@@ -424,7 +433,7 @@ function useComparisonSuggestions(query: string, candidates: ComparisonCandidate
       } finally {
         if (!controller.signal.aborted) setLoading(false);
       }
-    }, 220);
+    }, 1000);
     return () => {
       window.clearTimeout(timer);
       controller.abort();
@@ -435,11 +444,10 @@ function useComparisonSuggestions(query: string, candidates: ComparisonCandidate
 
 async function interpretComparisonRequest(input: string, analytics: AnalyticsSummary | null): Promise<{ pair: string; metric: MetricKey }> {
   const fallback = parseComparisonRequest(input);
-  const fallbackTargets = fallback.pair.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean);
-  // Les demandes de pays sont déterministes : on les applique directement afin
-  // que JEV ne réduise pas une comparaison à trois pays au champ target_c.
-  if (fallbackTargets.length >= 2) return fallback;
   const candidates = buildComparisonCandidates(analytics);
+  // Les noms de pays et leurs alias sont déterministes et peuvent contenir
+  // plus de trois éléments, alors que le fournisseur distant en renvoie trois.
+  if ((fallback.recognizedCountries?.length ?? 0) >= 2) return fallback;
   const explicitTargets = extractExplicitComparisonTargets(input, candidates);
   if (explicitTargets.length >= 2) return { pair: explicitTargets.join(" avec "), metric: fallback.metric };
   try {
@@ -461,6 +469,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
     [detailOrigin, setDetailOrigin] = useState<View | null>(null),
     [mobile, setMobile] = useState(false),
     [searchOpen, setSearchOpen] = useState(false),
+    [searchClosing, setSearchClosing] = useState(false),
     [compare, setCompare] = useState(false),
     [compareMetric, setCompareMetric] = useState<MetricKey | null>(null),
     [searchMetric, setSearchMetric] = useState<MetricKey | null>(null),
@@ -468,6 +477,10 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
     [comparisonPair, setComparisonPair] = useState<string | null>(null),
     [compareRelative, setCompareRelative] = useState(false),
     [notificationsOpen, setNotificationsOpen] = useState(false),
+    [selectedVisitorId, setSelectedVisitorId] = useState<string | null>(null),
+    [historyPeriod, setHistoryPeriod] = useState<HistoryPeriod>("Last 24 hours"),
+    [historyPage, setHistoryPage] = useState(""),
+    [analyticsGranularity, setAnalyticsGranularity] = useState("Hourly"),
     [query, setQuery] = useState(""),
     [chips, setChips] = useState<string[]>([]),
     [range, setRange] = useState<Range>("24 dernières heures"),
@@ -476,10 +489,13 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
     [offset, setOffset] = useState(0),
     [refresh, setRefresh] = useState(false),
     [stickyAnalyticsControls, setStickyAnalyticsControls] = useState<ReactNode | null>(null);
-  const title = detail?.name ?? nav.find((n) => n.id === view)?.label ?? "Home",
+  const searchCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const title = selectedVisitorId ? visitorHistoryName(selectedVisitorId) : detail?.name ?? nav.find((n) => n.id === view)?.label ?? "Home",
     ctx = { range, granularity, offset };
   const comparisonCandidates = useMemo(() => buildComparisonCandidates(initialAnalytics), [initialAnalytics]);
   const activeComparisonPair = comparisonPair ?? chips.find((chip) => /\s+avec\s+/i.test(chip)) ?? null;
+  const historyListOpen = view === "history" && !selectedVisitorId;
+  const secondaryControlsVisible = historyListOpen || (view !== "history" && Boolean(stickyAnalyticsControls || activeComparisonPair));
   const updateChips = (next: string[]) => {
     setChips(next);
     if (next.length === 0) {
@@ -493,28 +509,91 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [view, detail]);
+  useEffect(() => () => {
+    if (searchCloseTimer.current) clearTimeout(searchCloseTimer.current);
+  }, []);
+  const openSearch = () => {
+    if (searchCloseTimer.current) clearTimeout(searchCloseTimer.current);
+    setSearchClosing(false);
+    setSearchOpen(true);
+  };
+  const closeSearch = (clearQuery = false) => {
+    if (!searchOpen || searchClosing) return;
+    setSearchClosing(true);
+    searchCloseTimer.current = setTimeout(() => {
+      setSearchOpen(false);
+      setSearchClosing(false);
+      if (clearQuery) setQuery("");
+      searchCloseTimer.current = null;
+    }, 440);
+  };
   const go = (v: View) => {
     setView(v);
+    setSelectedVisitorId(null);
     setDetail(null);
     setDetailOrigin(null);
     setStickyAnalyticsControls(null);
     setMobile(false);
   };
   const submit = async (v: string, selectedTargets: string[] = []) => {
-    if (v.trim()) {
-      const parsed = await interpretComparisonRequest(v, initialAnalytics);
-      const pair = selectedTargets.length >= 2 ? selectedTargets.join(" avec ") : parsed.pair;
-      setChips([pair]);
-      setComparisonPair(pair);
-      setCompareMetric(parsed.metric);
-      setSearchFilter(null);
-      setSearchMetric(null);
-    }
-    setSearchOpen(false);
-    setQuery("");
+    const command = v.trim();
+    if (!command) return;
+      const normalized = normalizeSearch(command);
+      const explicitTargets = selectedTargets.length
+        ? selectedTargets
+        : extractExplicitComparisonTargets(command, comparisonCandidates);
+      const compareRequested = /\b(compar|compare|versus|vs|contre)\w*\b|\savec\s/.test(normalized);
+      const metricRequested = /\b(graph|graphique|evolution|tendance|courbe|taux|trafic|visiteurs?|sessions?|pages?|conversion|rebond|scroll|defilement|cta|clics?|reservations?)\b/.test(normalized);
+      const refersToCurrentFilter = /\b(ca|cela|ce pays|cette page|ce filtre|celui ci|celle ci)\b/.test(normalized);
+      const localParsed = parseComparisonRequest(command);
+      const contextualMetricRequest = metricRequested && refersToCurrentFilter && Boolean(searchFilter) && explicitTargets.length < 2;
+      const parsed = contextualMetricRequest
+        ? localParsed
+        : await interpretComparisonRequest(command, initialAnalytics);
+      const parsedTargets = parsed.pair.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean);
+      const comparisonTargets = selectedTargets.length >= 2
+        ? selectedTargets
+        : parsedTargets.length >= 2
+          ? parsedTargets
+          : explicitTargets;
+
+      const shouldCompare = !contextualMetricRequest && (
+        compareRequested
+        || selectedTargets.length >= 2
+        || (localParsed.recognizedCountries?.length ?? 0) >= 2
+      );
+
+      if (shouldCompare && comparisonTargets.length >= 2) {
+        const pair = comparisonTargets.join(" avec ");
+        setChips([pair]);
+        setComparisonPair(pair);
+        setCompareMetric(parsed.metric);
+        setSearchFilter(null);
+        setSearchMetric(null);
+      } else if (metricRequested) {
+        const target = refersToCurrentFilter && searchFilter ? searchFilter : explicitTargets[0] ?? null;
+        const activeTarget = target ?? searchFilter;
+        setSearchMetric(parsed.metric);
+        setSearchFilter(activeTarget);
+        setComparisonPair(null);
+        setCompareMetric(null);
+        const metricNames: Partial<Record<MetricKey, string>> = {
+          visitors: "Visiteurs", sessions: "Sessions", views: "Pages vues", engaged: "Sessions engagées",
+          conversion: "Taux de conversion", bounce: "Taux de rebond", scroll: "Profondeur de scroll", cta: "Clics CTA", bookings: "Réservations",
+        };
+        setChips([...(activeTarget ? [activeTarget] : []), `Graphique · ${metricNames[parsed.metric] ?? "Visiteurs"}`]);
+      } else if (explicitTargets[0]) {
+        setChips([explicitTargets[0]]);
+        setSearchFilter(explicitTargets[0]);
+        setSearchMetric(null);
+        setComparisonPair(null);
+        setCompareMetric(null);
+      }
+      closeSearch(true);
   };
   return (
     <div className="fw-shell">
+      {searchOpen && <div className={`fw-command-backdrop ${searchClosing ? "is-closing" : ""}`} onMouseDown={() => closeSearch()} aria-hidden="true" />}
       <aside className={`fw-sidebar ${mobile ? "is-open" : ""}`}>
         <div className="fw-logo">
           <img src="/ruff-logo.png" alt="Ruff Agency" />
@@ -544,26 +623,68 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
           </button>
           <b>{title}</b>
         </header>
-        <header className={`fw-topbar ${stickyAnalyticsControls ? "has-analytics-controls" : ""} ${detail ? "is-detail" : ""}`}>
+        <header className={`fw-topbar ${secondaryControlsVisible ? "has-analytics-controls" : ""} ${detail || selectedVisitorId ? "is-detail" : ""} ${searchOpen ? "is-search-open" : ""}`}>
           <div className="fw-topbar-primary">
-            <BreadcrumbTrail items={detail ? [
+            <BreadcrumbTrail items={selectedVisitorId ? [
+              { label: "Historique", onClick: () => setSelectedVisitorId(null) },
+              { label: visitorHistoryName(selectedVisitorId), current: true },
+            ] : detail ? [
               ...(detailOrigin === "home" ? [{ label: "Home", onClick: () => go("home") }] : []),
               { label: detail.type === "page" ? "Page" : detail.type === "profile" ? "Profil" : "Ads", onClick: () => detail.type === "page" ? go("pages") : detail.type === "profile" ? go("profiles") : go("ads") },
               { label: detail.name, current: true },
-            ] : [{ label: view === "home" ? "Dashboard" : view === "ads" ? "Ads" : view === "pages" ? "Page" : view === "profiles" ? "Profils" : "En direct", current: true }]} />
-            <div className="fw-sticky-search"><SearchBar chips={chips} setChips={updateChips} onSearch={() => setSearchOpen(true)} onCompare={() => { setCompareMetric(null); setCompare(true); }} /></div>
+            ] : [{ label: view === "home" ? "Dashboard" : view === "ads" ? "Ads" : view === "pages" ? "Page" : view === "profiles" ? "Profils" : view === "history" ? "Historique" : "En direct", current: true }]} />
+            <div className={`fw-sticky-search ${searchOpen ? "is-open" : ""} ${searchClosing ? "is-closing" : ""}`}>
+              <SearchBar value={query} setValue={setQuery} onSearch={openSearch} onSubmit={() => submit(query)} onCompare={() => { setCompareMetric(null); setCompare(true); }} />
+              {searchOpen && (
+                <SearchOverlay
+                  query={query}
+                  setQuery={setQuery}
+                  close={() => closeSearch()}
+                  submit={submit}
+                  candidates={comparisonCandidates}
+                  onFilter={(value) => {
+                    setChips([value]);
+                    setSearchFilter(value);
+                    setSearchMetric(null);
+                    setComparisonPair(null);
+                    setCompareMetric(null);
+                    closeSearch(true);
+                  }}
+                  onMetric={(metric, label) => {
+                    setChips([...(searchFilter ? [searchFilter] : []), `Graphique · ${label}`]);
+                    setSearchMetric(metric);
+                    setComparisonPair(null);
+                    setCompareMetric(null);
+                    closeSearch(true);
+                  }}
+                />
+              )}
+            </div>
             <div className="fw-topbar-actions">
               <button className="fw-figma-icon-button" onClick={() => { setCompareMetric(null); setCompare(true); }} aria-label="Comparer"><FigmaCompareIcon /><span>Comparer</span></button>
               <button className="fw-figma-icon-button" onClick={() => setNotificationsOpen((open) => !open)} aria-label="Notifications"><FigmaBellIcon /><span>Notifications</span></button>
               <button className="fw-ads-cta" onClick={() => go("ads")}><Plus size={23} />Créer une publicité</button>
             </div>
           </div>
-          <div className={`fw-topbar-secondary ${stickyAnalyticsControls ? "has-controls" : "is-empty"}`} aria-hidden={!stickyAnalyticsControls}>
-            <div className="fw-sticky-analytics-controls">{stickyAnalyticsControls}</div>
+          <div className={`fw-topbar-secondary ${secondaryControlsVisible ? "has-controls" : "is-empty"}`} aria-hidden={!secondaryControlsVisible}>
+            <div className="fw-sticky-analytics-controls">
+              {historyListOpen ? <VisitorHistoryControls period={historyPeriod} onPeriodChange={setHistoryPeriod} page={historyPage} onPageChange={setHistoryPage} granularity={analyticsGranularity} onGranularityChange={setAnalyticsGranularity} pageOptions={pages} /> : view !== "history" ? stickyAnalyticsControls : null}
+              {view !== "history" && activeComparisonPair && (
+                <div className="df-active-filter fw-comparison-filter">
+                  <button className="df-active-filter-value" title={activeComparisonPair} onClick={() => setCompare(true)}>
+                    <i><FigmaCompareIcon /></i>
+                    <span>{activeComparisonPair.replace(/\s+avec\s+/gi, ", ")}</span>
+                  </button>
+                  <button className="df-active-filter-clear" aria-label="Retirer la comparaison" onClick={() => updateChips(chips.filter((chip) => chip !== activeComparisonPair))}><X /></button>
+                </div>
+              )}
+            </div>
           </div>
         </header>
         <div className="fw-content">
-          {detail ? (
+          {selectedVisitorId ? (
+            <VisitorHistoryDetail id={selectedVisitorId} onBack={() => setSelectedVisitorId(null)} />
+          ) : detail ? (
                 <DetailView
               key={`${detail.type}-${detail.name}`}
               detail={detail}
@@ -590,6 +711,12 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
                   comparisonPair={activeComparisonPair}
                   externalFilter={searchFilter}
                   externalMetric={searchMetric}
+                  selectedPagePath={historyPage}
+                  onSelectedPagePathChange={setHistoryPage}
+                  analyticsPeriod={historyPeriod}
+                  onAnalyticsPeriodChange={setHistoryPeriod}
+                  analyticsGranularity={analyticsGranularity}
+                  onAnalyticsGranularityChange={setAnalyticsGranularity}
                 />
               )}{" "}
               {view === "ads" && (
@@ -606,6 +733,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
                 />
               )}{" "}
               {view === "live" && <Live />}
+              {view === "history" && <VisitorHistory profiles={profiles} period={historyPeriod} page={historyPage} onOpen={setSelectedVisitorId} />}
             </>
           )}
         </div>
@@ -622,33 +750,6 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
           </button>
         ))}
       </nav>
-      {searchOpen && (
-        <SearchOverlay
-          query={query}
-          setQuery={setQuery}
-          close={() => setSearchOpen(false)}
-          submit={submit}
-          candidates={comparisonCandidates}
-          onFilter={(value) => {
-            setChips([value]);
-            setSearchFilter(value);
-            setSearchMetric(null);
-            setComparisonPair(null);
-            setCompareMetric(null);
-            setSearchOpen(false);
-            setQuery("");
-          }}
-          onMetric={(metric, label) => {
-            setChips([`Graphique · ${label}`]);
-            setSearchMetric(metric);
-            setSearchFilter(null);
-            setComparisonPair(null);
-            setCompareMetric(null);
-            setSearchOpen(false);
-            setQuery("");
-          }}
-        />
-      )}{" "}
       {compare && (
         <QuickCompare
           close={() => setCompare(false)}
@@ -741,41 +842,38 @@ function Controls(p: {
   );
 }
 function SearchBar({
-  chips,
-  setChips,
+  value,
+  setValue,
   onSearch,
+  onSubmit,
   onCompare,
 }: {
-  chips: string[];
-  setChips: (v: string[]) => void;
+  value: string;
+  setValue: (value: string) => void;
   onSearch: () => void;
+  onSubmit: () => void;
   onCompare: () => void;
 }) {
   return (
-    <div className="fw-command">
-      <button className="fw-command-input" onClick={onSearch}>
-        <Search size={21} />
-        <span>Comparer une page, une campagne, un UTM ou une audience…</span>
-      </button>
+    <form className="fw-command" onClick={onSearch} onSubmit={(event) => { event.preventDefault(); onSubmit(); }}>
+      <label className="fw-command-input">
+        <button type="button" className="fw-command-open" aria-label="Ouvrir la recherche avancée">
+          <Search size={21} />
+        </button>
+        <input
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          aria-label="Rechercher avec Jeff"
+          placeholder="Demandez à Jeff de filtrer ou comparer…"
+        />
+      </label>
       <div className="fw-command-actions">
-        {chips.map((c) => (
-          <span key={c} className={/\s+avec\s+/i.test(c) ? "is-comparison" : "is-filter"}>
-            <i>{/\s+avec\s+/i.test(c) ? <FigmaCompareIcon /> : <Filter size={14} />}</i>
-            {c}
-            <button
-              aria-label={`Retirer ${c}`}
-              onClick={() => setChips(chips.filter((x) => x !== c))}
-            >
-              <X size={12} />
-            </button>
-          </span>
-        ))}
-        <button onClick={onCompare}>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onCompare(); }}>
           <SlidersHorizontal size={16} />
           Comparer
         </button>
       </div>
-    </div>
+    </form>
   );
 }
 function Home({
@@ -790,6 +888,12 @@ function Home({
   comparisonPair,
   externalFilter,
   externalMetric,
+  selectedPagePath,
+  onSelectedPagePathChange,
+  analyticsPeriod,
+  onAnalyticsPeriodChange,
+  analyticsGranularity,
+  onAnalyticsGranularityChange,
 }: {
   ctx: Ctx;
   openProfile: (n: string) => void;
@@ -802,12 +906,18 @@ function Home({
   comparisonPair: string | null;
   externalFilter: string | null;
   externalMetric: MetricKey | null;
+  selectedPagePath: string;
+  onSelectedPagePathChange: (path: string) => void;
+  analyticsPeriod: HistoryPeriod;
+  onAnalyticsPeriodChange: (period: HistoryPeriod) => void;
+  analyticsGranularity: string;
+  onAnalyticsGranularityChange: (granularity: string) => void;
 }) {
   const pageOptions = useMemo(() => pages.map(({ name, path }) => ({ name, path })), []);
   return (
     <div className="fw-view">
       <ProfileRail open={openProfile} />
-      <ExactAnalyticsDashboard analytics={initialAnalytics} compareMetric={compareMetric} onCompareMetricChange={onCompareMetricChange} compareRelative={compareRelative} comparisonPair={comparisonPair} externalFilter={externalFilter} externalMetric={externalMetric} pageOptions={pageOptions} onStickyControlsChange={onStickyControlsChange} onSelectPage={openPage} />
+      <ExactAnalyticsDashboard analytics={initialAnalytics} compareMetric={compareMetric} onCompareMetricChange={onCompareMetricChange} compareRelative={compareRelative} comparisonPair={comparisonPair} externalFilter={externalFilter} externalMetric={externalMetric} pageOptions={pageOptions} selectedPagePath={selectedPagePath} onSelectedPagePathChange={onSelectedPagePathChange} analyticsPeriod={analyticsPeriod} onAnalyticsPeriodChange={onAnalyticsPeriodChange} analyticsGranularity={analyticsGranularity} onAnalyticsGranularityChange={onAnalyticsGranularityChange} onStickyControlsChange={onStickyControlsChange} onSelectPage={openPage} />
     </div>
   );
 }
@@ -2124,7 +2234,7 @@ function SearchOverlay({
   onFilter: (value: string) => void;
   onMetric: (metric: MetricKey, label: string) => void;
 }) {
-  const { suggestions } = useComparisonSuggestions(query, candidates);
+  const { suggestions, loading, provider } = useComparisonSuggestions(query, candidates);
   const normalizedQuery = normalizeSearch(query);
   const compareRequested = /\b(compar|compare|versus|vs|contre)\w*\b|\savec\s/.test(normalizedQuery);
   const metricRequested = /\b(graph|graphique|evolution|tendance|courbe|taux|trafic|visiteurs?|sessions?|pages?|conversion|rebond|scroll|cta|clics?)\b/.test(normalizedQuery);
@@ -2134,12 +2244,17 @@ function SearchOverlay({
     conversion: "Taux de conversion", bounce: "Taux de rebond", scroll: "Profondeur de scroll", cta: "Clics CTA", bookings: "Réservations",
   };
   const commandWords = new Set(["comparer", "compare", "comparaison", "details", "close details", "ouvrir le menu"]);
-  const exactTargets = candidates
+  const aliasedCountryLabels = parseComparisonRequest(query).pair.split(/\s+avec\s+/i).map((value) => value.trim());
+  const aliasedCountryTargets = aliasedCountryLabels
+    .map((label) => candidates.find((candidate) => normalizeSearch(candidate.label) === normalizeSearch(label) && candidate.kind === "Pays"))
+    .filter((candidate): candidate is ComparisonCandidate => Boolean(candidate));
+  const exactTargets = [...aliasedCountryTargets, ...candidates
     .map((candidate) => ({ candidate, normalizedLabel: normalizeSearch(candidate.label), index: normalizedQuery.indexOf(normalizeSearch(candidate.label)) }))
     .filter((item) => item.normalizedLabel.length > 1 && item.index >= 0 && !commandWords.has(item.normalizedLabel))
     .sort((a, b) => a.index - b.index || Number(b.candidate.kind === "Pays") - Number(a.candidate.kind === "Pays"))
     .filter((item, index, list) => list.findIndex((other) => other.candidate.label === item.candidate.label) === index)
-    .map((item) => item.candidate);
+    .map((item) => item.candidate)]
+    .filter((candidate, index, list) => list.findIndex((item) => item.label === candidate.label && item.kind === candidate.kind) === index);
   const uniqueSuggestions = suggestions.filter((candidate, index, list) => list.findIndex((item) => item.label === candidate.label) === index);
   const firstComparisonTarget = exactTargets[0] ?? uniqueSuggestions[0];
   const compatibleTargets = firstComparisonTarget
@@ -2153,6 +2268,12 @@ function SearchOverlay({
         ? [[firstComparisonTarget, exactCompatibleTarget]]
         : compatibleTargets.slice(0, 5).map((candidate) => [firstComparisonTarget, candidate]))
     : [];
+  const explicitComparisonTargets = exactTargets.length >= 2
+    ? exactTargets.filter((candidate) => candidate.kind === exactTargets[0].kind)
+    : [];
+  const primaryComparisonTargets = explicitComparisonTargets.length >= 2
+    ? explicitComparisonTargets
+    : comparisonPairs[0] ?? [];
   const displaySuggestions = suggestions
     .filter((candidate, index, list) => {
       const first = list.findIndex((item) => item.label === candidate.label);
@@ -2161,16 +2282,12 @@ function SearchOverlay({
     })
     .slice(0, 8);
   const runPrimary = () => {
-    if (compareRequested && comparisonPairs[0]) return submit(query, comparisonPairs[0].map((item) => item.label));
+    if (compareRequested && primaryComparisonTargets.length >= 2) return submit(query, primaryComparisonTargets.map((item) => item.label));
     if (metricRequested) return onMetric(metric, metricLabels[metric] ?? "Visiteurs");
     if (displaySuggestions[0]) return onFilter(displaySuggestions[0].label);
   };
   return (
-    <div className="fw-overlay fw-command-layer" onMouseDown={close}>
-      <section
-        className="fw-command-modal"
-        onMouseDown={(e) => e.stopPropagation()}
-      >
+      <section className="fw-command-modal">
         <div className="fw-command-field">
           <Search size={22} />
           <input
@@ -2180,13 +2297,14 @@ function SearchOverlay({
             onKeyDown={(e) => e.key === "Escape" ? close() : e.key === "Enter" && runPrimary()}
             placeholder="Rechercher avec Jeff…"
           />
+          {loading ? <span className="fw-jeff-inline-status"><LoaderCircle size={16} /> Jeff cherche</span> : <span className="fw-jeff-inline-status is-ready">{provider === "jev" ? "Jeff prêt" : "Prêt"}</span>}
           <kbd>Esc</kbd>
         </div>
         <div className="fw-command-results" role="listbox" aria-label="Résultats de recherche">
-          {compareRequested && comparisonPairs.map((pair, index) => <button key={`${pair[0].kind}-${pair[0].label}-${pair[1].label}`} className={index === 0 ? "is-primary" : ""} onClick={() => submit(query, pair.map((item) => item.label))} role="option">
+          {compareRequested && primaryComparisonTargets.length >= 2 && <button className="is-primary" onClick={() => submit(query, primaryComparisonTargets.map((item) => item.label))} role="option">
             <i className="is-compare"><FigmaCompareIcon /></i>
-            <span><b>Comparer {pair[0].label} et {pair[1].label}</b><small>Comparaison · {pair[0].kind} · {metricLabels[metric] ?? "Visiteurs"}</small></span>
-          </button>)}
+            <span><b>Comparer {primaryComparisonTargets.map((item) => item.label).join(", ")}</b><small>Comparaison · {primaryComparisonTargets.length} {primaryComparisonTargets[0].kind.toLocaleLowerCase("fr-FR")} · {metricLabels[metric] ?? "Visiteurs"}</small></span>
+          </button>}
           {!compareRequested && metricRequested && <button onClick={() => onMetric(metric, metricLabels[metric] ?? "Visiteurs")} role="option">
             <i><BarChart3 size={18} /></i>
             <span><b>Afficher l’évolution — {metricLabels[metric] ?? "Visiteurs"}</b><small>Graphique principal</small></span>
@@ -2199,7 +2317,6 @@ function SearchOverlay({
           {!query.trim() && <p>Tapez un pays, une page, une métrique ou une comparaison.</p>}
         </div>
       </section>
-    </div>
   );
 }
 function Compare({
@@ -2345,7 +2462,7 @@ function QuickCompare({
           <button className={`fw-chart-compare-toggle ${compareRelative ? "is-on" : ""}`} aria-label="Comparer relativement" aria-pressed={compareRelative} onClick={() => setCompareRelative(!compareRelative)}><i /></button>
         </div>
         <div className="fw-smart-search-head fw-smart-search-head-compact">
-          <span><Sparkles size={13} />{loading ? "Recherche…" : `${suggestions.length} options`}</span>
+          <span>{loading ? <LoaderCircle className="fw-spin" size={13} /> : <Sparkles size={13} />}{loading ? "Jeff recherche…" : `${suggestions.length} options`}</span>
           <small>{provider === "jev" ? "Jeff" : "Données disponibles"}</small>
         </div>
         {selected.length > 0 && <div className="fw-smart-selected">

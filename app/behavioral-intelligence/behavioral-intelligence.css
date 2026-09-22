@@ -241,7 +241,7 @@
   height: 72px;
   background: #fff;
   border: 1px solid #00000026;
-  border-radius: 999px;
+  border-radius: 26px;
   padding: 10px 12px 10px 20px;
   box-shadow:
     1px 1px 4px #00000008,
@@ -263,6 +263,28 @@
   color: #16243d;
   text-align: left;
   cursor: text;
+}
+.fw-command-input input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #20242a;
+  font: 500 14px Inter;
+}
+.fw-command-input input::placeholder { color: #a0a0a0; opacity: 1; }
+.fw-command-open {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #16243d;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
 }
 .fw-command-input span {
   color: #a0a0a0;
@@ -318,6 +340,9 @@
 }
 .fw-command-actions > span > i svg { width: 15px; height: 15px; }
 .fw-command-actions > span.is-comparison > i svg { width: 17px; height: 17px; }
+.fw-spin,
+.fw-jeff-inline-status:not(.is-ready) svg { animation: fw-spin .75s linear infinite; opacity: 1; }
+@keyframes fw-spin { to { transform: rotate(360deg); } }
 .fw-view {
   display: grid;
   gap: 20px;
@@ -1209,6 +1234,15 @@
   font: 9px Inter;
   color: #999;
 }
+.fw-jeff-inline-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  color: #747a82;
+  font: 650 10px Inter;
+}
+.fw-jeff-inline-status.is-ready { color: #9aa0a7; font-weight: 550; }
 .fw-command-field button,
 .fw-compare-modal header button {
   border: 0;
@@ -1692,17 +1726,58 @@
 .fw-sidebar nav button svg { width: 20px; height: 20px; }
 .fw-main { margin-left: 276px; width: calc(100% - 276px); }
 .fw-topbar { position: sticky; top: 0; z-index: 24; height: auto; min-height: 76px; padding: 0; display: block; background: #f9f9f9f5; border-bottom: 1px solid #0000001a; backdrop-filter: blur(14px); }
+.fw-topbar.is-search-open { z-index: 101; }
 .fw-topbar-primary { min-height: 76px; padding: 12px clamp(18px, 2vw, 38px); display: grid; grid-template-columns: minmax(150px, .72fr) minmax(300px, 1.8fr) auto; align-items: center; gap: 18px; border-bottom: 1px solid #00000021; }
 .fw-topbar-secondary { min-height: 56px; padding: 8px clamp(18px, 2vw, 38px); display: flex; align-items: center; }
 .fw-topbar:not(.has-analytics-controls) .fw-topbar-primary { border-bottom: 0; }
 .fw-breadcrumb { gap: 8px; font-size: 15px; white-space: nowrap; }
 .fw-breadcrumb strong.is-current { color: #111; }
-.fw-sticky-search { min-width: 0; }
-.fw-sticky-search .fw-command { height: 48px; min-width: 0; margin: 0; padding: 5px 7px 5px 14px; border-radius: 999px; box-shadow: 1px 1px 4px #00000008, 4px 6px 7px #00000008; }
+.fw-sticky-search { position: relative; min-width: 0; }
+.fw-sticky-search.is-open { z-index: 30; }
+.fw-sticky-search .fw-command { height: 48px; min-width: 0; margin: 0; padding: 5px 7px 5px 14px; border-radius: 26px; box-shadow: 1px 1px 4px #00000008, 4px 6px 7px #00000008; transition: opacity .24s ease; }
+.fw-sticky-search .fw-command:hover { border-color: #cfd2d5; box-shadow: 1px 1px 4px #00000008, 4px 6px 7px #00000008; }
+.fw-sticky-search.is-open .fw-command { opacity: 0; pointer-events: none; }
 .fw-sticky-search .fw-command-input { gap: 9px; }
 .fw-sticky-search .fw-command-input span { font-size: 13px; }
 .fw-sticky-search .fw-command-actions > button { display: none; }
 .fw-sticky-search .fw-command-actions { margin-left: 0; }
+.fw-command-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.5);
+  backdrop-filter: none;
+  animation: fw-command-backdrop-in .4s ease both;
+}
+.fw-command-backdrop.is-closing { animation: fw-command-backdrop-out .44s ease both; }
+.fw-sticky-search .fw-command-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 102;
+  width: 100%;
+  max-height: min(520px, calc(100vh - 30px));
+  border: 1px solid #d8dadd;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 22px 60px #20273324, 0 4px 14px #20273312;
+  overflow: hidden;
+  animation: fw-command-expand .48s cubic-bezier(.22,.78,.28,1) both;
+}
+.fw-sticky-search.is-closing .fw-command-modal { animation: fw-command-collapse .44s cubic-bezier(.42,0,.58,1) both; }
+.fw-sticky-search .fw-command-field { height: 48px; padding: 0 14px; }
+.fw-sticky-search .fw-command-results { max-height: min(420px, calc(100vh - 100px)); }
+@keyframes fw-command-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fw-command-backdrop-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes fw-command-expand {
+  from { max-height: 48px; opacity: .94; }
+  to { max-height: min(520px, calc(100vh - 30px)); opacity: 1; }
+}
+@keyframes fw-command-collapse {
+  from { max-height: min(520px, calc(100vh - 30px)); opacity: 1; }
+  to { max-height: 48px; opacity: .94; }
+}
 .fw-topbar-actions { display: flex; align-items: center; gap: 8px; }
 .fw-figma-icon-button { position: relative; width: 48px; height: 48px; padding: 10px; border: 1px solid #00000014; border-radius: 999px; color: #141b34; background: #f3f3f3; display: grid; place-items: center; cursor: pointer; transition: background-color .15s ease, transform .12s cubic-bezier(.22,1,.36,1), box-shadow .15s ease; }
 .fw-figma-icon-button:hover { background: #eaeaea; box-shadow: 0 2px 8px #0000000a; }
@@ -2840,7 +2915,7 @@
 }
 .df-chart-line {
   fill: none;
-  stroke: #7fc7ff;
+  stroke: #8dcdff;
   stroke-width: 3;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
@@ -2848,7 +2923,7 @@
 .df-chart-line.is-dashed {
   stroke-dasharray: 5 7;
 }
-.df-chart-line.is-compare { stroke: #e4b928; stroke-width: 3; }
+.df-chart-line.is-compare { stroke: #E16540; stroke-width: 3; }
 .df-chart-line-extra { stroke-width: 3; }
 .df-chart-line-extra.extra-0 { stroke: #F6DF8E; }
 .df-chart-line-extra.extra-1 { stroke: #c58cff; }
@@ -2856,7 +2931,7 @@
 .df-selection-band { fill: #6f77801b; stroke: #7d858d8a; stroke-width: 1; stroke-dasharray: 4 4; pointer-events: none; }
 .df-hover-line { stroke: #5f6a7338; stroke-width: 1; vector-effect: non-scaling-stroke; }
 .df-hover-dot { fill: #8dcdff; stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
-.df-hover-dot.is-compare { fill: #e4b928; }
+.df-hover-dot.is-compare { fill: #E16540; }
 .df-hover-dot.extra-0 { fill: #F6DF8E; }
 .df-hover-dot.extra-1 { fill: #c58cff; }
 .df-chart-tooltip {
@@ -2885,7 +2960,7 @@
   font-size: 12px;
 }
 .df-chart-tooltip span i { width: 11px; height: 11px; border-radius: 2px; background: #8dcdff; }
-.df-chart-tooltip .df-tooltip-compare i { background: #e4b928; }
+.df-chart-tooltip .df-tooltip-compare i { background: #E16540; }
 .df-chart-tooltip .df-tooltip-extra i { background: #F6DF8E; }
 .df-chart-tooltip span strong { margin-left: 12px; }
 .df-tooltip-range { margin-top: 9px; padding-top: 8px; border-top: 1px solid #ffffff22; display: grid; gap: 3px; font-size: 11px; }
@@ -3591,12 +3666,15 @@ button.df-details:hover { background: #f7fbfe; color: #256a94; }
 .fw-topbar.has-analytics-controls { min-height: 126px; }
 .fw-topbar-primary { min-height: 64px; padding-top: 8px; padding-bottom: 8px; }
 .fw-topbar-secondary { min-height: 62px; padding-top: 10px; padding-bottom: 10px; }
-.fw-sticky-analytics-controls { justify-content: flex-start; overflow: visible; }
-.fw-sticky-analytics-controls { margin-left: 0; display: block; }
-.fw-sticky-analytics-controls .df-toolbar { width: 100%; margin: 0; flex-wrap: nowrap; justify-content: flex-start; }
+.fw-sticky-analytics-controls { margin-left: 0; display: flex; align-items: center; justify-content: flex-start; gap: 8px; overflow: visible; }
+.fw-sticky-analytics-controls .df-toolbar { width: 100%; min-width: 0; flex: 1 1 auto; margin: 0; flex-wrap: nowrap; justify-content: flex-start; }
 .fw-sticky-analytics-controls .df-scope-filter { margin-left: auto; }
 .fw-sticky-analytics-controls .df-icon-btn:has(+ .df-active-filter) { margin-left: auto; }
 .fw-sticky-analytics-controls .df-active-filter { flex: 0 0 auto; }
+.fw-sticky-analytics-controls .fw-comparison-filter { max-width: min(520px, 44vw); margin-left: auto; }
+.fw-comparison-filter .df-active-filter-value > i { width: 17px; height: 17px; flex: 0 0 17px; display: grid; place-items: center; font-style: normal; }
+.fw-comparison-filter .df-active-filter-value > i svg { width: 17px; height: 17px; }
+.fw-comparison-filter .df-active-filter-value > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* The frame uses a darker gray active state, with a very subtle neutral hover.
    These rules intentionally come after the legacy sidebar rules. */
@@ -3777,6 +3855,29 @@ button.df-details:hover { background: #f7fbfe; color: #256a94; }
   transition: background-color .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
 .df-domain-pill { padding: 0 12px; gap: 8px; font-size: 16px; }
+.df-page-select {
+  height: 32px;
+  max-width: 190px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  overflow: hidden;
+  border: 1px solid rgba(20,22,26,.08);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(20,22,26,.06), 0 4px 10px rgba(20,22,26,.035);
+  color: #17191c;
+  font: 500 16px Inter, Arial, sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.df-page-select svg { width: 14px; height: 14px; flex: none; opacity: .32; }
+.df-page-select:hover { border-color: rgba(20,22,26,.14); }
+.df-page-picker,
+.vh-page-picker { width: 190px; max-width: min(190px, calc(100vw - 32px)); }
+.df-filter-status { padding: 38px 16px; color: #777d85; font: 500 14px Inter, Arial, sans-serif; }
 .df-domain-icon { width: 20px; height: 20px; border-radius: 5px; }
 .df-control { padding: 0 12px; gap: 8px; font-size: 16px; }
 .df-icon-btn { width: 32px; padding: 0; }
