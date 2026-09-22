@@ -42,6 +42,28 @@ function rankCandidates(query: string, candidates: Candidate[]) {
     .map(({ score: _score, ...candidate }) => candidate);
 }
 
+function explicitTargets(query: string, candidates: Candidate[]) {
+  const normalizedQuery = normalize(query);
+  const countryAliases: Record<string, string[]> = {
+    "etats unis": ["etats unis", "united states", "usa", "us"],
+    france: ["france"],
+    "united kingdom": ["united kingdom", "royaume uni", "uk", "gb"],
+    germany: ["germany", "allemagne", "de"],
+    india: ["india", "inde", "in"],
+    canada: ["canada"],
+    australia: ["australia", "australie", "au"],
+  };
+  const matches = candidates.flatMap((candidate) => {
+    const labels = [candidate.label, ...(countryAliases[normalize(candidate.label)] ?? [])];
+    return labels.map((label) => ({ candidate, label, index: normalizedQuery.indexOf(normalize(label)) }));
+  })
+    .filter((item) => item.index >= 0 && item.label.length > 1)
+    .sort((a, b) => a.index - b.index)
+    .filter((item, index, list) => list.findIndex((entry) => entry.candidate.label === item.candidate.label && entry.candidate.kind === item.candidate.kind) === index);
+  const firstKind = matches[0]?.candidate.kind;
+  return matches.filter((item) => item.candidate.kind === firstKind).map((item) => item.candidate);
+}
+
 function choice(answer: unknown) {
   if (!answer || typeof answer !== "object") return null;
   const value = answer as Record<string, unknown>;
@@ -51,7 +73,9 @@ function choice(answer: unknown) {
 
 function parseAnswers(payload: unknown) {
   const answers = payload && typeof payload === "object" && "answers" in payload ? (payload as { answers?: Record<string, unknown> }).answers ?? {} : {};
-  const targets = [choice(answers.target_a), choice(answers.target_b)].filter((value): value is string => Boolean(value));
+  const targets = [choice(answers.target_a), choice(answers.target_b), choice(answers.target_c)]
+    .filter((value): value is string => Boolean(value))
+    .filter((value, index, list) => list.indexOf(value) === index);
   const metric = choice(answers.metric);
   return { targets, metric: metric && metrics.includes(metric) ? metric : "visitors" };
 }
@@ -69,7 +93,8 @@ export async function POST(request: NextRequest) {
       : [];
     if (!query) return NextResponse.json({ error: "Missing query" }, { status: 400 });
     const localSuggestions = rankCandidates(query, candidates);
-    const localResult = { targets: [], metric: inferMetric(query), suggestions: localSuggestions, provider: "local" };
+    const localTargets = explicitTargets(query, candidates);
+    const localResult = { targets: localTargets.map((candidate) => candidate.label), metric: inferMetric(query), suggestions: localSuggestions, provider: "local" };
     if (!apiKey) return NextResponse.json(localResult);
     const options = candidates.map((candidate) => candidate.label);
     const controller = new AbortController();
@@ -84,14 +109,16 @@ export async function POST(request: NextRequest) {
         questions: {
           target_a: { type: "choice", instructions: "Choose the first data dimension or entity requested. Return one exact option from the list.", options },
           target_b: { type: "choice", instructions: "Choose the second requested entity. It must have the same kind/category as target_a (country with country, page with page, campaign with campaign). Return one exact option from the list.", options },
+          target_c: { type: "choice", instructions: "If the user requested a third entity, choose it with the same kind/category as target_a. Otherwise return the first option.", options },
           metric: { type: "choice", instructions: "Choose the metric requested by the user.", options: metrics },
         },
       }),
     });
     if (!response.ok) return NextResponse.json(localResult);
     const interpreted = parseAnswers(await response.json());
+    if (localTargets.length >= 2) interpreted.targets = localTargets.map((candidate) => candidate.label);
     const selectedCandidates = interpreted.targets.map((target) => candidates.find((candidate) => candidate.label === target));
-    if (selectedCandidates.length === 2 && selectedCandidates.some((candidate) => !candidate || candidate.kind !== selectedCandidates[0]?.kind)) {
+    if (selectedCandidates.length >= 2 && selectedCandidates.some((candidate) => !candidate || candidate.kind !== selectedCandidates[0]?.kind)) {
       interpreted.targets = [];
     }
     const preferred = interpreted.targets

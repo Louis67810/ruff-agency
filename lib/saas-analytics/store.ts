@@ -157,8 +157,15 @@ function eventMatchesFilter(event: AnalyticsEvent, filter: string) {
 }
 
 /** Keeps only people who satisfy every selected criterion. */
-export function filterAnalyticsEvents(events: AnalyticsEvent[], filters: string[]) {
+export function filterAnalyticsEvents(
+  events: AnalyticsEvent[],
+  filters: string[],
+  mode: "visitor" | "event" = "visitor",
+) {
   if (!filters.length) return events;
+  if (mode === "event") {
+    return events.filter((event) => filters.every((filter) => eventMatchesFilter(event, filter)));
+  }
   const matchingVisitors = filters.map((filter) => new Set(
     events.filter((event) => eventMatchesFilter(event, filter)).map((event) => event.visitorId),
   ));

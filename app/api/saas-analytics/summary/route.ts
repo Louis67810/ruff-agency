@@ -19,9 +19,10 @@ export async function GET(request: NextRequest) {
   try {
     const rawFilters = request.nextUrl.searchParams.get("filters");
     const filters = rawFilters ? JSON.parse(rawFilters) : [];
+    const matchMode = request.nextUrl.searchParams.get("match") === "event" ? "event" : "visitor";
     const events = await readAnalyticsEvents(days);
     const filteredEvents = Array.isArray(filters)
-      ? filterAnalyticsEvents(events, filters.filter((value): value is string => typeof value === "string"))
+      ? filterAnalyticsEvents(events, filters.filter((value): value is string => typeof value === "string"), matchMode)
       : events;
     return NextResponse.json(summarizeAnalytics(filteredEvents, days));
   } catch (error) {

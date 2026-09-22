@@ -2849,11 +2849,16 @@
   stroke-dasharray: 5 7;
 }
 .df-chart-line.is-compare { stroke: #e4b928; stroke-width: 3; }
+.df-chart-line-extra { stroke-width: 3; }
+.df-chart-line-extra.extra-0 { stroke: #F6DF8E; }
+.df-chart-line-extra.extra-1 { stroke: #c58cff; }
 .df-hover-band { fill: #8dcdff13; }
 .df-selection-band { fill: #6f77801b; stroke: #7d858d8a; stroke-width: 1; stroke-dasharray: 4 4; pointer-events: none; }
 .df-hover-line { stroke: #5f6a7338; stroke-width: 1; vector-effect: non-scaling-stroke; }
 .df-hover-dot { fill: #8dcdff; stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .df-hover-dot.is-compare { fill: #e4b928; }
+.df-hover-dot.extra-0 { fill: #F6DF8E; }
+.df-hover-dot.extra-1 { fill: #c58cff; }
 .df-chart-tooltip {
   position: absolute;
   z-index: 5;
@@ -2881,6 +2886,7 @@
 }
 .df-chart-tooltip span i { width: 11px; height: 11px; border-radius: 2px; background: #8dcdff; }
 .df-chart-tooltip .df-tooltip-compare i { background: #e4b928; }
+.df-chart-tooltip .df-tooltip-extra i { background: #F6DF8E; }
 .df-chart-tooltip span strong { margin-left: 12px; }
 .df-tooltip-range { margin-top: 9px; padding-top: 8px; border-top: 1px solid #ffffff22; display: grid; gap: 3px; font-size: 11px; }
 .df-tooltip-range > b { font-size: 11px; }
@@ -3280,7 +3286,8 @@ button.df-details:hover { background: #f7fbfe; color: #256a94; }
 .df-comparison-dot { width: 8px; height: 8px; border-radius: 50%; }
 .df-comparison-dot.is-first { background: #8dcdff; }
 .df-comparison-dot.is-second { background: #F6DF8E; }
-.dashboard-tabs { --tabs-bg: #fcfbfa; --tabs-border: #f5f4f3; --tab-active-bg: #ffffff; --tab-active-border: #f2f1f0; --tab-active-text: #262626; --tab-muted-text: #57534e; display: inline-flex; align-items: center; gap: 0; box-sizing: border-box; min-height: 46px; padding: 3px; border: 1px solid var(--tabs-border); border-radius: 18px; background: var(--tabs-bg); font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; white-space: nowrap; }
+.dashboard-tabs { --tabs-bg: #fcfbfa; --tabs-border: #f5f4f3; --tab-active-bg: #ffffff; --tab-active-border: #f2f1f0; --tab-active-text: #262626; --tab-muted-text: #57534e; display: inline-flex; align-items: center; gap: 0; box-sizing: border-box; min-height: 46px; max-width: 100%; padding: 3px; border: 1px solid var(--tabs-border); border-radius: 18px; background: var(--tabs-bg); font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; white-space: nowrap; overflow-x: auto; scrollbar-width: none; }
+.dashboard-tabs::-webkit-scrollbar { display: none; }
 .dashboard-tab { position: relative; z-index: 0; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; min-width: 56px; height: 38px; padding: 0 12px; margin: 0; border: 0; border-radius: 14px; background: transparent; color: var(--tab-muted-text); opacity: .6; font: inherit; font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0; cursor: pointer; outline: none; transition: color 120ms ease, opacity 120ms ease; }
 .dashboard-tab:hover, .dashboard-tab[aria-selected="true"] { color: var(--tab-active-text); opacity: 1; }
 .dashboard-tab-active-indicator { position: absolute; inset: 0; z-index: 0; box-sizing: border-box; border: 1px solid var(--tab-active-border); border-radius: 14px; background: var(--tab-active-bg); box-shadow: 0 1px 2px rgba(28, 25, 23, .08), 0 0 0 1px rgba(255, 255, 255, .35) inset; opacity: 0; pointer-events: none; transition: opacity 120ms ease; }
