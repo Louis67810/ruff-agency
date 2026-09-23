@@ -252,7 +252,7 @@ function smoothPath(points: Array<[number, number]>) {
 }
 
 export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, analytics, compareMetric = null, onCompareMetricChange, compareRelative = false, comparisonPair = null, externalFilter = null, externalMetric = null, onStickyControlsChange, onSelectPage, pageOptions = [], selectedPagePath = "", onSelectedPagePathChange, analyticsPeriod, onAnalyticsPeriodChange, analyticsGranularity, onAnalyticsGranularityChange }: { mode?: DashboardMode; scope?: string; linkedPagePath?: string; analytics?: AnalyticsSummary | null; compareMetric?: MetricKey | null; onCompareMetricChange?: (value: MetricKey | null) => void; compareRelative?: boolean; comparisonPair?: string | null; externalFilter?: string | null; externalMetric?: MetricKey | null; onStickyControlsChange?: (controls: ReactNode | null) => void; onSelectPage?: (page: string) => void; pageOptions?: Array<{ name: string; path: string }>; selectedPagePath?: string; onSelectedPagePathChange?: (path: string) => void; analyticsPeriod?: string; onAnalyticsPeriodChange?: (period: "Last 24 hours" | "Last 7 days" | "Last 30 days") => void; analyticsGranularity?: string; onAnalyticsGranularityChange?: (granularity: string) => void }) {
-  const firstMetric: MetricKey = mode === "ad" ? "impressions" : "visitors";
+  const firstMetric: MetricKey = mode === "ad" ? "impressions" : mode === "home" ? "online" : "visitors";
   const [metric, setMetric] = useState<MetricKey>(firstMetric);
   const activeCompareMetric = comparisonPair ? metric : compareMetric;
   const [localGranularity, setLocalGranularity] = useState(granularities[0]);
@@ -562,6 +562,7 @@ function MainAnalytics({ mode, scope, analytics, previous, series = [], metric, 
   };
   const metrics: Array<{ key: MetricKey; label: string; value: string; change: string; arrow?: string; online?: boolean }> = mode === "home"
     ? [
+        liveMetric("online", "Online now"),
         liveMetric("visitors", "Visitors"), liveMetric("sessions", "Sessions"),
         liveMetric("views", "Page views"), liveMetric("engaged", "Engaged sessions"),
         liveMetric("session", "Average session time"), liveMetric("scroll", "Scroll depth"),
@@ -569,7 +570,7 @@ function MainAnalytics({ mode, scope, analytics, previous, series = [], metric, 
         liveMetric("cta", "CTA clicks"), liveMetric("bookings", "Booked calls"),
         liveMetric("returning", "Returning visitors"), liveMetric("returnRate", "Return rate"),
         liveMetric("mainSiteVisits", "Main site visits"), liveMetric("conversions", "Conversions"),
-        liveMetric("online", "Online now"), liveMetric("pagesPerSession", "Pages per session"),
+        liveMetric("pagesPerSession", "Pages per session"),
         liveMetric("conversionsPerVisitor", "Conversions / visitor"), liveMetric("conversionsPerSession", "Conversions / session"),
         liveMetric("preConversionTime", "Avg. time before conversion"), liveMetric("engagementRate", "Engagement rate"),
       ]

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import type { AnalyticsEventInput } from "@/lib/saas-analytics/types";
 import type { AnalyticsViewport } from "@/lib/saas-analytics/types";
+import { isExcludedAnalyticsPath } from "@/lib/saas-analytics/excluded-paths";
 
 type ClientEvent = Omit<
   AnalyticsEventInput,
@@ -53,7 +54,7 @@ export function SaasAnalyticsTracker() {
   useEffect(() => {
     // The dashboard and its management tools are intentionally excluded: they
     // must never pollute the acquisition data they display.
-    if (pathname.startsWith("/saas-redesign/analytics") || pathname.startsWith("/saas-redesign/tweets-admin") || pathname.startsWith("/saas-redesign/content-editor") || pathname.startsWith("/behavioral-intelligence")) return;
+    if (isExcludedAnalyticsPath(pathname)) return;
     const visitorId = getStableId(localStorage, "ruff_saas_visitor_id");
     const previousActivity = Number(sessionStorage.getItem("ruff_saas_last_activity") ?? 0);
     const newSession = !sessionStorage.getItem("ruff_saas_session_id") || Date.now() - previousActivity > 30 * 60_000;

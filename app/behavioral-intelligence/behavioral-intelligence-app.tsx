@@ -518,7 +518,9 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
   }, []);
   useEffect(() => {
     if (view !== "history" && view !== "live") return;
-    const days = view === "live" || historyPeriod === "Last 24 hours" ? 1 : historyPeriod === "Last 7 days" ? 7 : 30;
+    // Keep the same 30-day visitor record while the history controls change
+    // which recently active visitors are visible.
+    const days = view === "live" ? 1 : 30;
     let active = true;
     const load = () => fetch(`/api/saas-analytics/summary?report=1&visitors=1&days=${days}`, { cache: "no-store" })
       .then((response) => response.ok ? response.json() : Promise.reject(new Error("Analytics unavailable")))

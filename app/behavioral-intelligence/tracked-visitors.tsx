@@ -5,7 +5,14 @@ import type { HistoryPeriod } from "./visitor-history";
 import { ArrowLeft, Clock3, FileText, MousePointer2 } from "lucide-react";
 
 export function visitorHistoryName(id: string) {
-  return `Visiteur ${id.slice(0, 8)}`;
+  // Derive a stable display number from the persistent visitor ID. A new
+  // session for the same browser keeps both its history row and its name.
+  let hash = 0xcbf29ce484222325n;
+  for (const character of id) {
+    hash ^= BigInt(character.charCodeAt(0));
+    hash = BigInt.asUintN(64, hash * 0x100000001b3n);
+  }
+  return `Visiteur n°${String(hash % 1_000_000_000_000n).padStart(12, "0")}`;
 }
 
 function relativeTime(value: string) {

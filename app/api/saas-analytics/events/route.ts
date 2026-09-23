@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { writeAnalyticsEvent } from "@/lib/saas-analytics/store";
+import { isExcludedAnalyticsPath } from "@/lib/saas-analytics/excluded-paths";
 import {
   analyticsEventTypes,
   type AnalyticsEventInput,
@@ -86,6 +87,8 @@ export async function POST(request: NextRequest) {
       .filter((event): event is AnalyticsEventInput => Boolean(event));
     if (!inputs.length)
       return NextResponse.json({ error: "Invalid event" }, { status: 400 });
+    const trackedInputs = inputs.filter((event) => !isExcludedAnalyticsPath(event.path));
+    if (!trackedInputs.length) return new NextResponse(null, { status: 204 });
 
     const country = (
       request.headers.get("x-vercel-ip-country") ??
@@ -96,7 +99,7 @@ export async function POST(request: NextRequest) {
     const region = request.headers.get("x-vercel-ip-country-region") ?? request.headers.get("cf-region");
     const city = request.headers.get("x-vercel-ip-city") ?? request.headers.get("cf-ipcity");
     await Promise.all(
-      inputs.map((event) => writeAnalyticsEvent({ ...event, metadata: {
+      trackedInputs.map((event) => writeAnalyticsEvent({ ...event, metadata: {
         ...event.metadata,
         ...(region ? { region: region.slice(0, 100) } : {}),
         ...(city ? { city: city.slice(0, 100) } : {}),

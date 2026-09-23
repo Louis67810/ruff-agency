@@ -2,6 +2,7 @@ import "server-only";
 
 import { appendFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { isExcludedAnalyticsPath } from "./excluded-paths";
 import type {
   AnalyticsEvent,
   AnalyticsEventInput,
@@ -116,7 +117,7 @@ export async function readAnalyticsEvents(days: number) {
       all.push(...rows.map(fromDatabaseRow));
       if (rows.length < 1000) break;
     }
-    return all;
+    return all.filter((event) => !isExcludedAnalyticsPath(event.path));
   }
 
   if (process.env.NODE_ENV === "production") {
@@ -129,7 +130,7 @@ export async function readAnalyticsEvents(days: number) {
       .split("\n")
       .filter(Boolean)
       .map((line) => JSON.parse(line) as AnalyticsEvent)
-      .filter((event) => event.createdAt >= cutoff);
+      .filter((event) => event.createdAt >= cutoff && !isExcludedAnalyticsPath(event.path));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw error;
