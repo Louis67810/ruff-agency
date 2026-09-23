@@ -119,6 +119,10 @@ export async function readAnalyticsEvents(days: number) {
     return all;
   }
 
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("SaaS analytics storage is not configured");
+  }
+
   try {
     const contents = await readFile(localFile, "utf8");
     return contents

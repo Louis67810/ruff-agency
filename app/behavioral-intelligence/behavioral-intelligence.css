@@ -1,4 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+.fw-login-page { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #f9f9f9; font-family: Inter, Arial, sans-serif; color: #262626; }
+.fw-login-card { width: min(100%, 420px); display: grid; gap: 16px; padding: 32px; border: 1px solid #26262614; border-radius: 18px; background: #fff; box-shadow: 0 3px 12px #0000000d; }
+.fw-login-card > span { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: #59708d; }
+.fw-login-card h1 { margin: 0; font-size: 28px; line-height: 1.2; }
+.fw-login-card p { margin: 0 0 8px; color: #6f7480; line-height: 1.5; }
+.fw-login-card label { font-size: 13px; font-weight: 600; }
+.fw-login-card input { min-height: 44px; width: 100%; padding: 0 12px; border: 1px solid #cbd2dc; border-radius: 9px; color: #262626; background: #fff; }
+.fw-login-card button { min-height: 44px; border: 0; border-radius: 9px; background: #262626; color: #fff; font-weight: 700; cursor: pointer; }
+.fw-login-card button:disabled { opacity: .65; cursor: wait; }
+.fw-login-card a { color: #24537a; font-weight: 700; }
+.fw-login-card small[role="alert"] { color: #a52a2a; }
 :root {
   --fw-bg: #f9f9f9;
   --fw-side: #e7ebf3;
