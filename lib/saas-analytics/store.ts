@@ -6,6 +6,8 @@ import type {
   AnalyticsEvent,
   AnalyticsEventInput,
   AnalyticsSummary,
+  AnalyticsSeriesPoint,
+  AnalyticsVisitor,
   AnalyticsViewport,
 } from "./types";
 
@@ -103,26 +105,18 @@ export async function readAnalyticsEvents(days: number) {
   const cutoff = new Date(Date.now() - days * 86_400_000).toISOString();
   const config = supabaseConfig();
   if (config) {
-    const query = new URLSearchParams({
-      select: "*",
-      created_at: `gte.${cutoff}`,
-      order: "created_at.asc",
-      limit: "20000",
-    });
-    const response = await fetch(
-      `${config.url}/rest/v1/saas_analytics_events?${query}`,
-      {
-        headers: {
-          ...supabaseHeaders(config.key),
-        },
-        cache: "no-store",
-      },
-    );
-    if (!response.ok) {
-      throw new Error(`Supabase analytics query failed (${response.status})`);
+    const all: AnalyticsEvent[] = [];
+    for (let offset = 0; ; offset += 1000) {
+      const query = new URLSearchParams({ select: "*", created_at: `gte.${cutoff}`, order: "created_at.asc,id.asc", limit: "1000", offset: String(offset) });
+      const response = await fetch(`${config.url}/rest/v1/saas_analytics_events?${query}`, {
+        headers: supabaseHeaders(config.key), cache: "no-store",
+      });
+      if (!response.ok) throw new Error(`Supabase analytics query failed (${response.status})`);
+      const rows = (await response.json()) as Record<string, unknown>[];
+      all.push(...rows.map(fromDatabaseRow));
+      if (rows.length < 1000) break;
     }
-    const rows = (await response.json()) as Record<string, unknown>[];
-    return rows.map(fromDatabaseRow);
+    return all;
   }
 
   try {
@@ -140,11 +134,14 @@ export async function readAnalyticsEvents(days: number) {
 
 const countryAliases: Record<string, string[]> = {
   "united states": ["us", "usa", "united states"],
+  "états-unis": ["us", "usa", "united states"],
+  "etats-unis": ["us", "usa", "united states"],
   "united kingdom": ["gb", "uk", "united kingdom"],
   france: ["fr", "france"],
   germany: ["de", "germany"],
   india: ["in", "india"],
   australia: ["au", "australia"],
+  canada: ["ca", "canada"],
 };
 
 function eventMatchesFilter(event: AnalyticsEvent, filter: string) {
@@ -202,6 +199,10 @@ function eventViewport(event: AnalyticsEvent): AnalyticsViewport {
   return viewport === "mobile" || viewport === "tablet" ? viewport : "desktop";
 }
 
+function isConfirmedConversion(event: AnalyticsEvent) {
+  return event.eventType === "conversion" && event.metadata?.conversionType !== "booked_call";
+}
+
 export function summarizeAnalytics(
   events: AnalyticsEvent[],
   rangeDays: number,
@@ -209,17 +210,18 @@ export function summarizeAnalytics(
   const visitorIds = new Set(events.map((event) => event.visitorId));
   const sessionIds = new Set(events.map((event) => event.sessionId));
   const pageViews = events.filter((event) => event.eventType === "page_view");
-  const returning = new Set(
-    pageViews
-      .filter((event) => Number(event.metadata?.visitCount ?? 1) > 1)
-      .map((event) => event.visitorId),
-  );
-  const conversions = events.filter(
-    (event) => event.eventType === "conversion",
-  );
+  const visitsByVisitor = new Map<string, Set<string>>();
+  pageViews.forEach((event) => {
+    const sessions = visitsByVisitor.get(event.visitorId) ?? new Set<string>();
+    sessions.add(event.sessionId);
+    visitsByVisitor.set(event.visitorId, sessions);
+  });
+  const returning = new Set(pageViews.filter((event) => Number(event.metadata?.visitCount ?? 1) > 1 || (visitsByVisitor.get(event.visitorId)?.size ?? 0) > 1).map((event) => event.visitorId));
+  const conversions = events.filter(isConfirmedConversion);
+  const convertingVisitors = new Set(conversions.map((event) => event.visitorId));
   const ctaClicks = events.filter((event) => event.eventType === "cta_click");
   const bookedCalls = conversions.filter(
-    (event) => event.metadata?.conversionType === "booked_call",
+    (event) => event.metadata?.conversionType === "booking_confirmed",
   );
   const engagedSessionIds = new Set(
     events
@@ -262,13 +264,17 @@ export function summarizeAnalytics(
     event.eventType === "page_view" ? event.path : undefined,
   );
   const pageSessions = new Map<string, Set<string>>();
+  const pageVisitors = new Map<string, Set<string>>();
   pageViews.forEach((event) => {
     if (!pageSessions.has(event.path)) pageSessions.set(event.path, new Set());
     pageSessions.get(event.path)?.add(event.sessionId);
+    if (!pageVisitors.has(event.path)) pageVisitors.set(event.path, new Set());
+    pageVisitors.get(event.path)?.add(event.visitorId);
   });
   const pageSessionTotals = [...pageSessions.entries()]
     .map(([path, sessions]) => ({ path, value: sessions.size }))
     .sort((a, b) => b.value - a.value);
+  const pageVisitorTotals = [...pageVisitors.entries()].map(([path, visitors]) => ({ path, value: visitors.size })).sort((a, b) => b.value - a.value);
   const exitLinks = counts((event) =>
     event.eventType === "site_navigation" && event.metadata?.exitLink
       ? String(event.metadata.exitLink)
@@ -318,14 +324,22 @@ export function summarizeAnalytics(
       return { path, viewport: viewport as AnalyticsViewport, value: people.size };
     })
     .sort((a, b) => b.value - a.value);
-  const sessionDurations = events
-    .filter((event) => event.eventType === "session_end" && event.durationMs)
-    .map((event) => event.durationMs ?? 0);
-  const recentSessions = new Set(
-    events
-      .filter((event) => Date.now() - Date.parse(event.createdAt) < 5 * 60_000)
-      .map((event) => event.sessionId),
-  );
+  const durationBySession = new Map<string, number>();
+  events.filter((event) => event.eventType === "session_end" && event.durationMs).forEach((event) => {
+    durationBySession.set(event.sessionId, (durationBySession.get(event.sessionId) ?? 0) + (event.durationMs ?? 0));
+  });
+  const sessionDurations = [...durationBySession.values()];
+  const sessionStarts = new Map<string, number>();
+  pageViews.forEach((event) => sessionStarts.set(event.sessionId, Math.min(sessionStarts.get(event.sessionId) ?? Infinity, Date.parse(event.createdAt))));
+  const conversionTimes = conversions.map((event) => (Date.parse(event.createdAt) - (sessionStarts.get(event.sessionId) ?? Date.parse(event.createdAt))) / 1000).filter((value) => value >= 0);
+  const latestSessionEvent = new Map<string, AnalyticsEvent>();
+  events.forEach((event) => {
+    const previous = latestSessionEvent.get(event.sessionId);
+    if (!previous || previous.createdAt < event.createdAt) latestSessionEvent.set(event.sessionId, event);
+  });
+  const recentVisitors = new Set([...latestSessionEvent.values()]
+    .filter((event) => event.eventType !== "session_end" && Date.now() - Date.parse(event.createdAt) < 5 * 60_000)
+    .map((event) => event.visitorId));
 
   const sectionViews = new Map<string, Set<string>>();
   const sectionTimes = new Map<string, number[]>();
@@ -344,16 +358,14 @@ export function summarizeAnalytics(
       if (!sectionTimes.has(section)) sectionTimes.set(section, []);
       sectionTimes.get(section)?.push(event.durationMs);
     }
-    if (event.eventType === "conversion") {
+    if (isConfirmedConversion(event)) {
       sectionConversions.set(
         section,
         (sectionConversions.get(section) ?? 0) + 1,
       );
     }
   });
-  const orderedIds = Object.keys(sectionLabels).filter((id) =>
-    sectionViews.has(id),
-  );
+  const orderedIds = [...sectionViews.keys()];
   const sections = orderedIds.map((id, index) => {
     const views = sectionViews.get(id)?.size ?? 0;
     const nextViews = sectionViews.get(orderedIds[index + 1])?.size ?? views;
@@ -362,7 +374,7 @@ export function summarizeAnalytics(
     const bouncedInSection = [...sectionSessionIds].filter((sessionId) => bouncedSessions.has(sessionId)).length;
     return {
       id,
-      label: sectionLabels[id],
+      label: String(events.find((event) => event.sectionId === id)?.metadata?.sectionLabel ?? sectionLabels[id] ?? id),
       views,
       dropOffRate: views ? Math.max(0, ((views - nextViews) / views) * 100) : 0,
       averageSeconds: times.length
@@ -382,6 +394,7 @@ export function summarizeAnalytics(
     durations: number[];
     conversions: number;
     viewport: AnalyticsViewport;
+    firstSeen: string;
   }>();
   events.forEach((event) => {
     if (!event.sectionId) return;
@@ -395,23 +408,24 @@ export function summarizeAnalytics(
       durations: [],
       conversions: 0,
       viewport,
+      firstSeen: event.createdAt,
     };
     if (event.eventType === "section_view" || event.eventType === "scroll_zone") {
       current.reachedPeople.add(event.visitorId);
     }
     if (event.eventType === "section_time" && event.durationMs) current.durations.push(event.durationMs);
-    if (event.eventType === "conversion") current.conversions += 1;
+    if (isConfirmedConversion(event)) current.conversions += 1;
     pageSectionMap.set(key, current);
   });
   const pageSections = [...pageSectionMap.values()]
-    .map(({ reachedPeople, durations, ...section }) => ({
+    .sort((a, b) => a.path.localeCompare(b.path) || a.firstSeen.localeCompare(b.firstSeen))
+    .map(({ reachedPeople, durations, firstSeen: _firstSeen, ...section }) => ({
       ...section,
       reachedPeople: reachedPeople.size,
       averageSeconds: durations.length
         ? durations.reduce((total, value) => total + value, 0) / durations.length / 1000
         : 0,
-    }))
-    .sort((a, b) => a.path.localeCompare(b.path) || a.id.localeCompare(b.id));
+    }));
 
   const dailyMap = new Map<
     string,
@@ -424,7 +438,7 @@ export function summarizeAnalytics(
       conversions: 0,
     };
     day.visitors.add(event.visitorId);
-    if (event.eventType === "conversion") day.conversions += 1;
+    if (isConfirmedConversion(event)) day.conversions += 1;
     dailyMap.set(date, day);
   });
 
@@ -444,19 +458,21 @@ export function summarizeAnalytics(
     bounceRate: sessionIds.size
       ? (bouncedSessions.size / sessionIds.size) * 100
       : 0,
-    mainSiteVisits: events.filter(
-      (event) => event.eventType === "site_navigation",
-    ).length,
+    mainSiteVisits: new Set(pageViews.filter((event) => event.path === "/").map((event) => event.sessionId)).size,
     conversions: conversions.length,
     conversionRate: visitorIds.size
-      ? (conversions.length / visitorIds.size) * 100
+      ? (convertingVisitors.size / visitorIds.size) * 100
       : 0,
     averageSessionSeconds: sessionDurations.length
       ? sessionDurations.reduce((total, duration) => total + duration, 0) /
           sessionDurations.length /
           1000
       : 0,
-    online: recentSessions.size,
+    preConversionSeconds: conversionTimes.length ? conversionTimes.reduce((sum, value) => sum + value, 0) / conversionTimes.length : 0,
+    online: recentVisitors.size,
+    hostnames: pageViewsFor("hostname"),
+    regions: pageViewsFor("region"),
+    cities: pageViewsFor("city"),
     sources: pageViewsFor("channel"),
     referrers: pageViewsFor("referrer"),
     campaigns: pageViewsFor("campaign"),
@@ -479,6 +495,7 @@ export function summarizeAnalytics(
     scrollZones,
     scrollZoneTotals,
     pageSessionTotals,
+    pageVisitorTotals,
     pageSections,
     interactions: counts((event) => {
       if (event.eventType === "vote") return "Votes";
@@ -493,4 +510,61 @@ export function summarizeAnalytics(
       conversions: day.conversions,
     })),
   };
+}
+
+export function analyticsSeries(events: AnalyticsEvent[], days: number, granularity: string, now = Date.now()): AnalyticsSeriesPoint[] {
+  const count = granularity === "Weekly" ? Math.max(1, Math.ceil(days / 7)) : granularity === "Hourly" && days === 1 ? 24 : days;
+  const width = (days * 86_400_000) / count;
+  const start = now - days * 86_400_000;
+  const groups = Array.from({ length: count }, () => [] as AnalyticsEvent[]);
+  events.forEach((event) => {
+    const index = Math.floor((Date.parse(event.createdAt) - start) / width);
+    if (index >= 0 && index < count) groups[index].push(event);
+  });
+  return groups.map((group, index) => {
+    const summary = summarizeAnalytics(group, days);
+    const values: Record<string, number> = {
+      visitors: summary.visitors, views: summary.pageViews, sessions: summary.sessions,
+      engaged: summary.engagedSessions, scroll: summary.scrollDepth, cta: summary.ctaClicks,
+      bookings: summary.bookedCalls, bounce: summary.bounceRate, session: summary.averageSessionSeconds,
+      conversion: summary.conversionRate, calls: summary.conversions, returning: summary.returningVisitors,
+      returnRate: summary.returnRate, mainSiteVisits: summary.mainSiteVisits, conversions: summary.conversions,
+      online: summary.online, pagesPerSession: summary.sessions ? summary.pageViews / summary.sessions : 0,
+      conversionsPerVisitor: summary.visitors ? summary.conversions / summary.visitors * 100 : 0,
+      conversionsPerSession: summary.sessions ? summary.conversions / summary.sessions * 100 : 0,
+      preConversionTime: summary.preConversionSeconds,
+      engagementRate: summary.sessions ? summary.engagedSessions / summary.sessions * 100 : 0,
+    };
+    return { date: new Date(start + index * width).toISOString(), values };
+  });
+}
+
+export function analyticsVisitors(events: AnalyticsEvent[]): AnalyticsVisitor[] {
+  const byVisitor = new Map<string, AnalyticsEvent[]>();
+  events.forEach((event) => byVisitor.set(event.visitorId, [...(byVisitor.get(event.visitorId) ?? []), event]));
+  return [...byVisitor.entries()].map(([id, visitorEvents]) => {
+    visitorEvents.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    const pageViews = visitorEvents.filter((event) => event.eventType === "page_view");
+    const latest = visitorEvents.at(-1)!;
+    const latestSession = visitorEvents.filter((event) => event.sessionId === latest.sessionId);
+    const sessionEnds = latestSession.filter((event) => event.eventType === "session_end");
+    const lastPage = [...latestSession].reverse().find((event) => event.eventType === "page_view");
+    const lastActivity = [...latestSession].reverse().find((event) => event.eventType !== "heartbeat" && event.eventType !== "session_end") ?? latest;
+    return {
+      id, firstSeen: visitorEvents[0].createdAt, lastSeen: latest.createdAt,
+      countryCode: latest.countryCode,
+      region: String(latest.metadata?.region ?? "") || undefined,
+      city: String(latest.metadata?.city ?? "") || undefined,
+      source: String(pageViews[0]?.metadata?.channel ?? "Unknown"),
+      device: String(latest.metadata?.device ?? "Unknown"),
+      visits: new Set(pageViews.map((event) => event.sessionId)).size,
+      durationSeconds: Math.round(sessionEnds.reduce((sum, event) => sum + (event.durationMs ?? 0), 0) / 1000),
+      pages: [...new Set(pageViews.map((event) => event.path))],
+      sections: [...new Set(visitorEvents.filter((event) => event.eventType === "section_view").map((event) => String(event.metadata?.sectionLabel ?? event.sectionId ?? "")).filter(Boolean))],
+      lastAction: lastActivity.eventType,
+      conversions: visitorEvents.filter(isConfirmedConversion).length,
+      online: latest.eventType !== "session_end" && Date.now() - Date.parse(latest.createdAt) < 5 * 60_000,
+      currentPage: lastPage?.path,
+    };
+  }).sort((a, b) => b.lastSeen.localeCompare(a.lastSeen));
 }

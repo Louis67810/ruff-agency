@@ -6,6 +6,7 @@ import {
   ClientsSatisfaits,
 } from "@/components/sections/Hero2Optimized/Hero2Optimized";
 import { useLocale } from "@/components/LocaleProvider";
+import { trackSaasEvent } from "@/app/saas-redesign/saas-analytics-tracker";
 import "./CallBooking.css";
 
 declare global {
@@ -71,6 +72,23 @@ export default function CallBooking({ locale }: { locale?: "fr" | "en" }) {
   const english = (locale ?? useLocale()) === "en";
   useEffect(() => {
     initialiseCalAfterHydration(english ? "en" : "fr");
+    const cal = window.Cal?.ns?.["discovery-call"];
+    if (!cal) return;
+    const onBooking = (event: { detail?: { data?: { uid?: string } } }) => {
+      const uid = event.detail?.data?.uid;
+      if (uid) {
+        const key = `ruff_saas_booking_${uid}`;
+        if (sessionStorage.getItem(key)) return;
+        sessionStorage.setItem(key, "1");
+      }
+      trackSaasEvent({
+        eventType: "conversion",
+        sectionId: "booking",
+        metadata: { conversionType: "booking_confirmed", ...(uid ? { bookingUid: uid } : {}) },
+      });
+    };
+    cal("on", { action: "bookingSuccessfulV2", callback: onBooking });
+    return () => cal("off", { action: "bookingSuccessfulV2", callback: onBooking });
   }, [english]);
 
   return (

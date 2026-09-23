@@ -93,8 +93,14 @@ export async function POST(request: NextRequest) {
       "XX"
     ).toUpperCase();
     const countryCode = /^[A-Z]{2}$/.test(country) ? country : "XX";
+    const region = request.headers.get("x-vercel-ip-country-region") ?? request.headers.get("cf-region");
+    const city = request.headers.get("x-vercel-ip-city") ?? request.headers.get("cf-ipcity");
     await Promise.all(
-      inputs.map((event) => writeAnalyticsEvent(event, countryCode)),
+      inputs.map((event) => writeAnalyticsEvent({ ...event, metadata: {
+        ...event.metadata,
+        ...(region ? { region: region.slice(0, 100) } : {}),
+        ...(city ? { city: city.slice(0, 100) } : {}),
+      } }, countryCode)),
     );
     return new NextResponse(null, { status: 204 });
   } catch (error) {

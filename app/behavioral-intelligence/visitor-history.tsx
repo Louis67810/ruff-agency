@@ -331,6 +331,7 @@ export function VisitorHistoryControls({
   granularity,
   onGranularityChange,
   pageOptions,
+  onRefresh,
 }: {
   period: HistoryPeriod;
   onPeriodChange: (period: HistoryPeriod) => void;
@@ -339,6 +340,7 @@ export function VisitorHistoryControls({
   granularity: string;
   onGranularityChange: (granularity: string) => void;
   pageOptions: Array<{ name: string; path: string }>;
+  onRefresh?: () => void;
 }) {
   const [pageOpen, setPageOpen] = useState(false);
   const [periodOpen, setPeriodOpen] = useState(false);
@@ -458,6 +460,7 @@ export function VisitorHistoryControls({
         aria-label="Actualiser"
         onClick={() => {
           setRefreshing(true);
+          onRefresh?.();
           setTimeout(() => setRefreshing(false), 650);
         }}
       >

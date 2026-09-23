@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import { useEffect } from "react";
 import type { ReactNode } from "react";
-import type { AnalyticsSummary } from "@/lib/saas-analytics/types";
+import type { AnalyticsSeriesPoint, AnalyticsSummary } from "@/lib/saas-analytics/types";
 import { geoMercator, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import world from "world-atlas/countries-110m.json";
@@ -26,6 +26,7 @@ import {
 
 type Row = { name: string; value: number; icon?: string; path?: string };
 type DashboardMode = "home" | "page" | "profile" | "ad";
+type AnalyticsReport = { summary: AnalyticsSummary; previous: AnalyticsSummary; series: AnalyticsSeriesPoint[]; comparison: Array<{ label: string; summary: AnalyticsSummary; previous: AnalyticsSummary; series: AnalyticsSeriesPoint[] }> };
 export type MetricKey = "visitors" | "views" | "sessions" | "engaged" | "scroll" | "cta" | "bookings" | "bounce" | "session" | "conversion" | "share" | "calls" | "impressions" | "clicks" | "ctr" | "cpa" | "spend" | "returning" | "returnRate" | "mainSiteVisits" | "conversions" | "online" | "pagesPerSession" | "conversionsPerVisitor" | "conversionsPerSession" | "preConversionTime" | "engagementRate";
 
 const comparisonPalette = ["#8DCDFF", "#8DA8FF", "#AA99FF", "#FAC666", "#FA9C66", "#E16540", "#95EB73", "#DBEB73", "#FF8DA0", "#F78DFF"];
@@ -227,7 +228,7 @@ function pageSectionFunnelTabs(path: string | null, analytics?: AnalyticsSummary
   if (!path || !analytics) return null;
   const sections = analytics.pageSections.filter((section) => section.path === path);
   if (!sections.length) return null;
-  const pageViews = analytics.paths.find((item) => item.label === path)?.value ?? sections[0].reachedPeople;
+  const pageViews = analytics.pageVisitorTotals.find((item) => item.path === path)?.value ?? sections[0].reachedPeople;
   return {
     "Section reach": [
       { name: "Page visitors", value: pageViews },
@@ -269,15 +270,17 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   const [pageOpen, setPageOpen] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [revision, setRevision] = useState(0);
+  useEffect(() => {
+    const timer = window.setInterval(() => setRevision((value) => value + 1), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
   const [filters, setFilters] = useState<string[]>([]);
   const [scopeActive, setScopeActive] = useState(Boolean(scope));
   const [filterRemoving, setFilterRemoving] = useState<string | null>(null);
   const [filterPicker, setFilterPicker] = useState<{ title: string; rows: Row[]; onChoose: (row: Row) => void } | null>(null);
   const [filterPickers, setFilterPickers] = useState<Record<string, { title: string; rows: Row[]; onChoose: (row: Row) => void }>>({});
-  const [filteredAnalytics, setFilteredAnalytics] = useState<{ key: string; summary: AnalyticsSummary } | null>(null);
+  const [report, setReport] = useState<{ key: string; value: AnalyticsReport } | null>(null);
   const [filterError, setFilterError] = useState(false);
-  const [comparisonAnalytics, setComparisonAnalytics] = useState<AnalyticsSummary | null>(null);
-  const [comparisonAnalyticsPair, setComparisonAnalyticsPair] = useState<AnalyticsSummary[]>([]);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [searchOverlay, setSearchOverlay] = useState<{ title: string; rows: Row[]; onChoose: (row: Row) => void } | null>(null);
   // Filtered summaries come from the event store; never shrink values with a
@@ -285,7 +288,7 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   const filterFactor = 1;
   const appliedFilters = selectedPagePath ? [...filters.filter((filter) => filter !== selectedPagePath), selectedPagePath] : filters;
   const filterDays = analyticsPeriod === "Last 24 hours" ? 1 : analyticsPeriod === "Last 7 days" ? 7 : 30;
-  const filterKey = appliedFilters.length ? `${filterDays}:${appliedFilters.join("|")}` : null;
+  const filterKey = `${filterDays}:${granularity}:${appliedFilters.join("|")}:${comparisonPair ?? ""}:${revision}`;
   const selectedFilter = filters.at(-1) ?? null;
   const pageFilterPath = selectedPagePath || filters.find((value) => value.startsWith("/")) || null;
   useEffect(() => {
@@ -295,43 +298,27 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
     if (externalMetric) setMetric(externalMetric);
   }, [externalMetric]);
   useEffect(() => {
-    if (!appliedFilters.length) {
-      setFilteredAnalytics(null);
-      setFilterError(false);
-      return;
-    }
     const controller = new AbortController();
     setFilterError(false);
-    fetch(`/api/saas-analytics/summary?days=${filterDays}&match=${selectedPagePath ? "event" : "visitor"}&filters=${encodeURIComponent(JSON.stringify(appliedFilters))}`, { signal: controller.signal, cache: "no-store" })
+    const targets = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
+    fetch(`/api/saas-analytics/summary?report=1&days=${filterDays}&granularity=${encodeURIComponent(granularity)}&filters=${encodeURIComponent(JSON.stringify(appliedFilters))}&targets=${encodeURIComponent(JSON.stringify(targets))}`, { signal: controller.signal, cache: "no-store" })
       .then((response) => response.ok ? response.json() : Promise.reject(new Error("Analytics unavailable")))
-      .then((summary: AnalyticsSummary | null) => { if (summary) setFilteredAnalytics({ key: filterKey ?? "", summary }); })
+      .then((value: AnalyticsReport) => setReport({ key: filterKey, value }))
       .catch(() => { if (!controller.signal.aborted) setFilterError(true); });
     return () => controller.abort();
   }, [filterKey]);
-  const analyticsView = filteredAnalytics?.key === filterKey ? filteredAnalytics.summary : filterKey ? null : analytics;
+  const currentReport = report?.key === filterKey ? report.value : null;
+  const analyticsView = currentReport?.summary ?? null;
   const comparisonNames = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
-  useEffect(() => {
-    const targets = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean) ?? [];
-    if (targets.length < 2) {
-      setComparisonAnalytics(null);
-      setComparisonAnalyticsPair([]);
-      return;
-    }
-    const controller = new AbortController();
-    Promise.all(targets.map((target) => {
-      const scopedFilters = [...filters.filter((filter) => filter !== target), target];
-      return fetch(`/api/saas-analytics/summary?days=30&match=event&filters=${encodeURIComponent(JSON.stringify(scopedFilters))}`, { signal: controller.signal, cache: "no-store" }).then((response) => response.ok ? response.json() : null);
-    }))
-      .then((summaries: Array<AnalyticsSummary | null>) => { setComparisonAnalyticsPair(summaries.map((summary) => summary).filter((summary): summary is AnalyticsSummary => Boolean(summary))); setComparisonAnalytics(summaries[1] ?? null); })
-      .catch(() => setComparisonAnalytics(null));
-    return () => controller.abort();
-  }, [comparisonPair, filterKey]);
+  const comparisonAnalyticsPair = currentReport?.comparison.map((item) => item.summary) ?? [];
+  const comparisonAnalytics = comparisonAnalyticsPair[1] ?? null;
   const comparisonValue = comparisonAnalytics && activeCompareMetric ? metricValue(comparisonAnalytics, activeCompareMetric) : null;
   const comparisonScale = comparisonAnalytics && analyticsView && activeCompareMetric
     ? comparisonValue && metricValue(analyticsView, activeCompareMetric) ? comparisonValue / Math.max(1, metricValue(analyticsView, activeCompareMetric)) : 1
     : 1;
   const comparisonSeries = comparisonNames.slice(1).map((label, index) => ({
     label,
+    values: currentReport?.comparison[index + 1]?.series.map((point) => point.values[metric] ?? 0) ?? [],
     scale: comparisonAnalyticsPair[index + 1] && analyticsView && activeCompareMetric
       ? metricValue(comparisonAnalyticsPair[index + 1], activeCompareMetric) / Math.max(1, metricValue(analyticsView, activeCompareMetric))
       : 1,
@@ -344,7 +331,7 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
     Campaign: analyticsView.campaigns.map((item) => ({ name: item.label, value: item.value })),
   } : sourceData;
   const livePathData: Record<string, Row[]> = analyticsView ? {
-    Hostname: pathData.Hostname,
+    Hostname: analyticsView.hostnames.map((item) => ({ name: item.label, value: item.value })),
     Page: analyticsView.paths.map((item) => ({ name: item.label, value: item.value })),
     "Entry page": analyticsView.entryPages.map((item) => ({ name: item.label, value: item.value })),
     "Exit link": analyticsView.exitLinks.map((item) => ({ name: item.label, value: item.value })),
@@ -355,10 +342,9 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
     Device: analyticsView.devices.map((item) => ({ name: item.label, value: item.value })),
   } : systemData;
   const liveLocationData: Record<string, Row[]> = analyticsView ? {
-    ...locationData,
-    Country: analyticsView.countries.some((item) => countryCodes[item.label])
-      ? analyticsView.countries.map((item) => ({ name: item.label, value: item.value }))
-      : locationData.Country,
+    Country: analyticsView.countries.map((item) => ({ name: item.label, value: item.value })),
+    Region: analyticsView.regions.map((item) => ({ name: item.label, value: item.value })),
+    City: analyticsView.cities.map((item) => ({ name: item.label, value: item.value })),
   } : locationData;
   const comparisonContextRows = comparisonRows(liveLocationData.Country ?? [], comparisonPair);
   useEffect(() => {
@@ -425,16 +411,16 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
         <AnalyticsToolbar {...{ scope: scopeActive ? scope : undefined, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick: (value: string) => { const picker = filterPickers[value] ?? filterPicker; if (picker) setSearchOverlay(picker); }, clearFilter, filterRemoving, ...toolbarPageProps }} />
       </div>
 
-      {filterKey && !analyticsView ? <div className="df-filter-status" role="status">{filterError ? "Statistiques indisponibles pour ce filtre." : "Chargement des statistiques de la page…"}</div> : <MainAnalytics mode={mode} scope={scope} analytics={analyticsView} metric={metric} setMetric={setMetric} compareMetric={activeCompareMetric} compareLabel={comparisonNames[1] ?? comparisonPair} compareValue={comparisonValue} compareScale={comparisonScale} comparisonSeries={comparisonSeries} compareRelative={compareRelative} onCompareMetricChange={onCompareMetricChange} period={periods[periodIndex]} granularity={granularity} factor={filterFactor * scopeFactor} filter={filterKey} revision={revision} />}
+      {!currentReport ? <div className="df-filter-status" role="status">{filterError ? "Statistiques indisponibles." : "Chargement des statistiques…"}</div> : <MainAnalytics mode={mode} scope={scope} analytics={comparisonPair && comparisonAnalyticsPair[0] ? comparisonAnalyticsPair[0] : analyticsView} previous={comparisonPair && currentReport.comparison[0] ? currentReport.comparison[0].previous : currentReport.previous} series={comparisonPair && currentReport.comparison[0] ? currentReport.comparison[0].series : currentReport.series} metric={metric} setMetric={setMetric} compareMetric={activeCompareMetric} compareLabel={comparisonNames[1] ?? comparisonPair} compareValue={comparisonValue} compareScale={comparisonScale} comparisonSeries={comparisonSeries} compareRelative={compareRelative} onCompareMetricChange={onCompareMetricChange} period={periods[periodIndex]} granularity={granularity} factor={filterFactor * scopeFactor} filter={filterKey} revision={revision} />}
 
-      {(!filterKey || analyticsView) && <div className="df-grid">
+      {currentReport && (mode === "home" || mode === "page") && <div className="df-grid">
         <SourceCard data={liveSourceData} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         <BarsCard tabs={livePathData} initial="Page" total={analyticsView ? compact(analyticsView.pageViews) : "5.8k"} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         {mode === "home" && <PageInsightCards analytics={analyticsView} comparisonPair={comparisonPair} comparisonAnalytics={comparisonAnalyticsPair} onSearch={(title, rows) => openSearch(title, rows)} />}
         <LocationCard data={liveLocationData} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         <BarsCard tabs={liveSystemData} initial="Browser" comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} comparisonAnalytics={comparisonAnalyticsPair} onFilter={applyFilter} selectedFilter={selectedFilter} icons onSearch={(tab, rows) => openSearch(tab, rows)} onSelectFilter={selectFilter} />
         {mode === "home" && pageFunnelTabs && <FunnelCard tabs={pageFunnelTabs} initial="Section reach" />}
-        {mode !== "home" && <DetailInsightCards mode={mode} onFilter={applyFilter} pageFunnelTabs={linkedPageFunnelTabs} />}
+        {mode !== "home" && <DetailInsightCards mode={mode} analytics={analyticsView} pageFunnelTabs={mode === "page" ? pageFunnelTabs : linkedPageFunnelTabs} />}
       </div>}
       {searchOverlay && <AnalyticsSearchOverlay title={searchOverlay.title} rows={searchOverlay.rows} onChoose={searchOverlay.onChoose} comparisonPair={comparisonPair} comparisonContextRows={comparisonContextRows} close={() => setSearchOverlay(null)} />}
     </section>
@@ -566,77 +552,41 @@ function Picker({ items, active, choose }: { items: string[]; active: string; ch
   return <div className="df-picker">{items.map((item) => <button key={item} className={item === active ? "is-active" : ""} onClick={() => choose(item)}>{item}</button>)}</div>;
 }
 
-function MainAnalytics({ mode, scope, analytics, metric, setMetric, compareMetric = null, compareLabel = null, compareValue = null, compareScale = 1, comparisonSeries = [], compareRelative = false, onCompareMetricChange, period, granularity, factor, filter, revision }: { mode: DashboardMode; scope?: string; analytics?: AnalyticsSummary | null; metric: MetricKey; setMetric: (value: MetricKey) => void; compareMetric?: MetricKey | null; compareLabel?: string | null; compareValue?: number | null; compareScale?: number; comparisonSeries?: Array<{ label: string; scale: number }>; compareRelative?: boolean; onCompareMetricChange?: (value: MetricKey | null) => void; period: string; granularity: string; factor: number; filter: string | null; revision: number }) {
+function MainAnalytics({ mode, scope, analytics, previous, series = [], metric, setMetric, compareMetric = null, compareLabel = null, compareValue = null, compareScale = 1, comparisonSeries = [], compareRelative = false, onCompareMetricChange, period, granularity, factor, filter, revision }: { mode: DashboardMode; scope?: string; analytics?: AnalyticsSummary | null; previous?: AnalyticsSummary | null; series?: AnalyticsSeriesPoint[]; metric: MetricKey; setMetric: (value: MetricKey) => void; compareMetric?: MetricKey | null; compareLabel?: string | null; compareValue?: number | null; compareScale?: number; comparisonSeries?: Array<{ label: string; scale: number; values: number[] }>; compareRelative?: boolean; onCompareMetricChange?: (value: MetricKey | null) => void; period: string; granularity: string; factor: number; filter: string | null; revision: number }) {
   const periodFactor = filter ? 1 : period === periods[0] ? 1 : period === periods[1] ? 6.8 : 27.2;
+  const liveMetric = (key: MetricKey, label: string) => {
+    const current = analytics ? metricValue(analytics, key) : 0;
+    const before = previous ? metricValue(previous, key) : 0;
+    const change = key === "online" ? "now" : before ? `${Math.abs((current - before) / before * 100).toFixed(1)}%` : "—";
+    return { key, label, value: formatChartValue(key, current), change, arrow: before && current !== before ? (current > before ? "up" : "down-bad") : undefined, online: key === "online" };
+  };
   const metrics: Array<{ key: MetricKey; label: string; value: string; change: string; arrow?: string; online?: boolean }> = mode === "home"
     ? [
-        { key: "visitors", label: "Visitors", value: compact(Math.round((analytics?.visitors ?? 5783) * periodFactor * factor)), change: "12.4%", arrow: "up" },
-        { key: "sessions", label: "Sessions", value: compact(Math.round((analytics?.sessions ?? 4521) * periodFactor * factor)), change: "9.8%", arrow: "up" },
-        { key: "views", label: "Page views", value: compact(Math.round((analytics?.pageViews ?? 8124) * periodFactor * factor)), change: "14.2%", arrow: "up" },
-        { key: "engaged", label: "Engaged sessions", value: compact(Math.round((analytics?.engagedSessions ?? 3180) * periodFactor * factor)), change: "7.6%", arrow: "up" },
-        { key: "session", label: "Average session time", value: analytics ? `${Math.floor(analytics.averageSessionSeconds / 60)}m ${Math.round(analytics.averageSessionSeconds % 60)}s` : factor < 1 ? "54s" : "1m 9s", change: "8.1%", arrow: "up" },
-        { key: "scroll", label: "Scroll depth", value: `${Math.round((analytics?.scrollDepth || 64) * factor)}%`, change: "5.3%", arrow: "up" },
-        { key: "bounce", label: "Bounce rate", value: `${Math.round(64 + (factor < 1 ? 3 : 0))}%`, change: "4%", arrow: "down-good" },
-        { key: "conversion", label: "Conversion rate", value: `${((analytics?.conversionRate ?? 8.7) * factor).toFixed(1)}%`, change: "2.1%", arrow: "up" },
-        { key: "cta", label: "CTA clicks", value: compact(Math.round((analytics?.ctaClicks ?? 684) * periodFactor * factor)), change: "11.3%", arrow: "up" },
-        { key: "bookings", label: "Booked calls", value: compact(Math.round((analytics?.bookedCalls ?? 180) * periodFactor * factor)), change: "9.2%", arrow: "up" },
-        { key: "returning", label: "Returning visitors", value: compact(Math.round((analytics?.returningVisitors ?? 1272) * periodFactor * factor)), change: "8.4%", arrow: "up" },
-        { key: "returnRate", label: "Return rate", value: `${(analytics?.returnRate ?? 22).toFixed(1)}%`, change: "4.0%", arrow: "up" },
-        { key: "mainSiteVisits", label: "Main site visits", value: compact(Math.round((analytics?.mainSiteVisits ?? 3584) * periodFactor * factor)), change: "6.2%", arrow: "up" },
-        { key: "conversions", label: "Conversions", value: compact(Math.round((analytics?.conversions ?? 462) * periodFactor * factor)), change: "7.1%", arrow: "up" },
-        { key: "online", label: "Online now", value: String(analytics?.online ?? 1), change: "now", online: true },
-        { key: "pagesPerSession", label: "Pages per session", value: ((analytics?.pageViews ?? 8124) / Math.max(1, analytics?.sessions ?? 4521)).toFixed(2), change: "3.2%", arrow: "up" },
-        { key: "conversionsPerVisitor", label: "Conversions / visitor", value: `${(((analytics?.conversions ?? 462) / Math.max(1, analytics?.visitors ?? 5783)) * 100).toFixed(1)}%`, change: "1.8%", arrow: "up" },
-        { key: "conversionsPerSession", label: "Conversions / session", value: `${(((analytics?.conversions ?? 462) / Math.max(1, analytics?.sessions ?? 4521)) * 100).toFixed(1)}%`, change: "2.4%", arrow: "up" },
-        { key: "preConversionTime", label: "Avg. time before conversion", value: analytics ? `${Math.floor(analytics.averageSessionSeconds / 60)}m ${Math.round(analytics.averageSessionSeconds % 60)}s` : "1m 09s", change: "6.5%", arrow: "down-good" },
-        { key: "engagementRate", label: "Engagement rate", value: `${(((analytics?.engagedSessions ?? 3180) / Math.max(1, analytics?.sessions ?? 4521)) * 100).toFixed(1)}%`, change: "4.7%", arrow: "up" },
+        liveMetric("visitors", "Visitors"), liveMetric("sessions", "Sessions"),
+        liveMetric("views", "Page views"), liveMetric("engaged", "Engaged sessions"),
+        liveMetric("session", "Average session time"), liveMetric("scroll", "Scroll depth"),
+        liveMetric("bounce", "Bounce rate"), liveMetric("conversion", "Conversion rate"),
+        liveMetric("cta", "CTA clicks"), liveMetric("bookings", "Booked calls"),
+        liveMetric("returning", "Returning visitors"), liveMetric("returnRate", "Return rate"),
+        liveMetric("mainSiteVisits", "Main site visits"), liveMetric("conversions", "Conversions"),
+        liveMetric("online", "Online now"), liveMetric("pagesPerSession", "Pages per session"),
+        liveMetric("conversionsPerVisitor", "Conversions / visitor"), liveMetric("conversionsPerSession", "Conversions / session"),
+        liveMetric("preConversionTime", "Avg. time before conversion"), liveMetric("engagementRate", "Engagement rate"),
       ]
-    : mode === "ad"
-    ? [
-        { key: "impressions", label: "Impressions", value: compact(Math.round(42840 * periodFactor * factor)), change: "18%", arrow: "up" },
-        { key: "clicks", label: "Clicks", value: compact(Math.round(2104 * periodFactor * factor)), change: "12%", arrow: "up" },
-        { key: "ctr", label: "CTR", value: `${(4.9 + (factor < 1 ? 0.7 : 0)).toFixed(1)}%`, change: "0.8%", arrow: "up" },
-        { key: "views", label: "Landing page views", value: compact(Math.round(3180 * periodFactor * factor)), change: "14%", arrow: "up" },
-        { key: "conversion", label: "Conversion rate", value: `${(8.7 + (factor < 1 ? 1.1 : 0)).toFixed(1)}%`, change: "2.1%", arrow: "up" },
-        { key: "cpa", label: "Cost / conversion", value: `${Math.round(59 * (factor < 1 ? 0.84 : 1))} €`, change: "7%", arrow: "down-good" },
-        { key: "spend", label: "Spend", value: `${compact(Math.round(12400 * periodFactor * factor))} €`, change: "9%", arrow: "up" },
-      ]
-    : mode === "profile"
+    : mode === "page"
       ? [
-          { key: "visitors", label: "Visitors", value: compact(Math.round(1214 * periodFactor * factor)), change: "16%", arrow: "up" },
-          { key: "share", label: "Audience share", value: `${Math.round(21 * factor)}%`, change: "3.4%", arrow: "up" },
-          { key: "conversion", label: "Conversion rate", value: `${(14.8 * factor).toFixed(1)}%`, change: "2.6%", arrow: "up" },
-          { key: "bounce", label: "Bounce rate", value: `${Math.round(48 + (factor < 1 ? 4 : 0))}%`, change: "5%", arrow: "down-good" },
-          { key: "session", label: "Session time", value: factor < 1 ? "1m 12s" : "2m 18s", change: "21%", arrow: "up" },
-        { key: "calls", label: "Booked calls", value: compact(Math.round(180 * periodFactor * factor)), change: "11%", arrow: "up" },
-        { key: "sessions", label: "Sessions", value: compact(Math.round(930 * periodFactor * factor)), change: "13%", arrow: "up" },
-        { key: "engaged", label: "Engaged sessions", value: compact(Math.round(612 * periodFactor * factor)), change: "10%", arrow: "up" },
-        { key: "cta", label: "CTA clicks", value: compact(Math.round(684 * periodFactor * factor)), change: "11%", arrow: "up" },
+          liveMetric("visitors", "Visitors"), liveMetric("views", "Page views"),
+          liveMetric("sessions", "Sessions"), liveMetric("engaged", "Engaged sessions"),
+          liveMetric("conversion", "Conversion rate"), liveMetric("bounce", "Bounce rate"),
+          liveMetric("session", "Session time"), liveMetric("calls", "Conversions"),
+          liveMetric("scroll", "Scroll depth"), liveMetric("cta", "CTA clicks"),
         ]
-      : mode === "page"
-        ? [
-            { key: "visitors", label: "Visitors", value: compact(Math.round(3137 * periodFactor * factor)), change: "29%", arrow: "up" },
-            { key: "views", label: "Page views", value: compact(Math.round(4682 * periodFactor * factor)), change: "18%", arrow: "up" },
-            { key: "conversion", label: "Conversion rate", value: `${(8.7 * factor).toFixed(1)}%`, change: "2.1%", arrow: "up" },
-            { key: "bounce", label: "Bounce rate", value: `${Math.round(60 + (factor < 1 ? 5 : 0))}%`, change: "3%", arrow: "down-good" },
-            { key: "session", label: "Session time", value: factor < 1 ? "52s" : "1m 46s", change: "21%", arrow: "up" },
-            { key: "calls", label: "Conversions", value: compact(Math.round(274 * periodFactor * factor)), change: "8%", arrow: "up" },
-            { key: "sessions", label: "Sessions", value: compact(Math.round(2460 * periodFactor * factor)), change: "16%", arrow: "up" },
-            { key: "scroll", label: "Scroll depth", value: `${Math.round(61 * factor)}%`, change: "6%", arrow: "up" },
-            { key: "cta", label: "CTA clicks", value: compact(Math.round(442 * periodFactor * factor)), change: "13%", arrow: "up" },
-          ]
-        : [
-            { key: "visitors", label: "Visitors", value: compact(Math.round(5783 * periodFactor * factor)), change: "20%", arrow: "up" },
-            { key: "views", label: "Page views", value: compact(Math.round(8124 * periodFactor * factor)), change: "14%", arrow: "up" },
-            { key: "conversion", label: "Conversion rate", value: `${(8.7 * factor).toFixed(1)}%`, change: "2.1%", arrow: "up" },
-            { key: "bounce", label: "Bounce rate", value: `${Math.round(64 + (factor < 1 ? 3 : 0))}%`, change: "4%", arrow: "down-good" },
-            { key: "session", label: "Session time", value: factor < 1 ? "54s" : "1m 9s", change: "1%", arrow: "down-bad" },
-            { key: "calls", label: "Online", value: String(Math.round(55 * factor)), change: "now", online: true },
-          ];
+      : [];
   const compareItem = compareMetric && !compareLabel ? metrics.find((item) => item.key === compareMetric) : null;
   return (
     <article className="df-card df-main-card">
       <div className="df-metrics">
+        {!metrics.length && <p>Les données de cette catégorie ne sont pas encore collectées.</p>}
         {metrics.map((item) => {
           return <button key={item.key} className={`df-metric is-clickable ${metric !== item.key ? "is-inactive" : ""}`} onClick={() => { if (compareMetric === item.key) onCompareMetricChange?.(metric); setMetric(item.key); }}>
             <span className="df-metric-label">{item.label}{item.online && <i className="df-online-dot" />}</span>
@@ -655,7 +605,7 @@ function MainAnalytics({ mode, scope, analytics, metric, setMetric, compareMetri
         <small>{compareRelative && compareMetric ? `${compareValue >= (analytics ? metricValue(analytics, compareMetric) : 0) ? "+" : ""}${(((compareValue - (analytics ? metricValue(analytics, compareMetric) : 0)) / Math.max(1, analytics ? metricValue(analytics, compareMetric) : 1)) * 100).toFixed(1)}%` : "Comparaison"}</small>
       </div>}
       </div>
-      <InteractiveChart metric={metric} compareMetric={compareMetric} compareLabel={compareLabel} compareScale={compareScale} comparisonSeries={comparisonSeries} compareRelative={compareRelative} scope={scope} period={period} granularity={granularity} factor={factor} filter={filter} revision={revision} />
+      {metrics.length > 0 && <InteractiveChart metric={metric} compareMetric={compareMetric} compareLabel={compareLabel} compareScale={compareScale} comparisonSeries={comparisonSeries} series={series} compareRelative={compareRelative} scope={scope} period={period} granularity={granularity} factor={factor} filter={filter} revision={revision} />}
     </article>
   );
 }
@@ -716,7 +666,7 @@ function PageInsightCard({ title, rows, suffix = "", visual = "list", comparison
   </article>;
 }
 
-function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 1, comparisonSeries = [], compareRelative, scope, period, granularity, factor, filter, revision }: { metric: MetricKey; compareMetric: MetricKey | null; compareLabel?: string | null; compareScale?: number; comparisonSeries?: Array<{ label: string; scale: number }>; compareRelative: boolean; scope?: string; period: string; granularity: string; factor: number; filter: string | null; revision: number }) {
+function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 1, comparisonSeries = [], series = [], compareRelative, scope, period, granularity, factor, filter, revision }: { metric: MetricKey; compareMetric: MetricKey | null; compareLabel?: string | null; compareScale?: number; comparisonSeries?: Array<{ label: string; scale: number; values: number[] }>; series?: AnalyticsSeriesPoint[]; compareRelative: boolean; scope?: string; period: string; granularity: string; factor: number; filter: string | null; revision: number }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState<number | null>(null);
   const [dragStart, setDragStart] = useState<number | null>(null);
@@ -743,11 +693,11 @@ function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 
     const shape = filter || scope || compareLabel ? 0.82 + Math.sin((i + (filterSeed + compareSeed) % 9) * 0.76) * 0.18 + Math.cos((i * 1.7 + filterSeed + compareSeed) * 0.31) * 0.1 : 1;
     return Math.max(0.1, (source + jitter) * factor * shape * scale);
   });
-  const values = useMemo(() => makeValues(metric), [metric, target, factor, filter, filterSeed, scope, revision]);
-  const compareValues = useMemo(() => compareMetric ? makeValues(compareMetric, compareScale) : null, [compareMetric, compareLabel, compareScale, target, factor, filter, filterSeed, scope, revision]);
+  const values = series.length ? series.map((point) => point.values[metric] ?? 0) : makeValues(metric);
+  const compareValues = compareMetric ? comparisonSeries[0]?.values.length ? comparisonSeries[0].values : series.length ? null : makeValues(compareMetric, compareScale) : null;
   const seriesColors = comparisonChartColors(compareValues ? Math.max(2, comparisonSeries.length + 1) : 1);
   const compareColor = seriesColors[1] ?? comparisonPalette[5];
-  const extraCompareSeries = comparisonSeries.slice(1).map((series, seriesIndex) => ({ ...series, color: seriesColors[seriesIndex + 2] ?? comparisonPalette[(seriesIndex + 2) % comparisonPalette.length], values: makeValues(metric, series.scale) }));
+  const extraCompareSeries = comparisonSeries.slice(1).map((item, seriesIndex) => ({ ...item, color: seriesColors[seriesIndex + 2] ?? comparisonPalette[(seriesIndex + 2) % comparisonPalette.length], values: item.values.length ? item.values : makeValues(metric, item.scale) }));
   const percentageMetric = ["bounce", "conversion", "share", "ctr", "scroll"].includes(metric);
   const maxValue = Math.max(...values, ...(compareValues ?? []), ...extraCompareSeries.flatMap((series) => series.values));
   const max = percentageMetric ? Math.max(10, Math.ceil(maxValue / 10) * 10) : Math.max(10, Math.ceil(maxValue / 100) * 100);
@@ -757,7 +707,8 @@ function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 
   const line = smoothPath(points);
   const solidLine = smoothPath(points.slice(0, -1));
   const area = `${line} L${points.at(-1)?.[0]},${top + innerH} L${left},${top + innerH} Z`;
-  const labels = granularity === "Weekly" ? ["W1", "W2", "W3", "W4", "W5"] : granularity === "Daily" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] : ["9am", "1pm", "5pm", "9pm", "1am", "5am", "9am"];
+  const labelOptions: Intl.DateTimeFormatOptions = period === "Last 24 hours" && granularity === "Hourly" ? { hour: "2-digit", minute: "2-digit" } : { day: "2-digit", month: "2-digit" };
+  const labels = series.length ? series.map((point) => new Date(point.date).toLocaleString("fr-FR", labelOptions)).filter((_, index) => index % Math.max(1, Math.ceil(series.length / 7)) === 0) : granularity === "Weekly" ? ["W1", "W2", "W3", "W4", "W5"] : granularity === "Daily" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] : ["9am", "1pm", "5pm", "9am"];
   const yLabels = [max, Math.round(max * 0.6), Math.round(max * 0.3), 0];
   const onMove = (event: React.PointerEvent<SVGRectElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -781,7 +732,7 @@ function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 
   };
   const selectedRange = selection && selection[1] > selection[0] ? selection : null;
   const formatDelta = (from: number, to: number) => `${to - from >= 0 ? "+" : ""}${((to - from) / Math.max(0.1, from) * 100).toFixed(1)}%`;
-  const labelForIndex = (index: number) => labels[Math.min(labels.length - 1, Math.round((index / Math.max(1, values.length - 1)) * (labels.length - 1)))];
+  const labelForIndex = (index: number) => series[index] ? new Date(series[index].date).toLocaleString("fr-FR", labelOptions) : labels[Math.min(labels.length - 1, Math.round((index / Math.max(1, values.length - 1)) * (labels.length - 1)))];
   const primaryDisplay = (index: number) => compareRelative && compareValues ? "100%" : formatChartValue(metric, values[index]);
   const compareDisplay = (index: number) => compareRelative && compareValues ? formatDelta(values[index], compareValues[index]) : formatChartValue(compareMetric!, compareValues![index]);
   const rangeSummary = selectedRange ? {
@@ -803,7 +754,7 @@ function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 
       {hover !== null && <g><rect x={Math.max(left, points[hover][0] - innerW / values.length / 2)} y={top} width={innerW / values.length} height={innerH} className="df-hover-band" /><line x1={points[hover][0]} x2={points[hover][0]} y1={top} y2={top + innerH} className="df-hover-line" /><circle cx={points[hover][0]} cy={points[hover][1]} r="5" className="df-hover-dot" />{compareValues && <circle cx={points[hover][0]} cy={top + innerH - (compareValues[hover] / max) * innerH} r="5" className="df-hover-dot is-compare" style={{ fill: compareColor }} />}{extraCompareSeries.map((series, seriesIndex) => <circle key={series.label} cx={points[hover][0]} cy={top + innerH - (series.values[hover] / max) * innerH} r="5" className={`df-hover-dot extra-${seriesIndex}`} style={{ fill: series.color }} />)}</g>}
       {selectedRange && <rect x={points[selectedRange[0]][0]} y={top} width={points[selectedRange[1]][0] - points[selectedRange[0]][0]} height={innerH} className="df-selection-band" />}
       <rect x={left} y={top} width={innerW} height={innerH} fill="transparent" onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={() => { if (dragStart === null) setHover(null); }} />
-      {labels.map((label, index) => <text key={`${label}-${index}`} x={left + (index / (labels.length - 1)) * innerW} y={height - 8} textAnchor="middle">{label}</text>)}
+      {labels.map((label, index) => <text key={`${label}-${index}`} x={left + (index / Math.max(1, labels.length - 1)) * innerW} y={height - 8} textAnchor="middle">{label}</text>)}
     </svg>
     {hover !== null && <div className="df-chart-tooltip" style={{ left: `${Math.min(89, Math.max(11, (points[hover][0] / width) * 100))}%`, top: `${Math.max(22, (points[hover][1] / height) * 100)}%` }}><b>{labelForIndex(hover)} · {period}</b><span><i />{metricLabel(metric)}<strong>{primaryDisplay(hover)}</strong></span>{compareValues && <span className="df-tooltip-compare"><i style={{ background: compareColor }} />{compareLabel ?? metricLabel(compareMetric!)}<strong>{compareDisplay(hover)}</strong></span>}{extraCompareSeries.map((series) => <span key={series.label} className="df-tooltip-compare df-tooltip-extra"><i style={{ background: series.color }} />{series.label}<strong>{compareRelative ? formatDelta(values[hover], series.values[hover]) : formatChartValue(metric, series.values[hover])}</strong></span>)}{rangeSummary && <div className="df-tooltip-range"><b>Zone sélectionnée</b><span className="df-tooltip-range-period">{labelForIndex(rangeSummary.start)} <em>→</em> {labelForIndex(rangeSummary.end)}</span><span><i className="df-tooltip-primary-dot" />{metricLabel(metric)}<strong>{rangeSummary.primary}</strong></span>{rangeSummary.compare !== null && <span className="df-tooltip-compare"><i style={{ background: compareColor }} />{compareLabel ?? metricLabel(compareMetric!)}<strong>{rangeSummary.compare}</strong></span>}{extraCompareSeries.map((series) => <span key={series.label} className="df-tooltip-compare df-tooltip-extra"><i style={{ background: series.color }} />{series.label}<strong>{formatDelta(series.values[rangeSummary.start], series.values[rangeSummary.end])}</strong></span>)}</div>}</div>}
   </div>;
@@ -830,7 +781,7 @@ function metricValue(analytics: AnalyticsSummary, metric: MetricKey) {
     pagesPerSession: analytics.pageViews / Math.max(1, analytics.sessions),
     conversionsPerVisitor: (analytics.conversions / Math.max(1, analytics.visitors)) * 100,
     conversionsPerSession: (analytics.conversions / Math.max(1, analytics.sessions)) * 100,
-    preConversionTime: analytics.averageSessionSeconds,
+    preConversionTime: analytics.preConversionSeconds,
     engagementRate: (analytics.engagedSessions / Math.max(1, analytics.sessions)) * 100,
   };
   return values[metric] ?? analytics.visitors;
@@ -882,7 +833,8 @@ function DatafastPie({ rows, selectedFilter, onSelect, tone = "primary", caption
   const [hovered, setHovered] = useState<Row | null>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const pieColors = tone === "compare" ? ["#F6DF8E", "#F6DF8E", "#F6DF8E", "#F6DF8E", "#F6DF8E"] : datafastPieColors;
-  const total = rows.reduce((sum, row) => sum + row.value, 0) || 1;
+  const actualTotal = rows.reduce((sum, row) => sum + row.value, 0);
+  const total = Math.max(1, actualTotal);
   const center = { x: 190, y: 192 };
   const outerRadius = 116;
   const innerRadius = 69;
@@ -946,7 +898,7 @@ function DatafastPie({ rows, selectedFilter, onSelect, tone = "primary", caption
           <text className="df-datafast-pie-value" x={label.right ? label.endX + (iconDomain ? 28 : 7) : label.endX - (iconDomain ? 28 : 7)} y={label.labelY + 13} textAnchor={label.right ? "start" : "end"}>{compact(label.row.value)}{valueSuffix} · {((label.row.value / total) * 100).toFixed(1)}%</text>
         </g>;
       })}
-      <text className="df-datafast-pie-total" x={center.x} y={center.y - 2} textAnchor="middle">{compact(total)}</text>
+      <text className="df-datafast-pie-total" x={center.x} y={center.y - 2} textAnchor="middle">{compact(actualTotal)}</text>
       <text className="df-datafast-pie-caption" x={center.x} y={center.y + 17} textAnchor="middle">{caption}</text>
     </svg>
     {hovered && <div className="df-datafast-pie-tooltip" style={{ left: `${Math.min(80, Math.max(5, (pointer.x / 536) * 100))}%`, top: `${Math.min(86, Math.max(8, (pointer.y / 384) * 100))}%` }}><span>{hovered.name}</span><b>{compact(hovered.value)} · {((hovered.value / total) * 100).toFixed(1)}%</b></div>}
@@ -970,8 +922,7 @@ function comparisonSummaryFallbackRows(summaries: AnalyticsSummary[], comparison
     const found = (collection as Array<{ label: string; value: number }>).find((row) => row.label.toLowerCase() === name.toLowerCase());
     if (found) return { name, value: found.value };
     const summary = summaries[index];
-    const value = key === "paths" || key === "entryPages" || key === "exitLinks" ? summary.pageViews : summary.visitors;
-    return { name, value };
+    return { name, value: 0 };
   });
 }
 
@@ -987,16 +938,16 @@ function comparisonDataRows(summaries: AnalyticsSummary[], index: number, key: k
     const summary = summaries[index];
     if (summary && names.length >= 2) {
       return names.map((name) => {
-        const normalized = name.toLocaleLowerCase("fr-FR").replace("états-unis", "united states");
-        const found = summary.countries.find((row) => row.label.toLocaleLowerCase() === normalized || (normalized === "united states" && row.label.toLocaleLowerCase() === "etats-unis"));
-        return { name, value: found?.value ?? summary.visitors };
+        const normalized = name.toLocaleLowerCase("fr-FR");
+        const code = countryCodes[name] ?? name.toUpperCase();
+        const found = summary.countries.find((row) => row.label.toLocaleLowerCase("fr-FR") === normalized || row.label.toUpperCase() === code);
+        return { name, value: found?.value ?? 0 };
       });
     }
   }
   const collection = summaries[index]?.[key];
   if (Array.isArray(collection) && collection.length > 0) return (collection as Array<{ label: string; value: number }>).map((row) => ({ name: row.label, value: row.value }));
-  const factor = index === 0 ? 0.82 : 1.14;
-  return fallback.map((row, rowIndex) => ({ ...row, value: Math.max(1, Math.round(row.value * (factor + rowIndex * 0.015))) }));
+  return [];
 }
 
 function comparisonRowsForTab(rows: Row[], comparisonPair?: string | null, comparisonAnalytics: AnalyticsSummary[] = [], activeIndex = 0, fallbackKey?: keyof AnalyticsSummary) {
@@ -1114,10 +1065,10 @@ function LocationCard({ data = locationData, comparisonPair, comparisonContextRo
   };
   const locationRows = data[tab] ?? [];
   const chartRows = tab === "Country" ? comparisonRowsForTab(locationRows, comparisonPair, comparisonAnalytics, comparisonIndex, "countries") : locationRows;
-  return <article className={`df-card df-location-card ${tab === "Map" ? "is-map" : ""}`}><CardHead><Tabs items={["Map", "Country", "Region", "City"]} active={tab} onChange={setTab} /></CardHead><div className="df-card-body df-location-body">{tab === "Map" ? <WorldMap onFilter={selectMapCountry} comparisonPair={comparisonPair} /> : <BarList rows={chartRows} seriesTone={comparisonIndex === 1 ? "compare" : "primary"} onSelect={(row) => onSelectFilter ? onSelectFilter(tab, chartRows, row) : onFilter(row.name)} selectedFilter={selectedFilter} flags={tab === "Country"} />}</div>{tab !== "Map" && <button className="df-details" onClick={() => onSearch?.(tab, chartRows)}>Details</button>}{tab === "Country" && <ComparisonTabs comparisonPair={comparisonPair} activeIndex={comparisonIndex} onChange={setComparisonIndex} />}</article>;
+  return <article className={`df-card df-location-card ${tab === "Map" ? "is-map" : ""}`}><CardHead><Tabs items={["Map", "Country", "Region", "City"]} active={tab} onChange={setTab} /></CardHead><div className="df-card-body df-location-body">{tab === "Map" ? <WorldMap rows={data.Country ?? []} onFilter={selectMapCountry} comparisonPair={comparisonPair} /> : <BarList rows={chartRows} seriesTone={comparisonIndex === 1 ? "compare" : "primary"} onSelect={(row) => onSelectFilter ? onSelectFilter(tab, chartRows, row) : onFilter(row.name)} selectedFilter={selectedFilter} flags={tab === "Country"} />}</div>{tab !== "Map" && <button className="df-details" onClick={() => onSearch?.(tab, chartRows)}>Details</button>}{tab === "Country" && <ComparisonTabs comparisonPair={comparisonPair} activeIndex={comparisonIndex} onChange={setComparisonIndex} />}</article>;
 }
 
-function WorldMap({ onFilter, comparisonPair }: { onFilter: (value: string) => void; comparisonPair?: string | null }) {
+function WorldMap({ rows, onFilter, comparisonPair }: { rows: Row[]; onFilter: (value: string) => void; comparisonPair?: string | null }) {
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const dragRef = useRef<{ pointerId: number; x: number; y: number; panX: number; panY: number } | null>(null);
@@ -1128,9 +1079,8 @@ function WorldMap({ onFilter, comparisonPair }: { onFilter: (value: string) => v
     const path = geoPath(projection);
     return collection.features.map((item: any, index: number) => <path key={index} d={path(item) ?? ""} />);
   }, []);
-  const points = [
-    ["United States", 22, 43, 1810], ["United Kingdom", 47, 35, 642], ["France", 49, 40, 521], ["Germany", 52, 37, 494], ["India", 68, 55, 366], ["Australia", 84, 76, 228],
-  ] as const;
+  const coordinates: Record<string, [number, number]> = { "United States": [22, 43], "États-Unis": [22, 43], US: [22, 43], "United Kingdom": [47, 35], GB: [47, 35], France: [49, 40], FR: [49, 40], Germany: [52, 37], DE: [52, 37], India: [68, 55], IN: [68, 55], Australia: [84, 76], AU: [84, 76], Canada: [19, 27], CA: [19, 27] };
+  const points = rows.filter((row) => coordinates[row.name]).map((row) => ({ name: row.name, value: row.value, xy: coordinates[row.name] }));
   const comparisonNames = comparisonPair?.split(/\s+avec\s+/i).map((value) => value.trim().toLowerCase()) ?? [];
   const zoomAtPoint = (event: React.WheelEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -1160,91 +1110,17 @@ function WorldMap({ onFilter, comparisonPair }: { onFilter: (value: string) => v
     setDragging(false);
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   };
-  return <div className={`df-world ${dragging ? "is-dragging" : ""}`} onWheel={zoomAtPoint} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag} aria-label="Interactive visitor map"><div className="df-world-zoom" style={{ transform: `translate3d(${pan.x}px, ${pan.y}px, 0) scale(${zoom})` }}><svg viewBox="0 0 800 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g>{paths}</g></svg>{points.map(([name, x, y, value]) => <button className={comparisonNames.includes(name.toLowerCase()) || (name === "United States" && comparisonNames.some((value) => value.includes("états") || value.includes("etats"))) ? "is-comparing" : ""} key={name} aria-label={`Filter by ${name}`} style={{ left: `${x}%`, top: `${y}%`, transform: `translate(-50%, -50%) scale(${1 / zoom})` }} onClick={() => onFilter(name)}><span>{name} · {compact(value)}</span></button>)}</div><span className="df-map-zoom-hint">Glisser pour déplacer · Molette pour zoomer · {Math.round(zoom * 100)}%</span></div>;
+  return <div className={`df-world ${dragging ? "is-dragging" : ""}`} onWheel={zoomAtPoint} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag} aria-label="Interactive visitor map"><div className="df-world-zoom" style={{ transform: `translate3d(${pan.x}px, ${pan.y}px, 0) scale(${zoom})` }}><svg viewBox="0 0 800 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g>{paths}</g></svg>{points.map(({ name, value, xy }) => <button className={comparisonNames.includes(name.toLowerCase()) || (name === "United States" && comparisonNames.some((value) => value.includes("états") || value.includes("etats"))) ? "is-comparing" : ""} key={name} aria-label={`Filter by ${name}`} style={{ left: `${xy[0]}%`, top: `${xy[1]}%`, transform: `translate(-50%, -50%) scale(${1 / zoom})` }} onClick={() => onFilter(name)}><span>{name} · {compact(value)}</span></button>)}</div><span className="df-map-zoom-hint">Glisser pour déplacer · Molette pour zoomer · {Math.round(zoom * 100)}%</span></div>;
 }
 
-function DetailInsightCards({ mode, onFilter, pageFunnelTabs }: { mode: Exclude<DashboardMode, "home">; onFilter: (value: string) => void; pageFunnelTabs?: Record<string, Row[]> | null }) {
-  const ctaTabs: Record<string, Row[]> = mode === "ad" ? {
-    "Ad actions": [
-      { name: "Landing page clicks", value: 1184 },
-      { name: "Profile visits", value: 624 },
-      { name: "Video completions", value: 418 },
-      { name: "Booked calls", value: 128 },
-    ],
-    "CTR by CTA": [
-      { name: "Book a call", value: 74 },
-      { name: "See the case study", value: 62 },
-      { name: "View pricing", value: 49 },
-      { name: "Learn more", value: 37 },
-    ],
-  } : {
-    "CTA clicks": [
-      { name: "Book a call", value: 684 },
-      { name: "View pricing", value: 442 },
-      { name: "See case studies", value: 318 },
-      { name: "Start a project", value: 226 },
-      { name: "Contact", value: 184 },
-    ],
-    "CTA conversion": [
-      { name: "Book a call", value: 148 },
-      { name: "Start a project", value: 112 },
-      { name: "View pricing", value: 87 },
-      { name: "Contact", value: 64 },
-    ],
-  };
-  const pageJourney = [
-    { name: "Page visitors", value: 12400 },
-    { name: "Hero viewed", value: 6800 },
-    { name: "Main section reached", value: 3200 },
-    { name: "Contact section reached", value: 1500 },
-    { name: "Conversion", value: 620 },
-  ];
-  const profileJourney = [
-    { name: "Profile visitors", value: 12400 },
-    { name: "Intent recognized", value: 6800 },
-    { name: "Qualified audience", value: 3200 },
-    { name: "Call intent", value: 1500 },
-    { name: "Booked call", value: 620 },
-  ];
-  const adJourney = [
-    { name: "Impressions", value: 12400 },
-    { name: "Clicks", value: 6800 },
-    { name: "Landing page visits", value: 3200 },
-    { name: "Qualified actions", value: 1500 },
-    { name: "Conversions", value: 620 },
-  ];
-  const sectionReach = mode === "ad" ? [
-    { name: "Impressions", value: 12400 },
-    { name: "Landing page views", value: 8600 },
-    { name: "Engaged visits", value: 4200 },
-    { name: "Qualified actions", value: 1800 },
-    { name: "Conversions", value: 620 },
-  ] : mode === "profile" ? [
-    { name: "Profile visitors", value: 12400 },
-    { name: "Hero viewed", value: 9800 },
-    { name: "Proof section viewed", value: 6800 },
-    { name: "Contact intent", value: 2100 },
-    { name: "Booked call", value: 620 },
-  ] : [
-    { name: "Page visitors", value: 12400 },
-    { name: "Hero viewed", value: 9800 },
-    { name: "Main section reached", value: 6800 },
-    { name: "Contact section reached", value: 2100 },
-    { name: "Conversion", value: 620 },
-  ];
-  const journey = mode === "profile" ? profileJourney : mode === "ad" ? adJourney : pageJourney;
-  const primaryJourneyLabel = mode === "profile" ? "Persona journey" : mode === "ad" ? "Ad funnel" : "Conversion journey";
-  const secondaryJourneyLabel = mode === "ad" ? "Drop-off by stage" : "Section reach";
-  const sectionTabs: Record<string, Row[]> = {
-    [primaryJourneyLabel]: journey,
-    ...(pageFunnelTabs ?? { [secondaryJourneyLabel]: sectionReach }),
-  };
+function DetailInsightCards({ mode, analytics, pageFunnelTabs }: { mode: Exclude<DashboardMode, "home">; analytics?: AnalyticsSummary | null; pageFunnelTabs?: Record<string, Row[]> | null }) {
+  if (mode !== "page") return <div className="df-filter-status">Les statistiques de cette catégorie ne sont pas encore collectées.</div>;
+  const ctaRows = analytics?.ctas.map((item) => ({ name: item.label, value: item.value })) ?? [];
   return <>
-    <BarsCard tabs={ctaTabs} initial={Object.keys(ctaTabs)[0]} total="CTA" interaction="inspect" />
-    <FunnelCard tabs={sectionTabs} initial={Object.keys(sectionTabs)[0]} />
+    <BarsCard tabs={{ "CTA clicks": ctaRows }} initial="CTA clicks" total="CTA" interaction="inspect" />
+    {pageFunnelTabs?.["Section reach"]?.length ? <FunnelCard tabs={pageFunnelTabs} initial="Section reach" /> : null}
   </>;
 }
-
 function FunnelCard({ tabs, initial }: { tabs: Record<string, Row[]>; initial: string }) {
   const [tab, setTab] = useState(initial);
   const [active, setActive] = useState(0);

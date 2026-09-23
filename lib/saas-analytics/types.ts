@@ -10,6 +10,7 @@ export const analyticsEventTypes = [
   "conversion",
   "site_navigation",
   "session_end",
+  "heartbeat",
 ] as const;
 
 export type AnalyticsEventType = (typeof analyticsEventTypes)[number];
@@ -48,7 +49,11 @@ export type AnalyticsSummary = {
   conversions: number;
   conversionRate: number;
   averageSessionSeconds: number;
+  preConversionSeconds: number;
   online: number;
+  hostnames: Array<{ label: string; value: number }>;
+  regions: Array<{ label: string; value: number }>;
+  cities: Array<{ label: string; value: number }>;
   sources: Array<{ label: string; value: number }>;
   referrers: Array<{ label: string; value: number }>;
   campaigns: Array<{ label: string; value: number }>;
@@ -93,6 +98,7 @@ export type AnalyticsSummary = {
   }>;
   scrollZoneTotals: Array<{ path: string; value: number; viewport: AnalyticsViewport }>;
   pageSessionTotals: Array<{ path: string; value: number }>;
+  pageVisitorTotals: Array<{ path: string; value: number }>;
   pageSections: Array<{
     path: string;
     id: string;
@@ -103,4 +109,24 @@ export type AnalyticsSummary = {
     viewport: AnalyticsViewport;
   }>;
   daily: Array<{ date: string; visitors: number; conversions: number }>;
+};
+
+export type AnalyticsSeriesPoint = { date: string; values: Record<string, number> };
+export type AnalyticsVisitor = {
+  id: string;
+  lastSeen: string;
+  firstSeen: string;
+  countryCode: string;
+  region?: string;
+  city?: string;
+  source: string;
+  device: string;
+  visits: number;
+  durationSeconds: number;
+  pages: string[];
+  currentPage?: string;
+  sections: string[];
+  lastAction: string;
+  conversions: number;
+  online: boolean;
 };

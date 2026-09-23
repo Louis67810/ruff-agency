@@ -2,12 +2,13 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import type { AnalyticsSummary, AnalyticsViewport } from "@/lib/saas-analytics/types";
+import type { AnalyticsSummary, AnalyticsVisitor, AnalyticsViewport } from "@/lib/saas-analytics/types";
 import { geoGraticule, geoOrthographic, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import world from "world-atlas/countries-110m.json";
 import { ExactAnalyticsDashboard, type MetricKey } from "./exact-analytics-dashboard";
-import { VisitorHistory, VisitorHistoryControls, VisitorHistoryDetail, visitorHistoryName, type HistoryPeriod } from "./visitor-history";
+import { VisitorHistoryControls, type HistoryPeriod } from "./visitor-history";
+import { TrackedVisitorHistory, TrackedVisitorDetail, visitorHistoryName } from "./tracked-visitors";
 import {
   ArrowLeft,
   ArrowRight,
@@ -478,6 +479,9 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
     [compareRelative, setCompareRelative] = useState(false),
     [notificationsOpen, setNotificationsOpen] = useState(false),
     [selectedVisitorId, setSelectedVisitorId] = useState<string | null>(null),
+    [trackedVisitors, setTrackedVisitors] = useState<AnalyticsVisitor[]>([]),
+    [trackedOnline, setTrackedOnline] = useState(0),
+    [trackedRevision, setTrackedRevision] = useState(0),
     [historyPeriod, setHistoryPeriod] = useState<HistoryPeriod>("Last 24 hours"),
     [historyPage, setHistoryPage] = useState(""),
     [analyticsGranularity, setAnalyticsGranularity] = useState("Hourly"),
@@ -512,6 +516,19 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
   useEffect(() => () => {
     if (searchCloseTimer.current) clearTimeout(searchCloseTimer.current);
   }, []);
+  useEffect(() => {
+    if (view !== "history" && view !== "live") return;
+    const days = view === "live" || historyPeriod === "Last 24 hours" ? 1 : historyPeriod === "Last 7 days" ? 7 : 30;
+    let active = true;
+    const load = () => fetch(`/api/saas-analytics/summary?report=1&visitors=1&days=${days}`, { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : Promise.reject(new Error("Analytics unavailable")))
+      .then((report: { visitors: AnalyticsVisitor[]; summary: AnalyticsSummary }) => {
+        if (active) { setTrackedVisitors(report.visitors); setTrackedOnline(report.summary.online); }
+      }).catch(() => { if (active) { setTrackedVisitors([]); setTrackedOnline(0); } });
+    void load();
+    const timer = window.setInterval(() => { void load(); }, 30_000);
+    return () => { active = false; window.clearInterval(timer); };
+  }, [view, historyPeriod, trackedRevision]);
   const openSearch = () => {
     if (searchCloseTimer.current) clearTimeout(searchCloseTimer.current);
     setSearchClosing(false);
@@ -668,7 +685,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
           </div>
           <div className={`fw-topbar-secondary ${secondaryControlsVisible ? "has-controls" : "is-empty"}`} aria-hidden={!secondaryControlsVisible}>
             <div className="fw-sticky-analytics-controls">
-              {historyListOpen ? <VisitorHistoryControls period={historyPeriod} onPeriodChange={setHistoryPeriod} page={historyPage} onPageChange={setHistoryPage} granularity={analyticsGranularity} onGranularityChange={setAnalyticsGranularity} pageOptions={pages} /> : view !== "history" ? stickyAnalyticsControls : null}
+              {historyListOpen ? <VisitorHistoryControls period={historyPeriod} onPeriodChange={setHistoryPeriod} page={historyPage} onPageChange={setHistoryPage} granularity={analyticsGranularity} onGranularityChange={setAnalyticsGranularity} pageOptions={pages} onRefresh={() => setTrackedRevision((value) => value + 1)} /> : view !== "history" ? stickyAnalyticsControls : null}
               {view !== "history" && activeComparisonPair && (
                 <div className="df-active-filter fw-comparison-filter">
                   <button className="df-active-filter-value" title={activeComparisonPair} onClick={() => setCompare(true)}>
@@ -683,7 +700,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
         </header>
         <div className="fw-content">
           {selectedVisitorId ? (
-            <VisitorHistoryDetail id={selectedVisitorId} onBack={() => setSelectedVisitorId(null)} />
+            <TrackedVisitorDetail visitor={trackedVisitors.find((visitor) => visitor.id === selectedVisitorId)} onBack={() => setSelectedVisitorId(null)} />
           ) : detail ? (
                 <DetailView
               key={`${detail.type}-${detail.name}`}
@@ -732,8 +749,8 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
                   open={(name) => { setDetailOrigin(null); setDetail({ type: "profile", name }); }}
                 />
               )}{" "}
-              {view === "live" && <Live />}
-              {view === "history" && <VisitorHistory profiles={profiles} period={historyPeriod} page={historyPage} onOpen={setSelectedVisitorId} />}
+              {view === "live" && <Live visitors={trackedVisitors} online={trackedOnline} />}
+              {view === "history" && <TrackedVisitorHistory visitors={trackedVisitors} period={historyPeriod} page={historyPage} onOpen={setSelectedVisitorId} />}
             </>
           )}
         </div>
@@ -940,14 +957,14 @@ function ProfileRail({ open }: { open: (n: string) => void }) {
   const scrollRail = (direction: -1 | 1) => railRef.current?.scrollBy({ left: direction * 420, behavior: "smooth" });
   return (
     <section className="fw-profile-rail-wrap" aria-label="Profils type de clients">
-      <div className="fw-profile-rail-heading"><h2>Profils type de clients :</h2><div><button aria-label="Profils précédents" onClick={() => scrollRail(-1)}><ArrowLeft size={17} /></button><button aria-label="Profils suivants" onClick={() => scrollRail(1)}><ArrowRight size={17} /></button></div></div>
+      <div className="fw-profile-rail-heading"><h2>Profils à qualifier :</h2><div><button aria-label="Profils précédents" onClick={() => scrollRail(-1)}><ArrowLeft size={17} /></button><button aria-label="Profils suivants" onClick={() => scrollRail(1)}><ArrowRight size={17} /></button></div></div>
       <div className="fw-profile-rail" ref={railRef}>
         {profiles.map((p, i) => (
           <button key={p.name} onClick={() => open(p.name)}>
             <span className={`fw-profile-orbs orb-${i % 5}`} aria-hidden="true">
               <Image src={p.image} alt="" fill sizes="174px" className="fw-profile-photo" style={{ objectPosition: p.imagePosition }} />
             </span>
-            <span className="fw-profile-meta"><strong>{p.name}</strong><b><span aria-hidden="true">•</span>{p.share}% <svg viewBox="0 0 10 9" aria-hidden="true"><path d="M.23 6.05 3.22.86C3.89-.28 5.54-.29 6.21.86l3.02 5.18c.67 1.15-.16 2.59-1.49 2.59H1.73C.4 8.63-.43 7.2.23 6.05Z" fill="currentColor" /></svg></b></span>
+            <span className="fw-profile-meta"><strong>{p.name}</strong><b>—</b></span>
           </button>
         ))}
       </div>
@@ -2048,6 +2065,7 @@ function DetailView({
       <ExactAnalyticsDashboard
         mode={detail.type === "profile" ? "profile" : "page"}
         scope={detail.name}
+        selectedPagePath={detail.type === "page" ? pages.find((page) => page.name === detail.name)?.path ?? "" : ""}
         analytics={initialAnalytics}
         compareMetric={compareMetric}
         onCompareMetricChange={onCompareMetricChange}
@@ -2140,35 +2158,35 @@ function MetricModal({
     </div>
   );
 }
-function Live() {
-  const visitors = [
-    { code: "in", country: "India", city: "Bengaluru", page: "/pricing", device: "Desktop", source: "Google", lat: 12.97, lon: 77.59, color: "#85d5ff" },
-    { code: "fr", country: "France", city: "Paris", page: "/", device: "Mobile", source: "Direct", lat: 48.86, lon: 2.35, color: "#bfaaff" },
-    { code: "us", country: "United States", city: "New York", page: "/work", device: "Desktop", source: "X", lat: 40.71, lon: -74.01, color: "#ffbf83" },
-    { code: "gb", country: "United Kingdom", city: "London", page: "/process", device: "Desktop", source: "Google", lat: 51.51, lon: -0.13, color: "#a5e3ba" },
-    { code: "au", country: "Australia", city: "Sydney", page: "/booking", device: "Mobile", source: "Meta", lat: -33.87, lon: 151.21, color: "#ff9da9" },
-    { code: "ca", country: "Canada", city: "Toronto", page: "/services/saas", device: "Desktop", source: "Direct", lat: 43.65, lon: -79.38, color: "#91b8ff" },
-  ];
+function Live({ visitors: records, online }: { visitors: AnalyticsVisitor[]; online: number }) {
+  const centers: Record<string, [number, number]> = { FR: [2.2, 46.6], US: [-98.5, 39.8], GB: [-2.2, 54], DE: [10.4, 51], IN: [78.9, 22.6], AU: [134, -25], CA: [-106, 56] };
+  const visitors = records.filter((record) => record.online).map((record, index) => ({
+    code: record.countryCode.toLowerCase(), country: record.countryCode, city: record.city ?? "Ville inconnue",
+    page: record.currentPage ?? "—", device: record.device, source: record.source,
+    lon: centers[record.countryCode]?.[0] ?? 0, lat: centers[record.countryCode]?.[1] ?? 0,
+    color: ["#85d5ff", "#bfaaff", "#ffbf83", "#a5e3ba", "#ff9da9", "#91b8ff"][index % 6],
+    lastAction: record.lastAction, durationSeconds: record.durationSeconds, visits: record.visits,
+  }));
   const [tab, setTab] = useState<"Visitors" | "Activity">("Visitors");
   const [summaryTab, setSummaryTab] = useState<"Countries" | "Pages" | "Devices">("Countries");
   const [selected, setSelected] = useState(0);
   const [visitorOverlay, setVisitorOverlay] = useState(false);
   const [rotation, setRotation] = useState<[number, number]>([18, -18]);
   const [drag, setDrag] = useState<{ x: number; y: number; rotation: [number, number] } | null>(null);
-  const [tick, setTick] = useState(0);
-  useEffect(() => { const timer = window.setInterval(() => setTick((value) => value + 1), 3500); return () => window.clearInterval(timer); }, []);
   const collection = useMemo(() => feature(world as any, (world as any).objects.countries) as any, []);
   const projection = useMemo(() => geoOrthographic().translate([380, 380]).scale(342).rotate(rotation).clipAngle(90), [rotation]);
   const mapPath = useMemo(() => geoPath(projection), [projection]);
   const countries = useMemo(() => collection.features.map((item: any, index: number) => <path key={index} d={mapPath(item) ?? ""} />), [collection, mapPath]);
   const graticule = useMemo(() => mapPath(geoGraticule()()) ?? "", [mapPath]);
-  const projectedVisitors = visitors.map((visitor, index) => ({ ...visitor, index, point: projection([visitor.lon, visitor.lat]) })).filter((visitor): visitor is typeof visitor & { point: [number, number] } => Boolean(visitor.point));
-  const selectedVisitor = visitors[selected];
+  const projectedVisitors = visitors.map((visitor, index) => ({ ...visitor, index, point: centers[visitor.country] ? projection([visitor.lon, visitor.lat]) : null })).filter((visitor): visitor is typeof visitor & { point: [number, number] } => Boolean(visitor.point));
+  const selectedVisitor = visitors[Math.min(selected, visitors.length - 1)];
   const summary = summaryTab === "Countries"
     ? visitors.map((visitor) => visitor.country)
     : summaryTab === "Pages"
       ? visitors.map((visitor) => visitor.page)
       : visitors.map((visitor) => visitor.device);
+  const summaryCounts = [...new Set(summary)].map((label) => ({ label, count: summary.filter((item) => item === label).length, visitorIndex: summary.indexOf(label) }));
+  if (!visitors.length) return <div className="fw-live-view"><section className="fw-live-summary"><header><b><BarChart3 size={19} />Live visitors</b><span>0 online now</span></header><p>Aucun visiteur actif actuellement.</p></section></div>;
   return <div className="fw-live-view">
     <div className="fw-live-globe-shell">
       <svg className="fw-live-globe" viewBox="0 0 760 760" role="img" aria-label="Globe interactif des visiteurs en direct" onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); setDrag({ x: event.clientX, y: event.clientY, rotation }); }} onPointerMove={(event) => { if (!drag) return; setRotation([drag.rotation[0] + (event.clientX - drag.x) * .28, Math.max(-58, Math.min(58, drag.rotation[1] - (event.clientY - drag.y) * .2))]); }} onPointerUp={() => setDrag(null)} onPointerCancel={() => setDrag(null)}>
@@ -2176,15 +2194,15 @@ function Live() {
         <circle cx="380" cy="380" r="350" className="fw-live-globe-orbit" /><circle cx="380" cy="380" r="342" fill="url(#live-globe-fill)" />
         <path d={graticule} className="fw-live-graticule" />
         <g className="fw-live-countries">{countries}</g>
-        {projectedVisitors.map((visitor) => <g key={visitor.city} className={`fw-live-point ${selected === visitor.index ? "is-selected" : ""}`} onClick={() => { setSelected(visitor.index); setVisitorOverlay(true); }} role="button" tabIndex={0} onKeyDown={(event) => event.key === "Enter" && (setSelected(visitor.index), setVisitorOverlay(true))}>
+        {projectedVisitors.map((visitor) => <g key={visitor.index} className={`fw-live-point ${selected === visitor.index ? "is-selected" : ""}`} onClick={() => { setSelected(visitor.index); setVisitorOverlay(true); }} role="button" tabIndex={0} onKeyDown={(event) => event.key === "Enter" && (setSelected(visitor.index), setVisitorOverlay(true))}>
           <circle cx={visitor.point[0]} cy={visitor.point[1]} r="16" fill={visitor.color} opacity=".22" filter="url(#live-glow)" /><circle cx={visitor.point[0]} cy={visitor.point[1]} r="7" fill={visitor.color} /><circle cx={visitor.point[0]} cy={visitor.point[1]} r="3" fill="#fff" />
         </g>)}
       </svg>
-      <p className="fw-live-rotate-hint">Drag to rotate the globe</p>
+      <p className="fw-live-rotate-hint">Glisser pour tourner · Position approximative par pays</p>
       <section className="fw-live-summary">
-        <header><b><BarChart3 size={19} />Live visitors</b><span><i />{58 + (tick % 4)} online now</span></header>
+        <header><b><BarChart3 size={19} />Live visitors</b><span><i />{online} online now</span></header>
         <nav>{(["Countries", "Pages", "Devices"] as const).map((item) => <button key={item} className={summaryTab === item ? "is-active" : ""} onClick={() => setSummaryTab(item)}>{item}</button>)}</nav>
-        <div className="fw-live-summary-list">{summary.slice(0, 4).map((item, index) => <button key={`${item}-${index}`} className={selected === index ? "is-active" : ""} onClick={() => setSelected(index)}><span>{summaryTab === "Countries" && <img className="fw-live-flag" src={`https://flagcdn.com/w40/${visitors[index].code}.png`} alt="" />}{item}</span><b>{[25, 12, 8, 5][index]}</b></button>)}</div>
+        <div className="fw-live-summary-list">{summaryCounts.slice(0, 4).map((item) => <button key={item.label} className={selected === item.visitorIndex ? "is-active" : ""} onClick={() => setSelected(item.visitorIndex)}><span>{summaryTab === "Countries" && <img className="fw-live-flag" src={`https://flagcdn.com/w40/${visitors[item.visitorIndex].code}.png`} alt="" />}{item.label}</span><b>{item.count}</b></button>)}</div>
       </section>
       <section className="fw-live-selected"><span><img className="fw-live-flag" src={`https://flagcdn.com/w40/${selectedVisitor.code}.png`} alt="" />{selectedVisitor.country}</span><b>{selectedVisitor.city}</b><p>{selectedVisitor.page} · {selectedVisitor.device} · {selectedVisitor.source}</p></section>
       {visitorOverlay && <div className="fw-live-visitor-overlay" role="dialog" aria-label={`Live session in ${selectedVisitor.city}`}>
@@ -2192,12 +2210,12 @@ function Live() {
         <span className="fw-live-overlay-kicker"><img className="fw-live-flag" src={`https://flagcdn.com/w40/${selectedVisitor.code}.png`} alt="" />Live session</span>
         <h2>{selectedVisitor.city}, {selectedVisitor.country}</h2>
         <p className="fw-live-overlay-page">Currently viewing <b>{selectedVisitor.page}</b></p>
-        <div className="fw-live-overlay-grid"><span><small>Session</small><b>04m 18s</b></span><span><small>Device</small><b>{selectedVisitor.device}</b></span><span><small>Source</small><b>{selectedVisitor.source}</b></span><span><small>Last action</small><b>CTA viewed</b></span></div>
-        <div className="fw-live-overlay-route"><i />Entered via {selectedVisitor.source.toLowerCase()} · 3 pages viewed · 1 active session</div>
+        <div className="fw-live-overlay-grid"><span><small>Temps suivi</small><b>{Math.round(selectedVisitor.durationSeconds / 60)} min</b></span><span><small>Device</small><b>{selectedVisitor.device}</b></span><span><small>Source</small><b>{selectedVisitor.source}</b></span><span><small>Last action</small><b>{selectedVisitor.lastAction.replaceAll("_", " ")}</b></span></div>
+        <div className="fw-live-overlay-route"><i />{selectedVisitor.visits} session{selectedVisitor.visits > 1 ? "s" : ""} suivie{selectedVisitor.visits > 1 ? "s" : ""}</div>
       </div>}
       <section className="fw-live-feed">
         <div>{(["Visitors", "Activity"] as const).map((item) => <button className={tab === item ? "is-active" : ""} key={item} onClick={() => setTab(item)}>{item}</button>)}</div>
-        {(tab === "Visitors" ? visitors : visitors.slice().reverse()).slice(0, 4).map((visitor, index) => <button key={`${visitor.city}-${tab}`} onClick={() => setSelected(visitors.indexOf(visitor))}><span className="fw-live-activity-dot" style={{ background: visitor.color }} /><strong><img className="fw-live-flag" src={`https://flagcdn.com/w40/${visitor.code}.png`} alt="" />{visitor.city}</strong><em>{tab === "Visitors" ? visitor.page : `${visitor.source} → ${visitor.page}`}</em><small>{index === 0 ? "now" : `${index + 1} min ago`}</small></button>)}
+        {(tab === "Visitors" ? visitors : visitors.slice().reverse()).slice(0, 4).map((visitor) => <button key={`${visitor.page}-${visitor.source}-${visitor.visits}`} onClick={() => setSelected(visitors.indexOf(visitor))}><span className="fw-live-activity-dot" style={{ background: visitor.color }} /><strong><img className="fw-live-flag" src={`https://flagcdn.com/w40/${visitor.code}.png`} alt="" />{visitor.city}</strong><em>{tab === "Visitors" ? visitor.page : `${visitor.source} → ${visitor.page}`}</em><small>en ligne</small></button>)}
       </section>
     </div>
   </div>;

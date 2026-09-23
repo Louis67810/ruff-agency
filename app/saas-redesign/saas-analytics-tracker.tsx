@@ -55,10 +55,16 @@ export function SaasAnalyticsTracker() {
     // must never pollute the acquisition data they display.
     if (pathname.startsWith("/saas-redesign/analytics") || pathname.startsWith("/saas-redesign/tweets-admin") || pathname.startsWith("/saas-redesign/content-editor") || pathname.startsWith("/behavioral-intelligence")) return;
     const visitorId = getStableId(localStorage, "ruff_saas_visitor_id");
+    const previousActivity = Number(sessionStorage.getItem("ruff_saas_last_activity") ?? 0);
+    const newSession = !sessionStorage.getItem("ruff_saas_session_id") || Date.now() - previousActivity > 30 * 60_000;
+    if (newSession) {
+      sessionStorage.setItem("ruff_saas_session_id", crypto.randomUUID());
+      sessionStorage.removeItem("ruff_saas_entry_path");
+      localStorage.setItem("ruff_saas_visits", String(Number(localStorage.getItem("ruff_saas_visits") ?? 0) + 1));
+    }
     const sessionId = getStableId(sessionStorage, "ruff_saas_session_id");
-    const visitCount =
-      Number(localStorage.getItem("ruff_saas_visits") ?? 0) + 1;
-    localStorage.setItem("ruff_saas_visits", String(visitCount));
+    sessionStorage.setItem("ruff_saas_last_activity", String(Date.now()));
+    const visitCount = Number(localStorage.getItem("ruff_saas_visits") ?? 1);
 
     const startedAt = performance.now();
     const viewedSections = new Set<string>();
@@ -80,7 +86,7 @@ export function SaasAnalyticsTracker() {
     const device = /Mobi|Android|iPhone/i.test(agent) ? "Mobile" : /iPad|Tablet/i.test(agent) ? "Tablet" : "Desktop";
     const entryPath = sessionStorage.getItem("ruff_saas_entry_path") ?? pathname;
     sessionStorage.setItem("ruff_saas_entry_path", entryPath);
-    const commonMetadata = { visitCount, referrer, channel, campaign, browser, operatingSystem, device, entryPath, viewport: getViewport() };
+    const commonMetadata = { visitCount, referrer, channel, campaign, browser, operatingSystem, device, entryPath, viewport: getViewport(), hostname: window.location.hostname };
 
     const decorate = (event: ClientEvent): AnalyticsEventInput => ({
       ...event,
@@ -115,6 +121,12 @@ export function SaasAnalyticsTracker() {
     };
 
     send({ eventType: "page_view" });
+    const heartbeat = window.setInterval(() => {
+      if (document.visibilityState === "visible") {
+        sessionStorage.setItem("ruff_saas_last_activity", String(Date.now()));
+        send({ eventType: "heartbeat" });
+      }
+    }, 30_000);
 
     const sectionByElement = new Map<Element, string>();
     const sectionLabelsById = new Map<string, string>();
@@ -197,9 +209,6 @@ export function SaasAnalyticsTracker() {
       const anchor = target instanceof HTMLAnchorElement ? target : null;
       if (!anchor) return;
       const url = new URL(anchor.href, window.location.href);
-      if (isCta && (url.hash === "#book" || /cal\.com$/i.test(url.hostname))) {
-        send({ eventType: "conversion", sectionId, metadata: { label, ctaId, conversionType: "booked_call" } });
-      }
       if (
         url.origin === window.location.origin &&
         url.pathname !== pathname
@@ -284,6 +293,7 @@ export function SaasAnalyticsTracker() {
     document.addEventListener("visibilitychange", visibility);
 
     return () => {
+      window.clearInterval(heartbeat);
       observer.disconnect();
       window.removeEventListener("saas:analytics", customEvent);
       document.removeEventListener("click", click, true);

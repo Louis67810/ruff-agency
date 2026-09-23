@@ -3,7 +3,8 @@ create table if not exists public.saas_analytics_events (
   created_at timestamptz not null default now(),
   event_type text not null check (event_type in (
     'page_view', 'section_view', 'section_time', 'cta_click', 'vote',
-    'before_after_interaction', 'conversion', 'site_navigation', 'session_end'
+    'before_after_interaction', 'conversion', 'site_navigation', 'session_end',
+    'scroll_depth', 'scroll_zone', 'heartbeat'
   )),
   visitor_id text not null,
   session_id text not null,
@@ -14,6 +15,14 @@ create table if not exists public.saas_analytics_events (
   value numeric,
   metadata jsonb not null default '{}'::jsonb
 );
+
+alter table public.saas_analytics_events drop constraint if exists saas_analytics_events_event_type_check;
+alter table public.saas_analytics_events add constraint saas_analytics_events_event_type_check
+  check (event_type in (
+    'page_view', 'section_view', 'section_time', 'cta_click', 'vote',
+    'before_after_interaction', 'conversion', 'site_navigation', 'session_end',
+    'scroll_depth', 'scroll_zone', 'heartbeat'
+  ));
 
 alter table public.saas_analytics_events enable row level security;
 revoke all on table public.saas_analytics_events from anon, authenticated;
