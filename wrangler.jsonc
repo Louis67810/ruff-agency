@@ -12,6 +12,10 @@
     {
       "pattern": "ruff.agency",
       "custom_domain": true
+    },
+    {
+      "pattern": "www.ruff.agency/*",
+      "zone_name": "ruff.agency"
     }
   ],
   "observability": {
