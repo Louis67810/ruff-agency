@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const description = english
     ? `Web design agency in ${location.cityName} specializing in high-performing landing pages and websites.`
     : `Agence web design à ${location.cityName} spécialisée en landing pages et sites performants pour renforcer votre image et convertir plus de visiteurs.`;
-  return { title: `${title} | Ruff Agency`, description, alternates: { canonical: url, languages: { fr: frenchUrl, en: englishUrl } }, openGraph: { title, description, url, type: "website" } };
+  return { title: `${title} | Ruff Agency`, description, robots: { index: false, follow: true }, alternates: { canonical: url, languages: { fr: frenchUrl, en: englishUrl } }, openGraph: { title, description, url, type: "website" } };
 }
 
 export default async function LocationPage({

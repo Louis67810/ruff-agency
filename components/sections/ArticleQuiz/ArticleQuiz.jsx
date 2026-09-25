@@ -30,7 +30,7 @@ const DEFAULT_CTA = {
   description:
     "Réservez un appel pour identifier les opportunités les plus importantes sur votre site.",
   label: "Réserver un appel",
-  href: "/contact",
+  href: "/30-min",
   badge: "Recommandé pour vous",
 };
 const DEFAULT_ENGLISH_CTA = {
@@ -38,7 +38,7 @@ const DEFAULT_ENGLISH_CTA = {
   description:
     "Book a call to identify the most important opportunities on your website.",
   label: "Book a call",
-  href: "/contact",
+  href: "/en/30-min",
   badge: "Recommended for you",
 };
 

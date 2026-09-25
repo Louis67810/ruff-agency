@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { projects } from "@/lib/data/projects";
 import { getArticleModifiedDate, listedArticles } from "@/lib/data/articles";
-import { locations, locationRoute } from "@/lib/data/locations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -43,13 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const locationPages = locations.map((location) => ({
-    url: `${SITE_URL}${locationRoute(location)}`,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-
-  const frenchPages = [...pages, ...realisationPages, ...articlePages, ...locationPages];
+  const frenchPages = [...pages, ...realisationPages, ...articlePages];
   const englishPages = frenchPages.map((page) => ({
     ...page,
     url: `${SITE_URL}/en${new URL(page.url).pathname === "/" ? "" : new URL(page.url).pathname}`,

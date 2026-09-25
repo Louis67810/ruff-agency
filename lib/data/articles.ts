@@ -423,7 +423,7 @@ const legacyArticles: Article[] = [
         title: "Faites une refonte de votre landing page maintenant",
         description: "Une refonte claire et orientée conversion peut transformer vos visiteurs en demandes qualifiées.",
         label: "Réserver un appel",
-        href: "/contact",
+        href: "/30-min",
       },
     },
     content: [
@@ -864,7 +864,7 @@ const legacyArticles: Article[] = [
       { type: "heading", text: "CTA audit dans le contenu" },
       { type: "cta", variant: "audit", eyebrow: "Réponse en moins de 48h", title: "Recevez un audit personnalisé de votre site par des experts", availability: "3 places disponibles pour Juin" },
       { type: "heading", text: "CTA de recommandation du quiz" },
-      { type: "cta", variant: "quiz", eyebrow: "Recommandé pour vous", title: "Votre landing page mérite une refonte pensée pour convertir.", description: "Réservez un appel pour identifier les opportunités les plus importantes sur votre site.", label: "Réserver un appel", href: "/contact" },
+      { type: "cta", variant: "quiz", eyebrow: "Recommandé pour vous", title: "Votre landing page mérite une refonte pensée pour convertir.", description: "Réservez un appel pour identifier les opportunités les plus importantes sur votre site.", label: "Réserver un appel", href: "/30-min" },
       { type: "faq", title: "FAQ liée à l’article", items: [
         { question: "La FAQ est-elle obligatoire dans un article ?", answer: "Non. Ce bloc est entièrement optionnel : ajoutez-le seulement lorsqu’il permet de répondre à des questions utiles qui prolongent vraiment la lecture de l’article." },
         { question: "Comment ajouter une nouvelle question ?", answer: "Dans le CMS, ajoutez simplement une entrée avec une question et sa réponse dans la liste du bloc FAQ. L’accordéon et les séparateurs sont générés automatiquement." },
