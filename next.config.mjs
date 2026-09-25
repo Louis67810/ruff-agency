@@ -16,6 +16,7 @@ const nextConfig = {
         destination: "/services/website",
         permanent: true,
       },
+      { source: "/site-internet/realisations", destination: "/realisations", permanent: true },
       {
         source: "/services/site-internet",
         destination: "/services/website",
@@ -23,6 +24,8 @@ const nextConfig = {
       },
       { source: "/services/ressources", destination: "/ressources", permanent: true },
       { source: "/inspirations", destination: "/ressources", permanent: true },
+      { source: "/inspirations/inspirations/etude-de-cas/30-min", destination: "/30-min", permanent: true },
+      { source: "/inspirations/inspirations/etude-de-cas/etude-de-cas", destination: "/ressources", permanent: true },
       { source: "/realisations/landing-page", destination: "/services/landing-page", permanent: true },
       { source: "/realisations/a-propos", destination: "/agence", permanent: true },
       { source: "/realisations/services", destination: "/services", permanent: true },
