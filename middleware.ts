@@ -4,7 +4,8 @@ const LOCALE_PREFIX = "/en";
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  if (url.hostname === "www.ruff.agency" || url.protocol === "http:") {
+  const isLocal = url.hostname === "localhost" || url.hostname === "127.0.0.1";
+  if (!isLocal && (url.hostname === "www.ruff.agency" || url.protocol === "http:")) {
     url.hostname = "ruff.agency";
     url.protocol = "https:";
     return NextResponse.redirect(url, 301);

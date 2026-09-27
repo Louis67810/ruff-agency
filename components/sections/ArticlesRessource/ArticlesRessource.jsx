@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useLocale } from "@/components/LocaleProvider";
 import { localizeHref } from "@/lib/i18n";
@@ -112,13 +113,21 @@ function ArticleCard({
   return (
     <a className="ar-card" href={href}>
       <div className="ar-card-image-shell">
-        {image.src ? (
+        {image.src && variant === "tools" ? (
+          <Image
+            className="ar-card-image"
+            src={image.src}
+            fill
+            sizes="(max-width: 809px) calc(100vw - 48px), (max-width: 1399px) calc(100vw - 128px), 42vw"
+            alt={image.alt || article.imageAlt || `Illustration de ${article.title}`}
+          />
+        ) : image.src ? (
           <img
             className="ar-card-image"
             src={image.src}
             srcSet={image.srcSet}
             sizes="(max-width: 809px) calc(100vw - 48px), (max-width: 1399px) calc(100vw - 128px), 42vw"
-            alt={image.alt || `Illustration de ${article.title}`}
+            alt={image.alt || article.imageAlt || `Illustration de ${article.title}`}
             loading="lazy"
           />
         ) : null}

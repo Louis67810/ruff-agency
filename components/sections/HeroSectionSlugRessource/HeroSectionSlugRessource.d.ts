@@ -9,6 +9,11 @@ export interface HeroSectionSlugRessourceProps {
   locale?: "fr" | "en";
   breadcrumbTitle?: string;
   title?: string;
+  subtitle?: string;
+  children?: React.ReactNode;
+  resourcesLabel?: string;
+  hideMeta?: boolean;
+  centered?: boolean;
   profilePhoto?: string | ResponsiveImage;
   author?: string;
   mainImage?: string | ResponsiveImage;

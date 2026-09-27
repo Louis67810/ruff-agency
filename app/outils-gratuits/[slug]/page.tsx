@@ -18,7 +18,18 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const localizedTool = locale === "en" ? getEnglishFreeTool(tool) : tool;
   const prefix = locale === "en" ? "/en" : "";
   const url = `${SITE_URL}${prefix}/outils-gratuits/${tool.slug}`;
-  return { title: `${localizedTool.title} | Ruff Agency`, description: localizedTool.description, alternates: { canonical: url, languages: { fr: `${SITE_URL}/outils-gratuits/${tool.slug}`, en: `${SITE_URL}/en/outils-gratuits/${tool.slug}` } }, openGraph: { url, type: "website" } };
+  const title = tool.kind === "redesign-roi"
+    ? locale === "en" ? "Website redesign ROI calculator | Ruff Agency" : "Simulateur ROI de refonte de site web | Ruff Agency"
+    : locale === "en" ? "Website builder price comparison | Ruff Agency" : "Comparateur de prix des plateformes de création de site | Ruff Agency";
+  const image = { url: `${SITE_URL}${tool.image}`, width: 6009, height: 4278, alt: localizedTool.imageAlt };
+  return {
+    title,
+    description: localizedTool.description,
+    robots: { index: true, follow: true },
+    alternates: { canonical: url, languages: { fr: `${SITE_URL}/outils-gratuits/${tool.slug}`, en: `${SITE_URL}/en/outils-gratuits/${tool.slug}` } },
+    openGraph: { title, description: localizedTool.description, url, type: "website", images: [image] },
+    twitter: { card: "summary_large_image", title, description: localizedTool.description, images: [image] },
+  };
 }
 
 export default async function FreeToolSlugPage({ params }: { params: { slug: string } }) {

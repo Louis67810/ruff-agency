@@ -26,6 +26,7 @@ function cleanDate(value) {
 export default function HeroSectionSlugRessource({
   breadcrumbTitle = "",
   title,
+  subtitle,
   profilePhoto,
   author = "Louis Staub",
   mainImage,
@@ -71,6 +72,7 @@ export default function HeroSectionSlugRessource({
 
         <div className="hsr-heading">
           <h1>{title}</h1>
+          {subtitle ? <p className="hsr-subtitle">{subtitle}</p> : null}
           {!hideMeta && (
             <div className="hsr-meta">
               <div className="hsr-author">

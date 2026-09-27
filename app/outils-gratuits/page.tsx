@@ -9,15 +9,18 @@ import { headers } from "next/headers";
 import { getEnglishFreeTools } from "@/lib/data/free-tools-en";
 import { localizedMetadata } from "@/lib/seo";
 
-const legacyMetadata: Metadata = {
-  title: "Outils gratuits — Ruff Agency",
-  description:
-    "Découvrez nos outils gratuits pour améliorer vos landing pages, vos messages et vos conversions.",
-  alternates: { canonical: `${SITE_URL}/outils-gratuits` },
-  openGraph: { url: `${SITE_URL}/outils-gratuits`, type: "website" },
-};
-
-export function generateMetadata(): Promise<Metadata> { return localizedMetadata({ path: "/outils-gratuits", frTitle: "Outils gratuits — Ruff Agency", frDescription: "Découvrez nos outils gratuits pour améliorer vos landing pages, vos messages et vos conversions.", enTitle: "Free web design tools — Ruff Agency", enDescription: "Free tools and resources to improve your landing pages, website and conversion rate." }); }
+export async function generateMetadata(): Promise<Metadata> {
+  const metadata = await localizedMetadata({
+    path: "/outils-gratuits",
+    frTitle: "Outils gratuits pour votre site web | Ruff Agency",
+    frDescription: "Utilisez nos outils gratuits pour estimer le ROI d’une refonte de site et comparer les prix des plateformes de création de sites web.",
+    enTitle: "Free website tools and calculators | Ruff Agency",
+    enDescription: "Use free tools to estimate website redesign ROI and compare the prices of website builders and hosting platforms.",
+  });
+  const english = (await headers()).get("x-site-locale") === "en";
+  const images = (english ? getEnglishFreeTools(freeTools) : freeTools).map((tool) => ({ url: `${SITE_URL}${tool.image}`, width: 6009, height: 4278, alt: tool.imageAlt }));
+  return { ...metadata, robots: { index: true, follow: true }, openGraph: { ...metadata.openGraph, images }, twitter: { ...metadata.twitter, images } };
+}
 
 export default async function FreeToolsPage() {
   const locale = (await headers()).get("x-site-locale") === "en" ? "en" : "fr";
@@ -41,8 +44,8 @@ export default async function FreeToolsPage() {
         }
         subtitle={
           locale === "en"
-            ? "Simple, practical tools to improve your pages and acquisition."
-            : "Des outils simples et concrets pour améliorer vos pages et votre acquisition."
+            ? "Estimate website redesign ROI and compare the cost of platforms for your next site."
+            : "Estimez le potentiel d’une refonte et comparez les prix des plateformes pour créer votre site."
         }
         showTicker={false}
       />
