@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { ArticleQuiz } from "@/lib/data/articles";
 export type ResponsiveImage = {
   src: string;
   srcSet?: string;
@@ -18,6 +19,7 @@ export interface HeroSectionSlugRessourceProps {
   author?: string;
   mainImage?: string | ResponsiveImage;
   mainVideo?: { src: string; poster?: string; title?: string };
+  quiz?: ArticleQuiz;
   updatedAt?: string;
   readingMinutes?: number;
   homeHref?: string;

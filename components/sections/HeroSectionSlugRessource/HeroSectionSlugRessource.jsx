@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { CalendarDaysIcon, ClockIcon } from "@heroicons/react/24/solid";
+import ArticleQuiz from "../ArticleQuiz/ArticleQuiz";
 import "./HeroSectionSlugRessource.css";
 import { localizeHref } from "@/lib/i18n";
 
@@ -31,6 +32,7 @@ export default function HeroSectionSlugRessource({
   author = "Louis Staub",
   mainImage,
   mainVideo,
+  quiz,
   updatedAt = "",
   readingMinutes = 1,
   homeHref = "/",
@@ -53,7 +55,7 @@ export default function HeroSectionSlugRessource({
 
   return (
     <section
-      className={`hsr-root ${centered ? "hsr-root--centered" : ""} ${hideMeta ? "hsr-root--without-meta" : ""} ${className}`.trim()}
+      className={`hsr-root ${quiz ? "hsr-root--quiz" : ""} ${centered ? "hsr-root--centered" : ""} ${hideMeta ? "hsr-root--without-meta" : ""} ${className}`.trim()}
       style={style}
     >
       <div className="hsr-inner">
@@ -112,6 +114,11 @@ export default function HeroSectionSlugRessource({
           )}
         </div>
 
+        {quiz ? (
+          <div className="hsr-quiz-frame">
+            <ArticleQuiz locale={locale} quiz={quiz} />
+          </div>
+        ) : (
         <div className="hsr-image-frame">
           {children ||
             (mainVideo?.src ? (
@@ -136,6 +143,7 @@ export default function HeroSectionSlugRessource({
               />
             ) : null)}
         </div>
+        )}
       </div>
     </section>
   );

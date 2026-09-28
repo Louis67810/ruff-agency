@@ -105,15 +105,18 @@ export default function ArticleQuiz({ quiz, locale = "fr" }) {
   const activeResult = useMemo(() => {
     const configuredResults = Object.entries(quiz.results || {});
     if (!configuredResults.length) return quiz.result;
-    const [resultId, result] = configuredResults.reduce(
-      (best, candidate) =>
-        (resultScores[candidate[0]] || 0) > (resultScores[best[0]] || 0)
-          ? candidate
-          : best,
-      configuredResults[0],
+    const highestScore = Math.max(
+      ...configuredResults.map(([resultId]) => resultScores[resultId] || 0),
     );
+    const tiedResults = configuredResults.filter(
+      ([resultId]) => (resultScores[resultId] || 0) === highestScore,
+    );
+    const preferredTie = tiedResults.find(
+      ([resultId]) => resultId === quiz.tieBreakResultId,
+    );
+    const [resultId, result] = preferredTie || tiedResults[0];
     return { id: resultId, ...result };
-  }, [quiz.result, quiz.results, resultScores]);
+  }, [quiz.result, quiz.results, quiz.tieBreakResultId, resultScores]);
   const progress = Math.round(
     (Math.min(questionIndex + 1, quiz.questions.length) /
       quiz.questions.length) *
@@ -147,7 +150,7 @@ export default function ArticleQuiz({ quiz, locale = "fr" }) {
   const showAuditCta = completionCta?.variant === "audit";
   return (
     <section
-      className={`aq-root ${isComplete ? "is-complete" : ""}${showAuditCta ? " aq-root--audit-cta" : ""}`}
+      className={`aq-root ${isComplete ? "is-complete" : ""}${showAuditCta ? " aq-root--audit-cta" : ""}${completionCta === false ? " aq-root--without-cta" : ""}`}
       aria-label={quiz.title}
     >
       {!isComplete ? (
@@ -213,7 +216,7 @@ export default function ArticleQuiz({ quiz, locale = "fr" }) {
             </h2>
             <span>{activeResult?.description}</span>
           </header>
-          {showAuditCta ? (
+          {completionCta === false ? null : showAuditCta ? (
             <CtaAuditRealisationsSlug
               locale={locale}
               compact

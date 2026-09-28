@@ -28,6 +28,28 @@ const ArticleChart = dynamic(() => import("./ArticleChart"), {
   loading: () => <div className="ra-chart-loading" aria-hidden="true" />,
 });
 
+const TABLE_TAG_CLASSES = {
+  Agence: "ra-table-tag--agence",
+  SaaS: "ra-table-tag--saas",
+  PME: "ra-table-tag--pme",
+  Indépendant: "ra-table-tag--independant",
+};
+
+function ArticleTableCellContent({ cell }) {
+  const value = typeof cell === "string" ? { text: cell } : cell;
+  if (!value) return null;
+  return (
+    <>
+      {value.text ? <span>{value.text}</span> : null}
+      {value.tag?.label ? (
+        <span className={`ra-table-tag ${TABLE_TAG_CLASSES[value.tag.category] || ""}`.trim()}>
+          {value.tag.label}
+        </span>
+      ) : null}
+    </>
+  );
+}
+
 const AI_SERVICES = [
   {
     name: "ChatGPT",
@@ -98,11 +120,12 @@ function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function formatParagraph(value, inlineInfo = []) {
+function formatParagraph(value, inlineInfo = [], inlineLinks = []) {
   const definitions = new Map(
     inlineInfo.map((item) => [item.term, item.explanation]),
   );
-  const terms = [...definitions.keys()].sort((a, b) => b.length - a.length);
+  const links = new Map(inlineLinks.map((item) => [item.text, item.href]));
+  const terms = [...new Set([...definitions.keys(), ...links.keys()])].sort((a, b) => b.length - a.length);
   const termPattern = terms.length
     ? new RegExp(`(${terms.map(escapeRegExp).join("|")})`, "g")
     : null;
@@ -113,7 +136,17 @@ function formatParagraph(value, inlineInfo = []) {
         return <strong key={`strong-${index}`}>{part.slice(2, -2)}</strong>;
       if (!termPattern) return part;
       return part.split(termPattern).map((fragment, fragmentIndex) =>
-        definitions.has(fragment) ? (
+        links.has(fragment) ? (
+          <a
+            className="ra-inline-source-link"
+            href={links.get(fragment)}
+            key={`${index}-${fragmentIndex}`}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {fragment}
+          </a>
+        ) : definitions.has(fragment) ? (
           <span className="ra-inline-term" key={`${index}-${fragmentIndex}`}>
             {fragment}
             <InlineInfoTrigger
@@ -448,10 +481,10 @@ export default function RessourceArticle({
                                   scope="row"
                                   key={`${rowIndex}-${cellIndex}`}
                                 >
-                                  {cell}
+                                  <ArticleTableCellContent cell={cell} />
                                 </th>
                               ) : (
-                                <td key={`${rowIndex}-${cellIndex}`}>{cell}</td>
+                                <td key={`${rowIndex}-${cellIndex}`}><ArticleTableCellContent cell={cell} /></td>
                               ),
                             )}
                           </tr>
@@ -624,7 +657,7 @@ export default function RessourceArticle({
                   }
                   key={index}
                 >
-                  {formatParagraph(block.text, block.inlineInfo)}
+                  {formatParagraph(block.text, block.inlineInfo, block.links)}
                 </p>
               );
             })}

@@ -1,6 +1,11 @@
 export type ArticleTag = { id: string; label: string };
 
 export type ArticleInlineInfo = { term: string; explanation: string };
+export type ArticleInlineLink = { text: string; href: string };
+export type ArticleTableCell = string | {
+  text?: string;
+  tag?: { label: string; category?: "Agence" | "SaaS" | "PME" | "Indépendant" };
+};
 
 export type ArticleChartData = {
   series?: Array<{ label: string; value: number; secondary?: number; date?: string }>;
@@ -12,11 +17,11 @@ export type ArticleChartData = {
 
 export type ArticleBlock =
   | { type: "heading"; text: string; level?: 2 | 3 }
-  | { type: "paragraph"; text: string; inlineInfo?: ArticleInlineInfo[] }
+  | { type: "paragraph"; text: string; inlineInfo?: ArticleInlineInfo[]; links?: ArticleInlineLink[] }
   | { type: "image"; src: string; alt?: string }
   | { type: "before-after"; before: { src: string; alt?: string }; after: { src: string; alt?: string }; beforeLabel?: string; afterLabel?: string }
   | { type: "video"; src: string; poster?: string; title?: string }
-  | { type: "table"; columns: string[]; rows: string[][]; highlightFirstColumn?: boolean }
+  | { type: "table"; columns: string[]; rows: ArticleTableCell[][]; highlightFirstColumn?: boolean }
   | { type: "inline-info"; text: string; explanation: string }
   | { type: "article-link"; slug: string; label?: string }
   | { type: "chart"; variant: "bar" | "area" | "sankey" | "heatmap" | "funnel" | "choropleth"; title: string; description?: string; data?: ArticleChartData; valueLabel?: string; unit?: string; source?: string }
@@ -44,7 +49,7 @@ export type ArticleQuizResult = {
   eyebrow: string;
   title: string;
   description: string;
-  cta?: ArticleQuizCta;
+  cta?: ArticleQuizCta | false;
 };
 
 export type ArticleQuiz = {
@@ -54,7 +59,8 @@ export type ArticleQuiz = {
   questions: Array<{ question: string; answers: Array<string | { label: string; resultId?: string }> }>;
   result: ArticleQuizResult;
   results?: Record<string, ArticleQuizResult>;
-  cta?: ArticleQuizCta;
+  tieBreakResultId?: string;
+  cta?: ArticleQuizCta | false;
 };
 
 export type Article = {
@@ -74,6 +80,7 @@ export type Article = {
   modifiedAt?: string;
   noIndex?: boolean;
   hiddenFromListing?: boolean;
+  quizInHero?: boolean;
   mainImage?: { src: string; alt?: string };
   mainVideo?: { src: string; poster?: string; title?: string };
   profilePhoto: { src: string };
@@ -871,7 +878,163 @@ const legacyArticles: Article[] = [
       ] },
     ],
   },
-
+  createRuffArticle({
+    id: "prix-creation-site-internet",
+    slug: "combien-coute-creation-site-internet",
+    tagId: "guide",
+    tag: "Guide",
+    title: "Combien coûte la création d’un site internet ?",
+    breadcrumbTitle: "Prix d’un site internet",
+    updatedAt: "Dernière mise à jour le 28 septembre 2026",
+    publishedAt: "2026-09-28",
+    modifiedAt: "2026-09-28",
+    metaDescription: "Prix d’un site vitrine, d’une landing page ou d’un e-commerce : fourchettes 2026, coûts à prévoir et critères pour comparer un devis.",
+    image: {
+      src: "/images/ressources/prix-creation-site-internet.webp",
+      alt: "Combien coûte la création d’un site internet ? — Ruff Agency",
+    },
+    mainImage: {
+      src: "/images/ressources/prix-creation-site-internet.webp",
+      alt: "Combien coûte la création d’un site internet ? — Ruff Agency",
+    },
+    quiz: {
+      eyebrow: "Estimateur de budget",
+      title: "Quel budget prévoir pour votre site internet ?",
+      description: "Répondez à trois questions pour obtenir une première fourchette indicative selon votre projet.",
+      questions: [
+        { question: "Quel type de site souhaitez-vous créer ?", answers: [{ label: "Une landing page", resultId: "landing" }, { label: "Un site vitrine de 5 à 7 pages", resultId: "vitrine" }, { label: "Un site vitrine plus complet, de 8 à 15 pages", resultId: "vitrinePremium" }] },
+        { question: "Quel périmètre de pages envisagez-vous ?", answers: [{ label: "Une page dédiée à une offre", resultId: "landing" }, { label: "Environ 5 à 7 pages", resultId: "vitrine" }, { label: "Environ 8 à 15 pages", resultId: "vitrinePremium" }] },
+        { question: "De quel niveau de fonctionnalités avez-vous besoin ?", answers: [{ label: "Un formulaire et une page orientée conversion", resultId: "landing" }, { label: "Un CMS et quelques intégrations", resultId: "vitrine" }, { label: "Plusieurs parcours, contenus ou intégrations spécifiques", resultId: "vitrinePremium" }] },
+      ],
+      result: { eyebrow: "Fourchette indicative", title: "Votre estimation est prête", description: "Cette estimation donne un premier repère. Le prix réel dépend du périmètre, des contenus, du design et des fonctionnalités détaillés dans le devis." },
+      results: {
+        landing: { eyebrow: "Budget repère · Landing page", title: "Jusqu’à 4 000 €", description: "C’est la borne haute de la fourchette publiée pour une landing page. Elle correspond à un périmètre plus poussé en stratégie, rédaction, design et intégration ; ce montant reste une estimation, pas un devis." },
+        vitrine: { eyebrow: "Budget repère · Site vitrine", title: "Jusqu’à 8 000 €", description: "C’est la borne haute de la fourchette publiée pour un site vitrine de 5 à 7 pages. Le niveau de personnalisation, les contenus et l’autonomie de mise à jour font varier le budget ; ce montant reste indicatif." },
+        vitrinePremium: { eyebrow: "Budget repère · Site vitrine complet", title: "Jusqu’à 10 000 €", description: "C’est la borne haute de la fourchette publiée pour un site vitrine plus complet. La direction artistique, la stratégie, les contenus et les pages spécifiques déterminent le budget final ; ce montant reste indicatif." },
+      },
+      tieBreakResultId: "vitrine",
+      cta: {
+        variant: "recommendation",
+        badge: "Une offre claire, sans compromis sur la qualité",
+        title: "Une landing page conçue pour convertir, pas juste pour être en ligne.",
+        description: "On conçoit des landing pages avec stratégie, design sur mesure et développement soigné. Notre offre démarre à 1 450 € : le périmètre exact est confirmé avec vous avant le projet.",
+        label: "On fait des landing pages pour 1 450 €",
+        href: "/services/landing-page",
+      },
+    },
+    about: "Des repères pour comprendre le prix de création d’un site internet, comparer les périmètres et prévoir les coûts après la mise en ligne.",
+    sources: [
+      { label: "Baromètre des prix publics de création de site web en France (relevé du 11 juin 2026) — Les Créavores, data.gouv.fr", href: "https://www.data.gouv.fr/datasets/barometre-des-prix-de-creation-de-site-web-en-france-2026" },
+      { label: "Prix d’un site internet en 2026 : fourchettes publiées par type de projet — Codecircle", href: "https://codecircle.fr/prix-site-internet/" },
+      { label: "Tarif de création d’un site internet : repères et prestations détaillées — ClicStudio", href: "https://clicstudio.fr/blog/tarif-creation-site-internet/" },
+      { label: "Offres de création, refonte et accompagnement — Gemeos", href: "https://www.gemeosagency.com/fr/offres" },
+    ],
+    content: [
+      { type: "paragraph", text: "Le prix de création d’un site internet peut aller de quelques centaines d’euros à plusieurs dizaines de milliers. Un site vitrine, une landing page et un e-commerce ne demandent ni le même travail ni les mêmes fonctionnalités. Pour un premier repère, le guide tarifaire 2026 de Codecircle situe un site vitrine de 5 à 7 pages entre **1 500 € et 8 000 €** selon le prestataire, un e-commerce entre **3 000 € et 20 000 €**, et un site sur mesure entre **8 000 € et 50 000 € ou plus**. Ce sont des fourchettes publiées, pas un tarif officiel ni une moyenne représentative de toutes les agences.", links: [{ text: "Codecircle", href: "https://codecircle.fr/prix-site-internet/" }] },
+      { type: "image", src: "/images/ressources/prix-creation-site-internet.webp", alt: "Visuel de l’article : Combien coûte la création d’un site internet ?" },
+      { type: "callout", variant: "info", icon: "info", title: "Un chiffre n’a de sens qu’avec son périmètre", text: "Avant de comparer deux prix, vérifiez le nombre de pages, les fonctionnalités, les contenus, le niveau de design, le SEO, la maintenance et la propriété du site. Les sources publiques ne précisent pas toujours si leurs tarifs sont HT ou TTC : vérifiez ce point sur chaque devis." },
+      { type: "heading", text: "Quel est le prix d’un site selon son type ?" },
+      { type: "paragraph", text: "Le tableau reprend des fourchettes publiées pour le marché français en 2026. Les catégories et les périmètres diffèrent selon les prestataires : utilisez-les pour préparer votre budget, puis comparez des devis portant sur le même besoin." },
+      { type: "table", columns: ["Type de projet", "Repères de prix publiés", "Ce qui pèse dans le budget"], rows: [["Landing page", "500 € à 4 000 €", "Structure, rédaction, design et objectif de conversion"], ["Site vitrine (5 à 7 pages)", "1 500 € à 8 000 €", "Nombre de modèles, contenus, design et autonomie de mise à jour"], ["Site vitrine premium (8 à 15 pages)", "2 500 € à 10 000 €", "Direction artistique, stratégie, contenus et pages spécifiques"], ["Site e-commerce", "3 000 € à 20 000 €", "Catalogue, paiement, livraison, variantes et migration"], ["Site sur mesure ou espace membre", "8 000 € à 50 000 € et plus", "Règles métier, comptes, intégrations et développement spécifique"]] },
+      { type: "paragraph", text: "Ces repères reprennent notamment les fourchettes détaillées par Codecircle, qui distingue freelance ou petite agence et agence classique. D’autres grilles, comme celle de ClicStudio, retiennent leurs propres prix et périmètres. Le jeu de données des Créavores publié sur data.gouv.fr rassemble 103 tarifs publics relevés en juin 2026 ; il s’agit d’un inventaire de prix affichés, pas d’une étude statistique représentative.", links: [{ text: "Codecircle", href: "https://codecircle.fr/prix-site-internet/" }, { text: "ClicStudio", href: "https://clicstudio.fr/blog/tarif-creation-site-internet/" }, { text: "data.gouv.fr", href: "https://www.data.gouv.fr/datasets/barometre-des-prix-de-creation-de-site-web-en-france-2026" }] },
+      { type: "article-link", slug: "combien-coute-landing-page", label: "Voir combien coûte une landing page" },
+      { type: "heading", text: "Pourquoi deux devis peuvent-ils autant varier ?" },
+      { type: "paragraph", text: "Le nombre de pages ne suffit pas à expliquer le prix. Ce qui compte, c’est le travail nécessaire pour rendre le site utile, cohérent avec l’activité et prêt à évoluer." },
+      { type: "bullet-list", items: [{ label: "", children: ["Cadrage et stratégie : ateliers, recherche utilisateur, positionnement et architecture des pages."] }, { label: "", children: ["Design : adaptation d’un modèle existant ou création d’une direction artistique sur mesure."] }, { label: "", children: ["Contenus : textes, photos, illustrations, traductions et intégration des contenus fournis."] }, { label: "", children: ["Fonctionnalités : CMS, formulaires avancés, réservation, paiement, espace membre ou connexion à un CRM."] }, { label: "", children: ["Qualité de livraison : responsive, accessibilité, performances, SEO technique, tests, formation et documentation."] }] },
+      { type: "article-link", slug: "developper-site-efficacement", label: "Voir la méthode pour créer un site efficacement" },
+      { type: "heading", text: "Freelance, agence ou plateforme : que paie-t-on ?" },
+      { type: "table", columns: ["Option", "Ce que vous payez", "À vérifier"], rows: [["Créer le site soi-même", "Abonnement éventuel et temps passé à concevoir, intégrer et maintenir le site", "Limites du forfait, personnalisation et portabilité"], ["Faire appel à un freelance", "Les compétences et le temps d’une personne ou d’un petit collectif", "Disponibilité, compétences couvertes et continuité du projet"], ["Faire appel à une agence", "Cadrage et coordination de plusieurs expertises selon la mission", "Équipe mobilisée, livrables et interlocuteur après livraison"]] },
+      { type: "paragraph", text: "Le mot « agence » ne garantit pas à lui seul un périmètre plus complet, et un freelance ne signifie pas automatiquement une prestation moins sérieuse. Demandez qui prend en charge chaque partie du projet et ce qui vous est remis à la fin." },
+      { type: "heading", text: "Quels frais prévoir après la mise en ligne ?" },
+      { type: "paragraph", text: "Le devis de création ne représente pas toujours le coût total. Selon la solution choisie, certains frais reviennent chaque mois ou chaque année ; d’autres apparaissent lorsque vous faites évoluer le site." },
+      { type: "bullet-list", items: [{ label: "Nom de domaine et hébergement ou abonnement de plateforme" }, { label: "Licences, thèmes, extensions et services connectés" }, { label: "Maintenance, sauvegardes, sécurité et mises à jour" }, { label: "Création de nouvelles pages et évolution des fonctionnalités" }, { label: "Rédaction, référencement et production de visuels" }, { label: "Frais de paiement ou commissions pour une boutique en ligne" }] },
+      { type: "callout", variant: "education", icon: "education", title: "Calculez le coût sur plusieurs années", text: "Coût de la première année = création + domaine et hébergement ou abonnement + licences + maintenance + contenus et évolutions prévues. Recommencez pour les années suivantes : certains frais disparaissent, d’autres se répètent." },
+      { type: "heading", text: "Comment comparer deux devis de création de site ?" },
+      { type: "bullet-list", items: [{ label: "", children: ["Même périmètre : objectif, pages, langues, contenus, fonctionnalités et contraintes techniques."] }, { label: "", children: ["Étapes détaillées : cadrage, conception, développement, intégration, tests et mise en ligne."] }, { label: "", children: ["Inclusions et exclusions : SEO, rédaction, hébergement, licences, formation et maintenance."] }, { label: "", children: ["Propriété et accès : domaine, fichiers, CMS, comptes et conditions de reprise par un autre prestataire."] }, { label: "", children: ["Coût après livraison : abonnements, support, modifications et éventuels frais de sortie."] }] },
+      { type: "article-link", slug: "questions-sections-landing-page", label: "Découvrir les questions à traiter sur chaque page" },
+      { type: "cta", variant: "quiz", eyebrow: "Votre projet de site", title: "Un budget fiable commence par un périmètre clair", description: "Présentez vos objectifs, vos contenus et vos contraintes pour identifier le bon format de site et les prochaines étapes.", label: "Découvrir notre service de création de site", href: "/services/website" },
+      { type: "faq", title: "Questions fréquentes sur le prix d’un site internet", items: [{ question: "Quel budget prévoir pour un site vitrine professionnel ?", answer: "Les guides tarifaires consultés en 2026 publient des fourchettes différentes selon le prestataire et le périmètre. Pour un site vitrine de 5 à 7 pages, l’un d’eux indique 1 500 € à 8 000 €. Le design, les contenus, le SEO et les fonctionnalités peuvent faire évoluer le montant." }, { question: "Combien coûte une landing page ?", answer: "Le prix varie selon qu’il s’agit d’un modèle adapté ou d’une page conçue sur mesure, et selon que la stratégie, le copywriting, l’intégration et les tests sont inclus. Un guide de tarifs 2026 consulté pour cet article indique 500 € à 4 000 € selon le prestataire." }, { question: "Le prix d’un site internet inclut-il l’hébergement ?", answer: "Pas toujours. L’hébergement peut être inclus, facturé à part ou remplacé par un abonnement de plateforme. Vérifiez aussi le renouvellement du domaine, les licences, les sauvegardes et la maintenance." }, { question: "Pourquoi les tarifs d’agence sont-ils différents ?", answer: "Les agences ne proposent pas toutes le même niveau de cadrage, de design, de développement ou d’accompagnement. Comparez les livrables, les compétences mobilisées, les frais récurrents et les responsabilités après mise en ligne." }, { question: "Comment obtenir des devis comparables ?", answer: "Envoyez aux prestataires le même brief : objectif, type de site, pages, fonctionnalités, contenus, délais et contraintes. Demandez un devis détaillé qui distingue la création, les coûts récurrents et les options." }] },
+    ],
+  }),
+  createRuffArticle({
+    id: "prix-landing-page",
+    slug: "combien-coute-landing-page",
+    tagId: "guide",
+    tag: "Guide",
+    title: "Combien coûte une landing page ?",
+    breadcrumbTitle: "Prix d’une landing page",
+    updatedAt: "Dernière mise à jour le 28 septembre 2026",
+    publishedAt: "2026-09-28",
+    modifiedAt: "2026-09-28",
+    metaDescription: "Prix d’une landing page en 2026 : offre Ruff Agency à partir de 1 450 €, repères de marché, facteurs de coût et points à vérifier dans un devis.",
+    image: {
+      src: "/images/ressources/prix-landing-page.webp",
+      alt: "Combien coûte une landing page ? — Ruff Agency",
+    },
+    mainImage: {
+      src: "/images/ressources/prix-landing-page.webp",
+      alt: "Combien coûte une landing page ? — Ruff Agency",
+    },
+    quizInHero: true,
+    quiz: {
+      eyebrow: "Estimateur de budget",
+      title: "Quel budget prévoir pour votre landing page ?",
+      description: "Répondez à trois questions pour obtenir un repère selon le niveau de stratégie, de design et de fonctionnalités souhaité.",
+      questions: [
+        { question: "Quel niveau de stratégie vous faut-il ?", answers: [{ label: "Mon offre et mon message sont déjà définis", resultId: "simple" }, { label: "J’ai besoin d’aide pour clarifier mon positionnement", resultId: "personnalisee" }, { label: "Je veux cadrer l’offre, l’audience et le parcours de conversion", resultId: "complexe" }] },
+        { question: "Quel niveau de design envisagez-vous ?", answers: [{ label: "Un design sobre avec peu de sections", resultId: "simple" }, { label: "Un design personnalisé pour ma marque", resultId: "personnalisee" }, { label: "Une direction artistique et des interactions sur mesure", resultId: "complexe" }] },
+        { question: "De quoi votre page a-t-elle besoin ?", answers: [{ label: "Un formulaire et un appel à l’action", resultId: "simple" }, { label: "Du copywriting et quelques intégrations", resultId: "personnalisee" }, { label: "Plusieurs langues, intégrations ou besoins spécifiques", resultId: "complexe" }] },
+      ],
+      result: { eyebrow: "Repère budgétaire", title: "Votre estimation est prête", description: "Le montant final dépend du périmètre, des contenus disponibles et des fonctionnalités prévues." },
+      results: {
+        simple: { eyebrow: "Repère publié · Landing page simple", title: "Environ 800 € à 1 500 €", description: "Cette tranche publiée concerne une page simple avec un périmètre limité. Chez Ruff Agency, l’offre commence à 1 450 € et inclut un travail cadré selon les livrables définis avec vous." },
+        personnalisee: { eyebrow: "Repère publié · Landing page personnalisée", title: "Environ 1 500 € à 3 500 €", description: "Cette tranche publiée correspond à un niveau plus poussé de stratégie, de rédaction et de design. Le coût dépend surtout des livrables réellement inclus." },
+        complexe: { eyebrow: "Repère publié · Landing page complexe", title: "Environ 3 500 € à 6 000 €", description: "Cette tranche publiée concerne des pages plus complexes, par exemple avec plusieurs langues ou des intégrations avancées. Ce résultat reste un repère, pas un devis." },
+      },
+      tieBreakResultId: "personnalisee",
+      cta: { variant: "recommendation", badge: "Stratégie, design et développement", title: "Une landing page conçue pour transformer le trafic en demandes.", description: "Notre offre démarre à 1 450 €. Le périmètre et les livrables sont clarifiés avant le début du projet.", label: "Découvrir l’offre à 1 450 €", href: "/services/landing-page" },
+    },
+    about: "Des repères pour comprendre le prix d’une landing page, les facteurs qui font varier son budget et les livrables à vérifier avant de comparer des devis.",
+    sources: [
+      { label: "Combien coûte la création d’une landing page ? — landingpage.fr, 9 avril 2026", href: "https://www.landingpage.fr/cout-landing-page" },
+      { label: "Prix d’un site internet en 2026 : fourchettes publiées par type de projet — Codecircle", href: "https://codecircle.fr/prix-site-internet/" },
+      { label: "Offre de création de landing page — Ruff Agency", href: "https://ruff.agency/services/landing-page" },
+    ],
+    content: [
+      { type: "paragraph", text: "En 2026, les tarifs d’agence publiés pour une landing page vont d’environ **800 € à 6 000 €**, selon la complexité et les livrables. Chez Ruff Agency, l’offre démarre à **1 450 €**. Ce prix d’entrée et les fourchettes du marché ne sont comparables que si le périmètre l’est aussi : stratégie, textes, design, intégration et suivi ne sont pas toujours inclus de la même manière." },
+      { type: "image", src: "/images/ressources/prix-landing-page.webp", alt: "Visuel de l’article : Combien coûte une landing page ?" },
+      { type: "callout", variant: "info", icon: "info", title: "Un prix isolé ne décrit pas une prestation", text: "Pour savoir si un devis est cohérent, vérifiez ce qui est conçu, écrit, développé et testé. Une page à prix bas peut demander beaucoup de travail de votre côté ; une offre plus complète peut inclure plusieurs expertises." },
+      { type: "article-link", slug: "questions-sections-landing-page", label: "Voir les questions à traiter dans chaque section d’une landing page" },
+      { type: "heading", text: "Quels tarifs sont publiés pour une landing page ?" },
+      { type: "paragraph", text: "Une grille publiée en avril 2026 répartit les offres d’agence en trois niveaux. Elle indique des prix d’environ 800 € à 1 500 € pour une page simple, de 1 500 € à 3 500 € pour une page personnalisée et de 3 500 € à 6 000 € pour un projet plus complexe. Ce sont les prix d’un guide professionnel, pas une moyenne statistique ni un tarif officiel." },
+      { type: "table", columns: ["Niveau de prestation", "Repère publié", "Exemples de périmètre"], rows: [["Page simple", "800 € à 1 500 €", "Besoin cadré, contenu fourni ou peu remanié, formulaire standard"], ["Page personnalisée", "1 500 € à 3 500 €", "Travail éditorial, design adapté à la marque et parcours de conversion défini"], ["Page complexe", "3 500 € à 6 000 €", "Plusieurs langues, intégrations avancées ou besoins spécifiques"], ["Offre Ruff Agency", "À partir de 1 450 €", "Projet cadré avec stratégie, design et développement ; livrables confirmés selon le brief"]] },
+      { type: "paragraph", text: "Les bornes se chevauchent parce que chaque prestataire classe différemment la complexité et n’inclut pas les mêmes tâches. La fourchette sert donc à préparer une discussion. Pour un chiffrage, demandez à l’agence de décrire précisément le résultat livré et les éléments qui restent à votre charge." },
+      { type: "article-link", slug: "combien-coute-creation-site-internet", label: "Comparer avec les prix d’un site internet complet" },
+      { type: "heading", text: "Que couvre le prix d’une landing page ?" },
+      { type: "paragraph", text: "Une landing page concentre le message d’une offre et guide le visiteur vers une action principale. Selon la mission, le travail peut commencer par le cadrage de l’offre et de son audience, puis passer par la structure, les textes, le design, l’intégration et les vérifications avant publication. Le devis doit dire clairement lesquelles de ces étapes sont comprises." },
+      { type: "paragraph", text: "Une prestation à 1 450 € n’implique pas automatiquement que tous les contenus, outils ou variantes soient inclus. Chez Ruff Agency, ce montant est le prix de départ communiqué pour l’offre ; le brief permet de confirmer le périmètre, les livrables et les éventuels besoins supplémentaires avant de commencer." },
+      { type: "table", columns: ["Étape", "Questions à poser"], rows: [["Cadrage", "Qui définit l’objectif, l’audience et le message principal ?"], ["Structure et rédaction", "Le plan de page et les textes sont-ils écrits, relus ou fournis par vos soins ?"], ["Design", "Le design reprend-il un modèle ou prévoit-il une direction artistique adaptée à votre marque ?"], ["Intégration", "La page est-elle intégrée sur votre plateforme et adaptée aux mobiles ?"], ["Mise en ligne", "Qui connecte le formulaire, vérifie les liens et teste les événements de mesure ?"]] },
+      { type: "heading", text: "Quels éléments font monter le budget ?" },
+      { type: "paragraph", text: "Le budget progresse lorsque la mission demande plus de recherche, de création ou de coordination. Le nombre de sections ne suffit pas à expliquer le prix : deux pages de longueur comparable peuvent demander des travaux très différents." },
+      { type: "bullet-list", items: [{ label: "Une offre encore à clarifier : recherche d’audience, positionnement et formulation de la promesse." }, { label: "Des textes à produire : interviews, copywriting, preuves, questions fréquentes ou variantes d’appels à l’action." }, { label: "Une identité à décliner : direction artistique, illustrations ou visuels conçus spécifiquement." }, { label: "Des interactions à intégrer : formulaires conditionnels, réservation ou connexion à un CRM." }, { label: "Des versions supplémentaires : traduction, déclinaison par audience ou campagne." }, { label: "Des contraintes de mesure : événements analytiques, tests et instrumentation des conversions." }] },
+      { type: "callout", variant: "education", icon: "education", title: "Le meilleur levier pour garder le budget sous contrôle", text: "Arrivez avec un objectif précis, les éléments de marque disponibles et une personne qui peut valider les contenus. Cela aide l’équipe à chiffrer le travail réel et limite les retours provoqués par un brief incomplet." },
+      { type: "heading", text: "Quels frais prévoir après la livraison ?" },
+      { type: "paragraph", text: "Le prix de création n’est pas toujours le coût total. Selon la solution choisie, la page peut entraîner un abonnement de plateforme, un hébergement, un nom de domaine, des licences ou de la maintenance. Les outils de mesure ou de prise de rendez-vous peuvent également avoir leur propre tarif." },
+      { type: "paragraph", text: "Distinguez les frais récurrents des évolutions ponctuelles. Le devis doit préciser qui gère les mises à jour, corrige un problème après la mise en ligne et modifie la page si l’offre change. Si vous prévoyez de tester plusieurs variantes, demandez aussi si la conception et le suivi de ces tests sont inclus." },
+      { type: "heading", text: "Comment comparer deux devis de landing page ?" },
+      { type: "paragraph", text: "Mettez les offres sur un même périmètre : même objectif, même contenu de départ, mêmes intégrations et même niveau d’accompagnement. Comparez les livrables ligne par ligne et notez ce qui n’est pas compris. Un devis détaillé rend visibles les différences qu’un prix global masque." },
+      { type: "bullet-list", items: [{ label: "La stratégie et la structure de page sont-elles incluses ?" }, { label: "Qui rédige les textes et fournit les photos ou illustrations ?" }, { label: "Le design est-il personnalisé et combien de cycles de retours sont prévus ?" }, { label: "La page est-elle intégrée, responsive et testée avant publication ?" }, { label: "Les formulaires, outils connectés et événements analytiques sont-ils compris ?" }, { label: "Quels frais ou interventions seront facturés après la livraison ?" }] },
+      { type: "content-list", variant: "summary", title: "À vérifier avant de signer", items: [{ label: "Le périmètre et les livrables exacts" }, { label: "La répartition des tâches entre l’agence et vous" }, { label: "Le nombre de retours, tests et variantes compris" }, { label: "Les frais récurrents, la propriété et les accès" }] },
+      { type: "paragraph", text: "Si votre besoin dépasse une page dédiée — par exemple s’il faut créer plusieurs pages, une navigation complète ou un espace de contenu — le budget ne relève plus du même périmètre. L’article sur le prix d’un site internet détaille ces autres formats et les postes qui s’y ajoutent." },
+      { type: "faq", title: "Questions fréquentes sur le prix d’une landing page", items: [
+        { question: "Quel est le prix d’une landing page chez Ruff Agency ?", answer: "Notre offre de landing page démarre à 1 450 €. Le prix final dépend du périmètre convenu et des livrables nécessaires. Il ne constitue pas une garantie de résultat commercial." },
+        { question: "Combien coûte une landing page réalisée par une agence ?", answer: "Une grille publiée en 2026 indique des tarifs d’agence entre 800 € et 6 000 €, selon qu’il s’agit d’une page simple, personnalisée ou complexe. Les prestations et tarifs varient d’une agence à l’autre." },
+        { question: "Que comprend une landing page à 1 450 € ?", answer: "Le périmètre exact est confirmé avant le début du projet. Faites préciser la stratégie, les contenus, le design, le développement, les intégrations et les révisions comprises dans le devis." },
+        { question: "Combien de temps faut-il pour créer une landing page ?", answer: "Le délai dépend de la disponibilité des contenus, du nombre de validations et des intégrations. Demandez un calendrier par étape et vérifiez ce qui peut retarder la livraison." },
+        { question: "Le prix garantit-il un taux de conversion ?", answer: "Non. Le prix couvre une prestation et des livrables définis ; il ne garantit ni un volume de trafic ni un résultat commercial. Les conversions dépendent aussi de l’offre, de l’audience et de la qualité du trafic." },
+      ] },
+    ],
+  }),
 ];
 
 /** Public CMS entries, normalized to semantic article components. */

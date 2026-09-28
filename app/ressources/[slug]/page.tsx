@@ -49,6 +49,7 @@ export default function RessourceSlugPage({ params }: { params: { slug: string }
   const article = sourceArticle && (locale === "en" ? getEnglishArticle(sourceArticle) : sourceArticle);
   if (!article) notFound();
   const readingMinutes = getArticleReadingMinutes(article);
+  const quizInHero = article.quizInHero || article.slug === "combien-coute-creation-site-internet";
   const articleUrl = `${SITE_URL}${locale === "en" ? "/en" : ""}/ressources/${article.slug}`;
   const description = getArticleDescription(article);
   const modifiedTime = getArticleModifiedDate(article);
@@ -84,6 +85,7 @@ export default function RessourceSlugPage({ params }: { params: { slug: string }
         author={article.author}
         mainImage={article.mainImage}
         mainVideo={article.mainVideo}
+        quiz={quizInHero ? article.quiz : undefined}
         updatedAt={article.updatedAt}
         readingMinutes={readingMinutes}
         homeHref={ROUTES.home}
@@ -94,7 +96,8 @@ export default function RessourceSlugPage({ params }: { params: { slug: string }
         locale={locale}
         articleTitle={article.title}
         articleUrl={articleUrl}
-        quiz={article.quiz}
+        quiz={quizInHero ? undefined : article.quiz}
+        className={quizInHero ? "ra-resource--after-quiz" : ""}
         articleLinks={locale === "en" ? getEnglishArticles(listedArticles).map(({ slug, title, tag }) => ({ slug, title, tag, href: `/en/ressources/${slug}` })) : articleLinks}
         authorPhoto={article.profilePhoto}
         authorName={article.author}

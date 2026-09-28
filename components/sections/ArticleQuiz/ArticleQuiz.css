@@ -36,6 +36,10 @@
 
 /* Base strictement copiée du CTA bleu global. */
 .aq-recommendation{border:1px solid rgba(0,0,0,.33);border-radius:40px;background:linear-gradient(65deg,rgb(1,69,248) 0%,rgb(79,126,251) 100%);box-shadow:0 4px 9px rgba(0,0,0,.1),0 16px 16px rgba(0,0,0,.09),0 36px 22px rgba(0,0,0,.05),0 64px 26px rgba(0,0,0,.01),0 100px 28px rgba(0,0,0,0)}
+.aq-root--without-cta{min-height:0;padding-bottom:40px}.aq-root--without-cta .aq-intro-complete{min-height:0}.aq-root--without-cta .aq-replay{bottom:auto;color:#121a2e;left:auto;margin:20px auto 0;position:relative}.aq-root--without-cta .aq-replay:hover{background:rgba(18,26,46,.06);color:#121a2e}
+.aq-recommendation .aq-recommendation-copy h3{color:#fff;font:700 40px/1.14 "Plus Jakarta Sans",sans-serif;margin:20px 0 18px}
+.aq-recommendation .aq-recommendation-copy p{color:rgba(255,255,255,.8);font:500 16px/1.46 Inter,sans-serif;margin:0}
+@media(max-width:809px){.aq-recommendation .aq-recommendation-copy h3{font-size:30px;margin:16px 0}.aq-recommendation .aq-recommendation-copy p{font-size:15px}}
 .aq-recommendation-visual{bottom:auto!important;object-fit:cover;right:auto!important}
 
 /* Copie à l'identique de la CTA de navigation fournie. */

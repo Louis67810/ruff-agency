@@ -100,7 +100,7 @@
 @media(max-width:809px){.ra-chart-card{padding:0}.ra-before-after__stage{aspect-ratio:1.25/1}.ra-before-after__line span{height:38px;width:38px}}
 @media(max-width:809px){.ra-inline-info__popover{left:50%;right:auto;transform:translate(-57%,8px)}.ra-inline-info__trigger:hover .ra-inline-info__popover,.ra-inline-info__trigger:focus .ra-inline-info__popover{transform:translate(-57%,0)}}
 .ra-before-after__line span img{height:24px;width:24px}
-.ra-article-link{background:transparent;border:0;border-radius:0;color:#0d152a;display:inline;text-decoration:underline;text-decoration-color:rgba(13,21,42,.45);text-decoration-thickness:1px;text-underline-offset:4px;transition:color .2s ease,text-decoration-color .2s ease}.ra-article-link:hover{background:transparent;color:#3566e1;text-decoration-color:#3566e1;transform:none}.ra-article-link span,.ra-article-link small,.ra-article-link>svg{display:inline}
+.ra-prose a.ra-article-link,.ra-prose a.ra-article-link:visited{background:transparent;border:0;border-radius:0;color:#0d152a;display:inline;font:500 18px/1.84 Inter,sans-serif;text-decoration:underline;text-decoration-color:rgba(13,21,42,.45);text-decoration-thickness:1px;text-underline-offset:4px;transition:text-decoration-color .2s ease}.ra-prose a.ra-article-link:hover{background:transparent;color:#0d152a;text-decoration-color:#0d152a;transform:none}.ra-article-link span,.ra-article-link small,.ra-article-link>svg{display:inline}
 .ra-point-cards{align-items:stretch}.ra-point-card{height:100%;min-height:0}
 .ra-inline-info__trigger{cursor:default}
 .ra-table--highlight-first tbody th{border-bottom:1px solid rgba(0,0,0,.16)}.ra-table--highlight-first tbody tr:last-child th{border-bottom:0}
@@ -108,5 +108,23 @@
 @media(max-width:809px){.ra-chart-canvas--sankey{min-height:260px;overflow:hidden}.ra-chart-canvas--sankey>div{min-height:260px}.ra-chart-canvas--sankey text{font-size:10px}.ra-chart-canvas--bar rect{rx:3px;ry:3px}.ra-end-toc{margin-top:64px}.ra-end-toc button{font-size:16px;line-height:2.1}.ra-table--highlight-first tbody th,.ra-table--highlight-first tbody tr:hover>th{border-bottom-color:rgba(0,0,0,.16)!important}.ra-table--highlight-first tbody tr:last-child th{border-bottom:0!important}}
 .ra-chart-canvas--choropleth{border:1px solid rgba(13,21,42,.11);border-radius:20px;overflow:hidden}
 
+/* Tableau CMS : grille sobre calée sur le composant sélectionné dans Figma. */
+.ra-table-wrap{border:1px solid rgba(136,136,136,.14);border-radius:12px;box-shadow:none;margin:24px 0;overflow:auto;width:100%}
+.ra-table{border-collapse:separate;border-spacing:0;min-width:760px;table-layout:fixed;width:100%}
+.ra-table th,.ra-table td{background:#fff;border:0;border-right:1px solid rgba(0,0,0,.08);border-bottom:1px solid rgba(0,0,0,.08);color:rgba(13,21,42,.8);font:500 16px/1.5 Inter,sans-serif;padding:17px 36px;text-align:left;white-space:normal;vertical-align:middle;overflow-wrap:anywhere}
+.ra-table-wrap .ra-table th{background:#f5f5f5;color:#0d152a;font-weight:700}
+.ra-table-wrap .ra-table thead th{background:#f5f5f5;color:#0d152a}
+.ra-table-wrap .ra-table thead th{border-bottom:1px solid rgba(0,0,0,.08)}
+.ra-table-wrap .ra-table td{background:#fff;color:rgba(13,21,42,.8)}
+.ra-table-wrap .ra-table tbody td,.ra-table-wrap .ra-table tbody th{transition:background-color .18s cubic-bezier(.2,.8,.2,1),border-color .18s ease,color .18s ease}
+.ra-table tr>*:last-child{border-right:0}.ra-table tbody tr:last-child>*{border-bottom:0}
+.ra-table-wrap .ra-table--highlight-first tbody th,.ra-table-wrap .ra-table--highlight-first tbody tr:hover>th{background:#f5f5f5;color:#0d152a;font-weight:700}
+.ra-table-wrap .ra-table tbody tr:hover>td,.ra-table-wrap .ra-table--highlight-first tbody tr:hover>th{background-color:rgba(0,0,0,.02)!important;background-image:none!important;color:inherit;filter:none}
+.ra-table-tag{align-items:center;background:#ececec;border-radius:11px;color:#5c5c5c;display:inline-flex;font:400 14px/1.2 Inter,sans-serif;justify-content:center;margin:2px 0;padding:8px 16px;white-space:nowrap}
+.ra-table-tag--agence{background:rgb(255,237,214);color:rgb(148,110,13)}.ra-table-tag--saas{background:rgb(225,231,250);color:rgb(91,109,171)}.ra-table-tag--pme{background:rgb(242,248,250);color:rgb(63,134,158)}.ra-table-tag--independant{background:rgb(236,236,236);color:rgb(92,92,92)}
+@media(max-width:809px){.ra-table-wrap{border-radius:12px;margin:8px 0}.ra-table th,.ra-table td{font-size:14px;padding:17px 24px}}
+
 /* Le quiz est le seul bloc article qui s'étend jusqu'aux bords de l'écran sur mobile. */
 @media(max-width:809px){.ra-inline-quiz{margin-left:-24px;margin-right:-24px;width:calc(100% + 48px)}.ra-inline-quiz .aq-root{border-radius:26px}}
+.ra-article-list__nested--standalone{margin-top:0}.ra-inline-source-link{color:inherit;text-decoration:underline;text-decoration-color:currentColor;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}.ra-inline-source-link:hover{color:#0d152a;text-decoration-color:#0d152a}
+@media(max-width:809px){.ra-prose a.ra-article-link,.ra-prose a.ra-article-link:visited{font-size:16px}}
