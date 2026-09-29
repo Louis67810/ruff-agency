@@ -373,7 +373,7 @@ export default function ArticlesRessource({
             String(selectedTag).toLowerCase(),
         )
       : articles;
-    return filtered.slice(0, 10);
+    return filtered;
   }, [articles, selectedTag]);
 
   return (

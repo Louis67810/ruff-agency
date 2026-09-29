@@ -893,10 +893,6 @@ const legacyArticles: Article[] = [
       src: "/images/ressources/prix-creation-site-internet.webp",
       alt: "Combien coûte la création d’un site internet ? — Ruff Agency",
     },
-    mainImage: {
-      src: "/images/ressources/prix-creation-site-internet.webp",
-      alt: "Combien coûte la création d’un site internet ? — Ruff Agency",
-    },
     quiz: {
       eyebrow: "Estimateur de budget",
       title: "Quel budget prévoir pour votre site internet ?",
@@ -931,7 +927,6 @@ const legacyArticles: Article[] = [
     ],
     content: [
       { type: "paragraph", text: "Le prix de création d’un site internet peut aller de quelques centaines d’euros à plusieurs dizaines de milliers. Un site vitrine, une landing page et un e-commerce ne demandent ni le même travail ni les mêmes fonctionnalités. Pour un premier repère, le guide tarifaire 2026 de Codecircle situe un site vitrine de 5 à 7 pages entre **1 500 € et 8 000 €** selon le prestataire, un e-commerce entre **3 000 € et 20 000 €**, et un site sur mesure entre **8 000 € et 50 000 € ou plus**. Ce sont des fourchettes publiées, pas un tarif officiel ni une moyenne représentative de toutes les agences.", links: [{ text: "Codecircle", href: "https://codecircle.fr/prix-site-internet/" }] },
-      { type: "image", src: "/images/ressources/prix-creation-site-internet.webp", alt: "Visuel de l’article : Combien coûte la création d’un site internet ?" },
       { type: "callout", variant: "info", icon: "info", title: "Un chiffre n’a de sens qu’avec son périmètre", text: "Avant de comparer deux prix, vérifiez le nombre de pages, les fonctionnalités, les contenus, le niveau de design, le SEO, la maintenance et la propriété du site. Les sources publiques ne précisent pas toujours si leurs tarifs sont HT ou TTC : vérifiez ce point sur chaque devis." },
       { type: "heading", text: "Quel est le prix d’un site selon son type ?" },
       { type: "paragraph", text: "Le tableau reprend des fourchettes publiées pour le marché français en 2026. Les catégories et les périmètres diffèrent selon les prestataires : utilisez-les pour préparer votre budget, puis comparez des devis portant sur le même besoin." },
@@ -971,10 +966,6 @@ const legacyArticles: Article[] = [
       src: "/images/ressources/prix-landing-page.webp",
       alt: "Combien coûte une landing page ? — Ruff Agency",
     },
-    mainImage: {
-      src: "/images/ressources/prix-landing-page.webp",
-      alt: "Combien coûte une landing page ? — Ruff Agency",
-    },
     quizInHero: true,
     quiz: {
       eyebrow: "Estimateur de budget",
@@ -1002,7 +993,6 @@ const legacyArticles: Article[] = [
     ],
     content: [
       { type: "paragraph", text: "En 2026, les tarifs d’agence publiés pour une landing page vont d’environ **800 € à 6 000 €**, selon la complexité et les livrables. Chez Ruff Agency, l’offre démarre à **1 450 €**. Ce prix d’entrée et les fourchettes du marché ne sont comparables que si le périmètre l’est aussi : stratégie, textes, design, intégration et suivi ne sont pas toujours inclus de la même manière." },
-      { type: "image", src: "/images/ressources/prix-landing-page.webp", alt: "Visuel de l’article : Combien coûte une landing page ?" },
       { type: "callout", variant: "info", icon: "info", title: "Un prix isolé ne décrit pas une prestation", text: "Pour savoir si un devis est cohérent, vérifiez ce qui est conçu, écrit, développé et testé. Une page à prix bas peut demander beaucoup de travail de votre côté ; une offre plus complète peut inclure plusieurs expertises." },
       { type: "article-link", slug: "questions-sections-landing-page", label: "Voir les questions à traiter dans chaque section d’une landing page" },
       { type: "heading", text: "Quels tarifs sont publiés pour une landing page ?" },
