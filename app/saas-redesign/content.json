@@ -321,6 +321,141 @@
       "copy": "Essential questions presented in a clearer, easier-to-scan format.",
       "before": "/landing-assets/scall/before-06-faq.png",
       "after": "/landing-assets/scall/after-06-faq.png"
+    },
+    {
+      "id": "hexora-hero-section",
+      "title": "Hexora — Hero section",
+      "copy": "A sharper introduction to visual database building.",
+      "before": "/landing-assets/saas-redesign/hexora/before-01-hero-section.png",
+      "after": "/landing-assets/saas-redesign/hexora/after-01-hero-section.png"
+    },
+    {
+      "id": "hexora-product-story",
+      "title": "Hexora — Product story",
+      "copy": "The core idea is explained with a more focused visual narrative.",
+      "before": "/landing-assets/saas-redesign/hexora/before-02-product-story.png",
+      "after": "/landing-assets/saas-redesign/hexora/after-02-product-story.png"
+    },
+    {
+      "id": "hexora-features",
+      "title": "Hexora — Features",
+      "copy": "Database tools are grouped into a clearer product overview.",
+      "before": "/landing-assets/saas-redesign/hexora/before-03-features.png",
+      "after": "/landing-assets/saas-redesign/hexora/after-03-features.png"
+    },
+    {
+      "id": "hexora-shortcuts",
+      "title": "Hexora — Shortcuts",
+      "copy": "The command interface gets a dedicated, easy-to-scan presentation.",
+      "before": "/landing-assets/saas-redesign/hexora/before-04-shortcuts.png",
+      "after": "/landing-assets/saas-redesign/hexora/after-04-shortcuts.png"
+    },
+    {
+      "id": "hexora-pricing",
+      "title": "Hexora — Pricing",
+      "copy": "The plans are easier to compare as teams grow.",
+      "before": "/landing-assets/saas-redesign/hexora/before-05-pricing.png",
+      "after": "/landing-assets/saas-redesign/hexora/after-05-pricing.png"
+    },
+    {
+      "id": "hexora-faq",
+      "title": "Hexora — FAQ",
+      "copy": "Common questions are presented with a cleaner hierarchy.",
+      "before": "/landing-assets/saas-redesign/hexora/before-06-faq.png",
+      "after": "/landing-assets/saas-redesign/hexora/after-06-faq.png"
+    },
+    {
+      "id": "zentra-hero-section",
+      "title": "Zentra — Hero section",
+      "copy": "The dashboard and the main promise are visible from the first screen.",
+      "before": "/landing-assets/saas-redesign/zentra/before-01-hero-section.png",
+      "after": "/landing-assets/saas-redesign/zentra/after-01-hero-section.png",
+      "objectPosition": "top"
+    },
+    {
+      "id": "zentra-how-it-works",
+      "title": "Zentra — How it works",
+      "copy": "The path from setup to audit readiness is easier to follow.",
+      "before": "/landing-assets/saas-redesign/zentra/before-02-how-it-works.png",
+      "after": "/landing-assets/saas-redesign/zentra/after-02-how-it-works.png"
+    },
+    {
+      "id": "zentra-dashboard",
+      "title": "Zentra — Dashboard",
+      "copy": "The compliance workspace is shown in a more focused product view.",
+      "before": "/landing-assets/saas-redesign/zentra/before-03-dashboard.png",
+      "after": "/landing-assets/saas-redesign/zentra/after-03-dashboard.png"
+    },
+    {
+      "id": "zentra-capabilities",
+      "title": "Zentra — Capabilities",
+      "copy": "Core compliance tasks have a clearer visual hierarchy.",
+      "before": "/landing-assets/saas-redesign/zentra/before-04-capabilities.png",
+      "after": "/landing-assets/saas-redesign/zentra/after-04-capabilities.png"
+    },
+    {
+      "id": "zentra-feature-overview",
+      "title": "Zentra — Feature overview",
+      "copy": "The tools are presented as one connected workflow.",
+      "before": "/landing-assets/saas-redesign/zentra/before-05-feature-overview.png",
+      "after": "/landing-assets/saas-redesign/zentra/after-05-feature-overview.png"
+    },
+    {
+      "id": "zentra-testimonials",
+      "title": "Zentra — Testimonials",
+      "copy": "Customer feedback is easier to read and more prominent.",
+      "before": "/landing-assets/saas-redesign/zentra/before-06-testimonials.png",
+      "after": "/landing-assets/saas-redesign/zentra/after-06-testimonials.png"
+    },
+    {
+      "id": "zentra-faq",
+      "title": "Zentra — FAQ",
+      "copy": "Migration and adoption questions are easier to find and compare.",
+      "before": "/landing-assets/saas-redesign/zentra/before-07-faq.png",
+      "after": "/landing-assets/saas-redesign/zentra/after-07-faq.png"
+    },
+    {
+      "id": "zentra-final-cta",
+      "title": "Zentra — Final CTA",
+      "copy": "The last screen gives visitors a clearer route to get started.",
+      "before": "/landing-assets/saas-redesign/zentra/before-08-final-cta.png",
+      "after": "/landing-assets/saas-redesign/zentra/after-08-final-cta.png"
+    },
+    {
+      "id": "solara-hero-section",
+      "title": "Solara — Hero section",
+      "copy": "The trading platform is introduced with a more precise product view.",
+      "before": "/landing-assets/saas-redesign/solara/before-01-hero-section.png",
+      "after": "/landing-assets/saas-redesign/solara/after-01-hero-section.png",
+      "objectPosition": "top"
+    },
+    {
+      "id": "solara-market-tools",
+      "title": "Solara — Market tools",
+      "copy": "Real-time data and trading tools are easier to scan.",
+      "before": "/landing-assets/saas-redesign/solara/before-02-market-tools.png",
+      "after": "/landing-assets/saas-redesign/solara/after-02-market-tools.png"
+    },
+    {
+      "id": "solara-trading-workspace",
+      "title": "Solara — Trading workspace",
+      "copy": "The market overview connects insight to action.",
+      "before": "/landing-assets/saas-redesign/solara/before-03-trading-workspace.png",
+      "after": "/landing-assets/saas-redesign/solara/after-03-trading-workspace.png"
+    },
+    {
+      "id": "solara-market-insights",
+      "title": "Solara — Market insights",
+      "copy": "Analytics and decisions are presented in a clearer flow.",
+      "before": "/landing-assets/saas-redesign/solara/before-04-market-insights.png",
+      "after": "/landing-assets/saas-redesign/solara/after-04-market-insights.png"
+    },
+    {
+      "id": "solara-final-cta",
+      "title": "Solara — Final CTA",
+      "copy": "The closing section makes the next action more direct.",
+      "before": "/landing-assets/saas-redesign/solara/before-05-final-cta.png",
+      "after": "/landing-assets/saas-redesign/solara/after-05-final-cta.png"
     }
   ],
   "reviews": [

@@ -1101,7 +1101,7 @@
   width: max-content;
   display: flex;
   gap: 31.945px;
-  animation: sr-scroll-seamless 65s linear infinite;
+  animation: sr-scroll-seamless 86.6667s linear infinite;
   will-change: transform;
 }
 .sr-marquee:hover .sr-marquee__track,
@@ -2226,7 +2226,7 @@ body:has(.sr) {
   overflow: hidden;
 }
 .sr-marquee > .sr-marquee__track {
-  animation: sr-scroll-seamless 65s linear infinite;
+  animation: sr-scroll-seamless 86.6667s linear infinite;
 }
 @keyframes sr-scroll-seamless {
   to {
@@ -2532,13 +2532,6 @@ body:has(.sr) {
   }
 }
 
-/* Remove the dark utility bar from the old screenshot without exposing a gap. */
-.sr-marquee-card__before-mask .sr-marquee-card__before {
-  top: -20px;
-  bottom: auto;
-  height: calc(100% + 20px);
-}
-
 /* Hover keeps the ticker running; JS eases its playback rate instead. */
 .sr-marquee:hover .sr-marquee__track {
   animation-play-state: running;
@@ -2552,13 +2545,6 @@ body:has(.sr) {
   height: 22px;
   color: #fff;
   fill: currentColor;
-}
-
-@media (max-width: 600px) {
-  .sr-marquee-card__before-mask .sr-marquee-card__before {
-    top: -8px;
-    height: calc(100% + 8px);
-  }
 }
 
 /* Section 3 — rebuilt from Figma frame 2147260980. */

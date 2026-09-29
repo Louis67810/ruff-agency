@@ -59,12 +59,19 @@ const defaultBeforeAfterSlides = [
     after: "/landing-assets/2005-6313.png",
   },
 ] as const;
-const beforeAfterSlides = [
+type BeforeAfterSlide = {
+  id: string;
+  title: string;
+  copy: string;
+  before: string;
+  after: string;
+  objectPosition?: string;
+};
+const beforeAfterSlides: BeforeAfterSlide[] = [
   ...(customContent.realizations.length
     ? customContent.realizations
     : defaultBeforeAfterSlides),
 ];
-type BeforeAfterSlide = (typeof beforeAfterSlides)[number];
 type RealizationProject = {
   id: string;
   title: string;
@@ -101,6 +108,18 @@ const projectDetails: Record<string, Pick<RealizationProject, "title" | "copy">>
     title: "Scall",
     copy: "A complete six-section redesign for an independent art director.",
   },
+  hexora: {
+    title: "Hexora",
+    copy: "We redesigned Hexora's website to make database building feel visual, powerful, and accessible.",
+  },
+  zentra: {
+    title: "Zentra",
+    copy: "A compliance landing page bringing deadlines, documents, risk detection and audit-ready reporting into one dashboard.",
+  },
+  solara: {
+    title: "Solara",
+    copy: "We redesigned Solara's website to make advanced trading feel precise, fast and easy to navigate.",
+  },
 };
 
 const realizationProjects = beforeAfterSlides.reduce<RealizationProject[]>(
@@ -124,7 +143,8 @@ const realizationProjects = beforeAfterSlides.reduce<RealizationProject[]>(
   },
   [],
 );
-const resultsProjectPriority = ["spreak", "rentala"];
+const featuredProjectIds = ["hexora", "zentra", "solara"] as const;
+const resultsProjectPriority = [...featuredProjectIds, "spreak", "rentala"];
 const orderedRealizationProjects = [...realizationProjects].sort(
   (projectA, projectB) => {
     const rank = (projectId: string) => {
@@ -268,11 +288,31 @@ const problemIcons = [
   WrenchScrewdriverIcon,
   ClockIcon,
 ] as const;
-const comparisonProjects = [
+const comparisonProjects: ReadonlyArray<{
+  project: string;
+  before: string;
+  after: string;
+  objectPosition?: string;
+  afterSide: "a" | "b";
+  afterPercent: number;
+  illustrative?: boolean;
+}> = [
+  ...featuredProjectIds.map((id, index) => {
+    const project = realizationProjects.find((item) => item.id === id)!;
+    return {
+      project: project.title,
+      before: project.slides[0].before,
+      after: project.slides[0].after,
+      objectPosition: project.slides[0].objectPosition,
+      afterSide: (index % 2 === 0 ? "a" : "b") as "a" | "b",
+      afterPercent: id === "hexora" ? 96 : id === "zentra" ? 95 : 92,
+      illustrative: true,
+    };
+  }),
   {
     project: "Zorgniotti",
-    before: "/landing-assets/zorgniotti/before-home.png",
-    after: "/landing-assets/zorgniotti/after-home.png",
+    before: "/landing-assets/zorgniotti/after-home.png",
+    after: "/landing-assets/zorgniotti/before-home.png",
     afterSide: "b",
     afterPercent: 98,
   },
@@ -299,7 +339,7 @@ const comparisonProjects = [
   },
   {
     project: "Keyframe",
-    before: "/landing-assets/keyframe/before-02-types.png",
+    before: "/landing-assets/keyframe/before-01-home.png",
     after: "/landing-assets/keyframe/after-01-home.png",
     afterSide: "b",
     afterPercent: 97,
@@ -318,18 +358,14 @@ const comparisonProjects = [
     afterSide: "b",
     afterPercent: 95,
   },
-] as const satisfies ReadonlyArray<{
-  project: string;
-  before: string;
-  after: string;
-  afterSide: "a" | "b";
-  afterPercent: number;
-}>;
+];
 
 const comparisonRounds = comparisonProjects.map((comparison) => ({
   project: comparison.project,
   a: comparison.afterSide === "a" ? comparison.after : comparison.before,
   b: comparison.afterSide === "b" ? comparison.after : comparison.before,
+  objectPosition: comparison.objectPosition,
+  illustrative: comparison.illustrative ?? false,
   aPercent:
     comparison.afterSide === "a"
       ? comparison.afterPercent
@@ -426,7 +462,8 @@ function MarqueeCard({
         <img
           className="sr-marquee-card__after"
           src={slide.after}
-          alt="Website after redesign"
+          alt={`${slide.title} after redesign`}
+          style={{ objectPosition: slide.objectPosition ?? "center" }}
           key={`after-${slide.id}`}
         />
         <div
@@ -436,7 +473,8 @@ function MarqueeCard({
           <img
             className="sr-marquee-card__before"
             src={slide.before}
-            alt="Website before redesign"
+            alt={`${slide.title} before redesign`}
+            style={{ objectPosition: slide.objectPosition ?? "center" }}
             key={`before-${slide.id}`}
           />
         </div>
@@ -850,7 +888,7 @@ function TrustChoice({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
           const label = side.toUpperCase();
           const percentage = current[`${side}Percent`];
           const selected = choice === side;
-          const tone = percentage >= 50 ? "positive" : "negative";
+          const tone = current.afterSide === side ? "positive" : "negative";
           return (
             <article
               className={`sr-trust-option ${selected ? "is-selected" : ""}`}
@@ -873,6 +911,7 @@ function TrustChoice({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
                   <img
                     src={current[side]}
                     alt={`${current.project} hero section, option ${label}`}
+                    style={{ objectPosition: current.objectPosition ?? "center" }}
                   />
                 </span>
                 {selected && (
@@ -880,9 +919,13 @@ function TrustChoice({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
                     className={`sr-trust-result sr-trust-result--${tone}`}
                     key={`${slide}-${side}-${choice}`}
                   >
-                    <strong>{percentage}%</strong>
+                    <strong>
+                      {percentage}%
+                    </strong>
                     <span className="sr-trust-result__copy">
-                      of people chose this
+                      {current.illustrative
+                        ? "illustrative split"
+                        : "of people chose this"}
                     </span>
                   </span>
                 )}
@@ -950,16 +993,24 @@ function Results() {
 }
 
 function ResultCase({ project }: { project: RealizationProject }) {
+  const [activeSlide, setActiveSlide] = useState(project.slides[0]);
+  const isFeatured = featuredProjectIds.some((id) => id === project.id);
+
   return (
     <article>
       <MarqueeCard
         item={project.slides[0].id}
         slides={project.slides}
         compact
+        onSlideChange={setActiveSlide}
       />
       <div className="sr-result-caption">
         <h3>{project.title}</h3>
-        <p>{project.copy}</p>
+        <p>
+          {isFeatured && activeSlide.id !== project.slides[0].id
+            ? activeSlide.copy
+            : project.copy}
+        </p>
       </div>
     </article>
   );
@@ -1132,7 +1183,7 @@ export default function SaasRedesignLanding({
         </div>
       </section>
       <Marquee
-        projects={realizationProjects}
+        projects={orderedRealizationProjects}
         className="sr-intro sr-intro--ticker"
       />
       <section className="sr-problems" id="problems" data-sr-reveal="section">

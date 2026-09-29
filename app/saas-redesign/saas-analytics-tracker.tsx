@@ -127,7 +127,7 @@ export function SaasAnalyticsTracker() {
         sessionStorage.setItem("ruff_saas_last_activity", String(Date.now()));
         send({ eventType: "heartbeat" });
       }
-    }, 30_000);
+    }, 120_000);
 
     const sectionByElement = new Map<Element, string>();
     const sectionLabelsById = new Map<string, string>();
