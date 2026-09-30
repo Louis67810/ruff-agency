@@ -147,7 +147,10 @@ function localeHref(targetLocale) {
     if (pathname === "/en") nextPath = "/";
     else if (pathname.startsWith("/en/")) nextPath = pathname.slice(3) || "/";
   }
-  return `${nextPath}${search}${hash}`;
+  const nextSearch = new URLSearchParams(search);
+  if (targetLocale === "fr") nextSearch.set("site-locale", "fr");
+  const query = nextSearch.toString();
+  return `${nextPath}${query ? `?${query}` : ""}${hash}`;
 }
 
 function LanguageSwitcher({ locale = "fr", dark = false, direction = "down" }) {
