@@ -2,13 +2,11 @@
 
 import {
   Calendar,
-  Code2,
   Edit3,
   FileText,
   Headphones,
   Infinity as InfinityIcon,
   Layout,
-  Maximize,
   MessageCircle,
   Monitor,
   PenTool,
@@ -23,7 +21,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./PrixOptimized.css";
 import { localizeHref } from "@/lib/i18n";
 
-type UpsellId = "branding" | "cms" | "motion";
+type UpsellId = "branding" | "cro";
 
 type Feature = {
   label: string;
@@ -35,7 +33,6 @@ type Upsell = {
   title: string;
   description: string;
   Icon: LucideIcon;
-  full?: boolean;
 };
 
 export type PrixOptimizedProps = {
@@ -55,8 +52,7 @@ export type PrixOptimizedProps = {
   avatarSrc?: string;
   tickerImages?: string[];
   brandingPrice?: number;
-  cmsPrice?: number;
-  motionPrice?: number;
+  croPrice?: number;
   className?: string;
 };
 
@@ -79,22 +75,15 @@ const FEATURES: Feature[] = [
 const UPSELLS: Upsell[] = [
   {
     id: "branding",
-    title: "Branding",
-    description: "Création complète de votre identité visuelle",
+    title: "Full Brand Identity",
+    description: "Une identité de marque complète, du logo à la direction visuelle.",
     Icon: PenTool,
   },
   {
-    id: "cms",
-    title: "Intégration CMS",
-    description: "Gérez votre contenu de manière autonome",
-    Icon: Code2,
-  },
-  {
-    id: "motion",
-    title: "Animation motion-design",
-    description: "Animations complexes",
-    Icon: Maximize,
-    full: true,
+    id: "cro",
+    title: "Post-launch CRO Sprint",
+    description: "Optimisation des conversions après la mise en ligne.",
+    Icon: Search,
   },
 ];
 const EN_FEATURE_LABELS = [
@@ -113,9 +102,8 @@ const EN_FEATURE_LABELS = [
   "24/7 customer support",
 ];
 const EN_UPSELL_COPY: Record<UpsellId, [string, string]> = {
-  branding: ["Branding", "Complete visual identity creation"],
-  cms: ["CMS integration", "Manage your content independently"],
-  motion: ["Motion design animation", "Complex animations"],
+  branding: ["Full Brand Identity", "A complete brand identity, from logo to visual direction."],
+  cro: ["Post-launch CRO Sprint", "Conversion improvements after launch."],
 };
 
 const DEFAULT_AVATAR =
@@ -192,27 +180,31 @@ function FeatureItem({ feature }: { feature: Feature }) {
 }
 
 export default function PrixOptimized({
-  basePrice = 1450,
-  extraPrice = 350,
+  basePrice,
+  extraPrice,
   maxPages = 10,
   landingTitle = "Landing Page",
   landingDescription = "Idéal pour un produit, un service ou un objectif unique, une page optimisée pour convertir.",
   siteTitle = "Site Internet",
   siteDescription = "Idéale pour ceux qui veulent scaler et ont une audience plus large.",
-  sliderInfoText = "(+350€ pages supplémentaires)",
+  sliderInfoText,
   bookingLabel = "Réserver un appel",
   bookingHref = "/30-min",
   secondaryLabel = "Voir nos réalisations",
   secondaryHref = "/realisations",
   avatarSrc = DEFAULT_AVATAR,
   tickerImages = DEFAULT_TICKER_IMAGES,
-  brandingPrice = 745,
-  cmsPrice = 245,
-  motionPrice = 395,
+  brandingPrice,
+  croPrice,
   className = "",
   locale = "fr",
 }: PrixOptimizedProps) {
   const english = locale === "en";
+  const prices = english
+    ? { base: 2000, page: 450, branding: 700, cro: 800 }
+    : { base: 1765, page: 400, branding: 620, cro: 700 };
+  const resolvedBasePrice = basePrice ?? prices.base;
+  const resolvedExtraPrice = extraPrice ?? prices.page;
   bookingHref = localizeHref(bookingHref, locale) || "#";
   secondaryHref = localizeHref(secondaryHref, locale) || "#";
   bookingLabel = english ? "Book a call" : bookingLabel;
@@ -223,11 +215,14 @@ export default function PrixOptimized({
   const localizedSiteDescription = english
     ? "Ideal for businesses ready to scale with a broader audience."
     : siteDescription;
-  const localizedSliderInfo = english
-    ? "(+€350 per additional page)"
-    : sliderInfoText;
+  const formatPrice = (amount: number) =>
+    english ? `$${amount.toLocaleString("en-US")}` : `${amount.toLocaleString("fr-FR")} €`;
+  const localizedSliderInfo = sliderInfoText ??
+    (english
+      ? `(+${formatPrice(resolvedExtraPrice)} per additional page)`
+      : `(+${formatPrice(resolvedExtraPrice)} par page supplémentaire)`);
   const safeMaxPages = Math.max(2, Math.round(maxPages));
-  const initialPages = Math.min(3, safeMaxPages);
+  const initialPages = 1;
   const [pages, setPages] = useState(initialPages);
   const [rawValue, setRawValue] = useState(initialPages);
   const [activeUpsells, setActiveUpsells] = useState<Set<UpsellId>>(
@@ -250,20 +245,19 @@ export default function PrixOptimized({
 
   const upsellPrices = useMemo(
     () => ({
-      branding: brandingPrice,
-      cms: cmsPrice,
-      motion: motionPrice,
+      branding: brandingPrice ?? prices.branding,
+      cro: croPrice ?? prices.cro,
     }),
-    [brandingPrice, cmsPrice, motionPrice],
+    [brandingPrice, croPrice, prices.branding, prices.cro],
   );
 
   const totalPrice = useMemo(() => {
-    let total = basePrice + (pages - 1) * extraPrice;
+    let total = resolvedBasePrice + (pages - 1) * resolvedExtraPrice;
     activeUpsells.forEach((id) => {
       total += upsellPrices[id];
     });
     return total;
-  }, [activeUpsells, basePrice, extraPrice, pages, upsellPrices]);
+  }, [activeUpsells, resolvedBasePrice, resolvedExtraPrice, pages, upsellPrices]);
 
   const displayedPrice = useAnimatedNumber(totalPrice);
   const pageTitle = pages === 1 ? landingTitle : siteTitle;
@@ -346,7 +340,7 @@ export default function PrixOptimized({
                     <button
                       key={upsell.id}
                       type="button"
-                      className={`prx-upsellCard${upsell.full ? " prx-upsellFull" : ""}${
+                      className={`prx-upsellCard${
                         isActive ? " prx-upsellActive" : ""
                       }`}
                       aria-pressed={isActive}
@@ -355,7 +349,7 @@ export default function PrixOptimized({
                       <h4>{upsell.title}</h4>
                       <p>{upsell.description}</p>
                       <div className="prx-upsellPrice">
-                        +{upsellPrices[upsell.id]}€
+                        +{formatPrice(upsellPrices[upsell.id])}
                       </div>
                     </button>
                   );
@@ -400,7 +394,7 @@ export default function PrixOptimized({
 
               <div className="prx-priceArea">
                 <div className="prx-total">
-                  {displayedPrice.toLocaleString("fr-FR")}€
+                  {formatPrice(displayedPrice)}
                 </div>
 
                 <div className="prx-ctaStack">

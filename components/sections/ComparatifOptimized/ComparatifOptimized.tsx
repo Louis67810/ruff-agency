@@ -30,7 +30,7 @@ const COLUMNS: ColumnData[] = [
     title: "Ruff agency",
     positive: true,
     items: [
-      "Commence à 1 490€",
+      "À partir de 1 765 €",
       "Design conversion-first",
       "Optimisé conversion",
       "14 jours de livraison",
@@ -66,7 +66,7 @@ const ENGLISH_COLUMNS: ColumnData[] = [
     title: "Ruff agency",
     positive: true,
     items: [
-      "Starting at €1,490",
+      "Starting at $2,000",
       "Conversion-first design",
       "Conversion-optimized",
       "Delivered in 14 days",

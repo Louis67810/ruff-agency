@@ -7,9 +7,8 @@ import ResourceShare from "@/components/sections/RessourceArticle/ResourceShare"
 import { QUALIFICATION, estimateConversion, rankDomains, type Domain, type Qualification } from "@/lib/conversion-estimator";
 import "./RedesignRoiTool.css";
 
-const money = (value: number, locale: string) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(Math.round(value));
+const money = (value: number, locale: string) => new Intl.NumberFormat(locale, { style: "currency", currency: locale === "en-US" ? "USD" : "EUR", maximumFractionDigits: 0 }).format(Math.round(value));
 const number = (value: number, locale: string) => new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(value);
-const REDESIGN_SERVICE_PRICE = 1650;
 
 function useAnimatedNumber(target: number, active: boolean) {
   const [display, setDisplay] = useState(0);
@@ -31,7 +30,8 @@ function useAnimatedNumber(target: number, active: boolean) {
 
 export default function RedesignRoiTool({ locale = "fr" }: { locale?: "fr" | "en" }) {
   const english = locale === "en";
-  const formatLocale = english ? "en-GB" : "fr-FR";
+  const formatLocale = english ? "en-US" : "fr-FR";
+  const redesignServicePrice = english ? 2000 : 1765;
   const [sales, setSales] = useState<number | "">("");
   const [price, setPrice] = useState<number | "">("");
   const [domain, setDomain] = useState<Domain | null>(null);
@@ -69,7 +69,7 @@ export default function RedesignRoiTool({ locale = "fr" }: { locale?: "fr" | "en
 
   const suggestions = useMemo(() => rankDomains(query), [query]);
   const ready = !!domain && rate !== "" && Number(rate) > 0 && sales !== "" && price !== "";
-  const result = useMemo(() => ready && domain ? estimateConversion({ domain, qualification, sales: Number(sales), price: Number(price), currentRate: Number(rate), investment: REDESIGN_SERVICE_PRICE }) : null, [ready, domain, qualification, sales, price, rate]);
+  const result = useMemo(() => ready && domain ? estimateConversion({ domain, qualification, sales: Number(sales), price: Number(price), currentRate: Number(rate), investment: redesignServicePrice }) : null, [ready, domain, qualification, sales, price, rate, redesignServicePrice]);
   const currentRate = result?.currentRate ?? 0;
   const afterRate = result?.afterRate ?? 0;
   const animatedCurrent = useAnimatedNumber(currentRate, ready);
@@ -97,7 +97,7 @@ export default function RedesignRoiTool({ locale = "fr" }: { locale?: "fr" | "en
         <p className="rrt-subtitle">{english ? "Adjust your numbers to explore a realistic redesign scenario." : "Ajustez vos chiffres pour explorer un scénario de refonte réaliste."}</p>
         <div className="rrt-divider" />
         <label>{english ? "Sales per month from your website" : "Combien de ventes par mois via votre site ?"}<input type="number" min="0" step="1" placeholder="0" value={sales} onChange={(event) => setSales(event.target.value === "" ? "" : Math.max(0, Number(event.target.value)))} /></label>
-        <label>{english ? "Average sale value" : "Prix moyen d’une vente"}<span className="rrt-number"><input type="number" min="0" step="50" placeholder="0" value={price} onChange={(event) => setPrice(event.target.value === "" ? "" : Math.max(0, Number(event.target.value)))} /><span>€</span></span></label>
+        <label>{english ? "Average sale value" : "Prix moyen d’une vente"}<span className="rrt-number"><input type="number" min="0" step="50" placeholder="0" value={price} onChange={(event) => setPrice(event.target.value === "" ? "" : Math.max(0, Number(event.target.value)))} /><span>{english ? "$" : "€"}</span></span></label>
         <label>{english ? "Current conversion rate" : "Votre taux de conversion actuel"}<span className="rrt-number"><input type="number" min="0.1" max="100" step="0.1" placeholder="0" value={rate} onChange={(event) => { setRate(event.target.value === "" ? "" : Math.min(100, Math.max(0, Number(event.target.value)))); setRateEdited(true); }} /><span>%</span></span></label>
         <div className="rrt-field" ref={searchRef}>
           <span>{english ? "Business sector" : "Domaine d’activité"}</span>
@@ -129,19 +129,19 @@ export default function RedesignRoiTool({ locale = "fr" }: { locale?: "fr" | "en
             <div className="rrt-after"><h4>{english ? "After redesign" : "Après refonte"}</h4><dl><div><dt>{english ? "Sales/month" : "Ventes/mois"}</dt><dd>{shown(result?.afterSales ?? 0)}</dd></div><div><dt>{english ? "Conversion rate" : "Taux de conversion"}</dt><dd>{shown(animatedAfter, " %")}</dd></div><div><dt>{english ? "Revenue/month" : "CA/mois"}</dt><dd>{shownMoney((result?.afterSales ?? 0) * Number(price))}</dd></div></dl><div className="rrt-extra"><span>{english ? "Additional revenue/month" : "CA supplémentaire/mois"}</span><strong>{result ? `+${money(result.extraRevenue, formatLocale)}` : "—"}</strong></div><div className="rrt-extra rrt-extra--second"><span>{english ? "Additional revenue/year" : "CA supplémentaire/an"}</span><strong>{result ? `+${money(result.extraRevenue * 12, formatLocale)}` : "—"}</strong></div></div>
           </div>
           <div className="rrt-stats">
-            <div className="rrt-stat-card"><div className="rrt-stat-heading"><span>{english ? "ROI over 12 months" : "ROI sur 12 mois"}</span><button type="button" className="rrt-info" aria-label={english ? "How is the ROI calculated?" : "Comment le ROI est-il calculé ?"}><Info size={14} /><span className="rrt-info-tip">{english ? "Based on a €1,650 redesign service." : "Calculé avec une prestation de refonte facturée 1 650 €."}</span></button></div><strong>{result?.roiTwelveMonths == null ? "—" : `${result.roiTwelveMonths >= 0 ? "+" : ""}${number(result.roiTwelveMonths, formatLocale)} %`}</strong></div>
+            <div className="rrt-stat-card"><div className="rrt-stat-heading"><span>{english ? "ROI over 12 months" : "ROI sur 12 mois"}</span><button type="button" className="rrt-info" aria-label={english ? "How is the ROI calculated?" : "Comment le ROI est-il calculé ?"}><Info size={14} /><span className="rrt-info-tip">{english ? "Based on a $2,000 redesign service." : "Calculé avec une prestation de refonte facturée 1 765 €."}</span></button></div><strong>{result?.roiTwelveMonths == null ? "—" : `${result.roiTwelveMonths >= 0 ? "+" : ""}${number(result.roiTwelveMonths, formatLocale)} %`}</strong></div>
             <div className="rrt-stat-card"><span>{english ? "Additional revenue/year" : "CA supplémentaire/an"}</span><strong>{result ? `+${money(result.extraRevenue * 12, formatLocale)}` : "—"}</strong></div>
             <div className="rrt-stat-card"><span>{english ? "Additional sales/month" : "Ventes en plus/mois"}</span><strong>{result ? `+${number(result.extraSales, formatLocale)}` : "—"}</strong></div>
             <div className="rrt-stat-card"><span>{english ? "Additional sales/year" : "Ventes en plus/an"}</span><strong>{result ? `+${number(result.extraSales * 12, formatLocale)}` : "—"}</strong></div>
             <div className="rrt-stat-card"><span>{english ? "Conversion improvement" : "Progression du taux"}</span><strong>{result ? `+${number((result.afterRate / result.currentRate - 1) * 100, formatLocale)} %` : "—"}</strong></div>
-            <div className="rrt-stat-card"><div className="rrt-stat-heading"><span>{english ? "Estimated payback" : "Délai de retour estimé"}</span><button type="button" className="rrt-info" aria-label={english ? "How is payback calculated?" : "Comment le délai de retour est-il calculé ?"}><Info size={14} /><span className="rrt-info-tip">{english ? "Estimated from the €1,650 service cost and additional monthly revenue." : "Estimé à partir du coût de prestation de 1 650 € et du CA supplémentaire mensuel."}</span></button></div><strong>{result?.paybackMonths == null ? "—" : `${number(result.paybackMonths, formatLocale)} ${english ? "months" : "mois"}`}</strong></div>
+            <div className="rrt-stat-card"><div className="rrt-stat-heading"><span>{english ? "Estimated payback" : "Délai de retour estimé"}</span><button type="button" className="rrt-info" aria-label={english ? "How is payback calculated?" : "Comment le délai de retour est-il calculé ?"}><Info size={14} /><span className="rrt-info-tip">{english ? "Estimated from the $2,000 service cost and additional monthly revenue." : "Estimé à partir du coût de prestation de 1 765 € et du CA supplémentaire mensuel."}</span></button></div><strong>{result?.paybackMonths == null ? "—" : `${number(result.paybackMonths, formatLocale)} ${english ? "months" : "mois"}`}</strong></div>
           </div>
           {result?.alreadyHigh && <div className="rrt-high" role="status"><strong>{english ? "Your conversion rate is already very high" : "Votre taux de conversion est déjà très élevé"}</strong></div>}
         </div>
         <div className="rrt-cta-wrap"><Cta href="#" className="rrt-site-cta" onClick={(event: React.MouseEvent<HTMLAnchorElement>) => { event.preventDefault(); if (result) setBookingOpen(true); else { setSearchOpen(true); setSearchStep("domain"); } }}>{result?.alreadyHigh ? (english ? "Discuss my website" : "Échanger sur mon site") : result ? (english ? `Claim ${money(result.extraRevenue, formatLocale)}/month` : `Récupérer mes ${money(result.extraRevenue, formatLocale)} / mois`) : (english ? "Estimate my potential" : "Estimer mon potentiel")}</Cta></div>
       </div>
     </div>
-    <p className="rrt-disclaimer">{english ? "Illustrative scenario, not a guarantee of conversions or revenue. ROI assumes a €1,650 redesign service. Sector and visitor quality rates are modelling assumptions." : "Cette simulation est une estimation, sans garantie de conversions ni de chiffre d’affaires. Le ROI suppose une prestation de refonte à 1 650 €. Les taux par domaine et qualification sont des hypothèses de calcul."}</p>
+    <p className="rrt-disclaimer">{english ? "Illustrative scenario, not a guarantee of conversions or revenue. ROI assumes a $2,000 redesign service. Sector and visitor quality rates are modelling assumptions." : "Cette simulation est une estimation, sans garantie de conversions ni de chiffre d’affaires. Le ROI suppose une prestation de refonte à 1 765 €. Les taux par domaine et qualification sont des hypothèses de calcul."}</p>
     <div className="rrt-share"><ResourceShare url={pageUrl} title={english ? "Website redesign ROI estimator" : "Simulateur ROI de refonte de site"} locale={locale} /></div>
     {bookingOpen && <div className="rrt-modal" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setBookingOpen(false); }}><div role="dialog" aria-modal="true" aria-label={english ? "Book a call" : "Réserver un appel"}><button className="rrt-modal-close" type="button" aria-label={english ? "Close" : "Fermer"} onClick={() => setBookingOpen(false)}><X /></button><iframe title={english ? "Cal.com booking" : "Réservation Cal.com"} src={`https://cal.com/ruffagency/discovery-call?embed=true&layout=month_view&theme=light&lang=${locale}`} allow="camera; microphone; fullscreen" /></div></div>}
   </>;
