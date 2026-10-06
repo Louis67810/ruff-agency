@@ -255,7 +255,7 @@ export default function HeroCaseStudy({
               >
                 <div className="hero-offers-cta">
                   <CTA variant="secondary" href={offersHref}>
-                    {english ? "View our offers" : "Voir nos offres"}
+                    {english ? "Explore the service" : "Découvrir le service"}
                   </CTA>
                 </div>
                 <div className="hero-call-cta">

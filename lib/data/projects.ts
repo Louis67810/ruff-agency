@@ -11,6 +11,8 @@ export type Project = {
   imageAlt?: string;
   category: RealisationCategory;
   href: string;
+  /** Service page most relevant to this case study. */
+  serviceHref?: string;
   heroTitle?: string;
   heroVideoSrc?: string;
   photoDuSite?: ProjectImage;
@@ -97,6 +99,7 @@ export const projects: Project[] = [
       "Hero section du site de Spreak",
       "SaaS",
     ),
+    serviceHref: "/services/landing-page",
     heroTitle: "Refonte d’une Landing Page pour un aspect haut de gamme",
     heroVideoSrc: "/videos/site-internet-landing.mp4",
     photoDuSite: { src: "https://framerusercontent.com/images/k9hqKDSdmfT6DjeoPRo5cmQHLFM.png?width=1202&height=672" },
@@ -141,6 +144,7 @@ export const projects: Project[] = [
       "Hero section du site de Keyframe agency",
       "Agence",
     ),
+    serviceHref: "/services/website",
     heroTitle: "Création d’un site web sur-mesure pour montrer leur motion design",
     photoDuSite: { src: "https://framerusercontent.com/images/w638PEZGXN6zoVTeEp4ZJ5zC7Y.png?width=2081&height=1211" },
     about: "Keyframe agency est une agence de création de vidéos en motion design.",
@@ -188,6 +192,7 @@ export const projects: Project[] = [
       "Hero section du site de Rentala",
       "SaaS",
     ),
+    serviceHref: "/services/website",
     heroTitle: "Refonte du design d’un SaaS pour maximiser la crédibilité et la conversion",
     heroVideoSrc: "/videos/landing-page-hero.mp4",
     photoDuSite: { src: "https://framerusercontent.com/images/k2fFX7w22E4ad4xjzAICuBvwo68.png?width=1346&height=716" },
@@ -234,6 +239,7 @@ export const projects: Project[] = [
       "Hero section du site du cabinet Zorgniotti",
       "PME",
     ),
+    serviceHref: "/services/website",
     heroTitle: "Refonte d’un site d’un cabinet comptable pour une image moderne et différenciante",
     heroVideoSrc: "/videos/development-react.mp4",
     photoDuSite: { src: "https://framerusercontent.com/images/V407ZbzjU6Fh0wdazSh60SGJBf0.png?width=1650&height=922" },
@@ -278,6 +284,7 @@ export const projects: Project[] = [
       "Hero section du site : Clovarex",
       "Indépendant",
     ),
+    serviceHref: "/services/website",
     heroTitle: "Refonte d’un site comptable pour une image premium et connectée",
     photoDuSite: { src: "https://framerusercontent.com/images/Z77UsyqCEP3JAR2zIZzN1EGucIk.png?width=2206&height=1223" },
     logo: { src: "https://framerusercontent.com/images/uUnfWGnlkZkgst7sSY4vjb7TWJw.png?width=230&height=94" },
@@ -325,6 +332,7 @@ export const projects: Project[] = [
       "Hero section de la landing page de Scall",
       "Indépendant",
     ),
+    serviceHref: "/services/landing-page",
     heroTitle: "Création d’un site artistique pour valoriser ses projets et son univers",
     photoDuSite: { src: "https://framerusercontent.com/images/kFcIznKt72MEBs9ZSJvb4GvzrF4.png?width=1184&height=749" },
     review: "",

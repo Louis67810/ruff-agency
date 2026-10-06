@@ -154,26 +154,33 @@ const orderedRealizationProjects = [...realizationProjects].sort(
     return rank(projectA.id) - rank(projectB.id);
   },
 );
+type RealizationCategory = "website" | "branding";
+const realizationCategories: readonly RealizationCategory[] = ["website", "branding"];
+const projectsByCategory: Record<RealizationCategory, RealizationProject[]> = {
+  website: orderedRealizationProjects,
+  // The branding collection can be replaced when its projects are available.
+  branding: orderedRealizationProjects,
+};
 const solutionCards = [
   [
-    "2005-6442",
-    "Clearer positioning",
-    "Make it immediately obvious what your product does, who it’s for and why it matters.",
+      "/landing-assets/saas-redesign/benefits/2486-1088.png",
+    "Stand out from every other SaaS",
+    "A distinct visual direction built around your product, not another recycled AI website.",
   ],
   [
-    "2005-6450",
-    "A stronger first impression",
-    "Make it immediately obvious what your product does, who it’s for and why it matters.",
+      "/landing-assets/saas-redesign/benefits/2419-1387.png?v=3",
+    "Turn more traffic into customers",
+    "Send more paid traffic to a website built to support growth, not just validate an MVP.",
   ],
   [
-    "2005-6458",
-    "A page built to convert",
-    "Make it immediately obvious what your product does, who it’s for and why it matters.",
+      "/landing-assets/saas-redesign/benefits/2419-1366.png",
+    "Build a brand people remember",
+    "Create a recognizable identity instead of being another tab they forget five minutes later.",
   ],
   [
-    "2005-6409",
-    "A website that grows",
-    "Create a flexible foundation that can evolve as your SaaS gains traction, expands its offer and reaches new customers.",
+      "/landing-assets/saas-redesign/benefits/2419-1436.png?v=4",
+    "Stop rebuilding it yourself",
+    "No more weekends testing prompts, templates and endless variations that still feel ‘almost right.’",
   ],
 ] as const;
 const defaultReviews = [
@@ -982,15 +989,31 @@ function TrustChoice({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
 }
 
 function Results() {
+  const [activeCategory, setActiveCategory] = useState<RealizationCategory>("website");
+
   return (
     <section className="sr-results" id="from-this" data-sr-reveal="section">
       <h2>From this → to this</h2>
       <p>
         Real redesigns, shown side by side so you can compare every detail.
       </p>
+      <div className="sr-results-divider" aria-hidden="true" />
+      <div className="sr-results-filters" role="group" aria-label="Project category">
+        {realizationCategories.map((category) => (
+          <button
+            key={category}
+            type="button"
+            aria-pressed={activeCategory === category}
+            className={activeCategory === category ? "is-active" : ""}
+            onClick={() => setActiveCategory(category)}
+          >
+            {category === "website" ? "Website" : "Branding"}
+          </button>
+        ))}
+      </div>
       <div className="sr-case-grid">
-        {orderedRealizationProjects.map((project) => (
-          <ResultCase project={project} key={project.id} />
+        {projectsByCategory[activeCategory].map((project) => (
+          <ResultCase project={project} key={`${activeCategory}-${project.id}`} />
         ))}
       </div>
     </section>
@@ -1016,8 +1039,46 @@ function ResultCase({ project }: { project: RealizationProject }) {
             ? activeSlide.copy
             : project.copy}
         </p>
+        <button className="sr-see-details" type="button" disabled>
+          See In Details
+        </button>
       </div>
     </article>
+  );
+}
+
+function FeaturedSocialProof() {
+  const review =
+    reviews.find(([, , quote]) => {
+      const firstSentence = quote.split(/(?<=\.)\s+/)[0] ?? "";
+      return quote.includes(". ") && firstSentence.length >= 30 && firstSentence.length <= 45;
+    }) ?? reviews.find(([, , quote]) => quote.includes(". ")) ?? reviews[0];
+  if (!review) return null;
+
+  const [name, role, quote] = review;
+  const [headline, ...bodyParts] = quote.split(/(?<=\.)\s+/);
+  const body = bodyParts.join(" ");
+
+  return (
+    <section className="sr-featured-review" aria-label="Client review">
+      <div className="sr-featured-review__content">
+        <div className="sr-featured-review__main">
+          <div className="sr-featured-review__logo-slot" aria-label="Client logo to be added" />
+          <div className="sr-featured-review__quote">
+            <h2>{headline}</h2>
+            <div className="sr-featured-review__divider" aria-hidden="true" />
+            {body ? <p>{body}</p> : null}
+          </div>
+        </div>
+        <div className="sr-featured-review__author">
+          <span className="sr-featured-review__avatar" aria-hidden="true" />
+          <div>
+            <strong>{name}</strong>
+            <p>{role}</p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1239,32 +1300,48 @@ export default function SaasRedesignLanding({
       </section>
       <TrustChoice tweets={managedTweets.length ? managedTweets : defaultTweets} />
       <section className="sr-solution" id="solution" data-sr-reveal="section">
+        <div className="sr-solution-ticker" aria-label="Introducing Ruff Agency">
+          <div className="sr-solution-ticker__track" aria-hidden="true">
+            {[0, 1].map((copy) => (
+              <div className="sr-solution-ticker__set" key={copy}>
+                {Array.from({ length: 14 }, (_, index) => (
+                  <span className="sr-solution-ticker__tag" key={index}>INTRODUCING</span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
         <img
           className="sr-solution-shape sr-solution-shape--left"
-          src="/landing-assets/figma-originals/2005-6398.svg"
+          src="/landing-assets/saas-redesign/benefits/2419-919.png"
           alt=""
           aria-hidden="true"
         />
         <img
           className="sr-solution-shape sr-solution-shape--right"
-          src="/landing-assets/figma-originals/2005-6399.svg"
+          src="/landing-assets/saas-redesign/benefits/2419-920.png"
           alt=""
           aria-hidden="true"
         />
-        <h2>Make your site look like it belongs to a real company.</h2>
-        <p>
+        <img
+          className="sr-solution-logo"
+          src="/landing-assets/saas-redesign/benefits/2431-937.png"
+          width="164"
+          height="48"
+          alt="Ruff Agency"
+        />
+        <h2>Make your site looks like it belongs to a real company</h2>
+        <p className="sr-solution-intro">
           You’ve already done the hard part: building the product, getting users
-          and proving people are willing to pay for it.
-          <br />
-          <br />
-          Now your website needs to catch up.
+          <strong> and proving people are willing to pay for it.</strong>
         </p>
+        <div className="sr-solution-divider" aria-hidden="true" />
         <div className="sr-solution-grid">
           {solutionCards.map(([image, title, copy]) => (
             <article className="sr-solution-card" key={title}>
               <div className="sr-solution-illustration">
                 <img
-                  src={`/landing-assets/solution-figma/${image}.png`}
+                  src={image}
                   alt=""
                   aria-hidden="true"
                 />
@@ -1277,7 +1354,16 @@ export default function SaasRedesignLanding({
             </article>
           ))}
         </div>
+        <div className="sr-ai-brand" aria-labelledby="sr-ai-brand-title">
+          <h2 id="sr-ai-brand-title">Keep using AI : without losing your brand</h2>
+          <p>
+            We build reusable brand rules, components and AI-ready context around
+            your new direction. So when you or your agents create new pages,
+            sections or assets, <strong>they start from your brand, not from generic SaaS patterns.</strong>
+          </p>
+        </div>
       </section>
+      <FeaturedSocialProof />
       <Results />
       <ConversionMetricsSection />
       <ProofReviews />

@@ -78,7 +78,7 @@ export default function RealisationSlugPage({ params }: { params: { slug: string
         videoSrc={project.heroVideoSrc}
         imageSlides={heroPhotos}
         realisationsHref={ROUTES.realisations}
-        offersHref={ROUTES.landingPage}
+        offersHref={project.serviceHref ?? ROUTES.siteInternet}
         callHref={ROUTES.contact}
       />
       <ContentPageRealisationsSlug
