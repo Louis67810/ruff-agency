@@ -19,7 +19,7 @@ export default async function SaasRedesignPage() {
         {...NAV_PROPS}
         locale="en"
         homeHref="#top"
-        ctaHref="#book"
+        ctaHref="/en/saas-redesign/brief"
         ctaLabel="Book a Call"
         landingMode
         landingLinks={[
@@ -34,7 +34,11 @@ export default async function SaasRedesignPage() {
         className="saas-redesign-nav"
       />
       <SaasRedesignLanding managedTweets={tweets} />
-      <Footer links={FOOTER_LINKS} bookingHref="#book" locale="en" />
+      <Footer
+        links={{ ...FOOTER_LINKS, booking: "/en/saas-redesign/brief" }}
+        bookingHref="/en/saas-redesign/brief"
+        locale="en"
+      />
     </>
   );
 }

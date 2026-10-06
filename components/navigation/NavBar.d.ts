@@ -8,3 +8,11 @@ export type NavBarProps = React.HTMLAttributes<HTMLElement> & {
 };
 declare const NavBar: React.FC<NavBarProps>;
 export default NavBar;
+export type LogoProps = {
+  href?: string;
+  dark?: boolean;
+  mobile?: boolean;
+  mobileUnique?: boolean;
+  className?: string;
+};
+export const Logo: React.FC<LogoProps>;

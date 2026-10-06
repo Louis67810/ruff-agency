@@ -256,8 +256,8 @@ function WhatsApp({ href }) {
   </div>;
 }
 
-function Logo({ href, dark = false, mobile = false, mobileUnique = false }) {
-  return <SafeLink href={href} className={`framer-1ffe4zf navbar-logo ${mobile ? "navbar-logo-mobile" : ""} ${mobileUnique ? "navbar-logo-mobile-unique" : ""}`}>
+export function Logo({ href, dark = false, mobile = false, mobileUnique = false, className = "" }) {
+  return <SafeLink href={href} className={`framer-1ffe4zf navbar-logo ${mobile ? "navbar-logo-mobile" : ""} ${mobileUnique ? "navbar-logo-mobile-unique" : ""} ${className}`}>
     <span className="framer-hech98 navbar-logo-svg" dangerouslySetInnerHTML={{ __html: LOGO_SVG }} />
     <span className="framer-r3bcr9 navbar-agency" style={{ color: dark ? "#fff" : "#000" }}>.agency</span>
   </SafeLink>;

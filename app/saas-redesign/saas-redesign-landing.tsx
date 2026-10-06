@@ -10,16 +10,16 @@ import {
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
+  ArrowTrendingDownIcon,
   ArrowTrendingUpIcon,
   ClockIcon,
   DocumentDuplicateIcon,
   PlusIcon,
+  ShoppingCartIcon,
   StarIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
 import Script from "next/script";
-import { Availability } from "@/components/sections/Hero2Optimized/Hero2Optimized";
-import CallBooking from "@/components/sections/CallBooking/CallBooking";
 import { VideoReviewCard } from "@/components/sections/SectionAvis/SectionAvis";
 import { HomepageReviewCard } from "@/components/sections/SectionAvis/HomepageReviewCard";
 import { StackSection3 } from "@/components/sections/StackSection3/StackSection3";
@@ -266,21 +266,26 @@ const reviews = [
 ];
 const issues = [
   [
-    'You\'ve outgrown the "quick MVP site"',
-    "Your product may already have paying customers, but an MVP-looking website makes the company feel less established.",
+    "Your product disappears into the crowd.",
+    "Your website looks like hundreds of other SaaS products, making it difficult for people to recognize or remember you.",
   ],
   [
-    "It looks like everyone else's",
-    "When every SaaS makes similar promises, design and positioning become part of how people decide who feels trustworthy.",
+    "Poor design lowers perceived quality.",
+    "If your website feels generic or cheap, prospects naturally assume the product behind it is too.",
   ],
   [
-    "Your first website wasn’t built for this",
-    "The site that helped you launch isn’t necessarily the site that should help you scale.",
+    "You lose credibility and pricing power.",
+    "When your brand doesn’t feel premium, charging premium prices becomes much harder.",
   ],
   [
-    "You don't have time to fix it yourself",
-    "You're not going to spend 3 weeks in a page builder tweaking spacing. You have a product to run.",
+    "You’re wasting qualified traffic",
+    "You’re still sending prospects to the website you built to validate your idea, not one designed to turn them into customers.",
   ],
+] as const;
+const problemResults = [
+  ["Lower conversion rates.", ArrowTrendingDownIcon],
+  ["Lower perceived value.", StarIcon],
+  ["Fewer sales.", ShoppingCartIcon],
 ] as const;
 const problemIcons = [
   ArrowTrendingUpIcon,
@@ -419,7 +424,7 @@ const SparklesIcon = () => null;
 
 function Cta() {
   return (
-    <ExistingCta kind="primary" href="#book" label="Book a Call">
+    <ExistingCta kind="primary" href="/en/saas-redesign/brief" label="Book a Call">
       Book a Call
     </ExistingCta>
   );
@@ -1189,14 +1194,14 @@ export default function SaasRedesignLanding({
       <section className="sr-problems" id="problems" data-sr-reveal="section">
         <div className="sr-problems-heading">
           <h2>
-            You built something real.
+            AI is good at a lot of things.
             <br />
-            But your site doesn’t show it…
+            And that’s exactly the problem.
           </h2>
           <p>
-            You shipped a product people actually pay for. But your landing page
-            gives the impression that your product was made in one prompt. And
-            you lose your customers’ trust in your product.
+            You’ve delegated the one thing AI still can’t do well: have taste.
+            When your SaaS looks like everything else, you lose trust,
+            memorability, and perceived value. Here's what that looks like:
           </p>
         </div>
         <div className="sr-rule" />
@@ -1216,6 +1221,20 @@ export default function SaasRedesignLanding({
               </article>
             );
           })}
+        </div>
+        <div className="sr-problem-result-rule" />
+        <div className="sr-problem-results">
+          <h3>The result?</h3>
+          <div className="sr-problem-result-list">
+            {problemResults.map(([label, ResultIcon]) => (
+              <div className="sr-problem-result-item" key={label}>
+                <span className="sr-problem-result-icon" aria-hidden="true">
+                  <ResultIcon />
+                </span>
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <TrustChoice tweets={managedTweets.length ? managedTweets : defaultTweets} />
@@ -1267,28 +1286,12 @@ export default function SaasRedesignLanding({
         aria-hidden="true"
         data-sr-reveal="fade"
       />
-      <section className="sr-book" id="book" data-sr-reveal="section">
-        <Availability english />
-        <h2>Get a conversion-focused SaaS site in 10 days.</h2>
-        <p>Projects typically start at $2,000</p>
-        <div className="sr-calendar">
-          <CallBooking locale="en" />
-        </div>
-        <div className="sr-guarantee">
-          <h3>100% risk-free satisfaction guarantee</h3>
-          <p>
-            We’re committed to your success. If you’re not completely thrilled
-            with your website, we’ll keep working until you are, or provide a
-            refund.
-          </p>
-        </div>
-      </section>
       <StackSection3
         id="faq"
         className="sr-final-faq"
         locale="en"
         faqs={saasFaqs}
-        ctaHref="#book"
+        ctaHref="/en/saas-redesign/brief"
         showDescription={false}
         showCta={false}
       />
