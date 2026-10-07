@@ -6,25 +6,33 @@ import {
   useRef,
   useState,
   type PointerEvent as ReactPointerEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   ArrowTrendingDownIcon,
   ArrowTrendingUpIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   ClockIcon,
   DocumentDuplicateIcon,
   PlusIcon,
   ShoppingCartIcon,
   StarIcon,
   WrenchScrewdriverIcon,
+  XMarkIcon,
+  ExclamationTriangleIcon,
 } from "@heroicons/react/24/solid";
 import Script from "next/script";
+import { createPortal } from "react-dom";
 import { VideoReviewCard } from "@/components/sections/SectionAvis/SectionAvis";
 import { HomepageReviewCard } from "@/components/sections/SectionAvis/HomepageReviewCard";
 import { StackSection3 } from "@/components/sections/StackSection3/StackSection3";
 import ExistingCta from "@/components/ui/Cta";
+import { projects as portfolioProjects } from "@/lib/data/projects";
 import { ConversionMetricsSection } from "./conversion-metrics-section";
+import SaasRedesignPricing from "./SaasRedesignPricing";
 import { trackSaasEvent } from "./saas-analytics-tracker";
 import { defaultTweets, type SaasTweet } from "./tweets";
 import customContent from "./content.json";
@@ -77,6 +85,7 @@ type RealizationProject = {
   title: string;
   copy: string;
   slides: BeforeAfterSlide[];
+  branding?: boolean;
 };
 
 const projectDetails: Record<string, Pick<RealizationProject, "title" | "copy">> = {
@@ -154,12 +163,188 @@ const orderedRealizationProjects = [...realizationProjects].sort(
     return rank(projectA.id) - rank(projectB.id);
   },
 );
+const brandingSlides = (
+  projectId: string,
+  title: string,
+  copy: string,
+  before: string,
+  afterImages: readonly string[],
+): BeforeAfterSlide[] => afterImages.map((after, index) => ({
+  id: `${projectId}-brand-${index + 1}`,
+  title,
+  copy,
+  before,
+  after,
+}));
+
+const brandingProjects: RealizationProject[] = [
+  {
+    id: "synthara-branding",
+    title: "Synthara",
+    copy: "An AI assistant identity built to feel intelligent, focused and ready for what comes next.",
+    branding: true,
+    slides: brandingSlides(
+      "synthara",
+      "Synthara — AI assistant identity",
+      "A distinctive red-and-charcoal identity for an AI assistant designed to help people think faster, stay organised and execute with confidence.",
+      "/landing-assets/saas-redesign/branding/synthara.png",
+      [1, 2, 3, 4, 5, 6].map((index) => `/landing-assets/saas-redesign/branding/synthara-${String(index).padStart(2, "0")}.png`),
+    ),
+  },
+  {
+    id: "zentra-branding",
+    title: "Zentra",
+    copy: "A calm, warm identity for a wellbeing product focused on rest, balance and everyday progress.",
+    branding: true,
+    slides: brandingSlides(
+      "zentra",
+      "Zentra — wellbeing identity",
+      "A warm gold-and-earth palette and a simple emblem give Zentra’s focus and wellbeing tools a calmer, more human feel.",
+      "/landing-assets/saas-redesign/branding/zentra.png",
+      [1, 2, 3, 4, 5, 6, 7, 8].map((index) => `/landing-assets/saas-redesign/branding/zentra-${String(index).padStart(2, "0")}.png`),
+    ),
+  },
+  {
+    id: "kuantro-branding",
+    title: "Kuantro",
+    copy: "A crisp blue identity that turns complex information into a clearer, more confident experience.",
+    branding: true,
+    slides: brandingSlides(
+      "kuantro",
+      "Kuantro — data clarity identity",
+      "The blue-and-cyan mark, restrained palette and interface concepts make Kuantro’s promise of data clarity and progress immediately visible.",
+      "/landing-assets/saas-redesign/branding/kuantro.png",
+      [1, 2, 3, 4, 5].map((index) => `/landing-assets/saas-redesign/branding/kuantro-${String(index).padStart(2, "0")}.png`),
+    ),
+  },
+  {
+    id: "naptivera-branding",
+    title: "Naptivera",
+    copy: "A warm, reassuring identity for technology that helps people rest better and wake to brighter days.",
+    branding: true,
+    slides: brandingSlides(
+      "naptivera",
+      "Naptivera — sleep and wellbeing identity",
+      "A sunrise orange, soft neutrals and a connected N symbol give Naptivera’s sleep experience a reassuring, human point of view.",
+      "/landing-assets/saas-redesign/branding/naptivera.png",
+      [1, 2, 3, 4, 5].map((index) => `/landing-assets/saas-redesign/branding/naptivera-${String(index).padStart(2, "0")}.png`),
+    ),
+  },
+];
 type RealizationCategory = "website" | "branding";
 const realizationCategories: readonly RealizationCategory[] = ["website", "branding"];
 const projectsByCategory: Record<RealizationCategory, RealizationProject[]> = {
   website: orderedRealizationProjects,
-  // The branding collection can be replaced when its projects are available.
-  branding: orderedRealizationProjects,
+  branding: brandingProjects,
+};
+
+type ProjectCaseStudy = {
+  title: string;
+  intro: string;
+  challenge: string;
+  solution: string;
+  results: [string, string, string];
+};
+
+const projectCaseStudies: Record<string, ProjectCaseStudy> = {
+  hexora: {
+    title: "A clearer way to build with data",
+    intro: "Making Hexora’s visual database builder easier to understand at first glance.",
+    challenge: "The product’s flexibility was hard to grasp from a generic first impression. Visitors needed to see what they could build, how the pieces fit together, and why Hexora was different.",
+    solution: "We gave the product story a clear visual direction, brought the database-building experience forward, and organised the page around the questions a prospective user needs answered before trying the platform.",
+    results: ["Explain the product faster", "Make the interface feel approachable", "Guide more qualified visitors to try Hexora"],
+  },
+  zentra: {
+    title: "Making compliance feel manageable",
+    intro: "Turning a complex compliance workflow into a clear, reassuring product story.",
+    challenge: "Deadlines, documents, risk detection and reporting are difficult to evaluate when they are scattered across a dense page. Visitors need confidence that every step is covered.",
+    solution: "We structured Zentra around the compliance workflow, made its key tools easy to scan, and gave important proof and next steps a more visible place.",
+    results: ["Clarify the end-to-end workflow", "Build confidence in the platform", "Make the next step easier to find"],
+  },
+  solara: {
+    title: "A sharper view of the markets",
+    intro: "Presenting Solara’s trading tools with the focus and precision its audience expects.",
+    challenge: "Advanced trading products can overwhelm visitors with data and features before they understand the value. The previous experience needed a stronger hierarchy and a more confident first impression.",
+    solution: "We brought the trading workspace and market insights into a more coherent narrative, pairing product detail with a calmer interface and clear paths through the offer.",
+    results: ["Make complex tools easier to scan", "Show the value of the workspace sooner", "Support confident product evaluation"],
+  },
+  zorgniotti: {
+    title: "A digital presence that reflects expertise",
+    intro: "Giving Zorgniotti’s established accounting firm a polished, clear five-page experience.",
+    challenge: "The firm’s expertise and people were not easy to discover in the old experience. Prospective clients needed a clearer sense of the team, services and best way to get in touch.",
+    solution: "We redesigned the core pages around the firm’s expertise, brought its team and client proof into a clearer hierarchy, and simplified contact and FAQ content.",
+    results: ["Make expertise easier to recognise", "Help visitors find relevant services", "Create a clearer route to an enquiry"],
+  },
+  spreak: {
+    title: "Turning customer intelligence into action",
+    intro: "Making Spreak’s customer intelligence platform easier to understand and explore.",
+    challenge: "A broad platform can feel like a collection of features when the story is not ordered around a customer’s goals. Visitors needed to connect the problem, solution, modules and pricing.",
+    solution: "We built a complete eight-section narrative from the homepage through pricing, giving the product’s benefits and modules a consistent visual system and a more direct flow.",
+    results: ["Connect features to customer needs", "Make the offer easier to compare", "Give sales conversations a clearer starting point"],
+  },
+  artan: {
+    title: "A stronger platform for creator growth",
+    intro: "Helping Artan show its offer, creators and work in one distinctive experience.",
+    challenge: "The value of a creator-focused studio can get lost when its work, process and offer live in separate visual stories. New visitors need to see both the quality of the work and how to get started.",
+    solution: "We shaped the site around Artan’s work and audience, then clarified its benefits, process, pricing and comparisons so each page supports the next decision.",
+    results: ["Let the portfolio demonstrate quality", "Make the offer easier to understand", "Create a more direct path from interest to click"],
+  },
+  rentala: {
+    title: "A simpler way to manage rentals",
+    intro: "Making Rentala’s rental management offer feel clear, modern and practical.",
+    challenge: "Landlords compare many tools while juggling day-to-day work. A feature-heavy presentation can hide how the product saves time and which plan fits a portfolio.",
+    solution: "We organised the story around the landlord’s workload, clarified the product journey and pricing, and placed proof and calls to action where visitors need reassurance.",
+    results: ["Show how the product fits daily work", "Help visitors compare plans with confidence", "Make a qualified next step more obvious"],
+  },
+  keyframe: {
+    title: "A motion studio with a clearer offer",
+    intro: "Presenting Keyframe’s video formats and production process with stronger visual hierarchy.",
+    challenge: "When a studio offers several video formats and production stages, prospects can struggle to compare what is included and how a project moves from brief to delivery.",
+    solution: "We gave the work a more focused showcase, explained the formats and production steps in sequence, and made pricing and booking easier to navigate.",
+    results: ["Help visitors find the right video format", "Set expectations for the production process", "Make booking a strategy call feel straightforward"],
+  },
+  zagula: {
+    title: "A more personal accounting website",
+    intro: "Making Julie Zagula’s expertise and client experience easier to discover.",
+    challenge: "An independent accounting firm depends on trust, but dense pages and hard-to-find answers can make it difficult for a prospective client to understand the firm’s approach.",
+    solution: "We built a five-section experience that introduces the firm clearly, presents its advantages and client proof with more structure, and makes contact and FAQs easier to navigate.",
+    results: ["Bring the firm’s expertise forward", "Answer common questions earlier", "Make a first conversation easier to start"],
+  },
+  scall: {
+    title: "A distinctive portfolio for an art director",
+    intro: "Giving Scall’s work and point of view a more visual, memorable home.",
+    challenge: "A portfolio has to make the work easy to browse while still telling visitors who is behind it. If project proof and personal positioning compete, neither gets enough attention.",
+    solution: "We created a six-section structure that leads with selected work, then gives clients, approach, case studies and reviews a more deliberate place in the story.",
+    results: ["Make selected work easier to explore", "Connect projects to the art director’s point of view", "Give prospective clients a clearer way to make contact"],
+  },
+  "synthara-branding": {
+    title: "An AI identity built for forward momentum",
+    intro: "Giving Synthara’s AI assistant a distinctive identity that feels capable and approachable.",
+    challenge: "AI can feel abstract or intimidating. Synthara needed a visual identity that signals intelligence and ambition while keeping the product human and easy to approach.",
+    solution: "We paired a bold, energetic mark with a dark charcoal and red palette, then carried the identity across the app icon, product interface and brand touchpoints.",
+    results: ["Make the AI assistant easier to recognise", "Balance advanced technology with a human feel", "Carry one clear identity across product and marketing"],
+  },
+  "zentra-branding": {
+    title: "A calmer way forward",
+    intro: "Building a warm, reassuring identity for Zentra’s rest and wellbeing tools.",
+    challenge: "Wellbeing products need to feel supportive rather than demanding. The identity had to make focus, balance and daily progress feel calm and welcoming.",
+    solution: "We created a soft gold and earth-toned visual system with a simple, memorable mark, then applied it to the app and its everyday wellbeing experiences.",
+    results: ["Communicate calm and balance at first glance", "Make the product feel approachable and human", "Create a consistent identity across app and brand materials"],
+  },
+  "kuantro-branding": {
+    title: "Turning complexity into clarity",
+    intro: "Giving Kuantro’s data platform a clear visual language for confident decisions.",
+    challenge: "Complex information can slow teams down when it is difficult to interpret. Kuantro needed a visual identity that made clarity, progress and analytical confidence tangible.",
+    solution: "We built a precise blue-and-cyan identity around a geometric K mark and extended it into the product interface, app icon and supporting brand elements.",
+    results: ["Make a data-focused product easier to recognise", "Express clarity and progress through a consistent system", "Bring the identity into the product experience"],
+  },
+  "naptivera-branding": {
+    title: "A brighter tomorrow starts with better rest",
+    intro: "Creating a warm identity for Naptivera’s sleep and wellbeing experience.",
+    challenge: "Sleep technology can feel clinical. Naptivera needed to make better rest feel personal, comforting and connected to brighter days.",
+    solution: "We shaped an expressive orange symbol and a warm palette, then applied the identity to the app, sleep tools and supporting brand touchpoints.",
+    results: ["Make the sleep experience feel warm and reassuring", "Build recognition around a simple, distinctive mark", "Keep the brand consistent across product and everyday use"],
+  },
 };
 const solutionCards = [
   [
@@ -271,6 +456,22 @@ const reviews = [
       )
     : defaultReviews),
 ];
+const featuredReview = reviews.find(([, , quote]) => {
+  const firstSentence = quote.split(/(?<=\.)\s+/)[0] ?? "";
+  return quote.includes(". ") && firstSentence.length >= 30 && firstSentence.length <= 45;
+}) ?? reviews.find(([, , quote]) => quote.includes(". ")) ?? reviews[0];
+const reviewAuthorByProjectId: Record<string, string> = {
+  zorgniotti: "Dominique Zenglein",
+  spreak: "Sacha Tassart",
+  artan: "Artan",
+  rentala: "Martin Riedweg",
+  keyframe: "Antoine Troovy",
+  zagula: "Julie Zagula",
+};
+const portfolioSlugByProjectId: Record<string, string> = {
+  keyframe: "keyframe-agency",
+  zagula: "clovarex",
+};
 const issues = [
   [
     "Your product disappears into the crowd.",
@@ -441,22 +642,26 @@ function MarqueeCard({
   item,
   slides = beforeAfterSlides,
   compact = false,
+  initialPosition = 50,
   onSlideChange,
+  branding = false,
 }: {
   item: string;
   slides?: ReadonlyArray<BeforeAfterSlide>;
   compact?: boolean;
+  initialPosition?: number;
   onSlideChange?: (slide: BeforeAfterSlide) => void;
+  branding?: boolean;
 }) {
   const slideSet = slides.length ? slides : beforeAfterSlides;
-  const [position, setPosition] = useState(50);
+  const [position, setPosition] = useState(initialPosition);
   const [activeSlide, setActiveSlide] = useState(() => {
     const slideIndex = slideSet.findIndex((slide) => slide.id === item);
     return slideIndex >= 0 ? slideIndex : 0;
   });
   const slide = slideSet[activeSlide];
 
-  useEffect(() => setPosition(50), [activeSlide]);
+  useEffect(() => setPosition(initialPosition), [activeSlide, initialPosition]);
   const updatePositionFromPointer = (
     event: ReactPointerEvent<HTMLInputElement>,
   ) => {
@@ -467,14 +672,14 @@ function MarqueeCard({
 
   return (
     <article
-      className={`sr-marquee-card${compact ? " sr-marquee-card--compact" : ""}`}
-      aria-label="Website redesign example"
+      className={`sr-marquee-card${compact ? " sr-marquee-card--compact" : ""}${branding ? " sr-marquee-card--branding" : ""}`}
+      aria-label={branding ? "Brand identity project" : "Website redesign example"}
     >
       <div className="sr-marquee-card__image" data-example={item}>
         <img
           className="sr-marquee-card__after"
           src={slide.after}
-          alt={`${slide.title} after redesign`}
+          alt={branding ? slide.title : `${slide.title} after redesign`}
           style={{ objectPosition: slide.objectPosition ?? "center" }}
           key={`after-${slide.id}`}
         />
@@ -549,13 +754,13 @@ function MarqueeCard({
           }}
         />
       </div>
-      <div className="sr-before-after-dots" aria-label="Choose a redesign">
+      {slideSet.length > 1 ? <div className="sr-before-after-dots" aria-label={branding ? "Choose a brand image" : "Choose a redesign"}>
         {slideSet.map((candidate, index) => (
           <button
             type="button"
             key={candidate.id}
             className={index === activeSlide ? "is-active" : ""}
-            aria-label={`Show redesign ${index + 1}`}
+            aria-label={`Show ${branding ? "brand image" : "redesign"} ${index + 1}`}
             aria-current={index === activeSlide ? "true" : undefined}
             onClick={() => {
               setActiveSlide(index);
@@ -568,7 +773,7 @@ function MarqueeCard({
             }}
           />
         ))}
-      </div>
+      </div> : null}
       <span className="sr-marquee-card__label sr-marquee-card__label--before">
         Before
       </span>
@@ -990,6 +1195,7 @@ function TrustChoice({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
 
 function Results() {
   const [activeCategory, setActiveCategory] = useState<RealizationCategory>("website");
+  const [openProject, setOpenProject] = useState<RealizationProject | null>(null);
 
   return (
     <section className="sr-results" id="from-this" data-sr-reveal="section">
@@ -1013,14 +1219,30 @@ function Results() {
       </div>
       <div className="sr-case-grid">
         {projectsByCategory[activeCategory].map((project) => (
-          <ResultCase project={project} key={`${activeCategory}-${project.id}`} />
+          <ResultCase
+            project={project}
+            onOpen={() => setOpenProject(project)}
+            key={`${activeCategory}-${project.id}`}
+          />
         ))}
       </div>
+      {openProject ? (
+        <ProjectDetailOverlay
+          project={openProject}
+          onClose={() => setOpenProject(null)}
+        />
+      ) : null}
     </section>
   );
 }
 
-function ResultCase({ project }: { project: RealizationProject }) {
+function ResultCase({
+  project,
+  onOpen,
+}: {
+  project: RealizationProject;
+  onOpen: () => void;
+}) {
   const [activeSlide, setActiveSlide] = useState(project.slides[0]);
   const isFeatured = featuredProjectIds.some((id) => id === project.id);
 
@@ -1031,6 +1253,7 @@ function ResultCase({ project }: { project: RealizationProject }) {
         slides={project.slides}
         compact
         onSlideChange={setActiveSlide}
+        branding={project.branding}
       />
       <div className="sr-result-caption">
         <h3>{project.title}</h3>
@@ -1039,7 +1262,7 @@ function ResultCase({ project }: { project: RealizationProject }) {
             ? activeSlide.copy
             : project.copy}
         </p>
-        <button className="sr-see-details" type="button" disabled>
+        <button className="sr-see-details" type="button" onClick={onOpen}>
           See In Details
         </button>
       </div>
@@ -1047,23 +1270,320 @@ function ResultCase({ project }: { project: RealizationProject }) {
   );
 }
 
-function FeaturedSocialProof() {
-  const review =
-    reviews.find(([, , quote]) => {
-      const firstSentence = quote.split(/(?<=\.)\s+/)[0] ?? "";
-      return quote.includes(". ") && firstSentence.length >= 30 && firstSentence.length <= 45;
-    }) ?? reviews.find(([, , quote]) => quote.includes(". ")) ?? reviews[0];
+function ProjectCarousel({
+  project,
+  initialPosition,
+  label,
+}: {
+  project: RealizationProject;
+  initialPosition: number;
+  label: string;
+}) {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const scrollResetRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const slides = project.slides;
+  const displaySlides = slides.length > 1
+    ? [slides[slides.length - 1], ...slides, slides[0]]
+    : slides;
+  const scrollToSlide = (index: number, behavior: ScrollBehavior = "smooth") => {
+    const viewport = viewportRef.current;
+    const card = viewport?.querySelector<HTMLElement>(`[data-gallery-index="${index}"]`);
+    if (!viewport || !card) return;
+    viewport.scrollTo({
+      left: card.offsetLeft - (viewport.clientWidth - card.offsetWidth) / 2,
+      behavior,
+    });
+  };
+  useEffect(() => {
+    scrollToSlide(slides.length > 1 ? 1 : 0, "instant");
+    return () => {
+      if (scrollResetRef.current) clearTimeout(scrollResetRef.current);
+    };
+  }, [project.id, slides.length]);
+  const handleScroll = () => {
+    const viewport = viewportRef.current;
+    if (!viewport || slides.length <= 1) return;
+    const cards = Array.from(viewport.querySelectorAll<HTMLElement>(".sr-project-gallery__slide"));
+    const center = viewport.scrollLeft + viewport.clientWidth / 2;
+    const nearest = cards.reduce(
+      (best, card, index) => {
+        const distance = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
+        return distance < best.distance ? { index, distance } : best;
+      },
+      { index: 1, distance: Number.POSITIVE_INFINITY },
+    ).index;
+    setActiveSlide((nearest - 1 + slides.length) % slides.length);
+    if (scrollResetRef.current) clearTimeout(scrollResetRef.current);
+    if (nearest === 0 || nearest === cards.length - 1) {
+      scrollResetRef.current = setTimeout(
+        () => scrollToSlide(nearest === 0 ? slides.length : 1, "instant"),
+        150,
+      );
+    }
+  };
+  const changeSlide = (direction: number) => {
+    const next = (activeSlide + direction + slides.length) % slides.length;
+    const target = activeSlide + direction + 1;
+    scrollToSlide(target);
+    setActiveSlide(next);
+    if (target === 0 || target === slides.length + 1) {
+      window.setTimeout(() => scrollToSlide(next + 1, "instant"), 460);
+    }
+  };
+
+  return (
+    <div className="sr-project-gallery" aria-label={`${label} image carousel`}>
+      <div className="sr-project-gallery__viewport" ref={viewportRef} onScroll={handleScroll}>
+        <div className="sr-project-gallery__track">
+          {displaySlides.map((slide, index) => (
+            <div
+              className="sr-project-gallery__slide"
+              data-gallery-index={index}
+              key={`${project.id}-${label}-${slide.id}-${index}`}
+            >
+              <MarqueeCard
+                item={slide.id}
+                slides={[slide]}
+                compact
+                initialPosition={initialPosition}
+                branding={project.branding}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      {slides.length > 1 ? (
+        <div className="sr-project-gallery__controls" aria-label="Carousel controls">
+          <button
+            type="button"
+            aria-label="Previous page image"
+            onClick={() => changeSlide(-1)}
+          >
+            <ChevronLeftIcon aria-hidden="true" />
+          </button>
+          <span aria-live="polite">
+            {activeSlide + 1}/{slides.length}
+          </span>
+          <button
+            type="button"
+            aria-label="Next page image"
+            onClick={() => changeSlide(1)}
+          >
+            <ChevronRightIcon aria-hidden="true" />
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function ProjectDetailOverlay({
+  project,
+  onClose,
+}: {
+  project: RealizationProject;
+  onClose: () => void;
+}) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const study = projectCaseStudies[project.id];
+  const reviewAuthor = reviewAuthorByProjectId[project.id];
+  const review = reviewAuthor
+    ? reviews.find(([name]) => name === reviewAuthor)
+    : undefined;
+  const portfolioSlug = portfolioSlugByProjectId[project.id] ?? project.id;
+  const portfolioProject = portfolioProjects.find(({ slug }) => slug === portfolioSlug);
+  const logoSrc = portfolioProject?.logo?.src;
+  const clientAvatar = review?.[3];
+  const challengeSentences = (study?.challenge.match(/[^.!?]+[.!?]+|[^.!?]+$/g) ?? [project.copy]).map((point) => point.trim());
+  const solutionSentences = (study?.solution.match(/[^.!?]+[.!?]+|[^.!?]+$/g) ?? [project.copy]).map((point) => point.trim());
+  const challengePoints = project.branding
+    ? challengeSentences.slice(0, 5)
+    : [...challengeSentences, "The strongest value was not clear at first glance.", "Visitors needed a more confident reason to keep exploring.", "The next step was too easy to miss."].slice(0, 5);
+  const solutionPoints = project.branding
+    ? solutionSentences.slice(0, 5)
+    : [...solutionSentences, ...(study?.results ?? []), project.copy].slice(0, 5);
+  const resultPoints = project.branding
+    ? (study?.results ?? []).slice(0, 5)
+    : [...(study?.results ?? []), `A clearer first impression for ${project.title}`, "A more direct path from interest to action"].slice(0, 5);
+  const closeLabel = `Close ${project.title} project details`;
+
+  useEffect(() => {
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      previousFocusRef.current?.focus();
+    };
+  }, []);
+
+  const handleKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
+    if (event.key === "Escape") {
+      event.stopPropagation();
+      onClose();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = Array.from(
+      event.currentTarget.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((element) => element.getClientRects().length > 0);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
+  if (typeof document === "undefined") return null;
+  return createPortal(
+    <div
+      className="sr-project-overlay"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <article
+        className="sr-project-overlay__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`sr-project-title-${project.id}`}
+        onKeyDown={handleKeyDown}
+      >
+        <header className="sr-project-overlay__header">
+          <div className="sr-project-overlay__project-name">{project.title}</div>
+          <button
+            ref={closeButtonRef}
+            className="sr-project-overlay__close"
+            type="button"
+            aria-label={closeLabel}
+            onClick={onClose}
+          >
+            <span>Close</span><XMarkIcon aria-hidden="true" />
+          </button>
+        </header>
+
+        <div className="sr-project-overlay__body">
+          <div className="sr-project-overlay__ornaments" aria-hidden="true">
+            <div className="sr-project-overlay__shape-left">
+              <div><img src="/landing-assets/saas-redesign/case-study/project-shape-left.svg" alt="" /></div>
+            </div>
+            <div className="sr-project-overlay__shape-right">
+              <div><img src="/landing-assets/saas-redesign/case-study/project-shape-right.svg" alt="" /></div>
+            </div>
+          </div>
+          <section className="sr-project-intro">
+            {review ? (
+              <div className="sr-project-client-badge">
+                <span>Client review</span>
+                {clientAvatar ? <img src={clientAvatar} alt="" /> : null}
+                <span className="sr-project-client-badge__divider" aria-hidden="true" />
+                <span>{review[0]}</span>
+                <span className="sr-project-client-badge__stars" aria-label="Rated 5 out of 5">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <StarIcon key={index} />
+                  ))}
+                </span>
+              </div>
+            ) : (
+              <div className="sr-project-client-badge" data-kind="average" aria-label="Average client rating: 5 out of 5, based on over 30 reviews">
+                <span>Rated 5/5 based on over 30 reviews</span>
+                <span className="sr-project-client-badge__stars" aria-hidden="true">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <StarIcon key={index} />
+                  ))}
+                </span>
+              </div>
+            )}
+            <h2 id={`sr-project-title-${project.id}`}>{study?.title ?? project.title}</h2>
+            <p className="sr-project-intro__copy">{study?.intro ?? project.copy}</p>
+            <div className={`sr-project-intro__visual${project.branding ? " sr-project-intro__visual--branding" : ""}`}>
+              {project.branding ? (
+                <ProjectCarousel project={project} initialPosition={50} label="Before and after" />
+              ) : (
+                <MarqueeCard
+                  item={project.slides[0].id}
+                  slides={[project.slides[0]]}
+                  compact
+                  initialPosition={50}
+                />
+              )}
+            </div>
+            <ExistingCta kind="primary" href="/en/saas-redesign/brief" label="Book a Call">Send us your SaaS</ExistingCta>
+          </section>
+
+          {review ? <FeaturedSocialProof review={review} logoSrc={logoSrc} logoName={portfolioProject?.title} /> : null}
+
+          <div className="sr-project-story">
+            <ProjectArgumentList title="The Challenge" subtitle={study?.intro ?? project.copy} points={challengePoints} id={`sr-project-challenge-${project.id}`} tone="challenge" />
+            <ProjectCarousel
+              project={project}
+              initialPosition={project.branding ? 50 : 100}
+              label={project.branding ? "Before and after" : "Before"}
+            />
+            <ProjectArgumentList title="The Solution" subtitle={study?.title ?? project.title} points={solutionPoints} id={`sr-project-solution-${project.id}`} tone="solution" />
+            <ProjectCarousel project={project} initialPosition={50} label="Before and after" />
+            <ProjectArgumentList title="The Result" subtitle={study?.intro ?? project.copy} points={resultPoints} id={`sr-project-results-${project.id}`} tone="results" />
+            <ProjectCarousel
+              project={project}
+              initialPosition={project.branding ? 50 : 0}
+              label={project.branding ? "Before and after" : "After"}
+            />
+          </div>
+
+        </div>
+      </article>
+    </div>,
+    document.body,
+  );
+}
+
+function ProjectArgumentList({ title, subtitle, points, id, tone }: { title: string; subtitle: string; points: string[]; id: string; tone: "challenge" | "solution" | "results" }) {
+  return (
+    <section className="sr-project-arguments" data-tone={tone} aria-labelledby={id}>
+      <div className="sr-project-arguments__heading">
+        <h3 id={id}>{title}</h3>
+        <p>{subtitle}</p>
+      </div>
+      <ul>
+        {points.map((point, index) => (
+          <li key={`${id}-${index}`}>
+            <div className="sr-project-arguments__line-content">
+              <span className="sr-project-arguments__icon" aria-hidden="true"><ExclamationTriangleIcon /></span>
+              <span>{point}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function FeaturedSocialProof({ review, logoSrc, logoName }: { review?: (typeof reviews)[number]; logoSrc?: string; logoName?: string }) {
   if (!review) return null;
 
-  const [name, role, quote] = review;
+  const [name, role, quote, avatar] = review;
   const [headline, ...bodyParts] = quote.split(/(?<=\.)\s+/);
   const body = bodyParts.join(" ");
 
   return (
-    <section className="sr-featured-review" aria-label="Client review">
+    <section className="sr-featured-review" aria-label="Client review" data-has-logo={logoSrc ? "true" : "false"}>
       <div className="sr-featured-review__content">
         <div className="sr-featured-review__main">
-          <div className="sr-featured-review__logo-slot" aria-label="Client logo to be added" />
+          {logoSrc ? <img className="sr-featured-review__logo-slot" src={logoSrc} alt={`${logoName ?? "Client"} logo`} /> : null}
           <div className="sr-featured-review__quote">
             <h2>{headline}</h2>
             <div className="sr-featured-review__divider" aria-hidden="true" />
@@ -1071,7 +1591,7 @@ function FeaturedSocialProof() {
           </div>
         </div>
         <div className="sr-featured-review__author">
-          <span className="sr-featured-review__avatar" aria-hidden="true" />
+          <span className="sr-featured-review__avatar" aria-hidden="true">{avatar ? <img src={avatar} alt="" /> : null}</span>
           <div>
             <strong>{name}</strong>
             <p>{role}</p>
@@ -1363,8 +1883,13 @@ export default function SaasRedesignLanding({
           </p>
         </div>
       </section>
-      <FeaturedSocialProof />
+      <FeaturedSocialProof review={featuredReview} />
       <Results />
+      <SaasRedesignPricing
+        locale="en"
+        bookingLabel="Book a call"
+        bookingHref="/en/saas-redesign/brief"
+      />
       <ConversionMetricsSection />
       <ProofReviews />
       <div
