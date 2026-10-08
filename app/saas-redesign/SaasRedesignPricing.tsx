@@ -312,9 +312,6 @@ export default function PrixOptimized({
                 <h3>{pageTitle}</h3>
                 <div className="sr-prx-priceLine">
                   <div className="sr-prx-total">{formatPrice(displayedPrice)}</div>
-                  <span className="sr-prx-pageLimit">
-                    {english ? `Up to ${pages} ${pages === 1 ? "page" : "pages"}` : `Jusqu’à ${pages} ${pages === 1 ? "page" : "pages"}`}
-                  </span>
                 </div>
               </div>
 

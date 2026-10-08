@@ -440,7 +440,7 @@
   }
 }
 
-/* The video itself is portrait; use its portrait poster for the review preview. */
+/* Keep the portrait video poster and hide the stretched landscape artwork. */
 .sr .sr-proof-reviews .framer-Eqvb3 .framer-1au1x7u,
 .sr .sr-proof-reviews .framer-Eqvb3.hover .framer-1au1x7u {
   inset: 0;
@@ -451,7 +451,7 @@
   background: url("https://framerusercontent.com/images/iKUzDQyjNJX2C4jYilyXAuLs48.jpg?width=635&height=974") center / cover no-repeat;
 }
 .sr .sr-proof-reviews .framer-Eqvb3 .framer-1au1x7u img {
-  display: none;
+  display: none !important;
 }
 
 .sr-review-rating {
