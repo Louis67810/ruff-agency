@@ -4,7 +4,7 @@ import {
   useId,
   useMemo,
   useState,
-  type MouseEvent as ReactMouseEvent,
+  type PointerEvent as ReactPointerEvent,
 } from "react";
 import { area, curveMonotoneX, line } from "d3-shape";
 
@@ -14,10 +14,11 @@ type MetricProfile = {
   role: string;
   avatar: string;
   values: number[];
+  dates: string[];
 };
 
-const metricProfiles: MetricProfile[] = [
-  {
+const metricProfiles: Record<"antoine" | "dominique", MetricProfile> = {
+  antoine: {
     id: "keyframe",
     name: "Antoine Troovy",
     role: "Founder of Keyframe",
@@ -30,9 +31,10 @@ const metricProfiles: MetricProfile[] = [
       1.34, 2.05, 0.72, 0.8, 1.22, 0.69, 1.38, 0.82, 1.56, 0.88, 1.86, 0.74,
       0.68, 7.72,
     ],
+    dates: ["1 Jan", "29 Jan", "26 Feb", "26 Mar", "23 Apr", "20 May"],
   },
-  {
-    id: "spreak",
+  dominique: {
+    id: "zorgniotti",
     name: "Dominique Zenglein",
     role: "Partner at Zorgniotti",
     avatar:
@@ -44,8 +46,9 @@ const metricProfiles: MetricProfile[] = [
       1.58, 1.96, 1.18, 1.24, 1.72, 1.26, 1.86, 1.34, 1.98, 1.42, 2.26, 1.38,
       1.28, 5.38,
     ],
+    dates: ["1 Jun", "29 Jun", "27 Jul", "24 Aug", "21 Sep", "19 Oct"],
   },
-];
+};
 
 const VIEW_WIDTH = 1349;
 const VIEW_HEIGHT = 380;
@@ -55,7 +58,6 @@ const PLOT_HEIGHT = VIEW_HEIGHT - PLOT.top - PLOT.bottom;
 const PLOT_BOTTOM = PLOT.top + PLOT_HEIGHT;
 const MAX_VALUE = 8;
 const CHANGE_INDEX = 10;
-const xLabels = ["3 Dec", "29 Jan", "9 Feb", "23 Feb", "17 Mar", "10 Apr"];
 const yLabels = [0, 2, 4, 6, 8];
 
 function getProfileStats(profile: MetricProfile) {
@@ -85,8 +87,8 @@ function ProfileIdentity({ profile }: { profile: MetricProfile }) {
 function ConversionChart({ profile }: { profile: MetricProfile }) {
   const gradientId = useId().replace(/:/g, "");
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const stats = getProfileStats(profile);
-
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [selection, setSelection] = useState<[number, number] | null>(null);
   const chart = useMemo(() => {
     const points = profile.values.map((value, index) => {
       const x = PLOT.left + (index / (profile.values.length - 1)) * PLOT_WIDTH;
@@ -115,33 +117,46 @@ function ConversionChart({ profile }: { profile: MetricProfile }) {
     };
   }, [profile]);
 
-  const updateHover = (event: ReactMouseEvent<SVGRectElement>) => {
+  const getIndex = (event: ReactPointerEvent<SVGRectElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
     const relativeX =
       ((event.clientX - bounds.left) / bounds.width) * PLOT_WIDTH;
-    const index = Math.round(
+    return Math.round(
       Math.max(0, Math.min(1, relativeX / PLOT_WIDTH)) *
         (profile.values.length - 1),
     );
+  };
+  const updateHover = (event: ReactPointerEvent<SVGRectElement>) => {
+    const index = getIndex(event);
     setHoverIndex(index);
+    if (dragStart !== null) {
+      setSelection([Math.min(dragStart, index), Math.max(dragStart, index)]);
+    }
+  };
+  const startSelection = (event: ReactPointerEvent<SVGRectElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    const index = getIndex(event);
+    setDragStart(index);
+    setSelection([index, index]);
+    setHoverIndex(index);
+  };
+  const finishSelection = (event: ReactPointerEvent<SVGRectElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    setDragStart(null);
   };
 
   const hoveredPoint = hoverIndex === null ? null : chart.points[hoverIndex];
-  const tooltipX = hoveredPoint
-    ? Math.min(VIEW_WIDTH - 148, hoveredPoint[0] + 12)
-    : 0;
-  const tooltipY = hoveredPoint
-    ? Math.max(PLOT.top + 6, hoveredPoint[1] - 58)
-    : 0;
-  const hoveringBefore = hoverIndex !== null && hoverIndex <= CHANGE_INDEX;
-  const hoverColor = hoveringBefore ? "rgba(255,255,255,.6)" : "#6FB8E0";
+  const selectedRange = selection && selection[1] > selection[0] ? selection : null;
+  const rangeIncrease = selectedRange
+    ? ((profile.values[selectedRange[1]] - profile.values[selectedRange[0]]) /
+        Math.max(0.1, profile.values[selectedRange[0]])) *
+      100
+    : null;
 
   return (
     <div className="sr-metric-chart" key={profile.id}>
-      <div className="sr-metric-chart-label" aria-hidden="true">
-        <span>[</span> average conversion: {stats.beforeAverage.toFixed(2)}%
-        before → {stats.afterAverage.toFixed(2)}% after <span>]</span>
-      </div>
       <svg
         viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
         role="img"
@@ -166,8 +181,9 @@ function ConversionChart({ profile }: { profile: MetricProfile }) {
             x2="0"
             y2="1"
           >
-            <stop offset="0%" stopColor="#6FB8E0" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#6FB8E0" stopOpacity="0" />
+            <stop offset="0%" stopColor="#8DCDFF" stopOpacity="0.5" />
+            <stop offset="45%" stopColor="#8DCDFF" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#8DCDFF" stopOpacity="0" />
           </linearGradient>
         </defs>
 
@@ -180,23 +196,9 @@ function ConversionChart({ profile }: { profile: MetricProfile }) {
                 x2={PLOT.left + PLOT_WIDTH}
                 y1={y}
                 y2={y}
-                stroke="#FFFFFF"
-                strokeOpacity="0.13"
-                strokeDasharray="3 6"
+                className="sr-metric-grid-line"
               />
-              <text x={34} y={y + 4} textAnchor="end">
-                {value}%
-              </text>
             </g>
-          );
-        })}
-
-        {xLabels.map((label, index) => {
-          const x = PLOT.left + (index / (xLabels.length - 1)) * PLOT_WIDTH;
-          return (
-            <text key={label} x={x} y={PLOT_BOTTOM + 26} textAnchor="middle">
-              {label}
-            </text>
           );
         })}
 
@@ -204,8 +206,8 @@ function ConversionChart({ profile }: { profile: MetricProfile }) {
         <path
           d={chart.beforeLine}
           fill="none"
-          stroke="#FFFFFF"
-          strokeOpacity="0.4"
+          stroke="#9aa3ad"
+          strokeOpacity="0.72"
           strokeWidth="2"
           strokeDasharray="6 4"
           vectorEffect="non-scaling-stroke"
@@ -215,8 +217,9 @@ function ConversionChart({ profile }: { profile: MetricProfile }) {
           className="sr-metric-line-in"
           d={chart.afterLine}
           fill="none"
-          stroke="#6FB8E0"
-          strokeWidth="2.5"
+          stroke="#8DCDFF"
+          strokeWidth="3"
+          strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
         />
 
@@ -225,68 +228,46 @@ function ConversionChart({ profile }: { profile: MetricProfile }) {
           x2={chart.changeX}
           y1={PLOT.top}
           y2={PLOT_BOTTOM}
-          stroke="#6FB8E0"
+          stroke="#8DCDFF"
           strokeOpacity="0.5"
           strokeDasharray="4 4"
           vectorEffect="non-scaling-stroke"
         />
-        <text
-          className="sr-metric-change-label"
-          x={chart.changeX - 10}
-          y={PLOT.top + 16}
-          textAnchor="end"
-        >
-          → Landing page changed
-        </text>
+
+        {selectedRange && (
+          <rect
+            x={chart.points[selectedRange[0]][0]}
+            y={PLOT.top}
+            width={chart.points[selectedRange[1]][0] - chart.points[selectedRange[0]][0]}
+            height={PLOT_HEIGHT}
+            className="sr-metric-selection-band"
+          />
+        )}
 
         {hoveredPoint && hoverIndex !== null && (
           <g className="sr-metric-tooltip" pointerEvents="none">
+            <rect
+              x={Math.max(PLOT.left, hoveredPoint[0] - PLOT_WIDTH / profile.values.length / 2)}
+              y={PLOT.top}
+              width={PLOT_WIDTH / profile.values.length}
+              height={PLOT_HEIGHT}
+              className="sr-metric-hover-band"
+            />
             <line
               x1={hoveredPoint[0]}
               x2={hoveredPoint[0]}
               y1={PLOT.top}
               y2={PLOT_BOTTOM}
-              stroke={hoverColor}
-              strokeOpacity="0.34"
-              strokeDasharray="3 4"
+              className="sr-metric-hover-line"
               vectorEffect="non-scaling-stroke"
             />
             <circle
               cx={hoveredPoint[0]}
               cy={hoveredPoint[1]}
               r="5"
-              fill="#0B1327"
-              stroke={hoverColor}
-              strokeWidth="2.5"
+              className="sr-metric-hover-dot"
               vectorEffect="non-scaling-stroke"
             />
-            <rect
-              x={tooltipX}
-              y={tooltipY}
-              width="136"
-              height="48"
-              rx="10"
-              fill="#182238"
-              stroke="#FFFFFF"
-              strokeOpacity="0.1"
-              vectorEffect="non-scaling-stroke"
-            />
-            <text
-              className={`sr-metric-tooltip-value${hoveringBefore ? " is-before" : ""}`}
-              x={tooltipX + 12}
-              y={tooltipY + 20}
-            >
-              {profile.values[hoverIndex].toFixed(2)}%
-            </text>
-            <text
-              className="sr-metric-tooltip-label"
-              x={tooltipX + 12}
-              y={tooltipY + 37}
-            >
-              {hoveringBefore
-                ? "Before conversion rate"
-                : "After conversion rate"}
-            </text>
           </g>
         )}
 
@@ -296,73 +277,83 @@ function ConversionChart({ profile }: { profile: MetricProfile }) {
           width={PLOT_WIDTH}
           height={PLOT_HEIGHT}
           fill="transparent"
-          onMouseMove={updateHover}
-          onMouseLeave={() => setHoverIndex(null)}
+          onPointerDown={startSelection}
+          onPointerMove={updateHover}
+          onPointerUp={finishSelection}
+          onPointerLeave={() => {
+            if (dragStart === null) setHoverIndex(null);
+          }}
         />
       </svg>
+      <div className="sr-metric-axis" aria-hidden="true">
+        {yLabels.map((value, index) => (
+          <span
+            className="sr-metric-axis-y"
+            key={value}
+            style={{ left: `${(34 / VIEW_WIDTH) * 100}%`, top: `${((PLOT_BOTTOM - (index / (yLabels.length - 1)) * PLOT_HEIGHT) / VIEW_HEIGHT) * 100}%` }}
+          >
+            {value}%
+          </span>
+        ))}
+        {profile.dates.map((label, index) => (
+          <span
+            className="sr-metric-axis-x"
+            key={label}
+            style={{ left: `${((PLOT.left + (index / (profile.dates.length - 1)) * PLOT_WIDTH) / VIEW_WIDTH) * 100}%`, top: `${((PLOT_BOTTOM + 26) / VIEW_HEIGHT) * 100}%` }}
+          >
+            {label}
+          </span>
+        ))}
+        <span
+          className="sr-metric-change-label"
+          style={{ left: `${((chart.changeX - 10) / VIEW_WIDTH) * 100}%`, top: `${((PLOT.top + 16) / VIEW_HEIGHT) * 100}%` }}
+        >
+          → Landing page changed
+        </span>
+      </div>
+      {hoveredPoint && hoverIndex !== null && (
+        <div
+          className="sr-metric-chart-tooltip"
+          style={{
+            left: `${Math.min(89, Math.max(11, (hoveredPoint[0] / VIEW_WIDTH) * 100))}%`,
+            top: `${Math.max(22, (hoveredPoint[1] / VIEW_HEIGHT) * 100)}%`,
+          }}
+        >
+          <strong>{profile.dates[Math.min(profile.dates.length - 1, Math.round((hoverIndex / (profile.values.length - 1)) * (profile.dates.length - 1)))]}</strong>
+          <span><i />Conversion rate<strong>{profile.values[hoverIndex].toFixed(2)}%</strong></span>
+          {selectedRange && rangeIncrease !== null && (
+            <div className="sr-metric-range-summary">
+              <b>Selected range</b>
+              <span>{rangeIncrease >= 0 ? "+" : ""}{rangeIncrease.toFixed(1)}% conversion change</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
 
-export function ConversionMetricsSection() {
-  const [activeId, setActiveId] = useState(metricProfiles[0].id);
-  const activeProfile =
-    metricProfiles.find((profile) => profile.id === activeId) ??
-    metricProfiles[0];
+export function ConversionMetricsSection({ person = "antoine", id }: { person?: "antoine" | "dominique"; id?: string }) {
+  const activeProfile = metricProfiles[person];
   const activeStats = getProfileStats(activeProfile);
 
   return (
     <section
       className="sr-metrics"
-      id="results"
-      aria-label="Conversion rate results"
-      data-sr-reveal="section"
+      id={id}
+      aria-label={`${activeProfile.name} conversion rate results`}
     >
-      <img
-        className="sr-metrics-decoration sr-metrics-decoration--left"
-        src="/landing-assets/figma-originals/2052-1466.svg"
-        alt=""
-        aria-hidden="true"
-      />
-      <img
-        className="sr-metrics-decoration sr-metrics-decoration--right"
-        src="/landing-assets/figma-originals/2052-1465.svg"
-        alt=""
-        aria-hidden="true"
-      />
-
       <div className="sr-metrics-main">
-        <header className="sr-metrics-summary">
-          <ProfileIdentity profile={activeProfile} />
-          <div className="sr-metric-total" aria-live="polite">
-            <strong>+{activeStats.increase}%</strong>
-            <span>Higher average conversion rate</span>
-          </div>
-        </header>
-        <ConversionChart profile={activeProfile} />
-      </div>
-
-      <div
-        className="sr-metrics-profiles"
-        aria-label="Choose a customer profile"
-      >
-        {metricProfiles.map((profile) => {
-          const selected = profile.id === activeId;
-          const stats = getProfileStats(profile);
-          return (
-            <button
-              type="button"
-              className={`sr-metric-profile${selected ? " is-active" : ""}`}
-              key={profile.id}
-              aria-pressed={selected}
-              onClick={() => setActiveId(profile.id)}
-            >
-              <img src={profile.avatar} alt="" />
-              <strong>{profile.name}</strong>
-              <span>+{stats.increase}%</span>
-            </button>
-          );
-        })}
+        <div className="sr-metrics-frame">
+          <header className="sr-metrics-summary">
+            <ProfileIdentity profile={activeProfile} />
+            <div className="sr-metric-total" aria-live="polite">
+              <strong>+{activeStats.increase}%</strong>
+              <span>Higher average conversion rate</span>
+            </div>
+          </header>
+          <ConversionChart profile={activeProfile} key={activeProfile.id} />
+        </div>
       </div>
     </section>
   );

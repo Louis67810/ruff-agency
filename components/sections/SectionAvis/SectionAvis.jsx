@@ -133,7 +133,7 @@ function VideoReviewCard({ RceipbT2y, ChPJcClC0 = "rgb(255, 228, 158)", style, c
                     _jsx3("div", { className: "framer-615ikf", style: { background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgb(0,0,0) 100%)", opacity: .69 } }),
                     _jsx3("div", { className: "framer-znthv6 framer-optimized-svg", "aria-hidden": "true", children: _jsx3("div", { className: "svgContainer", dangerouslySetInnerHTML: { __html: playSvg } }) })
                 ] }),
-            _jsx3("div", { className: "framer-1nniyl0-container", children: _jsx3("video", { ref: videoRef, src: RceipbT2y, loop: true, controls: true, muted: false, playsInline: true, poster: "https://framerusercontent.com/images/iKUzDQyjNJX2C4jYilyXAuLs48.jpg?width=635&height=974", preload: "metadata", style: { cursor: "auto", width: "100%", height: "100%", borderRadius: 0, display: "block", objectFit: "cover", backgroundColor: "rgba(0,0,0,0)", objectPosition: "50% 50%" } }) })
+            _jsx3("div", { className: "framer-1nniyl0-container", children: _jsx3("video", { ref: videoRef, src: RceipbT2y, loop: true, controls: active, muted: false, playsInline: true, poster: "https://framerusercontent.com/images/iKUzDQyjNJX2C4jYilyXAuLs48.jpg?width=635&height=974", preload: "metadata", style: { cursor: "auto", width: "100%", height: "100%", borderRadius: 0, display: "block", objectFit: "cover", backgroundColor: "rgba(0,0,0,0)", objectPosition: "50% 50%" } }) })
         ] });
 }
 const ttCuLOnZE_default = VideoReviewCard;

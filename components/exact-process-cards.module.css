@@ -186,6 +186,21 @@
 .arrow svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.75; }
 .arrow:disabled { cursor: default; opacity: .5; }
 
+.saasVariant .grid { gap: 24px; }
+.saasVariant .card { gap: 23px; }
+.saasVariant .label { font-size: 14px; line-height: 1.46; }
+.saasVariant .copy h3 { font-size: 20px; line-height: 1.46; margin-bottom: 8px; }
+.saasVariant .copy p { line-height: 2.08; min-height: 111px; }
+
+@media (max-width: 1399px) {
+  .saasVariant .grid { gap: 16px; }
+}
+
+@media (max-width: 809px) {
+  .saasVariant .copy h3 { font-size: 18px; }
+  .saasVariant .copy p { min-height: 0; line-height: 1.65; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cardReveal,
   .cardReveal.isVisible { animation: none; opacity: 1; transform: none; }

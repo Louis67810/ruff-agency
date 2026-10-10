@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import "./SaasRedesignPricing.css";
 import { localizeHref } from "@/lib/i18n";
+import { CtaArrowMark } from "@/components/ui/Cta";
+import { SaasRedesignGuarantee } from "./SaasRedesignTrustSections";
 
 type UpsellId = "page" | "branding" | "cro";
 
@@ -20,6 +22,7 @@ type Upsell = {
 
 export type PrixOptimizedProps = {
   locale?: "fr" | "en";
+  includeGuarantee?: boolean;
   basePrice?: number;
   extraPrice?: number;
   maxPages?: number;
@@ -38,6 +41,7 @@ export type PrixOptimizedProps = {
   croPrice?: number;
   additionalPagePrice?: number;
   className?: string;
+  sectionId?: string;
 };
 
 const FEATURES: Feature[] = [
@@ -106,9 +110,6 @@ const EN_UPSELL_COPY: Record<UpsellId, [string, string]> = {
   cro: ["Post-launch CRO Sprint", "Conversion improvements after launch."],
 };
 
-const DEFAULT_AVATAR =
-  "https://framerusercontent.com/images/2MtWvpxSPxrD8xwJa7XBZm2R8PE.jpg?scale-down-to=64&width=693&height=693";
-
 function useAnimatedNumber(target: number) {
   const [displayed, setDisplayed] = useState(target);
   const previous = useRef(target);
@@ -173,12 +174,13 @@ export default function PrixOptimized({
   sliderInfoText,
   bookingLabel = "Réserver un appel",
   bookingHref = "/30-min",
-  avatarSrc = DEFAULT_AVATAR,
   brandingPrice,
   croPrice,
   additionalPagePrice,
   className = "",
+  sectionId = "pricing",
   locale = "fr",
+  includeGuarantee = false,
 }: PrixOptimizedProps) {
   const english = locale === "en";
   const prices = english
@@ -187,7 +189,7 @@ export default function PrixOptimized({
   const resolvedBasePrice = basePrice ?? prices.base;
   const resolvedExtraPrice = extraPrice ?? prices.page;
   bookingHref = localizeHref(bookingHref, locale) || "#";
-  bookingLabel = english ? "Book a call" : bookingLabel;
+  bookingLabel = bookingLabel || (english ? "Start now" : "Réserver un appel");
   const formatPrice = (amount: number) =>
     english ? `$${amount.toLocaleString("en-US")}` : `${amount.toLocaleString("fr-FR")} €`;
   const localizedSliderInfo = sliderInfoText ??
@@ -285,12 +287,9 @@ export default function PrixOptimized({
   }, []);
 
   return (
-    <section id="pricing" className={`sr-prx-section ${className}`.trim()}>
+    <section id={sectionId} className={`sr-prx-section ${className}`.trim()}>
       <div className="sr-prx-backgroundShapes" aria-hidden="true">
-        <img className="sr-prx-shape sr-prx-shape--left" src="/landing-assets/pricing/shape-left.svg" alt="" />
-        <img className="sr-prx-shape sr-prx-shape--right" src="/landing-assets/pricing/shape-right.svg" alt="" />
-        <img className="sr-prx-shape sr-prx-shape--bottom-left" src="/landing-assets/pricing/shape-bottom-left.svg" alt="" />
-        <img className="sr-prx-shape sr-prx-shape--bottom-right" src="/landing-assets/pricing/shape-bottom-right.svg" alt="" />
+        <img className="sr-prx-shape" src="/landing-assets/saas-redesign/pricing-comparison-shapes.svg" alt="" />
       </div>
       <div className="sr-prx-sectionInner">
         <header className="sr-prx-heading">
@@ -352,15 +351,15 @@ export default function PrixOptimized({
               <div className="sr-prx-priceArea">
                 <div className="sr-prx-ctaStack">
                   <div className="sr-prx-primaryFrame">
-                    <a className="sr-prx-primaryButton" href={bookingHref}>
+                    <a className="sr-prx-primaryButton sr-prx-primaryButton--with-arrow" href={bookingHref}>
                       <span>{bookingLabel}</span>
-                      <span className="sr-prx-avatarBox"><img src={avatarSrc} alt="" /></span>
+                      <CtaArrowMark className="sr-prx-cta-arrow" />
                     </a>
                   </div>
                   <div className="sr-prx-reassurance">
-                    <span><img src="/landing-assets/pricing/icon-call.svg" alt="" />{english ? "No sales call required" : "Sans appel commercial"}</span>
+                    <span><img src="/landing-assets/saas-redesign/social-proof/no-sales-call.svg" alt="" />{english ? "No sales call required" : "Sans appel commercial"}</span>
                     <i aria-hidden="true" />
-                    <span><img src="/landing-assets/pricing/icon-check-badge.svg" alt="" />{english ? "No commitment" : "Sans engagement"}</span>
+                    <span><img src="/landing-assets/saas-redesign/social-proof/no-commitment.svg" alt="" />{english ? "No commitment" : "Sans engagement"}</span>
                   </div>
                 </div>
               </div>
@@ -387,24 +386,8 @@ export default function PrixOptimized({
           </div>
         </div>
 
-        <div className="sr-prx-guarantee">
-          <p className="sr-prx-guaranteeTitle">
-            {english
-              ? "100% satisfaction guaranteed"
-              : "Satisfait ou 100% Garantit"}
-          </p>
-          <p className="sr-prx-guaranteeDescription">
-            {english ? (
-              "We refine your website until it fully meets your needs, or we refund you in full."
-            ) : (
-              <>
-                Nous perfectionnons votre site jusqu’à ce qu’il vous convienne
-                entièrement, ou nous vous remboursons intégralement.
-              </>
-            )}
-          </p>
-        </div>
       </div>
+      {includeGuarantee && <SaasRedesignGuarantee />}
     </section>
   );
 }

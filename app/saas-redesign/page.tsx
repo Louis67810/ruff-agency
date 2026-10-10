@@ -3,7 +3,7 @@ import SiteNav from "@/components/navigation/SiteNav";
 import Footer from "@/components/footer/FooterServer";
 import { FOOTER_LINKS, NAV_PROPS } from "@/lib/site";
 import SaasRedesignLanding from "./saas-redesign-landing";
-import { readTweets } from "@/lib/saas-tweets/store";
+import { defaultTweets } from "./tweets";
 
 export const metadata: Metadata = {
   title: "SaaS website redesign | Ruff Agency",
@@ -11,8 +11,7 @@ export const metadata: Metadata = {
 };
 export const dynamic = "force-dynamic";
 
-export default async function SaasRedesignPage() {
-  const tweets = await readTweets().catch(() => []);
+export default function SaasRedesignPage() {
   return (
     <>
       <SiteNav
@@ -20,24 +19,26 @@ export default async function SaasRedesignPage() {
         locale="en"
         homeHref="#top"
         ctaHref="/en/saas-redesign/brief"
-        ctaLabel="Book a Call"
+        ctaLabel="Start your redesign"
         landingMode
         landingLinks={[
-          { label: "Problems", href: "#problems" },
-          { label: "Vote", href: "#vote" },
+          { label: "Comparison", href: "#why-ai" },
           { label: "Solution", href: "#solution" },
-          { label: "Our work", href: "#from-this" },
-          { label: "Results", href: "#results" },
+          { label: "Case studies", href: "#from-this" },
           { label: "Reviews", href: "#reviews" },
+          { label: "Start now", href: "#closing-cta" },
           { label: "FAQ", href: "#faq" },
         ]}
         className="saas-redesign-nav"
       />
-      <SaasRedesignLanding managedTweets={tweets} />
+      <SaasRedesignLanding managedTweets={defaultTweets} />
       <Footer
+        visible={false}
+        padding="96px 48px 64px 48px"
         links={{ ...FOOTER_LINKS, booking: "/en/saas-redesign/brief" }}
         bookingHref="/en/saas-redesign/brief"
         locale="en"
+        hideInternalLinks
       />
     </>
   );

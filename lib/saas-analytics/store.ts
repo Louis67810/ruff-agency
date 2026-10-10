@@ -152,7 +152,10 @@ const countryAliases: Record<string, string[]> = {
 function eventMatchesFilter(event: AnalyticsEvent, filter: string) {
   const wanted = filter.trim().toLowerCase();
   if (!wanted) return true;
-  if (event.path.toLowerCase() === wanted) return true;
+  if (wanted.startsWith("/")) {
+    const normalizePath = (value: string) => value.toLowerCase().replace(/\/+$/, "") || "/";
+    return normalizePath(event.path) === normalizePath(wanted);
+  }
   const countryValues = countryAliases[wanted] ?? [wanted];
   if (countryValues.includes(event.countryCode.toLowerCase())) return true;
   return Object.values(event.metadata ?? {}).some((value) => String(value ?? "").toLowerCase() === wanted);

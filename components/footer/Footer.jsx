@@ -255,7 +255,7 @@ function SvgMarkup({ markup, className = "" }) {
   );
 }
 
-function Availability({ english = false }) {
+export function Availability({ english = false }) {
   const [month, setMonth] = useState("");
   const [remaining, setRemaining] = useState(6);
   const [lottieReady, setLottieReady] = useState(false);
@@ -443,8 +443,16 @@ export default function Footer({
   className = "",
   style,
   locale = "fr",
+  hideInternalLinks = false,
 }) {
   const t = (fr, en) => (locale === "en" ? en : fr);
+  const BrandElement = hideInternalLinks ? "div" : "a";
+  const brandElementProps = hideInternalLinks
+    ? {}
+    : {
+        href: localizeHref(links.home, locale) || "#",
+        onClick: links.home ? undefined : (e) => e.preventDefault(),
+      };
   const localizedNavItems = navItems.map(([label, key, ghost]) => [
     t(
       label,
@@ -555,46 +563,46 @@ export default function Footer({
                 "The perfect blend of conversion and design.",
               )}
             </p>
-            <a
-              className="framer-1c40f2t"
-              href={localizeHref(links.home, locale) || "#"}
-              onClick={links.home ? undefined : (e) => e.preventDefault()}
-            >
+            <BrandElement className="framer-1c40f2t" {...brandElementProps}>
               <SvgMarkup markup={LOGO_SVG} className="footer-logo-svg" />
               <p className="framer-1oioa2n">.agency</p>
-            </a>
+            </BrandElement>
           </div>
           <div className="framer-eoh0es">
-            <div className="framer-wqmu2g">
-              <p className="footer-heading">Navigation</p>
-              <div className="framer-1q9fhly">
-                {localizedNavItems.map(([label, key, ghost]) => (
-                  <FooterLink
-                    key={label}
-                    label={label}
-                    idKey={key}
-                    links={links}
-                    ghost={ghost}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="framer-ngd2e7">
-              <p className="footer-heading">Services</p>
-              <div className="framer-19q5j0w">
-                {localizedServiceItems.map(([label, key, ghost], i) => (
-                  <FooterLink
-                    key={`${label}-${i}`}
-                    label={label}
-                    idKey={key}
-                    links={links}
-                    ghost={ghost}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </div>
+            {!hideInternalLinks ? (
+              <>
+                <div className="framer-wqmu2g">
+                  <p className="footer-heading">Navigation</p>
+                  <div className="framer-1q9fhly">
+                    {localizedNavItems.map(([label, key, ghost]) => (
+                      <FooterLink
+                        key={label}
+                        label={label}
+                        idKey={key}
+                        links={links}
+                        ghost={ghost}
+                        locale={locale}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="framer-ngd2e7">
+                  <p className="footer-heading">Services</p>
+                  <div className="framer-19q5j0w">
+                    {localizedServiceItems.map(([label, key, ghost], i) => (
+                      <FooterLink
+                        key={`${label}-${i}`}
+                        label={label}
+                        idKey={key}
+                        links={links}
+                        ghost={ghost}
+                        locale={locale}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : null}
             <div className="framer-1g1y9mg">
               <p className="footer-heading">
                 {t("Mes réseaux", "My social networks")}
@@ -623,21 +631,23 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="framer-1j04v13">
-          <p className="footer-heading">{t("Nos lieux :", "Our locations:")}</p>
-          <div className="framer-1pgssps">
-            {cities.map((location) => (
-              <p className="footer-place" key={location.citySlug}>
-                <a
-                  className="footer-link"
-                  href={localizeHref(locationRoute(location), locale)}
-                >
-                  {location.cityName}
-                </a>
-              </p>
-            ))}
+        {!hideInternalLinks ? (
+          <div className="framer-1j04v13">
+            <p className="footer-heading">{t("Nos lieux :", "Our locations:")}</p>
+            <div className="framer-1pgssps">
+              {cities.map((location) => (
+                <p className="footer-place" key={location.citySlug}>
+                  <a
+                    className="footer-link"
+                    href={localizeHref(locationRoute(location), locale)}
+                  >
+                    {location.cityName}
+                  </a>
+                </p>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
         <div
           className="framer-1l04fa9"
           style={{ backgroundColor: "rgba(255,255,255,.13)" }}

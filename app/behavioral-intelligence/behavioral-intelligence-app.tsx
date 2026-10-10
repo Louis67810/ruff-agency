@@ -52,10 +52,7 @@ const PROFILE =
   AD = "/behavioral-assets/01ed28f95fa41d88c4f507f7dcd910917fbb72fa.jpg";
 const nav = [
   { id: "home", label: "Home", icon: House },
-  { id: "ads", label: "Ads", icon: Megaphone },
-  { id: "pages", label: "Pages", icon: FileText },
   { id: "profiles", label: "Profils", icon: UserRound },
-  { id: "live", label: "En direct", icon: Globe2 },
   { id: "history", label: "Historique", icon: History },
 ] as const;
 
@@ -315,7 +312,7 @@ function parseComparisonRequest(input: string): { pair: string; metric: MetricKe
   return { pair: fallback.length >= 2 ? `${fallback[0]} avec ${fallback[1]}` : input.trim(), metric };
 }
 
-type ComparisonCandidate = { label: string; kind: string; value?: number };
+type ComparisonCandidate = { label: string; kind: string; value?: number; name?: string };
 type JevInterpretation = {
   targets: string[];
   metric: MetricKey;
@@ -327,14 +324,14 @@ const defaultCountries: ComparisonCandidate[] = [
   "France", "États-Unis", "United Kingdom", "Germany", "India", "Canada", "Australia",
 ].map((label) => ({ label, kind: "Pays" }));
 
-function buildComparisonCandidates(analytics: AnalyticsSummary | null): ComparisonCandidate[] {
+function buildComparisonCandidates(analytics: AnalyticsSummary | null, pageOptions: Array<{ name: string; path: string }>): ComparisonCandidate[] {
   const from = (items: Array<{ label: string; value?: number }> | undefined, kind: string) =>
     (items ?? []).map((item) => ({ label: item.label, kind, value: item.value }));
   const candidates: ComparisonCandidate[] = [
-    ...defaultCountries,
     ...from(analytics?.countries, "Pays"),
-    ...from(analytics?.paths, "Page"),
-    ...from(analytics?.entryPages, "Page d’entrée"),
+    ...from(analytics?.regions, "Région"),
+    ...from(analytics?.cities, "Ville"),
+    ...pageOptions.map((page) => ({ label: page.path, kind: "Page", name: page.name })),
     ...from(analytics?.exitLinks, "Lien de sortie"),
     ...from(analytics?.sources, "Source"),
     ...from(analytics?.referrers, "Référent"),
@@ -345,16 +342,6 @@ function buildComparisonCandidates(analytics: AnalyticsSummary | null): Comparis
     ...from(analytics?.ctas, "CTA"),
     ...from(analytics?.interactions, "Interaction"),
     ...(analytics?.sections ?? []).map((item) => ({ label: item.label, kind: "Section", value: item.views })),
-    ...(analytics?.pageSections ?? []).map((item) => ({ label: `${item.path} · ${item.label}`, kind: "Section", value: item.reachedPeople })),
-    ...profiles.map((item) => ({ label: item.name, kind: "Profil", value: item.share })),
-    ...ads.flatMap((item) => [
-      { label: item.name, kind: "Publicité", value: item.clicks },
-      { label: item.network, kind: "Réseau publicitaire" },
-    ]),
-    ...pages.flatMap((item) => [
-      { label: item.path, kind: "Page", value: item.visitors },
-      { label: item.name, kind: "Page", value: item.visitors },
-    ]),
   ];
   return candidates.filter((candidate, index, list) =>
     candidate.label.trim() && list.findIndex((item) => item.label === candidate.label && item.kind === candidate.kind) === index,
@@ -371,17 +358,24 @@ function normalizeSearch(value: string) {
     .replace(/\s+/g, " ");
 }
 
+function matchesSearch(query: string, text: string) {
+  const haystack = normalizeSearch(text);
+  return normalizeSearch(query).split(" ").filter(Boolean).every((token) => haystack.includes(token));
+}
+
 function rankComparisonCandidates(query: string, candidates: ComparisonCandidate[]) {
   const normalizedQuery = normalizeSearch(query);
-  const tokens = normalizedQuery.split(/[^a-z0-9]+/).filter((token) => token.length > 1);
+  const stopWords = new Set(["la", "le", "les", "de", "du", "des", "pour", "sur", "voir", "montre", "moi", "stats", "statistiques", "filtre", "filtrer", "recherche", "chercher", "trafic", "visiteurs", "sessions", "vues", "graphique"]);
+  const tokens = normalizedQuery.split(/[^a-z0-9]+/).filter((token) => token.length > 1 && !stopWords.has(token));
   return candidates
     .map((candidate, index) => {
-      const haystack = normalizeSearch(`${candidate.label} ${candidate.kind}`);
+      const haystack = normalizeSearch(`${candidate.label} ${candidate.name ?? ""} ${candidate.kind}`);
       const matches = tokens.filter((token) => haystack.includes(token)).length;
       const exact = normalizedQuery.includes(normalizeSearch(candidate.label)) ? 30 : 0;
       const popularity = Math.min(7, Math.log10(Math.max(1, candidate.value ?? 1)) * 2);
-      return { candidate, score: exact + matches * 9 + popularity - index / 10000 };
+      return { candidate, matches, score: exact + matches * 9 + popularity + (candidate.kind === "Page" ? 20 : 0) + (candidate.kind === "Page" && !candidate.label.startsWith("/en/") ? 2 : 0) - index / 10000 };
     })
+    .filter((item) => !tokens.length || item.matches === tokens.length)
     .sort((a, b) => b.score - a.score)
     .slice(0, 10)
     .map((item) => item.candidate);
@@ -391,7 +385,7 @@ function extractExplicitComparisonTargets(input: string, candidates: ComparisonC
   const normalizedInput = normalizeSearch(input);
   const matches = candidates
     .filter((candidate) => candidate.label.trim().length > 1)
-    .map((candidate) => ({ candidate, index: normalizedInput.indexOf(normalizeSearch(candidate.label)) }))
+    .map((candidate) => ({ candidate, index: Math.max(normalizedInput.indexOf(normalizeSearch(candidate.label)), candidate.name ? normalizedInput.indexOf(normalizeSearch(candidate.name)) : -1) }))
     .filter((item) => item.index >= 0)
     .sort((a, b) => a.index - b.index)
     .filter((item, index, list) => list.findIndex((entry) => entry.candidate.label === item.candidate.label && entry.candidate.kind === item.candidate.kind) === index);
@@ -404,48 +398,41 @@ function useComparisonSuggestions(query: string, candidates: ComparisonCandidate
   const [loading, setLoading] = useState(false);
   const [provider, setProvider] = useState<"jev" | "local">("local");
   useEffect(() => {
-    if (!query.trim()) {
-      setSuggestions(rankComparisonCandidates("", candidates));
-      setProvider("local");
-      setLoading(false);
-      return;
-    }
-    setSuggestions(rankComparisonCandidates(query, candidates));
+    const local = rankComparisonCandidates(query, candidates);
+    setSuggestions(local);
     setProvider("local");
     setLoading(false);
+    if (!query.trim()) return;
     const controller = new AbortController();
     const timer = window.setTimeout(async () => {
       setLoading(true);
       try {
         const response = await fetch("/api/jev", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          signal: controller.signal,
+          method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal,
           body: JSON.stringify({ query, candidates }),
         });
+        if (!response.ok) return;
         const result = await response.json() as JevInterpretation;
-        setSuggestions(result.suggestions?.length ? result.suggestions : rankComparisonCandidates(query, candidates));
+        if (controller.signal.aborted) return;
+        const valid = (result.suggestions ?? []).filter((item) => candidates.some((candidate) => candidate.label === item.label && candidate.kind === item.kind))
+          .filter((item) => !local.length || local.some((candidate) => candidate.label === item.label && candidate.kind === item.kind));
+        setSuggestions([...local.filter((item) => item.kind === "Page"), ...valid, ...local]
+          .filter((item, index, list) => list.findIndex((other) => other.label === item.label && other.kind === item.kind) === index)
+          .slice(0, 12));
         setProvider(result.provider ?? "local");
       } catch (error) {
-        if (!(error instanceof DOMException && error.name === "AbortError")) {
-          setSuggestions(rankComparisonCandidates(query, candidates));
-          setProvider("local");
-        }
+        if (!(error instanceof DOMException && error.name === "AbortError")) setProvider("local");
       } finally {
         if (!controller.signal.aborted) setLoading(false);
       }
-    }, 1000);
-    return () => {
-      window.clearTimeout(timer);
-      controller.abort();
-    };
+    }, 300);
+    return () => { window.clearTimeout(timer); controller.abort(); };
   }, [query, candidates]);
   return { suggestions, loading, provider };
 }
 
-async function interpretComparisonRequest(input: string, analytics: AnalyticsSummary | null): Promise<{ pair: string; metric: MetricKey }> {
+async function interpretComparisonRequest(input: string, candidates: ComparisonCandidate[]): Promise<{ pair: string; metric: MetricKey }> {
   const fallback = parseComparisonRequest(input);
-  const candidates = buildComparisonCandidates(analytics);
   // Les noms de pays et leurs alias sont déterministes et peuvent contenir
   // plus de trois éléments, alors que le fournisseur distant en renvoie trois.
   if ((fallback.recognizedCountries?.length ?? 0) >= 2) return fallback;
@@ -464,7 +451,7 @@ async function interpretComparisonRequest(input: string, analytics: AnalyticsSum
   }
 }
 
-export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalytics: AnalyticsSummary | null }) {
+export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, localPreview = false }: { initialAnalytics: AnalyticsSummary | null; pageCatalog: Array<{ name: string; path: string }>; localPreview?: boolean }) {
   const [view, setView] = useState<View>("home"),
     [detail, setDetail] = useState<Detail>(null),
     [detailOrigin, setDetailOrigin] = useState<View | null>(null),
@@ -496,7 +483,30 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
   const searchCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const title = selectedVisitorId ? visitorHistoryName(selectedVisitorId) : detail?.name ?? nav.find((n) => n.id === view)?.label ?? "Home",
     ctx = { range, granularity, offset };
-  const comparisonCandidates = useMemo(() => buildComparisonCandidates(initialAnalytics), [initialAnalytics]);
+  const pageOptions = useMemo(() => {
+    const byPath = new Map(pageCatalog.map((page) => [page.path, page]));
+    for (const item of initialAnalytics?.paths ?? []) if (!byPath.has(item.label)) byPath.set(item.label, { path: item.label, name: item.label });
+    return [...byPath.values()].filter((page) => page.path.startsWith("/")).sort((a, b) => a.path.localeCompare(b.path));
+  }, [initialAnalytics, pageCatalog]);
+  const comparisonCandidates = useMemo(() => buildComparisonCandidates(initialAnalytics, pageOptions), [initialAnalytics, pageOptions]);
+  const resolvePage = (value: string) => {
+    const exact = pageOptions.find((page) => page.path === value || normalizeSearch(page.name) === normalizeSearch(value));
+    if (exact) return exact.path;
+    const matches = pageOptions.filter((page) => matchesSearch(value, `${page.name} ${page.path}`));
+    if (matches.length === 1) return matches[0].path;
+    const french = matches.filter((page) => !page.path.startsWith("/en/") && page.path !== "/en");
+    return french.length === 1 ? french[0].path : undefined;
+  };
+  const selectPage = (path: string) => {
+    setHistoryPage(path);
+    setSearchFilter(null);
+    setSearchMetric(null);
+    setChips([]);
+    setComparisonPair(null);
+    setCompareMetric(null);
+    setDetail(null);
+    setView("home");
+  };
   const activeComparisonPair = comparisonPair ?? chips.find((chip) => /\s+avec\s+/i.test(chip)) ?? null;
   const historyListOpen = view === "history" && !selectedVisitorId;
   const secondaryControlsVisible = historyListOpen || (view !== "history" && Boolean(stickyAnalyticsControls || activeComparisonPair));
@@ -557,18 +567,29 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
   const submit = async (v: string, selectedTargets: string[] = []) => {
     const command = v.trim();
     if (!command) return;
+    const normalizedCommand = normalizeSearch(command);
+    const asksForMetric = /\b(graph|graphique|evolution|tendance|courbe|taux|trafic|visiteurs?|sessions?|pages? vues?|conversion|rebond|scroll|defilement|cta|clics?|reservations?)\b/.test(normalizedCommand);
+    const asksForComparison = /\b(compar|compare|versus|vs|contre)\w*\b|\savec\s/.test(normalizedCommand);
+    const pageWords = command.replace(/\b(montre|moi|affiche|afficher|voir|cherche|chercher|recherche|la|le|les|une|un|pages?|du|de|des|stats|statistiques|trafic|visiteurs?|sessions?|vues?|graphique|graphe|courbe|evolution|tendance|taux|conversion|rebond|scroll|clics?|cta)\b/gi, " ").replace(/\s+/g, " ").trim();
+    const directPage = !asksForMetric && !asksForComparison ? resolvePage(command) ?? resolvePage(pageWords) : undefined;
+    if (directPage && selectedTargets.length < 2) {
+      selectPage(directPage);
+      closeSearch(true);
+      return;
+    }
+      const metricPage = asksForMetric && !asksForComparison ? resolvePage(pageWords) : null;
       const normalized = normalizeSearch(command);
       const explicitTargets = selectedTargets.length
         ? selectedTargets
         : extractExplicitComparisonTargets(command, comparisonCandidates);
       const compareRequested = /\b(compar|compare|versus|vs|contre)\w*\b|\savec\s/.test(normalized);
-      const metricRequested = /\b(graph|graphique|evolution|tendance|courbe|taux|trafic|visiteurs?|sessions?|pages?|conversion|rebond|scroll|defilement|cta|clics?|reservations?)\b/.test(normalized);
+      const metricRequested = /\b(graph|graphique|evolution|tendance|courbe|taux|trafic|visiteurs?|sessions?|pages? vues?|conversion|rebond|scroll|defilement|cta|clics?|reservations?)\b/.test(normalized);
       const refersToCurrentFilter = /\b(ca|cela|ce pays|cette page|ce filtre|celui ci|celle ci)\b/.test(normalized);
       const localParsed = parseComparisonRequest(command);
       const contextualMetricRequest = metricRequested && refersToCurrentFilter && Boolean(searchFilter) && explicitTargets.length < 2;
-      const parsed = contextualMetricRequest
+      const parsed = contextualMetricRequest || metricPage
         ? localParsed
-        : await interpretComparisonRequest(command, initialAnalytics);
+        : await interpretComparisonRequest(command, comparisonCandidates);
       const parsedTargets = parsed.pair.split(/\s+avec\s+/i).map((value) => value.trim()).filter(Boolean);
       const comparisonTargets = selectedTargets.length >= 2
         ? selectedTargets
@@ -590,20 +611,23 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
         setSearchFilter(null);
         setSearchMetric(null);
       } else if (metricRequested) {
-        const target = refersToCurrentFilter && searchFilter ? searchFilter : explicitTargets[0] ?? null;
+        const target = refersToCurrentFilter && searchFilter ? searchFilter : explicitTargets[0] ?? resolvePage(pageWords) ?? null;
         const activeTarget = target ?? searchFilter;
+        const targetPage = activeTarget ? resolvePage(activeTarget) : null;
+        if (targetPage) { setHistoryPage(targetPage); setView("home"); setDetail(null); }
         setSearchMetric(parsed.metric);
-        setSearchFilter(activeTarget);
+        setSearchFilter(targetPage ? null : activeTarget);
         setComparisonPair(null);
         setCompareMetric(null);
         const metricNames: Partial<Record<MetricKey, string>> = {
           visitors: "Visiteurs", sessions: "Sessions", views: "Pages vues", engaged: "Sessions engagées",
           conversion: "Taux de conversion", bounce: "Taux de rebond", scroll: "Profondeur de scroll", cta: "Clics CTA", bookings: "Réservations",
         };
-        setChips([...(activeTarget ? [activeTarget] : []), `Graphique · ${metricNames[parsed.metric] ?? "Visiteurs"}`]);
+        setChips([...(activeTarget && !targetPage ? [activeTarget] : []), `Graphique · ${metricNames[parsed.metric] ?? "Visiteurs"}`]);
       } else if (explicitTargets[0]) {
-        setChips([explicitTargets[0]]);
-        setSearchFilter(explicitTargets[0]);
+        const page = resolvePage(explicitTargets[0]);
+        if (page) selectPage(page);
+        else { setChips([explicitTargets[0]]); setSearchFilter(explicitTargets[0]); }
         setSearchMetric(null);
         setComparisonPair(null);
         setCompareMetric(null);
@@ -651,7 +675,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
               ...(detailOrigin === "home" ? [{ label: "Home", onClick: () => go("home") }] : []),
               { label: detail.type === "page" ? "Page" : detail.type === "profile" ? "Profil" : "Ads", onClick: () => detail.type === "page" ? go("pages") : detail.type === "profile" ? go("profiles") : go("ads") },
               { label: detail.name, current: true },
-            ] : [{ label: view === "home" ? "Dashboard" : view === "ads" ? "Ads" : view === "pages" ? "Page" : view === "profiles" ? "Profils" : view === "history" ? "Historique" : "En direct", current: true }]} />
+            ] : [{ label: view === "home" ? "Dashboard" : view === "profiles" ? "Profils" : "Historique", current: true }]} />
             <div className={`fw-sticky-search ${searchOpen ? "is-open" : ""} ${searchClosing ? "is-closing" : ""}`}>
               <SearchBar value={query} setValue={setQuery} onSearch={openSearch} onSubmit={() => submit(query)} onCompare={() => { setCompareMetric(null); setCompare(true); }} />
               {searchOpen && (
@@ -662,6 +686,8 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
                   submit={submit}
                   candidates={comparisonCandidates}
                   onFilter={(value) => {
+                    const page = resolvePage(value);
+                    if (page) { selectPage(page); closeSearch(true); return; }
                     setChips([value]);
                     setSearchFilter(value);
                     setSearchMetric(null);
@@ -682,7 +708,6 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
             <div className="fw-topbar-actions">
               <button className="fw-figma-icon-button" onClick={() => { setCompareMetric(null); setCompare(true); }} aria-label="Comparer"><FigmaCompareIcon /><span>Comparer</span></button>
               <button className="fw-figma-icon-button" onClick={() => setNotificationsOpen((open) => !open)} aria-label="Notifications"><FigmaBellIcon /><span>Notifications</span></button>
-              <button className="fw-ads-cta" onClick={() => go("ads")}><Plus size={23} />Créer une publicité</button>
             </div>
           </div>
           <div className={`fw-topbar-secondary ${secondaryControlsVisible ? "has-controls" : "is-empty"}`} aria-hidden={!secondaryControlsVisible}>
@@ -714,6 +739,10 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
                   compareRelative={compareRelative}
                   comparisonPair={activeComparisonPair}
                   onStickyControlsChange={setStickyAnalyticsControls}
+                  analyticsPeriod={historyPeriod}
+                  onAnalyticsPeriodChange={setHistoryPeriod}
+                  analyticsGranularity={analyticsGranularity}
+                  onAnalyticsGranularityChange={setAnalyticsGranularity}
             />
           ) : (
             <>
@@ -721,9 +750,11 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
                 <Home
                   ctx={ctx}
                   openProfile={(name) => { setDetailOrigin("home"); setDetail({ type: "profile", name }); }}
-                  openPage={(name) => { setDetailOrigin("home"); setDetail({ type: "page", name }); }}
+                  openPage={(name) => { const page = resolvePage(name); if (page) selectPage(page); }}
+                  pageOptions={pageOptions}
                   onStickyControlsChange={setStickyAnalyticsControls}
                   initialAnalytics={initialAnalytics}
+                  localPreview={localPreview}
                   compareMetric={compareMetric}
                   onCompareMetricChange={setCompareMetric}
                   compareRelative={compareRelative}
@@ -775,7 +806,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics }: { initialAnalyti
           compareRelative={compareRelative}
           setCompareRelative={setCompareRelative}
           setMetric={setCompareMetric}
-          interpret={async (value) => interpretComparisonRequest(value, initialAnalytics)}
+          interpret={async (value) => interpretComparisonRequest(value, comparisonCandidates)}
           candidates={comparisonCandidates}
           setComparisonPair={(value) => setComparisonPair(value)}
           apply={(v) => {
@@ -899,8 +930,10 @@ function Home({
   ctx,
   openProfile,
   openPage,
+  pageOptions,
   onStickyControlsChange,
   initialAnalytics,
+  localPreview,
   compareMetric,
   onCompareMetricChange,
   compareRelative,
@@ -917,8 +950,10 @@ function Home({
   ctx: Ctx;
   openProfile: (n: string) => void;
   openPage: (n: string) => void;
+  pageOptions: Array<{ name: string; path: string }>;
   onStickyControlsChange: (controls: ReactNode | null) => void;
   initialAnalytics: AnalyticsSummary | null;
+  localPreview: boolean;
   compareMetric: MetricKey | null;
   onCompareMetricChange: (value: MetricKey | null) => void;
   compareRelative: boolean;
@@ -932,10 +967,10 @@ function Home({
   analyticsGranularity: string;
   onAnalyticsGranularityChange: (granularity: string) => void;
 }) {
-  const pageOptions = useMemo(() => pages.map(({ name, path }) => ({ name, path })), []);
   return (
     <div className="fw-view">
       <ProfileRail open={openProfile} />
+      {localPreview && <p className="fw-local-analytics-note" role="status">Aperçu local : ces statistiques proviennent des visites de développement sur cet ordinateur, pas du site public.</p>}
       <ExactAnalyticsDashboard analytics={initialAnalytics} compareMetric={compareMetric} onCompareMetricChange={onCompareMetricChange} compareRelative={compareRelative} comparisonPair={comparisonPair} externalFilter={externalFilter} externalMetric={externalMetric} pageOptions={pageOptions} selectedPagePath={selectedPagePath} onSelectedPagePathChange={onSelectedPagePathChange} analyticsPeriod={analyticsPeriod} onAnalyticsPeriodChange={onAnalyticsPeriodChange} analyticsGranularity={analyticsGranularity} onAnalyticsGranularityChange={onAnalyticsGranularityChange} onStickyControlsChange={onStickyControlsChange} onSelectPage={openPage} />
     </div>
   );
@@ -943,7 +978,7 @@ function Home({
 function BreadcrumbTrail({ items }: { items: Array<{ label: string; onClick?: () => void; current?: boolean }> }) {
   return <div className="fw-breadcrumb">{items.map((item, index) => <span className="fw-breadcrumb-item" key={`${item.label}-${index}`}>
     {index > 0 && <i>/</i>}
-    {item.onClick ? <button onClick={item.onClick}>{item.label}</button> : <strong className={item.current ? "is-current" : ""}>{item.label}</strong>}
+    {item.onClick ? <button onClick={item.onClick}>{item.label}</button> : <strong title={item.label} className={item.current ? "is-current" : ""}>{item.label}</strong>}
   </span>)}</div>;
 }
 
@@ -2028,6 +2063,10 @@ function DetailView({
   compareRelative,
   comparisonPair,
   onStickyControlsChange,
+  analyticsPeriod,
+  onAnalyticsPeriodChange,
+  analyticsGranularity,
+  onAnalyticsGranularityChange,
 }: {
   detail: NonNullable<Detail>;
   ctx: Ctx;
@@ -2037,6 +2076,10 @@ function DetailView({
   compareRelative: boolean;
   comparisonPair: string | null;
   onStickyControlsChange: (controls: ReactNode | null) => void;
+  analyticsPeriod: HistoryPeriod;
+  onAnalyticsPeriodChange: (period: HistoryPeriod) => void;
+  analyticsGranularity: string;
+  onAnalyticsGranularityChange: (granularity: string) => void;
 }) {
   if (detail.type === "ad") {
     const selectedAd = ads.find((ad) => ad.name === detail.name) ?? ads[0];
@@ -2053,7 +2096,7 @@ function DetailView({
         </aside>
         <section>
           {INTERACTIVE_PREVIEWS_ENABLED && <InteractivePreview title={selectedAd.name} path={`ad:${selectedAd.name}`} image={AD} analytics={initialAnalytics} kind="ad" />}
-          <ExactAnalyticsDashboard mode="ad" scope={detail.name} linkedPagePath={adLandingPaths[selectedAd.name]} analytics={initialAnalytics} compareMetric={compareMetric} onCompareMetricChange={onCompareMetricChange} compareRelative={compareRelative} comparisonPair={comparisonPair} onStickyControlsChange={onStickyControlsChange} />
+          <ExactAnalyticsDashboard mode="ad" scope={detail.name} linkedPagePath={adLandingPaths[selectedAd.name]} analytics={initialAnalytics} compareMetric={compareMetric} onCompareMetricChange={onCompareMetricChange} compareRelative={compareRelative} comparisonPair={comparisonPair} onStickyControlsChange={onStickyControlsChange} analyticsPeriod={analyticsPeriod} onAnalyticsPeriodChange={onAnalyticsPeriodChange} analyticsGranularity={analyticsGranularity} onAnalyticsGranularityChange={onAnalyticsGranularityChange} />
         </section>
       </div>
     );
@@ -2074,6 +2117,10 @@ function DetailView({
         compareRelative={compareRelative}
         comparisonPair={comparisonPair}
         onStickyControlsChange={onStickyControlsChange}
+        analyticsPeriod={analyticsPeriod}
+        onAnalyticsPeriodChange={onAnalyticsPeriodChange}
+        analyticsGranularity={analyticsGranularity}
+        onAnalyticsGranularityChange={onAnalyticsGranularityChange}
       />
     </div>
   );
@@ -2255,9 +2302,10 @@ function SearchOverlay({
   onMetric: (metric: MetricKey, label: string) => void;
 }) {
   const { suggestions, loading, provider } = useComparisonSuggestions(query, candidates);
+  const [selectedKind, setSelectedKind] = useState<string | null>(null);
   const normalizedQuery = normalizeSearch(query);
   const compareRequested = /\b(compar|compare|versus|vs|contre)\w*\b|\savec\s/.test(normalizedQuery);
-  const metricRequested = /\b(graph|graphique|evolution|tendance|courbe|taux|trafic|visiteurs?|sessions?|pages?|conversion|rebond|scroll|cta|clics?)\b/.test(normalizedQuery);
+  const metricRequested = /\b(graph|graphique|evolution|tendance|courbe|taux|trafic|visiteurs?|sessions?|pages? vues?|conversion|rebond|scroll|cta|clics?)\b/.test(normalizedQuery);
   const metric = parseComparisonRequest(query).metric;
   const metricLabels: Partial<Record<MetricKey, string>> = {
     visitors: "Visiteurs", sessions: "Sessions", views: "Pages vues", engaged: "Sessions engagées",
@@ -2269,7 +2317,7 @@ function SearchOverlay({
     .map((label) => candidates.find((candidate) => normalizeSearch(candidate.label) === normalizeSearch(label) && candidate.kind === "Pays"))
     .filter((candidate): candidate is ComparisonCandidate => Boolean(candidate));
   const exactTargets = [...aliasedCountryTargets, ...candidates
-    .map((candidate) => ({ candidate, normalizedLabel: normalizeSearch(candidate.label), index: normalizedQuery.indexOf(normalizeSearch(candidate.label)) }))
+    .map((candidate) => ({ candidate, normalizedLabel: normalizeSearch(candidate.label), index: Math.max(normalizedQuery.indexOf(normalizeSearch(candidate.label)), candidate.name ? normalizedQuery.indexOf(normalizeSearch(candidate.name)) : -1) }))
     .filter((item) => item.normalizedLabel.length > 1 && item.index >= 0 && !commandWords.has(item.normalizedLabel))
     .sort((a, b) => a.index - b.index || Number(b.candidate.kind === "Pays") - Number(a.candidate.kind === "Pays"))
     .filter((item, index, list) => list.findIndex((other) => other.candidate.label === item.candidate.label) === index)
@@ -2294,7 +2342,7 @@ function SearchOverlay({
   const primaryComparisonTargets = explicitComparisonTargets.length >= 2
     ? explicitComparisonTargets
     : comparisonPairs[0] ?? [];
-  const displaySuggestions = suggestions
+  const displaySuggestions = (selectedKind ? rankComparisonCandidates(query, candidates.filter((candidate) => candidate.kind === selectedKind)) : suggestions)
     .filter((candidate, index, list) => {
       const first = list.findIndex((item) => item.label === candidate.label);
       if (first === index) return !list.some((item, itemIndex) => itemIndex > index && item.label === candidate.label && item.kind === "Pays");
@@ -2303,7 +2351,7 @@ function SearchOverlay({
     .slice(0, 8);
   const runPrimary = () => {
     if (compareRequested && primaryComparisonTargets.length >= 2) return submit(query, primaryComparisonTargets.map((item) => item.label));
-    if (metricRequested) return onMetric(metric, metricLabels[metric] ?? "Visiteurs");
+    if (metricRequested) return submit(query);
     if (displaySuggestions[0]) return onFilter(displaySuggestions[0].label);
   };
   return (
@@ -2321,17 +2369,20 @@ function SearchOverlay({
           <kbd>Esc</kbd>
         </div>
         <div className="fw-command-results" role="listbox" aria-label="Résultats de recherche">
+          <div className="fw-search-kinds" role="group" aria-label="Types de filtres">
+            {[[null, "Tout"], ["Page", "Pages"], ["Pays", "Pays"], ["Région", "Régions"], ["Ville", "Villes"], ["Source", "Sources"], ["Campagne", "Campagnes"], ["Appareil", "Appareils"], ["Section", "Sections"]].map(([kind, label]) => <button key={label} type="button" className={selectedKind === kind ? "is-active" : ""} onClick={() => setSelectedKind(kind)}>{label}</button>)}
+          </div>
           {compareRequested && primaryComparisonTargets.length >= 2 && <button className="is-primary" onClick={() => submit(query, primaryComparisonTargets.map((item) => item.label))} role="option">
             <i className="is-compare"><FigmaCompareIcon /></i>
             <span><b>Comparer {primaryComparisonTargets.map((item) => item.label).join(", ")}</b><small>Comparaison · {primaryComparisonTargets.length} {primaryComparisonTargets[0].kind.toLocaleLowerCase("fr-FR")} · {metricLabels[metric] ?? "Visiteurs"}</small></span>
           </button>}
-          {!compareRequested && metricRequested && <button onClick={() => onMetric(metric, metricLabels[metric] ?? "Visiteurs")} role="option">
+          {!compareRequested && metricRequested && <button onClick={() => submit(query)} role="option">
             <i><BarChart3 size={18} /></i>
             <span><b>Afficher l’évolution — {metricLabels[metric] ?? "Visiteurs"}</b><small>Graphique principal</small></span>
           </button>}
           {!compareRequested && displaySuggestions.map((candidate) => <button key={`${candidate.kind}-${candidate.label}`} onClick={() => onFilter(candidate.label)} role="option">
             <i><Filter size={17} /></i>
-            <span><b>{candidate.label}</b><small>Filtrer par {candidate.kind.toLocaleLowerCase("fr-FR")}</small></span>
+            <span><b>{candidate.name ?? candidate.label}</b><small>{candidate.kind === "Page" ? candidate.label : `Filtrer par ${candidate.kind.toLocaleLowerCase("fr-FR")}`}</small></span>
             {typeof candidate.value === "number" && <em>{num(candidate.value)}</em>}
           </button>)}
           {!query.trim() && <p>Tapez un pays, une page, une métrique ou une comparaison.</p>}

@@ -864,7 +864,7 @@ export function FunnelChart({
                       <rect
                         fill={bandColor}
                         height={H}
-                        key={`band-${stage.label}`}
+                        key={`band-${i}-${stage.label}`}
                         width={segW}
                         x={x}
                         y={0}
@@ -876,7 +876,7 @@ export function FunnelChart({
                     <rect
                       fill={bandColor}
                       height={segH}
-                      key={`band-${stage.label}`}
+                    key={`band-${i}-${stage.label}`}
                       width={W}
                       x={0}
                       y={y}
@@ -911,7 +911,7 @@ export function FunnelChart({
                   gradientStops={stage.gradient}
                   hovered={hoveredIndex === i}
                   index={i}
-                  key={stage.label}
+                  key={`${i}-${stage.label}`}
                   layers={layers}
                   normEnd={normEnd}
                   normStart={normStart}
@@ -929,7 +929,7 @@ export function FunnelChart({
                   gradientStops={stage.gradient}
                   hovered={hoveredIndex === i}
                   index={i}
-                  key={stage.label}
+                  key={`${i}-${stage.label}`}
                   layers={layers}
                   normEnd={normEnd}
                   normStart={normStart}
@@ -1010,7 +1010,7 @@ export function FunnelChart({
               <motion.div
                 animate={{ opacity: isDimmed ? 0.4 : 1 }}
                 className="absolute cursor-pointer"
-                key={`lbl-${stage.label}`}
+                key={`lbl-${i}-${stage.label}`}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 style={{ ...posStyle, zIndex: 20 }}

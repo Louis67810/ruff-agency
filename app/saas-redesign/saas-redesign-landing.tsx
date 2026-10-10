@@ -22,17 +22,40 @@ import {
   StarIcon,
   WrenchScrewdriverIcon,
   XMarkIcon,
-  ExclamationTriangleIcon,
 } from "@heroicons/react/24/solid";
+import {
+  ArrowPathIcon,
+  ArrowTrendingUpIcon as ArrowTrendingUpOutlineIcon,
+  ChartBarIcon,
+  CheckBadgeIcon,
+  ClockIcon as ClockOutlineIcon,
+  CursorArrowRaysIcon,
+  DocumentTextIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  LightBulbIcon,
+  MagnifyingGlassIcon,
+  PaintBrushIcon,
+  PuzzlePieceIcon,
+  RectangleGroupIcon,
+  ShieldCheckIcon,
+  SparklesIcon as SparklesOutlineIcon,
+  Squares2X2Icon,
+  SwatchIcon,
+  UsersIcon,
+} from "@heroicons/react/24/outline";
 import Script from "next/script";
 import { createPortal } from "react-dom";
 import { VideoReviewCard } from "@/components/sections/SectionAvis/SectionAvis";
 import { HomepageReviewCard } from "@/components/sections/SectionAvis/HomepageReviewCard";
 import { StackSection3 } from "@/components/sections/StackSection3/StackSection3";
 import ExistingCta from "@/components/ui/Cta";
+import { Availability } from "@/components/footer/Footer";
 import { projects as portfolioProjects } from "@/lib/data/projects";
 import { ConversionMetricsSection } from "./conversion-metrics-section";
 import SaasRedesignPricing from "./SaasRedesignPricing";
+import { SaasRedesignWhyAI } from "./SaasRedesignTrustSections";
+import SaasRedesignProcess from "./SaasRedesignProcess";
 import { trackSaasEvent } from "./saas-analytics-tracker";
 import { defaultTweets, type SaasTweet } from "./tweets";
 import customContent from "./content.json";
@@ -573,7 +596,7 @@ const comparisonProjects: ReadonlyArray<{
   },
 ];
 
-const comparisonRounds = comparisonProjects.map((comparison) => ({
+const comparisonRounds = [...comparisonProjects.slice(1), ...comparisonProjects.slice(0, 1)].map((comparison) => ({
   project: comparison.project,
   a: comparison.afterSide === "a" ? comparison.after : comparison.before,
   b: comparison.afterSide === "b" ? comparison.after : comparison.before,
@@ -591,50 +614,40 @@ const comparisonRounds = comparisonProjects.map((comparison) => ({
 }));
 
 const saasFaqs = [
-  {
-    question: "How long does it take?",
-    answer:
-      '10 business days from kickoff to delivery. You get a clear timeline upfront, not a vague "a few weeks."',
-  },
-  {
-    question: "How much does it cost?",
-    answer:
-      "Projects start at $2,000. You receive a fixed-price quote before we start — no hourly rate, scope creep or surprise invoice.",
-  },
-  {
-    question: "Is this a subscription?",
-    answer:
-      "No. One project, one payment, and you own the result. There is no retainer or monthly fee.",
-  },
-  {
-    question: "What do you need from me to start?",
-    answer:
-      "Your current site (if you have one), a rough idea of what you sell and who buys it, and any brand assets you already have, such as your logo and colors. That's it.",
-  },
-  {
-    question: "Will you touch my product, or just the marketing site?",
-    answer:
-      "Just the marketing site — the pages that sell your product, not the app itself. I won't touch your codebase or product features.",
-  },
-  {
-    question: "What if I need changes after delivery?",
-    answer:
-      "You get unlimited revisions throughout the project. At handoff, I also provide short, personalized tutorials that walk you through everything so you can manage the site easily. Once the project is complete, new pages and larger changes, including major illustration updates, are not included and are quoted separately.",
-  },
-  {
-    question: "Do you work with SaaS outside this niche or stage?",
-    answer:
-      "This offer is built specifically for early-stage SaaS founders around $1–3K MRR who've outgrown their AI-built site. If that's not you, we can still talk, but the process is optimized for that stage.",
-  },
+  { question: "Do you only work with SaaS?", answer: "Yes. We focus on SaaS companies that have outgrown the website they launched with and need something more distinctive, credible and conversion-focused." },
+  { question: "Is this built for teams that use AI?", answer: "Yes — especially. You can keep using AI to move fast. We create the brand system, components and context your AI tools can reuse so future pages and assets stay much closer to your visual direction." },
+  { question: "Can you work with our existing brand?", answer: "Absolutely. We can build on what already works, refine what doesn’t, and evolve your existing identity without starting from scratch." },
+  { question: "Do you write the copy?", answer: "Yes. We structure and write the page around your product, positioning, customers and the reasons they should choose you." },
+  { question: "Do you build it too?", answer: "Yes. We handle the strategy, copy, design and development — so you don’t have to coordinate multiple people." },
+  { question: "Framer or React?", answer: "Both. We can build in Framer or React/Next.js depending on your product, stack and what makes the most sense for your team." },
+  { question: "How involved do I need to be?", answer: "Very little. We need your product context and feedback at key stages. We handle the rest." },
+  { question: "How long does it take?", answer: "Most landing pages are completed in around 10 days, depending on feedback and scope." },
+  { question: "What happens after launch?", answer: "We can keep improving the page through CRO, testing and new iterations as real traffic comes in." },
+  { question: "Can I make changes afterward?", answer: "Yes. You keep full control of the website and can continue editing it yourself or with your team." },
+  { question: "Why shouldn’t I just use AI?", answer: "You can — and you should keep using it. The problem is that AI makes it easy for everyone to build the same “good-looking” SaaS website. We create the strategy and visual system that gives AI something unique to work from." },
+  { question: "How does payment work?", answer: "The project is split into two payments: one to start the project, and the second after the design stage before final delivery." },
 ] as const;
-
-const SparklesIcon = () => null;
 
 function Cta() {
   return (
-    <ExistingCta kind="primary" href="/en/saas-redesign/brief" label="Book a Call">
-      Book a Call
+    <ExistingCta kind="primary" href="/en/saas-redesign/brief" label="Make your SaaS stand out" showAvatar={false} showArrow>
+      Make your SaaS stand out
     </ExistingCta>
+  );
+}
+
+function HeroClientProof() {
+  return (
+    <div className="sr-hero-proof sr-intro sr-intro--ticker">
+      <span className="sr-hero-proof__label">Proven across 28+ clients.</span>
+      <span className="sr-hero-proof__avatars" aria-hidden="true">
+        {reviews.slice(0, 4).map(([name, , , avatar]) => (
+          <img key={name} src={avatar} alt="" />
+        ))}
+        <span className="sr-hero-proof__more">+24</span>
+      </span>
+      <span className="sr-hero-proof__result">Dozens now generating over $50K in MRR.</span>
+    </div>
   );
 }
 
@@ -940,6 +953,7 @@ function Choice() {
 }
 
 function TweetWall({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
+  const tickerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const rateFrame = useRef<number | null>(null);
   const loop = [...tweets, ...tweets];
@@ -964,6 +978,23 @@ function TweetWall({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
   };
 
   useEffect(
+    () => {
+      const ticker = tickerRef.current;
+      if (!ticker) return;
+      if (!("IntersectionObserver" in window)) {
+        ticker.classList.add("is-in-view");
+        return;
+      }
+      const observer = new IntersectionObserver(([entry]) => {
+        ticker.classList.toggle("is-in-view", entry.isIntersecting);
+      }, { threshold: 0.05 });
+      observer.observe(ticker);
+      return () => observer.disconnect();
+    },
+    [],
+  );
+
+  useEffect(
     () => () => {
       if (rateFrame.current !== null) cancelAnimationFrame(rateFrame.current);
     },
@@ -982,13 +1013,13 @@ function TweetWall({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
       />
       <h3>And you’re not the only one who thinks that</h3>
       <p className="sr-muted">
-        <strong>Only tweets from the last 24 hours</strong> showing that
-        AI-generated websites hurt conversions and discourage people from
-        buying.
+        Founders and builders sharing why distinctive products and websites
+        still matter in an AI-generated world.
       </p>
       <div
+        ref={tickerRef}
         className="sr-embed-ticker"
-        onMouseEnter={() => tweenPlaybackRate(0.28)}
+        onMouseEnter={() => tweenPlaybackRate(0.85)}
         onMouseLeave={() => tweenPlaybackRate(1)}
       >
         <div className="sr-embed-track" ref={trackRef}>
@@ -1457,7 +1488,7 @@ function ProjectDetailOverlay({
       }}
     >
       <article
-        className="sr-project-overlay__panel"
+        className="sr-project-overlay__panel sr"
         role="dialog"
         aria-modal="true"
         aria-labelledby={`sr-project-title-${project.id}`}
@@ -1522,7 +1553,7 @@ function ProjectDetailOverlay({
                 />
               )}
             </div>
-            <ExistingCta kind="primary" href="/en/saas-redesign/brief" label="Book a Call">Send us your SaaS</ExistingCta>
+            <ExistingCta kind="primary" href="/en/saas-redesign/brief" label="Make your SaaS stand out" showAvatar={false} showArrow>Make your SaaS stand out</ExistingCta>
           </section>
 
           {review ? <FeaturedSocialProof review={review} logoSrc={logoSrc} logoName={portfolioProject?.title} /> : null}
@@ -1537,11 +1568,17 @@ function ProjectDetailOverlay({
             <ProjectArgumentList title="The Solution" subtitle={study?.title ?? project.title} points={solutionPoints} id={`sr-project-solution-${project.id}`} tone="solution" />
             <ProjectCarousel project={project} initialPosition={50} label="Before and after" />
             <ProjectArgumentList title="The Result" subtitle={study?.intro ?? project.copy} points={resultPoints} id={`sr-project-results-${project.id}`} tone="results" />
-            <ProjectCarousel
-              project={project}
-              initialPosition={project.branding ? 50 : 0}
-              label={project.branding ? "Before and after" : "After"}
-            />
+            {project.id === "keyframe" || project.id === "zorgniotti" ? (
+              <div className="sr-reviews-chart-reveal is-expanded sr-project-story__metrics">
+                <ConversionMetricsSection person={project.id === "keyframe" ? "antoine" : "dominique"} />
+              </div>
+            ) : (
+              <ProjectCarousel
+                project={project}
+                initialPosition={project.branding ? 50 : 0}
+                label={project.branding ? "Before and after" : "After"}
+              />
+            )}
           </div>
 
         </div>
@@ -1549,6 +1586,28 @@ function ProjectDetailOverlay({
     </div>,
     document.body,
   );
+}
+
+function getProjectArgumentIcon(point: string, tone: "challenge" | "solution" | "results") {
+  const text = point.toLowerCase();
+  if (tone === "challenge" && /not clear|not easy|hard|difficult|lost|hidden|generic|overwhelm|miss|scattered/.test(text)) return EyeSlashIcon;
+  if (/conversion|conver[ts]|sales|growth|revenue|qualified|customers/.test(text)) return ArrowTrendingUpOutlineIcon;
+  if (/deadline|quick|speed|time|faster|delivery|daily/.test(text)) return ClockOutlineIcon;
+  if (/risk|trust|confidence|credible|reassur|professional/.test(text)) return ShieldCheckIcon;
+  if (/pricing|plans|compare|analytics|data|report/.test(text)) return ChartBarIcon;
+  if (/contact|booking|enquir|next step|call|action|click/.test(text)) return CursorArrowRaysIcon;
+  if (/brand|identity|recognis|recogniz|palette|mark|visual direction/.test(text)) return SwatchIcon;
+  if (/portfolio|work|showcase|page|section|structure|hierarchy|layout/.test(text)) return RectangleGroupIcon;
+  if (/team|client|people|audience|visitors|prospects|human/.test(text)) return UsersIcon;
+  if (/interface|app|product|platform|feature|module|tool/.test(text)) return Squares2X2Icon;
+  if (/clear|visible|scan|discover|first impression|understand/.test(text)) return EyeIcon;
+  if (/lost|hidden|difficult|hard|miss|generic|overwhelm/.test(text)) return EyeSlashIcon;
+  if (/process|journey|workflow|consistent|connect|sequence/.test(text)) return PuzzlePieceIcon;
+  if (/design|art|expressive|style/.test(text)) return PaintBrushIcon;
+  if (/proof|answer|information|explain|story|content/.test(text)) return DocumentTextIcon;
+  if (/ai|intelligen|innov/.test(text)) return SparklesOutlineIcon;
+  if (/simplif|improv|refin|organis|organiz/.test(text)) return ArrowPathIcon;
+  return tone === "challenge" ? MagnifyingGlassIcon : tone === "solution" ? LightBulbIcon : CheckBadgeIcon;
 }
 
 function ProjectArgumentList({ title, subtitle, points, id, tone }: { title: string; subtitle: string; points: string[]; id: string; tone: "challenge" | "solution" | "results" }) {
@@ -1559,20 +1618,23 @@ function ProjectArgumentList({ title, subtitle, points, id, tone }: { title: str
         <p>{subtitle}</p>
       </div>
       <ul>
-        {points.map((point, index) => (
-          <li key={`${id}-${index}`}>
-            <div className="sr-project-arguments__line-content">
-              <span className="sr-project-arguments__icon" aria-hidden="true"><ExclamationTriangleIcon /></span>
-              <span>{point}</span>
-            </div>
-          </li>
-        ))}
+        {points.map((point, index) => {
+          const Icon = getProjectArgumentIcon(point, tone);
+          return (
+            <li key={`${id}-${index}`}>
+              <div className="sr-project-arguments__line-content">
+                <span className="sr-project-arguments__icon" aria-hidden="true"><Icon /></span>
+                <span>{point}</span>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
 }
 
-function FeaturedSocialProof({ review, logoSrc, logoName }: { review?: (typeof reviews)[number]; logoSrc?: string; logoName?: string }) {
+function FeaturedSocialProof({ review, logoSrc, logoName, className = "" }: { review?: (typeof reviews)[number]; logoSrc?: string; logoName?: string; className?: string }) {
   if (!review) return null;
 
   const [name, role, quote, avatar] = review;
@@ -1580,7 +1642,7 @@ function FeaturedSocialProof({ review, logoSrc, logoName }: { review?: (typeof r
   const body = bodyParts.join(" ");
 
   return (
-    <section className="sr-featured-review" aria-label="Client review" data-has-logo={logoSrc ? "true" : "false"}>
+    <section className={`sr-featured-review ${className}`.trim()} aria-label="Client review" data-has-logo={logoSrc ? "true" : "false"}>
       <div className="sr-featured-review__content">
         <div className="sr-featured-review__main">
           {logoSrc ? <img className="sr-featured-review__logo-slot" src={logoSrc} alt={`${logoName ?? "Client"} logo`} /> : null}
@@ -1598,34 +1660,6 @@ function FeaturedSocialProof({ review, logoSrc, logoName }: { review?: (typeof r
           </div>
         </div>
       </div>
-    </section>
-  );
-}
-
-function Reviews() {
-  const [open, setOpen] = useState(false);
-  return (
-    <section className="sr-reviews">
-      <div className="sr-review-rating">
-        <span aria-hidden="true">★★★★★</span> Rated 5/5 based on over 30 reviews
-      </div>
-      <h2>What they think of it</h2>
-      <div className={`sr-review-grid ${open ? "sr-review-grid--open" : ""}`}>
-        <VideoReviewCard
-          RceipbT2y="https://framerusercontent.com/assets/edTM2GQjvjlTaWLPl9LWzwa6qw.mp4"
-          style={{ height: 487 }}
-        />
-        {reviews.map(([name, role, quote], index) => (
-          <article key={name} className={index > 1 ? "sr-review--extra" : ""}>
-            <p>“{quote}”</p>
-            <b>{name}</b>
-            <span>{role}</span>
-          </article>
-        ))}
-      </div>
-      <button className="sr-more" onClick={() => setOpen((value) => !value)}>
-        {open ? "Show less" : "Show more"}
-      </button>
     </section>
   );
 }
@@ -1654,50 +1688,51 @@ function FaqPlaceholder() {
 }
 
 function ProofReviews() {
-  const [reviewStep, setReviewStep] = useState(0);
+  const [chartsExpanded, setChartsExpanded] = useState(false);
 
   return (
     <section
       className="sr-reviews sr-proof-reviews"
       id="reviews"
       data-sr-reveal="section"
-      data-review-step={reviewStep}
     >
       <div className="sr-review-rating">
         <RatingStars /> Rated 5/5 based on over 30 reviews
       </div>
       <h2>What they think of it</h2>
-      <div
-        className={`sr-review-grid ${reviewStep > 0 ? "sr-review-grid--open" : ""} sr-review-grid--step-${reviewStep}`}
-      >
+      <div className="sr-review-grid">
         <VideoReviewCard
           RceipbT2y="https://framerusercontent.com/assets/edTM2GQjvjlTaWLPl9LWzwa6qw.mp4"
           style={{ height: 487 }}
         />
-        {reviews.map(([name, role, quote, avatar], index) => (
+        {reviews.slice(0, 7).map(([name, role, quote, avatar], index) => (
           <HomepageReviewCard
             key={name}
             avatar={avatar}
             name={name}
             role={role}
             quote={quote}
-            className={`sr-review-card sr-review-card--${index} ${index > 6 ? "sr-review--extra" : ""}`}
+            className={`sr-review-card sr-review-card--${index}`}
           />
         ))}
       </div>
-      {reviewStep < 2 && (
-        <ExistingCta
-          className="sr-more-cta"
-          href="#reviews"
-          kind="secondary"
-          onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
-            event.preventDefault();
-            setReviewStep((currentStep) => Math.min(currentStep + 1, 2));
-          }}
-        >
-          Show more
-        </ExistingCta>
-      )}
+      <div className={`sr-reviews-chart-reveal${chartsExpanded ? " is-expanded" : ""}`}>
+        <ConversionMetricsSection id="results" />
+        {chartsExpanded && <ConversionMetricsSection person="dominique" />}
+        {!chartsExpanded && (
+          <ExistingCta
+            className="sr-more-cta"
+            href="#reviews"
+            kind="secondary"
+            onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
+              event.preventDefault();
+              setChartsExpanded(true);
+            }}
+          >
+            Show more
+          </ExistingCta>
+        )}
+      </div>
     </section>
   );
 }
@@ -1746,28 +1781,23 @@ export default function SaasRedesignLanding({
   return (
     <main className="sr">
       <section className="sr-hero" id="top">
-        <div className="sr-eyebrow sr-intro sr-intro--eyebrow">
-          <SparklesIcon /> FOR SAAS OWNERS
-        </div>
+        <div className="sr-eyebrow sr-intro sr-intro--eyebrow">FOR GROWING SAAS COMPANIES</div>
         <h1 className="sr-intro sr-intro--title">
-          Stop selling a real product with an
-          <br className="sr-title-break" /> AI-generated landing page.
+          Stop looking like every other SaaS.
         </h1>
         <p className="sr-intro sr-intro--copy">
-          Custom-designed, conversion-focused website. We redesign SaaS websites
-          to match the product you’ve built, delivered in 10 days, not months.
+          Our agency helps your SaaS do what AI can’t: <strong>bring real design taste and creative direction to the table.</strong> We create high-quality websites and brand identities that make you <strong>stand out from the competition.</strong>
         </p>
         <div className="sr-hero-ctas sr-intro sr-intro--actions">
-          <ExistingCta
-            href="#from-this"
-            kind="secondary"
-            className="sr-see-examples"
-          >
-            See examples
-          </ExistingCta>
           <Cta />
         </div>
+        <div className="sr-hero-reassurance sr-intro sr-intro--actions">
+          <span><img src="/landing-assets/saas-redesign/social-proof/no-sales-call.svg" alt="" />No sales call required</span>
+          <i aria-hidden="true" />
+          <span><img src="/landing-assets/saas-redesign/social-proof/no-commitment.svg" alt="" />No commitment</span>
+        </div>
       </section>
+      <HeroClientProof />
       <Marquee
         projects={orderedRealizationProjects}
         className="sr-intro sr-intro--ticker"
@@ -1887,11 +1917,21 @@ export default function SaasRedesignLanding({
       <Results />
       <SaasRedesignPricing
         locale="en"
-        bookingLabel="Book a call"
+        bookingLabel="Start your redesign"
         bookingHref="/en/saas-redesign/brief"
       />
-      <ConversionMetricsSection />
+      <SaasRedesignProcess />
+      <FeaturedSocialProof review={reviews.find(([name]) => name === "Noé E.")} className="sr-featured-review--after-process" />
+      <SaasRedesignWhyAI />
       <ProofReviews />
+      <SaasRedesignPricing
+        locale="en"
+        bookingLabel="Start your redesign"
+        bookingHref="/en/saas-redesign/brief"
+        className="sr-pricing-flat"
+        sectionId="pricing-secondary"
+        includeGuarantee
+      />
       <div
         className="sr-reviews-book-divider"
         aria-hidden="true"
@@ -1905,7 +1945,23 @@ export default function SaasRedesignLanding({
         ctaHref="/en/saas-redesign/brief"
         showDescription={false}
         showCta={false}
+        padding="96px 48px 160px 48px"
       />
+      <section className="sr-closing-cta" id="closing-cta" aria-labelledby="sr-closing-title">
+        <div className="sr-closing-shapes" aria-hidden="true">
+          <img src="/landing-assets/saas-redesign/pricing-comparison-shapes.svg" alt="" />
+        </div>
+        <div className="sr-closing-content">
+          <div className="sr-closing-availability"><Availability english /></div>
+          <h2 id="sr-closing-title">Does your SaaS still look like the one you launched?</h2>
+          <p>Send it to us. We’ll tell you what we’d change.</p>
+          <HeroClientProof />
+          <Marquee projects={orderedRealizationProjects} className="sr-closing-marquee" />
+          <ExistingCta kind="primary" href="/en/saas-redesign/brief" label="Get a website that stands out" showAvatar={false} showArrow>
+            Get a website that stands out
+          </ExistingCta>
+        </div>
+      </section>
     </main>
   );
 }

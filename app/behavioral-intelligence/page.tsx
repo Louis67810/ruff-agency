@@ -4,6 +4,11 @@ import { analyticsCookieName, analyticsTokenIsValid } from "@/lib/saas-analytics
 import { readAnalyticsEvents, summarizeAnalytics } from "@/lib/saas-analytics/store";
 import { BehavioralIntelligenceApp } from "./behavioral-intelligence-app";
 import { BehavioralIntelligenceLogin } from "./behavioral-login";
+import sitemap from "@/app/sitemap";
+import { articles } from "@/lib/data/articles";
+import { projects } from "@/lib/data/projects";
+import { freeTools } from "@/lib/data/free-tools";
+import { locations, locationRoute } from "@/lib/data/locations";
 import "./behavioral-intelligence.css";
 import "./visitor-history.css";
 
@@ -31,5 +36,33 @@ export default async function BehavioralIntelligencePage() {
       <a href="/behavioral-intelligence">Réessayer</a>
     </div></main>;
   }
-  return <BehavioralIntelligenceApp initialAnalytics={analytics} />;
+  const titles = new Map<string, string>([
+    ["/", "Home"], ["/agence", "Agence"], ["/services", "Services"],
+    ["/realisations", "Réalisations"], ["/ressources", "Ressources"],
+    ["/outils-gratuits", "Outils gratuits"], ["/30-min", "30 min"],
+    ["/saas-redesign", "SaaS redesign"],
+    ["/saas-redesign/brief", "Brief SaaS redesign"],
+    ["/services/site-internet", "Site internet"],
+    ...articles.map((article): [string, string] => [article.href, article.title]),
+    ...projects.map((project): [string, string] => [project.href, project.title]),
+    ...freeTools.map((tool): [string, string] => [tool.href, tool.title]),
+    ...locations.map((location): [string, string] => [locationRoute(location), `Agence web design ${location.cityName}`]),
+  ]);
+  const paths = new Set([
+    ...sitemap().map((entry) => new URL(entry.url).pathname),
+    ...titles.keys(),
+    ...[...titles.keys()].map((path) => path === "/" ? "/en" : `/en${path}`),
+    ...locations.map(locationRoute),
+  ]);
+  const pageCatalog = [...paths].map((path) => ({
+    path,
+    name: path.startsWith("/en/") || path === "/en"
+      ? `${titles.get(path.slice(3) || "/") ?? path} · EN`
+      : titles.get(path) ?? path,
+  }));
+  const localPreview = process.env.NODE_ENV !== "production" && !(
+    (process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL)
+    && (process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY)
+  );
+  return <BehavioralIntelligenceApp initialAnalytics={analytics} pageCatalog={pageCatalog} localPreview={localPreview} />;
 }

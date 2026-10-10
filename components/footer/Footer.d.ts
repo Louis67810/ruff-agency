@@ -8,6 +8,7 @@ export type FooterProps = {
   links?: Record<string, string>;
   className?: string;
   style?: React.CSSProperties;
+  hideInternalLinks?: boolean;
 };
 
 declare const Footer: React.FC<FooterProps>;

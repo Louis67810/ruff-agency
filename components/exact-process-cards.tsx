@@ -163,8 +163,10 @@ function CardReveal({
 /** Cartes seules, pour remplacer une zone existante sans toucher au titre ou au CTA. */
 export function ExactProcessCardGrid({
   locale = "fr",
+  variant = "default",
 }: {
   locale?: "fr" | "en";
+  variant?: "default" | "saas";
 }) {
   const localizedSteps = locale === "en" ? englishSteps : steps;
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -197,7 +199,7 @@ export function ExactProcessCardGrid({
   const isCarousel = visibleCards < localizedSteps.length;
 
   return (
-    <div className={styles.carousel} data-carousel={isCarousel || undefined}>
+    <div className={`${styles.carousel} ${variant === "saas" ? styles.saasVariant : ""}`} data-carousel={isCarousel || undefined}>
       <div
         ref={viewportRef}
         className={styles.viewport}

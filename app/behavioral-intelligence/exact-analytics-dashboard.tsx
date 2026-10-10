@@ -266,8 +266,10 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
     const index = typeof next === "function" ? next(periodIndex) : next;
     if (onAnalyticsPeriodChange) onAnalyticsPeriodChange(periods[index] as "Last 24 hours" | "Last 7 days" | "Last 30 days");
     else setLocalPeriodIndex(index);
+    setGranularity(index === 0 ? "Hourly" : "Daily");
   };
   const [pageOpen, setPageOpen] = useState(false);
+  const [pageQuery, setPageQuery] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [revision, setRevision] = useState(0);
   useEffect(() => {
@@ -286,11 +288,12 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   // Filtered summaries come from the event store; never shrink values with a
   // visual factor, otherwise the dashboard would show invented numbers.
   const filterFactor = 1;
-  const appliedFilters = selectedPagePath ? [...filters.filter((filter) => filter !== selectedPagePath), selectedPagePath] : filters;
-  const filterDays = analyticsPeriod === "Last 24 hours" ? 1 : analyticsPeriod === "Last 7 days" ? 7 : 30;
+  const pagePath = selectedPagePath || (scope && mode === "page" ? pagePathFromScope(scope) : "");
+  const appliedFilters = [...filters.filter((filter) => !filter.startsWith("/")), ...(pagePath ? [pagePath] : [])];
+  const filterDays = periodIndex === 0 ? 1 : periodIndex === 1 ? 7 : 30;
   const filterKey = `${filterDays}:${granularity}:${appliedFilters.join("|")}:${comparisonPair ?? ""}:${revision}`;
   const selectedFilter = filters.at(-1) ?? null;
-  const pageFilterPath = selectedPagePath || filters.find((value) => value.startsWith("/")) || null;
+  const pageFilterPath = pagePath || null;
   useEffect(() => {
     setFilters(externalFilter ? [externalFilter] : []);
   }, [externalFilter]);
@@ -350,9 +353,14 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   useEffect(() => {
     setScopeActive(Boolean(scope));
   }, [scope]);
-  const scopeFactor = scope && scopeActive ? 0.72 + (scope.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0) % 29) / 100 : 1;
+  const scopeFactor = 1;
   const applyFilter = (value: string | null) => {
     setFilterRemoving(null);
+    if (value?.startsWith("/") && onSelectedPagePathChange) {
+      onSelectedPagePathChange(value);
+      setFilters((current) => current.filter((filter) => !filter.startsWith("/")));
+      return;
+    }
     setFilters((current) => value && !current.includes(value) ? [...current, value] : current);
     if (typeof window !== "undefined") window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
   };
@@ -373,7 +381,6 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
     setFilterPicker(picker);
     setFilterPickers((current) => ({ ...current, [row.name]: picker }));
     applyFilter(row.name);
-    if (title === "Page") onSelectPage?.(pageNameFromPath(row.name));
   };
   const clearFilter = (value: string) => {
     setFilterRemoving(value);
@@ -387,9 +394,10 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   const chooseDashboardPage = (path: string) => {
     onSelectedPagePathChange?.(path);
     setPageOpen(false);
+    setPageQuery("");
   };
   const toolbarPageProps = mode === "home" && onSelectedPagePathChange
-    ? { selectedPagePath, pageOptions, pageOpen, setPageOpen, onPageChange: chooseDashboardPage }
+    ? { selectedPagePath, pageOptions, pageOpen, setPageOpen, pageQuery, setPageQuery, onPageChange: chooseDashboardPage }
     : {};
 
   const refresh = () => {
@@ -403,7 +411,7 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   useEffect(() => {
     if (!onStickyControlsChange) return;
     onStickyControlsChange(<AnalyticsToolbar {...{ scope: scopeActive ? scope : undefined, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick: (value: string) => { const picker = filterPickers[value] ?? filterPicker; if (picker) setSearchOverlay(picker); }, clearFilter, filterRemoving, ...toolbarPageProps }} />);
-  }, [onStickyControlsChange, mode, scope, scopeActive, periodIndex, granularity, periodOpen, granularityOpen, refreshing, filters, filterPicker, filterPickers, filterRemoving, selectedPagePath, pageOpen]);
+  }, [onStickyControlsChange, mode, scope, scopeActive, periodIndex, granularity, periodOpen, granularityOpen, refreshing, filters, filterPicker, filterPickers, filterRemoving, selectedPagePath, pageOpen, pageQuery]);
 
   return (
     <section className="df-dashboard">
@@ -490,11 +498,17 @@ function pageNameFromPath(path: string) {
   return mapped ?? (path.replace(/^\//, "") || "Home");
 }
 
+function matchesPageQuery(query: string, name: string, path: string) {
+  const normalize = (value: string) => value.toLocaleLowerCase("fr-FR").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+  const text = normalize(`${name} ${path}`);
+  return normalize(query).split(" ").filter(Boolean).every((token) => text.includes(token));
+}
+
 function pagePathFromScope(scope?: string) {
   return ({ Home: "/", Services: "/services", Agency: "/agence", "Réalisations": "/realisations", "30 min": "/30-min", "SaaS redesign": "/saas-redesign" } as Record<string, string>)[scope ?? ""] ?? "/";
 }
 
-function AnalyticsToolbar({ scope, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick, clearFilter, filterRemoving = null, selectedPagePath, pageOptions, pageOpen, setPageOpen, onPageChange, compact = false }: {
+function AnalyticsToolbar({ scope, periodIndex, setPeriodIndex, granularity, setGranularity, periodOpen, setPeriodOpen, granularityOpen, setGranularityOpen, refreshing, refresh, filters, onFilterClick, clearFilter, filterRemoving = null, selectedPagePath, pageOptions, pageOpen, setPageOpen, pageQuery = "", setPageQuery, onPageChange, compact = false }: {
   scope?: string;
   periodIndex: number;
   setPeriodIndex: (value: number | ((current: number) => number)) => void;
@@ -514,6 +528,8 @@ function AnalyticsToolbar({ scope, periodIndex, setPeriodIndex, granularity, set
   pageOptions?: Array<{ name: string; path: string }>;
   pageOpen?: boolean;
   setPageOpen?: (open: boolean | ((current: boolean) => boolean)) => void;
+  pageQuery?: string;
+  setPageQuery?: (value: string) => void;
   onPageChange?: (path: string) => void;
   compact?: boolean;
 }) {
@@ -522,10 +538,16 @@ function AnalyticsToolbar({ scope, periodIndex, setPeriodIndex, granularity, set
     {onPageChange && <div className="df-control-anchor">
       <button className="df-page-select" type="button" aria-label={`Page : ${pageOptions?.find((option) => option.path === selectedPagePath)?.name ?? "All"}`} aria-expanded={pageOpen} onClick={() => setPageOpen?.((open) => !open)}>
         {pageOptions?.find((option) => option.path === selectedPagePath)?.name ?? "All"}
-        {!selectedPagePath && <ChevronDown />}
+        <ChevronDown />
       </button>
       {pageOpen && <div className="df-picker df-page-picker">
-        {[{ name: "All", path: "" }, ...(pageOptions ?? [])].map((option) => <button key={option.path} className={option.path === selectedPagePath ? "is-active" : ""} onClick={() => onPageChange(option.path)}>{option.name}</button>)}
+        <input type="search" aria-label="Rechercher une page" placeholder="Rechercher une page…" value={pageQuery} onChange={(event) => setPageQuery?.(event.target.value)} onKeyDown={(event) => {
+          if (event.key !== "Enter") return;
+          const matches = (pageOptions ?? []).filter((option) => matchesPageQuery(pageQuery, option.name, option.path));
+          if (matches.length === 1) { event.preventDefault(); onPageChange(matches[0].path); }
+        }} />
+        {[{ name: "All", path: "" }, ...(pageOptions ?? [])].filter((option) => !pageQuery || matchesPageQuery(pageQuery, option.name, option.path)).map((option) => <button key={option.path} className={option.path === selectedPagePath ? "is-active" : ""} onClick={() => onPageChange(option.path)}>{option.name}{option.path && <small>{option.path}</small>}</button>)}
+        {pageQuery && !(pageOptions ?? []).some((option) => matchesPageQuery(pageQuery, option.name, option.path)) && <p className="df-page-empty">Aucune page trouvée</p>}
       </div>}
     </div>}
     <div className="df-period-group">
@@ -685,15 +707,7 @@ function InteractiveChart({ metric, compareMetric, compareLabel, compareScale = 
     return () => observer.disconnect();
   }, []);
   const target = granularity === "Weekly" ? 8 : granularity === "Daily" ? 14 : 25;
-  const filterSeed = (filter ?? scope ?? "all").split("").reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  const makeValues = (chartMetric: MetricKey, scale = 1) => Array.from({ length: target }, (_, i) => {
-    const raw = baseSeries[chartMetric];
-    const source = raw[Math.round((i / Math.max(1, target - 1)) * (raw.length - 1))];
-    const jitter = revision ? ((i * 7 + revision * 3) % 11) - 5 : 0;
-    const compareSeed = compareLabel ? compareLabel.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0) : 0;
-    const shape = filter || scope || compareLabel ? 0.82 + Math.sin((i + (filterSeed + compareSeed) % 9) * 0.76) * 0.18 + Math.cos((i * 1.7 + filterSeed + compareSeed) * 0.31) * 0.1 : 1;
-    return Math.max(0.1, (source + jitter) * factor * shape * scale);
-  });
+  const makeValues = (_chartMetric: MetricKey, _scale = 1) => Array<number>(target).fill(0);
   const values = series.length ? series.map((point) => point.values[metric] ?? 0) : makeValues(metric);
   const compareValues = compareMetric ? comparisonSeries[0]?.values.length ? comparisonSeries[0].values : series.length ? null : makeValues(compareMetric, compareScale) : null;
   const seriesColors = comparisonChartColors(compareValues ? Math.max(2, comparisonSeries.length + 1) : 1);
