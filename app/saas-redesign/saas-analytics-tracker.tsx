@@ -52,6 +52,9 @@ export function trackSaasEvent(detail: ClientEvent) {
 export function SaasAnalyticsTracker() {
   const pathname = usePathname();
   useEffect(() => {
+    // Search crawlers do not need client-side behavioral tracking. Avoid
+    // sending analytics writes when they render pages for indexing.
+    if (/Googlebot|Google-InspectionTool|bingbot|BingPreview|DuckDuckBot|YandexBot|Slurp/i.test(navigator.userAgent)) return;
     // The dashboard and its management tools are intentionally excluded: they
     // must never pollute the acquisition data they display.
     if (isExcludedAnalyticsPath(pathname)) return;

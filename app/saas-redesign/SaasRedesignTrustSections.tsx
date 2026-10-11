@@ -62,9 +62,9 @@ function AiReasonsCard({
   );
 }
 
-export function SaasRedesignGuarantee() {
+export function SaasRedesignGuarantee({ id = "guarantee" }: { id?: string }) {
   return (
-    <section id="guarantee" className="sr-trust-section sr-trust-section--pricing" aria-labelledby="sr-trust-title">
+    <section id={id} className="sr-trust-section sr-trust-section--pricing" aria-labelledby={`${id}-title`}>
         <div className="sr-trust-card">
           <div className="sr-trust-art">
             <img
@@ -75,7 +75,7 @@ export function SaasRedesignGuarantee() {
             />
           </div>
           <div className="sr-trust-copy">
-            <h2 id="sr-trust-title">The 100% Satisfaction Guarantee</h2>
+            <h2 id={`${id}-title`}>The 100% Satisfaction Guarantee</h2>
             <p className="sr-trust-lead">
               We’re confident in the quality of our work, because we don’t stop until you’re fully satisfied with the result.
             </p>

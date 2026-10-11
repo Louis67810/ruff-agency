@@ -12,6 +12,8 @@ const titles: Record<string, string> = {
   "guide-copywriting-page-qui-convertit": "Landing page copywriting: how to structure a page that converts",
   "capter-attention-visiteur-landing-page": "Capture attention on a landing page: six design and conversion principles",
   "trouver-avatar-client-guide": "How to define a customer avatar for a more convincing landing page",
+  "combien-coute-creation-site-internet": "How much does a website cost in 2026? A complete pricing guide",
+  "combien-coute-landing-page": "How much does a landing page cost in 2026? Agency and freelance prices",
   "bibliotheque-composants-article": "Editorial component library",
 };
 
@@ -26,6 +28,8 @@ const metaDescriptions: Record<string, string> = {
   "guide-copywriting-page-qui-convertit": "A landing page copywriting guide: structure the message, proof, objections and calls to action without artificial promises.",
   "capter-attention-visiteur-landing-page": "Six design and conversion principles to capture attention on a landing page, clarify the offer and guide visitors to the CTA.",
   "trouver-avatar-client-guide": "Define an actionable customer avatar for your landing page: needs, objections, language, data and interview questions.",
+  "combien-coute-creation-site-internet": "Compare website prices in 2026: freelance and agency rates, what each package includes, and the questions to ask before signing a quote.",
+  "combien-coute-landing-page": "Compare landing page prices in 2026, understand the factors that affect a quote, and learn what to check before choosing an agency or freelancer.",
 };
 
 const introductions: Record<string, string> = {
@@ -38,6 +42,8 @@ const introductions: Record<string, string> = {
   "guide-copywriting-page-qui-convertit": "Landing page copywriting first makes an offer clear, credible and easy to choose. This guide covers the messaging levers to use thoughtfully: promise, proof, objection handling and calls to action.",
   "capter-attention-visiteur-landing-page": "To capture attention on a landing page, make the offer, hierarchy and CTA understandable at a glance. Visitors do not read everything: they scan for signals that help them decide whether to continue.",
   "trouver-avatar-client-guide": "A useful customer avatar is more than an age or job title. It brings together the needs, objections, words and situations that help you write a genuinely convincing landing page.",
+  "combien-coute-creation-site-internet": "Website prices vary with the scope, content, design, integrations and support included. This guide compares common options and explains what to verify in a quote before choosing a provider.",
+  "combien-coute-landing-page": "A landing page quote depends on more than the number of screens. This guide compares agency and freelance pricing, explains the scope behind a quote and lists the questions to ask before committing.",
 };
 
 export function getEnglishArticle(article: Article): Article {

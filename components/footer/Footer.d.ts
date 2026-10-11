@@ -15,3 +15,4 @@ declare const Footer: React.FC<FooterProps>;
 export { Footer };
 export default Footer;
 export const internalIds: Record<string, string>;
+export const Availability: React.FC<{ english?: boolean }>;

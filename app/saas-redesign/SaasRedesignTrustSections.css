@@ -11,6 +11,16 @@
 }
 .sr-trust-section--pricing { background: #f5f5f5; }
 
+#guarantee-primary.sr-trust-section--pricing {
+  padding-top: 48px;
+  background: transparent;
+}
+#guarantee-primary .sr-trust-card {
+  border-color: rgba(18, 26, 46, .16);
+  border-radius: 40px;
+  box-shadow: 0 2px 4px rgba(18, 26, 84, .05), 0 8px 14px rgba(18, 26, 84, .06), 0 22px 32px rgba(18, 26, 84, .04);
+}
+
 .sr-trust-card {
   display: grid;
   grid-template-columns: 274px minmax(0, 1fr);
@@ -191,4 +201,6 @@
   .sr-ai-reasons-card li { min-height: 84px; padding: 18px 0; font-size: 16px; }
   .sr-ai-reasons-icon { width: 42px; height: 42px; flex-basis: 42px; }
   .sr-ai-reasons-icon svg { width: 24px; height: 24px; }
+  #guarantee-primary.sr-trust-section--pricing { padding: 32px 18px 48px; }
+  #guarantee-primary .sr-trust-card { border-radius: 28px; }
 }

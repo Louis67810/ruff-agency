@@ -51,6 +51,7 @@ import { HomepageReviewCard } from "@/components/sections/SectionAvis/HomepageRe
 import { StackSection3 } from "@/components/sections/StackSection3/StackSection3";
 import ExistingCta from "@/components/ui/Cta";
 import { Availability } from "@/components/footer/Footer";
+import { saasFaqs } from "@/lib/saas-faq/knowledge";
 import { projects as portfolioProjects } from "@/lib/data/projects";
 import { ConversionMetricsSection } from "./conversion-metrics-section";
 import SaasRedesignPricing from "./SaasRedesignPricing";
@@ -612,21 +613,6 @@ const comparisonRounds = [...comparisonProjects.slice(1), ...comparisonProjects.
       : 100 - comparison.afterPercent,
   afterSide: comparison.afterSide,
 }));
-
-const saasFaqs = [
-  { question: "Do you only work with SaaS?", answer: "Yes. We focus on SaaS companies that have outgrown the website they launched with and need something more distinctive, credible and conversion-focused." },
-  { question: "Is this built for teams that use AI?", answer: "Yes — especially. You can keep using AI to move fast. We create the brand system, components and context your AI tools can reuse so future pages and assets stay much closer to your visual direction." },
-  { question: "Can you work with our existing brand?", answer: "Absolutely. We can build on what already works, refine what doesn’t, and evolve your existing identity without starting from scratch." },
-  { question: "Do you write the copy?", answer: "Yes. We structure and write the page around your product, positioning, customers and the reasons they should choose you." },
-  { question: "Do you build it too?", answer: "Yes. We handle the strategy, copy, design and development — so you don’t have to coordinate multiple people." },
-  { question: "Framer or React?", answer: "Both. We can build in Framer or React/Next.js depending on your product, stack and what makes the most sense for your team." },
-  { question: "How involved do I need to be?", answer: "Very little. We need your product context and feedback at key stages. We handle the rest." },
-  { question: "How long does it take?", answer: "Most landing pages are completed in around 10 days, depending on feedback and scope." },
-  { question: "What happens after launch?", answer: "We can keep improving the page through CRO, testing and new iterations as real traffic comes in." },
-  { question: "Can I make changes afterward?", answer: "Yes. You keep full control of the website and can continue editing it yourself or with your team." },
-  { question: "Why shouldn’t I just use AI?", answer: "You can — and you should keep using it. The problem is that AI makes it easy for everyone to build the same “good-looking” SaaS website. We create the strategy and visual system that gives AI something unique to work from." },
-  { question: "How does payment work?", answer: "The project is split into two payments: one to start the project, and the second after the design stage before final delivery." },
-] as const;
 
 function Cta() {
   return (
@@ -1227,6 +1213,34 @@ function TrustChoice({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
 function Results() {
   const [activeCategory, setActiveCategory] = useState<RealizationCategory>("website");
   const [openProject, setOpenProject] = useState<RealizationProject | null>(null);
+  const [showAllMobile, setShowAllMobile] = useState(false);
+  const [mobilePreviewHeight, setMobilePreviewHeight] = useState(0);
+  const resultsWindowRef = useRef<HTMLDivElement>(null);
+  const resultsGridRef = useRef<HTMLDivElement>(null);
+  const activeProjects = projectsByCategory[activeCategory];
+
+  useEffect(() => {
+    const windowElement = resultsWindowRef.current;
+    const grid = resultsGridRef.current;
+    if (!windowElement || !grid) return;
+    const updatePreviewHeight = () => {
+      const sixthProject = grid.children.item(5) as HTMLElement | null;
+      if (!sixthProject || !window.matchMedia("(max-width: 809px)").matches) {
+        setMobilePreviewHeight(0);
+        return;
+      }
+      const sixthProjectTop = sixthProject.getBoundingClientRect().top - windowElement.getBoundingClientRect().top;
+      setMobilePreviewHeight(sixthProjectTop + Math.min(100, sixthProject.offsetHeight * 0.24) + 40);
+    };
+    updatePreviewHeight();
+    const observer = new ResizeObserver(updatePreviewHeight);
+    observer.observe(grid);
+    window.addEventListener("resize", updatePreviewHeight);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updatePreviewHeight);
+    };
+  }, [activeCategory, activeProjects.length]);
 
   return (
     <section className="sr-results" id="from-this" data-sr-reveal="section">
@@ -1242,20 +1256,39 @@ function Results() {
             type="button"
             aria-pressed={activeCategory === category}
             className={activeCategory === category ? "is-active" : ""}
-            onClick={() => setActiveCategory(category)}
+            onClick={() => {
+              setActiveCategory(category);
+              setShowAllMobile(false);
+            }}
           >
             {category === "website" ? "Website" : "Branding"}
           </button>
         ))}
       </div>
-      <div className="sr-case-grid">
-        {projectsByCategory[activeCategory].map((project) => (
-          <ResultCase
-            project={project}
-            onOpen={() => setOpenProject(project)}
-            key={`${activeCategory}-${project.id}`}
-          />
-        ))}
+      <div
+        className={`sr-case-window${!showAllMobile && activeProjects.length > 5 ? " is-mobile-collapsed" : ""}`}
+        ref={resultsWindowRef}
+        style={!showAllMobile && mobilePreviewHeight ? { "--sr-mobile-preview-height": `${mobilePreviewHeight}px` } as React.CSSProperties : undefined}
+      >
+        <div className="sr-case-grid" key={activeCategory} ref={resultsGridRef}>
+          {activeProjects.map((project) => (
+            <ResultCase
+              project={project}
+              onOpen={() => setOpenProject(project)}
+              key={`${activeCategory}-${project.id}`}
+            />
+          ))}
+        </div>
+        {activeProjects.length > 5 && !showAllMobile ? (
+          <button
+            type="button"
+            className="sr-see-details sr-results-more"
+            aria-expanded={showAllMobile}
+            onClick={() => setShowAllMobile((expanded) => !expanded)}
+          >
+            See more
+          </button>
+        ) : null}
       </div>
       {openProject ? (
         <ProjectDetailOverlay
@@ -1702,7 +1735,7 @@ function ProofReviews() {
       <h2>What they think of it</h2>
       <div className="sr-review-grid">
         <VideoReviewCard
-          RceipbT2y="https://framerusercontent.com/assets/edTM2GQjvjlTaWLPl9LWzwa6qw.mp4"
+          RceipbT2y="/videos/william-testimonial-en.mp4"
           style={{ height: 487 }}
         />
         {reviews.slice(0, 7).map(([name, role, quote, avatar], index) => (
@@ -1919,6 +1952,8 @@ export default function SaasRedesignLanding({
         locale="en"
         bookingLabel="Start your redesign"
         bookingHref="/en/saas-redesign/brief"
+        includeGuarantee
+        guaranteeId="guarantee-primary"
       />
       <SaasRedesignProcess />
       <FeaturedSocialProof review={reviews.find(([name]) => name === "Noé E.")} className="sr-featured-review--after-process" />
@@ -1942,6 +1977,7 @@ export default function SaasRedesignLanding({
         className="sr-final-faq"
         locale="en"
         faqs={saasFaqs}
+        allowCustomQuestion
         ctaHref="/en/saas-redesign/brief"
         showDescription={false}
         showCta={false}

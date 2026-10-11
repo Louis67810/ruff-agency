@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function BehavioralIntelligencePage() {
+export default async function BehavioralIntelligencePage({ searchParams }: { searchParams?: { view?: string } }) {
   const authenticated = analyticsTokenIsValid(cookies().get(analyticsCookieName)?.value);
   if (process.env.NODE_ENV === "production" && !authenticated) {
     return <BehavioralIntelligenceLogin />;
@@ -64,5 +64,5 @@ export default async function BehavioralIntelligencePage() {
     (process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL)
     && (process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY)
   );
-  return <BehavioralIntelligenceApp initialAnalytics={analytics} pageCatalog={pageCatalog} localPreview={localPreview} />;
+  return <BehavioralIntelligenceApp initialAnalytics={analytics} pageCatalog={pageCatalog} localPreview={localPreview} initialView={searchParams?.view === "forms" ? "forms" : "home"} />;
 }

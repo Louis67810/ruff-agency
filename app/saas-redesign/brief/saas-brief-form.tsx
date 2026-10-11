@@ -20,6 +20,16 @@ const stepQuestions = [
   "Anything else we should know?",
 ];
 
+type BriefDraft = {
+  website: string;
+  email: string;
+  mrr: string;
+  changes: string[];
+  details: string;
+  step: number;
+  submitted: boolean;
+};
+
 export default function SaasBriefForm() {
   const [step, setStep] = useState(0);
   const [website, setWebsite] = useState("");
@@ -29,8 +39,13 @@ export default function SaasBriefForm() {
   const [details, setDetails] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [selectionError, setSelectionError] = useState("");
+  const [saveStatus, setSaveStatus] = useState<"saving" | "saved" | "error">("saving");
   const formRef = useRef<HTMLFormElement>(null);
   const stepPanelRef = useRef<HTMLDivElement>(null);
+  const briefSession = useRef<{ id: string; token: string; visitorId: string; revision: number } | null>(null);
+  const startedAt = useRef(Date.now());
+  const latestDraft = useRef<BriefDraft>({ website, email, mrr, changes, details, step, submitted });
+  latestDraft.current = { website, email, mrr, changes, details, step, submitted };
   const progress = Math.round(((step + 1) / stepCount) * 100);
   const briefMessage = [
     "Hi Ruff Agency, I'd like to discuss a redesign for my SaaS.",
@@ -44,6 +59,68 @@ export default function SaasBriefForm() {
   const briefSubject = `SaaS redesign brief — ${website}`;
   const whatsappHref = `https://api.whatsapp.com/send/?phone=33636465091&text=${encodeURIComponent(briefMessage)}&type=phone_number&app_absent=0`;
   const emailHref = `mailto:?subject=${encodeURIComponent(briefSubject)}&body=${encodeURIComponent(briefMessage)}`;
+
+  async function saveDraft(complete = latestDraft.current.submitted, silent = false) {
+    const session = briefSession.current;
+    if (!session) return false;
+    const draft = latestDraft.current;
+    const payload = {
+      id: session.id,
+      token: session.token,
+      visitorId: session.visitorId,
+      revision: ++session.revision,
+      lastStep: complete ? stepCount : draft.step,
+      website: draft.website.trim(),
+      email: draft.email.trim(),
+      mrr: draft.mrr,
+      changes: draft.changes,
+      details: draft.details,
+      durationMs: Math.min(Date.now() - startedAt.current, 86_400_000),
+      completed: complete,
+    };
+    if (!silent) setSaveStatus("saving");
+    try {
+      const response = await fetch("/api/saas-brief", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
+      if (!response.ok) throw new Error(`Brief save failed (${response.status})`);
+      if (!silent) setSaveStatus("saved");
+      return true;
+    } catch {
+      if (!silent) setSaveStatus("error");
+      return false;
+    }
+  }
+
+  useEffect(() => {
+    if (!briefSession.current) {
+      let visitorId = crypto.randomUUID();
+      try {
+        const existing = localStorage.getItem("ruff_saas_visitor_id");
+        if (existing && /^[0-9a-f-]{36}$/i.test(existing)) visitorId = existing;
+        else localStorage.setItem("ruff_saas_visitor_id", visitorId);
+      } catch { /* Private browsing may block local storage. */ }
+      briefSession.current = { id: crypto.randomUUID(), token: crypto.randomUUID(), visitorId, revision: -1 };
+    }
+    void saveDraft(false);
+    const flush = () => { void saveDraft(latestDraft.current.submitted, true); };
+    const whenHidden = () => { if (document.visibilityState === "hidden") flush(); };
+    window.addEventListener("pagehide", flush);
+    document.addEventListener("visibilitychange", whenHidden);
+    return () => {
+      window.removeEventListener("pagehide", flush);
+      document.removeEventListener("visibilitychange", whenHidden);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!briefSession.current) return;
+    const timer = window.setTimeout(() => { void saveDraft(); }, 550);
+    return () => window.clearTimeout(timer);
+  }, [website, email, mrr, changes, details, step, submitted]);
 
   useEffect(() => {
     if (step === 2 || step === 3)
@@ -66,7 +143,7 @@ export default function SaasBriefForm() {
     );
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSelectionError("");
 
@@ -83,6 +160,11 @@ export default function SaasBriefForm() {
       return;
     }
     if (step === stepCount - 1) {
+      const saved = await saveDraft(true);
+      if (!saved) {
+        setSelectionError("We couldn't save your brief. Please try again.");
+        return;
+      }
       setSubmitted(true);
       return;
     }
@@ -259,6 +341,9 @@ export default function SaasBriefForm() {
                   <span>{step === stepCount - 1 ? "Send My SaaS" : "Continue"}</span>
                   <ArrowRightIcon aria-hidden="true" />
                 </button>
+                <span className="sb-save-status" aria-live="polite">
+                  {saveStatus === "error" ? "Save interrupted" : saveStatus === "saved" ? "Progress saved" : "Saving…"}
+                </span>
               </div>
             </>
           )}

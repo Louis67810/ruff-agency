@@ -425,6 +425,13 @@
   gap: 32px;
 }
 
+.sb-save-status {
+  margin-top: -22px;
+  color: #7b8290;
+  font: 500 12px/1.3 Inter, sans-serif;
+  text-align: center;
+}
+
 .sb-form-error {
   min-height: 0;
   margin: 0;

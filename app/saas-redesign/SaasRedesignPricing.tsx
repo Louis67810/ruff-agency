@@ -23,6 +23,7 @@ type Upsell = {
 export type PrixOptimizedProps = {
   locale?: "fr" | "en";
   includeGuarantee?: boolean;
+  guaranteeId?: string;
   basePrice?: number;
   extraPrice?: number;
   maxPages?: number;
@@ -47,7 +48,7 @@ export type PrixOptimizedProps = {
 const FEATURES: Feature[] = [
   { label: "Up to 1 page", icon: "/landing-assets/pricing/icon-layout.svg" },
   { label: "Brand refinement", icon: "/landing-assets/pricing/icon-flow.svg" },
-  { label: "Delivery within 14 days", icon: "/landing-assets/pricing/icon-calendar.svg" },
+  { label: "Delivered within 10 days", icon: "/landing-assets/pricing/icon-calendar.svg" },
   { label: "Framer development", icon: "/landing-assets/pricing/icon-flash.svg" },
   { label: "3 rounds of unlimited revisions", icon: "/landing-assets/pricing/icon-infinity.svg" },
   { label: "Page animation", icon: "/landing-assets/pricing/icon-bounce.svg" },
@@ -79,7 +80,7 @@ const UPSELLS: Upsell[] = [
 const EN_FEATURE_LABELS = [
   "Up to 1 page",
   "Brand refinement",
-  "Delivery within 14 days",
+  "Delivered within 10 days",
   "Framer development",
   "3 rounds of unlimited revisions",
   "Page animation",
@@ -93,7 +94,7 @@ const EN_FEATURE_LABELS = [
 const FR_FEATURE_LABELS = [
   "Jusqu’à 1 page",
   "Affinement de la marque",
-  "Livraison sous 14 jours",
+  "Livraison sous 10 jours",
   "Développement Framer",
   "3 séries de révisions illimitées",
   "Animation de page",
@@ -181,6 +182,7 @@ export default function PrixOptimized({
   sectionId = "pricing",
   locale = "fr",
   includeGuarantee = false,
+  guaranteeId,
 }: PrixOptimizedProps) {
   const english = locale === "en";
   const prices = english
@@ -249,7 +251,9 @@ export default function PrixOptimized({
     ...feature,
     label: index === 0
       ? english ? `Up to ${pages} ${pages === 1 ? "page" : "pages"}` : `Jusqu’à ${pages} ${pages === 1 ? "page" : "pages"}`
-      : english ? EN_FEATURE_LABELS[index] : FR_FEATURE_LABELS[index],
+      : index === 2
+        ? english ? `Delivered within ${pages === 1 ? 10 : 14} days` : `Livraison sous ${pages === 1 ? 10 : 14} jours`
+        : english ? EN_FEATURE_LABELS[index] : FR_FEATURE_LABELS[index],
   }));
   const localizedUpsells = english
     ? UPSELLS.map((upsell) => ({
@@ -387,7 +391,7 @@ export default function PrixOptimized({
         </div>
 
       </div>
-      {includeGuarantee && <SaasRedesignGuarantee />}
+      {includeGuarantee && <SaasRedesignGuarantee id={guaranteeId} />}
     </section>
   );
 }

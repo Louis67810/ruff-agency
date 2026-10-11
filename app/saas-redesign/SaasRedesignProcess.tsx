@@ -11,7 +11,7 @@ export default function SaasRedesignProcess() {
       <div className="sr-process__inner">
         <header className="sr-process__heading">
           <h2 id="sr-process-title">From SaaS to standout brand.</h2>
-          <p>A complete website, built and launched in 14 days.</p>
+          <p>A complete website, built and launched in 10 days.</p>
         </header>
         <div className="sr-process__rule" aria-hidden="true" />
         <ExactProcessCardGrid locale="en" variant="saas" />

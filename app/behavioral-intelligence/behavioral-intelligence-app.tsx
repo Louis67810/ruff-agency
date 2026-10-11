@@ -9,6 +9,7 @@ import world from "world-atlas/countries-110m.json";
 import { ExactAnalyticsDashboard, type MetricKey } from "./exact-analytics-dashboard";
 import { VisitorHistoryControls, type HistoryPeriod } from "./visitor-history";
 import { TrackedVisitorHistory, TrackedVisitorDetail, visitorHistoryName } from "./tracked-visitors";
+import { SaasBriefDashboard } from "./saas-brief-dashboard";
 import {
   ArrowLeft,
   ArrowRight,
@@ -38,7 +39,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-type View = "home" | "ads" | "pages" | "profiles" | "live" | "history";
+type View = "home" | "ads" | "pages" | "profiles" | "live" | "history" | "forms";
 type Detail = { type: "ad" | "page" | "profile"; name: string } | null;
 type Metric = "visitors" | "conversion" | "bounce" | "session" | "online";
 type Range =
@@ -54,6 +55,7 @@ const nav = [
   { id: "home", label: "Home", icon: House },
   { id: "profiles", label: "Profils", icon: UserRound },
   { id: "history", label: "Historique", icon: History },
+  { id: "forms", label: "Formulaires", icon: FileText },
 ] as const;
 
 // Kept in the codebase for the next tracking iteration, but intentionally
@@ -451,8 +453,8 @@ async function interpretComparisonRequest(input: string, candidates: ComparisonC
   }
 }
 
-export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, localPreview = false }: { initialAnalytics: AnalyticsSummary | null; pageCatalog: Array<{ name: string; path: string }>; localPreview?: boolean }) {
-  const [view, setView] = useState<View>("home"),
+export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, localPreview = false, initialView = "home" }: { initialAnalytics: AnalyticsSummary | null; pageCatalog: Array<{ name: string; path: string }>; localPreview?: boolean; initialView?: View }) {
+  const [view, setView] = useState<View>(initialView),
     [detail, setDetail] = useState<Detail>(null),
     [detailOrigin, setDetailOrigin] = useState<View | null>(null),
     [mobile, setMobile] = useState(false),
@@ -557,6 +559,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, local
     }, 440);
   };
   const go = (v: View) => {
+    window.history.replaceState(null, "", v === "forms" ? "/behavioral-intelligence?view=forms" : "/behavioral-intelligence");
     setView(v);
     setSelectedVisitorId(null);
     setDetail(null);
@@ -675,7 +678,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, local
               ...(detailOrigin === "home" ? [{ label: "Home", onClick: () => go("home") }] : []),
               { label: detail.type === "page" ? "Page" : detail.type === "profile" ? "Profil" : "Ads", onClick: () => detail.type === "page" ? go("pages") : detail.type === "profile" ? go("profiles") : go("ads") },
               { label: detail.name, current: true },
-            ] : [{ label: view === "home" ? "Dashboard" : view === "profiles" ? "Profils" : "Historique", current: true }]} />
+            ] : [{ label: view === "home" ? "Dashboard" : view === "profiles" ? "Profils" : view === "forms" ? "Formulaires" : "Historique", current: true }]} />
             <div className={`fw-sticky-search ${searchOpen ? "is-open" : ""} ${searchClosing ? "is-closing" : ""}`}>
               <SearchBar value={query} setValue={setQuery} onSearch={openSearch} onSubmit={() => submit(query)} onCompare={() => { setCompareMetric(null); setCompare(true); }} />
               {searchOpen && (
@@ -784,6 +787,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, local
               )}{" "}
               {view === "live" && <Live visitors={trackedVisitors} online={trackedOnline} />}
               {view === "history" && <TrackedVisitorHistory visitors={trackedVisitors} period={historyPeriod} page={historyPage} onOpen={setSelectedVisitorId} />}
+              {view === "forms" && <SaasBriefDashboard />}
             </>
           )}
         </div>

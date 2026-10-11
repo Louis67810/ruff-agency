@@ -63,15 +63,15 @@ export default function RessourceSlugPage({ params }: { params: { slug: string }
     publisher: { "@type": "Organization", name: "Ruff Agency", url: SITE_URL },
     ...(article.publishedAt ? { datePublished: article.publishedAt } : {}),
     ...(modifiedTime ? { dateModified: modifiedTime } : {}),
-    mainEntityOfPage: `${SITE_URL}/ressources/${article.slug}`,
+    mainEntityOfPage: articleUrl,
   };
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Ressources", item: `${SITE_URL}/ressources` },
-      { "@type": "ListItem", position: 3, name: article.title, item: `${SITE_URL}/ressources/${article.slug}` },
+      { "@type": "ListItem", position: 1, name: locale === "en" ? "Home" : "Accueil", item: `${SITE_URL}${locale === "en" ? "/en" : ""}/` },
+      { "@type": "ListItem", position: 2, name: locale === "en" ? "Resources" : "Ressources", item: `${SITE_URL}${locale === "en" ? "/en" : ""}/ressources` },
+      { "@type": "ListItem", position: 3, name: article.title, item: articleUrl },
     ],
   };
   return (

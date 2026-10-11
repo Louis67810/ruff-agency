@@ -16,6 +16,7 @@ export interface StackSection3Props {
     question: string;
     answer: string;
   }>;
+  allowCustomQuestion?: boolean;
   onCtaClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 }
 

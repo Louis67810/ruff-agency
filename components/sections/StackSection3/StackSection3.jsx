@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { ArrowRightIcon, StopIcon } from "@heroicons/react/24/solid";
 import "./StackSection3.css";
 
 const FAQS = [
@@ -153,6 +154,123 @@ function FAQItem({ question, answer }) {
   );
 }
 
+function CustomQuestionItem() {
+  const [question, setQuestion] = useState("");
+  const [phase, setPhase] = useState("idle");
+  const [answer, setAnswer] = useState("");
+  const [contactHref, setContactHref] = useState(null);
+  const controllerRef = useRef(null);
+  const requestRef = useRef(0);
+  const [ref, visible] = useInViewOnce(0.5);
+  const answerId = React.useId();
+  const open = phase === "answered" || phase === "error";
+
+  useEffect(() => () => {
+    requestRef.current += 1;
+    controllerRef.current?.abort();
+  }, []);
+
+  const stopWaiting = () => {
+    requestRef.current += 1;
+    controllerRef.current?.abort();
+    controllerRef.current = null;
+    setPhase("idle");
+  };
+
+  const askQuestion = async () => {
+    const submittedQuestion = question.trim();
+    if (!submittedQuestion || phase === "loading") return;
+    controllerRef.current?.abort();
+    const controller = new AbortController();
+    controllerRef.current = controller;
+    const request = ++requestRef.current;
+    setAnswer("");
+    setContactHref(null);
+    setPhase("loading");
+
+    try {
+      const response = await fetch("/api/saas-faq", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: submittedQuestion }),
+        signal: controller.signal,
+      });
+      const result = await response.json();
+      if (requestRef.current !== request) return;
+      if (!response.ok || typeof result.answer !== "string") {
+        setAnswer(result.error || "We couldn't answer right now. Please try again.");
+        setContactHref(null);
+        setPhase("error");
+        return;
+      }
+      setAnswer(result.answer);
+      setContactHref(typeof result.contactHref === "string" ? result.contactHref : null);
+      setPhase("answered");
+    } catch {
+      if (requestRef.current !== request || controller.signal.aborted) return;
+      setAnswer("We couldn't answer right now. Please try again.");
+      setContactHref(null);
+      setPhase("error");
+    } finally {
+      if (requestRef.current === request) controllerRef.current = null;
+    }
+  };
+
+  return (
+    <li
+      ref={ref}
+      className={`s3-faq-item s3-faq-custom s3-reveal-up${visible ? " is-visible" : ""}${open ? " is-open" : ""}`}
+      aria-busy={phase === "loading"}
+    >
+      <form
+        className="s3-faq-header"
+        onSubmit={(event) => {
+          event.preventDefault();
+          void askQuestion();
+        }}
+      >
+        <input
+          className="s3-faq-question s3-faq-input"
+          type="text"
+          aria-label="Ask your own question"
+          placeholder="Ask your own question..."
+          value={question}
+          readOnly={phase === "loading"}
+          onChange={(event) => {
+            setQuestion(event.target.value);
+            setAnswer("");
+            setContactHref(null);
+            setPhase("idle");
+          }}
+          maxLength={600}
+        />
+        <button
+          className="s3-faq-action"
+          type={phase === "loading" ? "button" : "submit"}
+          onClick={phase === "loading" ? (event) => {
+            event.preventDefault();
+            stopWaiting();
+          } : undefined}
+          aria-label={phase === "loading" ? "Stop waiting for answer" : "Send question"}
+          aria-controls={answerId}
+          aria-expanded={open}
+        >
+          {phase === "loading" ? <StopIcon /> : <ArrowRightIcon />}
+        </button>
+      </form>
+
+      <div className="s3-answer-clip" id={answerId} aria-hidden={!open} aria-live="polite">
+        <div className="s3-answer-inner">
+          <p className="s3-faq-answer">{answer}</p>
+          {contactHref && <a className="s3-faq-contact" href={contactHref} target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>}
+        </div>
+      </div>
+
+      <div className="s3-faq-line" />
+    </li>
+  );
+}
+
 function PrimaryCTA({ href, onClick, locale = "fr" }) {
   const [ref, visible] = useInViewOnce(0.5);
   const safeHref = href || "#";
@@ -197,6 +315,7 @@ export function StackSection3({
   showCta = true,
   showSectionDivider = false,
   faqs,
+  allowCustomQuestion = false,
 }) {
   const [titleRef, titleVisible] = useInViewOnce(0.5);
   const [copyRef, copyVisible] = useInViewOnce(0.5);
@@ -263,6 +382,7 @@ export function StackSection3({
             {(faqs ?? (english ? ENGLISH_FAQS : FAQS)).map((faq) => (
               <FAQItem key={faq.question} {...faq} />
             ))}
+            {allowCustomQuestion && <CustomQuestionItem />}
           </ul>
         </div>
       </div>
