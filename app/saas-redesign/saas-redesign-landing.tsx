@@ -643,6 +643,8 @@ function MarqueeCard({
   compact = false,
   initialPosition = 50,
   onSlideChange,
+  selectedSlide,
+  onSelectedSlideChange,
   branding = false,
 }: {
   item: string;
@@ -650,6 +652,8 @@ function MarqueeCard({
   compact?: boolean;
   initialPosition?: number;
   onSlideChange?: (slide: BeforeAfterSlide) => void;
+  selectedSlide?: number;
+  onSelectedSlideChange?: (index: number) => void;
   branding?: boolean;
 }) {
   const slideSet = slides.length ? slides : beforeAfterSlides;
@@ -658,9 +662,10 @@ function MarqueeCard({
     const slideIndex = slideSet.findIndex((slide) => slide.id === item);
     return slideIndex >= 0 ? slideIndex : 0;
   });
-  const slide = slideSet[activeSlide];
+  const displayedSlide = selectedSlide ?? activeSlide;
+  const slide = slideSet[displayedSlide] ?? slideSet[0];
 
-  useEffect(() => setPosition(initialPosition), [activeSlide, initialPosition]);
+  useEffect(() => setPosition(initialPosition), [displayedSlide, initialPosition]);
   const updatePositionFromPointer = (
     event: ReactPointerEvent<HTMLInputElement>,
   ) => {
@@ -758,11 +763,12 @@ function MarqueeCard({
           <button
             type="button"
             key={candidate.id}
-            className={index === activeSlide ? "is-active" : ""}
+            className={index === displayedSlide ? "is-active" : ""}
             aria-label={`Show ${branding ? "brand image" : "redesign"} ${index + 1}`}
-            aria-current={index === activeSlide ? "true" : undefined}
+            aria-current={index === displayedSlide ? "true" : undefined}
             onClick={() => {
               setActiveSlide(index);
+              onSelectedSlideChange?.(index);
               onSlideChange?.(candidate);
               trackSaasEvent({
                 eventType: "before_after_interaction",
@@ -793,6 +799,21 @@ function Marquee({
   const repeated = [...projects, ...projects];
   const trackRef = useRef<HTMLDivElement>(null);
   const rateFrame = useRef<number | null>(null);
+  const resumeFrame = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [selectedSlides, setSelectedSlides] = useState<Record<string, number>>({});
+
+  const holdMobileTicker = () => {
+    if (!window.matchMedia("(max-width: 809px)").matches) return;
+    const animation = trackRef.current?.getAnimations()[0];
+    if (!animation) return;
+    if (rateFrame.current !== null) cancelAnimationFrame(rateFrame.current);
+    if (resumeFrame.current !== null) clearTimeout(resumeFrame.current);
+    animation.updatePlaybackRate(0);
+    resumeFrame.current = setTimeout(() => {
+      animation.updatePlaybackRate(1);
+      resumeFrame.current = null;
+    }, 4000);
+  };
 
   const tweenPlaybackRate = (targetRate: number) => {
     const animation = trackRef.current?.getAnimations()[0];
@@ -818,6 +839,7 @@ function Marquee({
   useEffect(
     () => () => {
       if (rateFrame.current !== null) cancelAnimationFrame(rateFrame.current);
+      if (resumeFrame.current !== null) clearTimeout(resumeFrame.current);
     },
     [],
   );
@@ -825,8 +847,13 @@ function Marquee({
   return (
     <div
       className={`sr-marquee ${className}`}
-      onMouseEnter={() => tweenPlaybackRate(0)}
-      onMouseLeave={() => tweenPlaybackRate(1)}
+      onMouseEnter={() => {
+        if (!window.matchMedia("(max-width: 809px)").matches) tweenPlaybackRate(0);
+      }}
+      onMouseLeave={() => {
+        if (!window.matchMedia("(max-width: 809px)").matches) tweenPlaybackRate(1);
+      }}
+      onPointerDownCapture={holdMobileTicker}
     >
       <div className="sr-marquee__track" ref={trackRef}>
         {repeated.map((project, index) => (
@@ -834,6 +861,10 @@ function Marquee({
             key={`${project.id}-${index}`}
             item={project.slides[0].id}
             slides={project.slides}
+            selectedSlide={selectedSlides[project.id]}
+            onSelectedSlideChange={(slideIndex) =>
+              setSelectedSlides((current) => ({ ...current, [project.id]: slideIndex }))
+            }
           />
         ))}
       </div>
@@ -1956,7 +1987,7 @@ export default function SaasRedesignLanding({
         guaranteeId="guarantee-primary"
       />
       <SaasRedesignProcess />
-      <FeaturedSocialProof review={reviews.find(([name]) => name === "Noé E.")} className="sr-featured-review--after-process" />
+      <FeaturedSocialProof review={reviews.find(([name]) => name === "Antoine Troovy")} className="sr-featured-review--after-process" />
       <SaasRedesignWhyAI />
       <ProofReviews />
       <SaasRedesignPricing

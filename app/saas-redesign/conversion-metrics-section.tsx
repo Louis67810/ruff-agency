@@ -4,6 +4,7 @@ import {
   useId,
   useMemo,
   useState,
+  type CSSProperties,
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import { area, curveMonotoneX, line } from "d3-shape";
@@ -315,9 +316,10 @@ function ConversionChart({ profile }: { profile: MetricProfile }) {
         <div
           className="sr-metric-chart-tooltip"
           style={{
-            left: `${Math.min(89, Math.max(11, (hoveredPoint[0] / VIEW_WIDTH) * 100))}%`,
+            "--tooltip-percent": `${Math.min(89, Math.max(11, (hoveredPoint[0] / VIEW_WIDTH) * 100))}%`,
+            "--tooltip-x": `${hoveredPoint[0]}px`,
             top: `${Math.max(22, (hoveredPoint[1] / VIEW_HEIGHT) * 100)}%`,
-          }}
+          } as CSSProperties}
         >
           <strong>{profile.dates[Math.min(profile.dates.length - 1, Math.round((hoverIndex / (profile.values.length - 1)) * (profile.dates.length - 1)))]}</strong>
           <span><i />Conversion rate<strong>{profile.values[hoverIndex].toFixed(2)}%</strong></span>

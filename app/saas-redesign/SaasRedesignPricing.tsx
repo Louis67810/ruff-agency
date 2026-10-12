@@ -242,7 +242,10 @@ export default function PrixOptimized({
     ? english ? "One Page Site" : "Site one-page"
     : english ? "Website" : "Site Internet";
   const fillPercentage = ((rawValue - 1) / (safeMaxPages - 1)) * 100;
-  const badgeLeft = thumbPosition(rawValue, 1, safeMaxPages, trackWidth);
+  const badgeLeft = Math.min(
+    Math.max(thumbPosition(rawValue, 1, safeMaxPages, trackWidth), 48),
+    Math.max(48, trackWidth - 48),
+  );
   const ticks = useMemo(
     () => Array.from({ length: safeMaxPages }),
     [safeMaxPages],
@@ -292,9 +295,6 @@ export default function PrixOptimized({
 
   return (
     <section id={sectionId} className={`sr-prx-section ${className}`.trim()}>
-      <div className="sr-prx-backgroundShapes" aria-hidden="true">
-        <img className="sr-prx-shape" src="/landing-assets/saas-redesign/pricing-comparison-shapes.svg" alt="" />
-      </div>
       <div className="sr-prx-sectionInner">
         <header className="sr-prx-heading">
           <h2 className="sr-prx-sectionTitle">
@@ -315,14 +315,14 @@ export default function PrixOptimized({
                 <h3>{pageTitle}</h3>
                 <div className="sr-prx-priceLine">
                   <div className="sr-prx-total">{formatPrice(displayedPrice)}</div>
+                  <div className="sr-prx-sliderInfo">{localizedSliderInfo}</div>
                 </div>
               </div>
 
               <div className="sr-prx-sliderModule">
-                <div className="sr-prx-sliderInfo">{localizedSliderInfo}</div>
                 <div className="sr-prx-sliderControl">
                   <div className="sr-prx-pageBadge" style={{ left: badgeLeft }}>
-                    {pages} {english ? (pages === 1 ? "page" : "pages") : (pages === 1 ? "page" : "pages")}
+                    {`${pages} ${pages === 1 ? "page" : "pages"}`}
                   </div>
                   <div className="sr-prx-trackBackground" aria-hidden="true">
                     <div className="sr-prx-ticks">{ticks.map((_, index) => <span key={index} />)}</div>

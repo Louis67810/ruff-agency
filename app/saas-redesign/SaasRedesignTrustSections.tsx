@@ -108,9 +108,6 @@ export function SaasRedesignGuarantee({ id = "guarantee" }: { id?: string }) {
 export function SaasRedesignWhyAI() {
   return (
       <section id="why-ai" className="sr-ai-reasons" aria-labelledby="sr-ai-reasons-title">
-        <div className="sr-ai-reasons-shapes" aria-hidden="true">
-          <img className="sr-ai-reasons-shape" src="/landing-assets/saas-redesign/pricing-comparison-shapes.svg" alt="" />
-        </div>
         <div className="sr-ai-reasons-inner">
           <header className="sr-ai-reasons-heading">
             <h2 id="sr-ai-reasons-title">Why not just use AI?</h2>
