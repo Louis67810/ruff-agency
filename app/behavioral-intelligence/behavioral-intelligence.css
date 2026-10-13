@@ -4247,3 +4247,31 @@ button.df-details:hover { background: #f7fbfe; color: #256a94; }
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+.fw-questions-report { display: flex; flex-direction: column; gap: 18px; }
+.fw-questions-intro { margin: -8px 0 0; color: #69717f; font-size: 14px; }
+.fw-questions-metrics { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; }
+.fw-questions-metric { display: flex; min-width: 0; min-height: 96px; flex-direction: column; justify-content: space-between; padding: 14px; border: 1px solid #e8e9ed; border-radius: 14px; background: #fff; }
+.fw-questions-metric span { color: #727987; font-size: 12px; }
+.fw-questions-metric strong { color: #151a29; font-size: 24px; font-weight: 600; }
+.fw-questions-metric small { color: #818894; font-size: 11px; }
+.fw-questions-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 10px; }
+.fw-questions-toolbar div { display: flex; align-items: baseline; gap: 10px; }
+.fw-questions-toolbar h2 { margin: 0; font-size: 18px; }
+.fw-questions-toolbar span { color: #818894; font-size: 13px; }
+.fw-questions-toolbar input { width: min(320px, 50vw); height: 40px; padding: 0 12px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; color: #151a29; font: inherit; }
+.fw-questions-table-wrap { overflow: auto; border: 1px solid #e8e9ed; border-radius: 14px; background: #fff; }
+.fw-questions-table { width: 100%; border-collapse: collapse; text-align: left; }
+.fw-questions-table th, .fw-questions-table td { padding: 14px 16px; border-bottom: 1px solid #eff0f2; font-size: 13px; }
+.fw-questions-table th { color: #747b89; font-weight: 500; white-space: nowrap; }
+.fw-questions-table td { color: #242a38; }
+.fw-questions-table tr:last-child td { border-bottom: 0; }
+.fw-questions-table td:first-child, .fw-questions-table td:nth-child(2) { white-space: nowrap; }
+.fw-questions-empty { padding: 34px 16px; color: #747b89; text-align: center; }
+@media (max-width: 1200px) { .fw-questions-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .fw-questions-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fw-questions-toolbar { align-items: stretch; flex-direction: column; }
+  .fw-questions-toolbar input { width: 100%; }
+  .fw-questions-table th, .fw-questions-table td { padding: 12px; }
+  .fw-questions-table td:first-child { white-space: normal; min-width: 115px; }
+}

@@ -341,9 +341,6 @@ export default function SaasBriefForm() {
                   <span>{step === stepCount - 1 ? "Send My SaaS" : "Continue"}</span>
                   <ArrowRightIcon aria-hidden="true" />
                 </button>
-                <span className="sb-save-status" aria-live="polite">
-                  {saveStatus === "error" ? "Save interrupted" : saveStatus === "saved" ? "Progress saved" : "Saving…"}
-                </span>
               </div>
             </>
           )}

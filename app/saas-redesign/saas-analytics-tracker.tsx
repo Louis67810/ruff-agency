@@ -205,6 +205,19 @@ export function SaasAnalyticsTracker() {
         .trim()
         .slice(0, 100);
       interactionCount += 1;
+      const integration = target.closest<HTMLElement>(
+        "[data-analytics-integration], [data-integration], #integrations .sr-integration, .sr-integration",
+      );
+      if (integration) {
+        send({
+          eventType: "integration_interaction",
+          sectionId: "integrations",
+          metadata: {
+            integration: integration.dataset.analyticsIntegration ?? integration.dataset.integration ?? integration.getAttribute("aria-label") ?? label,
+            control: label,
+          },
+        });
+      }
       const ctaId = target.dataset.analyticsCta || label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
       if (isCta) {
         send({ eventType: "cta_click", sectionId, metadata: { label, ctaId, ctaType: target.dataset.analyticsCtaType ?? "primary" } });

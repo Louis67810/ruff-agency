@@ -39,7 +39,7 @@ function parseEvent(value: unknown): AnalyticsEventInput | null {
                 item === null ||
                 ["string", "number", "boolean"].includes(typeof item),
             )
-            .map(([key, item]) => [key.slice(0, 48), item]),
+            .map(([key, item]) => [key.slice(0, 48), typeof item === "string" ? item.slice(0, 700) : item]),
         ) as AnalyticsEventInput["metadata"])
       : undefined;
 

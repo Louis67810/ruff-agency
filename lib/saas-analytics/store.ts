@@ -137,6 +137,59 @@ export async function readAnalyticsEvents(days: number) {
   }
 }
 
+export type FaqQuestionRecord = {
+  id: string;
+  createdAt: string;
+  path: string;
+  question: string;
+};
+
+/** Reads only submitted FAQ questions for the authenticated BI page. */
+export async function readFaqQuestionEvents(): Promise<FaqQuestionRecord[]> {
+  const config = supabaseConfig();
+  if (config) {
+    const records: FaqQuestionRecord[] = [];
+    for (let offset = 0; ; offset += 1000) {
+      const query = new URLSearchParams({
+        select: "id,created_at,path,metadata",
+        event_type: "eq.faq_question",
+        order: "created_at.desc,id.desc",
+        limit: "1000",
+        offset: String(offset),
+      });
+      const response = await fetch(`${config.url}/rest/v1/saas_analytics_events?${query}`, {
+        headers: supabaseHeaders(config.key),
+        cache: "no-store",
+      });
+      if (!response.ok) throw new Error(`Supabase FAQ analytics query failed (${response.status})`);
+      const rows = (await response.json()) as Array<Record<string, unknown>>;
+      records.push(...rows.flatMap((row) => {
+        const metadata = row.metadata && typeof row.metadata === "object"
+          ? row.metadata as Record<string, unknown>
+          : {};
+        const question = typeof metadata.question === "string" ? metadata.question.trim() : "";
+        return question ? [{ id: String(row.id), createdAt: String(row.created_at), path: String(row.path ?? ""), question }] : [];
+      }));
+      if (rows.length < 1000) break;
+    }
+    return records;
+  }
+
+  if (process.env.NODE_ENV === "production") throw new Error("SaaS analytics storage is not configured");
+  try {
+    return (await readFile(localFile, "utf8"))
+      .split("\n")
+      .filter(Boolean)
+      .map((line) => JSON.parse(line) as AnalyticsEvent)
+      .filter((event) => event.eventType === "faq_question" && typeof event.metadata?.question === "string")
+      .map((event) => ({ id: event.id, createdAt: event.createdAt, path: event.path, question: String(event.metadata?.question) }))
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
+    throw error;
+  }
+}
+
 const countryAliases: Record<string, string[]> = {
   "united states": ["us", "usa", "united states"],
   "états-unis": ["us", "usa", "united states"],
@@ -231,6 +284,11 @@ export function summarizeAnalytics(
   const bookedCalls = conversions.filter(
     (event) => event.metadata?.conversionType === "booking_confirmed",
   );
+  const saasLandingEvents = events.filter((event) => /^\/(?:en\/)?saas-redesign\/?$/.test(event.path));
+  const votes = saasLandingEvents.filter((event) => event.eventType === "vote");
+  const voteA = votes.filter((event) => event.metadata?.choice === "A").length;
+  const voteB = votes.filter((event) => event.metadata?.choice === "B").length;
+  const countSaasEvent = (eventType: AnalyticsEvent["eventType"]) => saasLandingEvents.filter((event) => event.eventType === eventType).length;
   const engagedSessionIds = new Set(
     events
       .filter((event) => ["cta_click", "conversion", "section_view", "scroll_depth"].includes(event.eventType))
@@ -509,8 +567,27 @@ export function summarizeAnalytics(
       if (event.eventType === "vote") return "Votes";
       if (event.eventType === "before_after_interaction")
         return "Before / after";
+      if (event.eventType === "ticker_interaction") return "Project ticker";
+      if (event.eventType === "integration_interaction") return "Integrations";
+      if (event.eventType === "faq_question") return "FAQ questions";
       return undefined;
     }),
+    saasInteractionSummary: [
+      { label: "Votes", value: votes.length },
+      { label: "Vote A", value: voteA },
+      { label: "Vote B", value: voteB },
+      { label: "Before / after sliders", value: countSaasEvent("before_after_interaction") },
+      { label: "Project ticker", value: countSaasEvent("ticker_interaction") },
+      { label: "Integrations", value: countSaasEvent("integration_interaction") },
+      { label: "FAQ questions", value: countSaasEvent("faq_question") },
+    ],
+    votePreference: {
+      a: voteA,
+      b: voteB,
+      total: votes.length,
+      aShare: votes.length ? Math.round((voteA / votes.length) * 100) : 0,
+      bShare: votes.length ? Math.round((voteB / votes.length) * 100) : 0,
+    },
     sections,
     daily: [...dailyMap.entries()].map(([date, day]) => ({
       date,

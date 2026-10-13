@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { analyticsCookieName, analyticsTokenIsValid } from "@/lib/saas-analytics/auth";
-import { readAnalyticsEvents, summarizeAnalytics } from "@/lib/saas-analytics/store";
+import { readAnalyticsEvents, readFaqQuestionEvents, summarizeAnalytics, type FaqQuestionRecord } from "@/lib/saas-analytics/store";
 import { BehavioralIntelligenceApp } from "./behavioral-intelligence-app";
 import { BehavioralIntelligenceLogin } from "./behavioral-login";
 import sitemap from "@/app/sitemap";
@@ -25,8 +25,11 @@ export default async function BehavioralIntelligencePage({ searchParams }: { sea
     return <BehavioralIntelligenceLogin />;
   }
   let analytics = null;
+  let faqQuestions: FaqQuestionRecord[] = [];
   try {
-    analytics = summarizeAnalytics(await readAnalyticsEvents(30), 30);
+    const [events, questions] = await Promise.all([readAnalyticsEvents(30), readFaqQuestionEvents()]);
+    analytics = summarizeAnalytics(events, 30);
+    faqQuestions = questions;
   } catch (error) {
     console.error("Behavioral Intelligence data unavailable", error);
     return <main className="fw-login-page"><div className="fw-login-card" role="alert">
@@ -64,5 +67,6 @@ export default async function BehavioralIntelligencePage({ searchParams }: { sea
     (process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL)
     && (process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY)
   );
-  return <BehavioralIntelligenceApp initialAnalytics={analytics} pageCatalog={pageCatalog} localPreview={localPreview} initialView={searchParams?.view === "forms" ? "forms" : "home"} />;
+  const initialView = searchParams?.view === "forms" ? "forms" : searchParams?.view === "questions" ? "questions" : "home";
+  return <BehavioralIntelligenceApp initialAnalytics={analytics} initialFaqQuestions={faqQuestions} pageCatalog={pageCatalog} localPreview={localPreview} initialView={initialView} />;
 }

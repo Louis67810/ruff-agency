@@ -277,6 +277,13 @@
 }
 
 .s3-faq-header {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
   align-content: center;
   align-items: center;
   display: flex;

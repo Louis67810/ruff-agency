@@ -134,14 +134,18 @@ function FAQItem({ question, answer }) {
     <li
       ref={ref}
       className={`s3-faq-item s3-reveal-up${visible ? " is-visible" : ""}${open ? " is-open" : ""}`}
-      onClick={() => setOpen((value) => !value)}
     >
-      <div className="s3-faq-header">
-        <p className="s3-faq-question">{question}</p>
+      <button
+        type="button"
+        className="s3-faq-header"
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span className="s3-faq-question">{question}</span>
         <div className="s3-faq-chevron-wrap">
           <ChevronDown open={open} />
         </div>
-      </div>
+      </button>
 
       <div className="s3-answer-clip" aria-hidden={!open}>
         <div className="s3-answer-inner">
@@ -187,6 +191,13 @@ function CustomQuestionItem() {
     setAnswer("");
     setContactHref(null);
     setPhase("loading");
+    window.dispatchEvent(new CustomEvent("saas:analytics", {
+      detail: {
+        eventType: "faq_question",
+        sectionId: "faq",
+        metadata: { question: submittedQuestion.slice(0, 600) },
+      },
+    }));
 
     try {
       const response = await fetch("/api/saas-faq", {

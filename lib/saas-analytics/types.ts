@@ -7,6 +7,9 @@ export const analyticsEventTypes = [
   "cta_click",
   "vote",
   "before_after_interaction",
+  "ticker_interaction",
+  "integration_interaction",
+  "faq_question",
   "conversion",
   "site_navigation",
   "session_end",
@@ -79,6 +82,8 @@ export type AnalyticsSummary = {
     destination: string;
   }>;
   interactions: Array<{ label: string; value: number }>;
+  saasInteractionSummary: Array<{ label: string; value: number }>;
+  votePreference: { a: number; b: number; total: number; aShare: number; bShare: number };
   sections: Array<{
     id: string;
     label: string;

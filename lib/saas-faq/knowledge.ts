@@ -1,16 +1,16 @@
 /** Public facts shown on the SaaS redesign page. Keep the FAQ and assistant in sync. */
 export const saasFaqs = [
   { question: "Do you only work with SaaS?", answer: "Yes. We focus on SaaS companies that have outgrown the website they launched with and need something more distinctive, credible and conversion-focused." },
-  { question: "Is this built for teams that use AI?", answer: "Yes — especially. You can keep using AI to move fast. We create the brand system, components and context your AI tools can reuse so future pages and assets stay much closer to your visual direction." },
+  { question: "Is this built for teams that use AI?", answer: "Yes, especially. You can keep using AI to move fast. We create the brand system, components and context your AI tools can reuse so future pages and assets stay much closer to your visual direction." },
   { question: "Can you work with our existing brand?", answer: "Absolutely. We can build on what already works, refine what doesn’t, and evolve your existing identity without starting from scratch." },
   { question: "Do you write the copy?", answer: "Yes. We structure and write the page around your product, positioning, customers and the reasons they should choose you." },
-  { question: "Do you build it too?", answer: "Yes. We handle the strategy, copy, design and development — so you don’t have to coordinate multiple people." },
+  { question: "Do you build it too?", answer: "Yes. We handle the strategy, copy, design and development, so you don’t have to coordinate multiple people." },
   { question: "Framer or React?", answer: "Both. We can build in Framer or React/Next.js depending on your product, stack and what makes the most sense for your team." },
   { question: "How involved do I need to be?", answer: "Very little. We need your product context and feedback at key stages. We handle the rest." },
   { question: "How long does it take?", answer: "Most landing pages are completed in around 10 days, depending on feedback and scope." },
   { question: "What happens after launch?", answer: "We can keep improving the page through CRO, testing and new iterations as real traffic comes in." },
   { question: "Can I make changes afterward?", answer: "Yes. You keep full control of the website and can continue editing it yourself or with your team." },
-  { question: "Why shouldn’t I just use AI?", answer: "You can — and you should keep using it. The problem is that AI makes it easy for everyone to build the same “good-looking” SaaS website. We create the strategy and visual system that gives AI something unique to work from." },
+  { question: "Why shouldn’t I just use AI?", answer: "You can, and you should keep using it. The problem is that AI makes it easy for everyone to build the same “good-looking” SaaS website. We create the strategy and visual system that gives AI something unique to work from." },
   { question: "How does payment work?", answer: "The project is split into two payments: one to start the project, and the second after the design stage before final delivery." },
 ] as const;
 

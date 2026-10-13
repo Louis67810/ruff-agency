@@ -645,6 +645,7 @@ function MarqueeCard({
   onSlideChange,
   selectedSlide,
   onSelectedSlideChange,
+  projectId,
   branding = false,
 }: {
   item: string;
@@ -654,6 +655,7 @@ function MarqueeCard({
   onSlideChange?: (slide: BeforeAfterSlide) => void;
   selectedSlide?: number;
   onSelectedSlideChange?: (index: number) => void;
+  projectId?: string;
   branding?: boolean;
 }) {
   const slideSet = slides.length ? slides : beforeAfterSlides;
@@ -753,7 +755,7 @@ function MarqueeCard({
               eventType: "before_after_interaction",
               sectionId: compact ? "results" : "hero",
               value: position,
-              metadata: { slide: slide.id, method: "slider" },
+              metadata: { slide: slide.id, project: projectId ?? item, method: "slider" },
             });
           }}
         />
@@ -771,9 +773,9 @@ function MarqueeCard({
               onSelectedSlideChange?.(index);
               onSlideChange?.(candidate);
               trackSaasEvent({
-                eventType: "before_after_interaction",
+                eventType: "ticker_interaction",
                 sectionId: compact ? "results" : "hero",
-                metadata: { slide: candidate.id, method: "dot" },
+                metadata: { slide: candidate.id, project: projectId ?? item, method: "slide_select" },
               });
             }}
           />
@@ -802,17 +804,22 @@ function Marquee({
   const resumeFrame = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [selectedSlides, setSelectedSlides] = useState<Record<string, number>>({});
 
-  const holdMobileTicker = () => {
+  const pauseMobileTicker = () => {
     if (!window.matchMedia("(max-width: 809px)").matches) return;
     const animation = trackRef.current?.getAnimations()[0];
     if (!animation) return;
     if (rateFrame.current !== null) cancelAnimationFrame(rateFrame.current);
     if (resumeFrame.current !== null) clearTimeout(resumeFrame.current);
-    animation.updatePlaybackRate(0);
+    animation.pause();
+  };
+
+  const resumeMobileTickerWhenIdle = () => {
+    if (!window.matchMedia("(max-width: 809px)").matches) return;
+    if (resumeFrame.current !== null) clearTimeout(resumeFrame.current);
     resumeFrame.current = setTimeout(() => {
-      animation.updatePlaybackRate(1);
+      trackRef.current?.getAnimations()[0]?.play();
       resumeFrame.current = null;
-    }, 4000);
+    }, 700);
   };
 
   const tweenPlaybackRate = (targetRate: number) => {
@@ -853,13 +860,17 @@ function Marquee({
       onMouseLeave={() => {
         if (!window.matchMedia("(max-width: 809px)").matches) tweenPlaybackRate(1);
       }}
-      onPointerDownCapture={holdMobileTicker}
+      onPointerDownCapture={pauseMobileTicker}
+      onPointerMoveCapture={pauseMobileTicker}
+      onPointerUpCapture={resumeMobileTickerWhenIdle}
+      onPointerCancelCapture={resumeMobileTickerWhenIdle}
     >
       <div className="sr-marquee__track" ref={trackRef}>
         {repeated.map((project, index) => (
           <MarqueeCard
             key={`${project.id}-${index}`}
             item={project.slides[0].id}
+            projectId={project.id}
             slides={project.slides}
             selectedSlide={selectedSlides[project.id]}
             onSelectedSlideChange={(slideIndex) =>
@@ -973,7 +984,23 @@ function TweetWall({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
   const tickerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const rateFrame = useRef<number | null>(null);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const loop = [...tweets, ...tweets];
+
+  const pauseOnMobileInteraction = () => {
+    if (!window.matchMedia("(max-width: 809px)").matches) return;
+    if (resumeTimer.current !== null) clearTimeout(resumeTimer.current);
+    trackRef.current?.getAnimations()[0]?.pause();
+  };
+
+  const resumeAfterMobileInteraction = () => {
+    if (!window.matchMedia("(max-width: 809px)").matches) return;
+    if (resumeTimer.current !== null) clearTimeout(resumeTimer.current);
+    resumeTimer.current = setTimeout(() => {
+      trackRef.current?.getAnimations()[0]?.play();
+      resumeTimer.current = null;
+    }, 700);
+  };
 
   const tweenPlaybackRate = (targetRate: number) => {
     const animation = trackRef.current?.getAnimations()[0];
@@ -1014,6 +1041,7 @@ function TweetWall({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
   useEffect(
     () => () => {
       if (rateFrame.current !== null) cancelAnimationFrame(rateFrame.current);
+      if (resumeTimer.current !== null) clearTimeout(resumeTimer.current);
     },
     [],
   );
@@ -1038,6 +1066,10 @@ function TweetWall({ tweets }: { tweets: ReadonlyArray<SaasTweet> }) {
         className="sr-embed-ticker"
         onMouseEnter={() => tweenPlaybackRate(0.85)}
         onMouseLeave={() => tweenPlaybackRate(1)}
+        onPointerDownCapture={pauseOnMobileInteraction}
+        onPointerMoveCapture={pauseOnMobileInteraction}
+        onPointerUpCapture={resumeAfterMobileInteraction}
+        onPointerCancelCapture={resumeAfterMobileInteraction}
       >
         <div className="sr-embed-track" ref={trackRef}>
           {loop.map((tweet, index) => (
@@ -1992,8 +2024,10 @@ export default function SaasRedesignLanding({
       <ProofReviews />
       <SaasRedesignPricing
         locale="en"
-        bookingLabel="Start your redesign"
+        bookingLabel="Make your SaaS stand out"
         bookingHref="/en/saas-redesign/brief"
+        siteTitle="Make your SaaS stand out from every other site"
+        siteDescription="A distinctive brand and website make it easier for the right customers to trust you and choose you."
         className="sr-pricing-flat"
         sectionId="pricing-secondary"
         includeGuarantee

@@ -27,6 +27,7 @@ import {
   LoaderCircle,
   Menu,
   Megaphone,
+  MessageSquare,
   MousePointer2,
   Plus,
   RefreshCw,
@@ -39,8 +40,9 @@ import {
   Users,
   X,
 } from "lucide-react";
-type View = "home" | "ads" | "pages" | "profiles" | "live" | "history" | "forms";
+type View = "home" | "ads" | "pages" | "profiles" | "live" | "history" | "forms" | "questions";
 type Detail = { type: "ad" | "page" | "profile"; name: string } | null;
+type FaqQuestionRecord = { id: string; createdAt: string; path: string; question: string };
 type Metric = "visitors" | "conversion" | "bounce" | "session" | "online";
 type Range =
   | "Aujourd’hui"
@@ -56,6 +58,7 @@ const nav = [
   { id: "profiles", label: "Profils", icon: UserRound },
   { id: "history", label: "Historique", icon: History },
   { id: "forms", label: "Formulaires", icon: FileText },
+  { id: "questions", label: "Questions FAQ", icon: MessageSquare },
 ] as const;
 
 // Kept in the codebase for the next tracking iteration, but intentionally
@@ -453,7 +456,7 @@ async function interpretComparisonRequest(input: string, candidates: ComparisonC
   }
 }
 
-export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, localPreview = false, initialView = "home" }: { initialAnalytics: AnalyticsSummary | null; pageCatalog: Array<{ name: string; path: string }>; localPreview?: boolean; initialView?: View }) {
+export function BehavioralIntelligenceApp({ initialAnalytics, initialFaqQuestions = [], pageCatalog, localPreview = false, initialView = "home" }: { initialAnalytics: AnalyticsSummary | null; initialFaqQuestions?: FaqQuestionRecord[]; pageCatalog: Array<{ name: string; path: string }>; localPreview?: boolean; initialView?: View }) {
   const [view, setView] = useState<View>(initialView),
     [detail, setDetail] = useState<Detail>(null),
     [detailOrigin, setDetailOrigin] = useState<View | null>(null),
@@ -559,7 +562,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, local
     }, 440);
   };
   const go = (v: View) => {
-    window.history.replaceState(null, "", v === "forms" ? "/behavioral-intelligence?view=forms" : "/behavioral-intelligence");
+    window.history.replaceState(null, "", v === "forms" || v === "questions" ? `/behavioral-intelligence?view=${v}` : "/behavioral-intelligence");
     setView(v);
     setSelectedVisitorId(null);
     setDetail(null);
@@ -678,7 +681,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, local
               ...(detailOrigin === "home" ? [{ label: "Home", onClick: () => go("home") }] : []),
               { label: detail.type === "page" ? "Page" : detail.type === "profile" ? "Profil" : "Ads", onClick: () => detail.type === "page" ? go("pages") : detail.type === "profile" ? go("profiles") : go("ads") },
               { label: detail.name, current: true },
-            ] : [{ label: view === "home" ? "Dashboard" : view === "profiles" ? "Profils" : view === "forms" ? "Formulaires" : "Historique", current: true }]} />
+            ] : [{ label: view === "home" ? "Dashboard" : view === "profiles" ? "Profils" : view === "forms" ? "Formulaires" : view === "questions" ? "Questions FAQ" : "Historique", current: true }]} />
             <div className={`fw-sticky-search ${searchOpen ? "is-open" : ""} ${searchClosing ? "is-closing" : ""}`}>
               <SearchBar value={query} setValue={setQuery} onSearch={openSearch} onSubmit={() => submit(query)} onCompare={() => { setCompareMetric(null); setCompare(true); }} />
               {searchOpen && (
@@ -788,6 +791,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics, pageCatalog, local
               {view === "live" && <Live visitors={trackedVisitors} online={trackedOnline} />}
               {view === "history" && <TrackedVisitorHistory visitors={trackedVisitors} period={historyPeriod} page={historyPage} onOpen={setSelectedVisitorId} />}
               {view === "forms" && <SaasBriefDashboard />}
+              {view === "questions" && <FaqQuestionsReport questions={initialFaqQuestions} analytics={initialAnalytics} />}
             </>
           )}
         </div>
@@ -1669,6 +1673,48 @@ function Profiles({
     </div>
   );
 }
+function FaqQuestionsReport({ questions, analytics }: { questions: FaqQuestionRecord[]; analytics: AnalyticsSummary | null }) {
+  const [filter, setFilter] = useState("");
+  const visibleQuestions = questions.filter((entry) => entry.question.toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
+  const metrics = analytics?.saasInteractionSummary ?? [];
+  const votePreference = analytics?.votePreference;
+  return (
+    <section className="fw-view fw-questions-report">
+      <Header title="Questions FAQ et interactions" />
+      <p className="fw-questions-intro">Données de la page SaaS redesign, synchronisées avec Supabase. Les questions sont conservées et visibles ici après leur envoi.</p>
+      <div className="fw-questions-metrics">
+        {metrics.map((metric) => (
+          <article className="fw-questions-metric" key={metric.label}>
+            <span>{metric.label}</span>
+            <strong>{num(metric.value)}</strong>
+            {metric.label === "Vote A" && votePreference ? <small>{votePreference.aShare}% des votes</small> : null}
+            {metric.label === "Vote B" && votePreference ? <small>{votePreference.bShare}% des votes</small> : null}
+          </article>
+        ))}
+      </div>
+      <div className="fw-questions-toolbar">
+        <div><h2>Questions envoyées</h2><span>{visibleQuestions.length} sur {questions.length}</span></div>
+        <input value={filter} onChange={(event) => setFilter(event.target.value)} placeholder="Rechercher une question" aria-label="Rechercher une question FAQ" />
+      </div>
+      <div className="fw-questions-table-wrap">
+        <table className="fw-questions-table">
+          <thead><tr><th>Date</th><th>Page</th><th>Question</th></tr></thead>
+          <tbody>
+            {visibleQuestions.map((entry) => (
+              <tr key={entry.id}>
+                <td>{new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(entry.createdAt))}</td>
+                <td>{entry.path}</td>
+                <td>{entry.question}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {!visibleQuestions.length && <div className="fw-questions-empty">{questions.length ? "Aucune question ne correspond à cette recherche." : "Aucune question envoyée pour le moment."}</div>}
+      </div>
+    </section>
+  );
+}
+
 function Header({
   title,
   action,

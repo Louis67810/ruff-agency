@@ -173,6 +173,8 @@ export default function PrixOptimized({
   extraPrice,
   maxPages = 10,
   sliderInfoText,
+  siteTitle,
+  siteDescription,
   bookingLabel = "Réserver un appel",
   bookingHref = "/30-min",
   brandingPrice,
@@ -298,12 +300,12 @@ export default function PrixOptimized({
       <div className="sr-prx-sectionInner">
         <header className="sr-prx-heading">
           <h2 className="sr-prx-sectionTitle">
-            {english ? "Make your site looks like it belongs to a real company" : "Un site à la hauteur d’une vraie entreprise"}
+            {siteTitle ?? (english ? "Make your site looks like it belongs to a real company" : "Un site à la hauteur d’une vraie entreprise")}
           </h2>
           <p className="sr-prx-headingDescription">
-            {english
+            {siteDescription ?? (english
               ? <>You’ve already done the hard part: building the product, getting users and <strong>proving people are willing to pay for it.</strong></>
-              : <>Vous avez déjà fait le plus difficile : créer votre produit, trouver vos utilisateurs et <strong>prouver que votre offre mérite d’être achetée.</strong></>}
+              : <>Vous avez déjà fait le plus difficile : créer votre produit, trouver vos utilisateurs et <strong>prouver que votre offre mérite d’être achetée.</strong></>)}
           </p>
           <div className="sr-prx-headingRule" aria-hidden="true" />
         </header>
