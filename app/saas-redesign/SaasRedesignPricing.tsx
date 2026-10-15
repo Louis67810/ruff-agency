@@ -322,6 +322,7 @@ export default function PrixOptimized({
               </div>
 
               <div className="sr-prx-sliderModule">
+                <div className="sr-prx-sliderInfo">{localizedSliderInfo}</div>
                 <div className="sr-prx-sliderControl">
                   <div className="sr-prx-pageBadge" style={{ left: badgeLeft }}>
                     {`${pages} ${pages === 1 ? "page" : "pages"}`}

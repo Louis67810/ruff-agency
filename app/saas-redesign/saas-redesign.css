@@ -6672,6 +6672,17 @@ html:has(.sr) {
 .sr .sr-prx-priceLine { align-items: baseline; justify-content: space-between; }
 .sr .sr-prx-sliderInfo { flex: 0 1 auto; margin: 0; text-align: right; }
 .sr .sr-prx-sliderModule { padding-top: 34px; }
+.sr .sr-prx-sliderModule > .sr-prx-sliderInfo { display: none; }
+@media (min-width: 721px) {
+  .sr .sr-prx-priceLine > .sr-prx-sliderInfo { display: none; }
+  .sr .sr-prx-sliderModule { padding-top: 0; }
+  .sr .sr-prx-sliderModule > .sr-prx-sliderInfo {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+    text-align: right;
+  }
+}
 .sr .sr-proof-reviews { padding-top: 72px; }
 .sr .sr-review-grid .homepage-review-card.sr-review-card { height: auto !important; min-height: 0 !important; }
 .sr .sr-solution-grid .sr-solution-card__copy { align-items: stretch; text-align: left; }
