@@ -4260,10 +4260,12 @@ button.df-details:hover { background: #f7fbfe; color: #256a94; }
 .fw-questions-toolbar span { color: #818894; font-size: 13px; }
 .fw-questions-toolbar input { width: min(320px, 50vw); height: 40px; padding: 0 12px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; color: #151a29; font: inherit; }
 .fw-questions-table-wrap { overflow: auto; border: 1px solid #e8e9ed; border-radius: 14px; background: #fff; }
-.fw-questions-table { width: 100%; border-collapse: collapse; text-align: left; }
+.fw-questions-table { width: 100%; min-width: 920px; border-collapse: collapse; text-align: left; }
 .fw-questions-table th, .fw-questions-table td { padding: 14px 16px; border-bottom: 1px solid #eff0f2; font-size: 13px; }
 .fw-questions-table th { color: #747b89; font-weight: 500; white-space: nowrap; }
 .fw-questions-table td { color: #242a38; }
+.fw-questions-table td:nth-child(3), .fw-questions-table td:nth-child(4) { width: 34%; min-width: 260px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; vertical-align: top; }
+.fw-questions-answer-status { color: #858b96; }
 .fw-questions-table tr:last-child td { border-bottom: 0; }
 .fw-questions-table td:first-child, .fw-questions-table td:nth-child(2) { white-space: nowrap; }
 .fw-questions-empty { padding: 34px 16px; color: #747b89; text-align: center; }

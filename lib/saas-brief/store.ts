@@ -12,6 +12,7 @@ export type BriefResponse = {
   startedAt: string;
   updatedAt: string;
   completedAt: string | null;
+  whatsappClickedAt: string | null;
   revision: number;
   lastStep: number;
   website: string;
@@ -51,6 +52,7 @@ function fromRow(row: Record<string, unknown>): BriefResponse {
     startedAt: String(row.started_at),
     updatedAt: String(row.updated_at),
     completedAt: row.completed_at ? String(row.completed_at) : null,
+    whatsappClickedAt: row.whatsapp_clicked_at ? String(row.whatsapp_clicked_at) : null,
     revision: Number(row.revision ?? 0),
     lastStep: Number(row.last_step ?? 0),
     website: String(row.website ?? ""),
@@ -115,13 +117,50 @@ export async function saveBriefResponse(snapshot: BriefSnapshot) {
   await appendFile(localFile, `${JSON.stringify(row)}\n`, "utf8");
 }
 
+export async function recordBriefWhatsAppClick(id: string, tokenHash: string) {
+  const clickedAt = new Date().toISOString();
+  const config = supabaseConfig();
+  if (config) {
+    const query = new URLSearchParams({
+      id: `eq.${id}`,
+      edit_token_hash: `eq.${tokenHash}`,
+      completed_at: "not.is.null",
+      select: "id",
+    });
+    const response = await fetch(`${config.url}/rest/v1/saas_brief_responses?${query}`, {
+      method: "PATCH",
+      headers: { ...headers(config.key), prefer: "return=representation" },
+      body: JSON.stringify({ whatsapp_clicked_at: clickedAt }),
+      cache: "no-store",
+    });
+    if (!response.ok) throw new Error(`Supabase WhatsApp click update failed (${response.status})`);
+    return ((await response.json()) as unknown[]).length > 0;
+  }
+
+  if (process.env.NODE_ENV === "production")
+    throw new Error("SaaS brief storage is not configured");
+  let contents: string;
+  try {
+    contents = await readFile(localFile, "utf8");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return false;
+    throw error;
+  }
+  const matching = contents.split("\n").filter(Boolean).map((line) => JSON.parse(line) as Record<string, unknown>)
+    .filter((row) => row.id === id && row.edit_token_hash === tokenHash && row.completed_at);
+  const latest = matching.at(-1);
+  if (!latest) return false;
+  await appendFile(localFile, `${JSON.stringify({ ...latest, whatsapp_clicked_at: clickedAt })}\n`, "utf8");
+  return true;
+}
+
 export async function readBriefResponses(): Promise<BriefResponse[]> {
   const config = supabaseConfig();
   if (config) {
     const all: BriefResponse[] = [];
     for (let offset = 0; ; offset += 1000) {
       const query = new URLSearchParams({
-        select: "id,visitor_id,started_at,updated_at,completed_at,revision,last_step,website,email,mrr,changes,details,duration_ms",
+        select: "id,visitor_id,started_at,updated_at,completed_at,whatsapp_clicked_at,revision,last_step,website,email,mrr,changes,details,duration_ms",
         order: "started_at.asc,id.asc",
         limit: "1000",
         offset: String(offset),
@@ -147,7 +186,11 @@ export async function readBriefResponses(): Promise<BriefResponse[]> {
       const row = fromRow(JSON.parse(line) as Record<string, unknown>);
       const previous = latest.get(row.id);
       if (!previous || row.revision >= previous.revision) {
-        latest.set(row.id, { ...row, startedAt: previous?.startedAt ?? row.startedAt });
+        latest.set(row.id, {
+          ...row,
+          startedAt: previous?.startedAt ?? row.startedAt,
+          whatsappClickedAt: row.whatsappClickedAt ?? previous?.whatsappClickedAt ?? null,
+        });
       }
     }
     return [...latest.values()].sort((a, b) => b.startedAt.localeCompare(a.startedAt));

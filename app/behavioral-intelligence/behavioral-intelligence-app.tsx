@@ -42,7 +42,14 @@ import {
 } from "lucide-react";
 type View = "home" | "ads" | "pages" | "profiles" | "live" | "history" | "forms" | "questions";
 type Detail = { type: "ad" | "page" | "profile"; name: string } | null;
-type FaqQuestionRecord = { id: string; createdAt: string; path: string; question: string };
+type FaqQuestionRecord = {
+  id: string;
+  createdAt: string;
+  path: string;
+  question: string;
+  answer: string | null;
+  responseStatus: "answered" | "error" | "stopped" | null;
+};
 type Metric = "visitors" | "conversion" | "bounce" | "session" | "online";
 type Range =
   | "Aujourd’hui"
@@ -1675,13 +1682,14 @@ function Profiles({
 }
 function FaqQuestionsReport({ questions, analytics }: { questions: FaqQuestionRecord[]; analytics: AnalyticsSummary | null }) {
   const [filter, setFilter] = useState("");
-  const visibleQuestions = questions.filter((entry) => entry.question.toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
+  const visibleQuestions = questions.filter((entry) =>
+    `${entry.question} ${entry.answer ?? ""}`.toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
   const metrics = analytics?.saasInteractionSummary ?? [];
   const votePreference = analytics?.votePreference;
   return (
     <section className="fw-view fw-questions-report">
       <Header title="Questions FAQ et interactions" />
-      <p className="fw-questions-intro">Données de la page SaaS redesign, synchronisées avec Supabase. Les questions sont conservées et visibles ici après leur envoi.</p>
+      <p className="fw-questions-intro">Questions et réponses de la FAQ de la page SaaS redesign, synchronisées avec Supabase. Les réponses antérieures à ce suivi ne peuvent pas être reconstituées.</p>
       <div className="fw-questions-metrics">
         {metrics.map((metric) => (
           <article className="fw-questions-metric" key={metric.label}>
@@ -1694,17 +1702,24 @@ function FaqQuestionsReport({ questions, analytics }: { questions: FaqQuestionRe
       </div>
       <div className="fw-questions-toolbar">
         <div><h2>Questions envoyées</h2><span>{visibleQuestions.length} sur {questions.length}</span></div>
-        <input value={filter} onChange={(event) => setFilter(event.target.value)} placeholder="Rechercher une question" aria-label="Rechercher une question FAQ" />
+        <input value={filter} onChange={(event) => setFilter(event.target.value)} placeholder="Rechercher une question ou réponse" aria-label="Rechercher une question ou réponse FAQ" />
       </div>
       <div className="fw-questions-table-wrap">
         <table className="fw-questions-table">
-          <thead><tr><th>Date</th><th>Page</th><th>Question</th></tr></thead>
+          <thead><tr><th>Date</th><th>Page</th><th>Question</th><th>Réponse affichée</th></tr></thead>
           <tbody>
             {visibleQuestions.map((entry) => (
               <tr key={entry.id}>
                 <td>{new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(entry.createdAt))}</td>
                 <td>{entry.path}</td>
                 <td>{entry.question}</td>
+                <td className="fw-questions-answer">{entry.responseStatus === "answered"
+                  ? entry.answer
+                  : entry.responseStatus === "error"
+                    ? <><span className="fw-questions-answer-status">Erreur</span>{entry.answer ? ` ${entry.answer}` : " Réponse indisponible"}</>
+                    : entry.responseStatus === "stopped"
+                      ? <span className="fw-questions-answer-status">Attente interrompue</span>
+                      : <span className="fw-questions-answer-status">Réponse non enregistrée</span>}</td>
               </tr>
             ))}
           </tbody>

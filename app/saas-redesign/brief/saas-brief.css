@@ -8,8 +8,8 @@
   --sb-blue: #0147ff;
   position: relative;
   isolation: isolate;
-  min-height: 100vh;
-  overflow: hidden;
+  min-height: 100dvh;
+  overflow-x: clip;
   padding: 51px 32px 96px;
   background: #fbfbfb;
   color: var(--sb-ink);
@@ -23,10 +23,14 @@
   margin: 0 auto;
 }
 
-.sb-haze {
+.sb-haze,
+.sb-outline {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
+}
+
+.sb-haze {
   background: #fbfbfb;
   filter: blur(68px);
 }
@@ -48,15 +52,12 @@
 }
 
 .sb-outline {
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .sb-outline--left {
-  top: 606px;
+  top: 320px;
   left: -158px;
   width: 458px;
   height: 630px;
@@ -64,9 +65,8 @@
 }
 
 .sb-outline--right {
-  top: 717px;
+  top: 380px;
   right: -158px;
-  left: auto;
   width: 459px;
   height: 521px;
   background-image: url("/Vector%20674.svg");
@@ -82,26 +82,24 @@
 .sb-brand {
   display: inline-flex;
   align-items: center;
-  position: static;
   width: 161px;
   height: 44px;
   color: #000;
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.sb-brand .navbar-logo-svg {
-  position: relative;
-  top: auto;
-  left: auto;
+.sb-brand img {
+  display: block;
   width: 69px;
   height: 44px;
   flex: 0 0 69px;
 }
 
-.sb-brand .navbar-agency {
-  position: static;
+.sb-brand span {
   margin-left: 4px;
-  transform: none;
+  font: 700 22.89px/26px "Plus Jakarta Sans", sans-serif;
+  letter-spacing: -0.03em;
 }
 
 .sb-heading {
@@ -142,7 +140,7 @@
   display: none;
 }
 
-.aq-root.sb-form {
+.sb-form {
   display: flex;
   width: min(100%, 760px);
   min-height: 0;
@@ -156,9 +154,10 @@
   border-radius: 36px;
   background: #fff;
   overflow: visible;
+  box-shadow: 0 3px 7px rgba(0,0,0,.05), 0 12px 12px rgba(0,0,0,.04), 0 28px 17px rgba(0,0,0,.03);
 }
 
-.aq-root.sb-form:has(.sb-choice-group) {
+.sb-form:has(.sb-choice-group) {
   min-height: 0;
 }
 
@@ -201,25 +200,32 @@
 
 .sb-step-panel > .sb-back,
 .sb-step-panel > .sb-question,
+.sb-step-panel > .sb-optional,
 .sb-step-panel > .sb-question-rule,
 .sb-step-panel > .sb-field,
 .sb-step-panel > .sb-choice-group,
 .sb-step-panel > .sb-form-error,
 .sb-form-footer > .sb-submit {
-  animation: sb-item-in 680ms cubic-bezier(.16, 1, .3, 1) backwards;
+  animation: sb-item-in 420ms cubic-bezier(.16, 1, .3, 1) backwards;
 }
-.sb-step-panel > .sb-back { animation-delay: 60ms; }
-.sb-step-panel > .sb-question { animation-delay: 140ms; }
-.sb-step-panel > .sb-question-rule { animation-delay: 220ms; }
+.sb-step-panel > .sb-back { animation-delay: 30ms; }
+.sb-step-panel > .sb-question { animation-delay: 70ms; }
+.sb-step-panel > .sb-optional { animation-delay: 100ms; }
+.sb-step-panel > .sb-question-rule { animation-delay: 120ms; }
 .sb-step-panel > .sb-field,
-.sb-step-panel > .sb-choice-group { animation-delay: 300ms; }
-.sb-form-footer > .sb-submit { animation-delay: 700ms; }
+.sb-step-panel > .sb-choice-group { animation-delay: 160ms; }
+.sb-form-footer > .sb-submit { animation-delay: 240ms; }
 
 .sb-question {
   margin: 0 0 4px;
   color: var(--sb-ink);
   font: 700 clamp(26px, 3vw, 36px)/1.12 "Plus Jakarta Sans", sans-serif;
   letter-spacing: -0.05em;
+}
+
+.sb-optional {
+  color: rgba(18, 26, 46, .58);
+  font: 500 13px/1.35 Inter, sans-serif;
 }
 
 .sb-question-rule {
@@ -275,6 +281,36 @@
   box-shadow: 0 0 0 4px rgba(1, 71, 255, 0.08);
 }
 
+.sb-url-field {
+  display: flex;
+  height: 58px;
+  align-items: center;
+  padding-left: 18px;
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 16px;
+  background: #fafafa;
+  font: 500 16px/1.45 Inter, sans-serif;
+  letter-spacing: -.02em;
+  transition: border-color 280ms ease, box-shadow 280ms ease, background 280ms ease;
+}
+
+.sb-url-field:focus-within {
+  border-color: rgba(1, 71, 255, .45);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(1, 71, 255, .08);
+}
+
+.sb-url-field > span { flex: none; color: var(--sb-ink); }
+.sb-url-field input,
+.sb-url-field input:focus {
+  min-width: 0;
+  height: 100%;
+  padding: 0 18px 0 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .sb-choice-group {
   min-width: 0;
   margin: 0;
@@ -323,12 +359,12 @@
     color 180ms ease,
     transform 240ms cubic-bezier(.2, .8, .2, 1),
     box-shadow 240ms ease;
-  animation: sb-item-in 680ms cubic-bezier(.16, 1, .3, 1) backwards;
-  animation-delay: 380ms;
+  animation: sb-item-in 420ms cubic-bezier(.16, 1, .3, 1) backwards;
+  animation-delay: 220ms;
 }
-.sb-choice-row > .sb-choice:nth-child(2) { animation-delay: 460ms; }
-.sb-choice-row > .sb-choice:nth-child(3) { animation-delay: 540ms; }
-.sb-choice-row > .sb-choice:nth-child(4) { animation-delay: 620ms; }
+.sb-choice-row > .sb-choice:nth-child(2) { animation-delay: 280ms; }
+.sb-choice-row > .sb-choice:nth-child(3) { animation-delay: 340ms; }
+.sb-choice-row > .sb-choice:nth-child(4) { animation-delay: 400ms; }
 
 .sb-choice:hover {
   border-color: rgba(18, 26, 46, 0.18);
@@ -553,7 +589,7 @@
 }
 .sb-form-error:empty { display: none; }
 
-.sb-send-cta--whatsapp { justify-content: center; }
+.sb-send-cta--whatsapp { width: min(100%, 360px); justify-content: center; }
 .sb-send-cta--whatsapp > span { order: 1; }
 .sb-send-cta--whatsapp > svg {
   order: 2;
@@ -609,6 +645,7 @@
   color: rgba(18, 26, 46, 0.7);
   font: 500 16px/1.5 Inter, sans-serif;
 }
+.sb-success > p strong { color: var(--sb-ink); }
 
 .sb-success-back { margin-top: 8px; }
 
@@ -617,19 +654,24 @@
     padding: 40px 24px 72px;
   }
 
-  .aq-root.sb-form {
+  .sb-form {
     min-height: 0;
     height: fit-content;
     padding: 38px 32px;
     border-radius: 32px;
   }
 
-  .aq-root.sb-form:has(.sb-choice-group) {
+  .sb-form:has(.sb-choice-group) {
     min-height: 0;
   }
 }
 
 @media (max-width: 600px) {
+  .sb-haze,
+  .sb-outline {
+    display: none;
+  }
+
   .sb-page {
     padding: 28px 16px 48px;
   }
@@ -652,7 +694,7 @@
     margin-top: 2px;
   }
 
-  .aq-root.sb-form {
+  .sb-form {
     min-height: 0;
     gap: 22px;
     margin-top: 28px;
@@ -660,7 +702,7 @@
     border-radius: 23px;
   }
 
-  .aq-root.sb-form:has(.sb-choice-group) {
+  .sb-form:has(.sb-choice-group) {
     min-height: 0;
   }
 

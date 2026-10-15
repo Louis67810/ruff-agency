@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowDownToLine, RefreshCw, X } from "lucide-react";
 import type { BriefResponse } from "@/lib/saas-brief/store";
+import { briefReference } from "@/lib/saas-brief/validation";
 import "./saas-brief-dashboard.css";
 
 type MainTab = "insights" | "submissions";
@@ -63,6 +64,7 @@ export function SaasBriefDashboard() {
   const [filter, setFilter] = useState<SubmissionFilter>("all");
   const [range, setRange] = useState<Range>("all");
   const [selected, setSelected] = useState<BriefResponse | null>(null);
+  const [search, setSearch] = useState("");
 
   async function load() {
     try {
@@ -101,7 +103,11 @@ export function SaasBriefDashboard() {
   const responded = useMemo(() => scoped.filter(hasAnswer), [scoped]);
   const completed = responded.filter((row) => row.completedAt);
   const partial = responded.filter((row) => !row.completedAt);
-  const visible = filter === "completed" ? completed : filter === "partial" ? partial : responded;
+  const filtered = filter === "completed" ? completed : filter === "partial" ? partial : responded;
+  const visible = filtered.filter((row) => {
+    const term = search.trim().toLowerCase();
+    return !term || [briefReference(row.id), row.website, row.email].some((value) => value.toLowerCase().includes(term));
+  });
   const uniqueRespondents = new Set(responded.map((row) => row.visitorId)).size;
   const averageDuration = scoped.length ? scoped.reduce((sum, row) => sum + row.durationMs, 0) / scoped.length : 0;
 
@@ -121,9 +127,9 @@ export function SaasBriefDashboard() {
   const maxDaily = Math.max(...visitDays.map(([, value]) => value), 1);
 
   function downloadCsv() {
-    const columns = ["Started at", "Completed at", "Status", "Website", "Work email", "Current MRR", "What needs to change", "Additional details", "Last question reached", "Visit duration"];
+    const columns = ["Brief reference", "Started at", "Completed at", "Status", "WhatsApp CTA clicked at", "Website", "Work email", "Current MRR", "What needs to change", "Additional details", "Last question reached", "Visit duration"];
     const lines = [columns.map(csvCell).join(","), ...visible.map((row) => [
-      formatDate(row.startedAt), row.completedAt ? formatDate(row.completedAt) : "", row.completedAt ? "Completed" : "Partial",
+      briefReference(row.id), formatDate(row.startedAt), row.completedAt ? formatDate(row.completedAt) : "", row.completedAt ? "Completed" : "Partial", row.whatsappClickedAt ? formatDate(row.whatsappClickedAt) : "",
       row.website, row.email, row.mrr, row.changes.join("; "), row.details, questions[Math.min(row.lastStep, 4)], duration(row.durationMs),
     ].map(csvCell).join(","))];
     const url = URL.createObjectURL(new Blob(["\ufeff", lines.join("\r\n")], { type: "text/csv;charset=utf-8" }));
@@ -174,10 +180,11 @@ export function SaasBriefDashboard() {
         <div className="bf-submission-filters" role="tablist" aria-label="Submission status">
           {(["all", "completed", "partial"] as const).map((item) => <button key={item} role="tab" aria-selected={filter === item} className={filter === item ? "is-active" : ""} onClick={() => setFilter(item)}>{item[0].toUpperCase() + item.slice(1)} <span>{item === "all" ? responded.length : item === "completed" ? completed.length : partial.length}</span></button>)}
         </div>
+        <input aria-label="Find a brief by reference, website or email" className="bf-search" onChange={(event) => setSearch(event.target.value)} placeholder="Find a brief" type="search" value={search} />
         <button className="bf-download" onClick={downloadCsv} disabled={!visible.length}><ArrowDownToLine size={16} /> Download CSV</button>
       </div>
-      <div className="bf-table-scroll"><table className="bf-table"><thead><tr><th>Started at</th><th>Status</th><th>SaaS website</th><th>Work email</th><th>Current MRR</th><th>What needs to change?</th><th>Additional details</th><th>Last question</th><th>Visit duration</th></tr></thead><tbody>{visible.map((row) => <tr key={row.id} onClick={() => setSelected(row)} tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter") setSelected(row); }}><td>{formatDate(row.startedAt)}</td><td><span className={`bf-status ${row.completedAt ? "is-complete" : ""}`}>{row.completedAt ? "Completed" : "Partial"}</span></td><td>{row.website || "—"}</td><td>{row.email || "—"}</td><td>{row.mrr || "—"}</td><td>{row.changes.join(", ") || "—"}</td><td>{row.details || "—"}</td><td>{questions[Math.min(row.lastStep, 4)]}</td><td>{duration(row.durationMs)}</td></tr>)}</tbody></table>{!visible.length && <div className="bf-table-empty">No {filter === "all" ? "responses" : filter} responses in this period.</div>}</div>
+    <div className="bf-table-scroll"><table className="bf-table"><thead><tr><th>Brief reference</th><th>Started at</th><th>Status</th><th>WhatsApp CTA clicked</th><th>SaaS website</th><th>Work email</th><th>Current MRR</th><th>What needs to change?</th><th>Additional details</th><th>Last question</th><th>Visit duration</th></tr></thead><tbody>{visible.map((row) => <tr key={row.id} onClick={() => setSelected(row)} tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter") setSelected(row); }}><td>{briefReference(row.id)}</td><td>{formatDate(row.startedAt)}</td><td><span className={`bf-status ${row.completedAt ? "is-complete" : ""}`}>{row.completedAt ? "Completed" : "Partial"}</span></td><td>{row.whatsappClickedAt ? formatDate(row.whatsappClickedAt) : "—"}</td><td>{row.website || "—"}</td><td>{row.email || "—"}</td><td>{row.mrr || "—"}</td><td>{row.changes.join(", ") || "—"}</td><td>{row.details || "—"}</td><td>{questions[Math.min(row.lastStep, 4)]}</td><td>{duration(row.durationMs)}</td></tr>)}</tbody></table>{!visible.length && <div className="bf-table-empty">No {filter === "all" ? "" : `${filter} `}responses in this period.</div>}</div>
     </>}
-    {selected && <div className="bf-detail-backdrop" onMouseDown={() => setSelected(null)}><aside className="bf-detail" role="dialog" aria-modal="true" aria-label="Form response" onMouseDown={(event) => event.stopPropagation()}><div className="bf-detail-header"><div><span>{selected.completedAt ? "COMPLETED" : "PARTIAL"} RESPONSE</span><h3>{selected.website || selected.email || "Unfinished visit"}</h3></div><button onClick={() => setSelected(null)} aria-label="Close response"><X size={20} /></button></div><p>Started {formatDate(selected.startedAt)} · {duration(selected.durationMs)}</p>{questions.map((question, index) => <section key={question}><h4>{question}</h4><div>{index === 0 ? selected.website : index === 1 ? selected.email : index === 2 ? selected.mrr : index === 3 ? selected.changes.join(", ") : selected.details || "—"}</div></section>)}</aside></div>}
+    {selected && <div className="bf-detail-backdrop" onMouseDown={() => setSelected(null)}><aside className="bf-detail" role="dialog" aria-modal="true" aria-label="Form response" onMouseDown={(event) => event.stopPropagation()}><div className="bf-detail-header"><div><span>{selected.completedAt ? "COMPLETED" : "PARTIAL"} RESPONSE · {briefReference(selected.id)}</span><h3>{selected.website || selected.email || "Unfinished visit"}</h3></div><button onClick={() => setSelected(null)} aria-label="Close response"><X size={20} /></button></div><p>Started {formatDate(selected.startedAt)} · {duration(selected.durationMs)}</p><p>WhatsApp CTA clicked: {selected.whatsappClickedAt ? formatDate(selected.whatsappClickedAt) : "—"}</p>{questions.map((question, index) => <section key={question}><h4>{question}</h4><div>{index === 0 ? selected.website : index === 1 ? selected.email : index === 2 ? selected.mrr : index === 3 ? selected.changes.join(", ") : selected.details || "—"}</div></section>)}</aside></div>}
   </section>;
 }

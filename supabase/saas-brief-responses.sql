@@ -5,6 +5,7 @@ create table if not exists public.saas_brief_responses (
   started_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   completed_at timestamptz,
+  whatsapp_clicked_at timestamptz,
   revision integer not null default 0 check (revision >= 0),
   last_step smallint not null default 0 check (last_step between 0 and 5),
   website text not null default '' check (char_length(website) <= 500),
@@ -14,6 +15,9 @@ create table if not exists public.saas_brief_responses (
   details text not null default '' check (char_length(details) <= 800),
   duration_ms integer not null default 0 check (duration_ms between 0 and 86400000)
 );
+
+alter table public.saas_brief_responses
+  add column if not exists whatsapp_clicked_at timestamptz;
 
 alter table public.saas_brief_responses enable row level security;
 revoke all on table public.saas_brief_responses from anon, authenticated;

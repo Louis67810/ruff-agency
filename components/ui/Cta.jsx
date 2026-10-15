@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import "./Cta.css";
 
 const PROFILE_IMAGE =
@@ -16,8 +17,9 @@ export default function Cta({
   className = "",
   onClick = undefined,
 }) {
+  const CtaLink = href.startsWith("/") ? Link : "a";
   return (
-    <a className={`cta ${kind === "primary" ? "cta-primary" : "cta-secondary"} ${className}`.trim()} href={href} onClick={onClick} data-analytics-cta={label || (typeof children === "string" ? children : "cta")} data-analytics-cta-type={kind}>
+    <CtaLink className={`cta ${kind === "primary" ? "cta-primary" : "cta-secondary"} ${className}`.trim()} href={href} onClick={onClick} data-analytics-cta={label || (typeof children === "string" ? children : "cta")} data-analytics-cta-type={kind}>
       <span className={`cta-inner${showArrow ? " cta-has-arrow" : ""}`}>
         <span className="cta-label">{children ?? label}</span>
         {kind === "primary" && showAvatar ? (
@@ -25,7 +27,7 @@ export default function Cta({
         ) : null}
         {kind === "primary" && showArrow ? <CtaArrowMark /> : null}
       </span>
-    </a>
+    </CtaLink>
   );
 }
 

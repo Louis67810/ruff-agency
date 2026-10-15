@@ -164,10 +164,21 @@ function CustomQuestionItem() {
   const [answer, setAnswer] = useState("");
   const [contactHref, setContactHref] = useState(null);
   const controllerRef = useRef(null);
+  const questionIdRef = useRef(null);
   const requestRef = useRef(0);
   const [ref, visible] = useInViewOnce(0.5);
   const answerId = React.useId();
   const open = phase === "answered" || phase === "error";
+
+  const recordOutcome = (questionId, status, text = "") => {
+    window.dispatchEvent(new CustomEvent("saas:analytics", {
+      detail: {
+        eventType: "faq_answer",
+        sectionId: "faq",
+        metadata: { questionId, status, answer: text.slice(0, 4000) },
+      },
+    }));
+  };
 
   useEffect(() => () => {
     requestRef.current += 1;
@@ -178,6 +189,8 @@ function CustomQuestionItem() {
     requestRef.current += 1;
     controllerRef.current?.abort();
     controllerRef.current = null;
+    if (questionIdRef.current) recordOutcome(questionIdRef.current, "stopped");
+    questionIdRef.current = null;
     setPhase("idle");
   };
 
@@ -188,6 +201,8 @@ function CustomQuestionItem() {
     const controller = new AbortController();
     controllerRef.current = controller;
     const request = ++requestRef.current;
+    const questionId = crypto.randomUUID();
+    questionIdRef.current = questionId;
     setAnswer("");
     setContactHref(null);
     setPhase("loading");
@@ -195,7 +210,7 @@ function CustomQuestionItem() {
       detail: {
         eventType: "faq_question",
         sectionId: "faq",
-        metadata: { question: submittedQuestion.slice(0, 600) },
+        metadata: { question: submittedQuestion.slice(0, 600), questionId },
       },
     }));
 
@@ -209,17 +224,25 @@ function CustomQuestionItem() {
       const result = await response.json();
       if (requestRef.current !== request) return;
       if (!response.ok || typeof result.answer !== "string") {
-        setAnswer(result.error || "We couldn't answer right now. Please try again.");
+        const errorMessage = result.error || "We couldn't answer right now. Please try again.";
+        recordOutcome(questionId, "error", errorMessage);
+        questionIdRef.current = null;
+        setAnswer(errorMessage);
         setContactHref(null);
         setPhase("error");
         return;
       }
+      recordOutcome(questionId, "answered", result.answer);
+      questionIdRef.current = null;
       setAnswer(result.answer);
       setContactHref(typeof result.contactHref === "string" ? result.contactHref : null);
       setPhase("answered");
     } catch {
       if (requestRef.current !== request || controller.signal.aborted) return;
-      setAnswer("We couldn't answer right now. Please try again.");
+      const errorMessage = "We couldn't answer right now. Please try again.";
+      recordOutcome(questionId, "error", errorMessage);
+      questionIdRef.current = null;
+      setAnswer(errorMessage);
       setContactHref(null);
       setPhase("error");
     } finally {

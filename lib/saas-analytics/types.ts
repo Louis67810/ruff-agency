@@ -10,6 +10,7 @@ export const analyticsEventTypes = [
   "ticker_interaction",
   "integration_interaction",
   "faq_question",
+  "faq_answer",
   "conversion",
   "site_navigation",
   "session_end",

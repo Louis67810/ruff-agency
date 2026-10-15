@@ -142,17 +142,61 @@ export type FaqQuestionRecord = {
   createdAt: string;
   path: string;
   question: string;
+  answer: string | null;
+  responseStatus: "answered" | "error" | "stopped" | null;
 };
+
+type FaqEventRow = {
+  id: string;
+  createdAt: string;
+  path: string;
+  sessionId: string;
+  eventType: string;
+  metadata: Record<string, unknown>;
+};
+
+function pairFaqEvents(events: FaqEventRow[]): FaqQuestionRecord[] {
+  const answers = new Map<string, { answer: string | null; status: FaqQuestionRecord["responseStatus"] }>();
+  for (const event of events) {
+    if (event.eventType !== "faq_answer") continue;
+    const questionId = event.metadata.questionId;
+    if (typeof questionId !== "string") continue;
+    const key = `${event.sessionId}:${questionId}`;
+    if (answers.has(key)) continue;
+    const status = event.metadata.status;
+    if (status !== "answered" && status !== "error" && status !== "stopped") continue;
+    answers.set(key, {
+      answer: typeof event.metadata.answer === "string" ? event.metadata.answer : null,
+      status,
+    });
+  }
+
+  return events.flatMap((event) => {
+    if (event.eventType !== "faq_question") return [];
+    const question = typeof event.metadata.question === "string" ? event.metadata.question.trim() : "";
+    if (!question) return [];
+    const questionId = event.metadata.questionId;
+    const outcome = typeof questionId === "string" ? answers.get(`${event.sessionId}:${questionId}`) : undefined;
+    return [{
+      id: event.id,
+      createdAt: event.createdAt,
+      path: event.path,
+      question,
+      answer: outcome?.answer ?? null,
+      responseStatus: outcome?.status ?? null,
+    }];
+  }).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
 
 /** Reads only submitted FAQ questions for the authenticated BI page. */
 export async function readFaqQuestionEvents(): Promise<FaqQuestionRecord[]> {
   const config = supabaseConfig();
   if (config) {
-    const records: FaqQuestionRecord[] = [];
+    const events: FaqEventRow[] = [];
     for (let offset = 0; ; offset += 1000) {
       const query = new URLSearchParams({
-        select: "id,created_at,path,metadata",
-        event_type: "eq.faq_question",
+        select: "id,created_at,path,session_id,event_type,metadata",
+        event_type: "in.(faq_question,faq_answer)",
         order: "created_at.desc,id.desc",
         limit: "1000",
         offset: String(offset),
@@ -163,27 +207,40 @@ export async function readFaqQuestionEvents(): Promise<FaqQuestionRecord[]> {
       });
       if (!response.ok) throw new Error(`Supabase FAQ analytics query failed (${response.status})`);
       const rows = (await response.json()) as Array<Record<string, unknown>>;
-      records.push(...rows.flatMap((row) => {
+      events.push(...rows.map((row) => {
         const metadata = row.metadata && typeof row.metadata === "object"
           ? row.metadata as Record<string, unknown>
           : {};
-        const question = typeof metadata.question === "string" ? metadata.question.trim() : "";
-        return question ? [{ id: String(row.id), createdAt: String(row.created_at), path: String(row.path ?? ""), question }] : [];
+        return {
+          id: String(row.id),
+          createdAt: String(row.created_at),
+          path: String(row.path ?? ""),
+          sessionId: String(row.session_id ?? ""),
+          eventType: String(row.event_type ?? ""),
+          metadata,
+        };
       }));
       if (rows.length < 1000) break;
     }
-    return records;
+    return pairFaqEvents(events);
   }
 
   if (process.env.NODE_ENV === "production") throw new Error("SaaS analytics storage is not configured");
   try {
-    return (await readFile(localFile, "utf8"))
+    const events = (await readFile(localFile, "utf8"))
       .split("\n")
       .filter(Boolean)
       .map((line) => JSON.parse(line) as AnalyticsEvent)
-      .filter((event) => event.eventType === "faq_question" && typeof event.metadata?.question === "string")
-      .map((event) => ({ id: event.id, createdAt: event.createdAt, path: event.path, question: String(event.metadata?.question) }))
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+      .filter((event) => event.eventType === "faq_question" || event.eventType === "faq_answer")
+      .map((event) => ({
+        id: event.id,
+        createdAt: event.createdAt,
+        path: event.path,
+        sessionId: event.sessionId,
+        eventType: event.eventType,
+        metadata: event.metadata ?? {},
+      }));
+    return pairFaqEvents(events);
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw error;

@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { analyticsCookieName, analyticsTokenIsValid } from "@/lib/saas-analytics/auth";
 import { briefStoreIsConfigured, readBriefResponses, saveBriefResponse, type BriefSnapshot } from "@/lib/saas-brief/store";
+import { normalizeSaasWebsite } from "@/lib/saas-brief/validation";
 
 export const runtime = "nodejs";
 
@@ -56,7 +57,7 @@ export async function POST(request: NextRequest) {
     !Number.isInteger(durationMs) || Number(durationMs) < 0 || Number(durationMs) > 86_400_000 ||
     typeof completed !== "boolean"
   ) return NextResponse.json({ error: "Invalid response" }, { status: 400 });
-  if (completed && (!website.trim() || !/^\S+@\S+\.\S+$/.test(email) || !mrr || changes.length === 0 || Number(lastStep) < 4))
+  if (completed && (!normalizeSaasWebsite(website) || !/^\S+@\S+\.\S+$/.test(email) || Number(lastStep) < 4))
     return NextResponse.json({ error: "Incomplete response" }, { status: 400 });
 
   const snapshot: BriefSnapshot = {
@@ -65,7 +66,7 @@ export async function POST(request: NextRequest) {
     visitorId,
     revision: Number(revision),
     lastStep: Number(lastStep),
-    website: website.trim(),
+    website: normalizeSaasWebsite(website) ?? website.trim(),
     email: email.trim(),
     mrr,
     changes: changes as string[],

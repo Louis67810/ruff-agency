@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from "@heroicons/react/24/solid";
-import { Logo } from "@/components/navigation/NavBar";
+import { normalizeSaasWebsite, stripWebsiteProtocol } from "@/lib/saas-brief/validation";
 
 const mrrBands = ["<5k", "5–10k", "10–30k", "30k+"];
 const changeOptions = [
@@ -37,30 +37,29 @@ export default function SaasBriefForm() {
   const [mrr, setMrr] = useState("");
   const [changes, setChanges] = useState<string[]>([]);
   const [details, setDetails] = useState("");
+  const [ready, setReady] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [selectionError, setSelectionError] = useState("");
-  const [saveStatus, setSaveStatus] = useState<"saving" | "saved" | "error">("saving");
-  const formRef = useRef<HTMLFormElement>(null);
   const stepPanelRef = useRef<HTMLDivElement>(null);
   const briefSession = useRef<{ id: string; token: string; visitorId: string; revision: number } | null>(null);
   const startedAt = useRef(Date.now());
   const latestDraft = useRef<BriefDraft>({ website, email, mrr, changes, details, step, submitted });
   latestDraft.current = { website, email, mrr, changes, details, step, submitted };
   const progress = Math.round(((step + 1) / stepCount) * 100);
+  const normalizedWebsite = normalizeSaasWebsite(website) ?? website.trim();
   const briefMessage = [
     "Hi Ruff Agency, I'd like to discuss a redesign for my SaaS.",
     "",
-    `SaaS website: ${website}`,
-    `Work email: ${email}`,
-    `Current MRR: ${mrr}`,
-    `What needs to change: ${changes.join(", ")}`,
+    `SaaS website: ${normalizedWebsite}`,
+    mrr ? `Current MRR: ${mrr}` : "",
+    changes.length ? `What needs to change: ${changes.join(", ")}` : "",
     details.trim() ? `Additional details: ${details.trim()}` : "",
   ].filter(Boolean).join("\n");
-  const briefSubject = `SaaS redesign brief — ${website}`;
+  const briefSubject = `SaaS redesign brief — ${normalizedWebsite}`;
   const whatsappHref = `https://api.whatsapp.com/send/?phone=33636465091&text=${encodeURIComponent(briefMessage)}&type=phone_number&app_absent=0`;
   const emailHref = `mailto:?subject=${encodeURIComponent(briefSubject)}&body=${encodeURIComponent(briefMessage)}`;
 
-  async function saveDraft(complete = latestDraft.current.submitted, silent = false) {
+  async function saveDraft(complete = latestDraft.current.submitted) {
     const session = briefSession.current;
     if (!session) return false;
     const draft = latestDraft.current;
@@ -70,7 +69,7 @@ export default function SaasBriefForm() {
       visitorId: session.visitorId,
       revision: ++session.revision,
       lastStep: complete ? stepCount : draft.step,
-      website: draft.website.trim(),
+      website: normalizeSaasWebsite(draft.website) ?? draft.website.trim(),
       email: draft.email.trim(),
       mrr: draft.mrr,
       changes: draft.changes,
@@ -78,7 +77,6 @@ export default function SaasBriefForm() {
       durationMs: Math.min(Date.now() - startedAt.current, 86_400_000),
       completed: complete,
     };
-    if (!silent) setSaveStatus("saving");
     try {
       const response = await fetch("/api/saas-brief", {
         method: "POST",
@@ -87,15 +85,14 @@ export default function SaasBriefForm() {
         keepalive: true,
       });
       if (!response.ok) throw new Error(`Brief save failed (${response.status})`);
-      if (!silent) setSaveStatus("saved");
       return true;
     } catch {
-      if (!silent) setSaveStatus("error");
       return false;
     }
   }
 
   useEffect(() => {
+    setReady(true);
     if (!briefSession.current) {
       let visitorId = crypto.randomUUID();
       try {
@@ -103,10 +100,11 @@ export default function SaasBriefForm() {
         if (existing && /^[0-9a-f-]{36}$/i.test(existing)) visitorId = existing;
         else localStorage.setItem("ruff_saas_visitor_id", visitorId);
       } catch { /* Private browsing may block local storage. */ }
-      briefSession.current = { id: crypto.randomUUID(), token: crypto.randomUUID(), visitorId, revision: -1 };
+      const id = crypto.randomUUID();
+      briefSession.current = { id, token: crypto.randomUUID(), visitorId, revision: -1 };
     }
     void saveDraft(false);
-    const flush = () => { void saveDraft(latestDraft.current.submitted, true); };
+    const flush = () => { void saveDraft(latestDraft.current.submitted); };
     const whenHidden = () => { if (document.visibilityState === "hidden") flush(); };
     window.addEventListener("pagehide", flush);
     document.addEventListener("visibilitychange", whenHidden);
@@ -122,16 +120,13 @@ export default function SaasBriefForm() {
     return () => window.clearTimeout(timer);
   }, [website, email, mrr, changes, details, step, submitted]);
 
-  useEffect(() => {
-    if (step === 2 || step === 3)
-      stepPanelRef.current?.focus({ preventScroll: true });
-    if (step > 0)
-      formRef.current?.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
-        block: "start",
-      });
+  useLayoutEffect(() => {
+    if (step === 0) return;
+    const panel = stepPanelRef.current;
+    if (!panel) return;
+    const top = panel.closest("form")?.getBoundingClientRect().top ?? panel.getBoundingClientRect().top;
+    if (top < 16) window.scrollTo({ top: Math.max(0, window.scrollY + top - 16), behavior: "instant" });
+    panel.focus({ preventScroll: true });
   }, [step]);
 
   function toggleChange(option: string) {
@@ -147,17 +142,11 @@ export default function SaasBriefForm() {
     event.preventDefault();
     setSelectionError("");
 
-    if (step === 2 && !mrr) {
-      setSelectionError("Choose your current MRR to continue.");
-      return;
-    }
     if (step === 0) {
-      const value = website.trim();
-      if (value && !/^https?:\/\//i.test(value)) setWebsite(`https://${value}`);
-    }
-    if (step === 3 && changes.length === 0) {
-      setSelectionError("Choose at least one priority to continue.");
-      return;
+      if (!normalizeSaasWebsite(website)) {
+        setSelectionError("Enter a valid website address, such as saas.com.");
+        return;
+      }
     }
     if (step === stepCount - 1) {
       const saved = await saveDraft(true);
@@ -176,16 +165,29 @@ export default function SaasBriefForm() {
     setStep((current) => Math.max(0, current - 1));
   }
 
+  function trackWhatsAppClick() {
+    const session = briefSession.current;
+    if (!session) return;
+    void fetch("/api/saas-brief/whatsapp-click", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ id: session.id, token: session.token }),
+      keepalive: true,
+    }).catch(() => { /* The WhatsApp link must remain usable if tracking is unavailable. */ });
+  }
+
   return (
     <main className="sb-page">
       <div className="sb-haze sb-haze--top" aria-hidden="true" />
       <div className="sb-haze sb-haze--left" aria-hidden="true" />
       <div className="sb-outline sb-outline--left" aria-hidden="true" />
       <div className="sb-outline sb-outline--right" aria-hidden="true" />
-
       <div className="sb-wrap">
         <header className="sb-header">
-          <Logo className="sb-brand" href="/en/saas-redesign" />
+          <a className="sb-brand" href="/en/saas-redesign" aria-label="Ruff Agency home">
+            <img src="/ruff-logo-mark.svg" alt="" width="69" height="44" />
+            <span>.agency</span>
+          </a>
           <div className="sb-heading">
             <h1>You’re One Step Away From Standing Out</h1>
             <p>
@@ -196,7 +198,7 @@ export default function SaasBriefForm() {
           <div className="sb-rule" />
         </header>
 
-        <form className="aq-root sb-form" onSubmit={handleSubmit} ref={formRef}>
+        <form className="sb-form" onSubmit={handleSubmit} noValidate>
           {submitted ? (
               <div className="sb-success" role="status" aria-live="polite">
                 <span className="sb-success-icon"><CheckIcon /></span>
@@ -204,11 +206,12 @@ export default function SaasBriefForm() {
                   <ArrowLeftIcon aria-hidden="true" /><span>Back to the previous question</span>
                 </button>
                 <h2>Thanks for telling us about your SaaS.</h2>
-                <p>Choose how you’d like to send your brief.</p>
+                <p>Your brief is saved. Choose how you’d like to contact us.</p>
                 <div className="sb-send-actions">
                   <a
                     className="sb-submit sb-send-cta sb-send-cta--whatsapp"
                     href={whatsappHref}
+                    onClick={trackWhatsAppClick}
                     rel="noopener noreferrer"
                     target="_blank"
                   >
@@ -233,25 +236,25 @@ export default function SaasBriefForm() {
                   </button>
                 )}
                 <h2 className="sb-question">{stepQuestions[step]}</h2>
+                {step >= 2 && <span className="sb-optional">Optional — you can continue without answering</span>}
                 <div className="sb-question-rule" aria-hidden="true" />
                 {step === 0 && (
                   <label className="sb-field">
-                    <span className="sb-sr-only">Your SaaS</span>
-                    <input
-                      autoComplete="url"
-                      autoFocus
-                      name="website"
-                      onChange={(event) => setWebsite(event.target.value)}
-                      onBlur={(event) => {
-                        const value = event.currentTarget.value.trim();
-                        if (value && !/^https?:\/\//i.test(value)) setWebsite(`https://${value}`);
-                      }}
-                      placeholder="https://saas.com"
-                      required
-                      inputMode="url"
-                      type="text"
-                      value={website}
-                    />
+                    <span className="sb-sr-only">Your SaaS website</span>
+                    <span className="sb-url-field">
+                      <span aria-hidden="true">https://</span>
+                      <input
+                        aria-label="Your SaaS website, after https://"
+                        autoComplete="url"
+                        name="website"
+                        onChange={(event) => { setWebsite(stripWebsiteProtocol(event.target.value)); setSelectionError(""); }}
+                        placeholder="saas.com"
+                        required
+                        inputMode="url"
+                        type="text"
+                        value={website}
+                      />
+                    </span>
                   </label>
                 )}
                 {step === 1 && (
@@ -259,9 +262,8 @@ export default function SaasBriefForm() {
                     <span className="sb-sr-only">Work email</span>
                     <input
                       autoComplete="email"
-                      autoFocus
                       name="email"
-                      onChange={(event) => setEmail(event.target.value)}
+                      onChange={(event) => { setEmail(event.target.value); setSelectionError(""); }}
                       placeholder="you@saas.com"
                       required
                       type="email"
@@ -321,7 +323,6 @@ export default function SaasBriefForm() {
                   <label className="sb-field sb-field--details">
                     <span className="sb-sr-only">Anything else we should know?</span>
                     <textarea
-                      autoFocus
                       maxLength={800}
                       name="details"
                       onChange={(event) => setDetails(event.target.value)}
@@ -337,8 +338,8 @@ export default function SaasBriefForm() {
               </div>
 
               <div className="sb-form-footer">
-                <button className="sb-submit" type="submit">
-                  <span>{step === stepCount - 1 ? "Send My SaaS" : "Continue"}</span>
+                <button className="sb-submit" disabled={!ready} type="submit">
+                  <span>{step === stepCount - 1 ? "Save My Brief" : "Continue"}</span>
                   <ArrowRightIcon aria-hidden="true" />
                 </button>
               </div>
