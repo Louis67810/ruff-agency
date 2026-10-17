@@ -7,7 +7,7 @@ import { localizeHref } from "@/lib/i18n";
 import { CtaArrowMark } from "@/components/ui/Cta";
 import { SaasRedesignGuarantee } from "./SaasRedesignTrustSections";
 
-type UpsellId = "page" | "branding" | "cro";
+type UpsellId = "branding" | "cro";
 
 type Feature = {
   label: string;
@@ -40,7 +40,6 @@ export type PrixOptimizedProps = {
   tickerImages?: string[];
   brandingPrice?: number;
   croPrice?: number;
-  additionalPagePrice?: number;
   className?: string;
   sectionId?: string;
 };
@@ -61,11 +60,6 @@ const FEATURES: Feature[] = [
 ];
 
 const UPSELLS: Upsell[] = [
-  {
-    id: "page",
-    title: "Additional page",
-    description: "",
-  },
   {
     id: "branding",
     title: "Full Brand Identity",
@@ -106,7 +100,6 @@ const FR_FEATURE_LABELS = [
   "Stratégie de conversion",
 ];
 const EN_UPSELL_COPY: Record<UpsellId, [string, string]> = {
-  page: ["Additional page", "Add one more page to your website."],
   branding: ["Full Brand Identity", "A complete brand identity, from logo to visual direction."],
   cro: ["Post-launch CRO Sprint", "Conversion improvements after launch."],
 };
@@ -180,7 +173,6 @@ export default function PrixOptimized({
   bookingHref = "/30-min",
   brandingPrice,
   croPrice,
-  additionalPagePrice,
   className = "",
   sectionId = "pricing",
   locale = "fr",
@@ -189,8 +181,8 @@ export default function PrixOptimized({
 }: PrixOptimizedProps) {
   const english = locale === "en";
   const prices = english
-    ? { base: 2000, page: 400, additionalPage: 450, branding: 700, cro: 800 }
-    : { base: 1765, page: 400, additionalPage: 450, branding: 620, cro: 700 };
+    ? { base: 2000, page: 450, branding: 700, cro: 800 }
+    : { base: 1765, page: 450, branding: 620, cro: 700 };
   const resolvedBasePrice = basePrice ?? prices.base;
   const resolvedExtraPrice = extraPrice ?? prices.page;
   bookingHref = localizeHref(bookingHref, locale) || "#";
@@ -225,11 +217,10 @@ export default function PrixOptimized({
 
   const upsellPrices = useMemo(
     () => ({
-      page: additionalPagePrice ?? prices.additionalPage,
       branding: brandingPrice ?? prices.branding,
       cro: croPrice ?? prices.cro,
     }),
-    [additionalPagePrice, brandingPrice, croPrice, prices.additionalPage, prices.branding, prices.cro],
+    [brandingPrice, croPrice, prices.branding, prices.cro],
   );
 
   const totalPrice = useMemo(() => {
@@ -386,7 +377,7 @@ export default function PrixOptimized({
                   onClick={() => toggleUpsell(upsell.id)}
                 >
                   <span className="sr-prx-upsellName">{upsell.title}</span>
-                  <span className="sr-prx-upsellPrice">+{formatPrice(upsellPrices[upsell.id])}{upsell.id === "page" ? (english ? "/ page" : "/ page") : ""}</span>
+                  <span className="sr-prx-upsellPrice">+{formatPrice(upsellPrices[upsell.id])}</span>
                   <span className="sr-prx-upsellCheck" aria-hidden="true">{isActive ? <CheckIcon /> : null}</span>
                 </button>
               );

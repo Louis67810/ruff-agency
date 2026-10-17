@@ -64,6 +64,9 @@ export function SaasAnalyticsTracker() {
     if (newSession) {
       sessionStorage.setItem("ruff_saas_session_id", crypto.randomUUID());
       sessionStorage.removeItem("ruff_saas_entry_path");
+      ["source", "medium", "campaign", "content", "term"].forEach((key) =>
+        sessionStorage.removeItem(`ruff_saas_utm_${key}`),
+      );
       localStorage.setItem("ruff_saas_visits", String(Number(localStorage.getItem("ruff_saas_visits") ?? 0) + 1));
     }
     const sessionId = getStableId(sessionStorage, "ruff_saas_session_id");
@@ -80,17 +83,48 @@ export function SaasAnalyticsTracker() {
     const sentScrollThresholds = new Set<number>();
     const sentScrollZones = new Set<number>();
 
+    const searchParams = new URLSearchParams(window.location.search);
+    const utmKeys = ["source", "medium", "campaign", "content", "term"] as const;
+    const hasUtmParameters = utmKeys.some((key) => searchParams.has(`utm_${key}`));
+    if (hasUtmParameters) {
+      utmKeys.forEach((key) => {
+        const value = searchParams.get(`utm_${key}`)?.trim().slice(0, 100);
+        if (value) sessionStorage.setItem(`ruff_saas_utm_${key}`, value);
+        else sessionStorage.removeItem(`ruff_saas_utm_${key}`);
+      });
+    }
+    const utm = Object.fromEntries(
+      utmKeys.map((key) => [key, sessionStorage.getItem(`ruff_saas_utm_${key}`) ?? ""]),
+    ) as Record<(typeof utmKeys)[number], string>;
     const referrerUrl = document.referrer;
     const referrer = referrerUrl ? (() => { try { return new URL(referrerUrl).hostname; } catch { return "Direct"; } })() : "Direct";
-    const campaign = new URLSearchParams(window.location.search).get("utm_campaign") ?? "None";
-    const channel = !referrerUrl ? "Direct" : /google|bing|duckduckgo|yahoo/i.test(referrer) ? "Organic search" : /facebook|instagram|linkedin|x[.]com|twitter|tiktok/i.test(referrer) ? "Organic social" : referrer === window.location.hostname ? "Internal" : "Referral";
+    const campaign = utm.campaign || "None";
+    const referralChannel = !referrerUrl ? "Direct" : /google|bing|duckduckgo|yahoo/i.test(referrer) ? "Organic search" : /facebook|instagram|linkedin|x[.]com|twitter|tiktok/i.test(referrer) ? "Organic social" : referrer === window.location.hostname ? "Internal" : "Referral";
+    const channel = utm.source
+      ? `${utm.source}${utm.medium ? ` / ${utm.medium}` : ""}`
+      : referralChannel;
     const agent = navigator.userAgent;
     const browser = /Edg\//.test(agent) ? "Edge" : /Firefox\//.test(agent) ? "Firefox" : /Safari\//.test(agent) && !/Chrome\//.test(agent) ? "Safari" : /Chrome\//.test(agent) ? "Chrome" : "Other";
     const operatingSystem = /Windows/i.test(agent) ? "Windows" : /Android/i.test(agent) ? "Android" : /iPhone|iPad|iPod/i.test(agent) ? "iOS" : /Mac OS/i.test(agent) ? "macOS" : /Linux/i.test(agent) ? "Linux" : "Other";
     const device = /Mobi|Android|iPhone/i.test(agent) ? "Mobile" : /iPad|Tablet/i.test(agent) ? "Tablet" : "Desktop";
     const entryPath = sessionStorage.getItem("ruff_saas_entry_path") ?? pathname;
     sessionStorage.setItem("ruff_saas_entry_path", entryPath);
-    const commonMetadata = { visitCount, referrer, channel, campaign, browser, operatingSystem, device, entryPath, viewport: getViewport(), hostname: window.location.hostname };
+    const commonMetadata = {
+      visitCount,
+      referrer,
+      channel,
+      campaign,
+      utmSource: utm.source,
+      utmMedium: utm.medium,
+      utmContent: utm.content,
+      utmTerm: utm.term,
+      browser,
+      operatingSystem,
+      device,
+      entryPath,
+      viewport: getViewport(),
+      hostname: window.location.hostname,
+    };
 
     const decorate = (event: ClientEvent): AnalyticsEventInput => ({
       ...event,
