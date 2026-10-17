@@ -121,7 +121,15 @@ function VideoReviewCard({ RceipbT2y, ChPJcClC0 = "rgb(255, 228, 158)", style, c
         if (videoRef.current)
             videoRef.current.volume = 0.25;
     }, []);
-    const open = () => { setActive(true); requestAnimationFrame(() => videoRef.current?.play?.().catch(() => { })); };
+    const open = () => {
+        // The card opens the native player once. On mobile, taps on the video
+        // controls can bubble to this handler; never call play() again after
+        // the controls are visible or a pause tap immediately resumes playback.
+        if (active)
+            return;
+        setActive(true);
+        requestAnimationFrame(() => videoRef.current?.play?.().catch(() => { }));
+    };
     const photo = "https://framerusercontent.com/images/Arkyoce2XSTAwUSdLe9qSHA3bP0.png?width=2048&height=1365";
     const photoSrcSet = "https://framerusercontent.com/images/Arkyoce2XSTAwUSdLe9qSHA3bP0.png?scale-down-to=512&width=2048&height=1365 512w, https://framerusercontent.com/images/Arkyoce2XSTAwUSdLe9qSHA3bP0.png?scale-down-to=1024&width=2048&height=1365 1024w, https://framerusercontent.com/images/Arkyoce2XSTAwUSdLe9qSHA3bP0.png?width=2048&height=1365 2048w";
     const extra = hover ? 362 : 336;
