@@ -64,35 +64,73 @@ const englishSteps: Step[] = steps.map((step, index) => ({
   ][index],
 }));
 
-function ProcessAnimation({ step }: { step: Step }) {
+function ProcessAnimation({ step, deferWhenHidden = false }: { step: Step; deferWhenHidden?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
     let player: DotLottie | undefined;
     let cancelled = false;
+    let loading = false;
+    let inViewport = !deferWhenHidden;
+    const syncPlayback = () => {
+      if (!player?.isLoaded) return;
+      if (inViewport && !document.hidden) player.play();
+      else player.pause();
+    };
 
-    void import("@lottiefiles/dotlottie-web").then(
-      ({ DotLottie: DotLottiePlayer }) => {
-        if (cancelled || !canvasRef.current) return;
-        player = new DotLottiePlayer({
-          canvas: canvasRef.current,
-          src: step.animation,
-          autoplay: true,
-          loop: true,
-          // L'auto-resize de DotLottie peut tenter de réutiliser un canvas démonté
-          // pendant une navigation Next.js, ce qui déclenche « RuntimeError: unreachable ».
-          renderConfig: { autoResize: false, devicePixelRatio: 2 },
-        });
-      },
-    );
+    const loadPlayer = () => {
+      if (loading || cancelled) return;
+      loading = true;
+      void import("@lottiefiles/dotlottie-web").then(
+        ({ DotLottie: DotLottiePlayer }) => {
+          if (cancelled) return;
+          player = new DotLottiePlayer({
+            canvas,
+            src: step.animation,
+            autoplay: false,
+            loop: true,
+            // Avoid resizing a detached canvas during Next.js navigation.
+            renderConfig: { autoResize: false, devicePixelRatio: 2 },
+          });
+          player.addEventListener("load", syncPlayback);
+          syncPlayback();
+        },
+      ).catch(() => { loading = false; });
+    };
+
+    let preloadObserver: IntersectionObserver | undefined;
+    let visibilityObserver: IntersectionObserver | undefined;
+    if (deferWhenHidden && typeof IntersectionObserver !== "undefined") {
+      const container = canvas.parentElement ?? canvas;
+      preloadObserver = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        loadPlayer();
+        preloadObserver?.disconnect();
+      }, { rootMargin: "600px 0px" });
+      visibilityObserver = new IntersectionObserver(([entry]) => {
+        inViewport = entry.isIntersecting;
+        syncPlayback();
+      });
+      preloadObserver.observe(container);
+      visibilityObserver.observe(container);
+    } else {
+      inViewport = true;
+      loadPlayer();
+    }
+    document.addEventListener("visibilitychange", syncPlayback);
 
     return () => {
       cancelled = true;
+      preloadObserver?.disconnect();
+      visibilityObserver?.disconnect();
+      document.removeEventListener("visibilitychange", syncPlayback);
+      player?.removeEventListener("load", syncPlayback);
       void player?.destroy();
     };
-  }, [step]);
+  }, [step, deferWhenHidden]);
 
   return (
     <div className={styles.visual} aria-hidden="true">
@@ -229,7 +267,7 @@ export function ExactProcessCardGrid({
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>
                 </div>
-                <ProcessAnimation step={step} />
+                <ProcessAnimation step={step} deferWhenHidden={variant === "saas"} />
               </article>
             </CardReveal>
           ))}

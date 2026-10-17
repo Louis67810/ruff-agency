@@ -45,6 +45,7 @@ import {
   UsersIcon,
 } from "@heroicons/react/24/outline";
 import Script from "next/script";
+import { useVisibleAnimation } from "@/components/hooks/useVisibleAnimation";
 import { createPortal } from "react-dom";
 import { VideoReviewCard } from "@/components/sections/SectionAvis/SectionAvis";
 import { HomepageReviewCard } from "@/components/sections/SectionAvis/HomepageReviewCard";
@@ -647,6 +648,7 @@ function MarqueeCard({
   onSelectedSlideChange,
   projectId,
   branding = false,
+  imageLoading = "lazy",
 }: {
   item: string;
   slides?: ReadonlyArray<BeforeAfterSlide>;
@@ -657,6 +659,7 @@ function MarqueeCard({
   onSelectedSlideChange?: (index: number) => void;
   projectId?: string;
   branding?: boolean;
+  imageLoading?: "eager" | "lazy";
 }) {
   const slideSet = slides.length ? slides : beforeAfterSlides;
   const [position, setPosition] = useState(initialPosition);
@@ -684,6 +687,8 @@ function MarqueeCard({
       <div className="sr-marquee-card__image" data-example={item}>
         <img
           className="sr-marquee-card__after"
+          loading={imageLoading}
+          decoding="async"
           src={slide.after}
           alt={branding ? slide.title : `${slide.title} after redesign`}
           style={{ objectPosition: slide.objectPosition ?? "center" }}
@@ -695,6 +700,8 @@ function MarqueeCard({
         >
           <img
             className="sr-marquee-card__before"
+            loading={imageLoading}
+            decoding="async"
             src={slide.before}
             alt={`${slide.title} before redesign`}
             style={{ objectPosition: slide.objectPosition ?? "center" }}
@@ -794,12 +801,15 @@ function MarqueeCard({
 function Marquee({
   projects,
   className = "",
+  priority = false,
 }: {
   projects: ReadonlyArray<RealizationProject>;
   className?: string;
+  priority?: boolean;
 }) {
   const repeated = [...projects, ...projects];
   const trackRef = useRef<HTMLDivElement>(null);
+  const canAnimate = useVisibleAnimation(trackRef);
   const rateFrame = useRef<number | null>(null);
   const resumeFrame = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [selectedSlides, setSelectedSlides] = useState<Record<string, number>>({});
@@ -817,7 +827,7 @@ function Marquee({
     if (!window.matchMedia("(max-width: 809px)").matches) return;
     if (resumeFrame.current !== null) clearTimeout(resumeFrame.current);
     resumeFrame.current = setTimeout(() => {
-      trackRef.current?.getAnimations()[0]?.play();
+      if (canAnimate.current) trackRef.current?.getAnimations()[0]?.play();
       resumeFrame.current = null;
     }, 700);
   };
@@ -872,6 +882,7 @@ function Marquee({
             item={project.slides[0].id}
             projectId={project.id}
             slides={project.slides}
+            imageLoading={priority && index < 3 ? "eager" : "lazy"}
             selectedSlide={selectedSlides[project.id]}
             onSelectedSlideChange={(slideIndex) =>
               setSelectedSlides((current) => ({ ...current, [project.id]: slideIndex }))
@@ -1873,6 +1884,8 @@ export default function SaasRedesignLanding({
   managedTweets?: ReadonlyArray<SaasTweet>;
 }) {
   useSaasScrollReveal();
+  const introducingTrackRef = useRef<HTMLDivElement>(null);
+  useVisibleAnimation(introducingTrackRef);
 
   return (
     <main className="sr">
@@ -1897,6 +1910,7 @@ export default function SaasRedesignLanding({
       <Marquee
         projects={orderedRealizationProjects}
         className="sr-intro sr-intro--ticker"
+        priority
       />
       <section className="sr-problems" id="problems" data-sr-reveal="section">
         <div className="sr-problems-heading">
@@ -1947,7 +1961,7 @@ export default function SaasRedesignLanding({
       <TrustChoice tweets={managedTweets.length ? managedTweets : defaultTweets} />
       <section className="sr-solution" id="solution" data-sr-reveal="section">
         <div className="sr-solution-ticker" aria-label="Introducing Ruff Agency">
-          <div className="sr-solution-ticker__track" aria-hidden="true">
+          <div className="sr-solution-ticker__track" ref={introducingTrackRef} aria-hidden="true">
             {[0, 1].map((copy) => (
               <div className="sr-solution-ticker__set" key={copy}>
                 {Array.from({ length: 14 }, (_, index) => (
@@ -1960,18 +1974,24 @@ export default function SaasRedesignLanding({
         <img
           className="sr-solution-shape sr-solution-shape--left"
           src="/landing-assets/saas-redesign/benefits/2419-919.png"
+          loading="lazy"
+          decoding="async"
           alt=""
           aria-hidden="true"
         />
         <img
           className="sr-solution-shape sr-solution-shape--right"
           src="/landing-assets/saas-redesign/benefits/2419-920.png"
+          loading="lazy"
+          decoding="async"
           alt=""
           aria-hidden="true"
         />
         <img
           className="sr-solution-logo"
           src="/landing-assets/saas-redesign/benefits/2431-937.png"
+          loading="lazy"
+          decoding="async"
           width="164"
           height="48"
           alt="Ruff Agency"
@@ -1988,6 +2008,8 @@ export default function SaasRedesignLanding({
               <div className="sr-solution-illustration">
                 <img
                   src={image}
+                  loading="lazy"
+                  decoding="async"
                   alt=""
                   aria-hidden="true"
                 />

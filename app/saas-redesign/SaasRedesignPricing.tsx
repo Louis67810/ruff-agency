@@ -113,15 +113,16 @@ const EN_UPSELL_COPY: Record<UpsellId, [string, string]> = {
 
 function useAnimatedNumber(target: number) {
   const [displayed, setDisplayed] = useState(target);
-  const previous = useRef(target);
+  const currentValue = useRef(target);
   const animationFrame = useRef(0);
 
   useEffect(() => {
-    const start = previous.current;
+    const start = currentValue.current;
     const duration = 400;
     const startedAt = performance.now();
 
     cancelAnimationFrame(animationFrame.current);
+    if (start === target) return;
 
     const tick = (now: number) => {
       const progress = Math.min((now - startedAt) / duration, 1);
@@ -130,12 +131,12 @@ function useAnimatedNumber(target: number) {
           ? 2 * progress * progress
           : -1 + (4 - 2 * progress) * progress;
 
-      setDisplayed(Math.floor(start + (target - start) * eased));
+      const next = progress === 1 ? target : Math.floor(start + (target - start) * eased);
+      currentValue.current = next;
+      setDisplayed(next);
 
       if (progress < 1) {
         animationFrame.current = requestAnimationFrame(tick);
-      } else {
-        previous.current = target;
       }
     };
 
