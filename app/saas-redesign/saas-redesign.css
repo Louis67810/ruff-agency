@@ -6740,7 +6740,21 @@ html:has(.sr) {
   .sr .sr-proof-reviews { padding-top: 44px; }
   .sr .sr-review-grid { align-items: start; }
   .sr .sr-review-grid .homepage-review-card.sr-review-card { width: 100%; height: auto !important; min-height: 0 !important; }
-  .sr .sr-review-grid .framer-Eqvb3 { width: 100%; height: auto !important; aspect-ratio: 319 / 487; border-radius: 31px; }
+  .sr .sr-proof-reviews .sr-review-grid .framer-Eqvb3 {
+    width: 100%;
+    height: auto !important;
+    aspect-ratio: 319 / 487;
+    border-radius: 31px;
+    clip-path: inset(0 round 31px);
+    isolation: isolate;
+    overflow: hidden;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+  .sr .sr-proof-reviews .framer-Eqvb3 .framer-1nniyl0-container,
+  .sr .sr-proof-reviews .framer-Eqvb3 video {
+    border-radius: inherit !important;
+    overflow: hidden;
+  }
   .sr .sr-reviews-chart-reveal .sr-metrics-frame { height: auto; min-height: 548px; }
   .sr .sr-reviews-chart-reveal .sr-metrics-summary { height: auto; min-height: 112px; padding: 16px; flex-wrap: wrap; }
   .sr .sr-reviews-chart-reveal .sr-metric-identity img { width: 60px; height: 60px; }
