@@ -649,6 +649,22 @@
 
 .sb-success-back { margin-top: 8px; }
 
+@media (min-width: 901px) {
+  .sb-page {
+    overflow-y: clip;
+  }
+
+  .sb-outline--left {
+    bottom: 0;
+    height: auto;
+  }
+
+  .sb-outline--right {
+    bottom: 0;
+    height: auto;
+  }
+}
+
 @media (max-width: 900px) {
   .sb-page {
     padding: 40px 24px 72px;

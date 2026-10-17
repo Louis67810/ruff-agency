@@ -41,6 +41,7 @@ export default function SaasBriefForm() {
   const [submitted, setSubmitted] = useState(false);
   const [selectionError, setSelectionError] = useState("");
   const stepPanelRef = useRef<HTMLDivElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
   const briefSession = useRef<{ id: string; token: string; visitorId: string; revision: number } | null>(null);
   const startedAt = useRef(Date.now());
   const latestDraft = useRef<BriefDraft>({ website, email, mrr, changes, details, step, submitted });
@@ -148,6 +149,18 @@ export default function SaasBriefForm() {
         return;
       }
     }
+    if (step === 1 && !emailInputRef.current?.checkValidity()) {
+      setSelectionError(email.trim() ? "Enter a valid work email address." : "Enter your work email to continue.");
+      return;
+    }
+    if (step === 2 && !mrr) {
+      setSelectionError("Select your current MRR to continue.");
+      return;
+    }
+    if (step === 3 && changes.length === 0) {
+      setSelectionError("Select at least one option to continue.");
+      return;
+    }
     if (step === stepCount - 1) {
       const saved = await saveDraft(true);
       if (!saved) {
@@ -236,7 +249,7 @@ export default function SaasBriefForm() {
                   </button>
                 )}
                 <h2 className="sb-question">{stepQuestions[step]}</h2>
-                {step >= 2 && <span className="sb-optional">Optional — you can continue without answering</span>}
+                {step === stepCount - 1 && <span className="sb-optional">Optional. You can continue without answering.</span>}
                 <div className="sb-question-rule" aria-hidden="true" />
                 {step === 0 && (
                   <label className="sb-field">
@@ -261,6 +274,7 @@ export default function SaasBriefForm() {
                   <label className="sb-field">
                     <span className="sb-sr-only">Work email</span>
                     <input
+                      ref={emailInputRef}
                       autoComplete="email"
                       name="email"
                       onChange={(event) => { setEmail(event.target.value); setSelectionError(""); }}
@@ -272,7 +286,7 @@ export default function SaasBriefForm() {
                   </label>
                 )}
                 {step === 2 && (
-                  <fieldset className="sb-choice-group">
+                  <fieldset className="sb-choice-group" aria-required="true">
                     <legend className="sb-sr-only">Current MRR</legend>
                     <div className="sb-choice-row sb-choice-row--vertical">
                       {mrrBands.map((band) => (
@@ -296,7 +310,7 @@ export default function SaasBriefForm() {
                   </fieldset>
                 )}
                 {step === 3 && (
-                  <fieldset className="sb-choice-group">
+                  <fieldset className="sb-choice-group" aria-required="true">
                     <legend className="sb-sr-only">What needs to change? Choose all that apply.</legend>
                     <div className="sb-choice-row sb-choice-row--vertical">
                       {changeOptions.map((option) => {

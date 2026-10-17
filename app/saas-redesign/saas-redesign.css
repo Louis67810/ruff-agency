@@ -6528,6 +6528,12 @@ html:has(.sr) {
   .sr > .stack-section-3.sr-final-faq { padding-top: 40px; }
 }
 
+@media (max-width: 720px) {
+  .sr .sr-reviews-book-divider { display: none; }
+  .sr .sr-prx-baseTop { gap: 24px; }
+  .sr .sr-prx-sliderModule { padding-top: 18px; }
+}
+
 .saas-redesign-nav .navbar-cta-avatar { display: none; }
 .saas-redesign-nav .navbar-cta-inner { gap: 0; padding-inline: 20px; }
 .saas-redesign-nav .navbar-desktop-landing-links { gap: 2px; }
