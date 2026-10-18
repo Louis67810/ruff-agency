@@ -2,16 +2,10 @@
 
 import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from "@heroicons/react/24/solid";
-import { normalizeSaasWebsite, stripWebsiteProtocol } from "@/lib/saas-brief/validation";
+import { normalizeSaasWebsite, stripWebsiteProtocol, normalizeWorkEmail, validateBriefStep, validateCompletedBrief, briefMrrOptions as mrrBands, briefChangeOptions as changeOptions } from "@/lib/saas-brief/validation";
 import { captureBriefAttribution, type BriefAttribution } from "@/lib/saas-brief/attribution";
 
-const mrrBands = ["<5k", "5–10k", "10–30k", "30k+"];
-const changeOptions = [
-  "Looks generic",
-  "Low conversion",
-  "Outgrown the brand",
-  "Other",
-];
+type SaveResult = { ok: boolean; error?: string; step?: number };
 const stepCount = 5;
 const stepQuestions = [
   "What’s your SaaS website?",
@@ -41,6 +35,9 @@ export default function SaasBriefForm() {
   const [ready, setReady] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [selectionError, setSelectionError] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const submittingRef = useRef(false);
+  const saveQueue = useRef<Promise<SaveResult>>(Promise.resolve({ ok: true }));
   const stepPanelRef = useRef<HTMLDivElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const briefSession = useRef<{ id: string; token: string; visitorId: string; revision: number } | null>(null);
@@ -62,9 +59,10 @@ export default function SaasBriefForm() {
   const whatsappHref = `https://api.whatsapp.com/send/?phone=33636465091&text=${encodeURIComponent(briefMessage)}&type=phone_number&app_absent=0`;
   const emailHref = `mailto:?subject=${encodeURIComponent(briefSubject)}&body=${encodeURIComponent(briefMessage)}`;
 
-  async function saveDraft(complete = latestDraft.current.submitted) {
+  async function saveDraft(complete = latestDraft.current.submitted): Promise<SaveResult> {
     const session = briefSession.current;
-    if (!session) return false;
+    if (!session) return { ok: false, error: "The form is still loading. Please try again." };
+    if (!complete && (submittingRef.current || latestDraft.current.submitted)) return { ok: true };
     const draft = latestDraft.current;
     const payload = {
       id: session.id,
@@ -73,7 +71,7 @@ export default function SaasBriefForm() {
       revision: ++session.revision,
       lastStep: complete ? stepCount : draft.step,
       website: normalizeSaasWebsite(draft.website) ?? draft.website.trim(),
-      email: draft.email.trim(),
+      email: normalizeWorkEmail(draft.email) ?? draft.email.trim(),
       mrr: draft.mrr,
       changes: draft.changes,
       details: draft.details,
@@ -81,18 +79,39 @@ export default function SaasBriefForm() {
       completed: complete,
       attribution: attribution.current,
     };
-    try {
-      const response = await fetch("/api/saas-brief", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
-        keepalive: true,
-      });
-      if (!response.ok) throw new Error(`Brief save failed (${response.status})`);
-      return true;
-    } catch {
-      return false;
-    }
+    // Keep draft writes in order so an autosave cannot undo final completion.
+    const request = saveQueue.current.then(async (): Promise<SaveResult> => {
+      if (!complete && payload.revision < session.revision) return { ok: true };
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 15_000);
+      try {
+        const response = await fetch("/api/saas-brief", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true,
+          signal: controller.signal,
+        });
+        if (response.ok) return { ok: true };
+        const issue = await response.json().catch(() => null) as { error?: string; step?: number } | null;
+        const invalidStep = issue?.step;
+        if (response.status === 400 && typeof invalidStep === "number" && Number.isInteger(invalidStep) && invalidStep >= 0 && invalidStep < stepCount) {
+          return { ok: false, error: issue?.error || "Please check this answer.", step: invalidStep };
+        }
+        const error = response.status === 429 ? "Too many attempts. Please wait a moment and try again."
+          : response.status === 413 ? "Your brief is too long. Shorten your additional details and try again."
+          : "We couldn't save your brief right now. Your answers are still here. Please try again in a moment.";
+        return { ok: false, error };
+      } catch {
+        return { ok: false, error: controller.signal.aborted
+          ? "Saving took too long. Your answers are still here. Please try again."
+          : "We couldn't reach the server. Check your connection and try again." };
+      } finally {
+        window.clearTimeout(timeout);
+      }
+    });
+    saveQueue.current = request;
+    return request;
   }
 
   useEffect(() => {
@@ -109,7 +128,9 @@ export default function SaasBriefForm() {
       briefSession.current = { id, token: crypto.randomUUID(), visitorId, revision: -1 };
     }
     void saveDraft(false);
-    const flush = () => { void saveDraft(latestDraft.current.submitted); };
+    const flush = () => {
+      if (!submittingRef.current && !latestDraft.current.submitted) void saveDraft(false);
+    };
     const whenHidden = () => { if (document.visibilityState === "hidden") flush(); };
     window.addEventListener("pagehide", flush);
     document.addEventListener("visibilitychange", whenHidden);
@@ -120,10 +141,10 @@ export default function SaasBriefForm() {
   }, []);
 
   useEffect(() => {
-    if (!briefSession.current) return;
+    if (!briefSession.current || submitted || isSaving) return;
     const timer = window.setTimeout(() => { void saveDraft(); }, 550);
     return () => window.clearTimeout(timer);
-  }, [website, email, mrr, changes, details, step, submitted]);
+  }, [website, email, mrr, changes, details, step, submitted, isSaving]);
 
   useLayoutEffect(() => {
     if (step === 0) return;
@@ -145,30 +166,29 @@ export default function SaasBriefForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submittingRef.current) return;
     setSelectionError("");
-
-    if (step === 0) {
-      if (!normalizeSaasWebsite(website)) {
-        setSelectionError("Enter a valid website address, such as saas.com.");
-        return;
-      }
-    }
-    if (step === 1 && !emailInputRef.current?.checkValidity()) {
-      setSelectionError(email.trim() ? "Enter a valid work email address." : "Enter your work email to continue.");
-      return;
-    }
-    if (step === 2 && !mrr) {
-      setSelectionError("Select your current MRR to continue.");
-      return;
-    }
-    if (step === 3 && changes.length === 0) {
-      setSelectionError("Select at least one option to continue.");
+    const issue = validateBriefStep(latestDraft.current, step);
+    if (issue) {
+      setSelectionError(issue);
+      if (step === 1) emailInputRef.current?.focus();
       return;
     }
     if (step === stepCount - 1) {
+      const invalid = validateCompletedBrief(latestDraft.current);
+      if (invalid) {
+        setStep(invalid.step);
+        setSelectionError(invalid.error);
+        return;
+      }
+      submittingRef.current = true;
+      setIsSaving(true);
       const saved = await saveDraft(true);
-      if (!saved) {
-        setSelectionError("We couldn't save your brief. Please try again.");
+      submittingRef.current = false;
+      setIsSaving(false);
+      if (!saved.ok) {
+        if (saved.step !== undefined) setStep(saved.step);
+        setSelectionError(saved.error || "Please try again.");
         return;
       }
       setSubmitted(true);
@@ -215,7 +235,7 @@ export default function SaasBriefForm() {
           <div className="sb-rule" />
         </header>
 
-        <form className="sb-form" onSubmit={handleSubmit} noValidate>
+        <form className="sb-form" onSubmit={handleSubmit} noValidate aria-busy={isSaving}>
           {submitted ? (
               <div className="sb-success" role="status" aria-live="polite">
                 <span className="sb-success-icon"><CheckIcon /></span>
@@ -248,7 +268,7 @@ export default function SaasBriefForm() {
                 aria-live="polite"
               >
                 {step > 0 && (
-                  <button className="sb-back" onClick={goBack} type="button">
+                  <button className="sb-back" onClick={goBack} type="button" disabled={isSaving}>
                     <ArrowLeftIcon aria-hidden="true" /><span>Back</span>
                   </button>
                 )}
@@ -264,6 +284,7 @@ export default function SaasBriefForm() {
                         aria-label="Your SaaS website, after https://"
                         autoComplete="url"
                         name="website"
+                        maxLength={500}
                         onChange={(event) => { setWebsite(stripWebsiteProtocol(event.target.value)); setSelectionError(""); }}
                         placeholder="saas.com"
                         required
@@ -281,6 +302,9 @@ export default function SaasBriefForm() {
                       ref={emailInputRef}
                       autoComplete="email"
                       name="email"
+                      maxLength={254}
+                      aria-invalid={Boolean(selectionError)}
+                      aria-describedby={selectionError ? "sb-form-error" : undefined}
                       onChange={(event) => { setEmail(event.target.value); setSelectionError(""); }}
                       placeholder="you@saas.com"
                       required
@@ -341,6 +365,7 @@ export default function SaasBriefForm() {
                   <label className="sb-field sb-field--details">
                     <span className="sb-sr-only">Anything else we should know?</span>
                     <textarea
+                      disabled={isSaving}
                       maxLength={800}
                       name="details"
                       onChange={(event) => setDetails(event.target.value)}
@@ -350,14 +375,14 @@ export default function SaasBriefForm() {
                     />
                   </label>
                 )}
-                <p className="sb-form-error" role="alert">
+                <p id="sb-form-error" className="sb-form-error" role="alert">
                   {selectionError}
                 </p>
               </div>
 
               <div className="sb-form-footer">
-                <button className="sb-submit" disabled={!ready} type="submit">
-                  <span>{step === stepCount - 1 ? "Save My Brief" : "Continue"}</span>
+                <button className="sb-submit" disabled={!ready || isSaving} type="submit">
+                  <span>{isSaving ? "Saving…" : step === stepCount - 1 ? "Save My Brief" : "Continue"}</span>
                   <ArrowRightIcon aria-hidden="true" />
                 </button>
               </div>

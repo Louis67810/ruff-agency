@@ -1,14 +1,14 @@
 import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { recordBriefWhatsAppClick } from "@/lib/saas-brief/store";
+import { isAllowedBriefOrigin } from "@/lib/saas-brief/request-origin";
 
 export const runtime = "nodejs";
 
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export async function POST(request: NextRequest) {
-  const origin = request.headers.get("origin");
-  if (origin && origin !== request.nextUrl.origin)
+  if (!isAllowedBriefOrigin(request))
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   if (Number(request.headers.get("content-length") ?? 0) > 512)
     return NextResponse.json({ error: "Payload too large" }, { status: 413 });
