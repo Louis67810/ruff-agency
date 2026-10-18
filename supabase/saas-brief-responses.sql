@@ -19,6 +19,9 @@ create table if not exists public.saas_brief_responses (
 alter table public.saas_brief_responses
   add column if not exists whatsapp_clicked_at timestamptz;
 
+alter table public.saas_brief_responses
+  add column if not exists attribution jsonb;
+
 alter table public.saas_brief_responses enable row level security;
 revoke all on table public.saas_brief_responses from anon, authenticated;
 grant select, insert, update on table public.saas_brief_responses to service_role;

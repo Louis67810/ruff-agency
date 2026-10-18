@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowDownToLine, RefreshCw, X } from "lucide-react";
 import type { BriefResponse } from "@/lib/saas-brief/store";
 import { briefReference } from "@/lib/saas-brief/validation";
+import { attributionQuery, matchesBriefAttribution } from "@/lib/saas-brief/attribution";
 import "./saas-brief-dashboard.css";
 
 type MainTab = "insights" | "submissions";
@@ -54,7 +55,7 @@ function AnswerCard({ title, values }: { title: string; values: Array<{ label: s
   </article>;
 }
 
-export function SaasBriefDashboard() {
+export function SaasBriefDashboard({ pageOptions = [] }: { pageOptions?: Array<{ name: string; path: string }> }) {
   const [rows, setRows] = useState<BriefResponse[]>([]);
   const [source, setSource] = useState<"local" | "supabase" | null>(null);
   const [loading, setLoading] = useState(true);
@@ -65,6 +66,32 @@ export function SaasBriefDashboard() {
   const [range, setRange] = useState<Range>("all");
   const [selected, setSelected] = useState<BriefResponse | null>(null);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState("");
+  const [utm, setUtm] = useState("*");
+  const sourcePages = useMemo(() => {
+    const options = new Map<string, string>();
+    pageOptions.forEach((option) => {
+      if (!option.path.includes("?")) options.set(option.path, option.name);
+    });
+    rows.forEach((row) => {
+      if (row.attribution && !options.has(row.attribution.path)) options.set(row.attribution.path, row.attribution.path);
+    });
+    return [...options].sort(([a], [b]) => a.localeCompare(b));
+  }, [rows, pageOptions]);
+  const utmOptions = useMemo(() => {
+    const values = new Set<string>();
+    rows.forEach((row) => {
+      if (row.attribution && (!page || row.attribution.path === page)) {
+        const query = attributionQuery(row.attribution);
+        if (query) values.add(query);
+      }
+    });
+    pageOptions.forEach((option) => {
+      const [path, query] = option.path.split("?", 2);
+      if (query && (!page || path === page)) values.add(query);
+    });
+    return [...values].sort();
+  }, [rows, pageOptions, page]);
 
   async function load() {
     try {
@@ -98,8 +125,10 @@ export function SaasBriefDashboard() {
 
   const scoped = useMemo(() => {
     const cutoff = range === "all" ? 0 : Date.now() - Number(range) * 86_400_000;
-    return rows.filter((row) => Date.parse(row.startedAt) >= cutoff).sort((a, b) => b.startedAt.localeCompare(a.startedAt));
-  }, [rows, range]);
+    return rows.filter((row) => Date.parse(row.startedAt) >= cutoff
+      && matchesBriefAttribution(row.attribution, page, utm)
+    ).sort((a, b) => b.startedAt.localeCompare(a.startedAt));
+  }, [rows, range, page, utm]);
   const responded = useMemo(() => scoped.filter(hasAnswer), [scoped]);
   const completed = responded.filter((row) => row.completedAt);
   const partial = responded.filter((row) => !row.completedAt);
@@ -127,9 +156,9 @@ export function SaasBriefDashboard() {
   const maxDaily = Math.max(...visitDays.map(([, value]) => value), 1);
 
   function downloadCsv() {
-    const columns = ["Brief reference", "Started at", "Completed at", "Status", "WhatsApp CTA clicked at", "Website", "Work email", "Current MRR", "What needs to change", "Additional details", "Last question reached", "Visit duration"];
+    const columns = ["Brief reference", "Source page", "UTM", "Started at", "Completed at", "Status", "WhatsApp CTA clicked at", "Website", "Work email", "Current MRR", "What needs to change", "Additional details", "Last question reached", "Visit duration"];
     const lines = [columns.map(csvCell).join(","), ...visible.map((row) => [
-      briefReference(row.id), formatDate(row.startedAt), row.completedAt ? formatDate(row.completedAt) : "", row.completedAt ? "Completed" : "Partial", row.whatsappClickedAt ? formatDate(row.whatsappClickedAt) : "",
+      briefReference(row.id), row.attribution?.path ?? "Unknown", row.attribution ? attributionQuery(row.attribution) || "No UTM" : "Unknown", formatDate(row.startedAt), row.completedAt ? formatDate(row.completedAt) : "", row.completedAt ? "Completed" : "Partial", row.whatsappClickedAt ? formatDate(row.whatsappClickedAt) : "",
       row.website, row.email, row.mrr, row.changes.join("; "), row.details, questions[Math.min(row.lastStep, 4)], duration(row.durationMs),
     ].map(csvCell).join(","))];
     const url = URL.createObjectURL(new Blob(["\ufeff", lines.join("\r\n")], { type: "text/csv;charset=utf-8" }));
@@ -151,12 +180,17 @@ export function SaasBriefDashboard() {
       <button role="tab" aria-selected={mainTab === "submissions"} className={mainTab === "submissions" ? "is-active" : ""} onClick={() => setMainTab("submissions")}>Submissions</button>
     </div>
     {error && <div className="bf-error" role="alert">{error}</div>}
+    <div className="bf-source-controls">
+      <label>Source page<select aria-label="Form source page" value={page} onChange={(event) => { setPage(event.target.value); setUtm("*"); }}><option value="">All pages</option>{sourcePages.map(([path, name]) => <option key={path} value={path}>{name} ({path})</option>)}</select></label>
+      <label>UTM campaign<select aria-label="Form UTM campaign" value={utm} onChange={(event) => setUtm(event.target.value)}><option value="*">All UTM campaigns</option><option value="">No UTM</option>{utmOptions.map((query) => <option key={query} value={query}>{decodeURIComponent(query.replaceAll("+", " "))}</option>)}<option value="unknown">Unknown attribution</option></select></label>
+      <label className="bf-range">Date range<select value={range} onChange={(event) => setRange(event.target.value as Range)}>{Object.entries(ranges).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+    </div>
+    {rows.some((row) => !row.attribution) && <p className="bf-attribution-note">Older visits without a recorded source are listed as unknown, separately from visits without UTM tags.</p>}
     {loading && !rows.length ? <p className="bf-loading">Loading form data…</p> : mainTab === "insights" ? <>
       <div className="bf-controls">
         <div className="bf-pills" role="tablist" aria-label="Insights view">
           {(["answers", "visits", "dropoffs"] as const).map((tab) => <button key={tab} role="tab" aria-selected={insightTab === tab} className={insightTab === tab ? "is-active" : ""} onClick={() => setInsightTab(tab)}>{tab === "dropoffs" ? "Drop-offs" : tab[0].toUpperCase() + tab.slice(1)}</button>)}
         </div>
-        <label className="bf-range"><span className="bf-sr-only">Date range</span><select value={range} onChange={(event) => setRange(event.target.value as Range)}>{Object.entries(ranges).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
       </div>
       <div className="bf-stats">
         {[{ label: "Visits", value: scoped.length }, { label: "Submissions", value: completed.length }, { label: "Unique respondents", value: uniqueRespondents }, { label: "Visit duration", value: duration(averageDuration) }].map((stat) => <div className="bf-stat" key={stat.label}><span>{stat.label}</span><strong>{stat.value}</strong></div>)}
@@ -183,8 +217,8 @@ export function SaasBriefDashboard() {
         <input aria-label="Find a brief by reference, website or email" className="bf-search" onChange={(event) => setSearch(event.target.value)} placeholder="Find a brief" type="search" value={search} />
         <button className="bf-download" onClick={downloadCsv} disabled={!visible.length}><ArrowDownToLine size={16} /> Download CSV</button>
       </div>
-    <div className="bf-table-scroll"><table className="bf-table"><thead><tr><th>Brief reference</th><th>Started at</th><th>Status</th><th>WhatsApp CTA clicked</th><th>SaaS website</th><th>Work email</th><th>Current MRR</th><th>What needs to change?</th><th>Additional details</th><th>Last question</th><th>Visit duration</th></tr></thead><tbody>{visible.map((row) => <tr key={row.id} onClick={() => setSelected(row)} tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter") setSelected(row); }}><td>{briefReference(row.id)}</td><td>{formatDate(row.startedAt)}</td><td><span className={`bf-status ${row.completedAt ? "is-complete" : ""}`}>{row.completedAt ? "Completed" : "Partial"}</span></td><td>{row.whatsappClickedAt ? formatDate(row.whatsappClickedAt) : "—"}</td><td>{row.website || "—"}</td><td>{row.email || "—"}</td><td>{row.mrr || "—"}</td><td>{row.changes.join(", ") || "—"}</td><td>{row.details || "—"}</td><td>{questions[Math.min(row.lastStep, 4)]}</td><td>{duration(row.durationMs)}</td></tr>)}</tbody></table>{!visible.length && <div className="bf-table-empty">No {filter === "all" ? "" : `${filter} `}responses in this period.</div>}</div>
+    <div className="bf-table-scroll"><table className="bf-table"><thead><tr><th>Brief reference</th><th>Started at</th><th>Source page</th><th>UTM</th><th>Status</th><th>WhatsApp CTA clicked</th><th>SaaS website</th><th>Work email</th><th>Current MRR</th><th>What needs to change?</th><th>Additional details</th><th>Last question</th><th>Visit duration</th></tr></thead><tbody>{visible.map((row) => <tr key={row.id} onClick={() => setSelected(row)} tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter") setSelected(row); }}><td>{briefReference(row.id)}</td><td>{formatDate(row.startedAt)}</td><td>{row.attribution?.path ?? "Unknown"}</td><td>{row.attribution ? attributionQuery(row.attribution) || "No UTM" : "Unknown"}</td><td><span className={`bf-status ${row.completedAt ? "is-complete" : ""}`}>{row.completedAt ? "Completed" : "Partial"}</span></td><td>{row.whatsappClickedAt ? formatDate(row.whatsappClickedAt) : "—"}</td><td>{row.website || "—"}</td><td>{row.email || "—"}</td><td>{row.mrr || "—"}</td><td>{row.changes.join(", ") || "—"}</td><td>{row.details || "—"}</td><td>{questions[Math.min(row.lastStep, 4)]}</td><td>{duration(row.durationMs)}</td></tr>)}</tbody></table>{!visible.length && <div className="bf-table-empty">No {filter === "all" ? "" : `${filter} `}responses in this period.</div>}</div>
     </>}
-    {selected && <div className="bf-detail-backdrop" onMouseDown={() => setSelected(null)}><aside className="bf-detail" role="dialog" aria-modal="true" aria-label="Form response" onMouseDown={(event) => event.stopPropagation()}><div className="bf-detail-header"><div><span>{selected.completedAt ? "COMPLETED" : "PARTIAL"} RESPONSE · {briefReference(selected.id)}</span><h3>{selected.website || selected.email || "Unfinished visit"}</h3></div><button onClick={() => setSelected(null)} aria-label="Close response"><X size={20} /></button></div><p>Started {formatDate(selected.startedAt)} · {duration(selected.durationMs)}</p><p>WhatsApp CTA clicked: {selected.whatsappClickedAt ? formatDate(selected.whatsappClickedAt) : "—"}</p>{questions.map((question, index) => <section key={question}><h4>{question}</h4><div>{index === 0 ? selected.website : index === 1 ? selected.email : index === 2 ? selected.mrr : index === 3 ? selected.changes.join(", ") : selected.details || "—"}</div></section>)}</aside></div>}
+    {selected && <div className="bf-detail-backdrop" onMouseDown={() => setSelected(null)}><aside className="bf-detail" role="dialog" aria-modal="true" aria-label="Form response" onMouseDown={(event) => event.stopPropagation()}><div className="bf-detail-header"><div><span>{selected.completedAt ? "COMPLETED" : "PARTIAL"} RESPONSE · {briefReference(selected.id)}</span><h3>{selected.website || selected.email || "Unfinished visit"}</h3></div><button onClick={() => setSelected(null)} aria-label="Close response"><X size={20} /></button></div><p>Started {formatDate(selected.startedAt)} · {duration(selected.durationMs)}</p><p>Source page: {selected.attribution?.path ?? "Unknown"}</p><p>UTM: {selected.attribution ? attributionQuery(selected.attribution) || "No UTM" : "Unknown"}</p><p>WhatsApp CTA clicked: {selected.whatsappClickedAt ? formatDate(selected.whatsappClickedAt) : "—"}</p>{questions.map((question, index) => <section key={question}><h4>{question}</h4><div>{index === 0 ? selected.website : index === 1 ? selected.email : index === 2 ? selected.mrr : index === 3 ? selected.changes.join(", ") : selected.details || "—"}</div></section>)}</aside></div>}
   </section>;
 }

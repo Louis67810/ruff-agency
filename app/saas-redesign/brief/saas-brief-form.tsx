@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { normalizeSaasWebsite, stripWebsiteProtocol } from "@/lib/saas-brief/validation";
+import { captureBriefAttribution, type BriefAttribution } from "@/lib/saas-brief/attribution";
 
 const mrrBands = ["<5k", "5–10k", "10–30k", "30k+"];
 const changeOptions = [
@@ -44,6 +45,7 @@ export default function SaasBriefForm() {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const briefSession = useRef<{ id: string; token: string; visitorId: string; revision: number } | null>(null);
   const startedAt = useRef(Date.now());
+  const attribution = useRef<BriefAttribution | null>(null);
   const latestDraft = useRef<BriefDraft>({ website, email, mrr, changes, details, step, submitted });
   latestDraft.current = { website, email, mrr, changes, details, step, submitted };
   const progress = Math.round(((step + 1) / stepCount) * 100);
@@ -77,6 +79,7 @@ export default function SaasBriefForm() {
       details: draft.details,
       durationMs: Math.min(Date.now() - startedAt.current, 86_400_000),
       completed: complete,
+      attribution: attribution.current,
     };
     try {
       const response = await fetch("/api/saas-brief", {
@@ -94,6 +97,7 @@ export default function SaasBriefForm() {
 
   useEffect(() => {
     setReady(true);
+    if (!attribution.current) attribution.current = captureBriefAttribution();
     if (!briefSession.current) {
       let visitorId = crypto.randomUUID();
       try {

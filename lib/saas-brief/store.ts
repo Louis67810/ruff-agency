@@ -2,6 +2,7 @@ import "server-only";
 
 import { appendFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { normalizeBriefAttribution, type BriefAttribution } from "./attribution";
 
 const localDirectory = path.join(process.cwd(), ".data");
 const localFile = path.join(localDirectory, "saas-brief-responses.jsonl");
@@ -21,10 +22,11 @@ export type BriefResponse = {
   changes: string[];
   details: string;
   durationMs: number;
+  attribution: BriefAttribution | null;
 };
 
 export type BriefSnapshot = Pick<BriefResponse,
-  "id" | "visitorId" | "revision" | "lastStep" | "website" | "email" | "mrr" | "changes" | "details" | "durationMs"
+  "id" | "visitorId" | "revision" | "lastStep" | "website" | "email" | "mrr" | "changes" | "details" | "durationMs" | "attribution"
 > & { completed: boolean; tokenHash: string };
 
 function supabaseConfig() {
@@ -61,6 +63,7 @@ function fromRow(row: Record<string, unknown>): BriefResponse {
     changes: Array.isArray(row.changes) ? row.changes.map(String) : [],
     details: String(row.details ?? ""),
     durationMs: Number(row.duration_ms ?? 0),
+    attribution: normalizeBriefAttribution(row.attribution),
   };
 }
 
@@ -77,6 +80,7 @@ export async function saveBriefResponse(snapshot: BriefSnapshot) {
     changes: snapshot.changes,
     details: snapshot.details,
     duration_ms: snapshot.durationMs,
+    ...(snapshot.attribution ? { attribution: snapshot.attribution } : {}),
   };
   const row = {
     id: snapshot.id,
@@ -160,7 +164,7 @@ export async function readBriefResponses(): Promise<BriefResponse[]> {
     const all: BriefResponse[] = [];
     for (let offset = 0; ; offset += 1000) {
       const query = new URLSearchParams({
-        select: "id,visitor_id,started_at,updated_at,completed_at,whatsapp_clicked_at,revision,last_step,website,email,mrr,changes,details,duration_ms",
+        select: "id,visitor_id,started_at,updated_at,completed_at,whatsapp_clicked_at,revision,last_step,website,email,mrr,changes,details,duration_ms,attribution",
         order: "started_at.asc,id.asc",
         limit: "1000",
         offset: String(offset),

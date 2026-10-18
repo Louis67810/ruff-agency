@@ -807,7 +807,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics, initialFaqQuestion
               )}{" "}
               {view === "live" && <Live visitors={trackedVisitors} online={trackedOnline} />}
               {view === "history" && <TrackedVisitorHistory visitors={trackedVisitors} period={historyPeriod} page={historyPage} onOpen={setSelectedVisitorId} />}
-              {view === "forms" && <SaasBriefDashboard />}
+              {view === "forms" && <SaasBriefDashboard pageOptions={pageOptions} />}
               {view === "questions" && <FaqQuestionsReport questions={initialFaqQuestions} analytics={initialAnalytics} />}
             </>
           )}

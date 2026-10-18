@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { analyticsCookieName, analyticsTokenIsValid } from "@/lib/saas-analytics/auth";
 import { briefStoreIsConfigured, readBriefResponses, saveBriefResponse, type BriefSnapshot } from "@/lib/saas-brief/store";
 import { normalizeSaasWebsite } from "@/lib/saas-brief/validation";
+import { normalizeBriefAttribution } from "@/lib/saas-brief/attribution";
 
 export const runtime = "nodejs";
 
@@ -73,6 +74,7 @@ export async function POST(request: NextRequest) {
     details: details.trim(),
     durationMs: Number(durationMs),
     completed,
+    attribution: normalizeBriefAttribution(body.attribution),
   };
   try {
     await saveBriefResponse(snapshot);

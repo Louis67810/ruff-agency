@@ -99,6 +99,15 @@ export function SaasAnalyticsTracker() {
     const referrerUrl = document.referrer;
     const referrer = referrerUrl ? (() => { try { return new URL(referrerUrl).hostname; } catch { return "Direct"; } })() : "Direct";
     const campaign = utm.campaign || "None";
+    if (!/\/saas-redesign\/brief\/?$/.test(pathname)) {
+      try {
+        sessionStorage.setItem("ruff_saas_brief_source", JSON.stringify({
+          path: pathname,
+          savedAt: Date.now(),
+          utm: Object.fromEntries(utmKeys.filter((key) => utm[key]).map((key) => [`utm_${key}`, utm[key]])),
+        }));
+      } catch { /* Form attribution must not interrupt tracking when storage is blocked. */ }
+    }
     const referralChannel = !referrerUrl ? "Direct" : /google|bing|duckduckgo|yahoo/i.test(referrer) ? "Organic search" : /facebook|instagram|linkedin|x[.]com|twitter|tiktok/i.test(referrer) ? "Organic social" : referrer === window.location.hostname ? "Internal" : "Referral";
     const channel = utm.source
       ? `${utm.source}${utm.medium ? ` / ${utm.medium}` : ""}`
