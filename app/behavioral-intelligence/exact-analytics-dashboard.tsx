@@ -288,8 +288,9 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   // Filtered summaries come from the event store; never shrink values with a
   // visual factor, otherwise the dashboard would show invented numbers.
   const filterFactor = 1;
-  const pagePath = selectedPagePath || (scope && mode === "page" ? pagePathFromScope(scope) : "");
-  const appliedFilters = [...filters.filter((filter) => !filter.startsWith("/")), ...(pagePath ? [pagePath] : [])];
+  const selectedPageFilter = selectedPagePath || (scope && mode === "page" ? pagePathFromScope(scope) : "");
+  const pagePath = selectedPageFilter.split("?", 1)[0];
+  const appliedFilters = [...filters.filter((filter) => !filter.startsWith("/")), ...(selectedPageFilter ? [selectedPageFilter] : [])];
   const filterDays = periodIndex === 0 ? 1 : periodIndex === 1 ? 7 : 30;
   const filterKey = `${filterDays}:${granularity}:${appliedFilters.join("|")}:${comparisonPair ?? ""}:${revision}`;
   const selectedFilter = filters.at(-1) ?? null;

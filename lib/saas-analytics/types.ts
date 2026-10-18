@@ -62,6 +62,7 @@ export type AnalyticsSummary = {
   referrers: Array<{ label: string; value: number }>;
   campaigns: Array<{ label: string; value: number }>;
   paths: Array<{ label: string; value: number }>;
+  pageVariants: Array<{ path: string; value: number }>;
   entryPages: Array<{ label: string; value: number }>;
   exitLinks: Array<{ label: string; value: number }>;
   browsers: Array<{ label: string; value: number }>;

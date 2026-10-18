@@ -264,7 +264,29 @@ function eventMatchesFilter(event: AnalyticsEvent, filter: string) {
   if (!wanted) return true;
   if (wanted.startsWith("/")) {
     const normalizePath = (value: string) => value.toLowerCase().replace(/\/+$/, "") || "/";
-    return normalizePath(event.path) === normalizePath(wanted);
+    let selected: URL;
+    try {
+      selected = new URL(filter, "https://analytics.local");
+    } catch {
+      return false;
+    }
+    if (normalizePath(event.path) !== normalizePath(selected.pathname)) return false;
+    const metadataKeys: Record<string, string> = {
+      utm_source: "utmSource",
+      utm_medium: "utmMedium",
+      utm_campaign: "utmCampaign",
+      utm_content: "utmContent",
+      utm_term: "utmTerm",
+    };
+    for (const [key, value] of selected.searchParams) {
+      if (!key.toLowerCase().startsWith("utm_")) continue;
+      const metadataKey = metadataKeys[key.toLowerCase()];
+      const actual = metadataKey
+        ? event.metadata?.[metadataKey] ?? (key.toLowerCase() === "utm_campaign" ? event.metadata?.campaign : undefined)
+        : undefined;
+      if (String(actual ?? "").trim().toLowerCase() !== value.trim().toLowerCase()) return false;
+    }
+    return true;
   }
   const countryValues = countryAliases[wanted] ?? [wanted];
   if (countryValues.includes(event.countryCode.toLowerCase())) return true;
@@ -386,6 +408,27 @@ export function summarizeAnalytics(
   const paths = counts((event) =>
     event.eventType === "page_view" ? event.path : undefined,
   );
+  const pageVariantCounts = new Map<string, number>();
+  pageViews.forEach((event) => {
+    const values: Array<[string, unknown]> = [
+      ["utm_source", event.metadata?.utmSource],
+      ["utm_medium", event.metadata?.utmMedium],
+      ["utm_campaign", event.metadata?.utmCampaign ?? event.metadata?.campaign],
+      ["utm_content", event.metadata?.utmContent],
+      ["utm_term", event.metadata?.utmTerm],
+    ];
+    const params = new URLSearchParams();
+    values.forEach(([key, raw]) => {
+      const value = String(raw ?? "").trim();
+      if (value && !(key === "utm_campaign" && value.toLowerCase() === "none")) params.set(key, value);
+    });
+    if (params.size === 0) return;
+    const variant = `${event.path}?${params.toString()}`;
+    pageVariantCounts.set(variant, (pageVariantCounts.get(variant) ?? 0) + 1);
+  });
+  const pageVariants = [...pageVariantCounts.entries()]
+    .map(([path, value]) => ({ path, value }))
+    .sort((a, b) => b.value - a.value || a.path.localeCompare(b.path));
   const pageSessions = new Map<string, Set<string>>();
   const pageVisitors = new Map<string, Set<string>>();
   pageViews.forEach((event) => {
@@ -600,6 +643,7 @@ export function summarizeAnalytics(
     referrers: pageViewsFor("referrer"),
     campaigns: pageViewsFor("campaign"),
     paths,
+    pageVariants,
     entryPages: pageViewsFor("entryPath"),
     exitLinks,
     browsers: pageViewsFor("browser"),

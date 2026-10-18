@@ -498,7 +498,17 @@ export function BehavioralIntelligenceApp({ initialAnalytics, initialFaqQuestion
   const pageOptions = useMemo(() => {
     const byPath = new Map(pageCatalog.map((page) => [page.path, page]));
     for (const item of initialAnalytics?.paths ?? []) if (!byPath.has(item.label)) byPath.set(item.label, { path: item.label, name: item.label });
-    return [...byPath.values()].filter((page) => page.path.startsWith("/")).sort((a, b) => a.path.localeCompare(b.path));
+    const pages = [...byPath.values()].filter((page) => page.path.startsWith("/")).sort((a, b) => a.path.localeCompare(b.path));
+    const variants = (initialAnalytics?.pageVariants ?? []).map((variant) => {
+      const [path, query = ""] = variant.path.split("?", 2);
+      const baseName = byPath.get(path)?.name ?? path;
+      const params = new URLSearchParams(query);
+      const campaign = params.get("utm_campaign");
+      const source = params.get("utm_source");
+      const details = [campaign, source && `source: ${source}`].filter(Boolean).join(" · ");
+      return { path: variant.path, name: `${baseName} · ${details || "UTM"}` };
+    });
+    return [...pages, ...variants].sort((a, b) => a.name.localeCompare(b.name));
   }, [initialAnalytics, pageCatalog]);
   const comparisonCandidates = useMemo(() => buildComparisonCandidates(initialAnalytics, pageOptions), [initialAnalytics, pageOptions]);
   const resolvePage = (value: string) => {
