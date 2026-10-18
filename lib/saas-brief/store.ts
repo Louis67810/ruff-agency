@@ -158,7 +158,7 @@ export async function recordBriefWhatsAppClick(id: string, tokenHash: string) {
   return true;
 }
 
-export async function readBriefResponses(): Promise<BriefResponse[]> {
+export async function readBriefResponses(completedSince?: string): Promise<BriefResponse[]> {
   const config = supabaseConfig();
   if (config) {
     const all: BriefResponse[] = [];
@@ -168,6 +168,7 @@ export async function readBriefResponses(): Promise<BriefResponse[]> {
         order: "started_at.asc,id.asc",
         limit: "1000",
         offset: String(offset),
+        ...(completedSince ? { completed_at: `gte.${completedSince}` } : {}),
       });
       const response = await fetch(`${config.url}/rest/v1/saas_brief_responses?${query}`, {
         headers: headers(config.key), cache: "no-store",
@@ -197,7 +198,7 @@ export async function readBriefResponses(): Promise<BriefResponse[]> {
         });
       }
     }
-    return [...latest.values()].sort((a, b) => b.startedAt.localeCompare(a.startedAt));
+    return [...latest.values()].filter((row) => !completedSince || Boolean(row.completedAt && row.completedAt >= completedSince)).sort((a, b) => b.startedAt.localeCompare(a.startedAt));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw error;

@@ -73,11 +73,12 @@ export function SaasAnalyticsTracker() {
     sessionStorage.setItem("ruff_saas_last_activity", String(Date.now()));
     const visitCount = Number(localStorage.getItem("ruff_saas_visits") ?? 1);
 
-    const startedAt = performance.now();
+    let startedAt = performance.now();
     const viewedSections = new Set<string>();
     const activeSince = new Map<string, number>();
     const durations = new Map<string, number>();
     let interactionCount = 0;
+    let lastScrollY = window.scrollY;
     let ended = false;
     const scrollThresholds = [25, 50, 75, 90];
     const sentScrollThresholds = new Set<number>();
@@ -152,19 +153,16 @@ export function SaasAnalyticsTracker() {
     };
     const sendBatch = (events: ClientEvent[]) => {
       const body = JSON.stringify(events.map(decorate));
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(
-          "/api/saas-analytics/events",
-          new Blob([body], { type: "application/json" }),
-        );
-      } else {
-        void fetch("/api/saas-analytics/events", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body,
-          keepalive: true,
-        });
-      }
+      if (navigator.sendBeacon && navigator.sendBeacon(
+        "/api/saas-analytics/events",
+        new Blob([body], { type: "application/json" }),
+      )) return;
+      void fetch("/api/saas-analytics/events", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body,
+        keepalive: true,
+      }).catch(() => undefined);
     };
 
     send({ eventType: "page_view" });
@@ -225,7 +223,7 @@ export function SaasAnalyticsTracker() {
     sectionByElement.forEach((_, element) => observer.observe(element));
 
     const customEvent = (event: WindowEventMap["saas:analytics"]) => {
-      interactionCount += 1;
+      if (!["page_view", "heartbeat", "section_view", "section_time", "scroll_zone", "session_end", "faq_answer"].includes(event.detail.eventType)) interactionCount += 1;
       send(event.detail);
     };
     window.addEventListener("saas:analytics", customEvent);
@@ -285,6 +283,10 @@ export function SaasAnalyticsTracker() {
     document.addEventListener("click", click, true);
 
     const scroll = () => {
+      if (Math.abs(window.scrollY - lastScrollY) >= 8) {
+        interactionCount += 1;
+        lastScrollY = window.scrollY;
+      }
       const documentHeight = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
       const depth = Math.min(100, Math.round((window.scrollY / documentHeight) * 100));
       scrollThresholds.forEach((threshold) => {
@@ -340,7 +342,9 @@ export function SaasAnalyticsTracker() {
         eventType: "session_end",
         durationMs: totalDuration,
         metadata: {
-          bounced: interactionCount === 0 && totalDuration < 10_000,
+          bounced: interactionCount === 0 && (/^\/(?:en\/)?saas-redesign\/?$/.test(pathname) || totalDuration < 10_000),
+          interactionCount,
+          bounceDefinition: "no_interaction",
           sectionsViewed: viewedSections.size,
         },
       });
@@ -348,6 +352,12 @@ export function SaasAnalyticsTracker() {
     };
     const visibility = () => {
       if (document.visibilityState === "hidden") endSession();
+      else if (ended) {
+        ended = false;
+        startedAt = performance.now();
+        durations.clear();
+        activeSince.forEach((_, sectionId) => activeSince.set(sectionId, startedAt));
+      }
     };
     window.addEventListener("pagehide", endSession);
     document.addEventListener("visibilitychange", visibility);

@@ -33,7 +33,7 @@ function parseEvent(value: unknown): AnalyticsEventInput | null {
     event.metadata && typeof event.metadata === "object"
       ? (Object.fromEntries(
           Object.entries(event.metadata as Record<string, unknown>)
-            .slice(0, 12)
+            .slice(0, 40)
             .filter(
               ([, item]) =>
                 item === null ||

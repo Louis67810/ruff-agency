@@ -3,6 +3,8 @@ import "server-only";
 import { appendFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { isExcludedAnalyticsPath } from "./excluded-paths";
+import { readBriefResponses } from "../saas-brief/store";
+import { attributeBriefConversions, bouncedSessionIds, hasEngagement } from "./metrics";
 import type {
   AnalyticsEvent,
   AnalyticsEventInput,
@@ -117,7 +119,7 @@ export async function readAnalyticsEvents(days: number) {
       all.push(...rows.map(fromDatabaseRow));
       if (rows.length < 1000) break;
     }
-    return all.filter((event) => !isExcludedAnalyticsPath(event.path));
+    return attributeBriefConversions(all.filter((event) => !isExcludedAnalyticsPath(event.path)), await readBriefResponses(cutoff));
   }
 
   if (process.env.NODE_ENV === "production") {
@@ -126,11 +128,12 @@ export async function readAnalyticsEvents(days: number) {
 
   try {
     const contents = await readFile(localFile, "utf8");
-    return contents
+    const events = contents
       .split("\n")
       .filter(Boolean)
       .map((line) => JSON.parse(line) as AnalyticsEvent)
       .filter((event) => event.createdAt >= cutoff && !isExcludedAnalyticsPath(event.path));
+    return attributeBriefConversions(events, await readBriefResponses(cutoff));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw error;
@@ -370,7 +373,7 @@ export function summarizeAnalytics(
   const countSaasEvent = (eventType: AnalyticsEvent["eventType"]) => saasLandingEvents.filter((event) => event.eventType === eventType).length;
   const engagedSessionIds = new Set(
     events
-      .filter((event) => ["cta_click", "conversion", "section_view", "scroll_depth"].includes(event.eventType))
+      .filter(hasEngagement)
       .map((event) => event.sessionId),
   );
   const scrollDepthBySession = new Map<string, number>();
@@ -380,14 +383,7 @@ export function summarizeAnalytics(
       const depth = Number(event.metadata?.depth ?? 0);
       scrollDepthBySession.set(event.sessionId, Math.max(scrollDepthBySession.get(event.sessionId) ?? 0, depth));
     });
-  const bouncedSessions = new Set(
-    events
-      .filter(
-        (event) =>
-          event.eventType === "session_end" && Boolean(event.metadata?.bounced),
-      )
-      .map((event) => event.sessionId),
-  );
+  const bouncedSessions = bouncedSessionIds(events);
 
   const counts = (filter: (event: AnalyticsEvent) => string | undefined) => {
     const map = new Map<string, number>();
