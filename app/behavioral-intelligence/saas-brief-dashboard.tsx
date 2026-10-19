@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowDownToLine, RefreshCw, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowDownToLine, RefreshCw, Trash2, X } from "lucide-react";
 import type { BriefResponse } from "@/lib/saas-brief/store";
 import { briefReference } from "@/lib/saas-brief/validation";
 import { attributionQuery, matchesBriefAttribution } from "@/lib/saas-brief/attribution";
@@ -56,10 +57,13 @@ function AnswerCard({ title, values }: { title: string; values: Array<{ label: s
 }
 
 export function SaasBriefDashboard({ pageOptions = [] }: { pageOptions?: Array<{ name: string; path: string }> }) {
+  const router = useRouter();
   const [rows, setRows] = useState<BriefResponse[]>([]);
   const [source, setSource] = useState<"local" | "supabase" | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [deleting, setDeleting] = useState(false);
+  const [notice, setNotice] = useState("");
   const [mainTab, setMainTab] = useState<MainTab>("insights");
   const [insightTab, setInsightTab] = useState<InsightTab>("answers");
   const [filter, setFilter] = useState<SubmissionFilter>("all");
@@ -105,6 +109,28 @@ export function SaasBriefDashboard({ pageOptions = [] }: { pageOptions?: Array<{
       setError(cause instanceof Error ? cause.message : "The form data could not be loaded.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function deleteResponse(row: BriefResponse) {
+    if (deleting || !window.confirm(`Delete response ${briefReference(row.id)} permanently? Its form conversion will also be removed from analytics. Browsing history will be kept.`)) return;
+    setDeleting(true);
+    setError("");
+    setNotice("");
+    try {
+      const response = await fetch(`/api/saas-brief?id=${encodeURIComponent(row.id)}`, { method: "DELETE" });
+      if (!response.ok) throw new Error(response.status === 401
+        ? "Please sign in to Behavioral Intelligence before deleting a response."
+        : "The response could not be deleted. Please try again.");
+      setRows((current) => current.filter((item) => item.id !== row.id));
+      setSelected(null);
+      setNotice("Response deleted. Conversion statistics will be recalculated from the remaining responses; browsing history is kept.");
+      window.dispatchEvent(new Event("saas-brief-responses-changed"));
+      router.refresh();
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "The response could not be deleted.");
+    } finally {
+      setDeleting(false);
     }
   }
 
@@ -180,6 +206,7 @@ export function SaasBriefDashboard({ pageOptions = [] }: { pageOptions?: Array<{
       <button role="tab" aria-selected={mainTab === "submissions"} className={mainTab === "submissions" ? "is-active" : ""} onClick={() => setMainTab("submissions")}>Submissions</button>
     </div>
     {error && <div className="bf-error" role="alert">{error}</div>}
+    {notice && <p className="bf-attribution-note" role="status">{notice}</p>}
     <div className="bf-source-controls">
       <label>Source page<select aria-label="Form source page" value={page} onChange={(event) => { setPage(event.target.value); setUtm("*"); }}><option value="">All pages</option>{sourcePages.map(([path, name]) => <option key={path} value={path}>{name} ({path})</option>)}</select></label>
       <label>UTM campaign<select aria-label="Form UTM campaign" value={utm} onChange={(event) => setUtm(event.target.value)}><option value="*">All UTM campaigns</option><option value="">No UTM</option>{utmOptions.map((query) => <option key={query} value={query}>{decodeURIComponent(query.replaceAll("+", " "))}</option>)}<option value="unknown">Unknown attribution</option></select></label>
@@ -217,8 +244,8 @@ export function SaasBriefDashboard({ pageOptions = [] }: { pageOptions?: Array<{
         <input aria-label="Find a brief by reference, website or email" className="bf-search" onChange={(event) => setSearch(event.target.value)} placeholder="Find a brief" type="search" value={search} />
         <button className="bf-download" onClick={downloadCsv} disabled={!visible.length}><ArrowDownToLine size={16} /> Download CSV</button>
       </div>
-    <div className="bf-table-scroll"><table className="bf-table"><thead><tr><th>Brief reference</th><th>Started at</th><th>Source page</th><th>UTM</th><th>Status</th><th>WhatsApp CTA clicked</th><th>SaaS website</th><th>Work email</th><th>Current MRR</th><th>What needs to change?</th><th>Additional details</th><th>Last question</th><th>Visit duration</th></tr></thead><tbody>{visible.map((row) => <tr key={row.id} onClick={() => setSelected(row)} tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter") setSelected(row); }}><td>{briefReference(row.id)}</td><td>{formatDate(row.startedAt)}</td><td>{row.attribution?.path ?? "Unknown"}</td><td>{row.attribution ? attributionQuery(row.attribution) || "No UTM" : "Unknown"}</td><td><span className={`bf-status ${row.completedAt ? "is-complete" : ""}`}>{row.completedAt ? "Completed" : "Partial"}</span></td><td>{row.whatsappClickedAt ? formatDate(row.whatsappClickedAt) : "—"}</td><td>{row.website || "—"}</td><td>{row.email || "—"}</td><td>{row.mrr || "—"}</td><td>{row.changes.join(", ") || "—"}</td><td>{row.details || "—"}</td><td>{questions[Math.min(row.lastStep, 4)]}</td><td>{duration(row.durationMs)}</td></tr>)}</tbody></table>{!visible.length && <div className="bf-table-empty">No {filter === "all" ? "" : `${filter} `}responses in this period.</div>}</div>
+    <div className="bf-table-scroll"><table className="bf-table"><thead><tr><th>Brief reference</th><th>Started at</th><th>Source page</th><th>UTM</th><th>Status</th><th>WhatsApp CTA clicked</th><th>SaaS website</th><th>Work email</th><th>Current MRR</th><th>What needs to change?</th><th>Additional details</th><th>Last question</th><th>Visit duration</th><th>Actions</th></tr></thead><tbody>{visible.map((row) => <tr key={row.id} onClick={() => setSelected(row)} tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter") setSelected(row); }}><td>{briefReference(row.id)}</td><td>{formatDate(row.startedAt)}</td><td>{row.attribution?.path ?? "Unknown"}</td><td>{row.attribution ? attributionQuery(row.attribution) || "No UTM" : "Unknown"}</td><td><span className={`bf-status ${row.completedAt ? "is-complete" : ""}`}>{row.completedAt ? "Completed" : "Partial"}</span></td><td>{row.whatsappClickedAt ? formatDate(row.whatsappClickedAt) : "—"}</td><td>{row.website || "—"}</td><td>{row.email || "—"}</td><td>{row.mrr || "—"}</td><td>{row.changes.join(", ") || "—"}</td><td>{row.details || "—"}</td><td>{questions[Math.min(row.lastStep, 4)]}</td><td>{duration(row.durationMs)}</td><td><button type="button" className="bf-delete" disabled={deleting} aria-label={`Delete response ${briefReference(row.id)}`} onClick={(event) => { event.stopPropagation(); void deleteResponse(row); }} onKeyDown={(event) => event.stopPropagation()}><Trash2 size={14} /> Delete</button></td></tr>)}</tbody></table>{!visible.length && <div className="bf-table-empty">No {filter === "all" ? "" : `${filter} `}responses in this period.</div>}</div>
     </>}
-    {selected && <div className="bf-detail-backdrop" onMouseDown={() => setSelected(null)}><aside className="bf-detail" role="dialog" aria-modal="true" aria-label="Form response" onMouseDown={(event) => event.stopPropagation()}><div className="bf-detail-header"><div><span>{selected.completedAt ? "COMPLETED" : "PARTIAL"} RESPONSE · {briefReference(selected.id)}</span><h3>{selected.website || selected.email || "Unfinished visit"}</h3></div><button onClick={() => setSelected(null)} aria-label="Close response"><X size={20} /></button></div><p>Started {formatDate(selected.startedAt)} · {duration(selected.durationMs)}</p><p>Source page: {selected.attribution?.path ?? "Unknown"}</p><p>UTM: {selected.attribution ? attributionQuery(selected.attribution) || "No UTM" : "Unknown"}</p><p>WhatsApp CTA clicked: {selected.whatsappClickedAt ? formatDate(selected.whatsappClickedAt) : "—"}</p>{questions.map((question, index) => <section key={question}><h4>{question}</h4><div>{index === 0 ? selected.website : index === 1 ? selected.email : index === 2 ? selected.mrr : index === 3 ? selected.changes.join(", ") : selected.details || "—"}</div></section>)}</aside></div>}
+    {selected && <div className="bf-detail-backdrop" onMouseDown={() => setSelected(null)}><aside className="bf-detail" role="dialog" aria-modal="true" aria-label="Form response" onMouseDown={(event) => event.stopPropagation()}><div className="bf-detail-header"><div><span>{selected.completedAt ? "COMPLETED" : "PARTIAL"} RESPONSE · {briefReference(selected.id)}</span><h3>{selected.website || selected.email || "Unfinished visit"}</h3></div><button onClick={() => setSelected(null)} aria-label="Close response"><X size={20} /></button></div><p>Started {formatDate(selected.startedAt)} · {duration(selected.durationMs)}</p><p>Source page: {selected.attribution?.path ?? "Unknown"}</p><p>UTM: {selected.attribution ? attributionQuery(selected.attribution) || "No UTM" : "Unknown"}</p><p>WhatsApp CTA clicked: {selected.whatsappClickedAt ? formatDate(selected.whatsappClickedAt) : "—"}</p>{questions.map((question, index) => <section key={question}><h4>{question}</h4><div>{index === 0 ? selected.website : index === 1 ? selected.email : index === 2 ? selected.mrr : index === 3 ? selected.changes.join(", ") : selected.details || "—"}</div></section>)}<button type="button" className="bf-delete" disabled={deleting} onClick={() => void deleteResponse(selected)}><Trash2 size={16} /> {deleting ? "Deleting…" : "Delete response"}</button><p>Deleting a completed response also removes its form conversion from all analytics views.</p></aside></div>}
   </section>;
 }

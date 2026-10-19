@@ -3,6 +3,8 @@
 import type { AnalyticsVisitor } from "@/lib/saas-analytics/types";
 import type { HistoryPeriod } from "./visitor-history";
 import { ArrowLeft, Clock3, FileText, MousePointer2 } from "lucide-react";
+import dynamic from "next/dynamic";
+const SessionReplayPanel = dynamic(() => import("./session-replay-panel").then((module) => module.SessionReplayPanel), { ssr: false });
 
 export function visitorHistoryName(id: string) {
   // Derive a stable display number from the persistent visitor ID. A new
@@ -65,5 +67,6 @@ export function TrackedVisitorDetail({ visitor, onBack }: { visitor?: AnalyticsV
         <div className="vh-signal"><MousePointer2 size={19} /><div><strong>Appareil et pays</strong><span>{visitor.device} · {visitor.countryCode}{visitor.city ? ` · ${visitor.city}` : ""}</span></div></div>
       </section>
     </div>
+    <SessionReplayPanel key={visitor.id} visitorId={visitor.id} />
   </div>;
 }

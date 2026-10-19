@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { analyticsCookieName, analyticsTokenIsValid } from "@/lib/saas-analytics/auth";
-import { briefStoreIsConfigured, readBriefResponses, saveBriefResponse, type BriefSnapshot } from "@/lib/saas-brief/store";
+import { briefStoreIsConfigured, deleteBriefResponse, readBriefResponses, saveBriefResponse, type BriefSnapshot } from "@/lib/saas-brief/store";
 import { normalizeSaasWebsite, normalizeWorkEmail, validateCompletedBrief, briefMrrOptions, briefChangeOptions } from "@/lib/saas-brief/validation";
 import { normalizeBriefAttribution } from "@/lib/saas-brief/attribution";
 import { isAllowedBriefOrigin } from "@/lib/saas-brief/request-origin";
@@ -12,6 +12,24 @@ const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}
 const allowedMrr = new Set<string>(["", ...briefMrrOptions]);
 const allowedChanges = new Set<string>(briefChangeOptions);
 const attempts = new Map<string, { count: number; resetAt: number }>();
+
+export async function DELETE(request: NextRequest) {
+  if (!analyticsTokenIsValid(request.cookies.get(analyticsCookieName)?.value))
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isAllowedBriefOrigin(request))
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const id = request.nextUrl.searchParams.get("id");
+  if (!id || !uuidPattern.test(id))
+    return NextResponse.json({ error: "Invalid response ID" }, { status: 400 });
+  try {
+    const deleted = await deleteBriefResponse(id);
+    if (!deleted) return NextResponse.json({ error: "Response not found" }, { status: 404 });
+    return new NextResponse(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  } catch (error) {
+    console.error("SaaS brief deletion failed", error);
+    return NextResponse.json({ error: "Response could not be deleted" }, { status: 503 });
+  }
+}
 
 export async function GET(request: NextRequest) {
   if (process.env.NODE_ENV === "production" && !analyticsTokenIsValid(request.cookies.get(analyticsCookieName)?.value))

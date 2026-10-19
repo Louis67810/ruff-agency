@@ -8,7 +8,12 @@ export type BriefConversionFact = Pick<BriefResponse, "id" | "visitorId" | "star
 /** Saved, completed briefs are the source of truth, including historical submissions. */
 export function attributeBriefConversions(events: AnalyticsEvent[], briefs: BriefConversionFact[]) {
   const visits = events.filter((event) => event.eventType === "page_view" && isSaasLandingPath(event.path));
-  const result = [...events];
+  // Reconcile stored brief events too: deleting a saved response must remove
+  // its conversion without erasing the visitor's browsing history.
+  const completedBriefIds = new Set(briefs.filter((brief) => brief.completedAt).map((brief) => brief.id));
+  const result = events.filter((event) => event.eventType !== "conversion"
+    || (event.metadata?.conversionType !== "brief_completed" && !event.metadata?.briefId)
+    || (typeof event.metadata?.briefId === "string" && completedBriefIds.has(event.metadata.briefId)));
   for (const brief of briefs) {
     if (!brief.completedAt || (brief.attribution && !isSaasLandingPath(brief.attribution.path))) continue;
     const start = Date.parse(brief.startedAt);

@@ -81,3 +81,7 @@
 .bf-source-controls label { display:grid; gap:6px; min-width:0; flex:1 1 200px; color:#626873; font-size:12px; }
 .bf-source-controls select { width:100%; min-width:0; height:40px; border:1px solid #e2e3e6; border-radius:10px; padding:0 10px; background:#fff; color:#34383f; text-overflow:ellipsis; }
 .bf-attribution-note { color:#737783; font-size:12px; margin:0 0 20px; }
+.bf-delete { display:inline-flex; align-items:center; justify-content:center; gap:7px; padding:9px 12px; border:1px solid #e8c8c8; border-radius:9px; background:#fff; color:#a52b2b; font-size:12px; cursor:pointer; white-space:nowrap; }
+.bf-delete:hover { background:#fff1f1; }
+.bf-delete:focus-visible { outline:2px solid #a52b2b; outline-offset:3px; }
+.bf-delete:disabled { opacity:.5; cursor:wait; }

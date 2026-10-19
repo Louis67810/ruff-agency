@@ -273,6 +273,11 @@ export function ExactAnalyticsDashboard({ mode = "home", scope, linkedPagePath, 
   const [refreshing, setRefreshing] = useState(false);
   const [revision, setRevision] = useState(0);
   useEffect(() => {
+    const reload = () => setRevision((value) => value + 1);
+    window.addEventListener("saas-brief-responses-changed", reload);
+    return () => window.removeEventListener("saas-brief-responses-changed", reload);
+  }, []);
+  useEffect(() => {
     const timer = window.setInterval(() => setRevision((value) => value + 1), 60_000);
     return () => window.clearInterval(timer);
   }, []);

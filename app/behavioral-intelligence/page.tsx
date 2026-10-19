@@ -67,6 +67,6 @@ export default async function BehavioralIntelligencePage({ searchParams }: { sea
     (process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL)
     && (process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY)
   );
-  const initialView = searchParams?.view === "forms" ? "forms" : searchParams?.view === "questions" ? "questions" : "home";
+  const initialView = searchParams?.view === "forms" ? "forms" : searchParams?.view === "questions" ? "questions" : searchParams?.view === "live" ? "live" : searchParams?.view === "history" ? "history" : "home";
   return <BehavioralIntelligenceApp initialAnalytics={analytics} initialFaqQuestions={faqQuestions} pageCatalog={pageCatalog} localPreview={localPreview} initialView={initialView} />;
 }

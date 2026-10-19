@@ -7,6 +7,7 @@ import { LocaleProvider } from "@/components/LocaleProvider";
 import type { Locale } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 import { SaasAnalyticsTracker } from "@/app/saas-redesign/saas-analytics-tracker";
+import { SessionReplayRecorder } from "@/components/session-replay/recorder";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body data-site-locale={locale}>
         <LocaleProvider locale={locale as Locale}>{children}</LocaleProvider>
         <SaasAnalyticsTracker />
+        <SessionReplayRecorder />
         <LocaleEnhancer />
       </body>
     </html>

@@ -186,9 +186,12 @@ export async function readBriefResponses(completedSince?: string): Promise<Brief
   try {
     const contents = await readFile(localFile, "utf8");
     const latest = new Map<string, BriefResponse>();
+    const deleted = new Set<string>();
     for (const line of contents.split("\n")) {
       if (!line) continue;
-      const row = fromRow(JSON.parse(line) as Record<string, unknown>);
+      const raw = JSON.parse(line) as Record<string, unknown>;
+      if (raw.deleted_at) { deleted.add(String(raw.id)); continue; }
+      const row = fromRow(raw);
       const previous = latest.get(row.id);
       if (!previous || row.revision >= previous.revision) {
         latest.set(row.id, {
@@ -198,9 +201,29 @@ export async function readBriefResponses(completedSince?: string): Promise<Brief
         });
       }
     }
-    return [...latest.values()].filter((row) => !completedSince || Boolean(row.completedAt && row.completedAt >= completedSince)).sort((a, b) => b.startedAt.localeCompare(a.startedAt));
+    return [...latest.values()].filter((row) => !deleted.has(row.id) && (!completedSince || Boolean(row.completedAt && row.completedAt >= completedSince))).sort((a, b) => b.startedAt.localeCompare(a.startedAt));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw error;
   }
+}
+
+/** Admin-only; callers must validate authentication and the response UUID. */
+export async function deleteBriefResponse(id: string): Promise<boolean> {
+  const config = supabaseConfig();
+  if (config) {
+    const query = new URLSearchParams({ id: `eq.${id}`, select: "id" });
+    const response = await fetch(`${config.url}/rest/v1/saas_brief_responses?${query}`, {
+      method: "DELETE",
+      headers: { ...headers(config.key), prefer: "return=representation" },
+      cache: "no-store",
+    });
+    if (!response.ok) throw new Error(`Supabase brief deletion failed (${response.status})`);
+    return ((await response.json()) as unknown[]).length > 0;
+  }
+  if (process.env.NODE_ENV === "production") throw new Error("SaaS brief storage is not configured");
+  if (!(await readBriefResponses()).some((row) => row.id === id)) return false;
+  // Append a tombstone so concurrent autosaves cannot resurrect a local test.
+  await appendFile(localFile, `${JSON.stringify({ id, deleted_at: new Date().toISOString() })}\n`, "utf8");
+  return true;
 }

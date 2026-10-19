@@ -62,6 +62,7 @@ const PROFILE =
   AD = "/behavioral-assets/01ed28f95fa41d88c4f507f7dcd910917fbb72fa.jpg";
 const nav = [
   { id: "home", label: "Home", icon: House },
+  { id: "live", label: "En ligne", icon: Users },
   { id: "profiles", label: "Profils", icon: UserRound },
   { id: "history", label: "Historique", icon: History },
   { id: "forms", label: "Formulaires", icon: FileText },
@@ -805,7 +806,7 @@ export function BehavioralIntelligenceApp({ initialAnalytics, initialFaqQuestion
                   open={(name) => { setDetailOrigin(null); setDetail({ type: "profile", name }); }}
                 />
               )}{" "}
-              {view === "live" && <Live visitors={trackedVisitors} online={trackedOnline} />}
+              {view === "live" && <Live visitors={trackedVisitors} online={trackedOnline} onOpen={setSelectedVisitorId} />}
               {view === "history" && <TrackedVisitorHistory visitors={trackedVisitors} period={historyPeriod} page={historyPage} onOpen={setSelectedVisitorId} />}
               {view === "forms" && <SaasBriefDashboard pageOptions={pageOptions} />}
               {view === "questions" && <FaqQuestionsReport questions={initialFaqQuestions} analytics={initialAnalytics} />}
@@ -2282,9 +2283,10 @@ function MetricModal({
     </div>
   );
 }
-function Live({ visitors: records, online }: { visitors: AnalyticsVisitor[]; online: number }) {
+function Live({ visitors: records, online, onOpen }: { visitors: AnalyticsVisitor[]; online: number; onOpen: (id: string) => void }) {
   const centers: Record<string, [number, number]> = { FR: [2.2, 46.6], US: [-98.5, 39.8], GB: [-2.2, 54], DE: [10.4, 51], IN: [78.9, 22.6], AU: [134, -25], CA: [-106, 56] };
   const visitors = records.filter((record) => record.online).map((record, index) => ({
+    id: record.id,
     code: record.countryCode.toLowerCase(), country: record.countryCode, city: record.city ?? "Ville inconnue",
     page: record.currentPage ?? "—", device: record.device, source: record.source,
     lon: centers[record.countryCode]?.[0] ?? 0, lat: centers[record.countryCode]?.[1] ?? 0,
@@ -2336,6 +2338,7 @@ function Live({ visitors: records, online }: { visitors: AnalyticsVisitor[]; onl
         <p className="fw-live-overlay-page">Currently viewing <b>{selectedVisitor.page}</b></p>
         <div className="fw-live-overlay-grid"><span><small>Temps suivi</small><b>{Math.round(selectedVisitor.durationSeconds / 60)} min</b></span><span><small>Device</small><b>{selectedVisitor.device}</b></span><span><small>Source</small><b>{selectedVisitor.source}</b></span><span><small>Last action</small><b>{selectedVisitor.lastAction.replaceAll("_", " ")}</b></span></div>
         <div className="fw-live-overlay-route"><i />{selectedVisitor.visits} session{selectedVisitor.visits > 1 ? "s" : ""} suivie{selectedVisitor.visits > 1 ? "s" : ""}</div>
+        <button className="bf-refresh" type="button" onClick={() => onOpen(selectedVisitor.id)}>Voir l’activité et l’enregistrement</button>
       </div>}
       <section className="fw-live-feed">
         <div>{(["Visitors", "Activity"] as const).map((item) => <button className={tab === item ? "is-active" : ""} key={item} onClick={() => setTab(item)}>{item}</button>)}</div>
