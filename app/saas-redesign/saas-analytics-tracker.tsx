@@ -83,6 +83,10 @@ export function SaasAnalyticsTracker() {
     const scrollThresholds = [25, 50, 75, 90];
     const sentScrollThresholds = new Set<number>();
     const sentScrollZones = new Set<number>();
+    let maxScrollDepth = 0;
+    let maxScrollY = 0;
+    let reportedScrollY = 0;
+    let scrollProgressTimer: number | undefined;
 
     const searchParams = new URLSearchParams(window.location.search);
     const utmKeys = ["source", "medium", "campaign", "content", "term"] as const;
@@ -233,7 +237,10 @@ export function SaasAnalyticsTracker() {
         "a,button,[data-analytics-cta]",
       );
       if (!target) return;
-      const isCta = target.matches("[data-analytics-cta],a[href='#book'],a[href*='cal.com']");
+      const anchor = target instanceof HTMLAnchorElement ? target : null;
+      const destination = anchor ? new URL(anchor.href, window.location.href) : null;
+      const isCta = target.matches("[data-analytics-cta],a[href='#book'],a[href*='cal.com']")
+        || (destination?.origin === window.location.origin && /^\/(?:en\/)?saas-redesign\/brief\/?$/.test(destination.pathname));
       const sectionId = [...sectionByElement.entries()].find(([element]) =>
         element.contains(target),
       )?.[1];
@@ -264,7 +271,6 @@ export function SaasAnalyticsTracker() {
         send({ eventType: "cta_click", sectionId, metadata: { label, ctaId, ctaType: target.dataset.analyticsCtaType ?? "primary" } });
       }
 
-      const anchor = target instanceof HTMLAnchorElement ? target : null;
       if (!anchor) return;
       const url = new URL(anchor.href, window.location.href);
       if (
@@ -282,13 +288,33 @@ export function SaasAnalyticsTracker() {
     };
     document.addEventListener("click", click, true);
 
+    // Zone events describe the heatmap, not the maximum scroll. Report short
+    // scrolls separately too, with a bounded request rate on mobile.
+    const takeScrollProgress = (): ClientEvent | undefined => {
+      if (maxScrollY <= reportedScrollY) return;
+      reportedScrollY = maxScrollY;
+      return {
+        eventType: "scroll_depth",
+        value: maxScrollDepth,
+        metadata: { depth: maxScrollDepth, maxScrollY, measurement: "progress" },
+      };
+    };
     const scroll = () => {
       if (Math.abs(window.scrollY - lastScrollY) >= 8) {
         interactionCount += 1;
         lastScrollY = window.scrollY;
       }
       const documentHeight = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      const depth = Math.min(100, Math.round((window.scrollY / documentHeight) * 100));
+      const depth = Math.max(0, Math.min(100, (window.scrollY / documentHeight) * 100));
+      maxScrollDepth = Math.max(maxScrollDepth, depth);
+      maxScrollY = Math.max(maxScrollY, window.scrollY);
+      if (maxScrollY > reportedScrollY && scrollProgressTimer === undefined) {
+        scrollProgressTimer = window.setTimeout(() => {
+          scrollProgressTimer = undefined;
+          const progress = takeScrollProgress();
+          if (progress) send(progress);
+        }, 2_000);
+      }
       scrollThresholds.forEach((threshold) => {
         if (depth >= threshold && !sentScrollThresholds.has(threshold)) {
           sentScrollThresholds.add(threshold);
@@ -325,6 +351,8 @@ export function SaasAnalyticsTracker() {
     const endSession = () => {
       if (ended) return;
       ended = true;
+      window.clearTimeout(scrollProgressTimer);
+      scrollProgressTimer = undefined;
       const now = performance.now();
       activeSince.forEach((start, sectionId) => {
         durations.set(sectionId, (durations.get(sectionId) ?? 0) + now - start);
@@ -338,6 +366,8 @@ export function SaasAnalyticsTracker() {
           metadata: { sectionLabel: sectionLabelsById.get(sectionId) ?? sectionId },
         }));
       const totalDuration = now - startedAt;
+      const progress = takeScrollProgress();
+      if (progress) events.push(progress);
       events.push({
         eventType: "session_end",
         durationMs: totalDuration,
@@ -346,6 +376,8 @@ export function SaasAnalyticsTracker() {
           interactionCount,
           bounceDefinition: "no_interaction",
           sectionsViewed: viewedSections.size,
+          maxScrollDepth,
+          maxScrollY,
         },
       });
       sendBatch(events);

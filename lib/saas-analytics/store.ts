@@ -376,11 +376,13 @@ export function summarizeAnalytics(
       .filter(hasEngagement)
       .map((event) => event.sessionId),
   );
-  const scrollDepthBySession = new Map<string, number>();
+  // Include visits with no measured scroll; averaging only threshold-crossing
+  // sessions made a handful of deep visits look like the whole audience.
+  const scrollDepthBySession = new Map([...sessionIds].map((id) => [id, 0]));
   events
-    .filter((event) => event.eventType === "scroll_depth")
+    .filter((event) => ["scroll_depth", "scroll_zone", "session_end"].includes(event.eventType))
     .forEach((event) => {
-      const depth = Number(event.metadata?.depth ?? 0);
+      const depth = Math.max(0, Math.min(100, Number(event.metadata?.maxScrollDepth ?? event.metadata?.depth ?? 0) || 0));
       scrollDepthBySession.set(event.sessionId, Math.max(scrollDepthBySession.get(event.sessionId) ?? 0, depth));
     });
   const bouncedSessions = bouncedSessionIds(events);
