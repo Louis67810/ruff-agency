@@ -46,10 +46,16 @@ async function call(method, path, body, auth = true) {
   assert.equal((await call('POST', 'posts', null)).status, 400);
   assert.equal((await call('POST', 'posts', { title: 'Invalid date', date: '2026-02-30' })).status, 400);
   assert.equal((await call('POST', 'posts', { title: 'Invalid image', image: 'https://external.test/track.svg' })).status, 400);
-  let response = await call('POST', 'posts', { title: 'API verification', id: 'contract-fixture', date: '2026-10-25' });
+  const mediaA = '/api/linkedin/media/550e8400-e29b-41d4-a716-446655440000.png';
+  const mediaB = '/api/linkedin/media/550e8400-e29b-41d4-a716-446655440001.jpg';
+  const mappedMedia = store.postInput({ title: 'Media contract', media: [mediaA, mediaB] }, false).media_paths;
+  assert.equal(mappedMedia.length, 2); assert.equal(mappedMedia[0], mediaA.split('/').at(-1));
+  assert.throws(() => store.postInput({ title: 'Too many', media: Array(11).fill(mediaA) }, false), error => error.status === 400);
+  let response = await call('POST', 'posts', { title: 'API verification', id: 'contract-fixture', date: '2026-10-25', media: [mediaA, mediaB] });
   assert.equal(response.status, 201);
   let { post } = await response.json();
   assert.equal(post.date, '2026-10-25'); assert.equal(post.category, ''); assert.equal(post.version, 1); assert(post.createdAt);
+  assert.equal(post.media.length, 2);
   response = await call('PATCH', 'posts/contract-fixture', { date: '2026-10-28', expectedVersion: 1 });
   assert.equal(response.status, 200); post = (await response.json()).post; assert.equal(post.date, '2026-10-28'); assert.equal(post.version, 2);
   assert.equal((await call('PATCH', 'posts/contract-fixture', { title: 'Stale edit', expectedVersion: 1 })).status, 409);
@@ -63,6 +69,7 @@ async function call(method, path, body, auth = true) {
   const html = fs.readFileSync('public/linkedin-atelier.html', 'utf8');
   new vm.Script(html.match(/<script>([\s\S]*?)<\/script>/)[1]);
   assert(!html.includes('type="time"')); assert(!html.includes('localStorage.setItem')); assert(html.includes('expectedVersion'));
+  assert(!html.includes('tagFilter')); assert(html.includes('multiple'));
   assert.equal(docs.openapi('https://example.test').openapi, '3.0.3');
   console.log('PASS: authentication, scopes, input validation, create, schedule, concurrency, filters, deletion, cloud script and API schema.');
 })().catch(error => { console.error(error); process.exitCode = 1; });

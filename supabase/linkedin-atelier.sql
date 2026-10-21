@@ -13,6 +13,7 @@ create table public.linkedin_posts (
   tags text[] not null default '{}' check (cardinality(tags) <= 30),
   publication_date date,
   image_path text check (image_path is null or image_path ~ '^[a-f0-9-]{36}\.(png|jpg|webp|gif)$'),
+  media_paths text[] not null default '{}',
   stage text not null default '' check (stage in ('', 'À explorer', 'En cours', 'Prêtes à publier')),
   x double precision, y double precision,
   version integer not null default 1 check (version > 0),

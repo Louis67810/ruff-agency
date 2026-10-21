@@ -6,8 +6,8 @@ export function openapi(origin: string) {
   const post = { type: "object", properties: {
     id: { type: "string" }, title: { type: "string", maxLength: 120 }, body: { type: "string", maxLength: 50000 },
     category: { type: "string", description: "Nom libre ; créé automatiquement si nécessaire. Vide pour aucune catégorie." },
-    tags: { type: "array", items: { type: "string" }, maxItems: 30 }, date: { type: "string", description: "AAAA-MM-JJ ou chaîne vide pour retirer la date. Aucune publication automatique sur LinkedIn." },
-    image: { type: "string", description: "Chemin retourné par POST /media" }, stage: { type: "string", enum: ["", "À explorer", "En cours", "Prêtes à publier"] },
+    date: { type: "string", description: "AAAA-MM-JJ ou chaîne vide pour retirer la date. Aucune publication automatique sur LinkedIn." },
+    media: { type: "array", items: { type: "string" }, maxItems: 10, description: "Jusqu’à 10 chemins retournés par POST /media." }, stage: { type: "string", enum: ["", "À explorer", "En cours", "Prêtes à publier"] },
     x: { type: "number" }, y: { type: "number" }, expectedVersion: { type: "integer", description: "Version lue avant modification (facultatif pour un agent)." },
   } };
   return {

@@ -53,9 +53,12 @@ export async function ensureCategory(name: string) {
 }
 
 export function postFromRow(row: Record<string, any>) {
+  const media = Array.isArray(row.media_paths) && row.media_paths.length
+    ? row.media_paths.map((path: string) => `/api/linkedin/media/${path}`)
+    : row.image_path ? [`/api/linkedin/media/${row.image_path}`] : [];
   return {
-    id: row.id, title: row.title, body: row.body, category: row.category ?? "", tags: row.tags,
-    date: row.publication_date ?? "", image: row.image_path ? `/api/linkedin/media/${row.image_path}` : "",
+    id: row.id, title: row.title, body: row.body, category: row.category ?? "",
+    date: row.publication_date ?? "", media, image: media[0] ?? "",
     stage: row.stage, x: row.x ?? undefined, y: row.y ?? undefined,
     createdAt: row.created_at, updatedAt: row.updated_at, version: row.version,
   };
@@ -92,22 +95,22 @@ export function postInput(input: unknown, partial: boolean) {
   if (!partial || "title" in source) { row.title = string(source.title, 120, "Le sujet"); if (!row.title) throw new ApiError(400, "Ajoute un sujet."); }
   if (!partial || "body" in source) row.body = string(source.body ?? "", 50000, "Le texte");
   if (!partial || "category" in source) row.category = string(source.category ?? "", 60, "La catégorie").replace(/\s+/g, " ") || null;
-  if (!partial || "tags" in source) {
-    const tags = source.tags ?? [];
-    if (!Array.isArray(tags) || tags.length > 30) throw new ApiError(400, "Utilise au maximum 30 tags.");
-    row.tags = [...new Set(tags.map(t => string(t, 60, "Le tag")).filter(Boolean))];
-  }
   if (!partial || "date" in source) row.publication_date = dateOnly(source.date ?? "");
   if (!partial || "stage" in source) {
     const stage = source.stage ?? "";
     if (!["", "À explorer", "En cours", "Prêtes à publier"].includes(String(stage))) throw new ApiError(400, "Statut inconnu.");
     row.stage = stage;
   }
-  if (!partial || "image" in source) {
-    const image = source.image ?? "";
-    if (typeof image !== "string" || (image && !/^\/api\/linkedin\/media\/[a-f0-9-]{36}\.(png|jpg|webp|gif)$/.test(image)))
-      throw new ApiError(400, "Envoie l’image via POST /api/linkedin/media avant de l’associer au post.");
-    row.image_path = image ? image.slice("/api/linkedin/media/".length) : null;
+  if (!partial || "media" in source || "image" in source) {
+    const media = "media" in source ? source.media : [source.image ?? ""];
+    if (!Array.isArray(media) || media.length > 10) throw new ApiError(400, "Ajoute au maximum 10 médias par idée.");
+    const paths = [...new Set(media.map(item => {
+      if (typeof item !== "string" || !/^\/api\/linkedin\/media\/[a-f0-9-]{36}\.(png|jpg|webp|gif)$/.test(item))
+        throw new ApiError(400, "Envoie chaque image via POST /api/linkedin/media avant de l’associer au post.");
+      return item.slice("/api/linkedin/media/".length);
+    }))];
+    row.media_paths = paths;
+    row.image_path = paths[0] ?? null;
   }
   for (const key of ["x", "y"]) if (key in source) {
     const value = source[key];
