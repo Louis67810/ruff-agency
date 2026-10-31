@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bénéfices v4 — Ruff</title>
+<!-- v4 (26/10/2026) : v3 + R14 (poignées arrondies), R15 (bouton fit-content),
+     R16 (sobriété : un objet central, puces accrochées, fantômes) d'après les
+     références Figma de brand/design/figma/. -->
+<link rel="stylesheet" href="../ruff-tokens.css">
+<style>
+  body { margin: 0; background: var(--rf-section); }
+
+  .bn-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 64px; }
+  .bn-head .rf-h2 { max-width: 860px; }
+  .bn-head .rf-btn { flex: none; align-self: flex-end; } /* R15 : hauteur fit-content */
+
+  .bn-row { display: grid; gap: 16px; }
+  .bn-row--top { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); margin-bottom: 16px; }
+  .bn-row--bottom { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .bn-stack { display: grid; gap: 16px; }
+  .bn-h-528 { height: 528px; }
+  .bn-h-tall { height: 1024px; }
+  .bn-h-504 { height: 504px; }
+
+  .bn-scene { position: absolute; left: 50%; top: var(--top, 40px); width: var(--w); height: var(--h); transform: translateX(-50%) scale(var(--s, 1)); transform-origin: top center; }
+  .bn-scene > * { position: absolute; }
+
+  /* Mini-page de maquette réutilisable */
+  .bn-mini { padding: 20px 18px; display: flex; flex-direction: column; align-items: center; gap: 7px; }
+  .bn-mini .rf-ph { width: 100%; flex: 1; margin-top: 8px; }
+
+  /* 1. Le raccourci */
+  .bn-face { width: 84px; height: 84px; }
+  .bn-face img { border-radius: 50%; }
+
+  /* 2. Le lien */
+  .bn-link { left: 90px; top: 196px; width: 240px; height: 60px; border-radius: 999px; display: flex; align-items: center; gap: 14px; padding: 0 22px; z-index: 3; }
+
+  /* 3 et 5. Page avec section sélectionnée */
+  .bn-page { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .bn-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .bn-nav span:first-child { width: 46px; height: 12px; border-radius: 3px; background: var(--rf-ink); }
+  .bn-nav span:last-child { width: 40px; height: 14px; border-radius: 328px; background: var(--rf-wire-pill); }
+  .bn-sel { position: relative; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .bn-sel__row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 4px; }
+  .bn-sel__row span { height: 70px; border-radius: 10px; background: var(--rf-wire-fill); }
+  .bn-dup { position: absolute; top: 0; left: calc(100% + 54px); width: 100%; height: 100%; padding: 16px; display: flex; flex-direction: column; gap: 8px; background: #fff; border: 1.04px solid var(--rf-wire-border); border-radius: 16px; } /* R8 : imbriqué, pas d'ombre */
+  .bn-dup .bn-sel__row span { height: 70px; }
+  .bn-bars { display: flex; align-items: flex-end; gap: 6px; height: 34px; }
+  .bn-bars i { width: 9px; border-radius: 3px; background: var(--rf-wire-bar); }
+  .bn-bars i.on { background: var(--rf-wire-pill); }
+
+  /* 4. La traînée */
+  .bn-phone { width: 210px; height: 600px; border-radius: 34px; padding: 26px 18px; display: flex; flex-direction: column; gap: 9px; }
+  .bn-phone__notch { width: 56px; height: 10px; border-radius: 99px; background: #ececec; margin: -10px auto 16px; }
+
+  @media (max-width: 1399px) { .bn-scene { --s: .86; } }
+  @media (max-width: 1100px) {
+    .bn-head { flex-direction: column; align-items: flex-start; }
+    .bn-head .rf-btn { align-self: flex-start; }
+    .bn-wrap { max-width: 714px; margin: 0 auto; }
+    .bn-row--top, .bn-row--bottom { grid-template-columns: 1fr; }
+    .bn-h-tall { height: 900px; }
+    .bn-scene { --s: .95; }
+  }
+  @media (max-width: 809px) {
+    .bn-head { margin-bottom: 40px; }
+    .bn-wrap { max-width: 420px; }
+    .bn-h-528, .bn-h-504 { height: 470px; }
+    .bn-h-tall { height: 760px; }
+    .bn-scene { --s: .58; --top: 26px; }
+    .rf-bento__fade { --rf-fade-h: 240px; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="rf-user" viewBox="0 0 40 40"><circle cx="20" cy="14" r="7" fill="#d8d8d8"/><path d="M6.5 34c1.6-7 7-10.5 13.5-10.5S31.9 27 33.5 34z" fill="#d8d8d8"/></symbol>
+    <symbol id="rf-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="rf-align-left" viewBox="0 0 28 28"><path d="M5 6h20M5 13h10M5 20h10" stroke="#000" stroke-width="1.67"/></symbol>
+    <symbol id="rf-align-center" viewBox="0 0 28 28"><path d="M5 7h17M9 14h8M9 20h8" stroke="#000" stroke-width="1.67"/></symbol>
+    <symbol id="rf-align-right" viewBox="0 0 28 28"><path d="M5 7h17M14 14h8M14 20h8" stroke="#000" stroke-width="1.67"/></symbol>
+  </defs>
+</svg>
+
+<section class="rf-section" aria-labelledby="bn-title">
+  <div class="rf-container bn-wrap">
+
+    <header class="bn-head">
+      <h2 class="rf-h2" id="bn-title"><span>Ce que votre site fait</span> <strong>pendant que vous travaillez</strong></h2>
+      <a class="rf-btn rf-btn--primary" href="#"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="../assets/louis.jpg" alt="Photo de profil de Louis Staub"></span></a>
+    </header>
+
+    <div class="bn-row bn-row--top">
+
+      <!-- 1. CONCEPT : « le raccourci ». Objet central : le trait direct entre le
+           visiteur et vous. Derrière, en pointillés pâles : le détour des e-mails. -->
+      <article class="rf-bento rf-bento--blue bn-h-528">
+        <div class="rf-bento__art" role="img" aria-label="Un visiteur relié directement à vous par un trait, au-dessus d'un long détour en pointillés">
+          <div class="bn-scene" style="--w:640px;--h:300px;--top:64px">
+            <svg style="left:0;top:0" width="640" height="300" viewBox="0 0 640 300" aria-hidden="true">
+              <path d="M88 150 C 130 -20, 210 300, 270 140 S 360 -30, 420 120 S 520 310, 552 150" fill="none" stroke="#7fa3b3" stroke-width="2.5" stroke-dasharray="1 10" stroke-linecap="round" opacity=".55"/>
+              <line x1="130" y1="150" x2="510" y2="150" stroke="#0147FF" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+            <span class="rf-avatar rf-avatar--ghost bn-face" style="left:46px;top:108px"><svg width="48" height="48"><use href="#rf-user"/></svg></span>
+            <span class="rf-avatar bn-face" style="left:510px;top:108px"><img src="../assets/louis.jpg" alt=""></span>
+          </div>
+        </div>
+        <div class="rf-bento__copy">
+          <p class="rf-bento__title">Vos prospects réservent sans vous écrire</p>
+          <p class="rf-bento__body">L'agenda est dans la page : le visiteur choisit son créneau au moment où il est convaincu, pas trois e-mails plus tard.</p>
+        </div>
+      </article>
+
+      <!-- 2. CONCEPT : « un lien, tout est derrière ». Objet central : le lien.
+           Derrière : des pages fantômes reliées à lui par de fines lignes. -->
+      <article class="rf-bento rf-bento--yellow bn-h-528">
+        <div class="rf-bento__art" role="img" aria-label="Un lien au centre, relié à plusieurs pages en arrière-plan">
+          <div class="bn-scene" style="--w:420px;--h:300px;--top:46px">
+            <svg style="left:0;top:0;overflow:visible" width="420" height="300" viewBox="0 0 420 300" aria-hidden="true">
+              <path d="M150 200 C 130 160, 40 170, -20 128" fill="none" stroke="rgba(0,0,0,.16)" stroke-width="1.5"/>
+              <path d="M210 196 L 210 112" fill="none" stroke="rgba(0,0,0,.16)" stroke-width="1.5"/>
+              <path d="M270 200 C 290 160, 380 176, 440 136" fill="none" stroke="rgba(0,0,0,.16)" stroke-width="1.5"/>
+            </svg>
+            <div class="rf-wire rf-ghost bn-mini" style="left:-110px;top:24px;width:160px;height:118px"><span class="rf-bar" style="width:80%"></span><span class="rf-bar rf-bar--3" style="width:60%"></span><span class="rf-pill"></span><span class="rf-ph"></span></div>
+            <div class="rf-wire rf-ghost bn-mini" style="left:130px;top:-6px;width:160px;height:118px"><span class="rf-bar" style="width:80%"></span><span class="rf-bar rf-bar--3" style="width:60%"></span><span class="rf-pill"></span><span class="rf-ph"></span></div>
+            <div class="rf-wire rf-ghost bn-mini" style="left:370px;top:32px;width:160px;height:118px"><span class="rf-bar" style="width:80%"></span><span class="rf-bar rf-bar--3" style="width:60%"></span><span class="rf-pill"></span><span class="rf-ph"></span></div>
+            <div class="rf-wire bn-link">
+              <svg width="24" height="24"><use href="#rf-link"/></svg>
+              <span class="rf-bar" style="width:132px;height:11px"></span>
+            </div>
+          </div>
+        </div>
+        <div class="rf-bento__copy">
+          <p class="rf-bento__title">Un lien qui vend à votre place</p>
+          <p class="rf-bento__body">Après un appel, vous envoyez votre page : elle reprend vos arguments, vos preuves et vos prix, sans rien oublier.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="bn-row bn-row--bottom">
+
+      <!-- 3. CONCEPT : « dupliquer ». Objet central : la page. Une section y est
+           sélectionnée (puces Aa / palette / alignements accrochées au cadre, pattern
+           F1) et sa copie fantôme part sur le côté. La page descend → fondu (R5). -->
+      <article class="rf-bento rf-bento--green bn-h-tall">
+        <div class="rf-bento__art" role="img" aria-label="Une page dont une section sélectionnée est dupliquée">
+          <div class="bn-scene" style="--w:520px;--h:960px;--top:96px">
+            <div class="rf-wire bn-page" style="left:40px;top:0;width:400px;height:900px">
+              <div class="bn-nav"><span></span><span></span></div>
+              <span class="rf-bar" style="width:84%;align-self:center"></span>
+              <span class="rf-bar" style="width:62%;align-self:center"></span>
+              <span class="rf-bar rf-bar--2" style="width:70%;align-self:center;margin-top:4px"></span>
+              <span class="rf-pill" style="align-self:center;margin-top:6px"></span>
+              <span class="rf-ph" style="height:170px;margin-top:14px"></span>
+              <div class="bn-sel" style="margin-top:26px">
+                <span class="rf-bar" style="width:60%"></span>
+                <span class="rf-bar rf-bar--2" style="width:42%"></span>
+                <div class="bn-sel__row"><span></span><span></span><span></span></div>
+                <div class="rf-select" style="inset:-2px"><i></i><i></i><i></i><i></i></div>
+                <div class="rf-chip rf-chip--type" style="left:-22px;top:-58px">A<span>a</span></div>
+                <div class="rf-chip" style="right:10px;top:-24px"><span class="rf-dot rf-dot--red"></span><span class="rf-dot rf-dot--yellow"></span><span class="rf-dot rf-dot--green"></span><span class="rf-dot rf-dot--blue"></span></div>
+                <div class="rf-chip rf-chip--flat" style="left:-44px;bottom:-30px;gap:8px;padding:8px 10px">
+                  <svg width="28" height="28"><use href="#rf-align-left"/></svg><span class="rf-toolbar__sep"></span>
+                  <svg width="28" height="28"><use href="#rf-align-center"/></svg><span class="rf-toolbar__sep"></span>
+                  <svg width="28" height="28"><use href="#rf-align-right"/></svg>
+                </div>
+                <div class="bn-dup rf-ghost">
+                  <span class="rf-bar" style="width:60%"></span>
+                  <span class="rf-bar rf-bar--2" style="width:42%"></span>
+                  <div class="bn-sel__row"><span></span><span></span><span></span></div>
+                </div>
+              </div>
+              <span class="rf-bar rf-bar--2" style="width:60%;align-self:center;margin-top:40px"></span>
+              <span class="rf-bar rf-bar--3" style="width:44%;align-self:center"></span>
+              <span class="rf-ph" style="height:160px;margin-top:14px"></span>
+            </div>
+          </div>
+        </div>
+        <div class="rf-bento__fade" style="--rf-fade-h:320px"></div>
+        <div class="rf-bento__copy">
+          <p class="rf-bento__title">Une nouvelle page en un après-midi</p>
+          <p class="rf-bento__body">Chaque section est un bloc réutilisable. Nouvelle offre, nouvelle campagne : vous dupliquez, vous changez le texte, c'est en ligne.</p>
+        </div>
+      </article>
+
+      <div class="bn-stack">
+        <!-- 4. CONCEPT : « la traînée ». Objet central : le téléphone. Derrière :
+             ses copies fantômes. Descend sous le texte → fondu (R5). -->
+        <article class="rf-bento rf-bento--violet bn-h-504">
+          <div class="rf-bento__art" role="img" aria-label="Un téléphone qui arrive vite, suivi de copies fantômes">
+            <div class="bn-scene" style="--w:440px;--h:470px;--top:38px">
+              <div class="rf-wire bn-phone" style="left:30px;top:26px;transform:rotate(-6deg);opacity:.16"></div>
+              <div class="rf-wire bn-phone" style="left:86px;top:22px;transform:rotate(-6deg);opacity:.32"></div>
+              <div class="rf-wire bn-phone rf-ghost" style="left:142px;top:18px;transform:rotate(-6deg)"></div>
+              <div class="rf-wire bn-phone" style="left:198px;top:14px;transform:rotate(-6deg)">
+                <span class="bn-phone__notch"></span>
+                <span class="rf-bar" style="width:84%;align-self:center"></span>
+                <span class="rf-bar" style="width:62%;align-self:center"></span>
+                <span class="rf-bar rf-bar--2" style="width:70%;align-self:center;margin-top:2px"></span>
+                <span class="rf-pill" style="align-self:center;margin-top:6px"></span>
+                <span class="rf-ph" style="height:120px;margin-top:10px"></span>
+                <span class="rf-bar rf-bar--2" style="width:64%;align-self:center;margin-top:8px"></span>
+              </div>
+            </div>
+          </div>
+          <div class="rf-bento__fade" style="--rf-fade-h:260px"></div>
+          <div class="rf-bento__copy">
+            <p class="rf-bento__title">Rapide, même sur un mauvais réseau</p>
+            <p class="rf-bento__body">Images allégées, code propre : la page s'affiche avant que le visiteur ait le temps de repartir.</p>
+          </div>
+        </article>
+
+        <!-- 5. CONCEPT : « la section qui convainc ». Objet central : la page. La
+             section la plus regardée est sélectionnée, une puce graphique est
+             accrochée au cadre. Descend sous le texte → fondu (R5). -->
+        <article class="rf-bento rf-bento--red bn-h-504">
+          <div class="rf-bento__art" role="img" aria-label="Une page dont la section la plus regardée est sélectionnée, avec un petit graphique">
+            <div class="bn-scene" style="--w:440px;--h:420px;--top:56px">
+              <div class="rf-wire bn-page" style="left:30px;top:0;width:380px;height:620px">
+                <div class="bn-nav"><span></span><span></span></div>
+                <div class="bn-sel" style="align-items:center;padding:14px 16px 18px">
+                  <span class="rf-bar" style="width:84%"></span>
+                  <span class="rf-bar" style="width:62%"></span>
+                  <span class="rf-bar rf-bar--2" style="width:70%;margin-top:4px"></span>
+                  <span class="rf-pill" style="margin-top:6px"></span>
+                  <div class="rf-select" style="inset:-2px"><i></i><i></i><i></i><i></i></div>
+                  <div class="rf-chip" style="right:-64px;top:20px;padding:10px 14px">
+                    <span class="bn-bars"><i style="height:30%"></i><i style="height:48%"></i><i style="height:40%"></i><i class="on" style="height:100%"></i><i style="height:62%"></i></span>
+                  </div>
+                </div>
+                <span class="rf-ph" style="height:150px;margin-top:16px"></span>
+              </div>
+            </div>
+          </div>
+          <div class="rf-bento__fade" style="--rf-fade-h:260px"></div>
+          <div class="rf-bento__copy">
+            <p class="rf-bento__title">Vous savez ce qui fait cliquer</p>
+            <p class="rf-bento__body">Clics et défilement sont mesurés : on voit quelle section convainc et laquelle retravailler.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+  </div>
+</section>
+</body>
+</html>

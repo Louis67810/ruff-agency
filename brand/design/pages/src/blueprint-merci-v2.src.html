@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merci — Ruff Agency Blueprint v2</title>
+<!-- Page de remerciement du lead magnet, v2 (26/10/2026) : footer réel du site (R21). -->
+<link rel="stylesheet" href="../ruff-tokens.css">
+<link rel="stylesheet" href="../../../app/fonts.css">
+<link rel="stylesheet" href="../../../components/footer/Footer.css">
+<style>
+  body { margin: 0; min-height: 100vh; background: var(--rf-page-cool); color: var(--rf-ink); font-family: var(--rf-font-text); display: flex; flex-direction: column; }
+  .mc-nav { display: flex; align-items: center; height: 92px; padding: 0 48px; }
+  .mc-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; font: 600 22px/1 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .mc-logo img { height: 40px; width: auto; }
+  main { flex: 1; display: grid; place-items: center; padding: 40px 16px 360px; }
+  .mc-card { max-width: 720px; padding: 56px; border-radius: 32px; background: #fff; border: 1px solid rgba(0,0,0,.12); box-shadow: var(--rf-shadow-quiz); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .mc-badge { width: 64px; height: 64px; border-radius: 50%; background: var(--rf-tint-green); display: grid; place-items: center; }
+  .mc-badge span { width: 34px; height: 34px; border-radius: 50%; background: var(--rf-dot-green); border: 1px solid #fff; box-shadow: var(--rf-shadow-dot); display: grid; place-items: center; }
+  .mc-text { font: 500 18px/1.7 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); margin: 0; }
+  .mc-honest { margin-top: 12px; padding: 22px 24px; border-radius: 18px; background: var(--rf-page); border: 1px solid var(--rf-wire-border); text-align: left; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .mc-honest p { margin: 0; font: 500 16px/1.6 var(--rf-font-text); color: var(--rf-ink-70); letter-spacing: -0.02em; }
+  .mc-honest b { color: var(--rf-ink); }
+  .footer-reset [class*="availability__"] { display: flex; align-items: center; gap: 10px; font: 500 16px/1.2 Inter, sans-serif; color: #fff; letter-spacing: -0.02em; }
+  .footer-reset [class*="availabilityIcon"] { width: 10px; height: 10px; border-radius: 50%; background: #ffa21f; }
+  .footer-reset [class*="availabilityText"] { display: flex; gap: 6px; align-items: baseline; }
+  .footer-reset [class*="availabilityNumber"] { font-weight: 700; font-size: 18px; }
+  @media (max-width: 809px) { .mc-card { padding: 32px 22px; } .mc-nav { padding: 0 16px; } .rf-h2 { font-size: 34px; } }
+</style>
+</head>
+<body>
+<header class="mc-nav"><a class="mc-logo" href="blueprint-v2.html"><img src="../assets/ruff-logo.png" alt="Ruff">.agency</a></header>
+<main>
+  <div class="mc-card">
+    <div class="mc-badge" aria-hidden="true"><span><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3.5 8.4l2.8 2.8 6-6.4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <h1 class="rf-h2"><span>C'est parti.</span> <strong>Ton Blueprint t'attend.</strong></h1>
+    <p class="mc-text">Clique sur le bouton pour récupérer le fichier, puis donne-le à ton IA. Elle te posera ses premières questions.</p>
+    <a class="rf-btn rf-btn--primary" href="#"><span class="rf-btn__inner">Télécharger le Blueprint <img class="rf-btn__avatar" src="../assets/louis.jpg" alt="Photo de profil de Louis Staub"></span></a>
+    <div class="mc-honest">
+      <p><b>Un rappel honnête :</b> ce que tu reçois est une partie du système. Pour des designs vraiment uniques, notre équipe de designers construit un système sur mesure pour ta marque.</p>
+      <a class="rf-btn rf-btn--secondary" href="#"><span class="rf-btn__inner">Découvrir le système complet et sur mesure</span></a>
+    </div>
+  </div>
+</main>
+<!--@FOOTER-->
+<script>const d=new Date(),days=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();document.querySelectorAll('.footer-reset [class*="availabilityNumber"]').forEach(n=>{n.textContent=Math.ceil(6-((d.getDate()-1)/days)*5)});document.querySelectorAll('.footer-reset [class*="availabilityText"] span:last-child').forEach(s=>{s.textContent='places restantes pour '+d.toLocaleDateString('fr-FR',{month:'long'})});</script>
+</body>
+</html>

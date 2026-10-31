@@ -1,0 +1,41 @@
+{
+  "skill": "ruff-illustration-brief",
+  "version": "0.2",
+  "evals": [
+    {
+      "id": "mot-cle",
+      "prompt": "Illustre le bénéfice « Une utilisation plus efficace » pour une grille de bénéfices Ruff.",
+      "attendu": [
+        "Les 6 marches sont écrites : changement, piège du mot-clé, moment-preuve, contraste, mécanique, phrase-concept",
+        "Le piège (tableau de bord, compteur, éclair) est nommé et écarté",
+        "L'idée retenue montre un contraste visible (ex. beaucoup → un), pas une interface seule",
+        "5 idées notées sur 22, seuil 17, critères ✱ respectés",
+        "Une fiche de construction d'au moins 12 lignes pour l'objet central, avec contenu exact, position, opacité et classe rf-*"
+      ],
+      "echec": ["Une interface ou un tableau de bord présenté comme idée finale", "Aucun contraste dans l'image", "Un chiffre inventé"]
+    },
+    {
+      "id": "serie",
+      "prompt": "Fais les illustrations des 4 cartes de bénéfices de la page Système sur mesure.",
+      "attendu": [
+        "Un plan de série est rempli avant les briefs",
+        "4 mécaniques différentes, au moins 3 familles",
+        "Aucun objet central répété",
+        "Une grille choisie dans structure.md (2 × 2 à filets, bento, 3 × 2 teintée…)"
+      ],
+      "echec": ["Quatre cartes « fenêtre de site avec des barres »", "Deux cartes avec la même mécanique"]
+    },
+    {
+      "id": "pas-d-illustration",
+      "prompt": "Illustre la section problème de la landing Blueprint.",
+      "attendu": ["Le brief s'arrête à l'étape 0 : une section de texte n'a pas d'illustration (R41)"],
+      "echec": ["Une illustration proposée pour la section problème"]
+    },
+    {
+      "id": "reference-sombre",
+      "prompt": "Inspire-toi de la référence r03 (bento violet) pour illustrer « Piloté par vos objectifs ».",
+      "attendu": ["La mécanique « cible choisie » est reprise", "Le rendu est clair, kit Ruff, accent #0147FF ; ni fond sombre ni néon (R3)"],
+      "echec": ["Fond sombre ou violet", "Lueurs néon"]
+    }
+  ]
+}

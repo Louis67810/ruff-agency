@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruff Agency Blueprint — v3</title>
+<!-- v3 (27/10/2026) : v2 + R40 à R45 (footer sans bandeau d'appel, moins d'illustrations,
+     emplacements vidéo pour les exemples, H1 plus petit, flèche dans un tag, avis avec photo en ticker).
+     v2 (26/10/2026) : structure refaite selon R21 à R39 (feedback.md) et la
+     grammaire de la page SaaS (skill ruff-design, references/structure.md).
+     Généré depuis pages/src/blueprint-v3.src.html par pages/src/build.mjs. -->
+<link rel="stylesheet" href="../ruff-tokens.css">
+<link rel="stylesheet" href="../../../app/fonts.css">
+<link rel="stylesheet" href="../../../components/footer/Footer.css">
+<link rel="stylesheet" href="../../../components/sections/StackSection3/StackSection3.css">
+<style>
+  body { margin: 0; background: #fbfbfb; color: var(--rf-ink); font-family: var(--rf-font-text); }
+  img { display: block; }
+  .ico { width: 24px; height: 24px; flex: none; }
+
+  /* ---------- Fonds de section (R22, R37) ---------- */
+  .bp-sec { padding: 142px 48px; }
+  .bp-sec--page { background: #fbfbfb; }
+  .bp-sec--white { background: #fff; }
+  .bp-sec--grey { background: #f5f5f5; }
+  .bp-sec--blue { background: #fbfbfb linear-gradient(180deg, rgb(12, 90, 192) 0%, rgba(10, 96, 209, .918) 15.17%, rgba(10, 103, 226, 0) 100%); }
+  .bp-wrap { max-width: var(--rf-container); margin: 0 auto; }
+  .bp-center { text-align: center; }
+
+  /* ---------- Typographie (grammaire SaaS) ---------- */
+  .bp-h2 { margin: 0; font: 700 64px/1.06 var(--rf-font-title); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .bp-h2 .bp-muted { color: var(--rf-ink-75); }
+  .bp-intro { margin: 24px 0 0; font: 500 20px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); max-width: 760px; }
+  .bp-intro strong { color: var(--rf-ink); font-weight: 600; }
+  .bp-center .bp-intro { margin-left: auto; margin-right: auto; }
+  .bp-head { margin-bottom: 64px; }
+  .bp-sec--blue .bp-h2 { color: #fff; }
+  .bp-sec--blue .bp-intro { color: rgba(255, 255, 255, .72); }
+  .bp-p { margin: 0; font: 500 18px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); }
+  .bp-p + .bp-p { margin-top: 18px; }
+  .bp-p strong { color: var(--rf-ink); font-weight: 600; }
+  .bp-small { margin: 0; font: 500 15px/1.6 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink-70); }
+  /* Conclusion de section (R31) */
+  .bp-conclusion { max-width: 980px; margin: 88px auto 0; text-align: center; }
+  .bp-conclusion::before { content: ""; display: block; height: .8px; background: rgba(0, 0, 0, .11); margin-bottom: 48px; }
+  .bp-conclusion p { margin: 0; font: 600 28px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+
+  .bp-todo { background: #fff3c4; color: #7a5600; border-radius: 4px; padding: 0 4px; font-weight: 600; }
+
+  /* ---------- Réassurance sous un bouton (R25) ---------- */
+  .bp-cta { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+  .bp-center .bp-cta, .bp-cta--center { align-items: center; }
+  .bp-cta .rf-btn { flex: none; }
+  .bp-reassure { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font: 500 16px/1.03 var(--rf-font-text); color: var(--rf-ink); letter-spacing: -0.02em; }
+  .bp-reassure span { display: inline-flex; align-items: center; gap: 12px; }
+  .bp-reassure .ico { color: #141b34; }
+  .bp-reassure i { width: 1px; height: 14px; background: rgba(20, 27, 52, .15); }
+
+  /* ---------- Navigation ---------- */
+  .bp-nav { position: sticky; top: 0; z-index: 30; background: rgba(251, 251, 251, .9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .bp-nav .bp-wrap { display: flex; align-items: center; justify-content: space-between; height: 92px; max-width: calc(var(--rf-container) + 96px); padding: 0 48px; }
+  .bp-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; font: 600 22px/1 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .bp-logo img { height: 40px; width: auto; }
+
+  /* ---------- Héros (R23, R24) ---------- */
+  .bp-hero { padding: 72px 48px 120px; background: #fbfbfb; text-align: center; }
+  .bp-eyebrow { display: inline-flex; align-items: center; height: 52px; padding: 10px 24px; border-radius: 46px; background: #fff; border: .8px solid rgba(0, 0, 0, .11); font: 500 16px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: rgba(18, 26, 46, .7); }
+  .bp-hero h1 { margin: 28px auto 0; max-width: 1040px; font: 700 64px/1.06 var(--rf-font-title); letter-spacing: -0.05em; color: var(--rf-ink); }
+  .bp-hero .bp-intro { max-width: 720px; margin: 24px auto 0; }
+  .bp-hero .bp-cta { margin-top: 40px; }
+  .bp-hint { margin-top: 10px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; padding: 12px 18px; border-radius: 15px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); box-shadow: var(--rf-shadow-card); font: 500 15px/1.5 var(--rf-font-text); color: var(--rf-ink-70); letter-spacing: -0.02em; }
+  .bp-hint .ico { width: 20px; height: 20px; color: #141b34; }
+  .bp-hint b { color: var(--rf-ink); font-weight: 600; }
+  /* Cadre média (même cadre que les visuels de la page SaaS) */
+  .bp-media { position: relative; max-width: 1180px; margin: 72px auto 0; aspect-ratio: 16 / 9; border-radius: 62px; background: #e2e2e2; border: 8px solid #fff; box-shadow: 0 2.87px 7.18px rgba(0, 0, 0, .05), 0 12.93px 12.93px rgba(0, 0, 0, .04), 0 28.74px 17.24px rgba(0, 0, 0, .03), 0 50.29px 20.12px rgba(0, 0, 0, .01), 0 77.59px 21.55px rgba(0, 0, 0, 0); overflow: hidden; display: grid; place-items: center; }
+  .bp-media__play { width: 96px; height: 96px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: var(--rf-shadow-card); color: var(--rf-ink); }
+  .bp-media__play .ico { width: 36px; height: 36px; margin-left: 4px; }
+  .bp-media__cap { position: absolute; left: 0; right: 0; bottom: 32px; text-align: center; }
+
+  /* ---------- Cartes (grammaire SaaS) ---------- */
+  .bp-card { background: #fff; border: .8px solid rgba(0, 0, 0, .133); border-radius: 32px; padding: 32px; box-shadow: var(--rf-shadow-card); }
+  .bp-card__head { display: flex; align-items: center; gap: 16px; }
+  .bp-tile { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; }
+  .bp-tile .ico { width: 24px; height: 24px; }
+  .bp-tile--red { background: rgb(255, 96, 101); }
+  .bp-tile--blue { background: var(--rf-blue); }
+  .bp-card h3 { margin: 0; font: 700 24px/1.88 var(--rf-font-title); letter-spacing: -0.03em; }
+  .bp-rule { height: 1px; background: rgba(0, 0, 0, .11); margin: 20px 0; }
+  .bp-card p { margin: 0; font: 500 18px/2.2 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); }
+
+  /* Carte d'illustration (F5) */
+  .bp-art-card { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; min-height: 680px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); border-radius: 32px; padding: 32px; box-shadow: var(--rf-shadow-card); }
+  .bp-art-card__art { position: absolute; left: 0; right: 0; top: 0; height: 360px; }
+  .bp-art-card h3 { margin: 0; font: 600 22px/1.86 var(--rf-font-text); letter-spacing: -0.03em; }
+  .bp-art-card p { margin: 0; font: 500 18px/2.2 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); }
+
+  /* Scène d'illustration */
+  .bp-scene { position: absolute; left: 50%; top: var(--top, 0px); width: var(--w); height: var(--h); transform: translateX(-50%) scale(var(--s, 1)); transform-origin: top center; }
+  .bp-scene > * { position: absolute; }
+  .bp-page { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .bp-pnav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .bp-pnav span:first-child { width: 46px; height: 12px; border-radius: 3px; background: var(--rf-wire-bar); }
+  .bp-pnav span:last-child { width: 40px; height: 14px; border-radius: 328px; background: var(--rf-wire-pill); }
+  .bp-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .bp-cols span { height: 64px; border-radius: 10px; background: var(--rf-wire-fill); }
+
+  /* ---------- Problème : grille de pages identiques ---------- */
+  .bp-split { display: grid; grid-template-columns: 1fr 1.15fr; gap: 72px; align-items: start; }
+  .bp-split .bp-intro { max-width: none; }
+  .bp-same { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; position: relative; }
+  .bp-same .rf-wire { position: relative; height: 230px; padding: 18px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .bp-same .bp-blob { width: 100%; flex: 1; margin-top: 8px; border-radius: 12px; background: linear-gradient(135deg, #ececf1, #f7f7f9); }
+  .bp-same-wrap { position: relative; }
+  .bp-same-wrap::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 170px; background: linear-gradient(180deg, rgba(255, 255, 255, 0), #fff); pointer-events: none; }
+
+  /* ---------- Avant / après (R27) ---------- */
+  .bp-pairs { display: grid; gap: 56px; }
+  .bp-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .bp-shot { margin: 0; }
+  .bp-shot__img { position: relative; aspect-ratio: 4 / 3; border-radius: 32px; background: #fff; border: .8px solid rgba(0, 0, 0, .1); box-shadow: var(--rf-shadow-card); display: grid; place-items: center; padding: 32px; text-align: center; overflow: hidden; }
+  .bp-label { position: absolute; top: 24px; left: 24px; padding: 16px 18px; border-radius: 15px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); box-shadow: var(--rf-shadow-card); font: 700 20px/1.07 var(--rf-font-title); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .bp-shot figcaption { margin-top: 18px; font: 500 16px/1.6 var(--rf-font-text); color: var(--rf-ink-70); letter-spacing: -0.02em; }
+  .bp-shot figcaption b { color: var(--rf-ink); font-weight: 600; }
+  /* Encadré de note (R33) = contour des visuels d'étapes */
+  .bp-note { margin-top: 56px; padding: 28px 32px; border-radius: 28px; background: rgba(186, 190, 199, .08); border: .8px solid rgba(1, 71, 255, .12); display: flex; gap: 16px; align-items: flex-start; }
+  .bp-note .ico { color: #141b34; margin-top: 4px; }
+
+  /* ---------- Contenu (section bleue) ---------- */
+  .bp-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .bp-q { width: 400px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .bp-q__row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--rf-wire-border); }
+  .bp-q__num { width: 22px; height: 22px; border-radius: 6px; background: var(--rf-wire-bar-2); flex: none; }
+  .bp-q__answers { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 0 4px 34px; }
+  .bp-q__answers span { height: 28px; border-radius: 999px; border: 1px solid var(--rf-wire-border); background: #fff; }
+  .bp-q__answers span.is-on { background: var(--rf-wire-pill); border-color: var(--rf-wire-pill); }
+  .bp-receive { margin-top: 16px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; }
+  .bp-receive h3 { margin: 0 0 12px; font: 700 32px/1.2 var(--rf-font-title); letter-spacing: -0.03em; }
+  .bp-list { list-style: none; margin: 0; padding: 0; }
+  .bp-list li { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(0, 0, 0, .08); font: 500 18px/1.5 var(--rf-font-text); letter-spacing: -0.03em; }
+  .bp-list li:last-child { border-bottom: 0; }
+  .bp-list .ico { color: var(--rf-blue); }
+  .bp-lock { position: relative; }
+  .bp-lock button { all: unset; cursor: pointer; display: flex; align-items: center; gap: 14px; width: 100%; color: var(--rf-ink-70); }
+  .bp-lock button:focus-visible { outline: 2px solid var(--rf-blue); outline-offset: 4px; border-radius: 8px; }
+  .bp-lock .ico { color: #141b34; }
+  .bp-lock b { color: var(--rf-ink); font-weight: 600; }
+  .bp-lock__rows { margin-left: auto; display: flex; flex-direction: column; gap: 6px; width: 120px; }
+  .bp-lock__rows i { height: 7px; border-radius: 4px; background: var(--rf-wire-bar-2); }
+  .bp-tip { position: absolute; left: 38px; bottom: calc(100% - 4px); width: 340px; padding: 16px 18px; border-radius: 15px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); box-shadow: var(--rf-shadow-card); font: 500 15px/1.55 var(--rf-font-text); color: var(--rf-ink-70); letter-spacing: -0.02em; opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 5; }
+  .bp-tip b { color: var(--rf-ink); }
+  .bp-lock:hover .bp-tip, .bp-lock:focus-within .bp-tip, .bp-lock.is-open .bp-tip { opacity: 1; transform: none; }
+  .bp-after-note { margin: 40px auto 0; max-width: 760px; text-align: center; }
+
+  /* ---------- Étapes (F4, sans schéma : R29) ---------- */
+  .bp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .bp-step { display: flex; flex-direction: column; gap: 23px; }
+  .bp-step > div:not(.bp-step__visual) { min-height: 196px; } /* visuels alignés d'une étape à l'autre */
+  .bp-step__label { align-self: flex-start; padding: 12px 16px; border-radius: 12px; background: rgb(234, 239, 255); font: 500 14px/1.46 var(--rf-font-text); letter-spacing: -0.03em; color: rgba(0, 0, 0, .8); }
+  .bp-step h3 { margin: 0 0 8px; font: 600 20px/1.46 var(--rf-font-text); letter-spacing: -0.03em; }
+  .bp-step p { margin: 0; font: 500 18px/2.08 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); }
+  .bp-step__visual { position: relative; height: 380px; border-radius: 28px; background: rgba(186, 190, 199, .08); border: .8px solid rgba(1, 71, 255, .12); overflow: hidden; }
+  .bp-file { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+  .bp-file img { width: 34px; height: auto; }
+
+  /* ---------- Quelle IA ---------- */
+  .bp-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border: .8px solid rgba(0, 0, 0, .133); border-radius: 32px; overflow: hidden; box-shadow: var(--rf-shadow-card); }
+  .bp-table th, .bp-table td { text-align: left; padding: 22px 24px; border-bottom: 1px solid rgba(0, 0, 0, .07); font: 500 16px/1.5 var(--rf-font-text); letter-spacing: -0.02em; vertical-align: middle; }
+  .bp-table th { font-weight: 600; font-size: 15px; color: var(--rf-ink-70); background: #fbfbfb; }
+  .bp-table tr:last-child td { border-bottom: 0; }
+  .bp-table td:first-child { font-weight: 600; color: var(--rf-ink); }
+  .bp-best { display: inline-block; margin-left: 8px; padding: 6px 10px; border-radius: 10px; background: var(--rf-blue); color: #fff; font: 600 13px/1 var(--rf-font-text); vertical-align: middle; }
+  .bp-ai-example { margin-top: 32px; }
+  .bp-ai-example .bp-shot__img { aspect-ratio: 16 / 7; }
+
+  /* ---------- Limites ---------- */
+  .bp-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  /* ---------- Trois niveaux ---------- */
+  .bp-levels-shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .bp-level__shot { position: relative; height: 300px; border-radius: 32px; overflow: hidden; border: .8px solid rgba(0, 0, 0, .1); box-shadow: var(--rf-shadow-card); }
+  .bp-level__video { display: grid; place-items: center; background: #e2e2e2; border: 8px solid #fff; box-shadow: 0 2.87px 7.18px rgba(0, 0, 0, .05), 0 12.93px 12.93px rgba(0, 0, 0, .04), 0 28.74px 17.24px rgba(0, 0, 0, .03), 0 50.29px 20.12px rgba(0, 0, 0, .01); }
+  .bp-level__video .bp-media__play { width: 64px; height: 64px; }
+  .bp-level__video .bp-media__play .ico { width: 26px; height: 26px; }
+  .bp-level__video .bp-media__cap { bottom: 18px; }
+  .bp-level__shot .rf-wire { left: 26px; right: 26px; top: 30px; height: 320px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .bp-level__head { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; }
+  .bp-level__head h3 { margin: 0; font: 700 24px/1.4 var(--rf-font-title); letter-spacing: -0.03em; }
+  .bp-info { position: relative; }
+  .bp-info button { all: unset; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #141b34; }
+  .bp-info button:hover { background: rgba(0, 0, 0, .04); }
+  .bp-info button:focus-visible { outline: 2px solid var(--rf-blue); outline-offset: 2px; }
+  .bp-info .bp-tip { left: auto; right: -6px; bottom: calc(100% + 8px); width: 290px; }
+  .bp-info:hover .bp-tip, .bp-info:focus-within .bp-tip, .bp-info.is-open .bp-tip { opacity: 1; transform: none; }
+  .bp-level__facts { list-style: none; margin: 14px 0 0; padding: 0; }
+  .bp-level__facts li { display: flex; gap: 12px; padding: 14px 0; border-top: 1px solid rgba(0, 0, 0, .08); font: 500 17px/1.6 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink-70); }
+  .bp-level__facts li .ico { color: #141b34; margin-top: 1px; }
+  .bp-level__facts li strong { color: var(--rf-ink); font-weight: 600; }
+  .bp-team { margin-top: 72px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; }
+  .bp-team h3 { margin: 0 0 14px; font: 700 32px/1.2 var(--rf-font-title); letter-spacing: -0.03em; }
+
+  /* ---------- Qui est derrière ---------- */
+  .bp-founder { display: flex; align-items: center; gap: 16px; margin-top: 32px; }
+  .bp-founder img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; box-shadow: var(--rf-shadow-dir); }
+  .bp-founder b { display: block; font: 600 18px/1.3 var(--rf-font-text); }
+  .bp-proofs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .bp-proofs .bp-card { padding: 28px; }
+  .bp-proofs b { display: block; font: 700 48px/1.06 var(--rf-font-title); letter-spacing: -0.03em; margin-bottom: 10px; }
+  .bp-ticker { margin-top: 72px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .bp-ticker__track { display: flex; gap: 16px; width: max-content; padding: 8px 0 48px; animation: bp-ticker 60s linear infinite; }
+  .bp-ticker:hover .bp-ticker__track { animation-play-state: paused; }
+  @keyframes bp-ticker { to { transform: translateX(calc(-50% - 8px)); } }
+  .bp-review { width: 420px; flex: none; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  .bp-review__author { display: flex; align-items: center; gap: 14px; }
+  .bp-review__author img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: var(--rf-shadow-dir); }
+  @media (prefers-reduced-motion: reduce) { .bp-ticker__track { animation: none; } .bp-ticker { overflow-x: auto; } }
+  .bp-quote { margin: 0; }
+  .bp-quote p { margin: 0 0 18px; font: 500 18px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .bp-quote cite { font: 600 16px/1.3 var(--rf-font-text); font-style: normal; }
+  .bp-quote cite span { display: block; font-weight: 500; color: var(--rf-ink-70); margin-top: 4px; }
+
+  /* ---------- FAQ réelle du site (R36) : réglage du padding ---------- */
+  .stack-section-3 { --s3-padding: 142px 48px 160px 48px; background: #fbfbfb; }
+
+  /* ---------- Formulaire final (bleu en dégradé) ---------- */
+  /* Le footer du site remonte son bandeau d'appel sur la section précédente :
+     comme sur le site (StackSection3 : 300 px en bas), on lui laisse la place. */
+  .bp-final { padding-bottom: 142px; }
+  .bp-final .bp-h2 { font-size: 64px; line-height: 1.14; }
+  .bp-final .bp-intro { color: rgba(255, 255, 255, .84); }
+  .bp-form-card { max-width: 760px; margin: 56px auto 0; padding: 48px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); border-radius: 32px; box-shadow: var(--rf-shadow-card); text-align: center; }
+  .bp-form { display: flex; gap: 10px; align-items: center; }
+  .bp-form label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .bp-form input { flex: 1; min-width: 0; height: 60px; padding: 0 20px; border-radius: 15px; border: .8px solid rgba(0, 0, 0, .15); background: #fff; font: 500 16px/1 var(--rf-font-text); color: var(--rf-ink); letter-spacing: -0.02em; }
+  .bp-form input:focus { outline: 2px solid var(--rf-blue); outline-offset: 1px; }
+  .bp-form .rf-btn { flex: none; }
+  .bp-form-card .bp-reassure { justify-content: center; margin-top: 24px; }
+  .bp-legal { margin-top: 20px; font: 500 13px/1.6 var(--rf-font-text); color: var(--rf-ink-70); }
+
+  /* ---------- Footer réel du site : compteur sans le module CSS du héros ---------- */
+  .footer-reset [class*="availability__"] { display: flex; align-items: center; gap: 10px; font: 500 16px/1.2 Inter, sans-serif; color: #fff; letter-spacing: -0.02em; }
+  .footer-reset [class*="availabilityIcon"] { width: 10px; height: 10px; border-radius: 50%; background: #ffa21f; }
+  .footer-reset [class*="availabilityText"] { display: flex; gap: 6px; align-items: baseline; }
+  .footer-reset [class*="availabilityNumber"] { font-weight: 700; font-size: 18px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1399px) {
+    .bp-h2 { font-size: 52px; }
+    .bp-hero h1 { font-size: 56px; }
+  }
+  @media (max-width: 1100px) {
+    .bp-split, .bp-two, .bp-receive, .bp-team, .bp-who { grid-template-columns: 1fr; gap: 40px; }
+    .bp-steps, .bp-three, .bp-levels-shots { grid-template-columns: 1fr; max-width: 560px; }
+    .bp-compare th { width: 160px; }
+  }
+  @media (max-width: 809px) {
+    .bp-sec { padding: 88px 16px; }
+    .bp-hero { padding: 40px 16px 72px; }
+    .bp-nav .bp-wrap { padding: 0 16px; height: 76px; }
+    .bp-logo img { height: 32px; }
+    .bp-nav .rf-btn--primary { padding: 4px; }
+    .bp-nav .rf-btn__inner { height: 40px; font-size: 14px; padding: 8px 8px 8px 14px; gap: 8px; }
+    .bp-nav .rf-btn__avatar { width: 24px; height: 24px; }
+    .bp-hero h1 { font-size: 40px; }
+    .bp-h2, .bp-final .bp-h2 { font-size: 34px; }
+    .bp-intro { font-size: 17px; }
+    .bp-media { border-radius: 32px; border-width: 5px; margin-top: 48px; }
+    .bp-media__play { width: 64px; height: 64px; }
+    .bp-conclusion p { font-size: 22px; }
+    .bp-same { grid-template-columns: 1fr 1fr; }
+    .bp-same .rf-wire:nth-child(n+5) { display: none; }
+    .bp-same .rf-wire { height: 170px; }
+    .bp-pair { grid-template-columns: 1fr; }
+    .bp-label { top: 16px; left: 16px; font-size: 16px; padding: 12px 14px; }
+    .bp-art-card { min-height: 640px; padding: 24px; }
+    .bp-art-card__art .bp-scene { --s: .66; }
+    .bp-ai-example .bp-shot__img { aspect-ratio: 4 / 3; padding-top: 88px; }
+    .bp-table th, .bp-table td { padding: 16px 12px; font-size: 14px; }
+    .bp-table th:nth-child(4), .bp-table td:nth-child(4) { display: none; }
+    .bp-compare, .bp-compare tbody, .bp-compare tr, .bp-compare th, .bp-compare td { display: block; width: 100%; }
+    .bp-compare td { padding-top: 4px; }
+    .bp-proofs { grid-template-columns: 1fr; }
+    .bp-form { flex-direction: column; align-items: stretch; }
+    .bp-form .rf-btn { align-self: center; }
+    .bp-form-card { padding: 28px 20px; }
+    .bp-tip { width: 260px; left: 0; }
+    .stack-section-3 { --s3-padding: 88px 16px 96px 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .bp-tip { transition: none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="hi-outline-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/></symbol>
+<symbol id="hi-outline-envelope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></symbol>
+<symbol id="hi-outline-cpu-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></symbol>
+<symbol id="hi-outline-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"/></symbol>
+<symbol id="hi-outline-information-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></symbol>
+<symbol id="hi-outline-lock-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></symbol>
+<symbol id="hi-outline-wrench-screwdriver" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"/></symbol>
+<symbol id="hi-outline-arrow-right-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+<symbol id="hi-outline-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+<symbol id="hi-solid-play" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-check-circle" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-check" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-arrow-path" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-cursor-arrow-rays" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.5a.75.75 0 0 1 .75.75V4.5a.75.75 0 0 1-1.5 0V2.25A.75.75 0 0 1 12 1.5ZM5.636 4.136a.75.75 0 0 1 1.06 0l1.592 1.591a.75.75 0 0 1-1.061 1.06l-1.591-1.59a.75.75 0 0 1 0-1.061Zm12.728 0a.75.75 0 0 1 0 1.06l-1.591 1.592a.75.75 0 0 1-1.06-1.061l1.59-1.591a.75.75 0 0 1 1.061 0Zm-6.816 4.496a.75.75 0 0 1 .82.311l5.228 7.917a.75.75 0 0 1-.777 1.148l-2.097-.43 1.045 3.9a.75.75 0 0 1-1.45.388l-1.044-3.899-1.601 1.42a.75.75 0 0 1-1.247-.606l.569-9.47a.75.75 0 0 1 .554-.68ZM3 10.5a.75.75 0 0 1 .75-.75H6a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 10.5Zm14.25 0a.75.75 0 0 1 .75-.75h2.25a.75.75 0 0 1 0 1.5H18a.75.75 0 0 1-.75-.75Zm-8.962 3.712a.75.75 0 0 1 0 1.061l-1.591 1.591a.75.75 0 1 1-1.061-1.06l1.591-1.592a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-fingerprint" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 3.75a6.715 6.715 0 0 0-3.722 1.118.75.75 0 1 1-.828-1.25 8.25 8.25 0 0 1 12.8 6.883c0 3.014-.574 5.897-1.62 8.543a.75.75 0 0 1-1.395-.551A21.69 21.69 0 0 0 18.75 10.5 6.75 6.75 0 0 0 12 3.75ZM6.157 5.739a.75.75 0 0 1 .21 1.04A6.715 6.715 0 0 0 5.25 10.5c0 1.613-.463 3.12-1.265 4.393a.75.75 0 0 1-1.27-.8A6.715 6.715 0 0 0 3.75 10.5c0-1.68.503-3.246 1.367-4.55a.75.75 0 0 1 1.04-.211ZM12 7.5a3 3 0 0 0-3 3c0 3.1-1.176 5.927-3.105 8.056a.75.75 0 1 1-1.112-1.008A10.459 10.459 0 0 0 7.5 10.5a4.5 4.5 0 1 1 9 0c0 .547-.022 1.09-.067 1.626a.75.75 0 0 1-1.495-.123c.041-.495.062-.996.062-1.503a3 3 0 0 0-3-3Zm0 2.25a.75.75 0 0 1 .75.75c0 3.908-1.424 7.485-3.781 10.238a.75.75 0 0 1-1.14-.975A14.19 14.19 0 0 0 11.25 10.5a.75.75 0 0 1 .75-.75Zm3.239 5.183a.75.75 0 0 1 .515.927 19.417 19.417 0 0 1-2.585 5.544.75.75 0 0 1-1.243-.84 17.915 17.915 0 0 0 2.386-5.116.75.75 0 0 1 .927-.515Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-light-bulb" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .75a8.25 8.25 0 0 0-4.135 15.39c.686.398 1.115 1.008 1.134 1.623a.75.75 0 0 0 .577.706c.352.083.71.148 1.074.195.323.041.6-.218.6-.544v-4.661a6.714 6.714 0 0 1-.937-.171.75.75 0 1 1 .374-1.453 5.261 5.261 0 0 0 2.626 0 .75.75 0 1 1 .374 1.452 6.712 6.712 0 0 1-.937.172v4.66c0 .327.277.586.6.545.364-.047.722-.112 1.074-.195a.75.75 0 0 0 .577-.706c.02-.615.448-1.225 1.134-1.623A8.25 8.25 0 0 0 12 .75Z"/><path fill-rule="evenodd" d="M9.013 19.9a.75.75 0 0 1 .877-.597 11.319 11.319 0 0 0 4.22 0 .75.75 0 1 1 .28 1.473 12.819 12.819 0 0 1-4.78 0 .75.75 0 0 1-.597-.876ZM9.754 22.344a.75.75 0 0 1 .824-.668 13.682 13.682 0 0 0 2.844 0 .75.75 0 1 1 .156 1.492 15.156 15.156 0 0 1-3.156 0 .75.75 0 0 1-.668-.824Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-swatch" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 4.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875V17.25a4.5 4.5 0 1 1-9 0V4.125Zm4.5 14.25a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clip-rule="evenodd"/><path d="M10.719 21.75h9.156c1.036 0 1.875-.84 1.875-1.875v-5.25c0-1.036-.84-1.875-1.875-1.875h-.14l-8.742 8.743c-.09.089-.18.175-.274.257ZM12.738 17.625l6.474-6.474a1.875 1.875 0 0 0 0-2.651L15.5 4.787a1.875 1.875 0 0 0-2.651 0l-.1.099V17.25c0 .126-.003.251-.01.375Z"/></symbol>
+<symbol id="hi-solid-sparkles" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-paint-brush" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M20.599 1.5c-.376 0-.743.111-1.055.32l-5.08 3.385a18.747 18.747 0 0 0-3.471 2.987 10.04 10.04 0 0 1 4.815 4.815 18.748 18.748 0 0 0 2.987-3.472l3.386-5.079A1.902 1.902 0 0 0 20.599 1.5Zm-8.3 14.025a18.76 18.76 0 0 0 1.896-1.207 8.026 8.026 0 0 0-4.513-4.513A18.75 18.75 0 0 0 8.475 11.7l-.278.5a5.26 5.26 0 0 1 3.601 3.602l.502-.278ZM6.75 13.5A3.75 3.75 0 0 0 3 17.25a1.5 1.5 0 0 1-1.601 1.497.75.75 0 0 0-.7 1.123 5.25 5.25 0 0 0 9.8-2.62 3.75 3.75 0 0 0-3.75-3.75Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-chat-bubble-left-right" viewBox="0 0 24 24" fill="currentColor"><path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z"/><path d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z"/></symbol>
+</defs></svg>
+
+<header class="bp-nav">
+  <div class="bp-wrap">
+    <a class="bp-logo" href="https://ruff.agency/" aria-label="Ruff Agency"><img src="../assets/ruff-logo.png" alt="Ruff">.agency</a>
+    <a class="rf-btn rf-btn--primary" href="#formulaire"><span class="rf-btn__inner">Recevoir le Blueprint <img class="rf-btn__avatar" src="../assets/louis.jpg" alt="Photo de profil de Louis Staub"></span></a>
+  </div>
+</header>
+
+<main>
+
+<!-- 1. HÉROS : fond page, place pour la vidéo (R23) ========================= -->
+<section class="bp-hero" aria-labelledby="bp-h1">
+  <div class="bp-wrap">
+    <span class="bp-eyebrow">RESSOURCE GRATUITE · RUFF AGENCY BLUEPRINT</span>
+    <h1 id="bp-h1">Ton IA peut enfin créer des designs qui ressemblent à ta marque.</h1>
+    <p class="bp-intro">Le Ruff Agency Blueprint est le système qui apprend ta direction artistique à ton IA. Tu le lui donnes, elle t'interroge, puis elle crée <strong>tes premiers designs de haute qualité en quelques minutes.</strong></p>
+    <div class="bp-cta bp-cta--center">
+      <a class="rf-btn rf-btn--primary" href="#formulaire"><span class="rf-btn__inner">Recevoir le Blueprint gratuit <img class="rf-btn__avatar" src="../assets/louis.jpg" alt=""></span></a>
+      <div class="bp-reassure">
+        <span><svg class="ico"><use href="#hi-outline-gift"/></svg>Gratuit</span><i aria-hidden="true"></i>
+        <span><svg class="ico"><use href="#hi-outline-envelope"/></svg>Accès immédiat par email</span><i aria-hidden="true"></i>
+        <span><svg class="ico"><use href="#hi-outline-cpu-chip"/></svg>Compatible avec ton IA habituelle</span>
+      </div>
+      <a class="bp-hint" href="#probleme"><svg class="ico"><use href="#hi-outline-arrow-down"/></svg><span>Le formulaire est en bas de page. <b>Prends deux minutes pour comprendre comment le Blueprint marche.</b></span></a>
+    </div>
+    <div class="bp-media" role="img" aria-label="Emplacement de la vidéo de présentation">
+      <span class="bp-media__play"><svg class="ico"><use href="#hi-solid-play"/></svg></span>
+      <p class="bp-small bp-media__cap"><span class="bp-todo">[Vidéo : le système complet en action]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PROBLÈME : fond blanc, titre dans sa colonne (R32) ================== -->
+<section class="bp-sec bp-sec--white" id="probleme" aria-labelledby="bp-h2-pb">
+  <div class="bp-wrap">
+    <div class="bp-split">
+      <div>
+        <h2 class="bp-h2" id="bp-h2-pb">Tout le monde utilise l'IA. Tout le monde obtient le même design.</h2>
+      </div>
+      <div>
+        <p class="bp-intro" style="margin-top:0">Demande à dix entreprises de faire créer leur site par une IA : tu obtiens dix fois la même page. Même dégradé, mêmes cartes arrondies, même titre qui ne dit rien.</p>
+        <p class="bp-intro">Ce n'est pas la faute de l'IA. Elle fait la moyenne de ce qu'elle a vu. <strong>Si tu ne lui donnes rien de précis sur ta marque, elle te rend la moyenne.</strong> Et quand tout le monde ressemble à la moyenne, être au-dessus devient un énorme avantage.</p>
+      </div>
+
+    </div>
+    <div class="bp-conclusion"><p>Le problème n'est pas ton IA. C'est ce que tu lui donnes pour travailler.</p></div>
+  </div>
+</section>
+
+<!-- 3. AVANT / APRÈS : fond page, visuels nus + étiquettes SaaS (R27) ====== -->
+<section class="bp-sec bp-sec--page" aria-labelledby="bp-h2-ba">
+  <div class="bp-wrap">
+    <div class="bp-head bp-center">
+      <h2 class="bp-h2" id="bp-h2-ba">Même brief. Même IA. Deux résultats.</h2>
+      <p class="bp-intro">À gauche, ce que ton IA produit seule. À droite, ce qu'elle produit une fois qu'elle a appris ta marque avec le Blueprint.</p>
+    </div>
+    <div class="bp-pairs">
+      <div class="bp-pair">
+        <figure class="bp-shot"><div class="bp-shot__img"><span class="bp-label">Avant</span><p class="bp-small"><span class="bp-todo">[Capture réelle : section de site, IA seule, même prompt, sans retouche]</span></p></div><figcaption><b>Avant :</b> une IA sans système. Correct, mais interchangeable.</figcaption></figure>
+        <figure class="bp-shot"><div class="bp-shot__img"><span class="bp-label">Après</span><p class="bp-small"><span class="bp-todo">[Capture réelle : la même IA avec le Blueprint, même prompt, sans retouche]</span></p></div><figcaption><b>Après :</b> la même IA avec ton Blueprint. Ta voix, ta DA, tes règles.</figcaption></figure>
+      </div>
+      <div class="bp-pair">
+        <figure class="bp-shot"><div class="bp-shot__img"><span class="bp-label">Avant</span><p class="bp-small"><span class="bp-todo">[Paire 2 : une slide ou un post, IA seule]</span></p></div></figure>
+        <figure class="bp-shot"><div class="bp-shot__img"><span class="bp-label">Après</span><p class="bp-small"><span class="bp-todo">[Paire 2 : la même demande avec le Blueprint]</span></p></div></figure>
+      </div>
+    </div>
+    <div class="bp-note"><svg class="ico"><use href="#hi-outline-information-circle"/></svg><p class="bp-p">Avec le Blueprint gratuit, tu atteins un bon niveau de départ. Pour un résultat vraiment unique, on y revient plus bas.</p></div>
+    <div class="bp-cta bp-cta--center" style="margin-top:56px">
+      <a class="rf-btn rf-btn--primary" href="#formulaire"><span class="rf-btn__inner">Recevoir le Blueprint gratuit <img class="rf-btn__avatar" src="../assets/louis.jpg" alt=""></span></a>
+      <div class="bp-reassure"><span><svg class="ico"><use href="#hi-outline-gift"/></svg>Gratuit</span><i aria-hidden="true"></i><span><svg class="ico"><use href="#hi-outline-envelope"/></svg>Accès immédiat par email</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CONTENU : section bleue en dégradé (R22), cartes F5 =================== -->
+<section class="bp-sec bp-sec--blue" aria-labelledby="bp-h2-in">
+  <div class="bp-wrap">
+    <div class="bp-head bp-center">
+      <h2 class="bp-h2" id="bp-h2-in">Un système en deux parties : ta voix, puis ton design.</h2>
+      <p class="bp-intro">Le Blueprint est un fichier que tu donnes à ton IA. Il lui apprend à te poser les bonnes questions, puis à créer en respectant ta marque.</p>
+    </div>
+    <div class="bp-two">
+      <!-- CONCEPT : « elle t'interroge ». Objet central : le questionnaire guidé,
+           une question ouverte et ta réponse choisie (pilule foncée). Pas de
+           sélection (R30) : ce n'est pas une création. -->
+      <article class="bp-art-card">
+        <div class="bp-art-card__art" role="img" aria-label="Un questionnaire guidé avec une question ouverte et la réponse choisie">
+          <div class="bp-scene" style="--w:440px;--h:320px;--top:36px">
+            <div class="rf-wire bp-q" style="left:20px;top:0">
+              <div class="bp-q__row"><span class="bp-q__num"></span><span class="rf-bar" style="width:62%"></span></div>
+              <div class="bp-q__row"><span class="bp-q__num" style="background:var(--rf-wire-pill)"></span><span class="rf-bar" style="width:70%"></span></div>
+              <div class="bp-q__answers"><span style="width:84px"></span><span class="is-on" style="width:110px"></span><span style="width:70px"></span><span style="width:96px"></span><span style="width:76px"></span></div>
+              <div class="bp-q__row"><span class="bp-q__num"></span><span class="rf-bar" style="width:54%"></span></div>
+              <div class="bp-q__row"><span class="bp-q__num"></span><span class="rf-bar" style="width:66%"></span></div>
+            </div>
+          </div>
+        </div>
+        <h3>Partie 1 : comment ta marque parle</h3>
+        <div class="bp-rule"></div>
+        <p>Ton IA apprend ton ton, ton vocabulaire, ce que tu dis et ce que tu ne dis jamais. Elle t'interroge sur ton client idéal, tes offres et ce qui te distingue.</p>
+      </article>
+      <!-- CONCEPT : « elle crée dans ta DA ». Objet central : le premier design,
+           sélectionné EN ENTIER (R30, c'est une création), avec ta typo et ta
+           palette accrochées au cadre (F1). Fantôme : la version suivante. -->
+      <article class="bp-art-card">
+        <div class="bp-art-card__art" role="img" aria-label="Le premier design, sélectionné, avec la typographie et la palette de la marque">
+          <div class="bp-scene" style="--w:440px;--h:320px;--top:56px">
+            <div class="rf-wire bp-page rf-ghost" style="left:300px;top:24px;width:260px;height:240px"><div class="bp-pnav"><span></span><span></span></div><span class="rf-bar" style="width:70%;align-self:center"></span><span class="rf-ph" style="height:96px"></span></div>
+            <div class="rf-wire bp-page" style="left:50px;top:10px;width:300px;height:260px">
+              <div class="bp-pnav"><span></span><span></span></div>
+              <span class="rf-bar" style="width:80%;align-self:center"></span>
+              <span class="rf-bar" style="width:56%;align-self:center"></span>
+              <span class="rf-bar rf-bar--2" style="width:64%;align-self:center"></span>
+              <span class="rf-pill" style="align-self:center;margin-top:4px"></span>
+              <span class="rf-ph" style="height:70px;margin-top:8px"></span>
+            </div>
+            <div class="rf-select" style="left:44px;top:4px;width:312px;height:272px"><i></i><i></i><i></i><i></i></div>
+            <div class="rf-chip rf-chip--type" style="left:18px;top:-30px;font-size:24px;padding:8px 12px">A<span>a</span></div>
+            <div class="rf-chip" style="left:250px;top:-22px;padding:8px 10px"><span class="rf-dot rf-dot--red"></span><span class="rf-dot rf-dot--yellow"></span><span class="rf-dot rf-dot--green"></span><span class="rf-dot rf-dot--blue"></span></div>
+          </div>
+        </div>
+        <h3>Partie 2 : comment ta marque se voit</h3>
+        <div class="bp-rule"></div>
+        <p>Couleurs, typographies, espacements, composants. Elle crée ton premier design, tu fais tes retours, elle s'ajuste.</p>
+      </article>
+    </div>
+
+    <div class="bp-card bp-receive">
+      <div>
+        <h3>Ce que tu reçois</h3>
+        <p class="bp-p">Tout ce qu'il faut pour que ton IA démarre dans ta direction artistique, dès la première conversation.</p>
+      </div>
+      <ul class="bp-list">
+        <li><svg class="ico"><use href="#hi-solid-check-circle"/></svg>Le fichier Blueprint à donner à ton IA</li>
+        <li><svg class="ico"><use href="#hi-solid-check-circle"/></svg>Le questionnaire guidé : ton client idéal, ta voix, ta direction artistique</li>
+        <li><svg class="ico"><use href="#hi-solid-check-circle"/></svg>Un filtre anti « AI slop » pour écarter les rendus génériques</li>
+        <li><svg class="ico"><use href="#hi-solid-check-circle"/></svg>Le guide pour savoir quand confier une tâche à un designer</li>
+        <li><svg class="ico"><use href="#hi-solid-check-circle"/></svg>Le comparatif des IA testées, daté du <span class="bp-todo">[date]</span></li>
+        <li class="bp-lock" data-toggle>
+          <button type="button" aria-describedby="bp-tip-premium" aria-expanded="false">
+            <svg class="ico"><use href="#hi-outline-lock-closed"/></svg>
+            <span><b>+19 autres règles</b> dans l'accès complet</span>
+            <span class="bp-lock__rows" aria-hidden="true"><i style="width:100%"></i><i style="width:76%"></i><i style="width:88%"></i></span>
+          </button>
+          <span class="bp-tip" role="tooltip" id="bp-tip-premium"><b>Des règles d'affinage faites à la main.</b> Chacune vient de tests et de retouches en boucle par nos designers, sur de vrais projets. Elles sont réservées au système complet.</span>
+        </li>
+      </ul>
+    </div>
+    <p class="bp-small bp-after-note">C'est une partie de notre système, pas la totalité. On t'explique plus bas ce qui reste réservé.</p>
+  </div>
+</section>
+
+<!-- 5. ÉTAPES : fond blanc, cartes F4, sans schéma (R29) ===================== -->
+<section class="bp-sec bp-sec--white" aria-labelledby="bp-h2-how">
+  <div class="bp-wrap">
+    <div class="bp-head bp-center">
+      <h2 class="bp-h2" id="bp-h2-how">Trois étapes, et ton IA travaille dans ta direction artistique.</h2>
+    </div>
+    <div class="bp-steps">
+      <article class="bp-step">
+        <span class="bp-step__label">Étape 1</span>
+        <div><h3>Tu donnes le Blueprint à ton IA</h3><p>Tu télécharges le fichier et tu le donnes à ton IA, comme n'importe quel document.</p></div>
+        <!-- CONCEPT : « déposer le fichier ». Objet central : la zone de saisie de
+             l'IA ; le fichier Blueprint glissé dedans par toi (curseur « Vous »). -->
+        <div class="bp-step__visual" role="img" aria-label="Le fichier Blueprint glissé dans la zone de saisie d'une IA">
+          <div class="bp-scene" style="--w:340px;--h:300px;--top:56px">
+            <div class="rf-wire" style="left:20px;top:56px;width:300px;height:190px;padding:16px;display:flex;flex-direction:column;gap:10px;transform:rotate(-3deg)">
+              <span class="rf-bar rf-bar--2" style="width:60%"></span><span class="rf-bar rf-bar--3" style="width:44%"></span><span class="rf-bar rf-bar--3" style="width:52%"></span>
+              <div style="margin-top:auto;height:48px;border-radius:12px;border:1px solid var(--rf-wire-border);display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 14px"><span class="rf-bar rf-bar--2" style="width:96px"></span><span style="width:32px;height:32px;border-radius:9px;background:var(--rf-wire-pill)"></span></div>
+            </div>
+            <div class="rf-wire bp-file" style="left:118px;top:6px;transform:rotate(5deg)"><img src="../assets/ruff-logo.png" alt=""><span style="display:flex;flex-direction:column;gap:6px"><span class="rf-bar" style="width:90px;height:9px"></span><span class="rf-bar rf-bar--3" style="width:50px"></span></span></div>
+            <div class="rf-you" style="left:188px;top:52px"><img src="../assets/cursor-blue.svg" alt=""><span>Vous</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="bp-step">
+        <span class="bp-step__label">Étape 2</span>
+        <div><h3>Elle t'interroge, puis crée ton premier design</h3><p>Elle te pose des questions précises sur ton client idéal, ta voix et tes références, puis elle crée ton premier design.</p></div>
+        <!-- CONCEPT : « de la question au design ». Objet central : le premier design
+             qui sort, incliné ; la question de l'IA accrochée au-dessus. -->
+        <div class="bp-step__visual" role="img" aria-label="Une question de l'IA et le premier design qui en sort">
+          <div class="bp-scene" style="--w:340px;--h:300px;--top:48px">
+            <div class="rf-wire bp-page" style="left:40px;top:66px;width:260px;height:220px;transform:rotate(-3deg)">
+              <div class="bp-pnav"><span></span><span></span></div>
+              <span class="rf-bar" style="width:76%;align-self:center"></span><span class="rf-bar rf-bar--2" style="width:56%;align-self:center"></span><span class="rf-pill" style="align-self:center"></span><span class="rf-ph" style="height:56px;margin-top:6px"></span>
+            </div>
+            <div class="rf-chip" style="left:8px;top:6px;flex-direction:column;align-items:flex-start;gap:7px;padding:12px 14px;transform:rotate(2deg)"><span class="rf-bar" style="width:160px;height:9px"></span><span class="rf-bar rf-bar--3" style="width:116px"></span></div>
+          </div>
+        </div>
+      </article>
+      <article class="bp-step">
+        <span class="bp-step__label">Étape 3</span>
+        <div><h3>Tu fais tes retours, elle s'améliore</h3><p>Tu dis ce qui ne va pas. Elle corrige, puis passe à une tâche différente, de plus en plus loin de ta référence de départ.</p></div>
+        <!-- CONCEPT : « le retour ». Objet central : le design ; ton commentaire
+             accroché et la pilule valider / refaire (F4). Pas de sélection. -->
+        <div class="bp-step__visual" role="img" aria-label="Un design, un commentaire et les boutons valider ou refaire">
+          <div class="bp-scene" style="--w:340px;--h:300px;--top:44px">
+            <div class="rf-wire bp-page" style="left:40px;top:44px;width:260px;height:230px;transform:rotate(2deg)">
+              <div class="bp-pnav"><span></span><span></span></div>
+              <span class="rf-bar" style="width:76%;align-self:center"></span><span class="rf-bar rf-bar--2" style="width:56%;align-self:center"></span><span class="rf-pill" style="align-self:center"></span><span class="rf-ph" style="height:64px;margin-top:6px"></span>
+            </div>
+            <div class="rf-chip" style="left:0;top:4px;flex-direction:column;align-items:flex-start;gap:7px;padding:12px 14px;transform:rotate(-2deg)"><span class="rf-bar" style="width:124px;height:9px"></span><span class="rf-bar rf-bar--3" style="width:90px"></span></div>
+            <div class="rf-chip" style="left:150px;top:214px;gap:8px;padding:8px"><span style="width:32px;height:32px;border-radius:50%;background:var(--rf-blue);display:grid;place-items:center;color:#fff"><svg width="16" height="16"><use href="#hi-solid-check"/></svg></span><span style="width:32px;height:32px;border-radius:50%;background:var(--rf-wire-selected);display:grid;place-items:center;color:#141b34"><svg width="16" height="16"><use href="#hi-solid-arrow-path"/></svg></span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="bp-conclusion"><p>À la fin, tu n'as pas seulement un design : tu as un système que ton IA sait réutiliser.</p></div>
+  </div>
+</section>
+
+<!-- 6. QUELLE IA : fond gris marqué, chaque titre dans sa colonne (R32) ====== -->
+<section class="bp-sec bp-sec--grey" aria-labelledby="bp-h2-ai">
+  <div class="bp-wrap bp-split">
+    <div>
+      <h2 class="bp-h2" id="bp-h2-ai">Le système marche avec plusieurs IA. Le résultat dépend du modèle.</h2>
+      <p class="bp-intro">Pour l'installation et la première création, nous recommandons <strong>Opus 5.5</strong>. C'est le modèle qui donne les résultats les plus précis dans nos tests.</p>
+      <p class="bp-intro">Une fois le système en place, tu peux l'utiliser avec d'autres modèles, comme le dernier modèle d'OpenAI. Les résultats y sont moins bons, mais le système fonctionne.</p>
+      <div class="bp-cta" style="margin-top:40px">
+        <a class="rf-btn rf-btn--primary" href="#formulaire"><span class="rf-btn__inner">Recevoir le Blueprint gratuit <img class="rf-btn__avatar" src="../assets/louis.jpg" alt=""></span></a>
+        <div class="bp-reassure"><span><svg class="ico"><use href="#hi-outline-gift"/></svg>Gratuit</span><i aria-hidden="true"></i><span><svg class="ico"><use href="#hi-outline-envelope"/></svg>Accès immédiat par email</span></div>
+      </div>
+    </div>
+    <div>
+      <table class="bp-table">
+        <thead><tr><th scope="col">Modèle</th><th scope="col">Premier design</th><th scope="col">Retours nécessaires</th><th scope="col">Remarque</th></tr></thead>
+        <tbody>
+          <tr><td>Opus 5.5 <span class="bp-best">Recommandé</span></td><td><span class="bp-todo">[à compléter]</span></td><td><span class="bp-todo">[à compléter]</span></td><td>Installation et premier design</td></tr>
+          <tr><td><span class="bp-todo">[Dernier modèle OpenAI]</span></td><td><span class="bp-todo">[à compléter]</span></td><td><span class="bp-todo">[à compléter]</span></td><td>Fonctionne une fois le système en place</td></tr>
+          <tr><td><span class="bp-todo">[3e modèle testé]</span></td><td><span class="bp-todo">[à compléter]</span></td><td><span class="bp-todo">[à compléter]</span></td><td><span class="bp-todo">[à compléter]</span></td></tr>
+        </tbody>
+      </table>
+      <p class="bp-small" style="margin-top:16px">Comparatif réalisé le <span class="bp-todo">[date]</span> sur nos propres tests. Les modèles évoluent vite : on le met à jour.</p>
+      <figure class="bp-shot bp-ai-example"><div class="bp-shot__img"><span class="bp-label">Généré avec OpenAI</span><p class="bp-small"><span class="bp-todo">[Capture réelle générée par un modèle OpenAI avec le Blueprint]</span></p></div></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 7. LIMITES : fond page, cartes SaaS avec tuile d'icône ================== -->
+<section class="bp-sec bp-sec--page" aria-labelledby="bp-h2-no">
+  <div class="bp-wrap">
+    <div class="bp-head">
+      <h2 class="bp-h2" id="bp-h2-no">Avant de le télécharger, voilà ce qu'il ne peut pas faire.</h2>
+      <p class="bp-intro">Le Blueprint te permet de créer une bonne partie de tes designs à un bon niveau. <span class="bp-todo">[Chiffre à confirmer par tes tests, ex. « environ 60 %, autour de 6 sur 10 »]</span> C'est largement suffisant pour avancer vite, mais ce ne sera pas unique.</p>
+      <p class="bp-intro">Il ne peut pas tout générer. Certains designs doivent être maîtrisés par des experts UX, UI et CRO, parce qu'ils décident de ce que ton client voit, comprend et clique.</p>
+    </div>
+    <div class="bp-three">
+      <article class="bp-card"><div class="bp-card__head"><span class="bp-tile bp-tile--red"><svg class="ico"><use href="#hi-solid-cursor-arrow-rays"/></svg></span><h3>Les pages qui convertissent</h3></div><div class="bp-rule"></div><p>Une page d'accueil, une page de vente, un tunnel.</p></article>
+      <article class="bp-card"><div class="bp-card__head"><span class="bp-tile bp-tile--red"><svg class="ico"><use href="#hi-solid-fingerprint"/></svg></span><h3>Ce qui doit être unique</h3></div><div class="bp-rule"></div><p>Ton identité, tes assets, ta signature visuelle.</p></article>
+      <article class="bp-card"><div class="bp-card__head"><span class="bp-tile bp-tile--red"><svg class="ico"><use href="#hi-solid-light-bulb"/></svg></span><h3>Les décisions de goût</h3></div><div class="bp-rule"></div><p>Celles qui demandent du jugement, pas seulement des règles.</p></article>
+    </div>
+    <div class="bp-note"><svg class="ico"><use href="#hi-outline-information-circle"/></svg><p class="bp-p"><strong>Pourquoi on te le dit maintenant :</strong> parce que ton IA fera de meilleurs designs si tu sais où elle s'arrête. Le Blueprint inclut d'ailleurs un guide pour repérer ces cas.</p></div>
+  </div>
+</section>
+
+<!-- 8. LA BASE : fond blanc, comparaison structurée sans MAJUSCULES (R34) ==== -->
+<section class="bp-sec bp-sec--white" aria-labelledby="bp-h2-base">
+  <div class="bp-wrap">
+    <div class="bp-head">
+      <h2 class="bp-h2" id="bp-h2-base">Une IA ne peut pas être meilleure que ce sur quoi elle s'appuie.</h2>
+      <p class="bp-intro">Si ta marque n'a pas d'identité forte, pas d'assets uniques, pas de règles précises, ton IA apprend ta marque telle qu'elle est : quelconque. Elle la reproduit parfaitement, et tu ressembles à tout le monde.</p>
+    </div>
+    <!-- R42 : ce sont des exemples → emplacements vidéo (même contenu, trois bases), pas d'illustration. -->
+    <div class="bp-levels-shots">
+      <div>
+        <div class="bp-level__shot bp-level__video" role="img" aria-label="Emplacement vidéo : sans système"><span class="bp-media__play"><svg class="ico"><use href="#hi-solid-play"/></svg></span><p class="bp-small bp-media__cap"><span class="bp-todo">[Vidéo : même contenu, sans système]</span></p></div>
+        <div class="bp-level__head"><h3>Sans système</h3><div class="bp-info" data-toggle><button type="button" aria-label="Détail technique : sans système" aria-describedby="bp-tip-1"><svg class="ico"><use href="#hi-outline-information-circle"/></svg></button><span class="bp-tip" role="tooltip" id="bp-tip-1">Contexte donné à l'IA : aucun. Tokens par requête : <span class="bp-todo">[à mesurer]</span></span></div></div>
+        <ul class="bp-level__facts">
+          <li><svg class="ico"><use href="#hi-outline-wrench-screwdriver"/></svg><span><strong>Construit :</strong> aucune base, l'IA improvise.</span></li>
+          <li><svg class="ico"><use href="#hi-outline-arrow-right-circle"/></svg><span><strong>Résultat :</strong> un design générique, interchangeable.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="bp-level__shot bp-level__video" role="img" aria-label="Emplacement vidéo : avec le Blueprint gratuit"><span class="bp-media__play"><svg class="ico"><use href="#hi-solid-play"/></svg></span><p class="bp-small bp-media__cap"><span class="bp-todo">[Vidéo : même contenu, avec le Blueprint gratuit]</span></p></div>
+        <div class="bp-level__head"><h3>Blueprint gratuit</h3><div class="bp-info" data-toggle><button type="button" aria-label="Détail technique : Blueprint gratuit" aria-describedby="bp-tip-2"><svg class="ico"><use href="#hi-outline-information-circle"/></svg></button><span class="bp-tip" role="tooltip" id="bp-tip-2">Contexte donné à l'IA : le Blueprint et tes réponses au questionnaire. Tokens par requête : <span class="bp-todo">[à mesurer]</span></span></div></div>
+        <ul class="bp-level__facts">
+          <li><svg class="ico"><use href="#hi-outline-wrench-screwdriver"/></svg><span><strong>Construit :</strong> un système solide, des règles générales.</span></li>
+          <li><svg class="ico"><use href="#hi-outline-arrow-right-circle"/></svg><span><strong>Résultat :</strong> un bon point de départ, reconnaissable mais pas unique.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="bp-level__shot bp-level__video" role="img" aria-label="Emplacement vidéo : avec un système sur mesure"><span class="bp-media__play"><svg class="ico"><use href="#hi-solid-play"/></svg></span><p class="bp-small bp-media__cap"><span class="bp-todo">[Vidéo : même contenu, avec un système sur mesure]</span></p></div>
+        <div class="bp-level__head"><h3>Système sur mesure</h3><div class="bp-info" data-toggle><button type="button" aria-label="Détail technique : système sur mesure" aria-describedby="bp-tip-3"><svg class="ico"><use href="#hi-outline-information-circle"/></svg></button><span class="bp-tip" role="tooltip" id="bp-tip-3">Contexte donné à l'IA : ton identité, tes assets et des règles affinées par nos designers. Tokens par requête : <span class="bp-todo">[à mesurer]</span></span></div></div>
+        <ul class="bp-level__facts">
+          <li><svg class="ico"><use href="#hi-outline-wrench-screwdriver"/></svg><span><strong>Construit :</strong> par des designers, avec ta marque, tes assets et des règles précises.</span></li>
+          <li><svg class="ico"><use href="#hi-outline-arrow-right-circle"/></svg><span><strong>Résultat :</strong> des designs uniques qui te démarquent.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bp-card bp-team">
+      <div>
+        <h3>Ce que fait notre équipe sur le système sur mesure</h3>
+        <p class="bp-p">Le Blueprint que tu reçois est une partie du système, pas le système entier. On n'a pas tout donné, et on te le dit.</p>
+      </div>
+      <ul class="bp-list">
+        <li><svg class="ico"><use href="#hi-solid-swatch"/></svg>Elle crée une identité et des assets propres à ta marque.</li>
+        <li><svg class="ico"><use href="#hi-solid-fingerprint"/></svg>Elle définit des critères de distinction très précis.</li>
+        <li><svg class="ico"><use href="#hi-solid-sparkles"/></svg>Elle apporte la créativité et le goût qui démarquent une entreprise des autres.</li>
+        <li><svg class="ico"><use href="#hi-solid-paint-brush"/></svg>Elle affine pendant des heures, avec des retours précis sur les détails.</li>
+        <li><svg class="ico"><use href="#hi-solid-chat-bubble-left-right"/></svg>Elle apprend à l'IA, élément par élément, quand et comment les utiliser.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9. QUI EST DERRIÈRE : fond gris marqué ================================== -->
+<section class="bp-sec bp-sec--grey" aria-labelledby="bp-h2-who">
+  <div class="bp-wrap bp-split">
+    <div>
+      <h2 class="bp-h2" id="bp-h2-who">Créé par des designers, pas par un générateur de prompts.</h2>
+      <p class="bp-intro">Ruff Agency est une agence de design. Les critères, les règles et la méthode de retours que ton IA apprend sont ceux que nous utilisons sur nos propres projets. <span class="bp-todo">[Années d'expérience de l'équipe, si tu veux l'ajouter]</span></p>
+    </div>
+    <div>
+      <div class="bp-founder" style="margin-top:0"><img src="../assets/louis.jpg" alt="Louis Staub"><div><b>Louis Staub</b><span class="bp-small">Fondateur de Ruff Agency</span></div></div>
+      <div class="bp-proofs">
+        <div class="bp-card"><b>+30</b><p class="bp-small">clients satisfaits, note moyenne 5/5</p></div>
+        <div class="bp-card"><b>6</b><p class="bp-small">études de cas publiées : Spreak, Rentala, Keyframe, Zorgniotti, Clovarex, Scall</p></div>
+      </div>
+    </div>
+  </div>
+  <!-- R45 : avis réels avec photo, en ticker (pause au survol, arrêt si mouvement réduit). -->
+  <div class="bp-ticker" aria-label="Avis clients">
+    <div class="bp-ticker__track">
+      <blockquote class="bp-card bp-quote bp-review"><p>« Je recommande vivement Louis pour son travail remarquable sur Spreak. Toute entreprise souhaitant collaborer avec un designer à la fois rigoureux, créatif et fiable fera un excellent choix. »</p><cite class="bp-review__author"><img src="../assets/avis/sacha-tassart.jpg" alt="Photo de Sacha Tassart" width="52" height="52"><span>Sacha Tassart<span>Fondateur de Spreak</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Le design est moderne et clair. Mention spéciale pour le copywriting : les textes sont percutants et mettent parfaitement en valeur notre proposition. »</p><cite class="bp-review__author"><img src="../assets/avis/martin-riedweg.png" alt="Photo de Martin Riedweg" width="52" height="52"><span>Martin Riedweg<span>Fondateur de Rentala</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Le site a été livré rapidement, avec un design clair et professionnel. Une collaboration efficace et un résultat au-delà de nos attentes. »</p><cite class="bp-review__author"><img src="../assets/avis/dominique-zenglein.png" alt="Photo de Dominique Zenglein" width="52" height="52"><span>Dominique Zenglein<span>Associé chez Zorgniotti</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Un vrai professionnel. Louis m'a livré un site soigné, fluide et parfaitement conforme à mes attentes. Il écoute, il ajuste, il vise juste. »</p><cite class="bp-review__author"><img src="../assets/avis/julie-zagula.png" alt="Photo de Julie Zagula" width="52" height="52"><span>Julie Zagula<span>Fondatrice de Clovarex</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Ruff agency m'a délivré mon site très rapidement et a été très réactive. Les assets et les animations sont magnifiques. »</p><cite class="bp-review__author"><img src="../assets/avis/antoine-troovy.png" alt="Photo de Antoine Troovy" width="52" height="52"><span>Antoine Troovy<span>Fondateur de Keyframe agency</span></span></cite></blockquote><blockquote class="bp-card bp-quote bp-review"><p>« Je recommande vivement Louis pour son travail remarquable sur Spreak. Toute entreprise souhaitant collaborer avec un designer à la fois rigoureux, créatif et fiable fera un excellent choix. »</p><cite class="bp-review__author"><img src="../assets/avis/sacha-tassart.jpg" alt="Photo de Sacha Tassart" width="52" height="52"><span>Sacha Tassart<span>Fondateur de Spreak</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Le design est moderne et clair. Mention spéciale pour le copywriting : les textes sont percutants et mettent parfaitement en valeur notre proposition. »</p><cite class="bp-review__author"><img src="../assets/avis/martin-riedweg.png" alt="Photo de Martin Riedweg" width="52" height="52"><span>Martin Riedweg<span>Fondateur de Rentala</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Le site a été livré rapidement, avec un design clair et professionnel. Une collaboration efficace et un résultat au-delà de nos attentes. »</p><cite class="bp-review__author"><img src="../assets/avis/dominique-zenglein.png" alt="Photo de Dominique Zenglein" width="52" height="52"><span>Dominique Zenglein<span>Associé chez Zorgniotti</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Un vrai professionnel. Louis m'a livré un site soigné, fluide et parfaitement conforme à mes attentes. Il écoute, il ajuste, il vise juste. »</p><cite class="bp-review__author"><img src="../assets/avis/julie-zagula.png" alt="Photo de Julie Zagula" width="52" height="52"><span>Julie Zagula<span>Fondatrice de Clovarex</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Ruff agency m'a délivré mon site très rapidement et a été très réactive. Les assets et les animations sont magnifiques. »</p><cite class="bp-review__author"><img src="../assets/avis/antoine-troovy.png" alt="Photo de Antoine Troovy" width="52" height="52"><span>Antoine Troovy<span>Fondateur de Keyframe agency</span></span></cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FAQ : composant réel du site (StackSection3, R36) ==================== -->
+<section class="stack-section-3" aria-labelledby="bp-faq-title">
+  <div class="s3-content"><div class="s3-layout">
+    <div class="s3-copy">
+      <div class="s3-title-wrap s3-reveal-title is-visible"><h2 class="s3-title" id="bp-faq-title">Des questions ? On y répond</h2></div>
+      <div class="s3-description-wrap s3-reveal-copy is-visible"><p class="s3-description">Tu as encore des questions ? Écris-nous <a href="https://api.whatsapp.com/send/?phone=33636465091" target="_blank" rel="noopener noreferrer">ici</a>, on te répond.</p></div>
+      <div class="s3-cta-reveal is-visible"><a class="s3-cta" href="#formulaire"><span class="s3-cta-inner"><span class="s3-cta-label">Recevoir le Blueprint gratuit</span><img class="s3-cta-avatar" src="../assets/louis.jpg" alt="Photo de profil de Louis Staub" width="28" height="28"></span></a></div>
+    </div>
+    <ul class="s3-faq-list">
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">C'est vraiment gratuit ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Oui. Tu reçois le Blueprint par email, sans paiement. Il existe une version plus complète et sur mesure, mais elle est optionnelle.</p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Avec quelle IA ça fonctionne ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Le système marche avec plusieurs IA. Pour l'installation et le premier design, nous recommandons Opus 5.5, qui donne les meilleurs résultats dans nos tests. Le comparatif est plus haut sur la page.</p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Pourquoi tout n'est pas inclus dans le gratuit ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Parce qu'une partie du travail demande la main d'un designer : l'identité, les assets uniques, les règles fines. Un fichier ne peut pas les contenir. Le Blueprint t'apporte chaque module du système en version de base. <span class="bp-todo">[Proportion à confirmer : la note dit « environ 70 % » ici et « 60 % » plus haut]</span></p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Je n'y connais rien en design. Est-ce que je peux l'utiliser ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Oui. L'IA te pose les questions, tu réponds avec tes mots, et tu corriges ce qui ne te plaît pas. Aucune compétence en design n'est nécessaire pour démarrer.</p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Est-ce que mes designs seront uniques ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Pas avec le Blueprint seul. Il t'amène à un bon niveau de départ, pas à un style qui n'appartient qu'à toi. Pour ça, il faut une base construite par des designers : c'est l'offre sur mesure.</p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Comment je sais si une tâche doit être confiée à un designer ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Le Blueprint inclut un guide pour le repérer. En règle générale : plus un design influence la décision d'achat, plus il vaut la peine d'être fait ou validé par un humain.</p></div></div><div class="s3-faq-line"></div></li>
+    </ul>
+  </div></div>
+</section>
+
+<!-- 11. FORMULAIRE : section bleue en dégradé (R22) ========================== -->
+<section class="bp-sec bp-sec--blue bp-final" id="formulaire" aria-labelledby="bp-h2-form">
+  <div class="bp-wrap bp-center">
+    <h2 class="bp-h2" id="bp-h2-form">Donne à ton IA une base solide.</h2>
+    <p class="bp-intro">Récupère le Ruff Agency Blueprint, donne-le à ton IA, et crée ton premier design de haute qualité dans ta direction artistique, en quelques minutes.</p>
+    <div class="bp-form-card">
+      <p class="bp-p" style="margin-bottom:28px">Tu sais déjà ce qu'il fait et ce qu'il ne fait pas. Le reste, tu le verras en l'utilisant.</p>
+      <form class="bp-form" action="blueprint-merci-v3.html" method="get" novalidate>
+        <label for="bp-email">Adresse email</label>
+        <input id="bp-email" name="_" type="email" placeholder="ton@email.com" autocomplete="email" required>
+        <button class="rf-btn rf-btn--primary" type="submit"><span class="rf-btn__inner">Recevoir le Blueprint gratuit <img class="rf-btn__avatar" src="../assets/louis.jpg" alt=""></span></button>
+      </form>
+      <div class="bp-reassure">
+        <span><svg class="ico"><use href="#hi-outline-gift"/></svg>Gratuit</span><i aria-hidden="true"></i>
+        <span><svg class="ico"><use href="#hi-outline-envelope"/></svg>Accès immédiat</span><i aria-hidden="true"></i>
+        <span><svg class="ico"><use href="#hi-outline-x-circle"/></svg>Désinscription en un clic</span>
+      </div>
+      <p class="bp-legal">En t'inscrivant, tu acceptes de recevoir le Blueprint et nos emails. Tu peux te désinscrire à tout moment. <a href="#"><span class="bp-todo">[Politique de confidentialité]</span></a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- 12. FOOTER : composant réel du site, sans bandeau d'appel (R21, R40) ===== -->
+<footer class="footer-reset framer-M7Fsn framer-1e9n470 " style="--th1ufy:96px 48px 64px 48px;--ink:#fff;background-color:rgb(35, 38, 48)"><div class="framer-1sjspef"><div class="framer-1jh4d2h"><div class="framer-1d3n5xr"><p class="framer-dsquaq">Le mélange parfait entre conversion et design.</p><a class="framer-1c40f2t" href="https://ruff.agency/"><span class="footer-logo-svg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 69 42.446" overflow="visible"><g><path d="M 0 13.465 C 0 11.075 1.754 9.046 4.12 8.701 L 63.492 0.05 C 64.875 -0.151 66.278 0.258 67.335 1.173 C 68.392 2.087 69 3.416 69 4.813 L 69 37.631 C 69 38.999 68.419 40.301 67.401 41.215 C 66.383 42.128 65.025 42.565 63.666 42.417 L 4.294 35.964 C 1.85 35.699 -0.001 33.635 0 31.177 Z" fill="rgba(255,255,255,0.25)"></path><path d="M 50.982 22.241 L 51.025 35.978 L 53.695 36.336 L 56.37 36.696 L 56.37 26.798 L 56.399 24.927 L 62.371 24.927 L 62.371 20.167 L 59.415 20.139 L 56.443 20.097 L 56.399 19.067 L 56.369 11.623 C 56.369 11.623 58.519 11.219 59.901 10.987 C 61.083 10.789 62.932 10.51 62.932 10.51 L 63.25 10.47 L 63.25 6 L 56.953 6.847 L 50.983 7.648 L 50.983 22.241 Z M 37.451 21.444 L 37.451 34.156 L 40.122 34.514 L 42.838 34.879 L 42.838 26 L 42.868 24.13 L 48.839 24.13 L 48.839 19.37 L 45.882 19.341 L 42.91 19.299 L 42.866 18.269 L 42.837 12.563 L 46.371 11.957 L 49.379 11.409 L 49.718 11.346 L 49.718 7.82 L 43.55 8.648 L 37.423 9.471 L 37.45 21.443 Z M 21.753 11.577 L 21.753 27.703 C 21.753 29.914 23.13 32.214 24.552 32.423 L 31.255 33.323 C 34.625 33.776 35.665 30.233 35.665 27.923 L 35.665 9.708 L 33.287 10.027 L 30.614 10.386 L 30.658 19.724 L 30.658 27.527 C 30.389 28.757 27.481 28.723 26.948 27.527 C 26.891 27.391 26.859 19.654 26.859 19.654 L 26.859 10.891 L 24.728 11.177 Z M 6 21.874 L 6 29.931 L 8.59 30.278 L 10.558 30.542 L 10.558 24.984 L 11.64 24.984 C 12.252 24.944 12.476 24.984 12.971 25.479 C 13.377 25.881 13.298 26.062 13.81 27.415 L 14.64 31.091 L 17.421 31.464 L 20.682 31.902 L 19.304 28.182 L 17.929 25.196 L 17.421 24.206 L 18.043 23.556 C 19.23 22.341 19.739 20.503 19.442 18.553 C 19.074 16.037 17.642 12.997 15.169 12.46 L 10.187 13.129 L 6 13.69 Z M 13.686 17.952 C 14.145 18.412 14.096 19.825 13.686 20.334 C 13.446 20.631 13.032 20.73 12.043 20.772 L 10.558 20.772 L 10.558 17.476 L 12.043 17.476 C 12.876 17.476 13.421 17.687 13.686 17.952 Z" fill="rgba(255,255,255,0.94)"></path></g></svg></span><p class="framer-1oioa2n">.agency</p></a></div><div class="framer-eoh0es"><div class="framer-wqmu2g"><p class="footer-heading">Navigation</p><div class="framer-1q9fhly"><p class="footer-links"><a class="footer-link" href="https://ruff.agency/">Accueil</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/realisations">Réalisations</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/ressources">Ressources</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/outils-gratuits">Outils gratuits</a></p><p class="footer-links"><a class="footer-link" href="#">Guide</a></p><p class="footer-links"><a class="footer-link" href="#">Outil</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/agence">À propos</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/30-min">30 minutes</a></p><p class="footer-links"><a class="footer-link footer-link--ghost" href="#">Lead magnet</a></p></div></div><div class="framer-ngd2e7"><p class="footer-heading">Services</p><div class="framer-19q5j0w"><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/landing-page">Landing Page</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/website">Site Internet</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/branding">Branding</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/product-design">Product design</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/seo-geo">SEO / GEO</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/optimisation-conversion">Optimisation conversion</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/copywriting">Copywriting</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/developpement-framer">Développement Framer</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/developpement-web">Développement code (React)</a></p></div></div><div class="framer-1g1y9mg"><p class="footer-heading">Mes réseaux</p><div class="framer-18ssb44"><div class="framer-1un4xf3"><span class="footer-social-icon footer-social-icon--x framer-ga2ues"><span class="footer-social-art"><span class="" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 12.929 12.067" overflow="visible"><path d="M 10.182 0 L 12.164 0 L 7.833 5.111 L 12.929 12.067 L 8.939 12.067 L 5.814 7.848 L 2.239 12.067 L 0.255 12.067 L 4.888 6.6 L 0 0 L 4.091 0 L 6.915 3.856 Z M 9.486 10.841 L 10.585 10.841 L 3.494 1.161 L 2.315 1.161 L 9.486 10.841 Z" fill="rgb(0, 0, 0)"></path></svg></span></span></span><p class="footer-social-label"><a class="footer-link" href="https://x.com/Louis67810" target="_blank" rel="noreferrer">X</a></p></div><div class="framer-8ld06r"><span class="footer-social-icon footer-social-icon--wa framer-7kuc86"><span class="footer-social-art"><span class="" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15 15" overflow="visible"><g><path d="M 7.498 0 C 3.363 0 0 3.364 0 7.5 C -0.002 9.08 0.498 10.619 1.428 11.896 L 0.493 14.682 L 3.376 13.761 C 4.599 14.572 6.035 15.003 7.502 15 C 11.637 15 15 11.636 15 7.5 C 15 3.364 11.637 0 7.502 0 L 7.498 0 Z" fill="rgb(254,254,254)"></path><path d="M 5.34 3.86 C 5.194 3.511 5.084 3.498 4.863 3.489 C 4.78 3.484 4.696 3.481 4.612 3.481 C 4.326 3.481 4.026 3.564 3.845 3.749 C 3.625 3.974 3.078 4.499 3.078 5.575 C 3.078 6.651 3.863 7.691 3.969 7.837 C 4.079 7.982 5.498 10.222 7.702 11.135 C 9.426 11.849 9.937 11.783 10.329 11.699 C 10.902 11.576 11.621 11.152 11.802 10.641 C 11.982 10.129 11.982 9.693 11.929 9.6 C 11.876 9.508 11.731 9.455 11.511 9.344 C 11.29 9.234 10.219 8.705 10.016 8.635 C 9.818 8.56 9.628 8.586 9.479 8.798 C 9.267 9.093 9.06 9.393 8.892 9.574 C 8.76 9.715 8.544 9.732 8.363 9.657 C 8.12 9.556 7.442 9.318 6.605 8.573 C 5.956 7.995 5.516 7.277 5.388 7.061 C 5.26 6.84 5.374 6.713 5.476 6.593 C 5.586 6.457 5.692 6.359 5.802 6.232 C 5.912 6.104 5.974 6.038 6.045 5.888 C 6.12 5.742 6.067 5.592 6.014 5.482 C 5.961 5.372 5.52 4.296 5.339 3.86 Z" fill="rgb(37,211,102)"></path></g></svg></span></span></span><p class="footer-social-label"><a class="footer-link" href="https://api.whatsapp.com/send/?phone=33636465091&amp;text=Bonjour%2C+je+vous+contacte+par+rapport+%C3%A0+vos+landing+pages.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noreferrer">WhatsApp</a></p></div><div class="framer-1l5pyzt"><span class="footer-social-icon footer-social-icon--in framer-1c9he38"><span class="footer-social-art"><span class="" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18 18" overflow="visible"><g><path d="M 0 0 L 18 0 L 18 18 L 0 18 Z" fill="transparent"></path><path d="M 16.671 0 L 1.329 0 C 0.595 0 0 0.595 0 1.329 L 0 16.671 C 0 17.405 0.595 18 1.329 18 L 16.671 18 C 17.405 18 18 17.405 18 16.671 L 18 1.329 C 18 0.595 17.405 0 16.671 0 Z M 5.365 15.334 L 2.659 15.334 L 2.659 6.737 L 5.365 6.737 Z M 4.01 5.546 C 3.153 5.542 2.461 4.844 2.465 3.986 C 2.468 3.129 3.165 2.436 4.022 2.438 C 4.88 2.44 5.573 3.136 5.572 3.994 C 5.578 4.409 5.415 4.809 5.121 5.101 C 4.826 5.394 4.425 5.555 4.01 5.546 Z M 15.34 15.341 L 12.635 15.341 L 12.635 10.645 C 12.635 9.26 12.046 8.833 11.286 8.833 C 10.483 8.833 9.696 9.437 9.696 10.68 L 9.696 15.341 L 6.99 15.341 L 6.99 6.744 L 9.592 6.744 L 9.592 7.935 L 9.628 7.935 C 9.889 7.406 10.804 6.502 12.2 6.502 C 13.71 6.502 15.341 7.399 15.341 10.024 Z" fill="rgb(255, 255, 255)"></path></g></svg></span></span></span><p class="footer-social-label"><a class="footer-link" href="https://www.linkedin.com/in/louis-staub-a49062332/" target="_blank" rel="noreferrer">LinkedIn</a></p></div></div></div></div></div><div class="framer-1j04v13"><p class="footer-heading">Nos lieux :</p><div class="framer-1pgssps"><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-paris">Paris</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-marseille">Marseille</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-lyon">Lyon</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-toulouse">Toulouse</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-nice">Nice</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-nantes">Nantes</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-montpellier">Montpellier</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-strasbourg">Strasbourg</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-lille">Lille</a></p></div></div><div class="framer-1l04fa9" style="background-color:rgba(255,255,255,.13)"></div><p class="framer-1b5zpj footer-copyright">Ruff Agency tous droits réservés</p></div></footer>
+
+<script>
+  // Infobulles : survol, clic (mobile), clavier.
+  document.querySelectorAll("[data-toggle]").forEach((el) => {
+    const btn = el.querySelector("button");
+    btn.addEventListener("click", () => btn.setAttribute("aria-expanded", String(el.classList.toggle("is-open"))));
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") document.querySelectorAll("[data-toggle].is-open").forEach((el) => el.classList.remove("is-open")); });
+  // FAQ du site : même comportement que StackSection3 (classe is-open).
+  document.querySelectorAll(".s3-faq-item").forEach((item) => {
+    const btn = item.querySelector(".s3-faq-header");
+    btn.addEventListener("click", () => {
+      const open = item.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(open));
+      item.querySelector(".s3-faq-chevron").classList.toggle("is-open", open);
+      item.querySelector(".s3-answer-clip").setAttribute("aria-hidden", String(!open));
+    });
+  });
+  // Footer du site : compteur de places (le site le calcule de la même façon).
+  const d = new Date(), days = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  document.querySelectorAll('.footer-reset [class*="availabilityNumber"]').forEach((n) => { n.textContent = Math.ceil(6 - ((d.getDate() - 1) / days) * 5); });
+  document.querySelectorAll('.footer-reset [class*="availabilityText"] span:last-child').forEach((s) => { s.textContent = "places restantes pour " + d.toLocaleDateString("fr-FR", { month: "long" }); });
+  // Maquette : on n'envoie pas l'email dans l'URL.
+  document.querySelector(".bp-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = document.getElementById("bp-email");
+    if (!input.checkValidity()) { input.reportValidity(); return; }
+    location.href = "blueprint-merci-v3.html";
+  });
+</script>
+</body>
+</html>

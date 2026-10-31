@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banque de design Ruff</title>
+<link rel="stylesheet" href="ruff-tokens.css">
+<style>
+  body { margin: 0; background: var(--rf-page); color: var(--rf-ink); font-family: var(--rf-font-text); }
+  .bk { max-width: 1324px; margin: 0 auto; padding: 64px 32px 128px; }
+  .bk-intro { display: flex; flex-direction: column; gap: 12px; margin-bottom: 64px; }
+  .bk-sec { padding: 56px 0; border-top: 1px solid rgba(0,0,0,.08); }
+  .bk-sec > h2 { font: 700 32px/1.1 var(--rf-font-title); letter-spacing: -0.04em; margin: 0 0 8px; }
+  .bk-sec > p { margin: 0 0 32px; max-width: 760px; }
+  .bk-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .bk-item { background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .bk-item code, .bk-code { font: 500 12px/1.5 ui-monospace, Consolas, monospace; color: var(--rf-ink-70); word-break: break-word; }
+  .bk-label { font: 600 14px/1.3 var(--rf-font-text); letter-spacing: -0.02em; }
+  .bk-meta { font: 500 12px/1.4 var(--rf-font-text); color: var(--rf-ink-70); }
+  .bk-swatch { height: 72px; border-radius: 10px; border: 1px solid rgba(0,0,0,.06); }
+  .bk-stage { position: relative; height: 300px; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid rgba(0,0,0,.06); }
+  .bk-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+  .bk-status { display: inline-block; padding: 3px 8px; border-radius: 6px; font: 600 11px/1.3 var(--rf-font-text); letter-spacing: .02em; }
+  .bk-status--c { background: #e6f6e9; color: #18692c; } .bk-status--v { background: #fff3d6; color: #8a5a00; } .bk-status--u { background: #ece9ff; color: #4a36b8; }
+  .bk-radius { width: 96px; height: 72px; background: #fff; border: 1.5px solid var(--rf-blue); }
+  .bk-shadow { height: 96px; background: #fff; border-radius: 16px; }
+  .bk-pattern { display: grid; gap: 6px; padding: 14px; background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,.06); }
+  .bk-pattern span { display: block; border-radius: 4px; background: #eceef3; height: 14px; }
+  .bk-pattern .b { background: var(--rf-blue); height: 10px; width: 40%; }
+  .bk-pattern .h { height: 22px; background: #d9dde6; }
+  @media (max-width: 809px) { .bk { padding: 40px 16px 96px; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Curseur noir à contour blanc (vu dans public/landing-assets/saas-redesign/benefits/2419-1366.png) -->
+    <symbol id="rf-cursor" viewBox="0 0 56 56">
+      <path d="M8 6.5 L47 21.5 C49.6 22.5 49.4 26.2 46.7 26.9 L30.5 31 L25.9 47.2 C25.1 49.9 21.4 50 20.5 47.4 Z" fill="#000" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke"/>
+    </symbol>
+    <symbol id="rf-user" viewBox="0 0 40 40">
+      <circle cx="20" cy="14" r="7" fill="#d8d8d8"/><path d="M6.5 34c1.6-7 7-10.5 13.5-10.5S31.9 27 33.5 34z" fill="#d8d8d8"/>
+    </symbol>
+    <symbol id="rf-align-left" viewBox="0 0 32 32"><path d="M5 7h23M5 14.7h11.5M5 22.4h11.5" stroke="#000" stroke-width="1.9"/></symbol>
+    <symbol id="rf-align-center" viewBox="0 0 32 32"><path d="M6 8h19M10.8 15.7h9.6M10.8 23.3h9.6" stroke="#000" stroke-width="1.9"/></symbol>
+    <symbol id="rf-align-right" viewBox="0 0 32 32"><path d="M6 8h19M15.6 15.7h9.5M15.6 23.3h9.5" stroke="#000" stroke-width="1.9"/></symbol>
+  </defs>
+</svg>
+
+<main class="bk">
+  <header class="bk-intro">
+    <p class="rf-eyebrow">Banque de design · v0.2 · règles validées : voir feedback.md</p>
+    <h1 class="rf-h2"><span>Tout le vocabulaire visuel</span> <strong>de Ruff Agency</strong></h1>
+    <p class="rf-lead">Chaque élément est reconstruit en HTML/CSS à partir du code du site et de ses images. Les classes viennent de <code class="bk-code">brand/design/ruff-tokens.css</code>. Statuts : <span class="bk-status bk-status--c">CONSTANT</span> <span class="bk-status bk-status--v">VARIABLE</span> <span class="bk-status bk-status--u">UNIQUE</span></p>
+  </header>
+
+  <!-- 1. COULEURS -->
+  <section class="bk-sec">
+    <h2>1. Couleurs</h2>
+    <p class="rf-body">Un bleu nuit pour le texte, un seul bleu d'accent, des fonds presque blancs. Les pastels n'apparaissent que dans les cartes bento et les illustrations.</p>
+    <div class="bk-grid">
+      <div class="bk-item"><div class="bk-swatch" style="background:#121a2e"></div><span class="bk-label">Encre</span><code>--rf-ink #121A2E</code><span class="bk-meta">Texte, titres, fond sombre</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item"><div class="bk-swatch" style="background:rgba(18,26,46,.7)"></div><span class="bk-label">Encre 70 %</span><code>--rf-ink-70</code><span class="bk-meta">Sous-titres, paragraphes</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item"><div class="bk-swatch" style="background:#0147ff"></div><span class="bk-label">Bleu Ruff</span><code>--rf-blue #0147FF</code><span class="bk-meta">Accent unique : bouton, eyebrow, sélection</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item"><div class="bk-swatch" style="background:linear-gradient(90deg,#4e7dfa,#0147ff)"></div><span class="bk-label">Dégradé bouton</span><code>90° #4E7DFA → #0147FF</code><span class="bk-meta">Survol : 161° rgb(67,108,222) → rgb(36,77,181)</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item"><div class="bk-swatch" style="background:#fbfbfb"></div><span class="bk-label">Fond de page</span><code>--rf-page #FBFBFB</code><span class="bk-meta">Aussi #F9FBFF et #FDFDFD selon les pages</span><span class="bk-status bk-status--v">VARIABLE</span></div>
+      <div class="bk-item"><div class="bk-swatch" style="background:#e1e4ed"></div><span class="bk-label">Socle bouton</span><code>--rf-socle #E1E4ED</code><span class="bk-meta">Cadre gris autour du bouton principal</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item"><div class="bk-swatch" style="background:#dcf6ff"></div><span class="bk-label">Carte cyan</span><code>--rf-card-cyan #DCF6FF</code><span class="bk-meta">Carte bento « visiteurs → clients »</span><span class="bk-status bk-status--u">UNIQUE</span></div>
+      <div class="bk-item"><div class="bk-swatch" style="background:#ffebc1"></div><span class="bk-label">Carte crème</span><code>--rf-card-cream #FFEBC1</code><span class="bk-meta">Carte bento « structurer votre offre »</span><span class="bk-status bk-status--u">UNIQUE</span></div>
+      <div class="bk-item" style="grid-column:1/-1"><div class="bk-row" style="gap:8px"><span class="bk-swatch" style="flex:1;background:var(--rf-tint-blue)"></span><span class="bk-swatch" style="flex:1;background:var(--rf-tint-yellow)"></span><span class="bk-swatch" style="flex:1;background:var(--rf-tint-green)"></span><span class="bk-swatch" style="flex:1;background:var(--rf-tint-violet)"></span><span class="bk-swatch" style="flex:1;background:var(--rf-tint-red)"></span></div><span class="bk-label">Teintes de cartes : bleu 195 · jaune 45 · vert 95 · violet 250 · rouge 0</span><code>--rf-tint-* = hsl(teinte 100% 93%) · .rf-bento--blue/yellow/green/violet/red</code><span class="bk-meta">Saturation et luminosité du cyan du site, seule la teinte change. Toutes les cartes d'un groupe sont teintées, chacune différemment (R1, R2).</span><span class="bk-status bk-status--c">VALIDÉ (R1, R2)</span></div>
+      <div class="bk-item"><div class="bk-swatch" style="background:#0d152a"></div><span class="bk-label">Nuit profonde</span><code>--rf-ink-deep #0D152A</code><span class="bk-meta">Articles, outils, landing SaaS</span><span class="bk-status bk-status--v">VARIABLE</span></div>
+      <div class="bk-item"><div class="bk-row" style="gap:8px"><span class="rf-dot rf-dot--red" style="position:static"></span><span class="rf-dot rf-dot--yellow"></span><span class="rf-dot rf-dot--green"></span><span class="rf-dot rf-dot--blue"></span></div><span class="bk-label">Pastilles d'outil ≈</span><code>#FF3433 #FFC532 #46C52A #0247FF</code><span class="bk-meta">Seules couleurs vives, uniquement dans la barre d'outils illustrée</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item"><div class="bk-row" style="gap:8px"><span class="bk-swatch" style="width:36px;height:36px;border-radius:50%;background:#e0ffc4"></span><span class="bk-swatch" style="width:36px;height:36px;border-radius:50%;background:#fdc7c8"></span><span class="bk-swatch" style="width:36px;height:36px;border-radius:50%;background:#fff1c4"></span><span class="bk-swatch" style="width:36px;height:36px;border-radius:50%;background:#cdc4ff"></span></div><span class="bk-label">Pastels d'avatars ≈</span><code>#E0FFC4 #FDC7C8 #FFF1C4 #CDC4FF</code><span class="bk-meta">Fonds des personnages « convertis »</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item"><div class="bk-row" style="gap:6px"><span class="rf-bar" style="width:60px"></span><span class="rf-bar rf-bar--2" style="width:60px"></span><span class="rf-ph" style="width:40px;height:24px"></span><span class="rf-pill" style="width:40px"></span></div><span class="bk-label">Gris de maquette</span><code>#DFDFDF #EAEAEA #FAFAFA #4F4F4F</code><span class="bk-meta">Barres, zones image, bouton de maquette</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+    </div>
+  </section>
+
+  <!-- 2. TYPO -->
+  <section class="bk-sec">
+    <h2>2. Typographie</h2>
+    <p class="rf-body">Titres en Plus Jakarta Sans 700, très serrés. Tout le reste en Inter 500. Les titres de carte sont en Inter 600, pas en Jakarta.</p>
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div><h3 class="rf-h1">On crée des landing pages</h3><code class="bk-code">.rf-h1 · Plus Jakarta Sans 700 · 72px · -0.05em</code></div>
+      <div><h3 class="rf-h2"><span>Tout ce dont vous avez besoin pour</span> <strong>faire croître votre business</strong></h3><code class="bk-code">.rf-h2 bicolore · 56px · -0.04em · partie neutre --rf-ink-75 · fin en --rf-ink</code></div>
+      <div><p class="rf-h3">Transformez vos visiteurs en clients</p><code class="bk-code">.rf-h3 / titre de carte · Inter 600 · 24px · -0.03em</code></div>
+      <div><p class="rf-lead">Transformez vos visiteurs en clients et renforcez votre crédibilité grâce à une landing page premium.</p><code class="bk-code">.rf-lead · Inter 500 · 18px · encre 70 %</code></div>
+      <div><p class="rf-eyebrow">Pourquoi nous choisir ?</p><code class="bk-code">.rf-eyebrow · Inter 500 · 16px · bleu</code></div>
+    </div>
+  </section>
+
+  <!-- 3. BOUTONS -->
+  <section class="bk-sec">
+    <h2>3. Boutons et leurs états</h2>
+    <p class="rf-body">Le bouton principal est la signature du site : socle gris, dégradé bleu en relief, photo du fondateur. Toujours à droite du bouton secondaire.</p>
+    <div class="bk-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">
+      <div class="bk-item"><span class="bk-label">Principal · repos</span><a class="rf-btn rf-btn--primary" href="#"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="assets/louis.jpg" alt="Photo de Louis Staub"></span></a><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item"><span class="bk-label">Principal · survol</span><a class="rf-btn rf-btn--primary is-hover" href="#"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="assets/louis.jpg" alt=""></span></a><span class="bk-meta">Dégradé plus sombre, ombre longue, photo pivotée de 10°</span></div>
+      <div class="bk-item"><span class="bk-label">Principal · focus clavier</span><a class="rf-btn rf-btn--primary" href="#" style="outline:2px solid var(--rf-blue);outline-offset:3px;border-radius:16px"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="assets/louis.jpg" alt=""></span></a><span class="bk-meta">Absent du site : proposition</span><span class="bk-status bk-status--v">VARIABLE</span></div>
+      <div class="bk-item"><span class="bk-label">Secondaire · repos / survol</span><div class="bk-row" style="gap:12px"><a class="rf-btn rf-btn--secondary" href="#"><span class="rf-btn__inner">Voir nos réalisations</span></a><a class="rf-btn rf-btn--secondary is-hover" href="#"><span class="rf-btn__inner">Survol</span></a></div><span class="bk-status bk-status--c">CONSTANT</span></div>
+      <div class="bk-item" style="background:#121a2e"><span class="bk-label" style="color:#fff">Paire sur fond sombre</span><div class="rf-btn-pair"><a class="rf-btn rf-btn--secondary on-dark" href="#"><span class="rf-btn__inner">Voir nos services</span></a><a class="rf-btn rf-btn--primary" href="#" style="background:#2a3654"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="assets/louis.jpg" alt=""></span></a></div><span class="bk-status bk-status--u">UNIQUE (/services)</span></div>
+    </div>
+  </section>
+
+  <!-- 4. HEROS -->
+  <section class="bk-sec">
+    <h2>4. Éléments de héros</h2>
+    <p class="rf-body">Ordre constant : preuve sociale → titre en deux lignes → sous-titre → paire de boutons → disponibilité.</p>
+    <div style="background:var(--rf-page-cool);border-radius:24px;padding:56px 24px;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center">
+      <div class="rf-proof"><span class="rf-proof__stack"><span style="background:#e0ffc4"></span><span style="background:#fdc7c8"></span><span style="background:#fff1c4"></span><span style="background:#cdc4ff"></span><span style="background:#d9dde6"></span></span>+30 clients satisfaits</div>
+      <h3 class="rf-h1" style="max-width:820px">Nos réalisations</h3>
+      <p class="rf-lead" style="max-width:440px">Découvrez des projets que nous avons menés avec soin, du concept à la mise en œuvre.</p>
+      <div class="rf-btn-pair"><a class="rf-btn rf-btn--secondary" href="#"><span class="rf-btn__inner">Voir nos offres</span></a><a class="rf-btn rf-btn--primary" href="#"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="assets/louis.jpg" alt=""></span></a></div>
+      <div class="rf-availability"><span class="rf-availability__dot"></span><b>3</b> places restantes pour novembre</div>
+    </div>
+    <p class="bk-meta" style="margin-top:12px">Sur le site, les avatars sont les vraies photos clients. Ici remplacés par des pastilles pour ne pas réutiliser leurs visages hors contexte.</p>
+  </section>
+
+  <!-- 5. CARTES -->
+  <section class="bk-sec">
+    <h2>5. Cartes</h2>
+    <p class="rf-body">Deux familles : la carte bento (illustration plein cadre, fondu, texte collé en bas, rayon 19 px) et la carte blanche (bordure 15 %, ombre en 4 couches, rayon 32 px, filet entre titre et texte).</p>
+    <div class="bk-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">
+      <article class="rf-bento rf-bento--cyan" style="height:300px"><div class="rf-bento__art"></div><div class="rf-bento__fade"></div><div class="rf-bento__copy"><p class="rf-bento__title">Carte bento cyan</p><p class="rf-bento__body">.rf-bento--cyan</p></div></article>
+      <article class="rf-bento rf-bento--cream" style="height:300px"><div class="rf-bento__fade"></div><div class="rf-bento__copy"><p class="rf-bento__title">Carte bento crème</p><p class="rf-bento__body">.rf-bento--cream</p></div></article>
+      <article class="rf-bento rf-bento--dark" style="height:300px;background:linear-gradient(160deg,#2a3654,#121a2e)"><div class="rf-bento__fade"></div><div class="rf-bento__copy"><p class="rf-bento__title">Carte bento sombre</p><p class="rf-bento__body">Interdite au milieu d'une section claire (R3).</p></div></article>
+      <article class="rf-card" style="min-height:300px;display:flex;flex-direction:column;justify-content:flex-end"><p class="rf-h3">Carte blanche</p><div class="rf-card__rule"></div><p class="rf-body" style="font-size:18px;line-height:1.7">Illustration en haut, titre, filet, texte gris.</p></article>
+    </div>
+  </section>
+
+  <!-- 6. ILLUSTRATIONS -->
+  <section class="bk-sec">
+    <h2>6. Briques d'illustration</h2>
+    <p class="rf-body">Les illustrations du site sont des « maquettes d'interface » épurées, en gris clair, réveillées par un seul élément bleu ou coloré. Jamais d'illustration de personnage dessiné, jamais d'icônes 3D.</p>
+    <div class="bk-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">
+
+      <div class="bk-item"><div class="bk-stage" style="background:#f6f7f9">
+        <div class="rf-wire" style="left:40px;top:34px;right:40px;bottom:-30px;padding:30px 34px;display:flex;flex-direction:column;align-items:center;gap:10px">
+          <span class="rf-bar" style="width:70%"></span><span class="rf-bar" style="width:55%"></span>
+          <span class="rf-bar rf-bar--2" style="width:60%;margin-top:6px"></span><span class="rf-bar rf-bar--2" style="width:45%"></span>
+          <span class="rf-pill" style="margin-top:6px"></span><span class="rf-ph" style="width:100%;height:90px;margin-top:10px"></span>
+        </div></div>
+        <span class="bk-label">Maquette fil de fer</span><code>.rf-wire .rf-bar .rf-pill .rf-ph</code><span class="bk-status bk-status--c">CONSTANT</span></div>
+
+      <div class="bk-item"><div class="bk-stage">
+        <div class="rf-wire" style="left:70px;top:46px;width:170px;height:280px"></div>
+        <div class="rf-select" style="left:62px;top:38px;width:186px;height:300px"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <span class="bk-label">Cadre de sélection Figma</span><code>.rf-select &gt; i×4</code><span class="bk-meta">#0147FF exact, trait 1,17 px, poignées carrées sans arrondi 14 px</span><span class="bk-status bk-status--c">VALIDÉ (R4)</span></div>
+
+      <div class="bk-item"><div class="bk-stage" style="display:grid;place-items:center">
+        <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
+          <div class="rf-toolbar" style="position:static">
+            <span class="rf-toolbar__btn"><svg width="28" height="28"><use href="#rf-align-left"/></svg></span><span class="rf-toolbar__sep"></span>
+            <span class="rf-toolbar__btn is-on"><svg width="28" height="28"><use href="#rf-align-center"/></svg></span><span class="rf-toolbar__sep"></span>
+            <span class="rf-toolbar__btn"><svg width="28" height="28"><use href="#rf-align-right"/></svg></span>
+          </div>
+          <div class="rf-palette" style="position:static"><span class="rf-dot rf-dot--red"></span><span class="rf-dot rf-dot--yellow"></span><span class="rf-dot rf-dot--green"></span><span class="rf-dot rf-dot--blue"></span></div>
+        </div></div>
+        <span class="bk-label">Barre d'outils + palette</span><code>.rf-toolbar .rf-toolbar__btn.is-on · .rf-palette .rf-dot</code><span class="bk-meta">Valeurs exactes du site : rayon 13 / 14,35 px, bordure 11 %, ombre --rf-shadow-tool, pastilles 18 px. Tout petit rond de couleur dans une illustration = ces pastilles, jamais des ronds pastel (R13).</span><span class="bk-status bk-status--c">VALIDÉ (R6, R13)</span></div>
+
+      <div class="bk-item"><div class="bk-stage" style="display:grid;place-items:center">
+        <div style="position:relative;width:200px;height:150px">
+          <div class="rf-wire" style="inset:0;transform:rotate(-6deg)"></div>
+          <span class="rf-burst" style="left:-36px;top:30px;transform:rotate(-20deg)"></span><span class="rf-burst" style="left:-44px;top:70px"></span><span class="rf-burst" style="right:-40px;top:20px;transform:rotate(25deg)"></span>
+          <img class="rf-cursor" src="assets/cursor.svg" alt="" style="left:16px;bottom:-44px">
+        </div></div>
+        <span class="bk-label">Curseur + rayons de clic</span><code>img.rf-cursor src="assets/cursor.svg" · .rf-burst</code><span class="bk-meta">Triangle noir arrondi, pointe en haut à droite, épais contour blanc (redessiné d'après 2419-1366.png)</span><span class="bk-status bk-status--c">VALIDÉ (R7)</span></div>
+
+      <div class="bk-item"><div class="bk-stage" style="background:linear-gradient(90deg,#eaf8fd,#caebf6 30%,#caebf6 70%,#eaf8fd)">
+        <span class="rf-avatar rf-avatar--ghost" style="left:8%;top:60px;width:64px;height:64px"><svg width="38" height="38"><use href="#rf-user"/></svg></span>
+        <span class="rf-avatar rf-avatar--ghost" style="left:24%;top:170px;width:48px;height:48px"><svg width="28" height="28"><use href="#rf-user"/></svg></span>
+        <span style="position:absolute;left:50%;top:30px;bottom:30px;width:7px;margin-left:-3px;border-radius:9px;background:#468ca8"></span>
+        <span class="rf-avatar rf-avatar--green" style="left:58%;top:50px;width:48px;height:48px"></span>
+        <span class="rf-avatar rf-avatar--pink" style="left:74%;top:90px;width:62px;height:62px"></span>
+        <span class="rf-avatar rf-avatar--yellow" style="left:57%;top:170px;width:56px;height:56px"></span>
+        <span class="rf-avatar rf-avatar--purple" style="left:80%;top:195px;width:40px;height:40px"></span>
+        </div>
+        <span class="bk-label">Avant / après en personnages</span><code>.rf-avatar--ghost → .rf-avatar--pastel</code><span class="bk-meta">Sur le site : memojis Apple dans les pastilles</span><span class="bk-status bk-status--u">UNIQUE</span></div>
+
+      <div class="bk-item"><div class="bk-stage" style="background:#f6f7f9">
+        <div class="rf-tilt rf-tilt--back" style="left:30px;top:40px;width:200px;height:140px;transform:rotate(-8deg)"></div>
+        <div class="rf-tilt" style="left:70px;top:80px;width:220px;height:160px;transform:rotate(-4deg);padding:16px;display:flex;flex-direction:column;gap:8px;align-items:center">
+          <span class="rf-bar" style="width:80%;background:#121a2e;height:10px"></span><span class="rf-bar" style="width:60%;background:#121a2e;height:10px"></span><span class="rf-bar rf-bar--3" style="width:70%"></span><span class="rf-pill"></span><span class="rf-ph" style="width:100%;height:46px"></span>
+        </div></div>
+        <span class="bk-label">Captures inclinées empilées</span><code>.rf-tilt .rf-tilt--back</code><span class="bk-meta">Bordure blanche 6 px, rotation -4° à -8°</span><span class="bk-status bk-status--c">CONSTANT</span></div>
+
+      <div class="bk-item"><div class="bk-stage" style="background:#fafafa">
+        <div class="rf-device" style="left:28px;right:28px;top:40px;bottom:-20px"><div class="rf-device__screen" style="padding:18px;display:flex;flex-direction:column;gap:8px"><span class="rf-bar" style="width:60%"></span><span class="rf-bar rf-bar--2" style="width:40%"></span><span class="rf-ph" style="height:80px"></span></div></div>
+        <span class="rf-tag rf-tag--label" style="position:absolute;left:44px;top:22px">Before</span><span class="rf-tag rf-tag--label" style="position:absolute;right:44px;top:22px">After</span>
+        </div>
+        <span class="bk-label">Cadre d'appareil avant / après</span><code>.rf-device .rf-tag--label</code><span class="bk-status bk-status--c">CONSTANT (réalisations)</span></div>
+
+    </div>
+  </section>
+
+  <!-- 7. OMBRES & RAYONS -->
+  <section class="bk-sec">
+    <h2>7. Ombres et rayons</h2>
+    <p class="rf-body">Ombres toujours grises et très diffuses, en plusieurs couches. Seul le bouton principal a une ombre bleutée.</p>
+    <div class="bk-grid">
+      <div class="bk-item"><div class="bk-shadow" style="box-shadow:var(--rf-shadow-card)"></div><code>--rf-shadow-card</code><span class="bk-meta">Cartes blanches</span></div>
+      <div class="bk-item"><div class="bk-shadow" style="box-shadow:var(--rf-shadow-wire)"></div><code>--rf-shadow-wire</code><span class="bk-meta">Panneaux de maquette (gris 107)</span></div>
+      <div class="bk-item"><div class="bk-shadow" style="box-shadow:var(--rf-shadow-quiz)"></div><code>--rf-shadow-quiz</code><span class="bk-meta">Blocs outil</span></div>
+      <div class="bk-item"><div class="bk-shadow" style="box-shadow:var(--rf-shadow-float)"></div><code>--rf-shadow-float</code><span class="bk-meta">Éléments flottants d'illustration</span></div>
+    </div>
+    <div class="bk-row" style="margin-top:32px">
+      <div><div class="bk-radius" style="border-radius:4px"></div><code class="bk-code">4 · barres</code></div>
+      <div><div class="bk-radius" style="border-radius:10px"></div><code class="bk-code">10 · bouton</code></div>
+      <div><div class="bk-radius" style="border-radius:15px"></div><code class="bk-code">15 · socle</code></div>
+      <div><div class="bk-radius" style="border-radius:19px"></div><code class="bk-code">19 · bento</code></div>
+      <div><div class="bk-radius" style="border-radius:24px"></div><code class="bk-code">24 · maquette</code></div>
+      <div><div class="bk-radius" style="border-radius:32px"></div><code class="bk-code">32 · carte</code></div>
+      <div><div class="bk-radius" style="border-radius:52px"></div><code class="bk-code">52 · outil</code></div>
+    </div>
+    <p class="bk-meta" style="margin-top:12px">Le site utilise plus de 20 rayons : ces 7 sont les plus fréquents (VARIABLE).</p>
+  </section>
+
+  <!-- 8. PATTERNS DE SECTION -->
+  <section class="bk-sec">
+    <h2>8. Patterns de section</h2>
+    <p class="rf-body">Ordre de la page d'accueil et des pages service : Héros → Bénéfices → Processus → Avis → Comparatif → Réalisations → Prix → Bandeau d'avis → FAQ + appel → Pied de page.</p>
+    <div class="bk-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">
+      <div class="bk-item"><div class="bk-pattern" style="justify-items:center"><span style="width:40%"></span><span class="h" style="width:80%"></span><span style="width:60%"></span><span class="b"></span></div><span class="bk-label">Héros centré</span></div>
+      <div class="bk-item"><div class="bk-pattern" style="grid-template-columns:2fr 1fr"><span class="h" style="grid-column:1/-1;width:70%"></span><span style="height:60px;background:#dcf6ff"></span><span style="height:60px;background:#121a2e"></span><span style="height:60px"></span><span style="height:60px;background:#ffebc1"></span></div><span class="bk-label">Bento bénéfices</span></div>
+      <div class="bk-item"><div class="bk-pattern" style="grid-template-columns:repeat(3,1fr)"><span class="h" style="grid-column:1/-1;width:60%"></span><span style="height:54px"></span><span style="height:54px"></span><span style="height:54px"></span></div><span class="bk-label">Processus en 3 étapes</span></div>
+      <div class="bk-item"><div class="bk-pattern" style="grid-template-columns:repeat(3,1fr)"><span style="height:70px;background:#e6edff;border:1px solid var(--rf-blue)"></span><span style="height:70px"></span><span style="height:70px"></span></div><span class="bk-label">Comparatif 3 colonnes (Ruff mis en avant)</span></div>
+      <div class="bk-item"><div class="bk-pattern" style="grid-template-columns:1fr 1fr"><span style="height:60px"></span><span style="height:60px"></span><span style="height:60px"></span><span style="height:60px"></span></div><span class="bk-label">Grille de réalisations</span></div>
+      <div class="bk-item"><div class="bk-pattern"><span class="h" style="width:50%"></span><span style="height:80px;border:1px solid #d9dde6;background:#fff"></span></div><span class="bk-label">Carte prix unique + options</span></div>
+    </div>
+  </section>
+  <!-- 9. REFERENCES FIGMA -->
+  <section class="bk-sec">
+    <h2>9. Références Figma (lues avec Figwright)</h2>
+    <p class="rf-body">Comment Louis construit ses illustrations : un objet central, des puces accrochées au cadre, des fantômes, un fondu. Détail et valeurs exactes dans <code class="bk-code">figma/README.md</code>.</p>
+    <div class="bk-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">
+      <div class="bk-item"><img src="figma/carte-objet-selectionne_1330-830.png" alt="Carte objet sélectionné" style="width:100%;border-radius:12px"><span class="bk-label">F1 · Objet sélectionné</span><span class="bk-meta">Puces « Aa », palette et alignements accrochées au cadre, fantômes à 48 %.</span></div>
+      <div class="bk-item"><img src="figma/carte-visiteurs-clients_1340-467.png" alt="Carte visiteurs vers clients" style="width:100%;border-radius:12px"><span class="bk-label">F2 · Transformation</span><span class="bk-meta">Avant / ligne / après, ombre directionnelle des cercles.</span></div>
+      <div class="bk-item"><img src="figma/carte-maquette-verticale_1330-801.png" alt="Carte maquette verticale" style="width:100%;border-radius:12px"><span class="bk-label">F3 · Grande maquette</span><span class="bk-meta">Une maquette haute sélectionnée, barre d'outils en bas, fondu.</span></div>
+      <div class="bk-item"><img src="figma/section-processus_957-2188.png" alt="Section processus" style="width:100%;border-radius:12px"><span class="bk-label">F4 · Processus</span><span class="bk-meta">Objet incliné dans une carte intérieure, curseur bleu « Vous ».</span></div>
+      <div class="bk-item"><img src="figma/section-benefices-saas_2422-2049.png" alt="Section bénéfices SaaS" style="width:100%;border-radius:12px"><span class="bk-label">F5 · Cartes blanches sur fond bleu</span></div>
+      <div class="bk-item"><div class="bk-stage" style="background:var(--rf-tint-lavender)">
+          <div class="rf-wire" style="left:60px;top:60px;width:170px;height:170px"></div>
+          <div class="rf-select" style="left:52px;top:52px;width:186px;height:186px"><i></i><i></i><i></i><i></i></div>
+          <div class="rf-chip rf-chip--type" style="left:34px;top:24px;font-size:22px;padding:8px 12px">A<span>a</span></div>
+          <div class="rf-chip" style="left:150px;top:68px;padding:8px 10px"><span class="rf-dot rf-dot--red"></span><span class="rf-dot rf-dot--yellow"></span><span class="rf-dot rf-dot--green"></span><span class="rf-dot rf-dot--blue"></span></div>
+          <div class="rf-you" style="left:120px;top:200px"><img src="assets/cursor-blue.svg" alt=""><span>Vous</span></div>
+        </div>
+        <span class="bk-label">Nouveaux composants</span><code>.rf-chip · .rf-chip--type · .rf-chip--flat · .rf-ghost · .rf-you · .rf-stage · --rf-shadow-dir</code><span class="bk-status bk-status--c">VALIDÉ (R16)</span></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

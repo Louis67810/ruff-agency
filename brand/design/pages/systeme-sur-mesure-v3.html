@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Système sur mesure — v3</title>
+<!-- Page « Système sur mesure » v2 (27/10/2026) : v1 + R48 à R53. Temps 1 (R46) : sans illustrations. Généré depuis pages/src/systeme-sur-mesure-v2.src.html par pages/src/build.mjs. -->
+<link rel="stylesheet" href="../ruff-tokens.css">
+<link rel="stylesheet" href="../../../app/fonts.css">
+<link rel="stylesheet" href="../../../components/footer/Footer.css">
+<link rel="stylesheet" href="../../../components/sections/StackSection3/StackSection3.css">
+<style>
+  body { margin: 0; background: #fbfbfb; color: var(--rf-ink); font-family: var(--rf-font-text); }
+  img { display: block; }
+  .ico { width: 24px; height: 24px; flex: none; }
+
+  /* ---------- Fonds de section (R22, R37) ---------- */
+  .bp-sec { padding: 142px 48px; }
+  .bp-sec--page { background: #fbfbfb; }
+  .bp-sec--white { background: #fff; }
+  .bp-sec--grey { background: #f5f5f5; }
+  .bp-sec--blue { background: #fbfbfb linear-gradient(180deg, rgb(12, 90, 192) 0%, rgba(10, 96, 209, .918) 15.17%, rgba(10, 103, 226, 0) 100%); }
+  .bp-wrap { max-width: var(--rf-container); margin: 0 auto; }
+  .bp-center { text-align: center; }
+
+  /* ---------- Typographie (grammaire SaaS) ---------- */
+  .bp-h2 { margin: 0; font: 700 64px/1.06 var(--rf-font-title); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .bp-h2 .bp-muted { color: var(--rf-ink-75); }
+  .bp-intro { margin: 24px 0 0; font: 500 20px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); max-width: 760px; }
+  .bp-intro strong { color: var(--rf-ink); font-weight: 600; }
+  .bp-center .bp-intro { margin-left: auto; margin-right: auto; }
+  .bp-head { margin-bottom: 64px; }
+  .bp-sec--blue .bp-h2 { color: #fff; }
+  .bp-sec--blue .bp-intro { color: rgba(255, 255, 255, .72); }
+  .bp-p { margin: 0; font: 500 18px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); }
+  .bp-p + .bp-p { margin-top: 18px; }
+  .bp-p strong { color: var(--rf-ink); font-weight: 600; }
+  .bp-small { margin: 0; font: 500 15px/1.6 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink-70); }
+  /* Conclusion de section (R31) */
+  .bp-conclusion { max-width: 980px; margin: 88px auto 0; text-align: center; }
+  .bp-conclusion::before { content: ""; display: block; height: .8px; background: rgba(0, 0, 0, .11); margin-bottom: 48px; }
+  .bp-conclusion p { margin: 0; font: 600 28px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+
+  .bp-todo { background: #fff3c4; color: #7a5600; border-radius: 4px; padding: 0 4px; font-weight: 600; }
+
+  /* ---------- Réassurance sous un bouton (R25) ---------- */
+  .bp-cta { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+  .bp-center .bp-cta, .bp-cta--center { align-items: center; }
+  .bp-cta .rf-btn { flex: none; }
+  .bp-reassure { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font: 500 16px/1.03 var(--rf-font-text); color: var(--rf-ink); letter-spacing: -0.02em; }
+  .bp-reassure span { display: inline-flex; align-items: center; gap: 12px; }
+  .bp-reassure .ico { color: #141b34; }
+  .bp-reassure i { width: 1px; height: 14px; background: rgba(20, 27, 52, .15); }
+
+  /* ---------- Navigation ---------- */
+  .bp-nav { position: sticky; top: 0; z-index: 30; background: rgba(251, 251, 251, .9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .bp-nav .bp-wrap { display: flex; align-items: center; justify-content: space-between; height: 92px; max-width: calc(var(--rf-container) + 96px); padding: 0 48px; }
+  .bp-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; font: 600 22px/1 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .bp-logo img { height: 40px; width: auto; }
+
+  /* ---------- Héros (R23, R24) ---------- */
+  .bp-hero { padding: 72px 48px 120px; background: #fbfbfb; text-align: center; }
+  .bp-eyebrow { display: inline-flex; align-items: center; height: 52px; padding: 10px 24px; border-radius: 46px; background: #fff; border: .8px solid rgba(0, 0, 0, .11); font: 500 16px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: rgba(18, 26, 46, .7); }
+  .bp-hero h1 { margin: 28px auto 0; max-width: 1040px; font: 700 64px/1.06 var(--rf-font-title); letter-spacing: -0.05em; color: var(--rf-ink); }
+  .bp-hero .bp-intro { max-width: 720px; margin: 24px auto 0; }
+  .bp-hero .bp-cta { margin-top: 40px; }
+  .bp-hint { margin-top: 10px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; padding: 12px 18px; border-radius: 15px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); box-shadow: var(--rf-shadow-card); font: 500 15px/1.5 var(--rf-font-text); color: var(--rf-ink-70); letter-spacing: -0.02em; }
+  .bp-hint .ico { width: 20px; height: 20px; color: #141b34; }
+  .bp-hint b { color: var(--rf-ink); font-weight: 600; }
+  /* Cadre média (même cadre que les visuels de la page SaaS) */
+  .bp-media { position: relative; max-width: 1180px; margin: 72px auto 0; aspect-ratio: 16 / 9; border-radius: 62px; background: #e2e2e2; border: 8px solid #fff; box-shadow: 0 2.87px 7.18px rgba(0, 0, 0, .05), 0 12.93px 12.93px rgba(0, 0, 0, .04), 0 28.74px 17.24px rgba(0, 0, 0, .03), 0 50.29px 20.12px rgba(0, 0, 0, .01), 0 77.59px 21.55px rgba(0, 0, 0, 0); overflow: hidden; display: grid; place-items: center; }
+  .bp-media__play { width: 96px; height: 96px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: var(--rf-shadow-card); color: var(--rf-ink); }
+  .bp-media__play .ico { width: 36px; height: 36px; margin-left: 4px; }
+  .bp-media__cap { position: absolute; left: 0; right: 0; bottom: 32px; text-align: center; }
+
+  /* ---------- Cartes (grammaire SaaS) ---------- */
+  .bp-card { background: #fff; border: .8px solid rgba(0, 0, 0, .133); border-radius: 32px; padding: 32px; box-shadow: var(--rf-shadow-card); }
+  .bp-card__head { display: flex; align-items: center; gap: 16px; }
+  .bp-tile { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; }
+  .bp-tile .ico { width: 24px; height: 24px; }
+  .bp-tile--red { background: rgb(255, 96, 101); }
+  .bp-tile--blue { background: var(--rf-blue); }
+  .bp-card h3 { margin: 0; font: 700 24px/1.88 var(--rf-font-title); letter-spacing: -0.03em; }
+  .bp-rule { height: 1px; background: rgba(0, 0, 0, .11); margin: 20px 0; }
+  .bp-card p { margin: 0; font: 500 18px/2.2 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); }
+
+  /* Carte d'illustration (F5) */
+  .bp-art-card { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; min-height: 680px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); border-radius: 32px; padding: 32px; box-shadow: var(--rf-shadow-card); }
+  .bp-art-card__art { position: absolute; left: 0; right: 0; top: 0; height: 360px; }
+  .bp-art-card h3 { margin: 0; font: 600 22px/1.86 var(--rf-font-text); letter-spacing: -0.03em; }
+  .bp-art-card p { margin: 0; font: 500 18px/2.2 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); }
+
+  /* Scène d'illustration */
+  .bp-scene { position: absolute; left: 50%; top: var(--top, 0px); width: var(--w); height: var(--h); transform: translateX(-50%) scale(var(--s, 1)); transform-origin: top center; }
+  .bp-scene > * { position: absolute; }
+  .bp-page { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .bp-pnav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .bp-pnav span:first-child { width: 46px; height: 12px; border-radius: 3px; background: var(--rf-wire-bar); }
+  .bp-pnav span:last-child { width: 40px; height: 14px; border-radius: 328px; background: var(--rf-wire-pill); }
+  .bp-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .bp-cols span { height: 64px; border-radius: 10px; background: var(--rf-wire-fill); }
+
+  /* ---------- Problème : grille de pages identiques ---------- */
+  .bp-split { display: grid; grid-template-columns: 1fr 1.15fr; gap: 72px; align-items: start; }
+  .bp-split .bp-intro { max-width: none; }
+  .bp-same { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; position: relative; }
+  .bp-same .rf-wire { position: relative; height: 230px; padding: 18px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .bp-same .bp-blob { width: 100%; flex: 1; margin-top: 8px; border-radius: 12px; background: linear-gradient(135deg, #ececf1, #f7f7f9); }
+  .bp-same-wrap { position: relative; }
+  .bp-same-wrap::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 170px; background: linear-gradient(180deg, rgba(255, 255, 255, 0), #fff); pointer-events: none; }
+
+  /* ---------- Avant / après (R27) ---------- */
+  .bp-pairs { display: grid; gap: 56px; }
+  .bp-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .bp-shot { margin: 0; }
+  .bp-shot__img { position: relative; aspect-ratio: 4 / 3; border-radius: 32px; background: #fff; border: .8px solid rgba(0, 0, 0, .1); box-shadow: var(--rf-shadow-card); display: grid; place-items: center; padding: 32px; text-align: center; overflow: hidden; }
+  .bp-label { position: absolute; top: 24px; left: 24px; padding: 16px 18px; border-radius: 15px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); box-shadow: var(--rf-shadow-card); font: 700 20px/1.07 var(--rf-font-title); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .bp-shot figcaption { margin-top: 18px; font: 500 16px/1.6 var(--rf-font-text); color: var(--rf-ink-70); letter-spacing: -0.02em; }
+  .bp-shot figcaption b { color: var(--rf-ink); font-weight: 600; }
+  /* Encadré de note (R33) = contour des visuels d'étapes */
+  .bp-note { margin-top: 56px; padding: 28px 32px; border-radius: 28px; background: rgba(186, 190, 199, .08); border: .8px solid rgba(1, 71, 255, .12); display: flex; gap: 16px; align-items: flex-start; }
+  .bp-note .ico { color: #141b34; margin-top: 4px; }
+
+  /* ---------- Contenu (section bleue) ---------- */
+  .bp-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .bp-q { width: 400px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .bp-q__row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--rf-wire-border); }
+  .bp-q__num { width: 22px; height: 22px; border-radius: 6px; background: var(--rf-wire-bar-2); flex: none; }
+  .bp-q__answers { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 0 4px 34px; }
+  .bp-q__answers span { height: 28px; border-radius: 999px; border: 1px solid var(--rf-wire-border); background: #fff; }
+  .bp-q__answers span.is-on { background: var(--rf-wire-pill); border-color: var(--rf-wire-pill); }
+  .bp-receive { margin-top: 16px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; }
+  .bp-receive h3 { margin: 0 0 12px; font: 700 32px/1.2 var(--rf-font-title); letter-spacing: -0.03em; }
+  .bp-list { list-style: none; margin: 0; padding: 0; }
+  .bp-list li { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(0, 0, 0, .08); font: 500 18px/1.5 var(--rf-font-text); letter-spacing: -0.03em; }
+  .bp-list li:last-child { border-bottom: 0; }
+  .bp-list .ico { color: var(--rf-blue); }
+  .bp-lock { position: relative; }
+  .bp-lock button { all: unset; cursor: pointer; display: flex; align-items: center; gap: 14px; width: 100%; color: var(--rf-ink-70); }
+  .bp-lock button:focus-visible { outline: 2px solid var(--rf-blue); outline-offset: 4px; border-radius: 8px; }
+  .bp-lock .ico { color: #141b34; }
+  .bp-lock b { color: var(--rf-ink); font-weight: 600; }
+  .bp-lock__rows { margin-left: auto; display: flex; flex-direction: column; gap: 6px; width: 120px; }
+  .bp-lock__rows i { height: 7px; border-radius: 4px; background: var(--rf-wire-bar-2); }
+  .bp-tip { position: absolute; left: 38px; bottom: calc(100% - 4px); width: 340px; padding: 16px 18px; border-radius: 15px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); box-shadow: var(--rf-shadow-card); font: 500 15px/1.55 var(--rf-font-text); color: var(--rf-ink-70); letter-spacing: -0.02em; opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 5; }
+  .bp-tip b { color: var(--rf-ink); }
+  .bp-lock:hover .bp-tip, .bp-lock:focus-within .bp-tip, .bp-lock.is-open .bp-tip { opacity: 1; transform: none; }
+  .bp-after-note { margin: 40px auto 0; max-width: 760px; text-align: center; }
+
+  /* ---------- Étapes (F4, sans schéma : R29) ---------- */
+  .bp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .bp-step { display: flex; flex-direction: column; gap: 23px; }
+  .bp-step > div:not(.bp-step__visual) { min-height: 196px; } /* visuels alignés d'une étape à l'autre */
+  .bp-step__label { align-self: flex-start; padding: 12px 16px; border-radius: 12px; background: rgb(234, 239, 255); font: 500 14px/1.46 var(--rf-font-text); letter-spacing: -0.03em; color: rgba(0, 0, 0, .8); }
+  .bp-step h3 { margin: 0 0 8px; font: 600 20px/1.46 var(--rf-font-text); letter-spacing: -0.03em; }
+  .bp-step p { margin: 0; font: 500 18px/2.08 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); }
+  .bp-step__visual { position: relative; height: 380px; border-radius: 28px; background: rgba(186, 190, 199, .08); border: .8px solid rgba(1, 71, 255, .12); overflow: hidden; }
+  .bp-file { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+  .bp-file img { width: 34px; height: auto; }
+
+  /* ---------- Quelle IA ---------- */
+  .bp-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border: .8px solid rgba(0, 0, 0, .133); border-radius: 32px; overflow: hidden; box-shadow: var(--rf-shadow-card); }
+  .bp-table th, .bp-table td { text-align: left; padding: 22px 24px; border-bottom: 1px solid rgba(0, 0, 0, .07); font: 500 16px/1.5 var(--rf-font-text); letter-spacing: -0.02em; vertical-align: middle; }
+  .bp-table th { font-weight: 600; font-size: 15px; color: var(--rf-ink-70); background: #fbfbfb; }
+  .bp-table tr:last-child td { border-bottom: 0; }
+  .bp-table td:first-child { font-weight: 600; color: var(--rf-ink); }
+  .bp-best { display: inline-block; margin-left: 8px; padding: 6px 10px; border-radius: 10px; background: var(--rf-blue); color: #fff; font: 600 13px/1 var(--rf-font-text); vertical-align: middle; }
+  .bp-ai-example { margin-top: 32px; }
+  .bp-ai-example .bp-shot__img { aspect-ratio: 16 / 7; }
+
+  /* ---------- Limites ---------- */
+  .bp-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  /* ---------- Trois niveaux ---------- */
+  .bp-levels-shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .bp-level__shot { position: relative; height: 300px; border-radius: 32px; overflow: hidden; border: .8px solid rgba(0, 0, 0, .1); box-shadow: var(--rf-shadow-card); }
+  .bp-level__video { display: grid; place-items: center; background: #e2e2e2; border: 8px solid #fff; box-shadow: 0 2.87px 7.18px rgba(0, 0, 0, .05), 0 12.93px 12.93px rgba(0, 0, 0, .04), 0 28.74px 17.24px rgba(0, 0, 0, .03), 0 50.29px 20.12px rgba(0, 0, 0, .01); }
+  .bp-level__video .bp-media__play { width: 64px; height: 64px; }
+  .bp-level__video .bp-media__play .ico { width: 26px; height: 26px; }
+  .bp-level__video .bp-media__cap { bottom: 18px; }
+  .bp-level__shot .rf-wire { left: 26px; right: 26px; top: 30px; height: 320px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .bp-level__head { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; }
+  .bp-level__head h3 { margin: 0; font: 700 24px/1.4 var(--rf-font-title); letter-spacing: -0.03em; }
+  .bp-info { position: relative; }
+  .bp-info button { all: unset; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #141b34; }
+  .bp-info button:hover { background: rgba(0, 0, 0, .04); }
+  .bp-info button:focus-visible { outline: 2px solid var(--rf-blue); outline-offset: 2px; }
+  .bp-info .bp-tip { left: auto; right: -6px; bottom: calc(100% + 8px); width: 290px; }
+  .bp-info:hover .bp-tip, .bp-info:focus-within .bp-tip, .bp-info.is-open .bp-tip { opacity: 1; transform: none; }
+  .bp-level__facts { list-style: none; margin: 14px 0 0; padding: 0; }
+  .bp-level__facts li { display: flex; gap: 12px; padding: 14px 0; border-top: 1px solid rgba(0, 0, 0, .08); font: 500 17px/1.6 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink-70); }
+  .bp-level__facts li .ico { color: #141b34; margin-top: 1px; }
+  .bp-level__facts li strong { color: var(--rf-ink); font-weight: 600; }
+  .bp-team { margin-top: 72px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; }
+  .bp-team h3 { margin: 0 0 14px; font: 700 32px/1.2 var(--rf-font-title); letter-spacing: -0.03em; }
+
+  /* ---------- Qui est derrière ---------- */
+  .bp-founder { display: flex; align-items: center; gap: 16px; margin-top: 32px; }
+  .bp-founder img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; box-shadow: var(--rf-shadow-dir); }
+  .bp-founder b { display: block; font: 600 18px/1.3 var(--rf-font-text); }
+  .bp-proofs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .bp-proofs .bp-card { padding: 28px; }
+  .bp-proofs b { display: block; font: 700 48px/1.06 var(--rf-font-title); letter-spacing: -0.03em; margin-bottom: 10px; }
+  .bp-ticker { margin-top: 72px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .bp-ticker__track { display: flex; gap: 16px; width: max-content; padding: 8px 0 48px; animation: bp-ticker 60s linear infinite; }
+  .bp-ticker:hover .bp-ticker__track { animation-play-state: paused; }
+  @keyframes bp-ticker { to { transform: translateX(calc(-50% - 8px)); } }
+  .bp-review { width: 420px; flex: none; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  .bp-review__author { display: flex; align-items: center; gap: 14px; }
+  .bp-review__author img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: var(--rf-shadow-dir); }
+  @media (prefers-reduced-motion: reduce) { .bp-ticker__track { animation: none; } .bp-ticker { overflow-x: auto; } }
+  .bp-quote { margin: 0; }
+  .bp-quote p { margin: 0 0 18px; font: 500 18px/1.86 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .bp-quote cite { font: 600 16px/1.3 var(--rf-font-text); font-style: normal; }
+  .bp-quote cite span { display: block; font-weight: 500; color: var(--rf-ink-70); margin-top: 4px; }
+
+  /* ---------- FAQ réelle du site (R36) : réglage du padding ---------- */
+  .stack-section-3 { --s3-padding: 142px 48px 160px 48px; background: #fbfbfb; }
+
+  /* ---------- Formulaire final (bleu en dégradé) ---------- */
+  /* Le footer du site remonte son bandeau d'appel sur la section précédente :
+     comme sur le site (StackSection3 : 300 px en bas), on lui laisse la place. */
+  .bp-final { padding-bottom: 142px; }
+  .bp-final .bp-h2 { font-size: 64px; line-height: 1.14; }
+  .bp-final .bp-intro { color: rgba(255, 255, 255, .84); }
+  .bp-form-card { max-width: 760px; margin: 56px auto 0; padding: 48px; background: #fff; border: .8px solid rgba(0, 0, 0, .15); border-radius: 32px; box-shadow: var(--rf-shadow-card); text-align: center; }
+  .bp-form { display: flex; gap: 10px; align-items: center; }
+  .bp-form label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .bp-form input { flex: 1; min-width: 0; height: 60px; padding: 0 20px; border-radius: 15px; border: .8px solid rgba(0, 0, 0, .15); background: #fff; font: 500 16px/1 var(--rf-font-text); color: var(--rf-ink); letter-spacing: -0.02em; }
+  .bp-form input:focus { outline: 2px solid var(--rf-blue); outline-offset: 1px; }
+  .bp-form .rf-btn { flex: none; }
+  .bp-form-card .bp-reassure { justify-content: center; margin-top: 24px; }
+  .bp-legal { margin-top: 20px; font: 500 13px/1.6 var(--rf-font-text); color: var(--rf-ink-70); }
+
+  /* ---------- Footer réel du site : compteur sans le module CSS du héros ---------- */
+  .footer-reset [class*="availability__"] { display: flex; align-items: center; gap: 10px; font: 500 16px/1.2 Inter, sans-serif; color: #fff; letter-spacing: -0.02em; }
+  .footer-reset [class*="availabilityIcon"] { width: 10px; height: 10px; border-radius: 50%; background: #ffa21f; }
+  .footer-reset [class*="availabilityText"] { display: flex; gap: 6px; align-items: baseline; }
+  .footer-reset [class*="availabilityNumber"] { font-weight: 700; font-size: 18px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1399px) {
+    .bp-h2 { font-size: 52px; }
+    .bp-hero h1 { font-size: 56px; }
+  }
+  @media (max-width: 1100px) {
+    .bp-split, .bp-two, .bp-receive, .bp-team, .bp-who { grid-template-columns: 1fr; gap: 40px; }
+    .bp-steps, .bp-three, .bp-levels-shots { grid-template-columns: 1fr; max-width: 560px; }
+    .bp-compare th { width: 160px; }
+  }
+  @media (max-width: 809px) {
+    .bp-sec { padding: 88px 16px; }
+    .bp-hero { padding: 40px 16px 72px; }
+    .bp-nav .bp-wrap { padding: 0 16px; height: 76px; }
+    .bp-logo img { height: 32px; }
+    .bp-nav .rf-btn--primary { padding: 4px; }
+    .bp-nav .rf-btn__inner { height: 40px; font-size: 14px; padding: 8px 8px 8px 14px; gap: 8px; }
+    .bp-nav .rf-btn__avatar { width: 24px; height: 24px; }
+    .bp-hero h1 { font-size: 40px; }
+    .bp-h2, .bp-final .bp-h2 { font-size: 34px; }
+    .bp-intro { font-size: 17px; }
+    .bp-media { border-radius: 32px; border-width: 5px; margin-top: 48px; }
+    .bp-media__play { width: 64px; height: 64px; }
+    .bp-conclusion p { font-size: 22px; }
+    .bp-same { grid-template-columns: 1fr 1fr; }
+    .bp-same .rf-wire:nth-child(n+5) { display: none; }
+    .bp-same .rf-wire { height: 170px; }
+    .bp-pair { grid-template-columns: 1fr; }
+    .bp-label { top: 16px; left: 16px; font-size: 16px; padding: 12px 14px; }
+    .bp-art-card { min-height: 640px; padding: 24px; }
+    .bp-art-card__art .bp-scene { --s: .66; }
+    .bp-ai-example .bp-shot__img { aspect-ratio: 4 / 3; padding-top: 88px; }
+    .bp-table th, .bp-table td { padding: 16px 12px; font-size: 14px; }
+    .bp-table th:nth-child(4), .bp-table td:nth-child(4) { display: none; }
+    .bp-compare, .bp-compare tbody, .bp-compare tr, .bp-compare th, .bp-compare td { display: block; width: 100%; }
+    .bp-compare td { padding-top: 4px; }
+    .bp-proofs { grid-template-columns: 1fr; }
+    .bp-form { flex-direction: column; align-items: stretch; }
+    .bp-form .rf-btn { align-self: center; }
+    .bp-form-card { padding: 28px 20px; }
+    .bp-tip { width: 260px; left: 0; }
+    .stack-section-3 { --s3-padding: 88px 16px 96px 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .bp-tip { transition: none; } }
+  /* ---------- Page Système sur mesure ---------- */
+  .bp-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .bp-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  /* Temps 1 (R46) : emplacement d'illustration neutre, même contour que les visuels d'étapes (R33) */
+  .bp-slot-illu { display: grid; place-items: center; text-align: center; padding: 24px; border-radius: 24px; background: rgba(186, 190, 199, .08); border: .8px solid rgba(1, 71, 255, .12); font: 500 14px/1.5 var(--rf-font-text); }
+  .bp-art-card--slot { min-height: 0; justify-content: flex-start; gap: 0; }
+  .bp-art-card--slot .bp-slot-illu { height: 260px; margin-bottom: 28px; }
+  .bp-step__visual.bp-slot-illu { height: 300px; }
+  .bp-level__head .bp-best { margin-left: 0; }
+  .bp-price { margin: 0 0 8px !important; font: 700 40px/1.1 var(--rf-font-title) !important; letter-spacing: -0.03em; color: var(--rf-ink) !important; }
+  .bp-receive .bp-h2 { line-height: 1.1; }
+  @media (max-width: 1100px) {
+    .bp-grid-3, .bp-grid-2 { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; }
+  }
+  @media (max-width: 809px) {
+    .bp-art-card--slot .bp-slot-illu { height: 200px; }
+    .bp-step__visual.bp-slot-illu { height: 220px; }
+    .bp-receive .bp-h2 { font-size: 34px !important; }
+    .bp-eyebrow { height: auto; padding: 8px 16px; font-size: 13px; line-height: 1.5; }
+  }
+
+  /* ---------- v2 (R48 à R53) ---------- */
+  .bp-hero--tint { position: relative; overflow: hidden; background: rgb(249, 251, 255); }
+  .bp-has-shapes { position: relative; overflow: hidden; }
+  /* R49 : livrables en grille */
+  .bp-deliverables { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .bp-deliv { padding: 28px; display: flex; flex-direction: column; gap: 10px; }
+  .bp-deliv .ico { width: 28px; height: 28px; color: #141b34; margin-bottom: 6px; }
+  .bp-deliv h3 { font: 600 20px/1.4 var(--rf-font-text) !important; letter-spacing: -0.03em; }
+  .bp-deliv p { font: 500 16px/1.7 var(--rf-font-text) !important; }
+  /* R52 : icônes de liste en encre ; l'offre a un logo */
+  .bp-list .ico { color: #141b34 !important; }
+  .bp-offer { display: flex; align-items: center; gap: 16px; }
+  .bp-offer__logo { flex: none; width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; color: #fff; background: linear-gradient(90deg, var(--rf-blue-light), var(--rf-blue)); border: 1px solid var(--rf-blue-border); box-shadow: inset 0 3px 0 rgba(255, 255, 255, .5), inset 0 -3px 0 var(--rf-blue-edge); }
+  .bp-offer__logo .ico { width: 28px; height: 28px; }
+  .bp-offer h3 { margin: 0; font: 700 24px/1.3 var(--rf-font-title); letter-spacing: -0.03em; }
+  /* R51 : vrai ticker, pleine largeur, continu, jamais en pause (comme le marquee du site) */
+  .bp-ticker { margin: 72px -48px 0; -webkit-mask-image: none; mask-image: none; overflow: hidden; }
+  .bp-ticker__track { gap: 32px; animation: bp-ticker-seamless 70s linear infinite; will-change: transform; }
+  .bp-ticker:hover .bp-ticker__track { animation-play-state: running; }
+  @keyframes bp-ticker-seamless { to { transform: translate3d(calc(-50% - 16px), 0, 0); } }
+  .bp-review { width: 380px; }
+  /* R50 : photos de profil avec contour */
+  .bp-review__author img { border: 3px solid #fff; box-shadow: var(--rf-shadow-dir); box-sizing: border-box; width: 56px; height: 56px; }
+  @media (max-width: 1100px) { .bp-deliverables { grid-template-columns: 1fr; } }
+  @media (max-width: 809px) { .bp-ticker { margin: 56px -16px 0; } .bp-review { width: 300px; } }
+
+  /* R48 « pas collé » : hors héros, les formes restent sur les bords et ne passent pas derrière le contenu */
+  .bp-has-shapes .rf-shape--left { left: calc(-6% - 560px); }
+  .bp-has-shapes .rf-shape--right { left: calc(100% - 260px); }
+  .bp-has-shapes .bp-step__visual { background: #f2f2f4; }
+  @media (max-width: 809px) { .bp-has-shapes .rf-shapes { display: none; } }
+
+  /* ---------- v3 (R54, R55) ---------- */
+  html { scroll-behavior: smooth; }
+  .bp-book { padding-bottom: 96px; }
+  .bp-book .bp-h2 { max-width: 900px; margin-inline: auto; }
+  .bp-book .bp-intro { max-width: 720px; margin-inline: auto; }
+  .bp-reassure--center { justify-content: center; margin-top: 28px; }
+  /* Même réglage que components/sections/CallBooking/CallBooking.css */
+  .bp-cal { max-width: 1054px; min-height: 665px; margin: 48px auto 0; padding: 0 24px; }
+  .bp-cal > div { height: 665px; overflow: visible; width: 100%; }
+  .bp-cal > div > cal-inline { height: 760px !important; margin-top: -95px; }
+  @media (max-width: 809px) {
+    .bp-book { padding-bottom: 64px; }
+    .bp-cal { min-height: 680px; padding: 0; }
+    .bp-cal > div, .bp-cal > div > cal-inline { height: 680px !important; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="hi-outline-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></symbol>
+<symbol id="hi-outline-magnifying-glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></symbol>
+<symbol id="hi-outline-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"/></symbol>
+<symbol id="hi-outline-wrench-screwdriver" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"/></symbol>
+<symbol id="hi-outline-arrow-right-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+<symbol id="hi-outline-swatch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z"/></symbol>
+<symbol id="hi-outline-finger-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33"/></symbol>
+<symbol id="hi-outline-cpu-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></symbol>
+<symbol id="hi-outline-light-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></symbol>
+<symbol id="hi-outline-information-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></symbol>
+<symbol id="hi-solid-play" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-sparkles" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-check-circle" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-clock" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd"/></symbol>
+<symbol id="hi-solid-shield-check" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 0 0-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08Zm3.094 8.016a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"/></symbol>
+</defs></svg>
+
+<header class="bp-nav">
+  <div class="bp-wrap">
+    <a class="bp-logo" href="https://ruff.agency/" aria-label="Ruff Agency"><img src="../assets/ruff-logo.png" alt="Ruff">.agency</a>
+    <a class="rf-btn rf-btn--primary" href="#reserver"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="../assets/louis.jpg" alt="Photo de profil de Louis Staub"></span></a>
+  </div>
+</header>
+
+<main>
+
+<!-- 1. HÉROS : fond page, place pour la vidéo (R23) ========================== -->
+<section class="bp-hero bp-hero--tint" aria-labelledby="bp-h1">
+  <div class="rf-shapes" aria-hidden="true">
+  <svg class="rf-shape rf-shape--right" viewBox="-37 -37 923 822" fill="none"><path d="M700 382.5L526.344 407.605C375.39 429.429 269.358 262.853 353.028 135.328L370.981 107.966C389.114 80.3294 418.24 61.808 450.958 57.1079C565.559 40.6452 630.17 184.499 541.739 259.226L299.628 463.821L0 747.5" stroke-width="74"/></svg>
+  <svg class="rf-shape rf-shape--left" viewBox="-37 -37 661 870" fill="none"><path d="M587 697.026L113.779 142.135C80.7861 103.448 92.9246 44.058 138.451 21.4196C164.867 8.28399 196.428 11.1396 220.057 28.8031L261.423 59.7251C319.221 102.931 341.496 179.144 316.062 246.676L222.816 494.265C216.639 510.664 208.062 526.055 197.365 539.934L0 796" stroke-width="74"/></svg>
+</div>
+  <div class="bp-wrap">
+    <span class="bp-eyebrow">SYSTÈME SUR MESURE · RUFF AGENCY</span>
+    <h1 id="bp-h1">Ton IA crée des designs que personne d'autre ne peut avoir.</h1>
+    <p class="bp-intro">Le Blueprint t'amène à un bon niveau. Le système sur mesure va plus loin : nos designers construisent ton identité, tes assets et des règles précises, puis apprennent à ton IA à s'en servir. <strong>Résultat : des designs uniques, qui te démarquent.</strong></p>
+    <div class="bp-cta bp-cta--center">
+      <a class="rf-btn rf-btn--primary" href="#reserver"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="../assets/louis.jpg" alt="Photo de profil de Louis Staub"></span></a>
+      <div class="bp-reassure">
+        <span><svg class="ico"><use href="#hi-outline-phone"/></svg>Appel de 30 minutes</span><i aria-hidden="true"></i>
+        <span><svg class="ico"><use href="#hi-outline-magnifying-glass"/></svg>Audit de ton site offert</span>
+      </div>
+      <a class="bp-hint" href="#difference"><svg class="ico"><use href="#hi-outline-arrow-down"/></svg><span>Tu viens du Blueprint ? <b>Voici ce qui change avec le système complet.</b></span></a>
+    </div>
+    <div class="bp-media" role="img" aria-label="Emplacement de la vidéo de présentation">
+      <span class="bp-media__play"><svg class="ico"><use href="#hi-solid-play"/></svg></span>
+      <p class="bp-small bp-media__cap"><span class="bp-todo">[Vidéo : un système sur mesure en action, de la marque au premier design]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. LA DIFFÉRENCE : fond blanc, titre à gauche, texte à droite (R41 : pas d'illustration) -->
+<section class="bp-sec bp-sec--white" id="difference" aria-labelledby="bp-h2-diff">
+  <div class="bp-wrap">
+    <div class="bp-split">
+      <div>
+        <h2 class="bp-h2" id="bp-h2-diff">Le Blueprint te rend bon. Il ne te rend pas unique.</h2>
+      </div>
+      <div>
+        <p class="bp-intro" style="margin-top:0">Avec le Blueprint, ton IA apprend des règles générales. Elle produit une bonne partie de tes designs à un bon niveau, assez pour avancer vite. Mais elle s'appuie sur ce que ta marque a déjà : si ton identité est quelconque, tes designs le restent.</p>
+        <p class="bp-intro">Ce qui te démarque ne tient pas dans un fichier : <strong>une identité propre, des assets uniques, des critères de distinction précis, et du goût.</strong> C'est ce que nos designers construisent pour toi, puis apprennent à ton IA.</p>
+      </div>
+    </div>
+    <div class="bp-conclusion"><p>Une IA ne peut pas être meilleure que ce sur quoi elle s'appuie.</p></div>
+  </div>
+</section>
+
+<!-- 3. TROIS NIVEAUX : fond page, exemples = emplacements vidéo (R42) ======= -->
+<section class="bp-sec bp-sec--page" aria-labelledby="bp-h2-levels">
+  <div class="bp-wrap">
+    <div class="bp-head bp-center">
+      <h2 class="bp-h2" id="bp-h2-levels">Même contenu, trois bases, trois résultats.</h2>
+      <p class="bp-intro">Le même brief, donné à la même IA. Seule change la base sur laquelle elle s'appuie.</p>
+    </div>
+    <div class="bp-levels-shots">
+      <div>
+        <div class="bp-level__shot bp-level__video" role="img" aria-label="Emplacement vidéo : sans système"><span class="bp-media__play"><svg class="ico"><use href="#hi-solid-play"/></svg></span><p class="bp-small bp-media__cap"><span class="bp-todo">[Vidéo : même contenu, sans système]</span></p></div>
+        <div class="bp-level__head"><h3>Sans système</h3></div>
+        <ul class="bp-level__facts">
+          <li><svg class="ico"><use href="#hi-outline-wrench-screwdriver"/></svg><span><strong>Construit :</strong> aucune base, l'IA improvise.</span></li>
+          <li><svg class="ico"><use href="#hi-outline-arrow-right-circle"/></svg><span><strong>Résultat :</strong> un design générique, interchangeable.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="bp-level__shot bp-level__video" role="img" aria-label="Emplacement vidéo : avec le Blueprint gratuit"><span class="bp-media__play"><svg class="ico"><use href="#hi-solid-play"/></svg></span><p class="bp-small bp-media__cap"><span class="bp-todo">[Vidéo : même contenu, avec le Blueprint gratuit]</span></p></div>
+        <div class="bp-level__head"><h3>Blueprint gratuit</h3></div>
+        <ul class="bp-level__facts">
+          <li><svg class="ico"><use href="#hi-outline-wrench-screwdriver"/></svg><span><strong>Construit :</strong> un système solide, des règles générales.</span></li>
+          <li><svg class="ico"><use href="#hi-outline-arrow-right-circle"/></svg><span><strong>Résultat :</strong> un bon point de départ, reconnaissable mais pas unique.</span></li>
+        </ul>
+      </div>
+      <div class="bp-level--focus">
+        <div class="bp-level__shot bp-level__video" role="img" aria-label="Emplacement vidéo : avec un système sur mesure"><span class="bp-media__play"><svg class="ico"><use href="#hi-solid-play"/></svg></span><p class="bp-small bp-media__cap"><span class="bp-todo">[Vidéo : même contenu, avec un système sur mesure]</span></p></div>
+        <div class="bp-level__head"><h3>Système sur mesure</h3><span class="bp-best">Cette offre</span></div>
+        <ul class="bp-level__facts">
+          <li><svg class="ico"><use href="#hi-outline-wrench-screwdriver"/></svg><span><strong>Construit :</strong> par nos designers, avec ta marque, tes assets et des règles précises.</span></li>
+          <li><svg class="ico"><use href="#hi-outline-arrow-right-circle"/></svg><span><strong>Résultat :</strong> des designs uniques qui te démarquent.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CE QUE FAIT L'ÉQUIPE : section bleue en dégradé (R22), cartes F5.
+     Temps 1 (R46) : emplacements d'illustration, à remplir en temps 2. ====== -->
+<section class="bp-sec bp-sec--blue" aria-labelledby="bp-h2-team">
+  <div class="bp-wrap">
+    <div class="bp-head bp-center">
+      <h2 class="bp-h2" id="bp-h2-team">Ce que nos designers construisent pour ta marque.</h2>
+      <p class="bp-intro">Le travail qu'un fichier ne peut pas faire : de la création, du goût et des heures d'affinage, élément par élément.</p>
+    </div>
+    <div class="bp-grid-3">
+      <article class="bp-art-card bp-art-card--slot"><div class="bp-slot-illu"><span class="bp-todo">[Illustration à venir : l'identité qui naît]</span></div><h3>Ton identité et tes assets</h3><div class="bp-rule"></div><p>Une identité et des assets propres à ta marque, que personne d'autre n'a.</p></article>
+      <article class="bp-art-card bp-art-card--slot"><div class="bp-slot-illu"><span class="bp-todo">[Illustration à venir : ce qui te distingue]</span></div><h3>Tes critères de distinction</h3><div class="bp-rule"></div><p>Des règles très précises sur ce qui rend ta marque reconnaissable, et ce qu'elle ne fait jamais.</p></article>
+      <article class="bp-art-card bp-art-card--slot"><div class="bp-slot-illu"><span class="bp-todo">[Illustration à venir : le goût en plus]</span></div><h3>La créativité et le goût</h3><div class="bp-rule"></div><p>Ce qui démarque une entreprise des autres, et qu'aucune règle générale ne remplace.</p></article>
+    </div>
+    <div class="bp-grid-2" style="margin-top:16px">
+      <article class="bp-art-card bp-art-card--slot"><div class="bp-slot-illu"><span class="bp-todo">[Illustration à venir : l'affinage au détail près]</span></div><h3>Des heures d'affinage</h3><div class="bp-rule"></div><p>Nos designers testent, corrigent et recommencent, avec des retours précis sur chaque détail.</p></article>
+      <article class="bp-art-card bp-art-card--slot"><div class="bp-slot-illu"><span class="bp-todo">[Illustration à venir : l'IA qui apprend ta marque]</span></div><h3>Une IA qui sait s'en servir</h3><div class="bp-rule"></div><p>On apprend à ton IA, élément par élément, quand et comment utiliser chaque asset et chaque règle.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CE QUE TU REÇOIS : fond blanc, deux colonnes + grille de livrables (R49) -->
+<section class="bp-sec bp-sec--white" aria-labelledby="bp-h2-get">
+  <div class="bp-wrap bp-split">
+    <div>
+      <h2 class="bp-h2" id="bp-h2-get">Ce que tu reçois.</h2>
+      <p class="bp-intro">Le système complet, construit pour ta marque et prêt à être utilisé par ton IA.</p>
+      <p class="bp-small" style="margin-top:24px"><span class="bp-todo">[Format de livraison et accompagnement après livraison, à confirmer]</span></p>
+    </div>
+    <div class="bp-deliverables">
+      <article class="bp-card bp-deliv"><svg class="ico"><use href="#hi-outline-swatch"/></svg><h3>Ton identité et tes assets</h3><p>Une identité et des assets propres à ta marque, que personne d'autre n'a.</p></article>
+      <article class="bp-card bp-deliv"><svg class="ico"><use href="#hi-outline-finger-print"/></svg><h3>Tes critères de distinction</h3><p>Rédigés en règles précises : ce que ta marque fait, et ce qu'elle ne fait jamais.</p></article>
+      <article class="bp-card bp-deliv"><svg class="ico"><use href="#hi-outline-cpu-chip"/></svg><h3>Le système entraîné</h3><p>Le système complet, avec toutes les règles d'affinage, entraîné sur ta marque.</p></article>
+      <article class="bp-card bp-deliv"><svg class="ico"><use href="#hi-outline-light-bulb"/></svg><h3>Le guide designer</h3><p>Pour savoir quand une tâche doit revenir à un designer plutôt qu'à ton IA.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 6. DÉROULÉ : fond gris marqué, étapes F4. Temps 1 : visuels à venir. ===== -->
+<section class="bp-sec bp-sec--grey bp-has-shapes" aria-labelledby="bp-h2-how">
+  <div class="rf-shapes" aria-hidden="true">
+  <svg class="rf-shape rf-shape--right" viewBox="-37 -37 923 822" fill="none"><path d="M700 382.5L526.344 407.605C375.39 429.429 269.358 262.853 353.028 135.328L370.981 107.966C389.114 80.3294 418.24 61.808 450.958 57.1079C565.559 40.6452 630.17 184.499 541.739 259.226L299.628 463.821L0 747.5" stroke-width="74"/></svg>
+  <svg class="rf-shape rf-shape--left" viewBox="-37 -37 661 870" fill="none"><path d="M587 697.026L113.779 142.135C80.7861 103.448 92.9246 44.058 138.451 21.4196C164.867 8.28399 196.428 11.1396 220.057 28.8031L261.423 59.7251C319.221 102.931 341.496 179.144 316.062 246.676L222.816 494.265C216.639 510.664 208.062 526.055 197.365 539.934L0 796" stroke-width="74"/></svg>
+</div>
+  <div class="bp-wrap">
+    <div class="bp-head bp-center">
+      <h2 class="bp-h2" id="bp-h2-how">Comment on construit ton système.</h2>
+      <p class="bp-intro">Trois étapes. Tu valides à chaque étape. <span class="bp-todo">[Durée totale à confirmer]</span></p>
+    </div>
+    <div class="bp-steps">
+      <article class="bp-step">
+        <span class="bp-step__label">Étape 1</span>
+        <div><h3>Un appel de 30 minutes</h3><p>On analyse ta marque et ton site actuel, et on définit ensemble ce qui doit te distinguer. L'audit de ton site est offert.</p></div>
+        <div class="bp-step__visual bp-slot-illu"><span class="bp-todo">[Illustration à venir : l'appel et l'audit]</span></div>
+      </article>
+      <article class="bp-step">
+        <span class="bp-step__label">Étape 2</span>
+        <div><h3>On construit ta base</h3><p>Nos designers créent ton identité, tes assets et tes critères de distinction. Tu fais tes retours, on ajuste.</p></div>
+        <div class="bp-step__visual bp-slot-illu"><span class="bp-todo">[Illustration à venir : la base qui se construit]</span></div>
+      </article>
+      <article class="bp-step">
+        <span class="bp-step__label">Étape 3</span>
+        <div><h3>On l'apprend à ton IA</h3><p>On affine le système jusqu'à ce que ton IA crée dans ta direction artistique, puis on te le livre, prêt à l'emploi.</p></div>
+        <div class="bp-step__visual bp-slot-illu"><span class="bp-todo">[Illustration à venir : l'IA qui crée dans ta DA]</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 7. EXEMPLES RÉELS : fond page, avant / après en emplacements média (R27, R42) -->
+<section class="bp-sec bp-sec--page" aria-labelledby="bp-h2-ex">
+  <div class="bp-wrap">
+    <div class="bp-head bp-center">
+      <h2 class="bp-h2" id="bp-h2-ex">Avec et sans système sur mesure.</h2>
+      <p class="bp-intro">À gauche, la même IA avec le Blueprint gratuit. À droite, avec le système construit pour la marque.</p>
+    </div>
+    <div class="bp-pairs">
+      <div class="bp-pair">
+        <figure class="bp-shot"><div class="bp-shot__img"><span class="bp-label">Blueprint</span><p class="bp-small"><span class="bp-todo">[Capture réelle : section de site, Blueprint gratuit]</span></p></div><figcaption><b>Blueprint :</b> un bon niveau, reconnaissable.</figcaption></figure>
+        <figure class="bp-shot"><div class="bp-shot__img"><span class="bp-label">Sur mesure</span><p class="bp-small"><span class="bp-todo">[Capture réelle : la même section, système sur mesure]</span></p></div><figcaption><b>Sur mesure :</b> une marque qu'on ne confond avec aucune autre.</figcaption></figure>
+      </div>
+    </div>
+    <div class="bp-note"><svg class="ico"><use href="#hi-outline-information-circle"/></svg><p class="bp-p"><span class="bp-todo">[Exemple réel de système sur mesure à ajouter, avec le nom du client s'il est d'accord]</span></p></div>
+  </div>
+</section>
+
+<!-- 8. PREUVES : fond blanc, chiffres + avis avec photo (contour, R50) en vrai ticker pleine largeur (R51) -->
+<section class="bp-sec bp-sec--white" aria-labelledby="bp-h2-proof">
+  <div class="bp-wrap bp-split">
+    <div>
+      <h2 class="bp-h2" id="bp-h2-proof">Le même niveau d'exigence que sur nos projets clients.</h2>
+      <p class="bp-intro">Ruff Agency est une agence de design. Les critères, les règles et la méthode de retours que nous appliquons à ton système sont ceux que nous utilisons sur nos propres projets.</p>
+    </div>
+    <div>
+      <div class="bp-proofs" style="margin-top:0">
+        <div class="bp-card"><b>+30</b><p class="bp-small">clients satisfaits, note moyenne 5/5</p></div>
+        <div class="bp-card"><b>6</b><p class="bp-small">études de cas publiées : Spreak, Rentala, Keyframe, Zorgniotti, Clovarex, Scall</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="bp-ticker" aria-label="Avis clients">
+    <div class="bp-ticker__track">
+      <blockquote class="bp-card bp-quote bp-review"><p>« Je recommande vivement Louis pour son travail remarquable sur Spreak. Toute entreprise souhaitant collaborer avec un designer à la fois rigoureux, créatif et fiable fera un excellent choix. »</p><cite class="bp-review__author"><img src="../assets/avis/sacha-tassart.jpg" alt="Photo de Sacha Tassart" width="52" height="52"><span>Sacha Tassart<span>Fondateur de Spreak</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Le design est moderne et clair. Mention spéciale pour le copywriting : les textes sont percutants et mettent parfaitement en valeur notre proposition. »</p><cite class="bp-review__author"><img src="../assets/avis/martin-riedweg.png" alt="Photo de Martin Riedweg" width="52" height="52"><span>Martin Riedweg<span>Fondateur de Rentala</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Le site a été livré rapidement, avec un design clair et professionnel. Une collaboration efficace et un résultat au-delà de nos attentes. »</p><cite class="bp-review__author"><img src="../assets/avis/dominique-zenglein.png" alt="Photo de Dominique Zenglein" width="52" height="52"><span>Dominique Zenglein<span>Associé chez Zorgniotti</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Un vrai professionnel. Louis m'a livré un site soigné, fluide et parfaitement conforme à mes attentes. Il écoute, il ajuste, il vise juste. »</p><cite class="bp-review__author"><img src="../assets/avis/julie-zagula.png" alt="Photo de Julie Zagula" width="52" height="52"><span>Julie Zagula<span>Fondatrice de Clovarex</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Ruff agency m'a délivré mon site très rapidement et a été très réactive. Les assets et les animations sont magnifiques. »</p><cite class="bp-review__author"><img src="../assets/avis/antoine-troovy.png" alt="Photo de Antoine Troovy" width="52" height="52"><span>Antoine Troovy<span>Fondateur de Keyframe agency</span></span></cite></blockquote><blockquote class="bp-card bp-quote bp-review"><p>« Je recommande vivement Louis pour son travail remarquable sur Spreak. Toute entreprise souhaitant collaborer avec un designer à la fois rigoureux, créatif et fiable fera un excellent choix. »</p><cite class="bp-review__author"><img src="../assets/avis/sacha-tassart.jpg" alt="Photo de Sacha Tassart" width="52" height="52"><span>Sacha Tassart<span>Fondateur de Spreak</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Le design est moderne et clair. Mention spéciale pour le copywriting : les textes sont percutants et mettent parfaitement en valeur notre proposition. »</p><cite class="bp-review__author"><img src="../assets/avis/martin-riedweg.png" alt="Photo de Martin Riedweg" width="52" height="52"><span>Martin Riedweg<span>Fondateur de Rentala</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Le site a été livré rapidement, avec un design clair et professionnel. Une collaboration efficace et un résultat au-delà de nos attentes. »</p><cite class="bp-review__author"><img src="../assets/avis/dominique-zenglein.png" alt="Photo de Dominique Zenglein" width="52" height="52"><span>Dominique Zenglein<span>Associé chez Zorgniotti</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Un vrai professionnel. Louis m'a livré un site soigné, fluide et parfaitement conforme à mes attentes. Il écoute, il ajuste, il vise juste. »</p><cite class="bp-review__author"><img src="../assets/avis/julie-zagula.png" alt="Photo de Julie Zagula" width="52" height="52"><span>Julie Zagula<span>Fondatrice de Clovarex</span></span></cite></blockquote>
+      <blockquote class="bp-card bp-quote bp-review"><p>« Ruff agency m'a délivré mon site très rapidement et a été très réactive. Les assets et les animations sont magnifiques. »</p><cite class="bp-review__author"><img src="../assets/avis/antoine-troovy.png" alt="Photo de Antoine Troovy" width="52" height="52"><span>Antoine Troovy<span>Fondateur de Keyframe agency</span></span></cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 9. PRIX : fond gris marqué (R37) ========================================= -->
+<section class="bp-sec bp-sec--grey" aria-labelledby="bp-h2-price">
+  <div class="bp-wrap bp-split">
+    <div>
+      <h2 class="bp-h2" id="bp-h2-price">Un prix fixé après l'appel.</h2>
+      <p class="bp-intro">Chaque marque part d'un point différent. On fixe le prix une fois qu'on a vu ta marque, ton site et ce qu'il faut construire. <span class="bp-todo">[À confirmer : prix fixe, « à partir de », ou sur devis]</span></p>
+      <div class="bp-cta" style="margin-top:40px">
+        <a class="rf-btn rf-btn--primary" href="#reserver"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="../assets/louis.jpg" alt=""></span></a>
+        <div class="bp-reassure"><span><svg class="ico"><use href="#hi-outline-phone"/></svg>Appel de 30 minutes</span><i aria-hidden="true"></i><span><svg class="ico"><use href="#hi-outline-magnifying-glass"/></svg>Audit de ton site offert</span></div>
+      </div>
+    </div>
+    <div class="bp-card">
+      <div class="bp-offer"><span class="bp-offer__logo" aria-hidden="true"><svg class="ico"><use href="#hi-solid-sparkles"/></svg></span><div><h3>Système sur mesure</h3><span class="bp-small">par Ruff Agency</span></div></div>
+      <div class="bp-rule"></div>
+      <p class="bp-price"><span class="bp-todo">[Prix à confirmer]</span></p>
+      <ul class="bp-list">
+        <li><svg class="ico"><use href="#hi-solid-check-circle"/></svg>Identité, assets et critères de distinction</li>
+        <li><svg class="ico"><use href="#hi-solid-check-circle"/></svg>Système complet entraîné sur ta marque</li>
+        <li><svg class="ico"><use href="#hi-solid-check-circle"/></svg>Affinage par nos designers jusqu'à validation</li>
+        <li><svg class="ico"><use href="#hi-solid-clock"/></svg><span class="bp-todo">[Délai à confirmer]</span></li>
+        <li><svg class="ico"><use href="#hi-solid-shield-check"/></svg><span class="bp-todo">[Garantie et conditions de paiement à confirmer]</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FAQ : composant réel du site (StackSection3, R36) ===================== -->
+<section class="stack-section-3" aria-labelledby="bp-faq-title">
+  <div class="s3-content"><div class="s3-layout">
+    <div class="s3-copy">
+      <div class="s3-title-wrap s3-reveal-title is-visible"><h2 class="s3-title" id="bp-faq-title">Des questions ? On y répond</h2></div>
+      <div class="s3-description-wrap s3-reveal-copy is-visible"><p class="s3-description">Tu as encore des questions ? Réserve un appel ou écris-nous <a href="https://api.whatsapp.com/send/?phone=33636465091" target="_blank" rel="noopener noreferrer">ici</a>.</p></div>
+      <div class="s3-cta-reveal is-visible"><a class="s3-cta" href="#reserver"><span class="s3-cta-inner"><span class="s3-cta-label">Réserver un appel</span><img class="s3-cta-avatar" src="../assets/louis.jpg" alt="Photo de profil de Louis Staub" width="28" height="28"></span></a></div>
+    </div>
+    <ul class="s3-faq-list">
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Quelle différence avec le Blueprint gratuit ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Le Blueprint donne à ton IA des règles générales : tu atteins un bon niveau, reconnaissable mais pas unique. Le système sur mesure est construit par nos designers à partir de ta marque : ton identité, tes assets, tes critères de distinction et toutes les règles d'affinage.</p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Je n'ai pas encore d'identité forte. Est-ce un problème ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Non. C'est justement le point de départ : nos designers créent une identité et des assets propres à ta marque avant de les apprendre à ton IA.</p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Avec quelle IA ça fonctionne ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Le système marche avec plusieurs IA. Pour l'installation et le premier design, nous recommandons Opus 5.5, qui donne les meilleurs résultats dans nos tests.</p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Combien de temps ça prend ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer"><span class="bp-todo">[Délai à confirmer]</span></p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Combien ça coûte ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Le prix est fixé après l'appel, une fois qu'on a vu ta marque et ce qu'il faut construire. <span class="bp-todo">[À confirmer : prix fixe, « à partir de » ou sur devis]</span></p></div></div><div class="s3-faq-line"></div></li>
+      <li class="s3-faq-item s3-reveal-up is-visible"><button type="button" class="s3-faq-header" aria-expanded="false"><span class="s3-faq-question">Est-ce que je pourrai encore faire appel à un designer ?</span><div class="s3-faq-chevron-wrap"><svg class="s3-faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M 12 6 L 6 0 L 0 6" transform="translate(6 9)"></path></svg></div></button><div class="s3-answer-clip" aria-hidden="true"><div class="s3-answer-inner"><p class="s3-faq-answer">Oui, et c'est parfois nécessaire : pour les pages qui doivent convertir, les éléments de marque uniques et les décisions de goût. Le système inclut un guide pour repérer ces cas.</p></div></div><div class="s3-faq-line"></div></li>
+    </ul>
+  </div></div>
+</section>
+
+<!-- 11. APPEL FINAL : fond blanc (R54), agenda Cal.com intégré à la place du bouton (R55). Footer sans bandeau (R40). -->
+<section class="bp-sec bp-sec--white bp-book" id="reserver" aria-labelledby="bp-h2-final">
+  <div class="bp-wrap bp-center">
+    <h2 class="bp-h2" id="bp-h2-final">Donne à ton IA une base que personne d'autre n'a.</h2>
+    <p class="bp-intro">Choisis un créneau de 30 minutes. On regarde ta marque ensemble, on te présente l'audit de ton site, et on te dit ce qu'on construirait pour toi.</p>
+    <div class="bp-reassure bp-reassure--center"><span><svg class="ico"><use href="#hi-outline-phone"/></svg>Appel de 30 minutes</span><i aria-hidden="true"></i><span><svg class="ico"><use href="#hi-outline-magnifying-glass"/></svg>Audit de ton site offert</span></div>
+  </div>
+  <div class="bp-cal" aria-label="Choisir un créneau pour ton appel"><div id="my-cal-inline-discovery-call"></div></div>
+</section>
+
+</main>
+
+<!-- 12. FOOTER : composant réel du site, sans bandeau d'appel (R21, R40) ===== -->
+<footer class="footer-reset framer-M7Fsn framer-1e9n470 " style="--th1ufy:96px 48px 64px 48px;--ink:#fff;background-color:rgb(35, 38, 48)"><div class="framer-1sjspef"><div class="framer-1jh4d2h"><div class="framer-1d3n5xr"><p class="framer-dsquaq">Le mélange parfait entre conversion et design.</p><a class="framer-1c40f2t" href="https://ruff.agency/"><span class="footer-logo-svg" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 69 42.446" overflow="visible"><g><path d="M 0 13.465 C 0 11.075 1.754 9.046 4.12 8.701 L 63.492 0.05 C 64.875 -0.151 66.278 0.258 67.335 1.173 C 68.392 2.087 69 3.416 69 4.813 L 69 37.631 C 69 38.999 68.419 40.301 67.401 41.215 C 66.383 42.128 65.025 42.565 63.666 42.417 L 4.294 35.964 C 1.85 35.699 -0.001 33.635 0 31.177 Z" fill="rgba(255,255,255,0.25)"></path><path d="M 50.982 22.241 L 51.025 35.978 L 53.695 36.336 L 56.37 36.696 L 56.37 26.798 L 56.399 24.927 L 62.371 24.927 L 62.371 20.167 L 59.415 20.139 L 56.443 20.097 L 56.399 19.067 L 56.369 11.623 C 56.369 11.623 58.519 11.219 59.901 10.987 C 61.083 10.789 62.932 10.51 62.932 10.51 L 63.25 10.47 L 63.25 6 L 56.953 6.847 L 50.983 7.648 L 50.983 22.241 Z M 37.451 21.444 L 37.451 34.156 L 40.122 34.514 L 42.838 34.879 L 42.838 26 L 42.868 24.13 L 48.839 24.13 L 48.839 19.37 L 45.882 19.341 L 42.91 19.299 L 42.866 18.269 L 42.837 12.563 L 46.371 11.957 L 49.379 11.409 L 49.718 11.346 L 49.718 7.82 L 43.55 8.648 L 37.423 9.471 L 37.45 21.443 Z M 21.753 11.577 L 21.753 27.703 C 21.753 29.914 23.13 32.214 24.552 32.423 L 31.255 33.323 C 34.625 33.776 35.665 30.233 35.665 27.923 L 35.665 9.708 L 33.287 10.027 L 30.614 10.386 L 30.658 19.724 L 30.658 27.527 C 30.389 28.757 27.481 28.723 26.948 27.527 C 26.891 27.391 26.859 19.654 26.859 19.654 L 26.859 10.891 L 24.728 11.177 Z M 6 21.874 L 6 29.931 L 8.59 30.278 L 10.558 30.542 L 10.558 24.984 L 11.64 24.984 C 12.252 24.944 12.476 24.984 12.971 25.479 C 13.377 25.881 13.298 26.062 13.81 27.415 L 14.64 31.091 L 17.421 31.464 L 20.682 31.902 L 19.304 28.182 L 17.929 25.196 L 17.421 24.206 L 18.043 23.556 C 19.23 22.341 19.739 20.503 19.442 18.553 C 19.074 16.037 17.642 12.997 15.169 12.46 L 10.187 13.129 L 6 13.69 Z M 13.686 17.952 C 14.145 18.412 14.096 19.825 13.686 20.334 C 13.446 20.631 13.032 20.73 12.043 20.772 L 10.558 20.772 L 10.558 17.476 L 12.043 17.476 C 12.876 17.476 13.421 17.687 13.686 17.952 Z" fill="rgba(255,255,255,0.94)"></path></g></svg></span><p class="framer-1oioa2n">.agency</p></a></div><div class="framer-eoh0es"><div class="framer-wqmu2g"><p class="footer-heading">Navigation</p><div class="framer-1q9fhly"><p class="footer-links"><a class="footer-link" href="https://ruff.agency/">Accueil</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/realisations">Réalisations</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/ressources">Ressources</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/outils-gratuits">Outils gratuits</a></p><p class="footer-links"><a class="footer-link" href="#">Guide</a></p><p class="footer-links"><a class="footer-link" href="#">Outil</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/agence">À propos</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/30-min">30 minutes</a></p><p class="footer-links"><a class="footer-link footer-link--ghost" href="#">Lead magnet</a></p></div></div><div class="framer-ngd2e7"><p class="footer-heading">Services</p><div class="framer-19q5j0w"><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/landing-page">Landing Page</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/website">Site Internet</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/branding">Branding</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/product-design">Product design</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/seo-geo">SEO / GEO</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/optimisation-conversion">Optimisation conversion</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/copywriting">Copywriting</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/developpement-framer">Développement Framer</a></p><p class="footer-links"><a class="footer-link" href="https://ruff.agency/services/developpement-web">Développement code (React)</a></p></div></div><div class="framer-1g1y9mg"><p class="footer-heading">Mes réseaux</p><div class="framer-18ssb44"><div class="framer-1un4xf3"><span class="footer-social-icon footer-social-icon--x framer-ga2ues"><span class="footer-social-art"><span class="" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 12.929 12.067" overflow="visible"><path d="M 10.182 0 L 12.164 0 L 7.833 5.111 L 12.929 12.067 L 8.939 12.067 L 5.814 7.848 L 2.239 12.067 L 0.255 12.067 L 4.888 6.6 L 0 0 L 4.091 0 L 6.915 3.856 Z M 9.486 10.841 L 10.585 10.841 L 3.494 1.161 L 2.315 1.161 L 9.486 10.841 Z" fill="rgb(0, 0, 0)"></path></svg></span></span></span><p class="footer-social-label"><a class="footer-link" href="https://x.com/Louis67810" target="_blank" rel="noreferrer">X</a></p></div><div class="framer-8ld06r"><span class="footer-social-icon footer-social-icon--wa framer-7kuc86"><span class="footer-social-art"><span class="" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15 15" overflow="visible"><g><path d="M 7.498 0 C 3.363 0 0 3.364 0 7.5 C -0.002 9.08 0.498 10.619 1.428 11.896 L 0.493 14.682 L 3.376 13.761 C 4.599 14.572 6.035 15.003 7.502 15 C 11.637 15 15 11.636 15 7.5 C 15 3.364 11.637 0 7.502 0 L 7.498 0 Z" fill="rgb(254,254,254)"></path><path d="M 5.34 3.86 C 5.194 3.511 5.084 3.498 4.863 3.489 C 4.78 3.484 4.696 3.481 4.612 3.481 C 4.326 3.481 4.026 3.564 3.845 3.749 C 3.625 3.974 3.078 4.499 3.078 5.575 C 3.078 6.651 3.863 7.691 3.969 7.837 C 4.079 7.982 5.498 10.222 7.702 11.135 C 9.426 11.849 9.937 11.783 10.329 11.699 C 10.902 11.576 11.621 11.152 11.802 10.641 C 11.982 10.129 11.982 9.693 11.929 9.6 C 11.876 9.508 11.731 9.455 11.511 9.344 C 11.29 9.234 10.219 8.705 10.016 8.635 C 9.818 8.56 9.628 8.586 9.479 8.798 C 9.267 9.093 9.06 9.393 8.892 9.574 C 8.76 9.715 8.544 9.732 8.363 9.657 C 8.12 9.556 7.442 9.318 6.605 8.573 C 5.956 7.995 5.516 7.277 5.388 7.061 C 5.26 6.84 5.374 6.713 5.476 6.593 C 5.586 6.457 5.692 6.359 5.802 6.232 C 5.912 6.104 5.974 6.038 6.045 5.888 C 6.12 5.742 6.067 5.592 6.014 5.482 C 5.961 5.372 5.52 4.296 5.339 3.86 Z" fill="rgb(37,211,102)"></path></g></svg></span></span></span><p class="footer-social-label"><a class="footer-link" href="https://api.whatsapp.com/send/?phone=33636465091&amp;text=Bonjour%2C+je+vous+contacte+par+rapport+%C3%A0+vos+landing+pages.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noreferrer">WhatsApp</a></p></div><div class="framer-1l5pyzt"><span class="footer-social-icon footer-social-icon--in framer-1c9he38"><span class="footer-social-art"><span class="" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18 18" overflow="visible"><g><path d="M 0 0 L 18 0 L 18 18 L 0 18 Z" fill="transparent"></path><path d="M 16.671 0 L 1.329 0 C 0.595 0 0 0.595 0 1.329 L 0 16.671 C 0 17.405 0.595 18 1.329 18 L 16.671 18 C 17.405 18 18 17.405 18 16.671 L 18 1.329 C 18 0.595 17.405 0 16.671 0 Z M 5.365 15.334 L 2.659 15.334 L 2.659 6.737 L 5.365 6.737 Z M 4.01 5.546 C 3.153 5.542 2.461 4.844 2.465 3.986 C 2.468 3.129 3.165 2.436 4.022 2.438 C 4.88 2.44 5.573 3.136 5.572 3.994 C 5.578 4.409 5.415 4.809 5.121 5.101 C 4.826 5.394 4.425 5.555 4.01 5.546 Z M 15.34 15.341 L 12.635 15.341 L 12.635 10.645 C 12.635 9.26 12.046 8.833 11.286 8.833 C 10.483 8.833 9.696 9.437 9.696 10.68 L 9.696 15.341 L 6.99 15.341 L 6.99 6.744 L 9.592 6.744 L 9.592 7.935 L 9.628 7.935 C 9.889 7.406 10.804 6.502 12.2 6.502 C 13.71 6.502 15.341 7.399 15.341 10.024 Z" fill="rgb(255, 255, 255)"></path></g></svg></span></span></span><p class="footer-social-label"><a class="footer-link" href="https://www.linkedin.com/in/louis-staub-a49062332/" target="_blank" rel="noreferrer">LinkedIn</a></p></div></div></div></div></div><div class="framer-1j04v13"><p class="footer-heading">Nos lieux :</p><div class="framer-1pgssps"><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-paris">Paris</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-marseille">Marseille</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-lyon">Lyon</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-toulouse">Toulouse</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-nice">Nice</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-nantes">Nantes</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-montpellier">Montpellier</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-strasbourg">Strasbourg</a></p><p class="footer-place"><a class="footer-link" href="https://ruff.agency/ville/agence-web-design-lille">Lille</a></p></div></div><div class="framer-1l04fa9" style="background-color:rgba(255,255,255,.13)"></div><p class="framer-1b5zpj footer-copyright">Ruff Agency tous droits réservés</p></div></footer>
+
+<script>
+  // Infobulles : survol, clic (mobile), clavier.
+  document.querySelectorAll("[data-toggle]").forEach((el) => {
+    const btn = el.querySelector("button");
+    btn.addEventListener("click", () => btn.setAttribute("aria-expanded", String(el.classList.toggle("is-open"))));
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") document.querySelectorAll("[data-toggle].is-open").forEach((el) => el.classList.remove("is-open")); });
+  // FAQ du site : même comportement que StackSection3 (classe is-open).
+  document.querySelectorAll(".s3-faq-item").forEach((item) => {
+    const btn = item.querySelector(".s3-faq-header");
+    btn.addEventListener("click", () => {
+      const open = item.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(open));
+      item.querySelector(".s3-faq-chevron").classList.toggle("is-open", open);
+      item.querySelector(".s3-answer-clip").setAttribute("aria-hidden", String(!open));
+    });
+  });
+  // Footer du site : compteur de places (le site le calcule de la même façon).
+  const d = new Date(), days = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  document.querySelectorAll('.footer-reset [class*="availabilityNumber"]').forEach((n) => { n.textContent = Math.ceil(6 - ((d.getDate() - 1) / days) * 5); });
+  document.querySelectorAll('.footer-reset [class*="availabilityText"] span:last-child').forEach((s) => { s.textContent = "places restantes pour " + d.toLocaleDateString("fr-FR", { month: "long" }); });
+  // Maquette : formulaire éventuel, sans envoyer l'email dans l'URL.
+  const form = document.querySelector(".bp-form");
+  if (form) form.addEventListener("submit", (e) => { e.preventDefault(); const i = form.querySelector("input[type=email]"); if (!i.checkValidity()) { i.reportValidity(); return; } });
+</script>
+<script>
+(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return api; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+Cal("init", "discovery-call", { origin: "https://app.cal.com" });
+Cal.ns["discovery-call"]("inline", { elementOrSelector: "#my-cal-inline-discovery-call", config: { layout: "month_view", locale: "fr", useSlotsViewOnSmallScreen: "true" }, calLink: "ruffagency/discovery-call" });
+Cal.ns["discovery-call"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+</script>
+</body>
+</html>

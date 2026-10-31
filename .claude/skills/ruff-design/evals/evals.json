@@ -1,0 +1,31 @@
+{
+  "skill": "ruff-design",
+  "note": "Grilles de résultat attendu (format Anatomy). Pas de score automatique : relire la réponse et les PNG contre chaque point. Le point « audit » est vérifiable par script.",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Fais-moi une section bénéfices pour la page service Copywriting, dans mon style.",
+      "expected_output": "Nouveau fichier brand/design/sections/<nom>-v1.html qui importe ../ruff-tokens.css. H2 bicolore Plus Jakarta Sans + bouton principal de 60 px avec la photo de Louis. Cinq cartes bento, toutes teintées et de teintes différentes (--rf-tint-*), aucune sombre. Chaque carte a un commentaire « CONCEPT » ; chaque illustration traduit le bénéfice (pas la phrase), avec un objet central de 12 éléments ou plus. Ombres du site uniquement, aucun pointillé ondulé, logos de maquette gris, boutons de maquette #333, petits ronds = .rf-dot. scripts/audit.mjs affiche « audit passed ». render.mjs a produit desktop, mobile et close, et la réponse dit que chaque PNG a été lu. Aucun chiffre ni résultat inventé dans les textes."
+    },
+    {
+      "id": 2,
+      "prompt": "J'ai des retours sur la v5 : les puces sont trop grosses et je ne veux plus de cartes crème.",
+      "expected_output": "Le retour est copié mot pour mot dans brand/design/feedback.md (journal) et traduit en règle numérotée R20 et suivantes, avec le défaut d'origine. La v5 n'est pas modifiée : une v6 est créée. Si les tokens changent, l'ancienne feuille est d'abord figée dans versions/ et les anciennes sections y pointent. Le skill (version +0.1), references/craft.md et, si possible, scripts/audit.mjs intègrent la nouvelle règle. L'audit passe sur la v6 et la réponse liste ce qui a changé."
+    },
+    {
+      "id": 3,
+      "prompt": "Récupère ma sélection Figma et ajoute ce qui est nouveau à la banque.",
+      "expected_output": "Lecture seule via Figwright (references/figwright.md) : un seul serveur permanent, captures un nœud par appel, get_design_context nœud par nœud. Les captures sont rangées dans brand/design/figma/, et le README y documente le pattern, les valeurs exactes (couleurs, ombres, rayons, typos) et ce qu'il ne faut pas recopier. ruff-tokens.css (ajouts sans casser les versions figées), banque.html et le tableau des patterns de references/illustration.md sont mis à jour."
+    },
+    {
+      "id": 5,
+      "prompt": "Fais-moi une landing page pour un nouveau lead magnet, comme la page SaaS redesign.",
+      "expected_output": "Nouveau fichier brand/design/pages/<nom>-v1.html, généré depuis un gabarit avec pages/src/build.mjs. Footer réel (components/site-footer.html + Footer.css) et FAQ réelle (StackSection3). Tag du héros façon SaaS, héros avec emplacement média si une vidéo est prévue, réassurance en Heroicons avec séparateurs. Fonds alternés (#FBFBFB, #FFF, #F5F5F5, bleu en dégradé vertical). H2 64 px d'une seule couleur (bicolore une fois au plus). Cartes, étapes et avant / après selon references/structure.md, sans boîte dans une boîte, sans majuscules, sans schéma ni pastille dans le contenu. Briefs d'illustration écrits avec ruff-illustration-brief. L'audit affiche « audit passed » ; les rendus desktop et mobile sont lus sur toute la hauteur de la page."
+    },
+    {
+      "id": 4,
+      "prompt": "Illustre la carte « Support 7j/7 » pour la grille tarifaire.",
+      "expected_output": "Une seule carte. Concept écrit en une phrase avant le code, plus la liste d'au moins 12 éléments. Pas d'icône de casque, pas de personnage dessiné, pas de bulle seule : un objet central détaillé (par exemple une conversation ou un panneau d'interface) avec, au plus, des puces accrochées et des fantômes. Le bas de l'objet est soit en fondu, soit flottant et entier, sur desktop comme sur mobile. L'audit passe."
+    }
+  ]
+}

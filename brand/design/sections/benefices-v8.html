@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bénéfices v8 — Ruff</title>
+<!-- v8 (27/10/2026) : v7 + loupe officielle .rf-loupe (R58) sur la carte 4 ; page d’arrière-plan de la carte 1 floutée (.rf-blur, inspiration heysimon).
+     v7 (27/10/2026) : v6 + nouveau curseur .rf-pointer (R57), sinon identique.
+     v6 (27/10/2026) : premier essai de la méthode ruff-illustration-brief v0.2 (R56).
+     Nouveaux bénéfices et nouveaux titres (D3, D7, D10, D8 de differenciateurs.md).
+     Plan de série et briefs : benefices-v6-briefs.md. Grille 2 × 2 à filets (réf. r05). -->
+<link rel="stylesheet" href="../ruff-tokens.css">
+<style>
+  body { margin: 0; background: var(--rf-section); }
+
+  .bx-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 72px; }
+  .bx-head .rf-h2 { max-width: 820px; }
+  .bx-head .rf-btn { flex: none; align-self: flex-end; } /* R15 */
+
+  /* Grille 2 × 2 à filets : traits fins qui dépassent, croix aux intersections */
+  .bx-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; }
+  .bx-line { position: absolute; background: rgba(0,0,0,.08); pointer-events: none; }
+  .bx-line--h { left: -48px; right: -48px; height: 1px; }
+  .bx-line--v { top: -48px; bottom: -48px; width: 1px; }
+  .bx-cross { position: absolute; width: 13px; height: 13px; margin: -6px 0 0 -6px; pointer-events: none; z-index: 3; }
+  .bx-cross::before, .bx-cross::after { content: ""; position: absolute; background: rgba(0,0,0,.32); }
+  .bx-cross::before { left: 6px; top: 0; width: 1px; height: 13px; }
+  .bx-cross::after { top: 6px; left: 0; height: 1px; width: 13px; }
+
+  .bx-card.rf-bento { --rf-bento-bg: var(--rf-section); height: 660px; padding: 44px 44px 0; justify-content: flex-start; border-radius: 0; background: transparent; }
+  .bx-card.rf-bento::after { display: none; }
+  .bx-card .rf-bento__copy { max-width: 470px; }
+  .bx-card .rf-bento__art { overflow: hidden; }
+
+  .bx-scene { position: absolute; left: 50%; top: var(--top, 220px); width: var(--w); height: var(--h); transform: translateX(-50%) scale(var(--s, 1)); transform-origin: top center; }
+  .bx-scene > * { position: absolute; }
+  .bx-txt { font: 500 14px/1.4 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink-70); margin: 0; }
+  .bx-ico { width: 16px; height: 16px; flex: none; }
+
+  /* Fond « page » réutilisé */
+  .bx-page { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .bx-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .bx-nav > span:first-child { width: 46px; height: 12px; border-radius: 3px; background: var(--rf-wire-bar); } /* R19 */
+  .bx-nav > span:last-child { width: 40px; height: 14px; border-radius: 328px; background: var(--rf-wire-pill); }
+
+  /* 1. La date en cours de frappe */
+  .bx-event { padding: 24px; display: flex; flex-direction: column; gap: 12px; border-radius: 20px; }
+  .bx-label { display: flex; align-items: center; gap: 8px; }
+  .bx-field { display: flex; align-items: center; gap: 10px; margin: 0 -10px; padding: 8px 10px; border-radius: 10px; background: #f4f4f5; font: 700 30px/1.1 var(--rf-font-title); letter-spacing: -0.04em; color: var(--rf-ink); white-space: nowrap; }
+  .bx-field s { color: #b9b9b9; text-decoration-thickness: 2px; }
+  .bx-caret { display: inline-block; width: 2px; height: 30px; margin-left: -8px; background: var(--rf-ink); }
+  .bx-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+  .bx-darkbtn { padding: 10px 18px; border-radius: 999px; background: var(--rf-wire-pill); color: #fff; font: 500 14px/1 var(--rf-font-text); letter-spacing: -0.02em; } /* R11 */
+  .bx-seats { display: flex; align-items: center; gap: 10px; }
+  .bx-seats .rf-avatar { position: relative !important; width: 28px; height: 28px; border-width: 1px; margin-left: -10px; }
+  .bx-seats .rf-avatar:first-child { margin-left: 0; }
+  .bx-saved { font: 600 14px/1 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink); }
+
+  /* 2. Le fil de messages */
+  .bx-chat { display: flex; flex-direction: column; overflow: hidden; border-radius: 24px; }
+  .bx-chat__head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid #efefef; }
+  .bx-chat__head .rf-avatar { position: relative !important; width: 34px; height: 34px; border-width: 1px; }
+  .bx-name { font: 600 15px/1.2 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink); }
+  .bx-chat__body { flex: 1; background: #f4f5f7; padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; }
+  .bx-day { align-self: center; padding: 4px 10px; border-radius: 999px; background: #fff; font: 500 11px/1.2 var(--rf-font-text); color: var(--rf-ink-70); }
+  .bx-bubble { align-self: flex-start; display: flex; align-items: center; gap: 12px; padding: 7px 12px 7px 7px; background: #fff; border-radius: 14px; margin-bottom: 4px; }
+  .bx-bubble p { margin: 0; font: 600 13px/1.3 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink); }
+  .bx-bubble time { display: block; margin-top: 4px; font: 500 11px/1 var(--rf-font-text); color: rgba(18,26,46,.45); }
+  .bx-bubble--me { align-self: flex-end; display: block; padding: 10px 12px; background: var(--rf-pastel-green); }
+  .bx-thumb { position: relative !important; width: 88px; height: 58px; flex: none; padding: 7px; border-radius: 8px; display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
+  .bx-thumb .rf-bar { height: 5px; border-radius: 2px; }
+  .bx-thumb .rf-ph { flex: 1; border-radius: 4px; }
+  .bx-thumb .rf-pill { width: 18px; height: 6px; }
+  .bx-thumb__hero { margin: -7px -7px 2px; height: 24px; background: var(--rf-blue); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3px; }
+  .bx-thumb__hero i { display: block; height: 3px; border-radius: 2px; background: rgba(255,255,255,.85); }
+
+  /* 3. La note et le titre */
+  .bx-note { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; border-radius: 18px; transform: rotate(-4deg); }
+  .bx-note__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .bx-note__head b { font: 600 14px/1.2 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink); }
+  .bx-mark { background: var(--rf-tint-blue); color: var(--rf-ink); font-weight: 600; padding: 1px 3px; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .bx-hero { padding: 18px 20px; display: flex; flex-direction: column; align-items: center; gap: 9px; border-radius: 20px; }
+  .bx-hero .bx-nav { align-self: stretch; margin-bottom: 8px; }
+  .bx-hero h3 { margin: 0; text-align: center; font: 700 25px/1.18 var(--rf-font-title); letter-spacing: -0.04em; color: var(--rf-ink); }
+  .bx-hero h3 mark { background: var(--rf-tint-blue); color: inherit; padding: 0 3px; border-radius: 4px; }
+
+  /* 4. La loupe */
+  .bx-site { padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; }
+  .bx-site__nav { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .bx-site__nav span { height: 7px; border-radius: 3px; background: var(--rf-wire-bar-2); }
+  .bx-site__hero { display: grid; grid-template-columns: 1fr 150px; gap: 18px; }
+  .bx-site__hero > div { display: flex; flex-direction: column; gap: 9px; }
+  .bx-weak { align-self: flex-start; margin-top: 8px; padding: 9px 14px; border-radius: 6px; background: #efefef; color: #cdcdcd; font: 500 12px/1 var(--rf-font-text); letter-spacing: -0.02em; white-space: nowrap; }
+  .bx-site__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+  .bx-site__row span { height: 96px; border-radius: 10px; background: var(--rf-wire-fill); }
+  .bx-pin { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #d9d9d9; color: #fff; font: 600 12px/1 var(--rf-font-text); }
+  .bx-pin--on { width: 28px; height: 28px; background: var(--rf-blue); font-size: 14px; border: 2px solid #fff; box-shadow: var(--rf-shadow-dot); }
+  .rf-loupe .rf-bar { height: 22px; border-radius: 6px; }
+  .rf-loupe .bx-weak { margin: 0; padding: 15px 18px; border-radius: 10px; font-size: 17px; }
+
+  @media (max-width: 1399px) { .bx-scene { --s: .9; } }
+  @media (max-width: 1100px) {
+    .bx-head { flex-direction: column; align-items: flex-start; }
+    .bx-head .rf-btn { align-self: flex-start; }
+    .bx-wrap { max-width: 640px; margin: 0 auto; }
+    .bx-grid { grid-template-columns: 1fr; }
+    .bx-line, .bx-cross { display: none; }
+    .bx-card.rf-bento { border-top: 1px solid rgba(0,0,0,.08); }
+    .bx-scene { --s: 1; }
+  }
+  @media (max-width: 809px) {
+    .bx-head { margin-bottom: 40px; }
+    .bx-card.rf-bento { height: 560px; padding: 32px 0 0; }
+    .bx-scene { --s: .66; --top: 230px !important; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="rf-user" viewBox="0 0 40 40"><circle cx="20" cy="14" r="7" fill="#d8d8d8"/><path d="M6.5 34c1.6-7 7-10.5 13.5-10.5S31.9 27 33.5 34z" fill="#d8d8d8"/></symbol>
+    <!-- Heroicons outline -->
+    <symbol id="hi-calendar" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></symbol>
+    <symbol id="hi-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></symbol>
+    <symbol id="hi-doc" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></symbol>
+  </defs>
+</svg>
+
+<section class="rf-section" aria-labelledby="bx-title">
+  <div class="rf-container bx-wrap">
+
+    <header class="bx-head">
+      <h2 class="rf-h2" id="bx-title"><span>Un site qui avance avec vous,</span> <strong>et que vous gardez en main</strong></h2>
+      <a class="rf-btn rf-btn--primary" href="#"><span class="rf-btn__inner">Réserver un appel <img class="rf-btn__avatar" src="../assets/louis.jpg" alt="Photo de profil de Louis Staub"></span></a>
+    </header>
+
+    <div class="bx-grid">
+      <span class="bx-line bx-line--h" style="top:0"></span>
+      <span class="bx-line bx-line--h" style="top:50%"></span>
+      <span class="bx-line bx-line--h" style="top:100%"></span>
+      <span class="bx-line bx-line--v" style="left:0"></span>
+      <span class="bx-line bx-line--v" style="left:50%"></span>
+      <span class="bx-line bx-line--v" style="left:100%"></span>
+      <span class="bx-cross" style="left:0;top:0"></span><span class="bx-cross" style="left:50%;top:0"></span><span class="bx-cross" style="left:100%;top:0"></span>
+      <span class="bx-cross" style="left:0;top:50%"></span><span class="bx-cross" style="left:50%;top:50%"></span><span class="bx-cross" style="left:100%;top:50%"></span>
+      <span class="bx-cross" style="left:0;top:100%"></span><span class="bx-cross" style="left:50%;top:100%"></span><span class="bx-cross" style="left:100%;top:100%"></span>
+
+      <!-- 1. CONCEPT (action en cours, Agir) : Objet central : la carte « Prochain atelier » du site
+           du client. On voit : « 12 » barré et « 19 » en train d'être tapé, le curseur « Vous » (.rf-pointer, R57) dessus.
+           Le contraste : l'ancienne date grise → la nouvelle nette. Ça prouve : le client modifie
+           son site lui-même, en direct. -->
+      <article class="rf-bento rf-bento--white bx-card">
+        <div class="rf-bento__art" role="img" aria-label="Sur la page d'un atelier, la date 12 est barrée et la date 19 est en train d'être tapée par le curseur Vous">
+          <div class="bx-scene" style="--w:460px;--h:460px;--top:226px">
+            <div class="rf-wire rf-blur bx-page" style="left:0;top:34px;width:460px;height:460px">
+              <div class="bx-nav"><span></span><span></span></div>
+              <span class="rf-bar" style="width:70%"></span>
+              <span class="rf-bar rf-bar--2" style="width:52%"></span>
+              <span class="rf-ph" style="height:240px;margin-top:12px"></span>
+            </div>
+            <div class="rf-wire bx-event" style="left:40px;top:92px;width:380px">
+              <span class="bx-label bx-txt"><svg class="bx-ico"><use href="#hi-calendar"/></svg>Prochain atelier</span>
+              <div class="bx-field">Jeudi <s>12</s> 19<i class="bx-caret"></i> mars</div>
+              <p class="bx-txt">14 h – 17 h · Lyon</p>
+              <span class="rf-bar rf-bar--2" style="width:72%"></span>
+              <span class="rf-bar rf-bar--3" style="width:50%"></span>
+              <div class="bx-foot">
+                <span class="bx-darkbtn">S'inscrire</span>
+                <span class="bx-seats">
+                  <span style="display:flex"><span class="rf-avatar rf-avatar--ghost"><svg width="18" height="18"><use href="#rf-user"/></svg></span><span class="rf-avatar rf-avatar--ghost"><svg width="18" height="18"><use href="#rf-user"/></svg></span><span class="rf-avatar rf-avatar--ghost"><svg width="18" height="18"><use href="#rf-user"/></svg></span></span>
+                  <span class="rf-bar rf-bar--3" style="width:54px"></span>
+                </span>
+              </div>
+              <div class="rf-chip" style="right:-30px;top:-24px"><svg class="bx-ico" style="color:var(--rf-ink)"><use href="#hi-check"/></svg><span class="bx-saved">Enregistré</span></div>
+            </div>
+            <div class="rf-pointer rf-pointer--blue" style="left:287px;top:180px"><svg class="rf-pointer__arrow" viewBox="100 2 41 41"><path d="M136.574 34.0727L138.99 11.4255C139.464 6.98561 135.199 3.53592 130.956 4.92761L107.936 12.4785C101.526 14.5814 102.686 23.9793 109.415 24.46L117.17 25.0139C119.651 25.1911 121.781 26.8449 122.567 29.2046L124.621 35.3655C126.712 41.6373 135.873 40.6465 136.574 34.0727Z" transform="matrix(-1 0 0 1 241 0)"/></svg><span>Vous</span></div>
+          </div>
+        </div>
+        <div class="rf-bento__fade" style="--rf-fade-h:90px;top:auto"></div>
+        <div class="rf-bento__copy">
+          <p class="rf-bento__title">Une date change ? Vous la changez vous-même</p>
+          <p class="rf-bento__body">Votre site se modifie comme un document : vous cliquez sur le texte, vous tapez, c'est en ligne. Sans écrire à personne.</p>
+        </div>
+      </article>
+
+      <!-- 2. CONCEPT (état final rempli, Montrer le résultat) : Objet central : le fil de messages
+           avec Louis. On voit : lundi une structure grise, mercredi une maquette, vendredi la version
+           en couleur, et la réponse du client. Le contraste : chaque vignette plus complète que la
+           précédente. Ça prouve : on voit son site se construire, sans attendre la livraison. -->
+      <article class="rf-bento rf-bento--white bx-card">
+        <div class="rf-bento__art" role="img" aria-label="Un fil de messages avec Louis : lundi une structure grise, mercredi une maquette, vendredi la version en couleur">
+          <div class="bx-scene" style="--w:380px;--h:470px;--top:178px">
+            <div class="rf-wire bx-chat" style="left:20px;top:0;width:340px;height:500px">
+              <div class="bx-chat__head">
+                <span class="rf-avatar"><img src="../assets/louis.jpg" alt=""></span>
+                <span style="display:flex;flex-direction:column;gap:5px"><span class="bx-name">Louis · Ruff</span><span class="rf-bar rf-bar--3" style="width:60px"></span></span>
+              </div>
+              <div class="bx-chat__body">
+                <span class="bx-day">Lundi</span>
+                <div class="bx-bubble" style="opacity:.5">
+                  <div class="rf-wire bx-thumb"><span class="rf-bar" style="width:70%"></span><span class="rf-bar rf-bar--3" style="width:50%"></span><span class="rf-bar rf-bar--3" style="width:84%;margin-top:6px"></span><span class="rf-bar rf-bar--3" style="width:60%"></span></div>
+                  <div><p>Structure de l'accueil</p><time>18:02</time></div>
+                </div>
+                <span class="bx-day">Mercredi</span>
+                <div class="bx-bubble" style="opacity:.78">
+                  <div class="rf-wire bx-thumb"><span class="rf-bar" style="width:70%;align-self:center;background:#bdbdbd"></span><span class="rf-bar rf-bar--3" style="width:48%;align-self:center"></span><span class="rf-ph"></span><span class="rf-pill" style="align-self:center"></span></div>
+                  <div><p>Textes et maquette</p><time>17:45</time></div>
+                </div>
+                <span class="bx-day">Vendredi</span>
+                <div class="bx-bubble">
+                  <div class="rf-wire bx-thumb"><span class="bx-thumb__hero"><i style="width:46px"></i><i style="width:30px"></i></span><span class="rf-ph"></span><span class="rf-pill" style="align-self:center"></span></div>
+                  <div><p>Version mobile en ligne</p><time>16:30</time></div>
+                </div>
+                <div class="bx-bubble bx-bubble--me"><p>Parfait, on garde ce titre</p><time style="text-align:right">16:41</time></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rf-bento__fade" style="--rf-fade-h:90px;top:auto"></div>
+        <div class="rf-bento__copy">
+          <p class="rf-bento__title">Vous voyez votre site avancer chaque jour</p>
+          <p class="rf-bento__body">Chaque jour, un message WhatsApp avec ce qui a été fait. Vous réagissez tout de suite, pas le jour de la livraison.</p>
+        </div>
+      </article>
+
+      <!-- 3. CONCEPT (surlignage → effet, Transformer) : Objet central : la note d'un appel client.
+           On voit : une phrase surlignée, et posé dessus le haut de page qui la reprend. Le contraste :
+           la note grise, inclinée → le titre net. Ça prouve : les textes partent des mots réels des
+           clients. Accent unique : le surlignage --rf-tint-blue, le même aux deux endroits. -->
+      <article class="rf-bento rf-bento--white bx-card">
+        <div class="rf-bento__art" role="img" aria-label="Dans la note d'un appel, la phrase « Je veux arrêter de courir après les devis » est surlignée ; le titre de la page la reprend">
+          <div class="bx-scene" style="--w:480px;--h:460px;--top:214px">
+            <div class="rf-wire bx-note" style="left:0;top:16px;width:320px;height:440px">
+              <div class="bx-note__head"><b style="display:flex;align-items:center;gap:8px"><svg class="bx-ico"><use href="#hi-doc"/></svg>Notes · appel découverte</b></div>
+              <span class="rf-bar rf-bar--2" style="width:46%"></span>
+              <p class="bx-txt">« On perd un temps fou à relancer. »</p>
+              <span class="rf-bar rf-bar--3" style="width:84%"></span>
+              <span class="rf-bar rf-bar--3" style="width:66%"></span>
+              <p class="bx-txt"><span class="bx-mark">« Je veux arrêter de courir après les devis. »</span></p>
+              <span class="rf-bar rf-bar--3" style="width:78%"></span>
+              <p class="bx-txt">« Notre site, personne ne le lit. »</p>
+              <span class="rf-bar rf-bar--3" style="width:70%"></span>
+              <span class="rf-bar rf-bar--3" style="width:52%"></span>
+            </div>
+            <div class="rf-wire bx-hero" style="left:150px;top:196px;width:330px;height:290px">
+              <div class="bx-nav"><span></span><span></span></div>
+              <h3>Arrêtez de <mark>courir après vos devis.</mark></h3>
+              <span class="rf-bar rf-bar--2" style="width:78%;margin-top:4px"></span>
+              <span class="rf-bar rf-bar--3" style="width:56%"></span>
+              <span class="rf-pill" style="margin-top:6px"></span>
+              <span class="rf-ph" style="width:100%;height:80px;margin-top:8px"></span>
+            </div>
+          </div>
+        </div>
+        <div class="rf-bento__fade" style="--rf-fade-h:90px;top:auto"></div>
+        <div class="rf-bento__copy">
+          <p class="rf-bento__title">Vos titres reprennent les mots de vos clients</p>
+          <p class="rf-bento__body">Le copywriting est inclus. On part de ce que vos clients disent vraiment, et leurs phrases deviennent vos titres.</p>
+        </div>
+      </article>
+
+      <!-- 4. CONCEPT (la loupe, Choisir) : Objet central : le site actuel du client. On voit : une
+           loupe sur le bouton principal, presque invisible, et une remarque accrochée. Le contraste :
+           le détail pâle et petit → agrandi et nommé. Ça prouve : on voit ce qui freine le site avant
+           de parler prix. Accent unique : le repère bleu « 1 ». -->
+      <article class="rf-bento rf-bento--white bx-card">
+        <div class="rf-bento__art" role="img" aria-label="Une loupe posée sur le bouton presque invisible d'un site, avec la remarque « Le bouton se confond avec le fond »">
+          <div class="bx-scene" style="--w:500px;--h:460px;--top:214px">
+            <div class="rf-wire bx-site" style="left:20px;top:0;width:470px;height:470px">
+              <div class="bx-site__nav"><span style="width:46px;height:12px;background:var(--rf-wire-bar)"></span><span style="width:40px;margin-left:auto"></span><span style="width:40px"></span><span style="width:40px"></span></div>
+              <div class="bx-site__hero">
+                <div>
+                  <span class="rf-bar" style="width:92%"></span>
+                  <span class="rf-bar" style="width:70%"></span>
+                  <span class="rf-bar rf-bar--2" style="width:84%;margin-top:4px"></span>
+                  <span class="rf-bar rf-bar--3" style="width:62%"></span>
+                  <span class="bx-weak">Demander un devis</span>
+                </div>
+                <span class="rf-ph" style="height:150px"></span>
+              </div>
+              <div class="bx-site__row"><span></span><span></span><span></span></div>
+              <span class="bx-pin" style="position:absolute;right:80px;top:150px;opacity:.6">2</span>
+              <span class="bx-pin" style="position:absolute;left:250px;top:280px;opacity:.6">3</span>
+            </div>
+            <div class="rf-loupe" style="left:-6px;top:66px;--rf-loupe-size:200px">
+              <span class="rf-loupe__handle"></span>
+              <div class="rf-loupe__glass">
+              <span class="rf-bar" style="left:-30px;top:26px;width:190px"></span>
+              <span class="rf-bar rf-bar--2" style="left:-30px;top:62px;width:140px;height:16px"></span>
+              <span class="bx-weak" style="left:4px;top:100px">Demander un devis</span>
+              </div>
+            </div>
+            <span class="bx-pin bx-pin--on" style="left:168px;top:70px;z-index:4">1</span>
+            <div class="rf-chip" style="left:200px;top:62px;padding:9px 12px"><span class="bx-saved">Le bouton se confond avec le fond</span></div>
+          </div>
+        </div>
+        <div class="rf-bento__fade" style="--rf-fade-h:90px;top:auto"></div>
+        <div class="rf-bento__copy">
+          <p class="rf-bento__title">L'appel commence par l'audit de votre site</p>
+          <p class="rf-bento__body">Avant de parler prix, on vous montre ce qui freine vos visiteurs aujourd'hui, avec des exemples pris sur vos pages.</p>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+</body>
+</html>

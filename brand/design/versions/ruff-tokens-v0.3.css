@@ -1,0 +1,316 @@
+/* ==========================================================================
+   Ruff Agency — banque de design (tokens + composants + briques d'illustration)
+   Source des valeurs : CSS du site (components/*, app/saas-redesign/*) et
+   images d'illustration (public/landing-assets/*). Voir brand/design/design.md.
+   Statut : v0.3 (26/10/2026) — intègre les règles R1 à R15 de feedback.md. Versions précédentes figées dans versions/. Toute valeur marquée "≈" a été échantillonnée sur une image.
+   ========================================================================== */
+
+/* Polices : sur le site elles sont servies par framerusercontent.com.
+   Pour les maquettes autonomes, Google Fonts sert les mêmes familles. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap");
+
+/* R15 : comme le site (app/globals.css), toutes les dimensions incluent padding
+   et bordure. Sans ça le bouton principal faisait ~80 px de haut au lieu de 60.
+   (Doit rester APRÈS l'@import, sinon les polices ne se chargent plus.) */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  /* --- Couleurs de base ------------------------------------------------- */
+  --rf-ink: #121a2e;                    /* texte, titres */
+  --rf-ink-deep: #0d152a;               /* bleu nuit plus foncé (variable) */
+  --rf-ink-70: rgba(18, 26, 46, 0.7);   /* texte secondaire */
+  --rf-ink-75: rgba(18, 26, 46, 0.75);  /* partie "muted" des titres bicolores */
+  --rf-ink-16: rgba(18, 26, 46, 0.16);
+  --rf-black-60: rgba(0, 0, 0, 0.6);    /* corps de carte sur fond clair */
+  --rf-blue: #0147ff;                   /* accent unique */
+  --rf-blue-light: #4e7dfa;             /* début du dégradé bouton */
+  --rf-blue-edge: #0e41c7;              /* bord bas "relief" */
+  --rf-blue-border: #2e4d9c;            /* bordure bouton */
+  --rf-blue-select: #2f68fe;            /* ≈ cadre de sélection des illustrations */
+  --rf-page: #fbfbfb;                   /* fond de page */
+  --rf-page-cool: #f9fbff;              /* fond des héros secondaires */
+  --rf-section: #fdfdfd;                /* fond section bénéfices */
+  --rf-white: #fff;
+  --rf-socle: #e1e4ed;                  /* socle gris autour du bouton principal */
+
+  /* --- Fonds de cartes "bento" (section bénéfices de l'accueil) -------- */
+  --rf-card-cyan: #dcf6ff;
+  --rf-card-cyan-band: #caebf6;         /* ≈ bande de l'illustration avant/après */
+  --rf-card-cream: #ffebc1;
+  --rf-card-olive: #5e6554;             /* dégradé bas de la carte photo */
+
+  /* --- Teintes de cartes (règle R1/R2 de feedback.md) ------------------
+     Même saturation et luminosité que le cyan du site (hsl 195 100% 93%),
+     seule la teinte change. Toutes les cartes d'un groupe sont teintées,
+     chacune d'une teinte différente. */
+  --rf-tint-s: 100%;
+  --rf-tint-l: 93%;
+  --rf-tint-blue: hsl(195 var(--rf-tint-s) var(--rf-tint-l));
+  --rf-tint-yellow: hsl(45 var(--rf-tint-s) var(--rf-tint-l));
+  --rf-tint-green: hsl(95 var(--rf-tint-s) var(--rf-tint-l));
+  --rf-tint-violet: hsl(250 var(--rf-tint-s) var(--rf-tint-l));
+  --rf-tint-red: hsl(0 var(--rf-tint-s) var(--rf-tint-l));
+
+  /* --- Briques d'illustration (maquettes "fil de fer") ----------------- */
+  /* Valeurs exactes de BenefitsOptimized.css (framer-qa9ace et enfants) */
+  --rf-wire-border: rgba(0, 0, 0, 0.11);
+  --rf-wire-bar: #dfdfdf;               /* barre de titre */
+  --rf-wire-bar-2: #e8e8e8;             /* barre de texte */
+  --rf-wire-bar-3: #eaeaea;
+  --rf-wire-fill: rgba(246, 246, 246, 0.73); /* zone image */
+  --rf-wire-pill: #333;                 /* bouton dans une maquette (R11 : toujours celui-ci) */
+  --rf-wire-dark: #333;
+  --rf-wire-selected: #f7f7f7;          /* bouton d'outil actif */
+  --rf-wire-sep: rgba(0, 0, 0, 0.14);   /* séparateur de barre d'outils */
+  --rf-user-icon: #d8d8d8;              /* silhouette utilisateur */
+  --rf-divider-teal: #468ca8;           /* ≈ barre avant/après */
+
+  /* Pastilles de couleur (barre d'outils) ≈ */
+  --rf-dot-red: #ff3433;
+  --rf-dot-yellow: #ffc532;
+  --rf-dot-green: #46c52a;
+  --rf-dot-blue: #0247ff;
+
+  /* Fonds pastel des avatars ≈ */
+  --rf-pastel-green: #e0ffc4;
+  --rf-pastel-pink: #fdc7c8;
+  --rf-pastel-yellow: #fff1c4;
+  --rf-pastel-purple: #cdc4ff;
+
+  /* --- Ombres ----------------------------------------------------------- */
+  --rf-shadow-card: 0 2px 3px rgba(0,0,0,.04), 0 6px 6px rgba(0,0,0,.03), 0 14px 8px rgba(0,0,0,.02), 0 24px 10px rgba(0,0,0,.01);
+  --rf-shadow-quiz: 0 3px 7px rgba(0,0,0,.05), 0 12px 12px rgba(0,0,0,.04), 0 28px 17px rgba(0,0,0,.03), 0 50px 20px rgba(0,0,0,.01);
+  /* R6 : ombres exactes du site, ne pas en inventer */
+  --rf-shadow-wire: 0 1.0426px 2.0851px rgba(107,107,107,.05), 0 4.1702px 4.1702px rgba(107,107,107,.05), 0 9.383px 6.2553px rgba(107,107,107,.03), 0 17.7234px 7.2979px rgba(107,107,107,.01), 0 27.1064px 7.2979px rgba(107,107,107,0);
+  --rf-shadow-tool: 0 0.9567px 1.9133px rgba(107,107,107,.05), 0 3.8266px 3.8266px rgba(107,107,107,.05), 0 8.6099px 5.74px rgba(107,107,107,.03), 0 16.2632px 6.6966px rgba(107,107,107,.01), 0 24.8731px 6.6966px rgba(107,107,107,0);
+  --rf-shadow-dot: 0 0 0.7903px rgba(0,0,0,.1), 0 1.5806px 1.5806px rgba(0,0,0,.09), 0 3.1611px 1.5806px rgba(0,0,0,.05), 0 5.532px 2.3709px rgba(0,0,0,.01), 0 8.6931px 2.3709px rgba(0,0,0,0);
+  --rf-shadow-float: var(--rf-shadow-wire); /* plus d'ombre inventée : alias */
+  --rf-shadow-avatar: 0 1px 2.9px rgba(0,0,0,.25);
+  --rf-shadow-btn: inset 0 3px 0 rgba(255,255,255,.5), inset 0 2px 6px 4px rgba(0,0,0,.08), inset 0 -3px 0 var(--rf-blue-edge), 0 2.45px 3.22px rgba(0,18,54,.07), 0 6.76px 8.89px rgba(0,18,54,.1), 0 16.28px 21.4px rgba(0,40,54,.16);
+  --rf-shadow-btn-hover: inset 0 3px 0 rgba(255,255,255,.5), inset 0 2px 6px 4px rgba(0,0,0,.08), inset 0 -3px 0 var(--rf-blue-edge), 0 2.45px 3.22px rgba(0,18,54,.07), 0 6.76px 8.89px rgba(0,18,54,.1), 0 16.28px 21.4px rgba(0,18,54,.13), 0 54px 71px rgba(0,40,54,.16);
+
+  /* --- Rayons ----------------------------------------------------------- */
+  --rf-r-xs: 4px;     /* barres fil de fer */
+  --rf-r-sm: 10px;    /* bouton (intérieur), bouton secondaire */
+  --rf-r-socle: 15px; /* socle du bouton principal */
+  --rf-r-bento: 19px; /* cartes bento de la section bénéfices */
+  --rf-r-wire: 24px;  /* panneaux de maquette */
+  --rf-r-card: 32px;  /* grandes cartes, aperçus */
+  --rf-r-tool: 52px;  /* blocs outil (quiz, simulateur) */
+
+  /* --- Espacements ------------------------------------------------------ */
+  --rf-s-1: 8px; --rf-s-2: 12px; --rf-s-3: 16px; --rf-s-4: 24px;
+  --rf-s-5: 32px; --rf-s-6: 48px; --rf-s-7: 64px; --rf-s-8: 128px;
+  --rf-container: 1324px;
+
+  /* --- Typo ------------------------------------------------------------- */
+  --rf-font-title: "Plus Jakarta Sans", sans-serif;
+  --rf-font-text: Inter, sans-serif;
+}
+
+/* ==========================================================================
+   Typographie
+   ========================================================================== */
+.rf-h1 { font: 700 72px/1.05 var(--rf-font-title); letter-spacing: -0.05em; color: var(--rf-ink); margin: 0; }
+.rf-h2 { font: 700 56px/1.15 var(--rf-font-title); letter-spacing: -0.04em; color: var(--rf-ink-75); margin: 0; }
+.rf-h2 strong, .rf-h2 .rf-strong { color: var(--rf-ink); font-weight: 700; }
+.rf-h3 { font: 600 24px/1.46 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); margin: 0; }
+.rf-lead { font: 500 18px/1.6 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); margin: 0; }
+.rf-body { font: 500 16px/1.46 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink-70); margin: 0; }
+.rf-eyebrow { font: 500 16px/1.46 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-blue); margin: 0; }
+
+@media (max-width: 1399px) { .rf-h2 { font-size: 42px; } .rf-h1 { font-size: 56px; } }
+@media (max-width: 809px)  { .rf-h2 { font-size: 32px; } .rf-h1 { font-size: 40px; } .rf-h3 { font-size: 18px; } }
+
+/* ==========================================================================
+   Boutons (components/ui/Cta.css)
+   ========================================================================== */
+.rf-btn { display: inline-flex; text-decoration: none; cursor: pointer; border: 0; background: none; padding: 0; font: 500 16px/1.03 var(--rf-font-text); white-space: nowrap; }
+.rf-btn__inner { display: inline-flex; align-items: center; justify-content: center; height: 48px; position: relative; }
+
+.rf-btn--primary { padding: 6px; background: var(--rf-socle); border-radius: var(--rf-r-socle); box-shadow: inset 0 0 2px rgba(0,0,0,.1); }
+.rf-btn--primary .rf-btn__inner { gap: 12px; padding: 10px 10px 10px 24px; color: #fff; border-radius: var(--rf-r-sm); border: 1px solid var(--rf-blue-border); background: linear-gradient(90deg, var(--rf-blue-light) 0%, var(--rf-blue) 100%); box-shadow: var(--rf-shadow-btn); transition: background .25s ease, box-shadow .25s ease; }
+.rf-btn--primary:hover .rf-btn__inner, .rf-btn--primary.is-hover .rf-btn__inner { background: linear-gradient(161deg, rgb(67,108,222) 0%, rgb(36,77,181) 100%); box-shadow: var(--rf-shadow-btn-hover); }
+.rf-btn__avatar { width: 28px; height: 28px; flex: none; border-radius: 6px; border: 1px solid #fff; box-shadow: var(--rf-shadow-avatar); object-fit: cover; transition: transform .4s cubic-bezier(.34,1.2,.64,1); }
+.rf-btn--primary:hover .rf-btn__avatar, .rf-btn--primary.is-hover .rf-btn__avatar { transform: rotate(10deg); }
+
+.rf-btn--secondary .rf-btn__inner { padding: 10px 24px; color: var(--rf-ink); background: #fff; border: 1px solid rgba(0,0,0,.15); border-radius: var(--rf-r-sm); transition: background-color .25s ease; }
+.rf-btn--secondary:hover .rf-btn__inner, .rf-btn--secondary.is-hover .rf-btn__inner { background: #f0f0f0; }
+.rf-btn--secondary.on-dark .rf-btn__inner { background: #1c2742; color: #fff; border-color: rgba(255,255,255,.08); }
+
+/* Focus clavier : peu présent sur le site (VARIABLE). Proposition à valider. */
+.rf-btn:focus-visible { outline: 2px solid var(--rf-blue); outline-offset: 3px; border-radius: 16px; }
+
+.rf-btn-pair { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+/* ==========================================================================
+   Preuve sociale + disponibilité (héros)
+   ========================================================================== */
+.rf-proof { display: inline-flex; align-items: center; gap: 12px; font: 500 18px/1 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink); }
+.rf-proof__stack { display: flex; }
+.rf-proof__stack > * { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #fff; margin-left: -8px; box-shadow: var(--rf-shadow-avatar); object-fit: cover; }
+.rf-proof__stack > *:first-child { margin-left: 0; }
+
+.rf-availability { display: inline-flex; align-items: center; gap: 10px; font: 500 16px/1 var(--rf-font-text); color: var(--rf-ink); letter-spacing: -0.02em; }
+.rf-availability__dot { width: 10px; height: 10px; border-radius: 50%; background: #ffa21f; /* valeur exacte non déterminée (Lottie) */ box-shadow: 0 0 0 5px rgba(255,162,31,.18); }
+.rf-availability b { font-size: 18px; font-weight: 600; }
+
+/* Pastille de section / tag ("FOR SAAS OWNERS", "After") */
+.rf-tag { display: inline-flex; align-items: center; padding: 10px 24px; border-radius: 999px; border: 1px solid rgba(0,0,0,.15); background: #fff; font: 600 16px/1 var(--rf-font-text); letter-spacing: 0.01em; color: var(--rf-ink); }
+.rf-tag--label { padding: 10px 18px; border-radius: 14px; border: 0; box-shadow: var(--rf-shadow-float); font-size: 20px; letter-spacing: -0.03em; }
+
+/* ==========================================================================
+   Cartes
+   ========================================================================== */
+/* Carte blanche (landing SaaS, cartes de valeurs) */
+.rf-card { position: relative; background: #fff; border: 1px solid rgba(0,0,0,.15); border-radius: var(--rf-r-card); box-shadow: var(--rf-shadow-card); padding: 32px; }
+.rf-card__rule { height: 1px; background: rgba(0,0,0,.1); margin: 16px 0; }
+
+/* Carte bento (section bénéfices de l'accueil) : illustration en haut,
+   dégradé de fondu vers la couleur de la carte, texte collé en bas. */
+.rf-bento { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 48px; border-radius: var(--rf-r-bento); background: #fff; isolation: isolate; }
+.rf-bento::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(0,0,0,.03); border-radius: inherit; pointer-events: none; }
+.rf-bento--white  { --rf-bento-bg: #fff; background: var(--rf-bento-bg); }
+/* Teintes (R1/R2) : toutes les cartes d'un groupe en ont une, toutes différentes */
+.rf-bento--blue   { --rf-bento-bg: var(--rf-tint-blue);   background: var(--rf-bento-bg); }
+.rf-bento--yellow { --rf-bento-bg: var(--rf-tint-yellow); background: var(--rf-bento-bg); }
+.rf-bento--green  { --rf-bento-bg: var(--rf-tint-green);  background: var(--rf-bento-bg); }
+.rf-bento--violet { --rf-bento-bg: var(--rf-tint-violet); background: var(--rf-bento-bg); }
+.rf-bento--red    { --rf-bento-bg: var(--rf-tint-red);    background: var(--rf-bento-bg); }
+/* Anciennes teintes du site, gardées pour référence */
+.rf-bento--cyan   { --rf-bento-bg: var(--rf-card-cyan); background: var(--rf-bento-bg); }
+.rf-bento--cream  { --rf-bento-bg: var(--rf-card-cream); background: var(--rf-bento-bg); }
+/* R3 : interdit au milieu d'une section claire. À n'utiliser que dans une section entièrement sombre. */
+.rf-bento--dark   { --rf-bento-bg: var(--rf-ink); background: var(--rf-ink); }
+.rf-bento__art { position: absolute; inset: 0; z-index: 0; }
+/* R5 : fondu de 0 à la couleur de la carte, sous le texte, pour tout élément
+   qui descend jusqu'en bas. Profil repris du site (framer-1sihc94). */
+.rf-bento__fade { position: absolute; left: 0; right: 0; bottom: 0; height: var(--rf-fade-h, 300px); z-index: 1; background: linear-gradient(180deg, color-mix(in srgb, var(--rf-bento-bg, #fff) 0%, transparent) 0%, color-mix(in srgb, var(--rf-bento-bg, #fff) 98%, transparent) 45%, var(--rf-bento-bg, #fff) 100%); pointer-events: none; }
+.rf-bento--dark .rf-bento__fade { background: linear-gradient(0deg, rgba(0,0,0,.83) 27%, transparent 100%); }
+.rf-bento__copy { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 8px; max-width: 520px; }
+.rf-bento__title { font: 600 24px/1.46 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); margin: 0; }
+.rf-bento__body { font: 500 18px/1.76 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-black-60); margin: 0; }
+.rf-bento--dark .rf-bento__title { color: #fff; }
+.rf-bento--dark .rf-bento__body { color: rgba(255,255,255,.6); }
+@media (max-width: 1399px) { .rf-bento__title { font-size: 20px; } }
+@media (max-width: 809px)  { .rf-bento { padding: 32px; } .rf-bento__title { font-size: 18px; } .rf-bento__body { font-size: 16px; } }
+
+/* ==========================================================================
+   Briques d'illustration — valeurs exactes de BenefitsOptimized.css
+   R8 : seuls les éléments posés directement sur le fond de la carte ont une
+   ombre. Un élément placé dans un élément de l'illustration n'en a pas.
+   ========================================================================== */
+/* Panneau de maquette blanc (framer-qa9ace) */
+.rf-wire { position: absolute; background: #fff; border-radius: 23.98px; box-shadow: var(--rf-shadow-wire); border: 1.04px solid var(--rf-wire-border); }
+.rf-wire .rf-wire { box-shadow: none; } /* R8 */
+/* Barres "squelette" (framer-1r1j7vb…) */
+.rf-bar { display: block; height: 14px; border-radius: 4.15px; background: var(--rf-wire-bar); }
+.rf-bar--2 { background: var(--rf-wire-bar-2); height: 9px; }
+.rf-bar--3 { background: var(--rf-wire-bar-3); height: 7px; }
+/* Zone image (framer-1cuhozw) */
+.rf-ph { display: block; border-radius: 13.55px; background: var(--rf-wire-fill); }
+/* R11 : bouton de maquette, toujours le même (framer-1cry4b3 : 47×14, #333) */
+.rf-pill { display: block; width: 47px; height: 14px; border-radius: 328px; background: var(--rf-wire-pill); }
+
+/* Cadre de sélection (R4, framer-imzg4g) : #0147FF, trait 1,17 px,
+   poignées carrées blanches 14 × 14,6 px, contour 2,34 px, coins légèrement arrondis (R14) */
+.rf-select { position: absolute; border: 1.17px solid var(--rf-blue); pointer-events: none; }
+.rf-select > i { position: absolute; width: 13.92px; height: 14.61px; box-sizing: border-box; background: #fff; border: 2.34px solid var(--rf-blue); border-radius: 3px; }
+.rf-select > i:nth-child(1) { top: -7.3px; left: -7px; }
+.rf-select > i:nth-child(2) { top: -7.3px; right: -7px; }
+.rf-select > i:nth-child(3) { bottom: -7.3px; left: -7px; }
+.rf-select > i:nth-child(4) { bottom: -7.3px; right: -7px; }
+.rf-select__label { position: absolute; top: -28px; left: -1px; padding: 4px 8px; background: var(--rf-blue); color: #fff; font: 600 12px/1 var(--rf-font-text); letter-spacing: -0.01em; white-space: nowrap; }
+
+/* Barre d'outils (framer-2dovbc / framer-1q12s5m) */
+.rf-toolbar { position: absolute; display: flex; align-items: center; gap: 10px; height: 58px; padding: 0 12px; background: #fff; border-radius: 13px; border: 1px solid var(--rf-wire-border); box-shadow: var(--rf-shadow-tool); }
+.rf-toolbar__btn { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 4px; }
+.rf-toolbar__btn.is-on { background: var(--rf-wire-selected); }
+.rf-toolbar__sep { width: 1px; height: 15px; background: var(--rf-wire-sep); }
+.rf-palette { position: absolute; display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; background: #fff; border-radius: 14.35px; border: 0.96px solid var(--rf-wire-border); box-shadow: var(--rf-shadow-tool); }
+/* Pastilles (framer-4590v…) : 18 px, bord blanc 1 px, ombre exacte */
+.rf-dot { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #fff; box-shadow: var(--rf-shadow-dot); flex: none; box-sizing: border-box; }
+.rf-dot--red { background: rgb(255, 51, 51); } .rf-dot--yellow { background: rgb(255, 197, 51); }
+.rf-dot--green { background: rgb(70, 197, 41); } .rf-dot--blue { background: rgb(1, 71, 255); }
+
+/* Avatars sur fond pastel avec anneau blanc */
+.rf-avatar { position: absolute; display: grid; place-items: center; border-radius: 50%; border: 4px solid #fff; box-shadow: var(--rf-shadow-wire); overflow: hidden; }
+.rf-wire .rf-avatar { box-shadow: none; } /* R8 */
+.rf-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.rf-avatar--ghost { background: #fff; }
+.rf-avatar--green { background: var(--rf-pastel-green); } .rf-avatar--pink { background: var(--rf-pastel-pink); }
+.rf-avatar--yellow { background: var(--rf-pastel-yellow); } .rf-avatar--purple { background: var(--rf-pastel-purple); }
+
+/* Curseur (R7) : <img class="rf-cursor" src=".../assets/cursor.svg">.
+   Triangle noir arrondi, pointe en haut à droite, ombre incluse dans l'SVG. */
+.rf-cursor { position: absolute; width: 64px; height: auto; z-index: 5; pointer-events: none; }
+
+/* "Rayons de clic" gris clair autour d'un élément */
+.rf-burst { position: absolute; width: 22px; height: 7px; border-radius: 99px; background: #ededed; }
+
+/* Cadre d'appareil gris (avant / après) */
+.rf-device { position: absolute; padding: 14px; border-radius: var(--rf-r-card); background: #e3e3e3; box-shadow: inset 0 0 0 1px rgba(0,0,0,.04), var(--rf-shadow-card); }
+.rf-device > .rf-device__screen { border-radius: 20px; background: #fff; overflow: hidden; height: 100%; }
+
+/* Capture inclinée avec carte bleue derrière */
+.rf-tilt { position: absolute; border-radius: 22px; border: 6px solid #fff; background: #fff; box-shadow: var(--rf-shadow-wire); overflow: hidden; }
+.rf-tilt--back { background: linear-gradient(160deg, #8fd0ff 0%, #2c7cf6 100%); }
+
+/* ==========================================================================
+   Briques relevées dans Figma (brand/design/figma/README.md, 26/10/2026)
+   ========================================================================== */
+/* Ombre directionnelle des cercles (F2) : 5 couches vers le bas à droite */
+:root {
+  --rf-shadow-dir: 1px 1px 3.6px rgba(10,10,10,.05), 5.1px 4.1px 6.6px rgba(10,10,10,.04), 11.2px 9.7px 8.7px rgba(10,10,10,.03), 19.9px 16.8px 10.2px rgba(10,10,10,.01), 30.6px 26.5px 11.2px rgba(10,10,10,0);
+  --rf-shadow-dir-sm: .6px .6px 2.1px rgba(10,10,10,.05), 3px 2.4px 3.9px rgba(10,10,10,.04), 6.6px 5.7px 5.1px rgba(10,10,10,.03), 11.7px 9.9px 6px rgba(10,10,10,.01);
+  --rf-tint-lavender: #e0e9ff; /* fond de la carte F1 dans Figma */
+}
+.rf-avatar { box-shadow: var(--rf-shadow-dir); }
+.rf-avatar--ghost { border: 1px solid rgba(0,0,0,.16); }
+
+/* Puce accrochée au bord d'un objet sélectionné (F1) : « Aa », palette, outils */
+.rf-chip { position: absolute; display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: #fff; border: 0.91px solid rgba(0,0,0,.11); border-radius: 13.7px; box-shadow: var(--rf-shadow-tool); z-index: 4; }
+.rf-chip--type { font: 600 30px/1 var(--rf-font-text); letter-spacing: -0.02em; color: #000; padding: 10px 16px; }
+.rf-chip--type span { font-weight: 400; }
+.rf-chip--flat { box-shadow: none; } /* barre d'alignements de F1 : sans ombre */
+
+/* Fantôme (F1) : même maquette à 48 % d'opacité, coupée par le bord de la carte */
+.rf-ghost { opacity: .48; }
+
+/* Curseur multijoueur « Vous » (F4) */
+.rf-you { position: absolute; z-index: 5; display: flex; flex-direction: column; align-items: flex-start; pointer-events: none; }
+.rf-you img { width: 28px; height: auto; margin-left: 52px; }
+.rf-you span { margin-top: -4px; padding: 7px 14px; border-radius: 999px; background: var(--rf-blue); color: #fff; font: 500 15px/1 var(--rf-font-text); letter-spacing: -0.02em; }
+
+/* Carte intérieure d'illustration (F4 : processus) */
+.rf-stage { position: relative; overflow: hidden; border-radius: 24px; background: #f6f6f7; border: 1px solid rgba(1,71,255,.08); }
+
+/* Section */
+.rf-section { background: var(--rf-section); border-top: 1px solid rgba(0,0,0,.05); padding: 196px 48px 128px; }
+.rf-container { max-width: var(--rf-container); margin: 0 auto; }
+@media (max-width: 1399px) { .rf-section { padding: 128px 48px; } }
+@media (max-width: 809px)  { .rf-section { padding: 96px 16px 64px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rf-btn__inner, .rf-btn__avatar { transition: none; }
+}
+
+/* ==========================================================================
+   Formes SVG du site (R48) — balisage : brand/design/components/shapes.html.
+   Positions reprises de components/sections/Hero2Optimized/Hero2Optimized.css.
+   ========================================================================== */
+.rf-shapes { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.rf-shapes ~ * { position: relative; z-index: 1; }
+.rf-shape { position: absolute; display: block; }
+.rf-shape path { stroke: #0147ff; stroke-opacity: .04; }
+.rf-shapes--light .rf-shape path { stroke: #fff; stroke-opacity: .08; }
+.rf-shape--right { width: 923px; height: 822px; left: calc(95.5% - 461.5px); top: calc(39.71% - 411px); }
+.rf-shape--left { width: 883px; height: 920px; left: calc(6.64% - 441.5px); top: calc(50.63% - 460px); }
+@media (min-width: 810px) and (max-width: 1399px) {
+  .rf-shape--right { left: calc(109.14% - 461.5px); }
+  .rf-shape--left { left: calc(-1.98% - 441.5px); }
+}
+@media (max-width: 809px) {
+  .rf-shape--right { height: 670px; left: calc(154.36% - 461.5px); top: calc(38.81% - 335px); }
+  .rf-shape--left { height: 750px; left: calc(-24.1% - 441.5px); top: calc(53.23% - 375px); }
+}
