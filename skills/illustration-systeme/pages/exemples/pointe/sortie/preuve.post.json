@@ -1,0 +1,255 @@
+{
+"racine": {
+"kind": "frame",
+"w": 1440,
+"h": 200,
+"nom": "03 · Preuve"
+},
+"noeuds": {
+"03 · Preuve": {
+"kind": "frame",
+"w": 1440,
+"h": 200
+},
+"03 · Preuve / Preuve · trait milieu": {
+"kind": "vec"
+},
+"03 · Preuve / Preuve · trait clients": {
+"kind": "vec"
+},
+"03 · Preuve / Preuve · sur-titre": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 14,
+"lh": 150,
+"ls": 1,
+"w": null,
+"align": "start",
+"x": 182,
+"y": 44
+},
+"03 · Preuve / Preuve · chiffre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 34,
+"lh": 110,
+"ls": -3,
+"w": null,
+"align": "start",
+"x": 182,
+"y": 76
+},
+"03 · Preuve / Preuve · note": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 182,
+"y": 124
+},
+"03 · Preuve / Preuve · client 1": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 815,
+"y": 37
+},
+"03 · Preuve / Preuve · client 2": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 1005,
+"y": 37
+},
+"03 · Preuve / Preuve · client 3": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 1195,
+"y": 37
+},
+"03 · Preuve / Preuve · client 4": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 815,
+"y": 137
+},
+"03 · Preuve / Preuve · client 5": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 1005,
+"y": 137
+},
+"03 · Preuve / Preuve · client 6": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 1195,
+"y": 137
+},
+"03 · Preuve / Preuve · séparateur 1": {
+"kind": "vec"
+},
+"03 · Preuve / Preuve · séparateur 2": {
+"kind": "vec"
+},
+"03 · Preuve / Preuve · jointure clients": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"03 · Preuve / Preuve · jointure clients droite": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"03 · Preuve / Preuve · jointure s1": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"03 · Preuve / Preuve · jointure s2": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"03 · Preuve / Preuve · trait de fin": {
+"kind": "vec"
+},
+"03 · Preuve / Preuve · jointure 150": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"03 · Preuve / Preuve · jointure 1290": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"03 · Preuve / Preuve · jointure 720": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"03 · Preuve / Preuve · jointure 910": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"03 · Preuve / Preuve · jointure 1100": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+}
+}
+}

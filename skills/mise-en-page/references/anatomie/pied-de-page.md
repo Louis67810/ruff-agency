@@ -1,0 +1,93 @@
+# pied-de-page · `6027:2763` · 1440 × 887
+
+Résumé : {'blocs': 28, 'illustrations': 1, 'traits': 13, 'icones': 10, 'textes': 29, 'boutons': 1, 'decors': 3, 'images': 1}
+Textes par rôle : {'texte / libellé': 25, 'texte d’intro': 3, 'titre géant': 1}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147260597** (frame) 1440×887 @(0,18636) `6027:2763` — auto-layout ↓ écart 0 align MIN/MIN · fond #1A1A1A
+  - ▣ **Frame 2147239793** (frame) 1440×601 @(0,0) `6027:2764` — auto-layout ↓ écart 0 pad 0/150/0/150 align MIN/MIN
+    - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Frame 2147239858 » 1440×1140 @(1440,-270) `6027:2765` (23 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+    - ▣ **Frame 2147239792** (frame) 1140×509 @(150,0) `6027:2791` — auto-layout → écart 0 align MIN/MIN
+      - ─ trait 509×0 @(0,0) #333333 `6027:2792`
+      - ▣ **Container** (frame) 367×465 @(0,0) `6027:2793` — auto-layout ↓ écart 150 pad 100/60/100/60 align MIN/MIN
+        - ▣ **Frame 2147239791** (frame) 247×68 @(60,100) `6027:2794` — auto-layout ↓ écart 16 align MIN/MIN
+          - ▣ **Frame 2147240273** (frame) 120×28 @(0,0) `6027:2795` — auto-layout → écart 6 align MIN/CENTER
+            - ◆ icône/logo « Frame 2147240272 » 34×28 @(0,0) `6027:2796`
+            - ▣ **Botwise** (group) 81×18 @(40,5) `6027:2802`
+              - ◆ icône/logo « Vector » 12×13 @(109,10) `6027:2803`
+              - ◆ icône/logo « Vector » 11×13 @(97,10) `6027:2804`
+              - ◆ icône/logo « Vector » 19×13 @(73,10) `6027:2806`
+              - ◆ icône/logo « Vector » 12×13 @(53,10) `6027:2808`
+              - ◆ icône/logo « Vector » 13×17 @(40,6) `6027:2809`
+          - **texte / libellé** « AI Powered Customer Support » — Inter Tight Medium 16, #EBE5E0, left, 247×24 @(0,44) `6027:2810`
+        - ▣ **Frame 2147261063** (frame) 123×47 @(60,318) `6027:2811` — auto-layout → écart 2 align MIN/MIN
+          - 🔘 **bouton** « Get Started » fond #FFFFFF 123×47 rayon 100 @(0,0) `6027:2812`
+      - ─ trait 509×0 @(367,0) #333333 `6027:2817`
+      - ▣ **Frame 2147239790** (frame) 773×509 @(367,0) `6027:2818` — auto-layout → écart 0 align MIN/MIN
+        - ▣ **Frame 2147239788** (frame) 258×509 @(0,0) `6027:2819` — auto-layout ↓ écart 0 align MIN/MIN
+          - ▣ **Frame 2147239787** (frame) 258×153 @(0,0) `6027:2820` — auto-layout → écart 10 pad 100/30/30/30 align CENTER/CENTER
+            - **texte d’intro** « Home » — Inter Tight Medium 18, #FFFFFF, left, 198×23 @(30,100) `6027:2821`
+          - ─ trait 258×0 @(0,153) #333333 `6027:2822`
+          - ▣ **Frame 2147237814** (frame) 258×356 @(0,153) `6027:2823` — auto-layout ↓ écart 10 pad 30/30/30/30 align MIN/MIN
+            - **texte / libellé** « Features » — Inter Tight Medium 16, #707070, left, 198×24 @(30,30) `6027:2824`
+            - **texte / libellé** « Platform » — Inter Tight Medium 16, #FFFFFF, left, 198×24 @(30,64) `6027:2825`
+            - **texte / libellé** « How it works » — Inter Tight Medium 16, #707070, left, 198×24 @(30,98) `6027:2826`
+            - **texte / libellé** « Benefits » — Inter Tight Medium 16, #707070, left, 198×24 @(30,132) `6027:2827`
+            - **texte / libellé** « Context Engine » — Inter Tight Medium 16, #707070, left, 198×24 @(30,166) `6027:2828`
+            - **texte / libellé** « Integrations » — Inter Tight Medium 16, #707070, left, 198×24 @(30,200) `6027:2829`
+            - **texte / libellé** « Growth Metrics » — Inter Tight Medium 16, #707070, left, 198×24 @(30,234) `6027:2830`
+            - **texte / libellé** « Testimonial » — Inter Tight Medium 16, #707070, left, 198×24 @(30,268) `6027:2831`
+            - ─ trait 22×0 @(0,65) #3745F1 `6027:2832`
+            - **texte / libellé** « FAQ’s » — Inter Tight Medium 16, #707070, left, 198×24 @(30,302) `6027:2833`
+        - ─ trait 509×0 @(258,0) #333333 `6027:2834`
+        - ▣ **Frame 2147239789** (frame) 258×509 @(258,0) `6027:2835` — auto-layout ↓ écart 0 align MIN/MIN
+          - ▣ **Frame 2147239787** (frame) 258×153 @(0,0) `6027:2836` — auto-layout → écart 10 pad 100/30/30/30 align CENTER/CENTER
+            - **texte d’intro** « All Pages » — Inter Tight Medium 18, #FFFFFF, left, 198×23 @(30,100) `6027:2837`
+          - ─ trait 258×0 @(0,153) #333333 `6027:2838`
+          - ▣ **Frame 2147237813** (frame) 258×356 @(0,153) `6027:2839` — auto-layout ↓ écart 10 pad 30/30/30/30 align MIN/MIN
+            - **texte / libellé** « Home » — Inter Tight Medium 16, #707070, left, 198×24 @(30,30) `6027:2840`
+            - **texte / libellé** « Pricing » — Inter Tight Medium 16, #707070, left, 198×24 @(30,64) `6027:2841`
+            - **texte / libellé** « About Us » — Inter Tight Medium 16, #707070, left, 198×24 @(30,98) `6027:2842`
+            - **texte / libellé** « Blogs » — Inter Tight Medium 16, #707070, left, 198×24 @(30,132) `6027:2843`
+            - **texte / libellé** « Contact » — Inter Tight Medium 16, #707070, left, 198×24 @(30,166) `6027:2844`
+            - **texte / libellé** « Waitlist » — Inter Tight Medium 16, #707070, left, 198×24 @(30,200) `6027:2845`
+            - **texte / libellé** « Privacy Policy » — Inter Tight Medium 16, #707070, left, 198×24 @(30,234) `6027:2846`
+            - **texte / libellé** « Terms & Condition » — Inter Tight Medium 16, #707070, left, 198×24 @(30,268) `6027:2847`
+            - **texte / libellé** « 404 » — Inter Tight Medium 16, #707070, left, 198×24 @(30,302) `6027:2848`
+        - ─ trait 509×0 @(515,0) #333333 `6027:2849`
+        - ▣ **Frame 2147239790** (frame) 258×369 @(515,0) `6027:2850` — auto-layout ↓ écart 0 align MIN/MIN
+          - ▣ **Frame 2147239787** (frame) 258×153 @(0,0) `6027:2851` — auto-layout → écart 10 pad 100/30/30/30 align CENTER/CENTER
+            - **texte d’intro** « Our Socials » — Inter Tight Medium 18, #FFFFFF, left, 198×23 @(30,100) `6027:2852`
+          - ─ trait 258×0 @(0,153) #333333 `6027:2853`
+          - ▣ **Frame 2147240349** (frame) 218×216 @(0,153) `6027:2854` — auto-layout ↓ écart 20 pad 30/30/30/30 align MIN/MIN
+            - ▣ **Frame 2147240347** (frame) 158×24 @(30,30) `6027:2855` — auto-layout → écart 6 align MIN/CENTER
+              - ◆ icône/logo « Interface essential/Linkedin » 22×22 @(0,1) `6027:2856`
+              - **texte / libellé** « LinkedIn » — Inter Tight Medium 16, #707070, left, 130×24 @(28,0) `6027:2858`
+            - ▣ **Frame 2147240349** (frame) 158×24 @(30,74) `6027:2859` — auto-layout → écart 6 align MIN/CENTER
+              - ◆ icône/logo « facebook-logo-fill » 22×22 @(0,1) `6027:2860`
+              - **texte / libellé** « Facebook » — Inter Tight Medium 16, #707070, left, 130×24 @(28,0) `6027:2863`
+            - ▣ **Frame 2147240350** (frame) 158×24 @(30,118) `6027:2864` — auto-layout → écart 6 align MIN/CENTER
+              - ◆ icône/logo « Interface essential/Instagram » 22×22 @(0,1) `6027:2865`
+              - **texte / libellé** « Instagram » — Inter Tight Medium 16, #707070, left, 130×24 @(28,0) `6027:2867`
+            - ▣ **Frame 2147240348** (frame) 158×24 @(30,162) `6027:2868` — auto-layout → écart 6 align MIN/CENTER
+              - ◆ icône/logo « Interface essential/twitter » 22×22 @(0,1) `6027:2869`
+              - **texte / libellé** « X » — Inter Tight Medium 16, #707070, left, 130×24 @(28,0) `6027:2871`
+      - ─ trait 509×0 @(1140,0) #333333 `6027:2872`
+    - ▣ **Frame 2147237830** (frame) 1140×92 @(150,509) `6027:2873` — auto-layout → écart 287 pad 30/60/30/60 align SPACE_BETWEEN/CENTER · contour #333333 1
+      - ▣ **Frame 2147237829** (frame) 222×23 @(459,34) `6027:2874` — auto-layout → écart 14 align MIN/CENTER
+        - **texte / libellé** « Privacy Policy » — Inter Tight Medium 15, #707070, left, 87×23 @(0,0) `6027:2875`
+        - ─ trait 16×0 @(101,4) #404040 `6027:2876`
+        - **texte / libellé** « Terms of Service » — Inter Tight Medium 15, #707070, left, 107×23 @(115,0) `6027:2877`
+    - ✦ décor / motif « Frame 2147240331 » 1440×15 @(0,0) `6027:2878` (déborde de la section : motif pixel, lumière ou forme)
+  - ─ trait 1440×0 @(0,601) #333333 `6027:2879`
+  - ▣ **Frame 2147240266** (frame) 1440×286 @(0,601) `6027:2880`
+    - ✦ décor / motif « Frame 2147260469 » 959×288 @(959,-2) `6027:2881` (déborde de la section : motif pixel, lumière ou forme)
+    - ✦ décor / motif « Frame 2147260467 » 1140×288 @(300,-2) `6027:2883` (déborde de la section : motif pixel, lumière ou forme)
+    - **titre géant** « Botwise » — Switzer Semibold 265, image, center, 1140×265 @(150,68) `6027:2885`
+    - ─ trait 350×0 @(150,0) #333333 `6027:2886`
+    - ─ trait 350×0 @(1290,0) #333333 `6027:2887`
+    - ▣ **Frame 2147240168** (frame) 1139×62 @(151,-1) `6027:2888`
+      - ▣ **Frame 276** (frame) 569×62 @(0,0) `6027:2889`
+      - ▣ **Frame 2147240168** (frame) 569×62 @(1140,0) `6027:3290`
+    - 🖼 image/photo « New Project (1) 1 » 1440×287 @(0,286) `6027:3691`

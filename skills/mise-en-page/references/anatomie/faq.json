@@ -1,0 +1,622 @@
+{
+ "type": "faq",
+ "noeud": "6027:1120",
+ "w": 1140,
+ "h": 918,
+ "items": {
+  "blocs": [
+   {
+    "id": "6027:1120",
+    "nom": "Frame 2147240290",
+    "w": 1140,
+    "h": 918,
+    "x": 151,
+    "y": 16989,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:1121",
+    "nom": "Frame 2147240158",
+    "w": 1140,
+    "h": 150,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:1122",
+    "nom": "Frame 2147239882",
+    "w": 1140,
+    "h": 82,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:1126",
+    "nom": "Frame 2147240160",
+    "w": 1140,
+    "h": 708,
+    "x": 0,
+    "y": 210,
+    "layout": "auto-layout ↓ écart 0 pad 0/97/0/97 align MIN/MIN",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6027:1127",
+    "nom": "Frame 2147240162",
+    "w": 946,
+    "h": 613,
+    "x": 97,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:1128",
+    "nom": "Frame 2147240161",
+    "w": 946,
+    "h": 163,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:1129",
+    "nom": "Container",
+    "w": 946,
+    "h": 163,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 pad 24/0/24/0 align CENTER/MIN",
+    "traits": "trait #D6D0C8 right/left"
+   },
+   {
+    "id": "6027:1130",
+    "nom": "Sub Container",
+    "w": 946,
+    "h": 27,
+    "x": 0,
+    "y": 24,
+    "layout": "auto-layout → écart 12 pad 0/24/0/24 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:1136",
+    "nom": "Text Container",
+    "w": 946,
+    "h": 48,
+    "x": 0,
+    "y": 91,
+    "layout": "auto-layout → écart 10 pad 0/24/0/24 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:1138",
+    "nom": "Container",
+    "w": 946,
+    "h": 75,
+    "x": 0,
+    "y": 163,
+    "layout": "auto-layout → écart 12 pad 24/24/24/24 align MIN/CENTER",
+    "traits": "trait #D6D0C8 right/left"
+   },
+   {
+    "id": "6027:1143",
+    "nom": "Container",
+    "w": 946,
+    "h": 75,
+    "x": 0,
+    "y": 238,
+    "layout": "auto-layout → écart 12 pad 24/24/24/24 align MIN/CENTER",
+    "traits": "trait #D6D0C8 right/left"
+   },
+   {
+    "id": "6027:1148",
+    "nom": "Container",
+    "w": 946,
+    "h": 75,
+    "x": 0,
+    "y": 313,
+    "layout": "auto-layout → écart 12 pad 24/24/24/24 align MIN/CENTER",
+    "traits": "trait #D6D0C8 right/left"
+   },
+   {
+    "id": "6027:1153",
+    "nom": "Container",
+    "w": 946,
+    "h": 75,
+    "x": 0,
+    "y": 388,
+    "layout": "auto-layout → écart 12 pad 24/24/24/24 align MIN/CENTER",
+    "traits": "trait #D6D0C8 right/left"
+   },
+   {
+    "id": "6027:1158",
+    "nom": "Container",
+    "w": 946,
+    "h": 75,
+    "x": 0,
+    "y": 463,
+    "layout": "auto-layout → écart 12 pad 24/24/24/24 align MIN/CENTER",
+    "traits": "trait #D6D0C8 right/left"
+   },
+   {
+    "id": "6027:1163",
+    "nom": "Container",
+    "w": 946,
+    "h": 75,
+    "x": 0,
+    "y": 538,
+    "layout": "auto-layout → écart 12 pad 24/24/24/24 align MIN/CENTER",
+    "traits": "trait #D6D0C8 right/left"
+   },
+   {
+    "id": "6027:1175",
+    "nom": "Frame 2147240116",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 708,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:2413",
+    "nom": "Frame 2147240166",
+    "w": 696,
+    "h": 374,
+    "x": 375,
+    "y": 155,
+    "layout": "auto-layout ↓ écart 40 pad 40/0/40/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2414",
+    "nom": "Frame 2147237801",
+    "w": 696,
+    "h": 207,
+    "x": 0,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2416",
+    "nom": "Frame 2147260464",
+    "w": 696,
+    "h": 178,
+    "x": 0,
+    "y": 29,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2419",
+    "nom": "Frame 2147237802",
+    "w": 245,
+    "h": 47,
+    "x": 226,
+    "y": 287,
+    "layout": "auto-layout → écart 14 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2427",
+    "nom": "Frame 2147239748",
+    "w": 946,
+    "h": 95,
+    "x": 97,
+    "y": 613,
+    "layout": "auto-layout → écart 44 pad 24/24/24/24 align SPACE_BETWEEN/CENTER",
+    "traits": "trait #D6D0C8 top/right/left"
+   },
+   {
+    "id": "6027:2428",
+    "nom": "Frame 2147239668",
+    "w": 495,
+    "h": 36,
+    "x": 24,
+    "y": 30,
+    "layout": "auto-layout → écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2429",
+    "nom": "Frame 2147238742",
+    "w": 114,
+    "h": 36,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart -10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2435",
+    "nom": "Frame 2",
+    "w": 245,
+    "h": 47,
+    "x": 677,
+    "y": 24,
+    "layout": "auto-layout → écart 14 align MIN/CENTER",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6027:1123",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "FAQ’s",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 43,
+    "h": 21,
+    "x": 548,
+    "y": 0,
+    "nb_car": 5
+   },
+   {
+    "id": "6027:1124",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Common Questions Answered",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 53,
+    "x": 0,
+    "y": 29,
+    "nb_car": 25
+   },
+   {
+    "id": "6027:1125",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Find answers about Botwise features, automation, integrations, / pricing, and chatbot support capabilities",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 52,
+    "x": 0,
+    "y": 98,
+    "nb_car": 106
+   },
+   {
+    "id": "6027:1131",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "What is Botwise AI chatbot?",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 870,
+    "h": 27,
+    "x": 24,
+    "y": 0,
+    "nb_car": 27
+   },
+   {
+    "id": "6027:1137",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Botwise is an AI-powered chatbot platform that automates customer conversations across websites, social media, / and messaging platforms.",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 898,
+    "h": 48,
+    "x": 24,
+    "y": 0,
+    "nb_car": 137
+   },
+   {
+    "id": "6027:1139",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "How does Botwise improve customer support?",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 870,
+    "h": 27,
+    "x": 24,
+    "y": 24,
+    "nb_car": 42
+   },
+   {
+    "id": "6027:1144",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "Which platforms does Botwise integrate with?",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 870,
+    "h": 27,
+    "x": 24,
+    "y": 24,
+    "nb_car": 44
+   },
+   {
+    "id": "6027:1149",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "Can Botwise handle multiple conversations simultaneously?",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 870,
+    "h": 27,
+    "x": 24,
+    "y": 24,
+    "nb_car": 57
+   },
+   {
+    "id": "6027:1154",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "Is Botwise suitable for small businesses?",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 870,
+    "h": 27,
+    "x": 24,
+    "y": 24,
+    "nb_car": 41
+   },
+   {
+    "id": "6027:1159",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "Can Botwise transfer chats to human agents?",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 870,
+    "h": 27,
+    "x": 24,
+    "y": 24,
+    "nb_car": 43
+   },
+   {
+    "id": "6027:1164",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "How quickly can Botwise be set up?",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 870,
+    "h": 27,
+    "x": 24,
+    "y": 24,
+    "nb_car": 34
+   },
+   {
+    "id": "6027:2415",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Start Today",
+    "couleur": "#767676",
+    "align": "LEFT",
+    "w": 94,
+    "h": 21,
+    "x": 301,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "6027:2417",
+    "role": "titre de section",
+    "police": "Switzer Semibold 54",
+    "texte": "Upgrade Customer / Support Today Now",
+    "couleur": "#000000E0",
+    "align": "CENTER",
+    "w": 748,
+    "h": 118,
+    "x": 0,
+    "y": 0,
+    "nb_car": 36
+   },
+   {
+    "id": "6027:2418",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Automate customer conversations instantly and deliver / faster support across every channel.",
+    "couleur": "#0000004A",
+    "align": "CENTER",
+    "w": 696,
+    "h": 48,
+    "x": 0,
+    "y": 130,
+    "nb_car": 92
+   },
+   {
+    "id": "6027:2434",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Talk to our team anytime Just send us a message",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 371,
+    "h": 27,
+    "x": 124,
+    "y": 4,
+    "nb_car": 47
+   }
+  ],
+  "icones": [
+   {
+    "id": "6027:1132",
+    "nom": "caret-up-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6027:1140",
+    "nom": "caret-down-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6027:1145",
+    "nom": "caret-down-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6027:1150",
+    "nom": "caret-down-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6027:1155",
+    "nom": "caret-down-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6027:1160",
+    "nom": "caret-down-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6027:1165",
+    "nom": "caret-down-bold",
+    "w": 16,
+    "h": 16
+   }
+  ],
+  "traits": [
+   {
+    "id": "6027:1135",
+    "w": 946,
+    "h": 0,
+    "x": 0,
+    "y": 71
+   },
+   {
+    "id": "6027:1168",
+    "w": 946,
+    "h": 0,
+    "x": 0,
+    "y": 163
+   },
+   {
+    "id": "6027:1169",
+    "w": 946,
+    "h": 0,
+    "x": 0,
+    "y": 238
+   },
+   {
+    "id": "6027:1170",
+    "w": 946,
+    "h": 0,
+    "x": 0,
+    "y": 313
+   },
+   {
+    "id": "6027:1171",
+    "w": 946,
+    "h": 0,
+    "x": 0,
+    "y": 388
+   },
+   {
+    "id": "6027:1172",
+    "w": 946,
+    "h": 0,
+    "x": 0,
+    "y": 463
+   },
+   {
+    "id": "6027:1173",
+    "w": 946,
+    "h": 0,
+    "x": 0,
+    "y": 538
+   },
+   {
+    "id": "6027:1174",
+    "w": 946,
+    "h": 0,
+    "x": 0,
+    "y": 538
+   },
+   {
+    "id": "6027:1177",
+    "w": 1440,
+    "h": 0,
+    "x": 0,
+    "y": 1
+   },
+   {
+    "id": "6027:1178",
+    "w": 1440,
+    "h": 0,
+    "x": 0,
+    "y": 15
+   },
+   {
+    "id": "6027:2443",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 0
+   }
+  ],
+  "images": [
+   {
+    "id": "6027:1176",
+    "nom": "Rectangle 34624471",
+    "w": 15,
+    "h": 1139
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6027:1179",
+    "nom": "Frame 2147261307",
+    "w": 1139,
+    "h": 547,
+    "x": 151,
+    "y": 65
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6027:2420",
+    "texte": "Book a demo",
+    "fond": "#FFFFFF",
+    "w": 112,
+    "h": 47,
+    "rayon": 100
+   },
+   {
+    "id": "6027:2422",
+    "texte": "Contact us",
+    "fond": "#1A1A1A",
+    "w": 119,
+    "h": 47,
+    "rayon": 100
+   },
+   {
+    "id": "6027:2436",
+    "texte": "Book a demo",
+    "fond": "#EFEBE7",
+    "w": 112,
+    "h": 47,
+    "rayon": 100
+   },
+   {
+    "id": "6027:2438",
+    "texte": "Contact us",
+    "fond": "#1A1A1A",
+    "w": 119,
+    "h": 47,
+    "rayon": 100
+   }
+  ]
+ }
+}

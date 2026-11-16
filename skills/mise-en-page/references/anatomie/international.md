@@ -1,0 +1,78 @@
+# international · `6027:2625` · 1138 × 661
+
+Résumé : {'blocs': 29, 'decors': 6, 'illustrations': 1, 'textes': 2, 'boutons': 15, 'traits': 14}
+Textes par rôle : {'titre de section': 1, 'texte d’intro': 1}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147240362** (frame) 1138×661 @(152,14518) `6027:2625` — auto-layout ↓ écart 0 align MIN/MAX
+  - ▣ **Frame 2147240361** (frame) 1138×501 @(0,0) `6027:2626` — auto-layout → écart 117 pad 180/40/60/40 align SPACE_BETWEEN/MIN · trait #D6D0C8 top
+    - ▣ **Frame 2147240344** (frame) 1140×73 @(0,528) `6027:2627`
+      - ✦ décor / motif « Group 43012 » 1140×111 @(0,-18) `6027:2628` (déborde de la section : motif pixel, lumière ou forme)
+      - ▣ **Group 43010** (group) 1140×80 @(0,-7) `6027:2631`
+        - ▣ **Frame** (frame) 1140×80 @(0,73) `6027:2632` — fond #FFFFFF
+          - ▣ **Clip path group** (group) 1296×80 @(-78,0) `6027:2633`
+            - ✦ décor / motif « clip0_397_3802 » 1296×80 @(-78,0) `6027:2634` (déborde de la section : motif pixel, lumière ou forme)
+            - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Group » 1701×579 @(-280,0) `6027:2636` (18 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+    - ▣ **Frame 2147240108** (frame) 384×261 @(377,180) `6027:2655` — auto-layout ↓ écart 40 align MIN/CENTER
+      - ✦ décor / motif « Frame 2147240360 » 630×375 @(-123,-280) `6027:2656` (déborde de la section : motif pixel, lumière ou forme)
+      - ▣ **Frame 2147260456** (frame) 384×174 @(0,0) `6027:2662` — auto-layout ↓ écart 16 align MIN/MIN
+        - ▣ **Frame 2147239882** (frame) 384×106 @(0,0) `6027:2663` — auto-layout ↓ écart 8 align MIN/CENTER
+          - **titre de section** « AI Support Without Borders » — Switzer Semibold 48, #1A1A1A, center, 384×106 @(0,0) `6027:2664`
+        - **texte d’intro** « Deliver fast automated customer support anywhere with Botwise global AI coverage. » — Inter Tight Medium 17, #666666, center, 384×52 @(0,122) `6027:2665`
+      - 🔘 **bouton** « Get Started » fond #1A1A1A 123×47 rayon 100 @(130,214) `6027:2666`
+    - ▣ **Frame 2147260448** (frame) 265×338 @(42,87) `6027:2671`
+      - ✦ décor / motif « Frame 2147260449 » 232×158 @(0,-20) `6027:2672` (déborde de la section : motif pixel, lumière ou forme)
+  - ▣ **Frame 2147240308** (frame) 1138×160 @(0,501) `6027:2674` — auto-layout ↓ écart 0 align MIN/MIN · trait #D6D0C8 top/bottom · fond #F7F5F3
+    - ▣ **Frame 2147240295** (frame) 1140×80 @(0,0) `6027:2675` — auto-layout → écart 10 align CENTER/CENTER
+      - ▣ **Frame 2147240302** (frame) 126×80 @(6,0) `6027:2676` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « China » fond #FFFFFF 86×40 rayon 100 @(20,20) `6027:2677`
+      - ─ trait 80×0 @(142,0) #D6D0C8 `6027:2680`
+      - ▣ **Frame 2147240301** (frame) 178×80 @(152,0) `6027:2681` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « United States » fond #FFFFFF 138×40 rayon 100 @(20,20) `6027:2682`
+      - ─ trait 80×0 @(340,0) #D6D0C8 `6027:2685`
+      - ▣ **Frame 2147240303** (frame) 114×80 @(350,0) `6027:2686` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « Italy » fond #FFFFFF 74×40 rayon 100 @(20,20) `6027:2687`
+      - ─ trait 80×0 @(474,0) #D6D0C8 `6027:2690`
+      - ▣ **Frame 2147240304** (frame) 129×80 @(484,0) `6027:2691` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « Japan » fond #FFFFFF 89×40 rayon 100 @(20,20) `6027:2692`
+      - ─ trait 80×0 @(624,0) #D6D0C8 `6027:2695`
+      - ▣ **Frame 2147240306** (frame) 170×80 @(634,0) `6027:2696` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « South Africa » fond #FFFFFF 130×40 rayon 100 @(20,20) `6027:2697`
+      - ─ trait 80×0 @(814,0) #D6D0C8 `6027:2700`
+      - ▣ **Frame 2147240307** (frame) 147×80 @(824,0) `6027:2701` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « Australia » fond #FFFFFF 107×40 rayon 100 @(20,20) `6027:2702`
+      - ─ trait 80×0 @(980,0) #D6D0C8 `6027:2705`
+      - ▣ **Frame 2147240305** (frame) 143×80 @(990,0) `6027:2706` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « Sweden » fond #FFFFFF 103×40 rayon 100 @(20,20) `6027:2707`
+    - ─ trait 1138×0 @(0,80) #D6D0C8 `6027:2710`
+    - ▣ **Frame 2147240296** (frame) 1140×80 @(0,80) `6027:2711` — auto-layout → écart 10 align CENTER/CENTER
+      - ▣ **Frame 2147240302** (frame) 170×80 @(-18,0) `6027:2712` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « South Korea » fond #FFFFFF 130×40 rayon 100 @(20,20) `6027:2713`
+      - ─ trait 80×0 @(162,0) #D6D0C8 `6027:2716`
+      - ▣ **Frame 2147240301** (frame) 137×80 @(172,0) `6027:2717` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « Greece » fond #FFFFFF 97×40 rayon 100 @(20,20) `6027:2718`
+      - ─ trait 80×0 @(319,0) #D6D0C8 `6027:2721`
+      - ▣ **Frame 2147240303** (frame) 150×80 @(329,0) `6027:2722` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « Denmark » fond #FFFFFF 110×40 rayon 100 @(20,20) `6027:2723`
+      - ─ trait 80×0 @(489,0) #D6D0C8 `6027:2726`
+      - ▣ **Frame 2147240304** (frame) 119×80 @(499,0) `6027:2727` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « India » fond #FFFFFF 79×40 rayon 100 @(20,20) `6027:2728`
+      - ─ trait 80×0 @(628,0) #D6D0C8 `6027:2731`
+      - ▣ **Frame 2147240306** (frame) 134×80 @(638,0) `6027:2732` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « France » fond #FFFFFF 94×40 rayon 100 @(20,20) `6027:2733`
+      - ─ trait 80×0 @(782,0) #D6D0C8 `6027:2736`
+      - ▣ **Frame 2147240307** (frame) 196×80 @(792,0) `6027:2737` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « United Kingdom » fond #FFFFFF 156×40 rayon 100 @(20,20) `6027:2738`
+      - ─ trait 80×0 @(998,0) #D6D0C8 `6027:2741`
+      - ▣ **Frame 2147240305** (frame) 150×80 @(1008,0) `6027:2742` — auto-layout ↓ écart 10 pad 20/20/20/20 align MIN/MIN
+        - 🔘 **bouton** « Germany » fond #FFFFFF 110×40 rayon 100 @(20,20) `6027:2743`
+    - ─ trait 1440×0 @(-151,1) #D6D0C8 `6027:2746`
+    - ✦ décor / motif « Frame 2147240116 » 1440×15 @(-151,159) `6027:2747` (déborde de la section : motif pixel, lumière ou forme)
+    - ▣ **Frame 2147260454** (frame) 267×157 @(0,1) `6027:2751`
+      - ▭ fond/forme « Rectangle 34625286 » 267×157 dégradé rayon  `6027:2752`
+      - ▭ fond/forme « Rectangle 34625287 » 165×157 dégradé rayon  `6027:2753`
+    - ▣ **Frame 2147260455** (frame) 267×157 @(1138,1) `6027:2754`
+      - ▭ fond/forme « Rectangle 34625286 » 267×157 dégradé rayon  `6027:2755`
+      - ▭ fond/forme « Rectangle 34625287 » 165×157 dégradé rayon  `6027:2756`
+  - ✦ décor / motif « Frame 2147240116 » 1440×15 @(-150,-14) `6027:2757` (déborde de la section : motif pixel, lumière ou forme)

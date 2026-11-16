@@ -1,0 +1,438 @@
+{
+ "type": "trois-ecrans",
+ "noeud": "6001:1227",
+ "w": 1140,
+ "h": 741,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:1227",
+    "nom": "Frame 2147260605",
+    "w": 1140,
+    "h": 741,
+    "x": 150,
+    "y": 6415,
+    "layout": "auto-layout ↓ écart 60 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:1228",
+    "nom": "Frame 2147240092",
+    "w": 1140,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 305 pad 0/97/0/97 align SPACE_BETWEEN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:1229",
+    "nom": "Frame 2147239882",
+    "w": 386,
+    "h": 135,
+    "x": 97,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1233",
+    "nom": "Frame 2147239897",
+    "w": 1139,
+    "h": 546,
+    "x": 1,
+    "y": 195,
+    "layout": "auto-layout ↓ écart 0 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:1242",
+    "nom": "Frame 2147239893",
+    "w": 1139,
+    "h": 537,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 1 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:1243",
+    "nom": "Frame 2147239890",
+    "w": 378,
+    "h": 537,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1324",
+    "nom": "Frame 2147239886",
+    "w": 378,
+    "h": 166,
+    "x": 0,
+    "y": 371,
+    "layout": "auto-layout ↓ écart 12 pad 20/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1325",
+    "nom": "Frame 2147239884",
+    "w": 59,
+    "h": 20,
+    "x": 40,
+    "y": 20,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1332",
+    "nom": "Frame 2147239885",
+    "w": 298,
+    "h": 74,
+    "x": 40,
+    "y": 52,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1336",
+    "nom": "Frame 2147239898",
+    "w": 378,
+    "h": 537,
+    "x": 380,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1467",
+    "nom": "Frame 2147239886",
+    "w": 378,
+    "h": 166,
+    "x": 0,
+    "y": 371,
+    "layout": "auto-layout ↓ écart 12 pad 20/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1468",
+    "nom": "Frame 2147239886",
+    "w": 67,
+    "h": 20,
+    "x": 40,
+    "y": 20,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1478",
+    "nom": "Frame 2147239885",
+    "w": 298,
+    "h": 74,
+    "x": 40,
+    "y": 52,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1482",
+    "nom": "Frame 2147239899",
+    "w": 378,
+    "h": 537,
+    "x": 761,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1574",
+    "nom": "Frame 2147239886",
+    "w": 378,
+    "h": 166,
+    "x": 0,
+    "y": 371,
+    "layout": "auto-layout ↓ écart 12 pad 20/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1575",
+    "nom": "Frame 2147239886",
+    "w": 91,
+    "h": 20,
+    "x": 40,
+    "y": 20,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1580",
+    "nom": "Frame 2147239885",
+    "w": 298,
+    "h": 74,
+    "x": 40,
+    "y": 52,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:1230",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Context Engine",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 120,
+    "h": 21,
+    "x": 0,
+    "y": 0,
+    "nb_car": 14
+   },
+   {
+    "id": "6001:1231",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "AI Conversations Made Smarter",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 386,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 29
+   },
+   {
+    "id": "6001:1232",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Automate customer conversations and deliver faster, more accurate support.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 359,
+    "h": 52,
+    "x": 684,
+    "y": 83,
+    "nb_car": 74
+   },
+   {
+    "id": "6001:1331",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Gmail",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 39,
+    "h": 20,
+    "x": 20,
+    "y": 0,
+    "nb_car": 5
+   },
+   {
+    "id": "6001:1333",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Intent Detection Engine",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 298,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:1334",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Understand customer queries and extract meaning from every conversation.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 298,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 72
+   },
+   {
+    "id": "6001:1477",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Social",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 47,
+    "h": 20,
+    "x": 20,
+    "y": 0,
+    "nb_car": 6
+   },
+   {
+    "id": "6001:1479",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Context Driven Replies",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 298,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 22
+   },
+   {
+    "id": "6001:1480",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Analyze conversation context to generate accurate and relevant responses.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 298,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 73
+   },
+   {
+    "id": "6001:1579",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Ecommerce",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 71,
+    "h": 20,
+    "x": 20,
+    "y": 0,
+    "nb_car": 9
+   },
+   {
+    "id": "6001:1581",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Automated Response Engine",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 298,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 25
+   },
+   {
+    "id": "6001:1582",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Convert customer queries into instant accurate automated support replies.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 298,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 73
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:1234",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": -15
+   },
+   {
+    "id": "6001:1238",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 537
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6001:1244",
+    "nom": "Frame 2147239889",
+    "w": 378,
+    "h": 371,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:1337",
+    "nom": "Frame 2147239889",
+    "w": 378,
+    "h": 371,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:1483",
+    "nom": "Frame 2147239888",
+    "w": 378,
+    "h": 371,
+    "x": 0,
+    "y": 0
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:1326",
+    "nom": "chat-centered-text-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:1469",
+    "nom": "brain-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:1576",
+    "nom": "puzzle-piece-bold",
+    "w": 16,
+    "h": 16
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:1335",
+    "w": 537,
+    "h": 0,
+    "x": 379,
+    "y": 0
+   },
+   {
+    "id": "6001:1481",
+    "w": 537,
+    "h": 0,
+    "x": 760,
+    "y": 0
+   }
+  ],
+  "jointures": [
+   {
+    "id": "6001:1583",
+    "x": 376,
+    "y": -5
+   },
+   {
+    "id": "6001:1584",
+    "x": 376,
+    "y": 542
+   },
+   {
+    "id": "6001:1585",
+    "x": 756,
+    "y": -5
+   },
+   {
+    "id": "6001:1586",
+    "x": 756,
+    "y": 542
+   }
+  ]
+ }
+}

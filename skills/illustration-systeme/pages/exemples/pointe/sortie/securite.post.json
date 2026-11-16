@@ -1,0 +1,474 @@
+{
+"racine": {
+"kind": "frame",
+"w": 1440,
+"h": 920,
+"fond": [
+"#1A1A1A",
+1
+],
+"nom": "06 · Sécurité"
+},
+"noeuds": {
+"06 · Sécurité": {
+"kind": "frame",
+"w": 1440,
+"h": 920,
+"fond": [
+"#1A1A1A",
+1
+]
+},
+"06 · Sécurité / Sécurité · rail g": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · rail d": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · sur-titre": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 14,
+"lh": 150,
+"ls": 1,
+"w": null,
+"align": "center",
+"x": 720,
+"y": 100
+},
+"06 · Sécurité / Sécurité · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 48,
+"lh": 110,
+"ls": -3,
+"w": 760,
+"align": "center",
+"x": 720,
+"y": 132
+},
+"06 · Sécurité / Sécurité · intro": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 17,
+"lh": 150,
+"ls": -2,
+"w": 560,
+"align": "center",
+"x": 720,
+"y": 260
+},
+"06 · Sécurité / Sécurité · illustration": {
+"kind": "frame",
+"w": 754,
+"h": 280
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Banque": {
+"kind": "frame",
+"w": 190,
+"h": 80,
+"fond": [
+"#262626",
+1
+],
+"rayon": 16,
+"contour": [
+"#404040",
+1
+],
+"effets": "ombre-flottante"
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Banque / Sécurité · Banque · icône": {
+"kind": "frame",
+"w": 40,
+"h": 40,
+"fond": [
+"#333333",
+1
+],
+"rayon": 10
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Banque / Sécurité · Banque · icône / Sécurité · Banque · glyphe": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Banque / Sécurité · Banque · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 68,
+"y": 20
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Banque / Sécurité · Banque · détail": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 68,
+"y": 41
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Agents": {
+"kind": "frame",
+"w": 190,
+"h": 80,
+"fond": [
+"#262626",
+1
+],
+"rayon": 16,
+"contour": [
+"#404040",
+1
+],
+"effets": "ombre-flottante"
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Agents / Sécurité · Agents · icône": {
+"kind": "frame",
+"w": 40,
+"h": 40,
+"fond": [
+"#333333",
+1
+],
+"rayon": 10
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Agents / Sécurité · Agents · icône / Sécurité · Agents · glyphe": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Agents / Sécurité · Agents · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 68,
+"y": 20
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Agents / Sécurité · Agents · détail": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 68,
+"y": 41
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · liaisons": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · verrou": {
+"kind": "frame",
+"w": 94,
+"h": 94,
+"fond": [
+"#FFFFFF",
+0.06
+],
+"rayon": 100,
+"contour": [
+"#FFFFFF",
+1,
+0.14
+],
+"effets": "ombre-flottante"
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · verrou / Sécurité · verrou · cadenas": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Lecture seule": {
+"kind": "frame",
+"w": 136,
+"h": 34,
+"fond": [
+"#FBFAF9",
+1
+],
+"rayon": 100
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Lecture seule / Sécurité · Lecture seule · cadenas": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · illustration / Sécurité · Lecture seule / Sécurité · Lecture seule · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 34,
+"y": 7
+},
+"06 · Sécurité / Sécurité · trait cases": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · case 1 · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 182,
+"y": 716
+},
+"06 · Sécurité / Sécurité · case 1 · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": 221,
+"align": "start",
+"x": 182,
+"y": 750
+},
+"06 · Sécurité / Sécurité · séparateur 1": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · jointure 1": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · case 2 · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 467,
+"y": 716
+},
+"06 · Sécurité / Sécurité · case 2 · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": 221,
+"align": "start",
+"x": 467,
+"y": 750
+},
+"06 · Sécurité / Sécurité · séparateur 2": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · jointure 2": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · case 3 · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 752,
+"y": 716
+},
+"06 · Sécurité / Sécurité · case 3 · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": 221,
+"align": "start",
+"x": 752,
+"y": 750
+},
+"06 · Sécurité / Sécurité · séparateur 3": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · jointure 3": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · case 4 · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 1037,
+"y": 716
+},
+"06 · Sécurité / Sécurité · case 4 · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": 221,
+"align": "start",
+"x": 1037,
+"y": 750
+},
+"06 · Sécurité / Sécurité · jointure g": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · jointure d": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · trait de fin": {
+"kind": "vec"
+},
+"06 · Sécurité / Sécurité · jointure 150": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · jointure 1290": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · jointure 435": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · jointure 720": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"06 · Sécurité / Sécurité · jointure 1005": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+}
+}
+}

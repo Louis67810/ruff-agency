@@ -1,0 +1,445 @@
+{
+ "_source": "Valeurs relevées avec Figwright sur les pages du Figma « Botwise — AI-First SaaS Template (Copy) » (11/11/2026). Format Figma prêt pour set_effects (couleurs en hex 8 caractères, converties par motifs.py). Ce sont des POINTS DE DÉPART : on peut changer couleur, intensité, direction.",
+ "ombre-panneau": {
+  "usage": "grand panneau / carte d'illustration sur fond sable",
+  "effets": [
+   {
+    "type": "DROP_SHADOW",
+    "color": "#60412424",
+    "offset": {
+     "x": 0,
+     "y": 10
+    },
+    "radius": 22
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#6041241F",
+    "offset": {
+     "x": 0,
+     "y": 41
+    },
+    "radius": 41
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#60412412",
+    "offset": {
+     "x": 0,
+     "y": 91
+    },
+    "radius": 55
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#60412405",
+    "offset": {
+     "x": 0,
+     "y": 163
+    },
+    "radius": 65
+   }
+  ]
+ },
+ "ombre-ligne": {
+  "usage": "rangée, pastille, petite carte (moteur : --il-shadow-row ; spread négatif = OK sur rectangle/cadre, à retirer sur un vecteur)",
+  "effets": [
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0B1C4A0A",
+    "offset": {
+     "x": 0,
+     "y": 1.08
+    },
+    "radius": 1.08,
+    "spread": -0.54
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0B1C4A0A",
+    "offset": {
+     "x": 0,
+     "y": 3.24
+    },
+    "radius": 3.24,
+    "spread": -1.62
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0B1C4A0A",
+    "offset": {
+     "x": 0,
+     "y": 6.48
+    },
+    "radius": 6.48,
+    "spread": -3.24
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0B1C4A0A",
+    "offset": {
+     "x": 0,
+     "y": 12.95
+    },
+    "radius": 12.95,
+    "spread": -6.48
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0B1C4A0A",
+    "offset": {
+     "x": 0,
+     "y": 25.9
+    },
+    "radius": 25.9,
+    "spread": -12.95
+   }
+  ]
+ },
+ "ombre-carte-avis": {
+  "usage": "carte blanche rayon 20 (témoignages) : ombre grise douce et longue",
+  "effets": [
+   {
+    "type": "DROP_SHADOW",
+    "color": "#A6A6A61A",
+    "offset": {
+     "x": 0,
+     "y": 6
+    },
+    "radius": 13
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#A6A6A617",
+    "offset": {
+     "x": 0,
+     "y": 24
+    },
+    "radius": 24
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#A6A6A60D",
+    "offset": {
+     "x": 0,
+     "y": 55
+    },
+    "radius": 33
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#A6A6A603",
+    "offset": {
+     "x": 0,
+     "y": 98
+    },
+    "radius": 39
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#7D7D7D26",
+    "offset": {
+     "x": 0,
+     "y": 1
+    },
+    "radius": 1
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#7D7D7D0D",
+    "offset": {
+     "x": 0,
+     "y": 4
+    },
+    "radius": 4
+   }
+  ]
+ },
+ "ombre-flottante": {
+  "usage": "objet posé en l'air, lumière en haut à droite (ombre portée vers le bas-gauche) : pastille, photo, puce",
+  "effets": [
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0000001A",
+    "offset": {
+     "x": -1,
+     "y": 3
+    },
+    "radius": 7
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#00000017",
+    "offset": {
+     "x": -5,
+     "y": 12
+    },
+    "radius": 13
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0000000D",
+    "offset": {
+     "x": -12,
+     "y": 26
+    },
+    "radius": 17
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#00000003",
+    "offset": {
+     "x": -22,
+     "y": 46
+    },
+    "radius": 20
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#00000059",
+    "offset": {
+     "x": -9,
+     "y": 8
+    },
+    "radius": 26
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0000004D",
+    "offset": {
+     "x": -34,
+     "y": 33
+    },
+    "radius": 48
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#0000002E",
+    "offset": {
+     "x": -77,
+     "y": 75
+    },
+    "radius": 65
+   }
+  ]
+ },
+ "ombre-indigo": {
+  "usage": "élément accent posé sur sable (tuile, bouton indigo) : ombre teintée",
+  "effets": [
+   {
+    "type": "DROP_SHADOW",
+    "color": "#828CF738",
+    "offset": {
+     "x": 0,
+     "y": 5
+    },
+    "radius": 11
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#828CF730",
+    "offset": {
+     "x": 0,
+     "y": 20
+    },
+    "radius": 20
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#828CF71C",
+    "offset": {
+     "x": 0,
+     "y": 45
+    },
+    "radius": 27
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#828CF708",
+    "offset": {
+     "x": 0,
+     "y": 81
+    },
+    "radius": 32
+   }
+  ]
+ },
+ "chute-sombre": {
+  "usage": "LUMIÈRE QUI TOMBE dans une section sombre : bande 15 px #1B1B1B en haut de la section, son ombre noire géante assombrit le haut et laisse le bas plus clair",
+  "effets": [
+   {
+    "type": "DROP_SHADOW",
+    "color": "#000000FA",
+    "offset": {
+     "x": 0,
+     "y": 51
+    },
+    "radius": 113
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#000000D9",
+    "offset": {
+     "x": 0,
+     "y": 206
+    },
+    "radius": 206
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#00000080",
+    "offset": {
+     "x": 0,
+     "y": 463
+    },
+    "radius": 250
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#00000026",
+    "offset": {
+     "x": 0,
+     "y": 823
+    },
+    "radius": 250
+   }
+  ]
+ },
+ "reflet-haut": {
+  "usage": "texte géant ou forme pleine en section sombre : liseré de lumière blanche sur le haut (logotype du pied de page)",
+  "effets": [
+   {
+    "type": "INNER_SHADOW",
+    "color": "#FFFFFFFF",
+    "offset": {
+     "x": 0,
+     "y": 6
+    },
+    "radius": 4
+   },
+   {
+    "type": "INNER_SHADOW",
+    "color": "#FFFFFFFF",
+    "offset": {
+     "x": 0,
+     "y": 3
+    },
+    "radius": 1
+   }
+  ]
+ },
+ "bouton-noir": {
+  "usage": "bouton principal #1A1A1A : lumière intérieure en haut",
+  "effets": [
+   {
+    "type": "INNER_SHADOW",
+    "color": "#FFFFFF4D",
+    "offset": {
+     "x": 0,
+     "y": 1
+    },
+    "radius": 1
+   }
+  ]
+ },
+ "verre-creux": {
+  "usage": "plaque en creux (pastille en verre, socle)",
+  "effets": [
+   {
+    "type": "INNER_SHADOW",
+    "color": "#A3948840",
+    "offset": {
+     "x": -4.6,
+     "y": -4.6
+    },
+    "radius": 9.1
+   },
+   {
+    "type": "INNER_SHADOW",
+    "color": "#FFFFFFFF",
+    "offset": {
+     "x": 4.6,
+     "y": 4.6
+    },
+    "radius": 4.6
+   }
+  ]
+ },
+ "metal-bosse": {
+  "usage": "bouton / pastille en relief métal clair",
+  "effets": [
+   {
+    "type": "INNER_SHADOW",
+    "color": "#8896A340",
+    "offset": {
+     "x": -5,
+     "y": -5
+    },
+    "radius": 10
+   },
+   {
+    "type": "INNER_SHADOW",
+    "color": "#FFFFFFFF",
+    "offset": {
+     "x": 5,
+     "y": 5
+    },
+    "radius": 5
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#FFFFFF66",
+    "offset": {
+     "x": -4,
+     "y": -4
+    },
+    "radius": 10
+   },
+   {
+    "type": "DROP_SHADOW",
+    "color": "#8896A366",
+    "offset": {
+     "x": 5,
+     "y": 5
+    },
+    "radius": 10
+   }
+  ]
+ },
+ "flou-lueur-large": {
+  "usage": "ellipse de couleur -> halo (témoignages : #3745F1 plein, 477×251)",
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 200
+   }
+  ]
+ },
+ "flou-lueur-moyen": {
+  "usage": "ellipse blanche de cœur de halo (203×251)",
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 120
+   }
+  ]
+ },
+ "flou-ruban": {
+  "usage": "rubans / croix pixel adoucis (appel final)",
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 39.7
+   }
+  ]
+ },
+ "flou-store": {
+  "usage": "ombre de store",
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 9
+   }
+  ]
+ }
+}

@@ -1,0 +1,1074 @@
+{
+ "type": "temoignages",
+ "noeud": "6027:2444",
+ "w": 1440,
+ "h": 509.00946044921875,
+ "items": {
+  "blocs": [
+   {
+    "id": "6027:2444",
+    "nom": "Frame 2147260607",
+    "w": 1440,
+    "h": 509,
+    "x": 1,
+    "y": 16330,
+    "layout": "auto-layout ↓ écart 60 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6027:2445",
+    "nom": "Frame 2147239882",
+    "w": 1440,
+    "h": 82,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2448",
+    "nom": "Frame 2147236648",
+    "w": 1440,
+    "h": 367,
+    "x": 0,
+    "y": 142,
+    "layout": "auto-layout → écart 20 pad 20/20/20/20 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2449",
+    "nom": "Frame 2147260823",
+    "w": 720,
+    "h": 365,
+    "x": 720,
+    "y": 1,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:2453",
+    "nom": "Frame 2147260824",
+    "w": 476,
+    "h": 365,
+    "x": 476,
+    "y": 1,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:2457",
+    "nom": "Frame 2147236669",
+    "w": 353,
+    "h": 327,
+    "x": -390,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": "contour #D6D6D6 1"
+   },
+   {
+    "id": "6027:2458",
+    "nom": "Frame 2147236644",
+    "w": 353,
+    "h": 237,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2465",
+    "nom": "Frame 2147240088",
+    "w": 305,
+    "h": 139,
+    "x": 24,
+    "y": 68,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2467",
+    "nom": "Container",
+    "w": 95,
+    "h": 15,
+    "x": 0,
+    "y": 124,
+    "layout": "auto-layout → écart 5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2474",
+    "nom": "Frame 2147236638",
+    "w": 353,
+    "h": 90,
+    "x": 0,
+    "y": 237,
+    "layout": "auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2475",
+    "nom": "Frame 2147236383",
+    "w": 50,
+    "h": 50,
+    "x": 24,
+    "y": 16,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": "contour #000000 2"
+   },
+   {
+    "id": "6027:2479",
+    "nom": "Text Container",
+    "w": 241,
+    "h": 48,
+    "x": 88,
+    "y": 17,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2482",
+    "nom": "Frame 2147260819",
+    "w": 353,
+    "h": 327,
+    "x": -17,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": "contour #D6D6D6 1"
+   },
+   {
+    "id": "6027:2483",
+    "nom": "Frame 2147236644",
+    "w": 353,
+    "h": 237,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2490",
+    "nom": "Frame 2147240088",
+    "w": 305,
+    "h": 139,
+    "x": 24,
+    "y": 68,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2492",
+    "nom": "Container",
+    "w": 95,
+    "h": 15,
+    "x": 0,
+    "y": 124,
+    "layout": "auto-layout → écart 5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2499",
+    "nom": "Frame 2147236638",
+    "w": 353,
+    "h": 90,
+    "x": 0,
+    "y": 237,
+    "layout": "auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2500",
+    "nom": "Frame 2147236383",
+    "w": 50,
+    "h": 50,
+    "x": 24,
+    "y": 16,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": "contour #000000 2"
+   },
+   {
+    "id": "6027:2504",
+    "nom": "Text Container",
+    "w": 241,
+    "h": 48,
+    "x": 88,
+    "y": 17,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2507",
+    "nom": "Frame 2147236665",
+    "w": 353,
+    "h": 327,
+    "x": 357,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": "contour #D6D6D6 1"
+   },
+   {
+    "id": "6027:2508",
+    "nom": "Frame 2147236644",
+    "w": 353,
+    "h": 237,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2515",
+    "nom": "Frame 2147240088",
+    "w": 305,
+    "h": 139,
+    "x": 24,
+    "y": 68,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2517",
+    "nom": "Container",
+    "w": 95,
+    "h": 15,
+    "x": 0,
+    "y": 124,
+    "layout": "auto-layout → écart 5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2524",
+    "nom": "Frame 2147236638",
+    "w": 353,
+    "h": 90,
+    "x": 0,
+    "y": 237,
+    "layout": "auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2525",
+    "nom": "Frame 2147236383",
+    "w": 50,
+    "h": 50,
+    "x": 24,
+    "y": 16,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": "contour #000000 2"
+   },
+   {
+    "id": "6027:2529",
+    "nom": "Text Container",
+    "w": 241,
+    "h": 48,
+    "x": 88,
+    "y": 17,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2532",
+    "nom": "Frame 2147260820",
+    "w": 353,
+    "h": 327,
+    "x": 730,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": "contour #D6D6D6 1"
+   },
+   {
+    "id": "6027:2533",
+    "nom": "Frame 2147236644",
+    "w": 353,
+    "h": 237,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2540",
+    "nom": "Frame 2147240088",
+    "w": 305,
+    "h": 139,
+    "x": 24,
+    "y": 68,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2542",
+    "nom": "Container",
+    "w": 95,
+    "h": 15,
+    "x": 0,
+    "y": 124,
+    "layout": "auto-layout → écart 5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2549",
+    "nom": "Frame 2147236638",
+    "w": 353,
+    "h": 90,
+    "x": 0,
+    "y": 237,
+    "layout": "auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2550",
+    "nom": "Frame 2147236383",
+    "w": 50,
+    "h": 50,
+    "x": 24,
+    "y": 16,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": "contour #000000 2"
+   },
+   {
+    "id": "6027:2554",
+    "nom": "Text Container",
+    "w": 241,
+    "h": 48,
+    "x": 88,
+    "y": 17,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2557",
+    "nom": "Frame 2147236670",
+    "w": 353,
+    "h": 327,
+    "x": 1103,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": "contour #D6D6D6 1"
+   },
+   {
+    "id": "6027:2558",
+    "nom": "Frame 2147236644",
+    "w": 353,
+    "h": 237,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2565",
+    "nom": "Frame 2147240088",
+    "w": 305,
+    "h": 139,
+    "x": 24,
+    "y": 68,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2567",
+    "nom": "Container",
+    "w": 95,
+    "h": 15,
+    "x": 0,
+    "y": 124,
+    "layout": "auto-layout → écart 5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2574",
+    "nom": "Frame 2147236638",
+    "w": 353,
+    "h": 90,
+    "x": 0,
+    "y": 237,
+    "layout": "auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2575",
+    "nom": "Frame 2147236383",
+    "w": 50,
+    "h": 50,
+    "x": 24,
+    "y": 16,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": "contour #000000 2"
+   },
+   {
+    "id": "6027:2579",
+    "nom": "Text Container",
+    "w": 241,
+    "h": 48,
+    "x": 88,
+    "y": 17,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2582",
+    "nom": "Frame 2147260821",
+    "w": 353,
+    "h": 327,
+    "x": 1477,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": "contour #D6D6D6 1"
+   },
+   {
+    "id": "6027:2583",
+    "nom": "Frame 2147236644",
+    "w": 353,
+    "h": 237,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2590",
+    "nom": "Frame 2147240088",
+    "w": 305,
+    "h": 139,
+    "x": 24,
+    "y": 68,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2592",
+    "nom": "Container",
+    "w": 95,
+    "h": 15,
+    "x": 0,
+    "y": 124,
+    "layout": "auto-layout → écart 5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2599",
+    "nom": "Frame 2147236638",
+    "w": 353,
+    "h": 90,
+    "x": 0,
+    "y": 237,
+    "layout": "auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2600",
+    "nom": "Frame 2147236383",
+    "w": 50,
+    "h": 50,
+    "x": 24,
+    "y": 16,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": "contour #000000 2"
+   },
+   {
+    "id": "6027:2604",
+    "nom": "Text Container",
+    "w": 241,
+    "h": 48,
+    "x": 88,
+    "y": 17,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2609",
+    "nom": "Frame 2147260818",
+    "w": 541,
+    "h": 365,
+    "x": 0,
+    "y": 1,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:2617",
+    "nom": "Frame 2147260822",
+    "w": 575,
+    "h": 365,
+    "x": 1440,
+    "y": 1,
+    "layout": "",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6027:2446",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Testimonial",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 94,
+    "h": 21,
+    "x": 673,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "6027:2447",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "What Our Users say",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1440,
+    "h": 53,
+    "x": 0,
+    "y": 29,
+    "nb_car": 18
+   },
+   {
+    "id": "6027:2466",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Botwise transformed how we manage customer conversations, helping our support team respond faster while AI handles repetitive questions automatically.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 305,
+    "h": 104,
+    "x": 0,
+    "y": 0,
+    "nb_car": 150
+   },
+   {
+    "id": "6027:2480",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "Daniel Carter",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 241,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 13
+   },
+   {
+    "id": "6027:2481",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Operations Coordinator",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 241,
+    "h": 23,
+    "x": 0,
+    "y": 25,
+    "nb_car": 22
+   },
+   {
+    "id": "6027:2491",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Botwise transformed how we manage customer conversations, helping our support team respond faster while AI handles repetitive questions automatically.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 305,
+    "h": 104,
+    "x": 0,
+    "y": 0,
+    "nb_car": 150
+   },
+   {
+    "id": "6027:2505",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "Daniel Carter",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 241,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 13
+   },
+   {
+    "id": "6027:2506",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Operations Coordinator",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 241,
+    "h": 23,
+    "x": 0,
+    "y": 25,
+    "nb_car": 22
+   },
+   {
+    "id": "6027:2516",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Botwise helps our team handle thousands of conversations daily while maintaining consistent responses and delivering better customer support.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 305,
+    "h": 104,
+    "x": 0,
+    "y": 0,
+    "nb_car": 141
+   },
+   {
+    "id": "6027:2530",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "Sophia Bennett",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 241,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 14
+   },
+   {
+    "id": "6027:2531",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Operations Lead",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 241,
+    "h": 23,
+    "x": 0,
+    "y": 25,
+    "nb_car": 15
+   },
+   {
+    "id": "6027:2541",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Botwise helps our team handle thousands of conversations daily while maintaining consistent responses and delivering better customer support.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 305,
+    "h": 104,
+    "x": 0,
+    "y": 0,
+    "nb_car": 141
+   },
+   {
+    "id": "6027:2555",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "Sophia Bennett",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 241,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 14
+   },
+   {
+    "id": "6027:2556",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Operations Lead",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 241,
+    "h": 23,
+    "x": 0,
+    "y": 25,
+    "nb_car": 15
+   },
+   {
+    "id": "6027:2566",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "With Botwise automation managing routine questions, our support team can focus on complex problems and improving customer experiences.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 305,
+    "h": 104,
+    "x": 0,
+    "y": 0,
+    "nb_car": 134
+   },
+   {
+    "id": "6027:2580",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "Michael Torres",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 241,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 14
+   },
+   {
+    "id": "6027:2581",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Product Manager",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 241,
+    "h": 23,
+    "x": 0,
+    "y": 25,
+    "nb_car": 15
+   },
+   {
+    "id": "6027:2591",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "With Botwise automation managing routine questions, our support team can focus on complex problems and improving customer experiences.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 305,
+    "h": 104,
+    "x": 0,
+    "y": 0,
+    "nb_car": 134
+   },
+   {
+    "id": "6027:2605",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "Michael Torres",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 241,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 14
+   },
+   {
+    "id": "6027:2606",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Product Manager",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 241,
+    "h": 23,
+    "x": 0,
+    "y": 25,
+    "nb_car": 15
+   }
+  ],
+  "icones": [
+   {
+    "id": "6027:2459",
+    "nom": "quotes-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2468",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2469",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2470",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2471",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2472",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2476",
+    "nom": "lightning-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2484",
+    "nom": "quotes-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2493",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2494",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2495",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2496",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2497",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2501",
+    "nom": "lightning-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2509",
+    "nom": "quotes-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2518",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2519",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2520",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2521",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2522",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2526",
+    "nom": "lightning-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2534",
+    "nom": "quotes-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2543",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2544",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2545",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2546",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2547",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2551",
+    "nom": "lightning-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2559",
+    "nom": "quotes-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2568",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2569",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2570",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2571",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2572",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2576",
+    "nom": "lightning-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2584",
+    "nom": "quotes-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6027:2593",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2594",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2595",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2596",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2597",
+    "nom": "Shape",
+    "w": 15,
+    "h": 15
+   },
+   {
+    "id": "6027:2601",
+    "nom": "lightning-fill",
+    "w": 24,
+    "h": 24
+   }
+  ],
+  "traits": [
+   {
+    "id": "6027:2473",
+    "w": 353,
+    "h": 0,
+    "x": 0,
+    "y": 237
+   },
+   {
+    "id": "6027:2498",
+    "w": 353,
+    "h": 0,
+    "x": 0,
+    "y": 237
+   },
+   {
+    "id": "6027:2523",
+    "w": 353,
+    "h": 0,
+    "x": 0,
+    "y": 237
+   },
+   {
+    "id": "6027:2548",
+    "w": 353,
+    "h": 0,
+    "x": 0,
+    "y": 237
+   },
+   {
+    "id": "6027:2573",
+    "w": 353,
+    "h": 0,
+    "x": 0,
+    "y": 237
+   },
+   {
+    "id": "6027:2598",
+    "w": 353,
+    "h": 0,
+    "x": 0,
+    "y": 237
+   },
+   {
+    "id": "6027:2607",
+    "w": 1440,
+    "h": 0,
+    "x": 0,
+    "y": 1
+   },
+   {
+    "id": "6027:2608",
+    "w": 1440,
+    "h": 0,
+    "x": 0,
+    "y": 367
+   }
+  ]
+ }
+}

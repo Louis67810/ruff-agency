@@ -1,0 +1,535 @@
+{
+"racine": {
+"kind": "frame",
+"w": 732,
+"h": 535,
+"nom": "Démo · relevé de novembre"
+},
+"noeuds": {
+"Démo · relevé de novembre": {
+"kind": "frame",
+"w": 732,
+"h": 535
+},
+"Démo · relevé de novembre / Démo · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 32,
+"y": 26
+},
+"Démo · relevé de novembre / Démo · compte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "end",
+"x": 700,
+"y": 27
+},
+"Démo · relevé de novembre / Démo · séparateur": {
+"kind": "vec"
+},
+"Démo · relevé de novembre / Démo · col date": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 11,
+"lh": 140,
+"ls": 2,
+"w": null,
+"align": "start",
+"x": 40,
+"y": 82
+},
+"Démo · relevé de novembre / Démo · col libellé": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 11,
+"lh": 140,
+"ls": 2,
+"w": null,
+"align": "start",
+"x": 124,
+"y": 82
+},
+"Démo · relevé de novembre / Démo · col montant": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 11,
+"lh": 140,
+"ls": 2,
+"w": null,
+"align": "end",
+"x": 520,
+"y": 82
+},
+"Démo · relevé de novembre / Démo · col statut": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 11,
+"lh": 140,
+"ls": 2,
+"w": null,
+"align": "start",
+"x": 572,
+"y": 82
+},
+"Démo · relevé de novembre / Démo · ligne estompée 1": {
+"kind": "frame",
+"w": 684,
+"h": 44,
+"opacite": 0.5
+},
+"Démo · relevé de novembre / Démo · ligne estompée 1 / Démo · ligne 1 · date": {
+"kind": "frame",
+"w": 40,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 1 / Démo · ligne 1 · libellé": {
+"kind": "frame",
+"w": 150,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 1 / Démo · ligne 1 · montant": {
+"kind": "frame",
+"w": 60,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 1 / Démo · ligne 1 · statut": {
+"kind": "frame",
+"w": 84,
+"h": 20,
+"fond": [
+"#F3F0ED",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 2": {
+"kind": "frame",
+"w": 684,
+"h": 44,
+"opacite": 0.9
+},
+"Démo · relevé de novembre / Démo · ligne estompée 2 / Démo · ligne 2 · date": {
+"kind": "frame",
+"w": 40,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 2 / Démo · ligne 2 · libellé": {
+"kind": "frame",
+"w": 187,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 2 / Démo · ligne 2 · montant": {
+"kind": "frame",
+"w": 60,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 2 / Démo · ligne 2 · statut": {
+"kind": "frame",
+"w": 84,
+"h": 20,
+"fond": [
+"#F3F0ED",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 3": {
+"kind": "frame",
+"w": 684,
+"h": 44,
+"opacite": 0.9
+},
+"Démo · relevé de novembre / Démo · ligne estompée 3 / Démo · ligne 3 · date": {
+"kind": "frame",
+"w": 40,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 3 / Démo · ligne 3 · libellé": {
+"kind": "frame",
+"w": 224,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 3 / Démo · ligne 3 · montant": {
+"kind": "frame",
+"w": 60,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 3 / Démo · ligne 3 · statut": {
+"kind": "frame",
+"w": 84,
+"h": 20,
+"fond": [
+"#F3F0ED",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 4": {
+"kind": "frame",
+"w": 684,
+"h": 44,
+"opacite": 0.5
+},
+"Démo · relevé de novembre / Démo · ligne estompée 4 / Démo · ligne 4 · date": {
+"kind": "frame",
+"w": 40,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 4 / Démo · ligne 4 · libellé": {
+"kind": "frame",
+"w": 171,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 4 / Démo · ligne 4 · montant": {
+"kind": "frame",
+"w": 60,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 4 / Démo · ligne 4 · statut": {
+"kind": "frame",
+"w": 84,
+"h": 20,
+"fond": [
+"#F3F0ED",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 5": {
+"kind": "frame",
+"w": 684,
+"h": 44,
+"opacite": 0.5
+},
+"Démo · relevé de novembre / Démo · ligne estompée 5 / Démo · ligne 5 · date": {
+"kind": "frame",
+"w": 40,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 5 / Démo · ligne 5 · libellé": {
+"kind": "frame",
+"w": 208,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 5 / Démo · ligne 5 · montant": {
+"kind": "frame",
+"w": 60,
+"h": 10,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne estompée 5 / Démo · ligne 5 · statut": {
+"kind": "frame",
+"w": 84,
+"h": 20,
+"fond": [
+"#F3F0ED",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro": {
+"kind": "frame",
+"w": 708,
+"h": 68,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 16,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro / Démo · ligne · date": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 28,
+"y": 24
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro / Démo · ligne · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 112,
+"y": 14
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro / Démo · ligne · détail": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 112,
+"y": 35
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro / Démo · ligne · montant": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "end",
+"x": 508,
+"y": 24
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro / Démo · Pointée": {
+"kind": "frame",
+"w": 112,
+"h": 34,
+"fond": [
+"#1A1A1A",
+1
+],
+"rayon": 100,
+"effets": "bouton-noir"
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro / Démo · Pointée / Démo · Pointée · coche": {
+"kind": "frame",
+"w": 22,
+"h": 22,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro / Démo · Pointée / Démo · Pointée · coche / Démo · Pointée · coche · tracé": {
+"kind": "vec"
+},
+"Démo · relevé de novembre / Démo · ligne Orange Pro / Démo · Pointée / Démo · Pointée · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 36,
+"y": 7
+},
+"Démo · relevé de novembre / Démo · câble": {
+"kind": "vec"
+},
+"Démo · relevé de novembre / Démo · prise haut": {
+"kind": "frame",
+"w": 10,
+"h": 10,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"contour": [
+"#D6D0C8",
+1
+]
+},
+"Démo · relevé de novembre / Démo · prise haut / Démo · prise haut · cœur": {
+"kind": "frame",
+"w": 4,
+"h": 4,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"Démo · relevé de novembre / Démo · facture": {
+"kind": "frame",
+"w": 232,
+"h": 64,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"Démo · relevé de novembre / Démo · facture / Démo · facture · icône": {
+"kind": "frame",
+"w": 40,
+"h": 40,
+"fond": [
+"#F3F0ED",
+1
+],
+"rayon": 10
+},
+"Démo · relevé de novembre / Démo · facture / Démo · facture · icône / Démo · facture · PDF": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 11,
+"lh": 140,
+"ls": 2,
+"w": null,
+"align": "center",
+"x": 20,
+"y": 13
+},
+"Démo · relevé de novembre / Démo · facture / Démo · facture · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 64,
+"y": 13
+},
+"Démo · relevé de novembre / Démo · facture / Démo · facture · source": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 64,
+"y": 33
+}
+}
+}

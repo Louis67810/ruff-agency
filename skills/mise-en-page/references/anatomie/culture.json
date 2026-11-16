@@ -1,0 +1,330 @@
+{
+ "type": "culture",
+ "noeud": "4001:50364",
+ "w": 1138,
+ "h": 754,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:50364",
+    "nom": "Frame 2147260681",
+    "w": 1138,
+    "h": 754,
+    "x": 151,
+    "y": 3261,
+    "layout": "auto-layout ↓ écart 40 pad 120/10/340/10 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:50412",
+    "nom": "Frame 2147237801",
+    "w": 1118,
+    "h": 207,
+    "x": 10,
+    "y": 120,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:50414",
+    "nom": "Frame 2147260464",
+    "w": 1118,
+    "h": 178,
+    "x": 0,
+    "y": 29,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:19135",
+    "nom": "Group 1597880888",
+    "w": 1120,
+    "h": 683,
+    "x": 689,
+    "y": 400,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50417",
+    "nom": "Frame 2147260684",
+    "w": 141,
+    "h": 47,
+    "x": 498,
+    "y": 367,
+    "layout": "auto-layout ↓ écart 10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:50423",
+    "nom": "Frame 2147260688",
+    "w": 42,
+    "h": 89,
+    "x": 183,
+    "y": -10,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50424",
+    "nom": "Frame 2147260686",
+    "w": 44,
+    "h": 81,
+    "x": 42,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50425",
+    "nom": "Frame 2147260619",
+    "w": 44,
+    "h": 81,
+    "x": 44,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50427",
+    "nom": "Frame 2147260620",
+    "w": 44,
+    "h": 81,
+    "x": 44,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50429",
+    "nom": "Frame 2147260687",
+    "w": 42,
+    "h": 89,
+    "x": -42,
+    "y": -10,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50430",
+    "nom": "Frame 2147260686",
+    "w": 44,
+    "h": 81,
+    "x": 42,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50431",
+    "nom": "Frame 2147260619",
+    "w": 44,
+    "h": 81,
+    "x": 44,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50433",
+    "nom": "Frame 2147260620",
+    "w": 44,
+    "h": 81,
+    "x": 44,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50435",
+    "nom": "Frame 2147260683",
+    "w": 575,
+    "h": 734,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50447",
+    "nom": "Frame 2147260682",
+    "w": 563,
+    "h": 737,
+    "x": 575,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50448",
+    "nom": "Frame 2147260674",
+    "w": 226,
+    "h": 288,
+    "x": 343,
+    "y": 131,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50449",
+    "nom": "Frame 2147260667",
+    "w": 226,
+    "h": 288,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50452",
+    "nom": "Group",
+    "w": 211,
+    "h": 271,
+    "x": 7,
+    "y": 9,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50453",
+    "nom": "Group",
+    "w": 211,
+    "h": 271,
+    "x": 7,
+    "y": 9,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:50455",
+    "nom": "Group",
+    "w": 211,
+    "h": 271,
+    "x": 7,
+    "y": 9,
+    "layout": "",
+    "traits": ""
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "4001:50365",
+    "nom": "Frame 2147240041",
+    "w": 1139,
+    "h": 754,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "4001:51262",
+    "nom": "Frame 2147260680",
+    "w": 1139,
+    "h": 477,
+    "x": 0,
+    "y": 277
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:50413",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Our Culture",
+    "couleur": "#FFFFFF",
+    "align": "LEFT",
+    "w": 94,
+    "h": 21,
+    "x": 512,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "4001:50415",
+    "role": "titre de section",
+    "police": "Switzer Semibold 54",
+    "texte": "Culture That / Powers Innovation",
+    "couleur": "#FFFFFF",
+    "align": "CENTER",
+    "w": 1118,
+    "h": 118,
+    "x": 0,
+    "y": 0,
+    "nb_car": 32
+   },
+   {
+    "id": "4001:50416",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Our team thrives on collaboration, learning, and building / AI tools that simplify conversations for businesses.",
+    "couleur": "#D6D0C8",
+    "align": "CENTER",
+    "w": 1118,
+    "h": 48,
+    "x": 0,
+    "y": 130,
+    "nb_car": 112
+   }
+  ],
+  "decors": [
+   {
+    "id": "6027:19113",
+    "w": 1120,
+    "h": 683,
+    "x": -556,
+    "y": -285
+   },
+   {
+    "id": "6027:19128",
+    "w": 1120,
+    "h": 683,
+    "x": -431,
+    "y": 402
+   },
+   {
+    "id": "6027:19120",
+    "w": 1120,
+    "h": 683,
+    "x": 564,
+    "y": -287
+   },
+   {
+    "id": "4001:50436",
+    "w": 226,
+    "h": 288,
+    "x": 0,
+    "y": 67
+   },
+   {
+    "id": "4001:50450",
+    "w": 226,
+    "h": 287,
+    "x": 0,
+    "y": 0
+   }
+  ],
+  "boutons": [
+   {
+    "id": "4001:50418",
+    "texte": "Join Our Team",
+    "fond": "#FFFFFF",
+    "w": 141,
+    "h": 47,
+    "rayon": 100
+   }
+  ],
+  "images": [
+   {
+    "id": "4001:50457",
+    "nom": "Rectangle 34625306",
+    "w": 192,
+    "h": 249
+   },
+   {
+    "id": "4001:50458",
+    "nom": "Image",
+    "w": 84,
+    "h": 67
+   }
+  ]
+ }
+}

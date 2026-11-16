@@ -1,0 +1,109 @@
+{
+ "type": "cta-final-contenu",
+ "noeud": "6027:10187",
+ "w": 696,
+ "h": 374,
+ "items": {
+  "blocs": [
+   {
+    "id": "6027:10187",
+    "nom": "Frame 2147240166",
+    "w": 696,
+    "h": 374,
+    "x": 375,
+    "y": 3330,
+    "layout": "auto-layout ↓ écart 40 pad 40/0/40/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:10188",
+    "nom": "Frame 2147237801",
+    "w": 696,
+    "h": 207,
+    "x": 0,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:10190",
+    "nom": "Frame 2147260464",
+    "w": 696,
+    "h": 178,
+    "x": 0,
+    "y": 29,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:10193",
+    "nom": "Frame 2147237802",
+    "w": 245,
+    "h": 47,
+    "x": 226,
+    "y": 287,
+    "layout": "auto-layout → écart 14 align MIN/CENTER",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6027:10189",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Start Today",
+    "couleur": "#767676",
+    "align": "LEFT",
+    "w": 94,
+    "h": 21,
+    "x": 301,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "6027:10191",
+    "role": "titre de section",
+    "police": "Switzer Semibold 54",
+    "texte": "Upgrade Customer / Support Today Now",
+    "couleur": "#000000E0",
+    "align": "CENTER",
+    "w": 748,
+    "h": 118,
+    "x": 0,
+    "y": 0,
+    "nb_car": 36
+   },
+   {
+    "id": "6027:10192",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Automate customer conversations instantly and deliver / faster support across every channel.",
+    "couleur": "#0000004A",
+    "align": "CENTER",
+    "w": 696,
+    "h": 48,
+    "x": 0,
+    "y": 130,
+    "nb_car": 92
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6027:10194",
+    "texte": "Book a demo",
+    "fond": "#FFFFFF",
+    "w": 112,
+    "h": 47,
+    "rayon": 100
+   },
+   {
+    "id": "6027:10196",
+    "texte": "Contact us",
+    "fond": "#1A1A1A",
+    "w": 119,
+    "h": 47,
+    "rayon": 100
+   }
+  ]
+ }
+}

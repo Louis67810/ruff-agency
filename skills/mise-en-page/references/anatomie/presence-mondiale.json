@@ -1,0 +1,292 @@
+{
+ "type": "presence-mondiale",
+ "noeud": "4001:50324",
+ "w": 1140,
+ "h": 664.2635498046875,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:50324",
+    "nom": "Frame 2147260665",
+    "w": 1140,
+    "h": 664,
+    "x": 150,
+    "y": 5562,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:50325",
+    "nom": "Frame 2147260653",
+    "w": 1140,
+    "h": 150,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:50326",
+    "nom": "Frame 2147239882",
+    "w": 1140,
+    "h": 82,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:50330",
+    "nom": "Frame 2147260663",
+    "w": 1140,
+    "h": 454,
+    "x": 0,
+    "y": 210,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top"
+   },
+   {
+    "id": "4001:50331",
+    "nom": "Frame 2147260663",
+    "w": 570,
+    "h": 454,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:50332",
+    "nom": "Frame 2147260660",
+    "w": 570,
+    "h": 346,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 10 pad 30/50/30/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:50334",
+    "nom": "Frame 2147260659",
+    "w": 570,
+    "h": 108,
+    "x": 0,
+    "y": 346,
+    "layout": "auto-layout → écart 12 pad 30/50/30/50 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "4001:50335",
+    "nom": "Frame 2147260614",
+    "w": 42,
+    "h": 42,
+    "x": 50,
+    "y": 33,
+    "layout": "auto-layout → écart 10 pad 7/7/7/7 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:50337",
+    "nom": "Text Container",
+    "w": 366,
+    "h": 48,
+    "x": 104,
+    "y": 30,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:50348",
+    "nom": "Frame 2147260664",
+    "w": 570,
+    "h": 454,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:50349",
+    "nom": "Frame 2147260660",
+    "w": 570,
+    "h": 346,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 10 pad 30/50/30/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:50351",
+    "nom": "Frame 2147260659",
+    "w": 570,
+    "h": 108,
+    "x": 0,
+    "y": 346,
+    "layout": "auto-layout → écart 12 pad 30/50/30/50 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "4001:50352",
+    "nom": "Frame 2147260614",
+    "w": 42,
+    "h": 42,
+    "x": 50,
+    "y": 33,
+    "layout": "auto-layout → écart 10 pad 7/7/7/7 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:50354",
+    "nom": "Text Container",
+    "w": 366,
+    "h": 48,
+    "x": 104,
+    "y": 30,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:50327",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Our Offices",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 94,
+    "h": 21,
+    "x": 523,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "4001:50328",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Global Team Presence",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 53,
+    "x": 0,
+    "y": 29,
+    "nb_car": 20
+   },
+   {
+    "id": "4001:50329",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Our offices connect teams worldwide to build / and support intelligent AI solutions.",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 52,
+    "x": 0,
+    "y": 98,
+    "nb_car": 84
+   },
+   {
+    "id": "4001:50338",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "United States",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 366,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 13
+   },
+   {
+    "id": "4001:50339",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "San Francisco, California 94105",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 366,
+    "h": 23,
+    "x": 0,
+    "y": 25,
+    "nb_car": 31
+   },
+   {
+    "id": "4001:50355",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "United Kingdom",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 366,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 14
+   },
+   {
+    "id": "4001:50356",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "London, England EC1A 1BB",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 366,
+    "h": 23,
+    "x": 0,
+    "y": 25,
+    "nb_car": 24
+   }
+  ],
+  "images": [
+   {
+    "id": "4001:50333",
+    "nom": "image 2480",
+    "w": 470,
+    "h": 286
+   },
+   {
+    "id": "4001:50336",
+    "nom": "Rectangle 34625305",
+    "w": 28,
+    "h": 28
+   },
+   {
+    "id": "4001:50350",
+    "nom": "image 2480",
+    "w": 470,
+    "h": 286
+   },
+   {
+    "id": "4001:50353",
+    "nom": "Rectangle 34625305",
+    "w": 28,
+    "h": 28
+   }
+  ],
+  "icones": [
+   {
+    "id": "4001:50340",
+    "nom": "Frame 459",
+    "w": 38,
+    "h": 30
+   },
+   {
+    "id": "4001:50357",
+    "nom": "Frame 459",
+    "w": 38,
+    "h": 30
+   }
+  ],
+  "traits": [
+   {
+    "id": "4001:50347",
+    "w": 454,
+    "h": 0,
+    "x": 570,
+    "y": 0
+   }
+  ]
+ }
+}

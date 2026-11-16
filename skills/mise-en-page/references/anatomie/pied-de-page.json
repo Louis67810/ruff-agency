@@ -1,0 +1,875 @@
+{
+ "type": "pied-de-page",
+ "noeud": "6027:2763",
+ "w": 1440,
+ "h": 886.9763793945312,
+ "items": {
+  "blocs": [
+   {
+    "id": "6027:2763",
+    "nom": "Frame 2147260597",
+    "w": 1440,
+    "h": 887,
+    "x": 0,
+    "y": 18636,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2764",
+    "nom": "Frame 2147239793",
+    "w": 1440,
+    "h": 601,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 0/150/0/150 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2791",
+    "nom": "Frame 2147239792",
+    "w": 1140,
+    "h": 509,
+    "x": 150,
+    "y": 0,
+    "layout": "auto-layout → écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2793",
+    "nom": "Container",
+    "w": 367,
+    "h": 465,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 150 pad 100/60/100/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2794",
+    "nom": "Frame 2147239791",
+    "w": 247,
+    "h": 68,
+    "x": 60,
+    "y": 100,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2795",
+    "nom": "Frame 2147240273",
+    "w": 120,
+    "h": 28,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2802",
+    "nom": "Botwise",
+    "w": 81,
+    "h": 18,
+    "x": 40,
+    "y": 5,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:2811",
+    "nom": "Frame 2147261063",
+    "w": 123,
+    "h": 47,
+    "x": 60,
+    "y": 318,
+    "layout": "auto-layout → écart 2 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2818",
+    "nom": "Frame 2147239790",
+    "w": 773,
+    "h": 509,
+    "x": 367,
+    "y": 0,
+    "layout": "auto-layout → écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2819",
+    "nom": "Frame 2147239788",
+    "w": 258,
+    "h": 509,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2820",
+    "nom": "Frame 2147239787",
+    "w": 258,
+    "h": 153,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 100/30/30/30 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2823",
+    "nom": "Frame 2147237814",
+    "w": 258,
+    "h": 356,
+    "x": 0,
+    "y": 153,
+    "layout": "auto-layout ↓ écart 10 pad 30/30/30/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2835",
+    "nom": "Frame 2147239789",
+    "w": 258,
+    "h": 509,
+    "x": 258,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2836",
+    "nom": "Frame 2147239787",
+    "w": 258,
+    "h": 153,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 100/30/30/30 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2839",
+    "nom": "Frame 2147237813",
+    "w": 258,
+    "h": 356,
+    "x": 0,
+    "y": 153,
+    "layout": "auto-layout ↓ écart 10 pad 30/30/30/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2850",
+    "nom": "Frame 2147239790",
+    "w": 258,
+    "h": 369,
+    "x": 515,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2851",
+    "nom": "Frame 2147239787",
+    "w": 258,
+    "h": 153,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 100/30/30/30 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2854",
+    "nom": "Frame 2147240349",
+    "w": 218,
+    "h": 216,
+    "x": 0,
+    "y": 153,
+    "layout": "auto-layout ↓ écart 20 pad 30/30/30/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:2855",
+    "nom": "Frame 2147240347",
+    "w": 158,
+    "h": 24,
+    "x": 30,
+    "y": 30,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2859",
+    "nom": "Frame 2147240349",
+    "w": 158,
+    "h": 24,
+    "x": 30,
+    "y": 74,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2864",
+    "nom": "Frame 2147240350",
+    "w": 158,
+    "h": 24,
+    "x": 30,
+    "y": 118,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2868",
+    "nom": "Frame 2147240348",
+    "w": 158,
+    "h": 24,
+    "x": 30,
+    "y": 162,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2873",
+    "nom": "Frame 2147237830",
+    "w": 1140,
+    "h": 92,
+    "x": 150,
+    "y": 509,
+    "layout": "auto-layout → écart 287 pad 30/60/30/60 align SPACE_BETWEEN/CENTER",
+    "traits": "contour #333333 1"
+   },
+   {
+    "id": "6027:2874",
+    "nom": "Frame 2147237829",
+    "w": 222,
+    "h": 23,
+    "x": 459,
+    "y": 34,
+    "layout": "auto-layout → écart 14 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:2880",
+    "nom": "Frame 2147240266",
+    "w": 1440,
+    "h": 286,
+    "x": 0,
+    "y": 601,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:2888",
+    "nom": "Frame 2147240168",
+    "w": 1139,
+    "h": 62,
+    "x": 151,
+    "y": -1,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:2889",
+    "nom": "Frame 276",
+    "w": 569,
+    "h": 62,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:3290",
+    "nom": "Frame 2147240168",
+    "w": 569,
+    "h": 62,
+    "x": 1140,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6027:2765",
+    "nom": "Frame 2147239858",
+    "w": 1440,
+    "h": 1140,
+    "x": 1440,
+    "y": -270
+   }
+  ],
+  "traits": [
+   {
+    "id": "6027:2792",
+    "w": 509,
+    "h": 0,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6027:2817",
+    "w": 509,
+    "h": 0,
+    "x": 367,
+    "y": 0
+   },
+   {
+    "id": "6027:2822",
+    "w": 258,
+    "h": 0,
+    "x": 0,
+    "y": 153
+   },
+   {
+    "id": "6027:2832",
+    "w": 22,
+    "h": 0,
+    "x": 0,
+    "y": 65
+   },
+   {
+    "id": "6027:2834",
+    "w": 509,
+    "h": 0,
+    "x": 258,
+    "y": 0
+   },
+   {
+    "id": "6027:2838",
+    "w": 258,
+    "h": 0,
+    "x": 0,
+    "y": 153
+   },
+   {
+    "id": "6027:2849",
+    "w": 509,
+    "h": 0,
+    "x": 515,
+    "y": 0
+   },
+   {
+    "id": "6027:2853",
+    "w": 258,
+    "h": 0,
+    "x": 0,
+    "y": 153
+   },
+   {
+    "id": "6027:2872",
+    "w": 509,
+    "h": 0,
+    "x": 1140,
+    "y": 0
+   },
+   {
+    "id": "6027:2876",
+    "w": 16,
+    "h": 0,
+    "x": 101,
+    "y": 4
+   },
+   {
+    "id": "6027:2879",
+    "w": 1440,
+    "h": 0,
+    "x": 0,
+    "y": 601
+   },
+   {
+    "id": "6027:2886",
+    "w": 350,
+    "h": 0,
+    "x": 150,
+    "y": 0
+   },
+   {
+    "id": "6027:2887",
+    "w": 350,
+    "h": 0,
+    "x": 1290,
+    "y": 0
+   }
+  ],
+  "icones": [
+   {
+    "id": "6027:2796",
+    "nom": "Frame 2147240272",
+    "w": 34,
+    "h": 28
+   },
+   {
+    "id": "6027:2803",
+    "nom": "Vector",
+    "w": 12,
+    "h": 13
+   },
+   {
+    "id": "6027:2804",
+    "nom": "Vector",
+    "w": 11,
+    "h": 13
+   },
+   {
+    "id": "6027:2806",
+    "nom": "Vector",
+    "w": 19,
+    "h": 13
+   },
+   {
+    "id": "6027:2808",
+    "nom": "Vector",
+    "w": 12,
+    "h": 13
+   },
+   {
+    "id": "6027:2809",
+    "nom": "Vector",
+    "w": 13,
+    "h": 17
+   },
+   {
+    "id": "6027:2856",
+    "nom": "Interface essential/Linkedin",
+    "w": 22,
+    "h": 22
+   },
+   {
+    "id": "6027:2860",
+    "nom": "facebook-logo-fill",
+    "w": 22,
+    "h": 22
+   },
+   {
+    "id": "6027:2865",
+    "nom": "Interface essential/Instagram",
+    "w": 22,
+    "h": 22
+   },
+   {
+    "id": "6027:2869",
+    "nom": "Interface essential/twitter",
+    "w": 22,
+    "h": 22
+   }
+  ],
+  "textes": [
+   {
+    "id": "6027:2810",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "AI Powered Customer Support",
+    "couleur": "#EBE5E0",
+    "align": "LEFT",
+    "w": 247,
+    "h": 24,
+    "x": 0,
+    "y": 44,
+    "nb_car": 27
+   },
+   {
+    "id": "6027:2821",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Home",
+    "couleur": "#FFFFFF",
+    "align": "LEFT",
+    "w": 198,
+    "h": 23,
+    "x": 30,
+    "y": 100,
+    "nb_car": 4
+   },
+   {
+    "id": "6027:2824",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Features",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 30,
+    "nb_car": 8
+   },
+   {
+    "id": "6027:2825",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Platform",
+    "couleur": "#FFFFFF",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 64,
+    "nb_car": 8
+   },
+   {
+    "id": "6027:2826",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "How it works",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 98,
+    "nb_car": 12
+   },
+   {
+    "id": "6027:2827",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Benefits",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 132,
+    "nb_car": 8
+   },
+   {
+    "id": "6027:2828",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Context Engine",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 166,
+    "nb_car": 14
+   },
+   {
+    "id": "6027:2829",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Integrations",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 200,
+    "nb_car": 12
+   },
+   {
+    "id": "6027:2830",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Growth Metrics",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 234,
+    "nb_car": 14
+   },
+   {
+    "id": "6027:2831",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Testimonial",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 268,
+    "nb_car": 11
+   },
+   {
+    "id": "6027:2833",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "FAQ’s",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 302,
+    "nb_car": 5
+   },
+   {
+    "id": "6027:2837",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "All Pages",
+    "couleur": "#FFFFFF",
+    "align": "LEFT",
+    "w": 198,
+    "h": 23,
+    "x": 30,
+    "y": 100,
+    "nb_car": 9
+   },
+   {
+    "id": "6027:2840",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Home",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 30,
+    "nb_car": 4
+   },
+   {
+    "id": "6027:2841",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Pricing",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 64,
+    "nb_car": 7
+   },
+   {
+    "id": "6027:2842",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "About Us",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 98,
+    "nb_car": 8
+   },
+   {
+    "id": "6027:2843",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Blogs",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 132,
+    "nb_car": 5
+   },
+   {
+    "id": "6027:2844",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Contact",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 166,
+    "nb_car": 7
+   },
+   {
+    "id": "6027:2845",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Waitlist",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 200,
+    "nb_car": 8
+   },
+   {
+    "id": "6027:2846",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Privacy Policy",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 234,
+    "nb_car": 14
+   },
+   {
+    "id": "6027:2847",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Terms & Condition",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 268,
+    "nb_car": 17
+   },
+   {
+    "id": "6027:2848",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "404",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 198,
+    "h": 24,
+    "x": 30,
+    "y": 302,
+    "nb_car": 3
+   },
+   {
+    "id": "6027:2852",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Our Socials",
+    "couleur": "#FFFFFF",
+    "align": "LEFT",
+    "w": 198,
+    "h": 23,
+    "x": 30,
+    "y": 100,
+    "nb_car": 11
+   },
+   {
+    "id": "6027:2858",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "LinkedIn",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 130,
+    "h": 24,
+    "x": 28,
+    "y": 0,
+    "nb_car": 8
+   },
+   {
+    "id": "6027:2863",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Facebook",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 130,
+    "h": 24,
+    "x": 28,
+    "y": 0,
+    "nb_car": 8
+   },
+   {
+    "id": "6027:2867",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Instagram",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 130,
+    "h": 24,
+    "x": 28,
+    "y": 0,
+    "nb_car": 9
+   },
+   {
+    "id": "6027:2871",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "X",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 130,
+    "h": 24,
+    "x": 28,
+    "y": 0,
+    "nb_car": 1
+   },
+   {
+    "id": "6027:2875",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Privacy Policy",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 87,
+    "h": 23,
+    "x": 0,
+    "y": 0,
+    "nb_car": 14
+   },
+   {
+    "id": "6027:2877",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Terms of Service",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 107,
+    "h": 23,
+    "x": 115,
+    "y": 0,
+    "nb_car": 16
+   },
+   {
+    "id": "6027:2885",
+    "role": "titre géant",
+    "police": "Switzer Semibold 265",
+    "texte": "Botwise",
+    "couleur": "image",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 265,
+    "x": 150,
+    "y": 68,
+    "nb_car": 7
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6027:2812",
+    "texte": "Get Started",
+    "fond": "#FFFFFF",
+    "w": 123,
+    "h": 47,
+    "rayon": 100
+   }
+  ],
+  "decors": [
+   {
+    "id": "6027:2878",
+    "w": 1440,
+    "h": 15,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6027:2881",
+    "w": 959,
+    "h": 288,
+    "x": 959,
+    "y": -2
+   },
+   {
+    "id": "6027:2883",
+    "w": 1140,
+    "h": 288,
+    "x": 300,
+    "y": -2
+   }
+  ],
+  "images": [
+   {
+    "id": "6027:3691",
+    "nom": "New Project (1) 1",
+    "w": 1440,
+    "h": 287
+   }
+  ]
+ }
+}

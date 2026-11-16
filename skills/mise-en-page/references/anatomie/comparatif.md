@@ -1,0 +1,78 @@
+# comparatif · `6001:5652` · 1139 × 923
+
+Résumé : {'blocs': 28, 'textes': 21, 'icones': 12, 'illustrations': 1, 'decors': 1, 'traits': 6, 'images': 2}
+Textes par rôle : {'texte d’intro': 3, 'titre de section': 2, 'surtitre / étiquette mono': 1, 'texte / libellé': 12, 'titre de carte': 3}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147260423** (frame) 1139×923 @(151,8759) `6001:5652` — auto-layout ↓ écart 60 align MIN/MIN
+  - ▣ **Frame 2147240099** (frame) 1139×137 @(0,0) `6001:5653` — auto-layout → écart 305 pad 0/97/0/97 align SPACE_BETWEEN/MAX
+    - ▣ **Frame 2147239882** (frame) 386×137 @(97,0) `6001:5654` — auto-layout ↓ écart 5 align MIN/MIN
+      - ▣ **Frame 2147240042** (frame) 109×26 @(0,0) `6001:5655` — auto-layout → écart 4 align CENTER/CENTER
+        - ▣ **Group 43005** (group) 6×4 @(0,11) `6001:5656`
+        - **texte d’intro** « Comparison » — Inter Tight Medium 17, #3745F1, left, 89×26 @(10,0) `6001:5661`
+        - ▣ **Group 43004** (group) 6×4 @(109,11) `6001:5662`
+      - **titre de section** « Smarter Than / Other platforms » — Switzer Semibold 48, #1A1A1A, left, 386×106 @(0,31) `6001:5667`
+    - **texte d’intro** « See how Chatbot compares on automation, accuracy, speed, and meeting intelligence. » — Inter Tight Medium 17, #666666, left, 343×52 @(699,85) `6001:5668`
+  - ▣ **Frame 2147240061** (frame) 1139×203 @(0,0) `6001:5669` — auto-layout ↓ écart 16 pad 0/353/0/353 align CENTER/CENTER
+    - ▣ **Frame 2147239882** (frame) 433×135 @(353,0) `6001:5670` — auto-layout ↓ écart 8 align MIN/CENTER
+      - **surtitre / étiquette mono** « Compare » — DM Mono Medium 14, #3745F1, left, 60×21 @(186,0) `6001:5671`
+      - **titre de section** « Better Than Traditional Support » — Switzer Semibold 48, #1A1A1A, center, 433×106 @(0,29) `6001:5672`
+    - **texte d’intro** « Compare Botwise with other tools for faster replies, smarter automation, and better suppor » — Inter Tight Medium 17, #595959, center, 433×52 @(353,151) `6001:5673`
+  - ▣ **Frame 2147260421** (frame) 1139×660 @(0,263) `6001:5674` — auto-layout ↓ écart 14 align MIN/CENTER
+    - ▣ **Frame 2147260419** (frame) 1139×512 @(0,0) `6001:5675` — auto-layout → écart 0 align MIN/MIN · trait #D6D0C8 top/bottom
+      - ▣ **Frame 2147260410** (frame) 386×512 @(0,0) `6001:5676` — auto-layout ↓ écart 0 align MIN/MIN
+        - ▣ **Frame 2147260408** (frame) 386×64 @(0,0) `6001:5677` — auto-layout → écart 10 pad 20/30/20/30 align MIN/CENTER · trait #D6D0C8 bottom · fond #F3F0ED
+          - **texte / libellé** « AI Support Features » — Switzer Semibold 16, #1A1A1A, left, 141×24 @(30,20) `6001:5678`
+        - ▣ **Frame 2147239768** (frame) 386×56 @(0,64) `6001:5679` — auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER · trait #D6D0C8 bottom
+          - ◆ icône/logo « globe-bold » 18×18 @(30,19) `6001:5680`
+          - **texte / libellé** « Multi-Channel Messaging Support » — Inter Tight Medium 16, #333333, left, 302×19 @(54,18) `6001:5686`
+        - ▣ **Frame 2147260409** (frame) 386×56 @(0,120) `6001:5687` — auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER · trait #D6D0C8 bottom
+          - ◆ icône/logo « chats-circle-bold » 18×18 @(30,19) `6001:5688`
+          - **texte / libellé** « AI Powered Auto Replies » — Inter Tight Medium 16, #333333, left, 302×19 @(54,18) `6001:5692`
+        - ▣ **Frame 2147260410** (frame) 386×56 @(0,176) `6001:5693` — auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER · trait #D6D0C8 bottom
+          - ◆ icône/logo « brain-bold » 18×18 @(30,19) `6001:5694`
+          - **texte / libellé** « Conversation Context Memory » — Inter Tight Medium 16, #333333, left, 302×19 @(54,18) `6001:5702`
+        - ▣ **Frame 2147260411** (frame) 386×56 @(0,232) `6001:5703` — auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER · trait #D6D0C8 bottom
+          - ◆ icône/logo « target-bold » 18×18 @(30,19) `6001:5704`
+          - **texte / libellé** « Smart Intent Detection » — Inter Tight Medium 16, #333333, left, 302×19 @(54,18) `6001:5709`
+        - ▣ **Frame 2147260412** (frame) 386×56 @(0,288) `6001:5710` — auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER · trait #D6D0C8 bottom
+          - ◆ icône/logo « files-bold » 18×18 @(30,19) `6001:5711`
+          - **texte / libellé** « Knowledge Base Integration » — Inter Tight Medium 16, #333333, left, 302×19 @(54,18) `6001:5717`
+        - ▣ **Frame 2147260413** (frame) 386×56 @(0,344) `6001:5718` — auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER · trait #D6D0C8 bottom
+          - ◆ icône/logo « eye-bold » 18×18 @(30,19) `6001:5719`
+          - **texte / libellé** « Real-Time Customer Insights » — Inter Tight Medium 16, #333333, left, 302×19 @(54,18) `6001:5723`
+        - ▣ **Frame 2147260416** (frame) 386×56 @(0,400) `6001:5724` — auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER · trait #D6D0C8 bottom
+          - ◆ icône/logo « gear-bold » 18×18 @(30,19) `6001:5725`
+          - **texte / libellé** « Automated Workflow Actions » — Inter Tight Medium 16, #333333, left, 302×19 @(54,18) `6001:5729`
+        - ▣ **Frame 2147260415** (frame) 386×56 @(0,456) `6001:5730` — auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER
+          - ◆ icône/logo « users-bold » 18×18 @(30,19) `6001:5731`
+          - **texte / libellé** « Team Collaboration Tools » — Inter Tight Medium 16, #333333, left, 302×19 @(54,18) `6001:5737`
+      - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Frame 2147260413 » 753×512 @(386,0) `6001:5738` (112 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+      - ✦ décor / motif « Frame 2147240053 » 1440×15 @(-150,512) `6001:5946` (déborde de la section : motif pixel, lumière ou forme)
+      - ─ trait 1440×0 @(-150,0) #D6D0C8 `6001:5950`
+    - ▣ **Frame 2147240204** (frame) 1139×134 @(0,526) `6001:5951` — auto-layout → écart 0 align MIN/CENTER · trait #D6D0C8 top/bottom
+      - ─ trait 132×0 @(0,1) #D6D0C8 `6001:5952`
+      - ▣ **Frame 2147239879** (frame) 378×132 @(1,1) `6001:5953` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER · fond #FFFFFF
+        - **titre de carte** « 3M+ » — Inter Tight SemiBold 32, #1A1A1A, left, 318×48 @(30,30) `6001:5954`
+        - **texte / libellé** « Messages Processed Monthly » — Inter Tight Medium 16, #595959, left, 318×24 @(30,78) `6001:5955`
+        - ▣ **Frame 2147239883** (frame) 80×96 @(96,80) `6001:5956`
+          - ▣ **Mask Group** (group) 94×124 @(78,0) `6001:5958`
+            - ◆ icône/logo « Vector 91 » 33×32 @(76,60) `6001:5960`
+            - ◆ icône/logo « Vector 90 » 36×36 @(80,59) `6001:5961`
+            - 🖼 image/photo « Rectangle » 157×158 @(95,-31) `6001:5962`
+      - ─ trait 132×0 @(379,1) #D6D0C8 `6001:5963`
+      - ▣ **Frame 2147239880** (frame) 378×132 @(380,1) `6001:5964` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER · fond #FFFFFF
+        - **titre de carte** « 120+ » — Inter Tight SemiBold 32, #1A1A1A, left, 318×48 @(30,30) `6001:5965`
+        - **texte / libellé** « Countries Using Botwise » — Inter Tight Medium 16, #595959, left, 318×24 @(30,78) `6001:5966`
+      - ─ trait 132×0 @(759,1) #D6D0C8 `6001:5967`
+      - ▣ **Frame 2147239881** (frame) 378×132 @(760,1) `6001:5968` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER · fond #FFFFFF
+        - **titre de carte** « 85% » — Inter Tight SemiBold 32, #1A1A1A, left, 318×48 @(30,30) `6001:5969`
+        - **texte / libellé** « Support Queries Automated » — Inter Tight Medium 16, #595959, left, 318×24 @(30,78) `6001:5970`
+        - ▣ **Frame 2147236603** (frame) 80×96 @(282,80) `6001:5971`
+          - ▣ **Mask Group** (group) 94×124 @(78,0) `6001:5973`
+            - ◆ icône/logo « Vector 91 » 33×32 @(76,60) `6001:5975`
+            - ◆ icône/logo « Vector 90 » 36×36 @(80,59) `6001:5976`
+            - 🖼 image/photo « Rectangle » 157×158 @(95,-31) `6001:5977`
+      - ─ trait 132×0 @(1138,1) #D6D0C8 `6001:5978`
+      - ─ trait 1440×0 @(-150,134) #D6D0C8 `6001:5979`

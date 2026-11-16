@@ -1,0 +1,520 @@
+{
+ "type": "article",
+ "noeud": "4001:33395",
+ "w": 794,
+ "h": 2450.406005859375,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:33395",
+    "nom": "Frame 2147260534",
+    "w": 794,
+    "h": 2450,
+    "x": 323,
+    "y": 220,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:33396",
+    "nom": "Frame 2147260530",
+    "w": 794,
+    "h": 711,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33397",
+    "nom": "Frame 2147260527",
+    "w": 794,
+    "h": 225,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 30 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:33398",
+    "nom": "Frame 2147260523",
+    "w": 694,
+    "h": 29,
+    "x": 50,
+    "y": 0,
+    "layout": "auto-layout → écart 20 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33399",
+    "nom": "Frame 2147260522",
+    "w": 108,
+    "h": 29,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 4 pad 4/10/4/8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33404",
+    "nom": "Frame 2147237685",
+    "w": 69,
+    "h": 29,
+    "x": 128,
+    "y": 0,
+    "layout": "auto-layout → écart 2 pad 4/10/4/8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33408",
+    "nom": "Frame 2147260398",
+    "w": 161,
+    "h": 20,
+    "x": 217,
+    "y": 4,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33416",
+    "nom": "Frame 2147260521",
+    "w": 694,
+    "h": 86,
+    "x": 50,
+    "y": 59,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:33419",
+    "nom": "Frame 2147260524",
+    "w": 694,
+    "h": 50,
+    "x": 50,
+    "y": 175,
+    "layout": "auto-layout → écart 82 align SPACE_BETWEEN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33420",
+    "nom": "Frame 2147236638",
+    "w": 353,
+    "h": 50,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 14 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33421",
+    "nom": "Frame 2147236383",
+    "w": 50,
+    "h": 50,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": "contour #000000 2"
+   },
+   {
+    "id": "4001:33425",
+    "nom": "Text Container",
+    "w": 289,
+    "h": 49,
+    "x": 64,
+    "y": 0,
+    "layout": "auto-layout ↓ écart -1 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:33428",
+    "nom": "Frame 2147238097",
+    "w": 168,
+    "h": 40,
+    "x": 526,
+    "y": 5,
+    "layout": "auto-layout → écart 12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33429",
+    "nom": "Frame 2147238093",
+    "w": 48,
+    "h": 40,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33432",
+    "nom": "Frame 2147238094",
+    "w": 48,
+    "h": 40,
+    "x": 60,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33435",
+    "nom": "Frame 2147238095",
+    "w": 48,
+    "h": 40,
+    "x": 120,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:33438",
+    "nom": "Frame 2147260529",
+    "w": 794,
+    "h": 426,
+    "x": 0,
+    "y": 255,
+    "layout": "auto-layout ↓ écart 10 pad 30/30/0/30 align MIN/MIN",
+    "traits": "trait #D6D0C8 top"
+   },
+   {
+    "id": "4001:33445",
+    "nom": "Frame 2147260533",
+    "w": 794,
+    "h": 1739,
+    "x": 0,
+    "y": 711,
+    "layout": "auto-layout ↓ écart 60 pad 80/50/80/50 align MIN/MIN",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "4001:33446",
+    "nom": "Frame 2147260531",
+    "w": 694,
+    "h": 791,
+    "x": 50,
+    "y": 80,
+    "layout": "auto-layout ↓ écart 40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:33447",
+    "nom": "Frame 2147238191",
+    "w": 694,
+    "h": 351,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:33451",
+    "nom": "Frame 2147260532",
+    "w": 694,
+    "h": 728,
+    "x": 50,
+    "y": 931,
+    "layout": "auto-layout ↓ écart 40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:33452",
+    "nom": "Frame 2147238191",
+    "w": 694,
+    "h": 263,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:33456",
+    "nom": "Frame 2147238192",
+    "w": 694,
+    "h": 425,
+    "x": 0,
+    "y": 303,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "icones": [
+   {
+    "id": "4001:33400",
+    "nom": "flag-banner-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "4001:33405",
+    "nom": "ClockCountdown",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "4001:33409",
+    "nom": "calendar-blank-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "4001:33422",
+    "nom": "lightning-fill",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "4001:33430",
+    "nom": "Interface essential/Linkedin",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "4001:33433",
+    "nom": "Interface essential/twitter",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "4001:33436",
+    "nom": "Interface essential/Instagram",
+    "w": 24,
+    "h": 24
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:33403",
+    "role": "petit texte",
+    "police": "Inter Tight Medium 14",
+    "texte": "Automation",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 70,
+    "h": 21,
+    "x": 28,
+    "y": 4,
+    "nb_car": 10
+   },
+   {
+    "id": "4001:33407",
+    "role": "petit texte",
+    "police": "Inter Tight Medium 14",
+    "texte": "5 min",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 33,
+    "h": 21,
+    "x": 26,
+    "y": 4,
+    "nb_car": 5
+   },
+   {
+    "id": "4001:33415",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Regular 13",
+    "texte": "September 12, 2025",
+    "couleur": "#474747",
+    "align": "LEFT",
+    "w": 141,
+    "h": 20,
+    "x": 20,
+    "y": 0,
+    "nb_car": 18
+   },
+   {
+    "id": "4001:33417",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 38",
+    "texte": "Automating Customer Replies",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 694,
+    "h": 46,
+    "x": 0,
+    "y": 0,
+    "nb_car": 27
+   },
+   {
+    "id": "4001:33418",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": " Learn how AI speeds responses across customer support channels.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 24,
+    "x": 0,
+    "y": 62,
+    "nb_car": 64
+   },
+   {
+    "id": "4001:33426",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 17",
+    "texte": "Emily Carter",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 289,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "4001:33427",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "UX Research Lead",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 289,
+    "h": 24,
+    "x": 0,
+    "y": 25,
+    "nb_car": 16
+   },
+   {
+    "id": "4001:33448",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "Why Automating Customer Replies Matters",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 34,
+    "x": 0,
+    "y": 0,
+    "nb_car": 39
+   },
+   {
+    "id": "4001:33449",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Customer support teams today handle conversations across websites, messaging apps, and social platforms. Responding quickly is critical, yet managing high volumes manually often leads to delays, missed queries, and inconsistent responses. /  / Many support teams still rely on manual replies, ticket routing, and repetitive workflows. These tasks consume valuable time and prevent teams from focusing on complex customer issues that require human attention. /  / AI-powered chatbots like Botwise transform how teams manage conversations by automatically responding to common questions, categorizing requests, and routing complex cases to human agents.",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 694,
+    "h": 297,
+    "x": 0,
+    "y": 54,
+    "nb_car": 651
+   },
+   {
+    "id": "4001:33453",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "Turning Conversations into Efficient Support",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 34,
+    "x": 0,
+    "y": 0,
+    "nb_car": 44
+   },
+   {
+    "id": "4001:33454",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "• Respond instantly to common customer questions across multiple channels  • Reduce repetitive support tasks with automated AI responses  • Improve response speed while maintaining consistent communication  • Allow support teams to focus on high-value customer interactions",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 694,
+    "h": 108,
+    "x": 0,
+    "y": 54,
+    "nb_car": 273
+   },
+   {
+    "id": "4001:33455",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Botwise captures incoming messages and analyzes them in real time. The AI understands intent, provides accurate replies, and escalates complex cases when human support is needed.",
+    "couleur": "#474747",
+    "align": "LEFT",
+    "w": 694,
+    "h": 81,
+    "x": 0,
+    "y": 182,
+    "nb_car": 178
+   },
+   {
+    "id": "4001:33457",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "Scale Support with AI Automation",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 34,
+    "x": 0,
+    "y": 0,
+    "nb_car": 32
+   },
+   {
+    "id": "4001:33458",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Why AI Chatbots Improve Customer Support",
+    "couleur": "#474747",
+    "align": "LEFT",
+    "w": 694,
+    "h": 27,
+    "x": 0,
+    "y": 54,
+    "nb_car": 40
+   },
+   {
+    "id": "4001:33459",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Modern businesses receive thousands of customer messages every day. Without automation, support teams struggle to maintain quick response times while managing growing conversation volumes. /  / AI chatbots streamline this process by automatically answering common questions, guiding customers to relevant resources, and collecting useful data from interactions. /  / Automation also reduces operational costs and improves customer satisfaction by ensuring faster responses and consistent communication across all support channels. /  / With Botwise, businesses can scale support operations while maintaining a high-quality customer experience.",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 694,
+    "h": 324,
+    "x": 0,
+    "y": 101,
+    "nb_car": 643
+   }
+  ],
+  "images": [
+   {
+    "id": "4001:33439",
+    "nom": "image 2468",
+    "w": 734,
+    "h": 396
+   },
+   {
+    "id": "4001:33450",
+    "nom": "Rectangle 34625293",
+    "w": 694,
+    "h": 400
+   }
+  ],
+  "traits": [
+   {
+    "id": "4001:33440",
+    "w": 794,
+    "h": 0,
+    "x": 0,
+    "y": 711
+   }
+  ],
+  "decors": [
+   {
+    "id": "4001:33441",
+    "w": 1440,
+    "h": 15,
+    "x": -323,
+    "y": 710
+   },
+   {
+    "id": "4001:33460",
+    "w": 1440,
+    "h": 15,
+    "x": -323,
+    "y": 2449
+   }
+  ]
+ }
+}

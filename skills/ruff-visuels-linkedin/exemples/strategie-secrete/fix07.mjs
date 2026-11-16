@@ -1,0 +1,14 @@
+import { fw, close } from '../../outils/fw.mjs';
+import { C, SHADOW_CARD, rect, frame, text, arrow } from '../../outils/kit.mjs';
+const S='5406:11178';
+const r = await fw('get_design_context',{nodeId:S,detail:'minimal',depth:1});
+const kids = r.nodes[0].children;
+const del = kids.filter(c=>['Petit oui','Flèche A→B'].includes(c.name) && c.type!=='TEXT').map(c=>c.id);
+const lbl = kids.find(c=>c.type==='TEXT' && c.name==='Petit oui');
+await fw('delete_nodes',{nodeIds:del});
+await fw('set_position',{nodeId:lbl.id,x:56,y:414});
+const a = await frame(S,{x:56,y:440,w:204,h:64,r:14,stroke:{color:{r:0,g:0,b:0},a:0.1},effects:SHADOW_CARD,name:'Petit oui'});
+await rect(a,{x:14,y:15,w:176,h:34,r:10,fill:C.blueSoft,stroke:{color:C.blue},strokeW:1.8});
+await text(a,'Avoir plus de demandes',{x:24,y:23.5,size:13.5,family:'Inter',style:'Medium',color:C.blue,ls:0});
+await arrow(S,{x:266,y:472},{x:292,y:472},{bend:0,width:5,head:9});
+close();

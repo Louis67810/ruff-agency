@@ -1,0 +1,20 @@
+/* Style « nouveau style » (fond chaud, accent indigo). Relevé avec Figwright le 05/11/2026.
+   Un style ne contient QUE des réglages : couleurs, teintes d'ombre, polices, rayons. */
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=switzer@500,600&display=swap");
+:root {
+  --s-bg: #f7f5f3; --s-surface: #fff; --s-sand: #f4f3f0; --s-tray: #efebe6; --s-field: #f3f0ed;
+  --s-line: #d6d0c8; --s-wire: #dedad3; --s-hairline: #e6e6e6; --s-orbit: rgba(0,0,0,.055);
+  --s-ink: #1a1a1a; --s-ink-2: #333; --s-ink-3: #888786; --s-skeleton: #e8e8e8; --s-skeleton-2: #efefef;
+  --s-accent: #3745f1; --s-alert: #e5383b; --s-ok: #22b45e;
+  --s-steel: #e8ebee; --s-steel-shade: #8896a3; --s-rim-base: #e4dcd3; --s-rim-1: #cfc3b6; --s-rim-2: #c1b1a1;
+  --s-plinth-1: #f1edea; --s-plinth-2: #e7e0da; --s-plinth-3: #e2dbd4; --s-plinth-4: #ccbfb2;
+  --s-code-key: #7a57c9; --s-code-str: #178a47; --s-code-fn: #c2581f;
+  /* Teintes d'ombre (triplets RGB) */
+  --s-tint-cool: 11 28 74; --s-tint-ring: 1 71 255; --s-tint-warm: 221 203 187; --s-tint-panel: 96 65 36;
+  --s-tint-steel: 110 92 74; --s-tint-glow: 130 140 247; --s-tint-deep: 7 14 95;
+  --s-font-title: "Switzer", "Inter Tight", sans-serif; --s-font-text: "Inter Tight", sans-serif; --s-font-mono: "DM Mono", ui-monospace, monospace;
+  /* Police des étiquettes : mono pour un produit tech ; pour un autre secteur, mettre var(--s-font-text) */
+  --s-font-label: var(--s-font-mono);
+  --s-r-chip: 6px; --s-r-logo: 7px; --s-r-row: 12px; --s-r-inner: 14px; --s-r-frame: 18px;
+}

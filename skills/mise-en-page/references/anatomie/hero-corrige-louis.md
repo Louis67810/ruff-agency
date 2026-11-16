@@ -1,0 +1,405 @@
+# hero-corrige-louis · `6058:801` · 1440 × 7855
+
+Résumé : {'blocs': 147, 'traits': 20, 'icones': 29, 'textes': 169, 'jointures': 10, 'images': 12, 'decors': 4, 'illustrations': 3, 'boutons': 1}
+Textes par rôle : {'titre de bloc': 8, 'texte / libellé': 92, 'surtitre / étiquette mono': 21, 'titre de section': 8, 'texte d’intro': 26, 'petit texte': 9, 'titre géant': 1, 'titre de carte': 4}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Landing Escale** (frame) 1440×7855 @(2261,28) `6058:801` — fond #F7F5F3
+  - ─ trait 1×7855 @(150,0) #D6D0C8 `6058:803`
+  - ─ trait 1×7855 @(1289,0) #D6D0C8 `6058:804`
+  - ▣ **01 · Navigation** (frame) 1440×87 @(0,0) `6058:805` — fond #F7F5F3
+    - ─ trait 1×87 @(1289,0) #D6D0C8 `6058:806`
+    - ─ trait 1×87 @(150,0) #D6D0C8 `6058:807`
+    - ▣ **Trait bas** (group) 1440×0 @(0,86) `6058:808`
+    - ◆ icône/logo « Logo Escale » 30×30 @(182,28) `6058:810`
+    - ▣ **Soulignement actif** (group) 54×2 @(430,84) `6058:814`
+    - ▣ **Bouton · Se connecter** (group) 128×47 @(932,20) `6058:816`
+    - ▣ **Bouton · Essayer** (group) 184×47 @(1074,20) `6058:818`
+    - **titre de bloc** « Escale » — Inter Semi Bold 20, #1A1A1A, left, 62×26 @(220,28) `6058:820`
+    - **texte / libellé** « Produit » — Inter Medium 15, #3745F1, left, 50×23 @(430,32) `6058:821`
+    - **texte / libellé** « Parcours » — Inter Medium 15, #1A1A1A, left, 62×23 @(518,32) `6058:822`
+    - **texte / libellé** « Tarifs » — Inter Medium 15, #1A1A1A, left, 39×23 @(614,32) `6058:823`
+    - **texte / libellé** « Clients » — Inter Medium 15, #1A1A1A, left, 48×23 @(694,32) `6058:824`
+    - **texte / libellé** « Ressources » — Inter Medium 15, #1A1A1A, left, 81×23 @(782,32) `6058:825`
+    - **texte / libellé** « Se connecter » — Inter Medium 15, #262626, center, 120×23 @(936,32) `6058:826`
+    - **texte / libellé** « Essayer gratuitement » — Inter Medium 15, #FFFFFF, center, 176×23 @(1078,32) `6058:827`
+  - ▣ **03 · Parcours** (frame) 1440×809 @(0,1246) `6058:1011` — fond #F7F5F3
+    - ▣ **Rails** (group) 1140×800 @(150,0) `6058:1012`
+    - **surtitre / étiquette mono** « LE PARCOURS » — DM Mono Medium 14, #3745F1, center, 94×21 @(672,8) `6058:1015`
+    - **titre de section** « Trente jours, quatre arrêts, / et personne ne se perd » — Inter Semi Bold 48, #1A1A1A, center, 581×106 @(430,37) `6058:1016`
+    - **texte d’intro** « Chaque nouvelle recrue suit une ligne claire. Escale annonce le prochain arrêt, / prévient » — Inter Medium 17, #595959, center, 606×52 @(417,167) `6058:1017`
+    - ▣ **Lueur station** (group) 520×300 @(602,280) `6058:1018`
+    - ▣ **Voie · relief** (group) 1120×4 @(160,469) `6058:1020`
+    - ▣ **Voie parcourue · lueur** (group) 662×8 @(200,466) `6058:1023`
+    - ▣ **Voie parcourue** (group) 662×2 @(200,469) `6058:1025`
+    - ▣ **Panneau J-7 · lien** (group) 1×25 @(292,504) `6058:1027`
+    - ▣ **Panneau J-7** (group) 64×30 @(260,528) `6058:1030`
+    - **surtitre / étiquette mono** « J-7 » — DM Mono Medium 13, #1A1A1A, center, 25×17 @(280,534) `6058:1032`
+    - ▣ **Panneau JOUR 1 · lien** (group) 1×25 @(578,504) `6058:1033`
+    - ▣ **Panneau JOUR 1** (group) 90×30 @(532,528) `6058:1036`
+    - **surtitre / étiquette mono** « JOUR 1 » — DM Mono Medium 13, #1A1A1A, center, 50×17 @(552,534) `6058:1038`
+    - ▣ **Panneau JOUR 7 · lien** (group) 1×25 @(862,504) `6058:1039`
+    - ▣ **Panneau JOUR 7** (group) 90×30 @(818,528) `6058:1042`
+    - **surtitre / étiquette mono** « JOUR 7 » — DM Mono Medium 13, #1A1A1A, center, 50×17 @(837,534) `6058:1044`
+    - ▣ **Panneau JOUR 30 · lien** (group) 1×25 @(1148,504) `6058:1045`
+    - ▣ **Panneau JOUR 30** (group) 100×30 @(1098,528) `6058:1048`
+    - **surtitre / étiquette mono** « JOUR 30 » — DM Mono Medium 13, #1A1A1A, center, 58×17 @(1118,534) `6058:1050`
+    - ▣ **Train · lien** (group) 1×33 @(862,404) `6058:1051`
+    - ▣ **Train · cadre** (group) 262×104 @(732,300) `6058:1054`
+    - ▣ **Train · carte** (group) 250×92 @(738,306) `6058:1056`
+    - ▣ **Train · progression** (group) 160×6 @(808,372) `6058:1058`
+    - **texte / libellé** « Camille, jour 5 » — Inter Semi Bold 16, #1A1A1A, left, 106×21 @(808,322) `6058:1061`
+    - **petit texte** « 3 tâches sur 4 faites » — Inter Medium 13, #707070, left, 125×17 @(808,344) `6058:1062`
+    - **surtitre / étiquette mono** « PROCHAIN ARRÊT : JOUR 7 » — DM Mono Medium 11, #8A8580, center, 162×14 @(782,274) `6058:1063`
+    - ▣ **Grille étapes** (group) 1140×188 @(150,612) `6058:1064`
+    - **surtitre / étiquette mono** « J-7 · AVANT » — DM Mono Medium 12, #767676, left, 82×17 @(182,648) `6058:1077`
+    - **texte d’intro** « Les accès s'ouvrent » — Inter Semi Bold 18, #1A1A1A, left, 167×27 @(182,674) `6058:1078`
+    - **texte / libellé** « Comptes, licences et badge sont / prêts avant le week-end. » — Inter Medium 16, #595959, left, 242×48 @(182,706) `6058:1079`
+    - **surtitre / étiquette mono** « JOUR 1 · ARRIVÉE » — DM Mono Medium 12, #767676, left, 119×17 @(467,648) `6058:1080`
+    - **texte d’intro** « Un bureau qui attend » — Inter Semi Bold 18, #1A1A1A, left, 176×27 @(467,674) `6058:1081`
+    - **texte / libellé** « Ordinateur configuré, café avec / le parrain à 9 h 30. » — Inter Medium 16, #595959, left, 232×48 @(467,706) `6058:1082`
+    - **surtitre / étiquette mono** « JOUR 7 · PREMIÈRE SEMAINE » — DM Mono Medium 12, #767676, left, 186×17 @(752,648) `6058:1083`
+    - **texte d’intro** « Premiers vrais dossiers » — Inter Semi Bold 18, #1A1A1A, left, 196×27 @(752,674) `6058:1084`
+    - **texte / libellé** « Trois tâches simples et un point / de vingt minutes avec le manager. » — Inter Medium 16, #595959, left, 251×48 @(752,706) `6058:1085`
+    - **surtitre / étiquette mono** « JOUR 30 · BILAN » — DM Mono Medium 12, #767676, left, 112×17 @(1037,648) `6058:1086`
+    - **texte d’intro** « Le premier bilan » — Inter Semi Bold 18, #1A1A1A, left, 134×27 @(1037,674) `6058:1087`
+    - **texte / libellé** « Cinq questions, partagées avec / la RH et le manager. » — Inter Medium 16, #595959, left, 233×48 @(1037,706) `6058:1088`
+    - ▣ **Frame 2147260767** (frame) 56×56 @(264,442) `6058:1089`
+      - ◆ icône/logo « Frame 2147260766 » 40×40 @(8,8) `6058:1092`
+    - ▣ **Frame 2147260767** (frame) 56×56 @(550,442) `6058:1093`
+      - ◆ icône/logo « Frame 2147260766 » 40×40 @(8,8) `6058:1096`
+    - ▣ **Frame 2147260767** (frame) 56×56 @(1120,442) `6058:1097`
+      - ◆ icône/logo « Frame 2147260766 » 40×40 @(8,8) `6058:1100`
+    - ▣ **Frame 2147260766** (frame) 65×65 @(830,438) `6058:1101`
+    - ◆ icône/logo « Station J-7 · icône » 14×14 @(285,463) `6058:1111`
+    - ◆ icône/logo « Station JOUR 1 · icône » 17×16 @(569,463) `6058:1115`
+    - ◆ icône/logo « Station JOUR 7 · icône » 16×15 @(855,462) `6058:1119`
+    - ◆ icône/logo « Station JOUR 30 · icône » 11×17 @(1141,463) `6058:1123`
+    - ● jointure 8×8 @(147,608) `6077:11`
+    - ● jointure 8×8 @(432,608) `6080:7`
+    - ● jointure 8×8 @(717,608) `6080:8`
+    - ● jointure 8×8 @(1002,608) `6080:9`
+    - ● jointure 8×8 @(1287,608) `6080:10`
+    - ● jointure 8×8 @(147,795) `6080:2`
+    - ● jointure 8×8 @(432,795) `6080:3`
+    - ● jointure 8×8 @(717,795) `6080:4`
+    - ● jointure 8×8 @(1002,795) `6080:5`
+    - ● jointure 8×8 @(1287,795) `6080:6`
+  - ▣ **Bande hachurée 1** (frame) 1440×15 @(0,1016) `6058:1126`
+    - 🖼 image/photo « Rectangle 34624471 » 15×1139 @(151,15) `6058:1127`
+    - ─ trait 1440×0 @(0,1) #D6D0C8 `6058:1128`
+    - ─ trait 1440×0 @(0,15) #D6D0C8 `6058:1129`
+  - ▣ **05 · Le parrain** (frame) 1440×840 @(0,3018) `6058:1210` — fond #F7F5F3
+    - ▣ **Rails** (group) 1140×840 @(150,0) `6058:1211`
+    - **surtitre / étiquette mono** « LE PARRAIN » — DM Mono Medium 14, #3745F1, left, 86×21 @(182,0) `6058:1214`
+    - **titre de section** « Quelqu'un à qui poser / les questions bêtes » — Inter Semi Bold 48, #1A1A1A, left, 475×106 @(182,29) `6058:1215`
+    - **texte d’intro** « Escale désigne un parrain pour chaque arrivée, lui envoie / un mémo de cinq lignes et lui  » — Inter Medium 17, #595959, left, 443×78 @(806,56) `6058:1216`
+    - ▣ **Grille** (group) 1140×660 @(150,180) `6058:1217`
+    - ▣ **Points de grille** (group) 1148×468 @(146,176) `6058:1219`
+    - ▣ **Lueur message** (group) 480×240 @(290,261) `6058:1227`
+    - ▣ **Camille · cadre** (group) 172×196 @(196,351) `6058:1229`
+    - ▣ **Camille · carte** (group) 160×184 @(202,357) `6058:1231`
+    - **texte / libellé** « Camille » — Inter Semi Bold 16, #1A1A1A, center, 56×21 @(254,459) `6058:1234`
+    - **petit texte** « Arrive lundi » — Inter Medium 13, #707070, center, 70×17 @(247,481) `6058:1235`
+    - ▣ **Camille · état** (group) 88×24 @(238,505) `6058:1236`
+    - **surtitre / étiquette mono** « NOUVELLE » — DM Mono Medium 11, #8A8580, center, 56×14 @(254,510) `6058:1238`
+    - ▣ **Thomas · cadre** (group) 172×196 @(692,351) `6058:1239`
+    - ▣ **Thomas · carte** (group) 160×184 @(698,357) `6058:1241`
+    - **texte / libellé** « Thomas » — Inter Semi Bold 16, #1A1A1A, center, 61×21 @(748,459) `6058:1244`
+    - **petit texte** « Parrain, design » — Inter Medium 13, #707070, center, 91×17 @(733,481) `6058:1245`
+    - ▣ **Thomas · état** (group) 88×24 @(734,505) `6058:1246`
+    - **surtitre / étiquette mono** « PARRAIN » — DM Mono Medium 11, #8A8580, center, 49×14 @(754,510) `6058:1248`
+    - ▣ **Fil · relief** (group) 324×34 @(368,461) `6058:1249`
+    - ▣ **Fil · lueur** (group) 324×33 @(368,461) `6058:1252`
+    - ▣ **Fil · actif** (group) 324×33 @(368,461) `6058:1254`
+    - ◆ icône/logo « Prise gauche » 12×12 @(362,455) `6058:1256`
+    - ◆ icône/logo « Prise droite » 12×12 @(686,455) `6058:1259`
+    - ▣ **Bulle · lien** (group) 1×114 @(530,381) `6058:1262`
+    - ▣ **Bulle** (group) 256×96 @(402,287) `6058:1265`
+    - **surtitre / étiquette mono** « THOMAS, 17 H 42 » — DM Mono Medium 11, #8A8580, left, 106×14 @(422,303) `6058:1267`
+    - **texte / libellé** « On déjeune ensemble lundi ? » — Inter Semi Bold 15, #1A1A1A, left, 201×19 @(422,321) `6058:1268`
+    - ▣ **Réponse · oui** (group) 104×26 @(422,347) `6058:1269`
+    - **petit texte** « Avec plaisir » — Inter Semi Bold 13, #FFFFFF, center, 71×17 @(439,352) `6058:1271`
+    - ▣ **Réponse · autre** (group) 104×25 @(534,348) `6058:1272`
+    - **petit texte** « Plutôt mardi » — Inter Semi Bold 13, #262626, center, 75×17 @(549,352) `6058:1274`
+    - ▣ **Curseur · pilule** (group) 78×28 @(542,389) `6058:1275`
+    - **petit texte** « Camille » — Inter Semi Bold 13, #FFFFFF, center, 46×17 @(558,394) `6058:1277`
+    - **surtitre / étiquette mono** « APRÈS 30 JOURS » — DM Mono Medium 14, #3745F1, left, 120×21 @(942,212) `6058:1278`
+    - **titre de section** « 9 sur 10 » — Inter Semi Bold 54, #1A1A1A, left, 197×59 @(942,242) `6058:1279`
+    - **texte / libellé** « nouvelles recrues savent à qui / poser leurs questions. » — Inter Medium 16, #595959, left, 222×48 @(942,310) `6058:1280`
+    - ▣ **Séparateur citation** (group) 316×0 @(942,400) `6058:1281`
+    - **texte / libellé** « « Thomas m'a écrit avant mon arrivée. / Le lundi, je connaissais déjà trois / personnes et » — Inter Medium 16, #262626, left, 286×72 @(942,424) `6058:1283`
+    - **texte d’intro** « Camille Roux » — Inter Semi Bold 17, #1A1A1A, left, 103×26 @(998,560) `6058:1284`
+    - **texte / libellé** « Designer produit, Atelier Nord » — Inter Medium 15, #707070, left, 205×23 @(998,585) `6058:1285`
+    - ◆ icône/logo « Point 1 · icône » 15×12 @(184,676) `6058:1286`
+    - **texte d’intro** « Le mémo du parrain » — Inter Semi Bold 18, #1A1A1A, left, 167×27 @(182,706) `6058:1290`
+    - **texte / libellé** « Cinq lignes sur la personne qui / arrive : son poste, ses outils, / un point commun. » — Inter Medium 16, #595959, left, 225×72 @(182,738) `6058:1291`
+    - ◆ icône/logo « Point 2 · icône » 15×15 @(564,674) `6058:1292`
+    - **texte d’intro** « Les bons rappels » — Inter Semi Bold 18, #1A1A1A, left, 143×27 @(562,706) `6058:1296`
+    - **texte / libellé** « Premier café, premier point, / premier bilan : un rappel la veille, / au bon moment. » — Inter Medium 16, #595959, left, 239×72 @(562,738) `6058:1297`
+    - ◆ icône/logo « Point 3 · icône » 15×15 @(944,674) `6058:1298`
+    - **texte d’intro** « Les questions du quotidien » — Inter Semi Bold 18, #1A1A1A, left, 226×27 @(942,706) `6058:1303`
+    - **texte / libellé** « Les salles, les congés, la cantine : / Escale répond, le parrain / complète. » — Inter Medium 16, #595959, left, 247×72 @(942,738) `6058:1304`
+    - ▭ fond/forme « Rectangle 34625373 » 72×72 #1F8CB0 rayon 42 `6058:1305`
+    - ▭ fond/forme « Rectangle 34625374 » 72×72 #DA7D36 rayon 42 `6058:1306`
+    - ◆ icône/logo « Figma Cursor » 35×39 @(536,361) `6058:1308`
+  - ▣ **07 · FAQ** (frame) 1440×957 @(0,4958) `6058:1391` — trait #D6D0C8 bottom · fond #F7F5F3
+    - ▣ **Rails** (group) 1140×957 @(150,0) `6058:1392`
+    - **surtitre / étiquette mono** « QUESTIONS FRÉQUENTES » — DM Mono Medium 14, #3745F1, center, 171×21 @(635,0) `6058:1395`
+    - **titre de section** « Ce qu'on nous demande / avant de commencer » — Inter Semi Bold 48, #1A1A1A, center, 531×106 @(454,29) `6058:1396`
+    - **texte d’intro** « Le temps d'installation, les données, le rôle du parrain : / les réponses courtes aux ques » — Inter Medium 17, #595959, center, 443×52 @(498,159) `6058:1397`
+    - ▣ **Question ouverte · fond** (group) 946×167 @(247,245) `6058:1398`
+    - **texte d’intro** « Combien de temps faut-il pour démarrer ? » — Inter Semi Bold 18, #1A1A1A, left, 350×27 @(271,267) `6058:1402`
+    - **texte / libellé** « Une demi-journée. On relie vos outils (Google, Slack, la paie), on importe vos modèles / d » — Inter Medium 16, #595959, left, 627×48 @(271,336) `6058:1403`
+    - ▣ **Question 2 · chevron** (group) 10×5 @(1156,447) `6058:1404`
+    - **texte d’intro** « Faut-il changer nos outils RH ? » — Inter Semi Bold 18, #1A1A1A, left, 255×27 @(271,436) `6058:1406`
+    - ▣ **Question 3 · chevron** (group) 10×5 @(1156,522) `6058:1407`
+    - **texte d’intro** « Qui voit les informations d'une nouvelle recrue ? » — Inter Semi Bold 18, #1A1A1A, left, 400×27 @(271,511) `6058:1409`
+    - ▣ **Question 4 · chevron** (group) 10×5 @(1156,597) `6058:1410`
+    - **texte d’intro** « Comment le parrain est-il choisi ? » — Inter Semi Bold 18, #1A1A1A, left, 279×27 @(271,586) `6058:1412`
+    - ▣ **Question 5 · chevron** (group) 10×5 @(1156,672) `6058:1413`
+    - **texte d’intro** « Et si l'arrivée est décalée ou annulée ? » — Inter Semi Bold 18, #1A1A1A, left, 316×27 @(271,661) `6058:1415`
+    - ▣ **Question 6 · chevron** (group) 10×5 @(1156,747) `6058:1416`
+    - **texte d’intro** « Escale convient-il aux alternants et aux stagiaires ? » — Inter Semi Bold 18, #1A1A1A, left, 427×27 @(271,736) `6058:1418`
+    - ▣ **Question 7 · chevron** (group) 10×5 @(1156,822) `6058:1419`
+    - **texte d’intro** « Où sont hébergées nos données ? » — Inter Semi Bold 18, #1A1A1A, left, 286×27 @(271,811) `6058:1421`
+    - ▣ **Pied de FAQ · cadre** (group) 945×95 @(248,862) `6058:1422`
+    - **texte d’intro** « Une question ? Inès répond en moins de deux heures. » — Inter Medium 17, #262626, left, 418×26 @(415,897) `6058:1424`
+    - ▣ **Bouton · Lire le guide** (group) 127×46 @(868,886) `6058:1425`
+    - **texte / libellé** « Lire le guide » — Inter Medium 15, #262626, center, 84×23 @(888,898) `6058:1427`
+    - ▣ **Bouton · Écrire à l'équipe** (group) 160×47 @(1009,886) `6058:1428`
+      - ▣ **Group** (group) 4×8 @(1145,905) `6058:1430`
+    - **texte / libellé** « Écrire à l'équipe » — Inter Medium 15, #FFFFFF, center, 109×23 @(1022,898) `6058:1432`
+    - ▣ **Traits FAQ** (group) 1140×618 @(150,244) `6058:1433`
+  - ▣ **08 · Appel final** (frame) 1440×600 @(0,6065) `6058:1439` — fond #F7F5F3
+    - ▣ **Rails** (group) 1140×600 @(150,0) `6058:1440`
+    - ▣ **Carte sable** (group) 1140×600 @(150,0) `6058:1443`
+    - ▣ **Grille pixel 1** (group) 712×484 @(378,57) `6058:1445`
+    - ▣ **Grille pixel 2** (group) 741×484 @(350,57) `6058:1447`
+    - ▣ **Grille pixel 3** (group) 1083×598 @(178,0) `6058:1449`
+    - ▣ **Grille pixel 4** (group) 1026×598 @(207,0) `6058:1451`
+    - ▣ **Grille pixel 5** (group) 1140×598 @(150,0) `6058:1453`
+    - ▣ **Grille pixel 6** (group) 1140×598 @(150,0) `6058:1455`
+    - ▣ **Escalier pixel flou** (group) 114×114 @(236,60) `6058:1457`
+    - ▣ **Croix pixel** (group) 142×85 @(1090,400) `6058:1459`
+    - ▣ **Escalier pixel net** (group) 85×85 @(1204,60) `6058:1461`
+    - ✦ décor / motif « Ombre de store » 747×708 @(673,-87) `6058:1463` (déborde de la section : motif pixel, lumière ou forme)
+    - ▣ **Rubans** (group) 248×113 @(300,470) `6058:1465`
+    - **surtitre / étiquette mono** « PRÊT POUR LUNDI ? » — DM Mono Medium 14, #767676, center, 145×21 @(648,112) `6058:1467`
+    - **titre de section** « Votre prochaine recrue / mérite mieux qu'un mail » — Inter Semi Bold 54, #000000E0, center, 582×118 @(429,142) `6058:1468`
+    - **texte / libellé** « Préparez sa première semaine en dix minutes. / Escale s'occupe du reste, la veille au soir » — Inter Medium 16, #00000073, center, 338×48 @(550,284) `6058:1469`
+    - ▣ **Bouton · Voir une démo** (group) 149×46 @(526,368) `6058:1470`
+    - **texte / libellé** « Voir une démo » — Inter Medium 15, #262626, center, 100×23 @(550,380) `6058:1472`
+    - ▣ **Bouton · Préparer une arrivée** (group) 226×47 @(689,368) `6058:1473`
+      - ▣ **Group** (group) 10×9 @(885,387) `6058:1475`
+    - **texte / libellé** « Préparer une arrivée » — Inter Medium 15, #FFFFFF, center, 141×23 @(720,380) `6058:1477`
+    - ◆ icône/logo « Garantie · Gratuit 30 jours » 18×18 @(469,464) `6058:1478`
+    - **texte / libellé** « Gratuit 30 jours » — Inter Medium 15, #262626, left, 108×23 @(495,462) `6058:1482`
+    - ◆ icône/logo « Garantie · Sans carte bancaire » 18×18 @(629,464) `6058:1483`
+    - **texte / libellé** « Sans carte bancaire » — Inter Medium 15, #262626, left, 138×23 @(655,462) `6058:1487`
+    - ◆ icône/logo « Garantie · Données en France » 18×18 @(815,464) `6058:1488`
+    - **texte / libellé** « Données en France » — Inter Medium 15, #262626, left, 134×23 @(841,462) `6058:1492`
+  - ▣ **09 · Pied de page (sombre)** (frame) 1440×1040 @(0,6815) `6058:1493` — fond #1A1A1A
+    - ▣ **Rails** (group) 1140×1040 @(150,0) `6058:1494`
+    - ✦ décor / motif « Chute sombre » 1440×15 @(0,-15) `6058:1497` (déborde de la section : motif pixel, lumière ou forme)
+    - ▣ **Lueur basse** (group) 1120×300 @(160,910) `6058:1499`
+    - **titre de section** « Le prochain lundi / commence ce soir. » — Inter Semi Bold 40, #FFFFFF, left, 344×88 @(210,84) `6058:1501`
+    - **texte d’intro** « La lettre RH du jeudi » — Inter Semi Bold 18, #FFFFFF, left, 168×27 @(790,84) `6058:1502`
+    - **texte / libellé** « Un conseil d'accueil par semaine, lu en cinq minutes. » — Inter Medium 15, #8A8580, left, 369×23 @(790,112) `6058:1503`
+    - ▣ **Lettre · champ** (group) 303×47 @(790,150) `6058:1504`
+    - **texte / libellé** « Votre e-mail professionnel » — Inter Medium 15, #8A8580, left, 185×23 @(812,162) `6058:1506`
+    - ▣ **Lettre · bouton S'abonner** (group) 124×48 @(1106,150) `6058:1507`
+    - **texte / libellé** « S'abonner » — Inter Medium 15, #262626, center, 70×23 @(1133,163) `6058:1509`
+    - ▣ **Pointillés** (group) 1140×410 @(150,270) `6058:1510`
+    - ◆ icône/logo « Logo » 30×30 @(210,312) `6058:1512`
+    - **titre de bloc** « Escale » — Inter Semi Bold 22, #FFFFFF, left, 67×26 @(250,312) `6058:1516`
+    - **texte / libellé** « L'accueil des nouvelles recrues, / préparé la veille au soir. » — Inter Medium 16, #EBE5E0, left, 232×48 @(210,372) `6058:1517`
+    - ◆ icône/logo « État des services » 18×18 @(207,467) `6058:1518`
+    - **texte / libellé** « Tous les services fonctionnent » — Inter Medium 15, #8A8580, left, 215×23 @(232,465) `6058:1521`
+    - **texte / libellé** « Hébergé en France, conforme RGPD » — Inter Medium 15, #8A8580, left, 254×23 @(210,497) `6058:1522`
+    - ▣ **Bouton · Essayer (pied)** (group) 196×47 @(210,580) `6058:1523`
+      - ▣ **Group** (group) 4×8 @(382,600) `6058:1525`
+    - **texte / libellé** « Essayer gratuitement » — Inter Medium 15, #262626, center, 148×23 @(226,592) `6058:1527`
+    - **texte d’intro** « Produit » — Inter Semi Bold 18, #FFFFFF, left, 61×27 @(552,302) `6058:1528`
+    - **texte / libellé** « Parcours » — Inter Medium 15, #FFFFFF, left, 62×23 @(552,392) `6058:1529`
+    - **texte / libellé** « Accès et comptes » — Inter Medium 15, #8A8580, left, 125×23 @(552,428) `6058:1530`
+    - **texte / libellé** « Matériel » — Inter Medium 15, #8A8580, left, 57×23 @(552,464) `6058:1531`
+    - **texte / libellé** « Parrainage » — Inter Medium 15, #8A8580, left, 75×23 @(552,500) `6058:1532`
+    - **texte / libellé** « Bilans à 30 jours » — Inter Medium 15, #8A8580, left, 114×23 @(552,536) `6058:1533`
+    - **texte / libellé** « Intégrations » — Inter Medium 15, #8A8580, left, 83×23 @(552,572) `6058:1534`
+    - **texte / libellé** « Tarifs » — Inter Medium 15, #8A8580, left, 39×23 @(552,608) `6058:1535`
+    - **texte d’intro** « Ressources » — Inter Semi Bold 18, #FFFFFF, left, 99×27 @(808,302) `6058:1536`
+    - **texte / libellé** « Guide de l'accueil » — Inter Medium 15, #8A8580, left, 121×23 @(808,392) `6058:1537`
+    - **texte / libellé** « Modèles de parcours » — Inter Medium 15, #8A8580, left, 146×23 @(808,428) `6058:1538`
+    - **texte / libellé** « Blog » — Inter Medium 15, #8A8580, left, 31×23 @(808,464) `6058:1539`
+    - **texte / libellé** « Webinaires » — Inter Medium 15, #8A8580, left, 77×23 @(808,500) `6058:1540`
+    - **texte / libellé** « Centre d'aide » — Inter Medium 15, #8A8580, left, 93×23 @(808,536) `6058:1541`
+    - **texte / libellé** « Liste d'attente » — Inter Medium 15, #8A8580, left, 99×23 @(808,572) `6058:1542`
+    - **texte d’intro** « Entreprise » — Inter Semi Bold 18, #FFFFFF, left, 87×27 @(1064,302) `6058:1543`
+    - **texte / libellé** « À propos » — Inter Medium 15, #8A8580, left, 63×23 @(1064,392) `6058:1544`
+    - **texte / libellé** « Clients » — Inter Medium 15, #8A8580, left, 48×23 @(1064,428) `6058:1545`
+    - **texte / libellé** « Carrières » — Inter Medium 15, #8A8580, left, 64×23 @(1064,464) `6058:1546`
+    - **texte / libellé** « Sécurité » — Inter Medium 15, #8A8580, left, 58×23 @(1064,500) `6058:1547`
+    - **texte / libellé** « Contact » — Inter Medium 15, #8A8580, left, 56×23 @(1064,536) `6058:1548`
+    - ▣ **Lien actif** (group) 2×20 @(522,394) `6058:1549`
+    - ▣ **Bande légale** (group) 1140×92 @(150,680) `6058:1551`
+    - **texte / libellé** « © 2026 Escale SAS, Lyon » — Inter Medium 15, #8A8580, left, 179×23 @(210,715) `6058:1553`
+    - **texte / libellé** « Mentions légales » — Inter Medium 15, #8A8580, left, 120×23 @(831,715) `6058:1554`
+    - **texte / libellé** « Confidentialité » — Inter Medium 15, #8A8580, left, 103×23 @(979,715) `6058:1555`
+    - **texte / libellé** « CGU » — Inter Medium 15, #8A8580, left, 34×23 @(1110,715) `6058:1556`
+    - **texte / libellé** « Cookies » — Inter Medium 15, #8A8580, left, 58×23 @(1172,715) `6058:1557`
+    - ▣ **Pixels 1** (group) 80×60 @(150,773) `6058:1558`
+    - ▣ **Pixels 2** (group) 80×60 @(396,773) `6058:1560`
+    - ▣ **Pixels 3** (group) 80×60 @(642,773) `6058:1562`
+    - ▣ **Pixels 4** (group) 80×60 @(888,773) `6058:1564`
+    - ▣ **Pixels 5** (group) 80×60 @(1134,773) `6058:1566`
+    - **titre géant** « Escale » — Inter Semi Bold 300, #00000003, left, 889×300 @(276,830) `6058:1568`
+    - 🖼 image/photo « Grain (overlay 30 %) » 1440×1040 @(0,0) `6058:1569`
+    - ▣ **Séparateurs légaux** (frame) 200×14 @(960,719) `6058:1570` — fond #FFFFFF
+  - ▣ **Bande hachurée 2** (frame) 1440×15 @(0,2114) `6058:1572`
+    - 🖼 image/photo « Rectangle 34624471 » 15×1139 @(151,15) `6058:1573`
+    - ─ trait 1440×0 @(0,1) #D6D0C8 `6058:1574`
+    - ─ trait 1440×0 @(0,15) #D6D0C8 `6058:1575`
+  - ▣ **Bande hachurée 3** (frame) 1440×15 @(0,2936) `6058:1576`
+    - 🖼 image/photo « Rectangle 34624471 » 15×1139 @(151,15) `6058:1577`
+    - ─ trait 1440×0 @(0,1) #D6D0C8 `6058:1578`
+    - ─ trait 1440×0 @(0,15) #D6D0C8 `6058:1579`
+  - ▣ **Bande hachurée 4** (frame) 1440×15 @(0,3926) `6058:1580`
+    - 🖼 image/photo « Rectangle 34624471 » 15×1139 @(151,15) `6058:1581`
+    - ─ trait 1440×0 @(0,1) #D6D0C8 `6058:1582`
+    - ─ trait 1440×0 @(0,15) #D6D0C8 `6058:1583`
+  - ▣ **Bande hachurée 5** (frame) 1440×15 @(0,4876) `6058:1584`
+    - 🖼 image/photo « Rectangle 34624471 » 15×1139 @(151,15) `6058:1585`
+    - ─ trait 1440×0 @(0,1) #D6D0C8 `6058:1586`
+    - ─ trait 1440×0 @(0,15) #D6D0C8 `6058:1587`
+  - ▣ **Bande hachurée 6** (frame) 1440×15 @(0,5983) `6058:1588`
+    - 🖼 image/photo « Rectangle 34624471 » 15×1139 @(151,15) `6058:1589`
+    - ─ trait 1440×0 @(0,1) #D6D0C8 `6058:1590`
+    - ─ trait 1440×0 @(0,15) #D6D0C8 `6058:1591`
+  - ▣ **06 · Démo (formulaire + preuve)** (frame) 1440×800 @(0,3941) `6058:1685` — fond #F7F5F3
+    - 🖼 image/photo « shadow-overlay 1 » 900×801 @(389,1) `6052:2`
+    - ▣ **Rails** (group) 1140×800 @(150,0) `6058:1686`
+    - ▣ **Halo-large** (group) 592×201 @(661,834) `6058:1691`
+    - ▣ **Halo-moyen** (group) 538×137 @(752,866) `6058:1693`
+    - ▣ **Panneau formulaire** (group) 569×798 @(151,1) `6058:1697`
+    - ▣ **Traits du bloc** (group) 1440×1599 @(0,0) `6058:1699`
+    - **surtitre / étiquette mono** « DÉMO PERSONNALISÉE » — DM Mono Medium 14, #3745F1, left, 154×21 @(200,56) `6058:1701`
+    - **titre de carte** « Préparons votre prochaine arrivée » — Inter Semi Bold 28, #1A1A1A, left, 433×34 @(200,86) `6058:1702`
+    - **texte / libellé** « Dites-nous qui arrive et quand : on vous montre son / parcours complet en vingt minutes, s » — Inter Medium 16, #595959, left, 380×48 @(200,128) `6058:1703`
+    - ▣ **Champ · Prénom** (group) 222×47 @(200,228) `6058:1704`
+    - **texte / libellé** « Prénom » — Inter Medium 16, #262626, left, 58×24 @(200,196) `6058:1706`
+    - **texte / libellé** « Inès » — Inter Medium 15, #707070, left, 29×23 @(220,241) `6058:1707`
+    - ▣ **Champ · Nom** (group) 222×47 @(448,228) `6058:1708`
+    - **texte / libellé** « Nom » — Inter Medium 16, #262626, left, 36×24 @(447,196) `6058:1710`
+    - **texte / libellé** « Moreau » — Inter Medium 15, #707070, left, 53×23 @(467,241) `6058:1711`
+    - ▣ **Champ · E-mail** (group) 469×47 @(200,332) `6058:1712`
+    - **texte / libellé** « E-mail professionnel » — Inter Medium 16, #262626, left, 150×24 @(200,300) `6058:1714`
+    - **texte / libellé** « ines@atelier-nord.fr » — Inter Medium 15, #707070, left, 139×23 @(220,345) `6058:1715`
+    - ▣ **Champ · Arrivées** (group) 222×47 @(200,436) `6058:1716`
+    - **texte / libellé** « Arrivées ce trimestre » — Inter Medium 16, #262626, left, 154×24 @(200,404) `6058:1719`
+    - **texte / libellé** « De 5 à 20 » — Inter Medium 15, #707070, left, 66×23 @(220,449) `6058:1720`
+    - ▣ **Champ · Date** (group) 222×47 @(448,436) `6058:1721`
+      - ◆ icône/logo « Group » 14×14 @(634,453) `6058:1723`
+    - **texte / libellé** « Prochaine arrivée » — Inter Medium 16, #262626, left, 129×24 @(447,404) `6058:1726`
+    - **texte / libellé** « Lundi 17 nov. » — Inter Medium 15, #707070, left, 90×23 @(467,449) `6058:1727`
+    - ▣ **Champ · Message** (group) 469×108 @(200,540) `6058:1728`
+    - **texte / libellé** « Ce qui vous prend le plus de temps » — Inter Medium 16, #262626, left, 258×24 @(200,508) `6058:1730`
+    - **texte / libellé** « Les accès, le matériel, les relances… » — Inter Medium 15, #707070, left, 250×23 @(220,556) `6058:1731`
+    - ▣ **Bouton · Recevoir ma démo** (group) 470×51 @(200,676) `6058:1732`
+      - ▣ **Group** (group) 10×9 @(513,697) `6058:1734`
+    - **texte / libellé** « Recevoir ma démo » — Inter Medium 15, #FFFFFF, center, 128×23 @(363,690) `6058:1736`
+    - **texte / libellé** « Réponse sous 24 h, sans engagement. Données hébergées en France. » — Inter Medium 15, #707070, center, 485×23 @(192,742) `6058:1737`
+    - **titre de carte** « 2 jours » — Inter Semi Bold 34, #1A1A1A, left, 106×37 @(770,56) `6058:1738`
+    - **texte / libellé** « gagnés par arrivée » — Inter Medium 15, #707070, left, 129×23 @(770,100) `6058:1739`
+    - **titre de carte** « 94 % » — Inter Semi Bold 34, #1A1A1A, left, 79×37 @(930,56) `6058:1740`
+    - **texte / libellé** « accès prêts à temps » — Inter Medium 15, #707070, left, 140×23 @(930,100) `6058:1741`
+    - **titre de carte** « 4,8/5 » — Inter Semi Bold 34, #1A1A1A, left, 84×37 @(1090,56) `6058:1742`
+    - **texte / libellé** « note des recrues » — Inter Medium 15, #707070, left, 117×23 @(1090,100) `6058:1743`
+    - ▣ **Séparateurs chiffres** (group) 160×64 @(912,58) `6058:1744`
+    - ▣ **Carte d'avis** (group) 470×246 @(770,176) `6058:1747`
+      - ◆ icône/logo « Group 1 » 18×13 @(802,200) `6070:7`
+    - **texte d’intro** « Avant, il fallait onze messages pour qu'un nouveau / ait son ordinateur. Aujourd'hui, la R » — Inter Medium 17, #595959, left, 408×78 @(802,237) `6058:1750`
+    - ▣ **Carte d'avis · trait** (group) 406×1 @(802,334) `6058:1751`
+    - **texte d’intro** « Inès Moreau » — Inter Semi Bold 17, #1A1A1A, left, 98×26 @(860,353) `6058:1754`
+    - **texte / libellé** « Responsable RH, Atelier Nord (140 salariés) » — Inter Medium 15, #707070, left, 299×23 @(860,377) `6058:1755`
+    - **surtitre / étiquette mono** « ILS ACCUEILLENT AVEC ESCALE » — DM Mono Medium 14, #767676, left, 231×21 @(770,500) `6058:1756`
+    - **titre de bloc** « Atelier Nord » — Inter Semi Bold 19, #9A948D, left, 104×23 @(770,548) `6058:1757`
+    - **titre de bloc** « Maison Lune » — Inter Semi Bold 19, #9A948D, left, 111×23 @(930,548) `6058:1758`
+    - **titre de bloc** « Ardent » — Inter Semi Bold 19, #9A948D, left, 61×23 @(1090,548) `6058:1759`
+    - **titre de bloc** « Bâtir & Co » — Inter Semi Bold 19, #9A948D, left, 86×23 @(770,612) `6058:1760`
+    - **titre de bloc** « Studio Ferro » — Inter Semi Bold 19, #9A948D, left, 106×23 @(930,612) `6058:1761`
+    - **titre de bloc** « Les Bureaux Verts » — Inter Semi Bold 19, #9A948D, left, 158×23 @(1090,612) `6058:1762`
+    - ▣ **Grille clients** (group) 470×128 @(770,530) `6058:1763`
+    - **texte / libellé** « + 220 équipes RH, de 12 à 900 salariés » — Inter Medium 15, #707070, left, 268×23 @(770,690) `6058:1765`
+  - ▣ **02 · Hero** (frame) 1440×1121 @(-1,87) `6072:8` — fond #F7F5F3 · grille de colonnes
+    - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Group 2 » 419×733 @(871,-40) `6073:253` (12 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+    - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Group 3 » 419×733 @(571,-20) `6073:254` (12 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+    - ─ trait 1×713 @(1290,0) #D6D0C8 `6072:9`
+    - ─ trait 1×713 @(152,0) #D6D0C8 `6072:10`
+    - ▣ **Bouton · Voir une démo** (group) 150×47 @(519,374) `6072:22`
+    - ▣ **Bouton · Préparer une arrivée** (group) 226×47 @(683,374) `6072:24`
+      - ▣ **Group** (group) 10×9 @(879,393) `6072:26`
+    - **titre de section** « Le premier jour se prépare tout seul, la veille. » — Inter Semi Bold 48, #1A1A1A, center, 650×106 @(399,155) `6072:132`
+    - **texte d’intro** « Escale ouvre les comptes, fait livrer l'ordinateur, prévient le parrain et cale la premièr » — Inter Medium 17, #595959, center, 442×78 @(503,277) `6072:133`
+    - **texte / libellé** « Voir une démo » — Inter Medium 15, #262626, center, 142×23 @(523,386) `6072:145`
+    - **texte / libellé** « Préparer une arrivée » — Inter Medium 15, #FFFFFF, center, 194×23 @(689,386) `6072:146`
+    - 🖼 image/photo « New Project (1) 1 » 1140×15 @(155,791) `6072:147`
+    - 🖼 image/photo « shadow-overlay 1 » 660×714 @(630,-1) `6073:185`
+    - 🖼 image/photo « shadow-overlay 2 » 582×715 @(733,-1) `6073:388`
+    - 🔘 **bouton** « Nouveau : le parcours des 30 premiers jours » fond #FFFFFF 357×40 rayon 100 @(546,87) `6073:381`
+    - ▭ fond/forme « Rectangle 34625301 » 666×161 dégradé rayon  `6073:364`
+    - ─ trait 1440×0 @(0,713) #0000001A `6075:420`
+    - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Group 1597880889 » 754×612 @(343,463) `6075:389` (11 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+    - ▣ **Group 1597880891** (group) 93×67 @(306,721) `6075:415`
+      - ▣ **Curseur · pilule** (group) 56×30 @(306,758) `6075:416`
+      - **petit texte** « Inès » — Inter Semi Bold 14, #FFFFFF, center, 48×18 @(310,764) `6075:418`
+      - ◆ icône/logo « Figma Cursor » 35×39 @(374,721) `6075:419`
+    - ▣ **Group 1597880890** (group) 96×67 @(1038,862) `6075:414`
+      - ▣ **Curseur · pilule** (group) 56×30 @(1078,899) `6072:77`
+      - **petit texte** « Inès » — Inter Semi Bold 14, #FFFFFF, center, 48×18 @(1082,905) `6072:130`
+      - ◆ icône/logo « Figma Cursor » 35×39 @(1063,862) `6072:172`
+    - ─ trait 1440×0 @(0,1121) #00000014 `6077:10`
+  - ▣ **04 · La veille au soir (sombre)** (frame) 1440×808 @(1,2129) `6058:1130` — fond #1A1A1A
+    - ✦ décor / motif « Rails » 1140×820 @(150,-12) `6058:1131` (déborde de la section : motif pixel, lumière ou forme)
+    - ✦ décor / motif « Chute sombre » 1440×15 @(0,-27) `6058:1134` (déborde de la section : motif pixel, lumière ou forme)
+    - ▣ **Halo indigo** (group) 600×460 @(720,138) `6058:1136`
+    - ▣ **Lumière au sol** (group) 495×190 @(640,588) `6058:1138`
+    - ▣ **Ligne du sol** (group) 730×0 @(560,588) `6058:1140`
+    - ▣ **Encadrement** (group) 258×464 @(891,124) `6058:1142`
+    - ▣ **Pièce éclairée** (group) 230×450 @(905,138) `6058:1144`
+    - ▣ **Bureau · plateau** (group) 130×130 @(985,458) `6058:1146`
+    - ▣ **Bureau · écran** (group) 70×62 @(1018,396) `6058:1150`
+    - ▣ **Bureau · plante** (group) 24×46 @(1095,412) `6058:1153`
+      - ◆ icône/logo « Vector » 14×24 @(1100,434) `6058:1154`
+      - ◆ icône/logo « Vector » 24×28 @(1095,412) `6058:1155`
+    - ▣ **Battant** (group) 93×502 @(812,112) `6058:1156`
+    - ▣ **Battant · reflet** (group) 0×442 @(902,142) `6058:1158`
+    - ◆ icône/logo « Poignée » 10×34 @(826,360) `6058:1160`
+    - ▣ **Lueur de la porte** (group) 210×410 @(915,158) `6058:1162`
+    - ▣ **Paillasson** (group) 190×34 @(926,616) `6058:1164`
+    - **surtitre / étiquette mono** « BIENVENUE CAMILLE » — DM Mono Medium 12, #6E665E, center, 138×16 @(952,626) `6058:1166`
+    - ▣ **Séparateurs** (group) 490×220 @(210,400) `6058:1167`
+    - ▣ **Étiquette** (group) 176×64 @(652,440) `6058:1169`
+    - ▣ **Étiquette · point** (group) 8×8 @(670,458) `6058:1172`
+    - **texte / libellé** « Tout est prêt » — Inter Semi Bold 15, #1A1A1A, left, 89×19 @(686,453) `6058:1174`
+    - **petit texte** « lundi, 9 h · bureau B14 » — Inter Medium 13, #707070, left, 135×17 @(668,477) `6058:1175`
+    - **surtitre / étiquette mono** « LA VEILLE AU SOIR » — DM Mono Medium 14, #8E96FA, left, 145×21 @(210,108) `6058:1176`
+    - **titre de section** « On laisse la lumière / allumée avant / qu'elle arrive » — Inter Semi Bold 48, #FFFFFF, left, 421×159 @(210,138) `6058:1177`
+    - **texte / libellé** « La veille d'une arrivée, Escale vérifie tout une dernière fois / et prévient chacun : la r » — Inter Medium 16, #A39D96, left, 426×48 @(210,318) `6058:1178`
+    - ◆ icône/logo « Point 1 · pastille » 40×40 @(210,414) `6058:1179`
+    - **texte / libellé** « Comptes créés et testés » — Inter Semi Bold 16, #F2EEEA, left, 183×24 @(266,412) `6058:1184`
+    - **texte / libellé** « Google, Slack, Notion et la paie » — Inter Medium 15, #8F8983, left, 218×23 @(266,436) `6058:1185`
+    - ◆ icône/logo « Point 2 · pastille » 40×40 @(210,490) `6058:1186`
+    - **texte / libellé** « Ordinateur livré au bon bureau » — Inter Semi Bold 16, #F2EEEA, left, 226×24 @(266,488) `6058:1191`
+    - **texte / libellé** « Colis suivi jusqu'à l'étage » — Inter Medium 15, #8F8983, left, 176×23 @(266,512) `6058:1192`
+    - ◆ icône/logo « Point 3 · pastille » 40×40 @(210,566) `6058:1193`
+    - **texte / libellé** « Un mot du parrain dans la boîte » — Inter Semi Bold 16, #F2EEEA, left, 232×24 @(266,564) `6058:1197`
+    - **texte / libellé** « Écrit par lui, envoyé à 18 h » — Inter Medium 15, #8F8983, left, 183×23 @(266,588) `6058:1198`
+    - ▣ **Bouton · Voir la checklist** (group) 165×46 @(210,652) `6058:1199`
+    - **texte / libellé** « Voir la checklist » — Inter Medium 16, #EBE5E0, center, 116×24 @(234,664) `6058:1201`
+    - ▣ **Bouton · Préparer une arrivée** (group) 226×47 @(390,652) `6058:1202`
+      - ▣ **Group** (group) 10×9 @(586,669) `6058:1204`
+    - **texte / libellé** « Préparer une arrivée » — Inter Medium 15, #262626, center, 141×23 @(420,664) `6058:1206`
+    - 🖼 image/photo « Grain (overlay 30 %) » 1440×820 @(0,-12) `6058:1207`
+    - ▣ **Étiquette · fil** (frame) 30×60 @(805,388) `6058:1208` — fond #FFFFFF

@@ -1,0 +1,64 @@
+{
+ "id": "v1",
+ "titre": "« La stratégie secrète qui booste ta conversion » — formulaire en 2 temps",
+ "statut": "Premier test, en attente des retours de Louis. Construit dans Figma (section « TEST Claude — Carrousel stratégie secrète (v1) ») en clonant les vrais composants des slides 5406:1557, 3302, 3145, 2461, 3496, 3397.",
+ "slides": [
+  "tests/v1/slide-01.png",
+  "tests/v1/slide-02.png",
+  "tests/v1/slide-03.png",
+  "tests/v1/slide-04.png",
+  "tests/v1/slide-05.png",
+  "tests/v1/slide-06.png",
+  "tests/v1/slide-07.png",
+  "tests/v1/slide-08.png",
+  "tests/v1/slide-09.png"
+ ],
+ "decisions": [
+  [
+   "general",
+   "Thème bleu : sujet positif (une astuce), donc cartouches bleus et numérotation bleue — règle de Louis."
+  ],
+  [
+   "general",
+   "Couverture sur deux rangées : « La stratégie » + « secrète » / « qui booste ta conversion », chaque cartouche sur une ligne, largeur ajustée au texte (auto-layout)."
+  ],
+  [
+   "general",
+   "« Pourquoi ça marche ? » en cartouche blanc, jamais bleu."
+  ],
+  [
+   "general",
+   "Pas de capitales éditoriales : « ÉTAPE N°1 » du gabarit devient « Le secret » ; « VRAIMENT » de la slide Merci passe en « vraiment »."
+  ],
+  [
+   "observation",
+   "Ossature reprise du guide en étapes (Contexte → bloc d'annonce → points numérotés → explication → Merci → Offre), adaptée à une seule stratégie au lieu d'une liste."
+  ],
+  [
+   "local",
+   "Illustrations inventées pour ce sujet : formulaire en deux cartes (couverture), avant/après champs obligatoires → question à choix (point 1), barre de progression sous cadre de sélection + pastille « Presque fini » (point 2), étape 1 répondue empilée derrière l'étape 2 (point 3), « Petit oui → oui plus grand » (slide 7)."
+  ],
+  [
+   "local",
+   "Le fondu de couverture est gardé parce que les cartes descendent sous la pilule noire ; sur les autres slides l'illustration ne touche pas le bas, donc pas de fondu."
+  ],
+  [
+   "local",
+   "Le CTA bleu source n'apparaît qu'au point 3, là où l'illustration montre réellement le bouton d'envoi ; ailleurs ce sont des faux CTA de structure."
+  ],
+  [
+   "proposition",
+   "Rayons des cartouches : les cartouches clonés gardent les rayons du corpus (≈0,2 × hauteur), différents du ratio « Le déclic » de la v0."
+  ],
+  [
+   "proposition",
+   "Contenu : stratégie du formulaire en deux temps (engagement progressif). Aucun chiffre ni résultat client inventé."
+  ]
+ ],
+ "questions": [
+  "Le sujet « formulaire en 2 temps » te convient-il comme « stratégie secrète », ou tu avais une autre stratégie en tête ?",
+  "Les slides Merci et Offre sont reprises telles quelles de ton corpus (prix 1240 €, « +25 clients satisfaits ») : à garder, mettre à jour ou retirer ?",
+  "Arrondis : garder ceux du corpus (≈0,2) ou recaler sur « Le déclic » (≈0,33) ?",
+  "Pour une stratégie unique, préfères-tu « Le secret » + bloc bleu (comme ici) ou un intertitre de type « Étape 1 / 2 / 3 » ?"
+ ]
+}

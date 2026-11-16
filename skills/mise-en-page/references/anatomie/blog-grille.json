@@ -1,0 +1,396 @@
+{
+ "type": "blog-grille",
+ "noeud": "6027:608",
+ "w": 1139,
+ "h": 851,
+ "items": {
+  "blocs": [
+   {
+    "id": "6027:608",
+    "nom": "Frame 2147260462",
+    "w": 1139,
+    "h": 851,
+    "x": 152,
+    "y": 15329,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:609",
+    "nom": "Frame 2147239882",
+    "w": 1139,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:612",
+    "nom": "Frame 2147260464",
+    "w": 1139,
+    "h": 656,
+    "x": 0,
+    "y": 195,
+    "layout": "auto-layout ↓ écart 40 pad 0/0/40/0 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6027:614",
+    "nom": "Frame 2147260458",
+    "w": 1139,
+    "h": 525,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 0 pad 0/15/0/15 align SPACE_BETWEEN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6027:615",
+    "nom": "Frame 2147260459",
+    "w": 350,
+    "h": 525,
+    "x": 15,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 15/0/15/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:616",
+    "nom": "Card",
+    "w": 350,
+    "h": 495,
+    "x": 0,
+    "y": 15,
+    "layout": "auto-layout ↓ écart 0 pad 4/4/0/4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:617",
+    "nom": "Image",
+    "w": 342,
+    "h": 249,
+    "x": 4,
+    "y": 4,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:619",
+    "nom": "Container",
+    "w": 342,
+    "h": 242,
+    "x": 4,
+    "y": 253,
+    "layout": "auto-layout ↓ écart 30 pad 24/24/24/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:620",
+    "nom": "Sub Container",
+    "w": 294,
+    "h": 121,
+    "x": 24,
+    "y": 24,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:621",
+    "nom": "Container",
+    "w": 245,
+    "h": 25,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:635",
+    "nom": "Text Container",
+    "w": 294,
+    "h": 84,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout ↓ écart 6 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:644",
+    "nom": "Frame 2147260460",
+    "w": 360,
+    "h": 525,
+    "x": 390,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 15/0/15/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:645",
+    "nom": "Card",
+    "w": 360,
+    "h": 495,
+    "x": 0,
+    "y": 15,
+    "layout": "auto-layout ↓ écart 0 pad 4/4/0/4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:646",
+    "nom": "Image",
+    "w": 352,
+    "h": 249,
+    "x": 4,
+    "y": 4,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:648",
+    "nom": "Container",
+    "w": 352,
+    "h": 242,
+    "x": 4,
+    "y": 253,
+    "layout": "auto-layout ↓ écart 30 pad 24/24/24/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:649",
+    "nom": "Sub Container",
+    "w": 304,
+    "h": 121,
+    "x": 24,
+    "y": 24,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:650",
+    "nom": "Container",
+    "w": 245,
+    "h": 25,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:664",
+    "nom": "Text Container",
+    "w": 304,
+    "h": 84,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout ↓ écart 6 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:673",
+    "nom": "Frame 2147260461",
+    "w": 350,
+    "h": 525,
+    "x": 774,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 15/0/15/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:674",
+    "nom": "Card",
+    "w": 350,
+    "h": 495,
+    "x": 0,
+    "y": 15,
+    "layout": "auto-layout ↓ écart 0 pad 4/4/0/4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:675",
+    "nom": "Image",
+    "w": 342,
+    "h": 249,
+    "x": 4,
+    "y": 4,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6027:677",
+    "nom": "Container",
+    "w": 342,
+    "h": 242,
+    "x": 4,
+    "y": 253,
+    "layout": "auto-layout ↓ écart 30 pad 24/24/24/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:678",
+    "nom": "Sub Container",
+    "w": 294,
+    "h": 121,
+    "x": 24,
+    "y": 24,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:679",
+    "nom": "Container",
+    "w": 245,
+    "h": 25,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6027:693",
+    "nom": "Text Container",
+    "w": 294,
+    "h": 84,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout ↓ écart 6 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6027:610",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Blogs",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 43,
+    "h": 21,
+    "x": 548,
+    "y": 0,
+    "nb_car": 5
+   },
+   {
+    "id": "6027:611",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Insights, News / & Guides",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1139,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 25
+   }
+  ],
+  "traits": [
+   {
+    "id": "6027:613",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 1
+   },
+   {
+    "id": "6027:643",
+    "w": 525,
+    "h": 0,
+    "x": 377,
+    "y": 0
+   },
+   {
+    "id": "6027:672",
+    "w": 525,
+    "h": 0,
+    "x": 762,
+    "y": 0
+   }
+  ],
+  "images": [
+   {
+    "id": "6027:618",
+    "nom": "image 27",
+    "w": 343,
+    "h": 249
+   },
+   {
+    "id": "6027:647",
+    "nom": "image 27",
+    "w": 353,
+    "h": 249
+   },
+   {
+    "id": "6027:676",
+    "nom": "image 27",
+    "w": 343,
+    "h": 249
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6027:638",
+    "texte": "Read Full Blog",
+    "fond": "#EFEBE7",
+    "w": 135,
+    "h": 43,
+    "rayon": 100
+   },
+   {
+    "id": "6027:667",
+    "texte": "Read Full Blog",
+    "fond": "#1A1A1A",
+    "w": 135,
+    "h": 43,
+    "rayon": 100
+   },
+   {
+    "id": "6027:696",
+    "texte": "Read Full Blog",
+    "fond": "#EFEBE7",
+    "w": 135,
+    "h": 43,
+    "rayon": 100
+   },
+   {
+    "id": "6027:705",
+    "texte": "Load All Blogs",
+    "fond": "#EFEBE7",
+    "w": 140,
+    "h": 51,
+    "rayon": 100
+   }
+  ],
+  "jointures": [
+   {
+    "id": "6027:701",
+    "x": 758,
+    "y": -4
+   },
+   {
+    "id": "6027:702",
+    "x": 374,
+    "y": 521
+   },
+   {
+    "id": "6027:703",
+    "x": 758,
+    "y": 521
+   },
+   {
+    "id": "6027:704",
+    "x": 374,
+    "y": -4
+   }
+  ],
+  "decors": [
+   {
+    "id": "6027:713",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 655
+   }
+  ]
+ }
+}

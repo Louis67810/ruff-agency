@@ -1,0 +1,149 @@
+{
+ "store": {
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 9
+   }
+  ],
+  "fusion": "MULTIPLY"
+ },
+ "halo-large": {
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 200
+   }
+  ]
+ },
+ "halo-moyen": {
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 200
+   }
+  ]
+ },
+ "halo-coeur": {
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 120
+   }
+  ]
+ },
+ "carte-avis": {
+  "effets": "ombre-carte-avis"
+ },
+ "croix-a": {
+  "fusion": "OVERLAY"
+ },
+ "croix-b": {
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 12
+   }
+  ],
+  "opacite": 0.8
+ },
+ "rubans-cta": {
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 10
+   }
+  ]
+ },
+ "form-l0c0-libelle": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.32
+  }
+ },
+ "form-l0c0-indication": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.3
+  }
+ },
+ "form-l0c1-libelle": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.32
+  }
+ },
+ "form-l0c1-indication": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.3
+  }
+ },
+ "form-l1c0-libelle": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.32
+  }
+ },
+ "form-l1c0-indication": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.3
+  }
+ },
+ "form-message-libelle": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.32
+  }
+ },
+ "form-message-indication": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.3
+  }
+ },
+ "form-envoi-fond": {
+  "effets": "bouton-noir"
+ },
+ "form-envoi-texte": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.3
+  }
+ },
+ "epingle-ombre": {
+  "effets": [
+   {
+    "type": "LAYER_BLUR",
+    "radius": 32.0
+   }
+  ]
+ },
+ "epingle-socle": {
+  "effets": "metal-bosse"
+ },
+ "epingle-tete": {
+  "effets": "ombre-flottante"
+ },
+ "chute": {
+  "effets": "chute-sombre"
+ },
+ "logotype": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 600,
+   "interlettre": -5.3
+  },
+  "effets": "reflet-haut"
+ }
+}

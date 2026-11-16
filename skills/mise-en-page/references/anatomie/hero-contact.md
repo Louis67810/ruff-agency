@@ -1,0 +1,109 @@
+# hero-contact · `4001:15087` · 1141 × 1214
+
+Résumé : {'blocs': 45, 'textes': 21, 'decors': 4, 'illustrations': 2, 'icones': 18, 'traits': 4, 'images': 3, 'boutons': 3}
+Textes par rôle : {'surtitre / étiquette mono': 1, 'titre de section': 1, 'texte d’intro': 7, 'texte / libellé': 11, 'titre de bloc': 1}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147260613** (frame) 1141×1214 @(150,147) `4001:15087` — auto-layout ↓ écart 0 align MIN/MIN
+  - ▣ **Frame 2147260612** (frame) 1141×539 @(0,0) `4001:15088` — auto-layout ↓ écart 70 align MIN/MIN
+    - ▣ **Frame 2147260597** (frame) 1141×319 @(0,0) `4001:15089` — auto-layout ↓ écart 40 align MIN/CENTER
+      - ▣ **Frame 2147240173** (frame) 88×76 @(526,0) `4001:15090` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · fond #FFFFFF · rayon 100
+        - ▣ **Frame 2147240057** (frame) 80×68 @(4,4) `4001:15091` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · contour #D6D0C8 1 · fond #F4F3F0 · rayon 100
+          - ▣ **Frame 2147240174** (frame) 72×60 @(4,4) `4001:15092` — auto-layout → écart 10 align MIN/CENTER
+            - ▣ **Frame 2147240054** (frame) 72×60 @(0,0) `4001:15093` — auto-layout → écart 10 pad 10/12/10/12 align MIN/CENTER · contour #FFFFFF 1 · fond dégradé · rayon 100
+              - ▣ **Frame 2147240273** (frame) 48×40 @(12,10) `4001:15097`
+                - … (plus profond : voir le snapshot)
+      - ▣ **Frame 2147260494** (frame) 1141×203 @(0,116) `4001:15103` — auto-layout ↓ écart 16 align MIN/MIN
+        - ▣ **Frame 2147239882** (frame) 1141×135 @(0,0) `4001:15104` — auto-layout ↓ écart 8 align MIN/CENTER
+          - **surtitre / étiquette mono** « Contact Us » — DM Mono Medium 14, #3745F1, left, 86×21 @(528,0) `4001:15105`
+          - **titre de section** « Connect With / Our Team » — Switzer Semibold 48, #1A1A1A, center, 1141×106 @(0,29) `4001:15106`
+        - ✦ décor / motif « Frame 2147260445 » 419×400 @(1141,-137) `4001:15107` (déborde de la section : motif pixel, lumière ou forme)
+        - ✦ décor / motif « Frame 2147260446 » 419×400 @(1,-137) `4001:15119` (déborde de la section : motif pixel, lumière ou forme)
+        - **texte d’intro** « Our team helps you automate conversations and improve support workflows quickly. » — Inter Tight Medium 17, #595959, center, 1141×52 @(0,151) `4001:15131`
+      - ✦ décor / motif « Frame 2147260544 » 570×455 @(571,-60) `4001:15132` (déborde de la section : motif pixel, lumière ou forme)
+      - ✦ décor / motif « Frame 2147260545 » 570×455 @(570,-60) `4001:15134` (déborde de la section : motif pixel, lumière ou forme)
+      - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Frame 2147260598 » 367×427 @(773,-54) `4001:15136` (5 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+      - ▣ **Frame 2147260599** (frame) 89×120 @(89,-26) `4001:15156`
+    - ▣ **Frame 2147260585** (frame) 1141×150 @(0,389) `4001:15175` — auto-layout → écart 0 pad 0/30/0/30 align MIN/CENTER · trait #D6D0C8 top/bottom
+      - ▣ **Frame 2147260583** (frame) 270×150 @(30,0) `4001:15176` — auto-layout ↓ écart 12 pad 34/34/34/34 align MIN/MIN
+        - ◆ icône/logo « lightning-bold » 20×20 @(34,34) `4001:15177`
+        - ▣ **Frame 2147239885** (frame) 202×50 @(34,66) `4001:15180` — auto-layout ↓ écart 4 align MIN/MIN
+          - **texte d’intro** « Fast Responses » — Switzer Semibold 18, #262626, left, 202×22 @(0,0) `4001:15181`
+          - **texte / libellé** « Instant Reply » — Inter Tight Medium 16, #595959, left, 202×24 @(0,26) `4001:15182`
+      - ─ trait 150×0 @(300,0) #D6D0C8 `4001:15183`
+      - ▣ **Frame 2147260584** (frame) 270×150 @(300,0) `4001:15184` — auto-layout ↓ écart 12 pad 34/34/34/34 align MIN/MIN
+        - ◆ icône/logo « user-circle-bold » 20×20 @(34,34) `4001:15185`
+        - ▣ **Frame 2147239885** (frame) 202×50 @(34,66) `4001:15190` — auto-layout ↓ écart 4 align MIN/MIN
+          - **texte d’intro** « Expert Guidance » — Switzer Semibold 18, #262626, left, 202×22 @(0,0) `4001:15191`
+          - **texte / libellé** « Product Specialists » — Inter Tight Medium 16, #595959, left, 202×24 @(0,26) `4001:15192`
+      - ─ trait 150×0 @(570,0) #D6D0C8 `4001:15193`
+      - ▣ **Frame 2147260585** (frame) 270×150 @(570,0) `4001:15194` — auto-layout ↓ écart 12 pad 34/34/34/34 align MIN/MIN
+        - ◆ icône/logo « clock-bold » 20×20 @(34,34) `4001:15195`
+        - ▣ **Frame 2147239885** (frame) 202×50 @(34,66) `4001:15199` — auto-layout ↓ écart 4 align MIN/MIN
+          - **texte d’intro** « 24/7 Availability » — Switzer Semibold 18, #262626, left, 202×22 @(0,0) `4001:15200`
+          - **texte / libellé** « Always Online » — Inter Tight Medium 16, #595959, left, 202×24 @(0,26) `4001:15201`
+      - ─ trait 150×0 @(841,0) #D6D0C8 `4001:15202`
+      - ▣ **Frame 2147260586** (frame) 270×150 @(841,0) `4001:15203` — auto-layout ↓ écart 12 pad 34/34/34/34 align MIN/MIN
+        - ◆ icône/logo « globe-bold » 20×20 @(34,34) `4001:15204`
+        - ▣ **Frame 2147239885** (frame) 202×50 @(34,66) `4001:15210` — auto-layout ↓ écart 4 align MIN/MIN
+          - **texte d’intro** « Global Support » — Switzer Semibold 18, #262626, left, 202×22 @(0,0) `4001:15211`
+          - **texte / libellé** « Worldwide Teams » — Inter Tight Medium 16, #595959, left, 202×24 @(0,26) `4001:15212`
+      - 🖼 image/photo « Rectangle 34624471 » 15×1138 @(1140,-15) `4001:15213`
+      - ▣ **Frame 2147260587** (frame) 42×34 @(1162,-21) `4001:15291`
+        - ◆ icône/logo « Frame 2147239863 » 36×34 @(6,0) `4001:15292`
+  - ▭ fond/forme « Rectangle 34625300 » 1141×80 #D9D9D9 rayon  `4001:15368`
+  - ▣ **Frame 2147260604** (frame) 1141×595 @(0,619) `4001:15369` — auto-layout → écart 0 align MIN/CENTER · trait #D6D0C8 bottom
+    - ▣ **Frame 2147260602** (frame) 570×595 @(0,0) `4001:15370` — auto-layout ↓ écart 40 pad 50/50/50/50 align MIN/MIN · fond #FFFFFF
+      - **titre de bloc** « Talk to our Botwise experts » — Switzer Semibold 22, #1A1A1A, left, 470×33 @(50,50) `4001:15371`
+      - ▣ **Frame 2147239782** (frame) 470×422 @(50,123) `4001:15372` — auto-layout ↓ écart 30 align CENTER/MIN
+        - ▣ **Frame 2147239490** (frame) 470×341 @(0,0) `4001:15373` — auto-layout ↓ écart 20 align MIN/MIN
+          - ▣ **Frame 2147239488** (frame) 470×80 @(0,0) `4001:15374` — auto-layout → écart 30 align MIN/CENTER
+            - ▣ **Frame 2147239484** (frame) 220×80 @(0,0) `4001:15375` — auto-layout ↓ écart 8 align MIN/MIN
+              - **texte / libellé** « First Name » — Inter Tight Medium 16, #262626, left, 220×24 @(0,0) `4001:15376`
+              - 🔘 **bouton** « Your first name » fond None 220×48 rayon 100 @(0,32) `4001:15377`
+            - ▣ **Frame 2147239485** (frame) 220×80 @(250,0) `4001:15379` — auto-layout ↓ écart 8 align MIN/MIN
+              - **texte / libellé** « Last Name » — Inter Tight Medium 16, #262626, left, 220×24 @(0,0) `4001:15380`
+              - 🔘 **bouton** « Your last name » fond None 220×48 rayon 100 @(0,32) `4001:15381`
+          - ▣ **Frame 2147239486** (frame) 470×80 @(0,100) `4001:15383` — auto-layout ↓ écart 8 align MIN/MIN
+            - **texte / libellé** « Email » — Inter Tight Medium 16, #262626, left, 470×24 @(0,0) `4001:15384`
+            - ▣ **Input Field** (frame) 470×48 @(0,32) `4001:15385` — auto-layout → écart 20 pad 12/16/12/16 align MIN/CENTER · contour #EBE5E0 0.9999999403953552 · rayon 100
+              - **texte / libellé** « Your email » — Inter Tight Medium 16, #707070, left, 71×24 @(16,12) `4001:15386`
+          - ▣ **Frame 2147239491** (frame) 470×141 @(0,200) `4001:15387` — auto-layout ↓ écart 8 align MIN/MIN
+            - **texte / libellé** « Message » — Inter Tight Medium 16, #262626, left, 470×24 @(0,0) `4001:15388`
+            - ▣ **Input Field** (frame) 470×109 @(0,32) `4001:15389` — auto-layout → écart 20 pad 12/16/12/16 align MIN/MIN · contour #EBE5E0 0.9999999403953552 · rayon 12
+              - **texte / libellé** « Your Message » — Inter Tight Medium 16, #707070, left, 97×24 @(16,12) `4001:15390`
+        - 🔘 **bouton** « Send message » fond #1A1A1A 144×51 rayon 100 @(0,371) `4001:15391`
+      - ▣ **Frame 2147239883** (frame) 80×96 @(96,80) `4001:15396`
+        - ▣ **Mask Group** (group) 94×124 @(78,0) `4001:15398`
+          - ◆ icône/logo « Vector 91 » 33×32 @(76,60) `4001:15400`
+          - ◆ icône/logo « Vector 90 » 36×36 @(80,59) `4001:15401`
+          - 🖼 image/photo « Rectangle » 157×158 @(95,-31) `4001:15402`
+      - ▣ **Frame 2147239884** (frame) 80×96 @(475,80) `4001:15403`
+        - ▣ **Mask Group** (group) 94×124 @(78,0) `4001:15405`
+          - ◆ icône/logo « Vector 91 » 33×32 @(76,60) `4001:15407`
+          - ◆ icône/logo « Vector 90 » 36×36 @(80,59) `4001:15408`
+          - 🖼 image/photo « Rectangle » 157×158 @(95,-31) `4001:15409`
+    - ─ trait 595×0 @(570,0) #D6D0C8 `4001:15410`
+    - ▣ **Frame 2147260611** (frame) 570×595 @(570,0) `4001:15411` — auto-layout ↓ écart 0 align MIN/MIN
+      - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Frame 2147260610 » 570×245 @(0,0) `4001:15412` (73 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+      - ▣ **Frame 2147260605** (frame) 570×350 @(0,245) `4001:15518` — auto-layout ↓ écart 30 pad 40/50/40/50 align CENTER/MIN · trait #D6D0C8 top
+        - ▣ **Frame 2147260606** (frame) 470×128 @(50,51) `4001:15519` — auto-layout ↓ écart 24 pad 0/80/0/0 align MIN/MIN
+          - ▣ **Frame 2147237743** (frame) 93×26 @(0,0) `4001:15520`
+            - ▣ **Typely** (group) 60×19 @(33,6) `4001:15530`
+              - ◆ icône/logo « Vector » 11×16 @(82,9) `4001:15531`
+              - ◆ icône/logo « Vector » 11×12 @(67,9) `4001:15533`
+              - ◆ icône/logo « Vector » 11×16 @(56,9) `4001:15534`
+              - ◆ icône/logo « Vector » 11×16 @(44,9) `4001:15535`
+              - ◆ icône/logo « Vector » 12×15 @(33,6) `4001:15536`
+          - **texte d’intro** « Botwise helps our team automate customer conversations while improving response speed and  » — Inter Tight SemiBold 17, #262626, left, 390×78 @(0,50) `4001:15537`
+        - ▣ **Frame 2147236638** (frame) 470×90 @(50,209) `4001:15538` — auto-layout → écart 14 pad 16/0/24/0 align MIN/CENTER
+          - ▣ **Frame 2147236383** (frame) 50×50 @(0,16) `4001:15539` — auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER · contour #000000 2 · fond #F2704F · rayon 100
+            - ◆ icône/logo « lightning-fill » 24×24 @(10,10) `4001:15540`
+          - ▣ **Text Container** (frame) 302×48 @(64,17) `4001:15543` — auto-layout ↓ écart -1 align MIN/MIN
+            - **texte d’intro** « Daniel Carter » — Inter Tight SemiBold 17, #1A1A1A, left, 302×26 @(0,0) `4001:15544`
+            - **texte / libellé** « Customer Success Manager » — Inter Tight Medium 15, #707070, left, 302×23 @(0,25) `4001:15545`
+          - ▣ **Frame 2147260609** (frame) 90×40 @(380,21) `4001:15546` — auto-layout → écart 10 align MIN/CENTER
+            - ◆ icône/logo « Frame 2147260607 » 40×40 @(0,0) `4001:15547`
+            - ◆ icône/logo « Frame 2147260608 » 40×40 @(50,0) `4001:15551`
+        - ◆ icône/logo « quotes-fill » 30×30 @(531,10) `4001:15555`

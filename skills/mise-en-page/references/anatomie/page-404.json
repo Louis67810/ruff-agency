@@ -1,0 +1,107 @@
+{
+ "type": "page-404",
+ "noeud": "4001:51299",
+ "w": 946,
+ "h": 312,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:51299",
+    "nom": "Frame 2147260633",
+    "w": 946,
+    "h": 312,
+    "x": 247,
+    "y": 257,
+    "layout": "auto-layout ↓ écart 40 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:51328",
+    "nom": "Frame 2147260632",
+    "w": 946,
+    "h": 225,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:51330",
+    "nom": "Text Container",
+    "w": 946,
+    "h": 102,
+    "x": 0,
+    "y": 123,
+    "layout": "auto-layout ↓ écart 14 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "decors": [
+   {
+    "id": "4001:51300",
+    "w": 488,
+    "h": 466,
+    "x": -96,
+    "y": -154
+   },
+   {
+    "id": "4001:51314",
+    "w": 488,
+    "h": 466,
+    "x": 1043,
+    "y": -154
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:51329",
+    "role": "titre géant",
+    "police": "Inter Tight Bold 89",
+    "texte": "404",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 946,
+    "h": 107,
+    "x": 0,
+    "y": 0,
+    "nb_car": 3
+   },
+   {
+    "id": "4001:51331",
+    "role": "titre de carte",
+    "police": "Switzer Medium 24",
+    "texte": "Oops page not found",
+    "couleur": "#262626",
+    "align": "CENTER",
+    "w": 946,
+    "h": 36,
+    "x": 0,
+    "y": 0,
+    "nb_car": 19
+   },
+   {
+    "id": "4001:51332",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "We regret to inform you that the Pavyon you're searching for seems to be / beyond our grasp. We apologize for any inconvenience this may cause.",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 946,
+    "h": 52,
+    "x": 0,
+    "y": 50,
+    "nb_car": 143
+   }
+  ],
+  "boutons": [
+   {
+    "id": "4001:51333",
+    "texte": "Back to Home Page",
+    "fond": "#1A1A1A",
+    "w": 172,
+    "h": 47,
+    "rayon": 100
+   }
+  ]
+ }
+}

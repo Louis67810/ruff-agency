@@ -1,0 +1,39 @@
+{
+ "id": "image-1",
+ "titre": "Image unique — « La formule d'une landing page qui convertit » (reproduction d'une référence)",
+ "statut": "Reproduction fidèle, en français et dans le style de Louis, d'une infographie qu'il a envoyée (2026-10-22). Section Figma 5422:1430, frame 5422:1431, 1150 × 1840. Scripts : exemples/image-formule-landing/. v2 : page centrale redessinée avec la template de site de Louis (5424:3826) ; liaisons coudées vers la hauteur exacte de leur cible.",
+ "slides": [
+  "tests/image-1/apercu.jpg"
+ ],
+ "decisions": [
+  [
+   "general",
+   "Quand Louis envoie une image comme référence, on reproduit SON contenu (toutes les annotations, même structure) traduit en français, dans son style. On n'invente ni ne résume l'information (retour R17)."
+  ],
+  [
+   "general",
+   "Composants sources clonés et mis à l'échelle (cloneScaled) : logo, cartouches de titre, signature PP, CTA bleu, check vert, tags blancs."
+  ],
+  [
+   "general",
+   "Page générique = template de site de Louis (5424:3826) : barres grises, pilules sombres sans libellé, blocs gris clair, titres bleu nuit ; on garde seulement les éléments que les annotations désignent (tags, prix, infobulle) (R18)."
+  ],
+  [
+   "observation",
+   "Format choisi pour garder la densité de la référence : 1150 × 1840 (proche de son ratio 0,69), bandelettes latérales conservées."
+  ],
+  [
+   "local",
+   "Annotations en encadrés blancs (style du tag source, coins 8) avec check vert ; liaisons noires fines terminées par un point, comme dans la référence."
+  ],
+  [
+   "local",
+   "La page centrale est l'archétype de la référence (exemple Slack), textes traduits ; les chiffres affichés (1 800 $, +4 000 entreprises…) sont ceux de la référence, pas des résultats de Louis."
+  ]
+ ],
+ "questions": [
+  "Garder la mention « Slack » de la référence, ou la remplacer par « ton outil » ?",
+  "Le titre en trois cartouches est-il à la bonne taille par rapport à la densité de l'image ?",
+  "Les deux petites flèches verticales de la référence (vers les encadrés FAQ) manquent faute de place : les ajouter en écartant les blocs ?"
+ ]
+}

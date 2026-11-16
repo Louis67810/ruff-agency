@@ -1,0 +1,105 @@
+{
+ "type": "banniere-cta",
+ "noeud": "4001:23965",
+ "w": 1140,
+ "h": 295,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:23965",
+    "nom": "Frame 2147260473",
+    "w": 1140,
+    "h": 295,
+    "x": 150,
+    "y": 2733,
+    "layout": "auto-layout → écart 80 pad 100/100/100/100 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "4001:24125",
+    "nom": "Frame 2147260547",
+    "w": 744,
+    "h": 95,
+    "x": 98,
+    "y": 100,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:24126",
+    "nom": "Frame 2147260546",
+    "w": 744,
+    "h": 95,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6027:12584",
+    "nom": "Group 1597880886",
+    "w": 608,
+    "h": 371,
+    "x": 593,
+    "y": 3,
+    "layout": "",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:24127",
+    "role": "titre de section",
+    "police": "Switzer Semibold 44",
+    "texte": "Upgrade Support With AI",
+    "couleur": "#FFFFFF",
+    "align": "LEFT",
+    "w": 744,
+    "h": 53,
+    "x": 0,
+    "y": 0,
+    "nb_car": 23
+   },
+   {
+    "id": "4001:24128",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Start automating conversations and scale customer support faster with Botwise AI.",
+    "couleur": "#DEDAD3",
+    "align": "LEFT",
+    "w": 744,
+    "h": 26,
+    "x": 0,
+    "y": 69,
+    "nb_car": 81
+   }
+  ],
+  "boutons": [
+   {
+    "id": "4001:24129",
+    "texte": "Get Started",
+    "fond": "#FFFFFF",
+    "w": 121,
+    "h": 47,
+    "rayon": 100
+   }
+  ],
+  "images": [
+   {
+    "id": "6027:12567",
+    "nom": "New Project (1) 1",
+    "w": 1442,
+    "h": 752
+   }
+  ],
+  "decors": [
+   {
+    "id": "6027:12583",
+    "w": 608,
+    "h": 371,
+    "x": -15,
+    "y": 3
+   }
+  ]
+ }
+}

@@ -1,0 +1,689 @@
+{
+ "type": "hero-liste-attente",
+ "noeud": "4001:44873",
+ "w": 1141,
+ "h": 766,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:44873",
+    "nom": "Frame 2147260629",
+    "w": 1141,
+    "h": 766,
+    "x": 150,
+    "y": 147,
+    "layout": "auto-layout ↓ écart 10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:44874",
+    "nom": "Frame 2147260621",
+    "w": 1141,
+    "h": 614,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44876",
+    "nom": "Frame 2147260597",
+    "w": 1141,
+    "h": 319,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 40 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44877",
+    "nom": "Frame 2147240173",
+    "w": 88,
+    "h": 76,
+    "x": 526,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44878",
+    "nom": "Frame 2147240057",
+    "w": 80,
+    "h": 68,
+    "x": 4,
+    "y": 4,
+    "layout": "auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER",
+    "traits": "contour #D6D0C8 1"
+   },
+   {
+    "id": "4001:44879",
+    "nom": "Frame 2147240174",
+    "w": 72,
+    "h": 60,
+    "x": 4,
+    "y": 4,
+    "layout": "auto-layout → écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44880",
+    "nom": "Frame 2147240054",
+    "w": 72,
+    "h": 60,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 10/12/10/12 align MIN/CENTER",
+    "traits": "contour #FFFFFF 1"
+   },
+   {
+    "id": "4001:44884",
+    "nom": "Frame 2147240273",
+    "w": 48,
+    "h": 40,
+    "x": 12,
+    "y": 10,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:44890",
+    "nom": "Frame 2147260494",
+    "w": 1141,
+    "h": 203,
+    "x": 0,
+    "y": 116,
+    "layout": "auto-layout ↓ écart 8 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44916",
+    "nom": "Frame 2147260617",
+    "w": 1141,
+    "h": 174,
+    "x": 0,
+    "y": 29,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:44917",
+    "nom": "Frame 2147239882",
+    "w": 1141,
+    "h": 106,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44927",
+    "nom": "Frame 2147260620",
+    "w": 600,
+    "h": 235,
+    "x": 270,
+    "y": 379,
+    "layout": "auto-layout ↓ écart 30 pad 60/60/60/60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44939",
+    "nom": "Frame 2147237803",
+    "w": 480,
+    "h": 55,
+    "x": 60,
+    "y": 60,
+    "layout": "auto-layout → écart 20 pad 4/4/4/18 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44945",
+    "nom": "Frame 2147238747",
+    "w": 251,
+    "h": 30,
+    "x": 174,
+    "y": 145,
+    "layout": "auto-layout → écart 11 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44946",
+    "nom": "Frame 2147238742",
+    "w": 93,
+    "h": 30,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart -9 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44956",
+    "nom": "Frame 2147240273",
+    "w": 69,
+    "h": 16,
+    "x": 64,
+    "y": 2,
+    "layout": "auto-layout → écart 3 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:44963",
+    "nom": "Botwise",
+    "w": 46,
+    "h": 10,
+    "x": 23,
+    "y": 3,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:44971",
+    "nom": "Frame 2147260628",
+    "w": 426,
+    "h": 468,
+    "x": 0,
+    "y": 146,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:44974",
+    "nom": "Frame 2147260627",
+    "w": 426,
+    "h": 468,
+    "x": 1141,
+    "y": 146,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:44977",
+    "nom": "Frame 2147261295",
+    "w": 1140,
+    "h": 312,
+    "x": 1,
+    "y": 312,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:45076",
+    "nom": "Frame 2147260585",
+    "w": 1141,
+    "h": 142,
+    "x": 0,
+    "y": 624,
+    "layout": "auto-layout → écart 0 pad 0/30/0/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "4001:45077",
+    "nom": "Frame 2147260583",
+    "w": 270,
+    "h": 142,
+    "x": 30,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 pad 30/60/30/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:45085",
+    "nom": "Frame 2147239885",
+    "w": 150,
+    "h": 50,
+    "x": 60,
+    "y": 62,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:45089",
+    "nom": "Frame 2147260584",
+    "w": 270,
+    "h": 142,
+    "x": 300,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 pad 30/60/30/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:45093",
+    "nom": "Frame 2147239885",
+    "w": 150,
+    "h": 50,
+    "x": 60,
+    "y": 62,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:45097",
+    "nom": "Frame 2147260587",
+    "w": 270,
+    "h": 142,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 pad 30/60/30/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:45104",
+    "nom": "Frame 2147239885",
+    "w": 150,
+    "h": 50,
+    "x": 60,
+    "y": 62,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:45108",
+    "nom": "Frame 2147260585",
+    "w": 270,
+    "h": 142,
+    "x": 841,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 pad 30/60/30/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:45114",
+    "nom": "Frame 2147239885",
+    "w": 150,
+    "h": 50,
+    "x": 60,
+    "y": 62,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:45118",
+    "nom": "Frame 2147239883",
+    "w": 80,
+    "h": 96,
+    "x": 96,
+    "y": 81,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:45120",
+    "nom": "Mask Group",
+    "w": 94,
+    "h": 124,
+    "x": 78,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:45125",
+    "nom": "Frame 2147260586",
+    "w": 80,
+    "h": 96,
+    "x": 1045,
+    "y": 81,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:45127",
+    "nom": "Mask Group",
+    "w": 94,
+    "h": 124,
+    "x": 78,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   }
+  ],
+  "images": [
+   {
+    "id": "4001:44875",
+    "nom": "New Project (1) 1",
+    "w": 1139,
+    "h": 752
+   },
+   {
+    "id": "4001:45117",
+    "nom": "Rectangle 34624471",
+    "w": 15,
+    "h": 1140
+   },
+   {
+    "id": "4001:45124",
+    "nom": "Rectangle",
+    "w": 157,
+    "h": 158
+   },
+   {
+    "id": "4001:45131",
+    "nom": "Rectangle",
+    "w": 157,
+    "h": 158
+   }
+  ],
+  "decors": [
+   {
+    "id": "4001:44891",
+    "w": 419,
+    "h": 400,
+    "x": 1141,
+    "y": -137
+   },
+   {
+    "id": "4001:44903",
+    "w": 419,
+    "h": 400,
+    "x": 1,
+    "y": -137
+   },
+   {
+    "id": "4001:44920",
+    "w": 570,
+    "h": 441,
+    "x": 571,
+    "y": -60
+   },
+   {
+    "id": "4001:44922",
+    "w": 570,
+    "h": 441,
+    "x": 570,
+    "y": -60
+   },
+   {
+    "id": "4001:44924",
+    "w": 367,
+    "h": 427,
+    "x": 773,
+    "y": -54
+   },
+   {
+    "id": "4001:44928",
+    "w": 609,
+    "h": 343,
+    "x": -4,
+    "y": -10
+   },
+   {
+    "id": "4001:45132",
+    "w": 1440,
+    "h": 15,
+    "x": -149,
+    "y": 765
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:44915",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Get early access",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 137,
+    "h": 21,
+    "x": 502,
+    "y": 0,
+    "nb_car": 16
+   },
+   {
+    "id": "4001:44918",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Get Early Access to Game Changing AI",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1141,
+    "h": 106,
+    "x": 0,
+    "y": 0,
+    "nb_car": 36
+   },
+   {
+    "id": "4001:44919",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Be amongst the first to experience Wait and launch a viral waitlist. Sign up to be notified when we launch!",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 1141,
+    "h": 52,
+    "x": 0,
+    "y": 122,
+    "nb_car": 107
+   },
+   {
+    "id": "4001:44940",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Enter your email",
+    "couleur": "#707070",
+    "align": "LEFT",
+    "w": 314,
+    "h": 24,
+    "x": 18,
+    "y": 16,
+    "nb_car": 16
+   },
+   {
+    "id": "4001:44951",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Loved by 20K+ Users",
+    "couleur": "#222525",
+    "align": "LEFT",
+    "w": 147,
+    "h": 24,
+    "x": 104,
+    "y": 3,
+    "nb_car": 19
+   },
+   {
+    "id": "4001:45086",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Fast Support",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 150,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "4001:45087",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Instant Responses",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 150,
+    "h": 24,
+    "x": 0,
+    "y": 26,
+    "nb_car": 17
+   },
+   {
+    "id": "4001:45094",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Expert Help",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 150,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "4001:45095",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Specialist Support",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 150,
+    "h": 24,
+    "x": 0,
+    "y": 26,
+    "nb_car": 18
+   },
+   {
+    "id": "4001:45105",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Expert Help",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 150,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "4001:45106",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Specialist Support",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 150,
+    "h": 24,
+    "x": 0,
+    "y": 26,
+    "nb_car": 18
+   },
+   {
+    "id": "4001:45115",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "27/7 Support",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 150,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "4001:45116",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Always Online",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 150,
+    "h": 24,
+    "x": 0,
+    "y": 26,
+    "nb_car": 13
+   }
+  ],
+  "boutons": [
+   {
+    "id": "4001:44941",
+    "texte": "Join waitlist",
+    "fond": "#1A1A1A",
+    "w": 124,
+    "h": 47,
+    "rayon": 100
+   }
+  ],
+  "icones": [
+   {
+    "id": "4001:44952",
+    "nom": "Frame 2147260618",
+    "w": 27,
+    "h": 38
+   },
+   {
+    "id": "4001:44954",
+    "nom": "Frame 2147260619",
+    "w": 27,
+    "h": 38
+   },
+   {
+    "id": "4001:44957",
+    "nom": "Frame 2147240272",
+    "w": 19,
+    "h": 16
+   },
+   {
+    "id": "4001:45078",
+    "nom": "rocket-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "4001:45090",
+    "nom": "headphones-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "4001:45098",
+    "nom": "users-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "4001:45109",
+    "nom": "globe-simple-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "4001:45122",
+    "nom": "Vector 91",
+    "w": 33,
+    "h": 32
+   },
+   {
+    "id": "4001:45123",
+    "nom": "Vector 90",
+    "w": 36,
+    "h": 36
+   },
+   {
+    "id": "4001:45129",
+    "nom": "Vector 91",
+    "w": 33,
+    "h": 32
+   },
+   {
+    "id": "4001:45130",
+    "nom": "Vector 90",
+    "w": 36,
+    "h": 36
+   }
+  ],
+  "traits": [
+   {
+    "id": "4001:45088",
+    "w": 142,
+    "h": 0,
+    "x": 300,
+    "y": 0
+   },
+   {
+    "id": "4001:45096",
+    "w": 142,
+    "h": 0,
+    "x": 570,
+    "y": 0
+   },
+   {
+    "id": "4001:45107",
+    "w": 142,
+    "h": 0,
+    "x": 841,
+    "y": 0
+   }
+  ]
+ }
+}

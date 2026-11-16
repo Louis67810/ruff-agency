@@ -1,0 +1,78 @@
+# hero-produit · `6001:63` · 1442 × 798
+
+Résumé : {'blocs': 46, 'illustrations': 1, 'icones': 21, 'traits': 3, 'textes': 0}
+Textes par rôle : {}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147240292** (frame) 1442×798 @(0,113) `6001:63` — auto-layout ↓ écart 0 align MIN/MIN
+  - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Frame 2147239859 » 1442×724 @(0,0) `6001:64` (46 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+  - ▣ **Frame 2147239649** (frame) 1442×74 @(0,724) `6001:173` — auto-layout → écart 0 align CENTER/CENTER
+    - ▣ **Frame 2147239647** (frame) 137×74 @(-70,0) `6001:174` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 97×42 @(20,16) `6001:175`
+        - ▣ **Frame 14** (frame) 84×28 @(7,7) `6001:176`
+          - ◆ icône/logo « Vector » 10×22 @(12,3) `6001:177`
+          - ▣ **Logiqo** (group) 52×18 @(32,7) `6001:179`
+    - ▣ **Frame 2147239648** (frame) 151×74 @(67,0) `6001:186` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 111×42 @(20,16) `6001:187`
+        - ▣ **Frame 11** (frame) 87×28 @(13,7) `6001:188`
+          - ◆ icône/logo « Vector » 19×20 @(5,4) `6001:189`
+          - ▣ **Nexora** (group) 54×13 @(32,8) `6001:192`
+            - ◆ icône/logo « Vector » 11×13 @(32,8) `6001:198`
+    - ▣ **Frame 2147239649** (frame) 144×74 @(218,0) `6001:199` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 104×42 @(20,16) `6001:200`
+        - ▣ **Frame 12** (frame) 90×28 @(7,7) `6001:201`
+          - ◆ icône/logo « Vector » 22×18 @(3,7) `6001:202`
+          - ▣ **Brandly** (group) 58×17 @(32,8) `6001:204`
+    - ▣ **Frame 2147239650** (frame) 148×74 @(362,0) `6001:212` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 108×42 @(20,16) `6001:213`
+        - ▣ **Frame 2147237742** (frame) 93×28 @(7,7) `6001:214`
+          - ◆ icône/logo « Vector » 12×20 @(14,4) `6001:215`
+          - ◆ icône/logo « Vector » 12×20 @(2,4) `6001:216`
+          - ▣ **Markivo** (group) 61×14 @(32,7) `6001:219`
+            - ◆ icône/logo « Vector » 14×13 @(32,8) `6001:226`
+    - ▣ **Frame 2147239651** (frame) 155×74 @(510,0) `6001:227` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 115×42 @(20,16) `6001:228`
+        - ▣ **Frame 2147237743** (frame) 93×26 @(12,8) `6001:229`
+          - ▣ **Typely** (group) 60×19 @(33,6) `6001:239`
+            - ◆ icône/logo « Vector » 11×16 @(82,9) `6001:240`
+            - ◆ icône/logo « Vector » 11×12 @(67,9) `6001:242`
+            - ◆ icône/logo « Vector » 11×16 @(56,9) `6001:243`
+            - ◆ icône/logo « Vector » 11×16 @(44,9) `6001:244`
+            - ◆ icône/logo « Vector » 12×15 @(33,6) `6001:245`
+    - ▣ **Frame 2147239652** (frame) 137×74 @(665,0) `6001:246` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 97×42 @(20,16) `6001:247`
+        - ▣ **Frame 19** (frame) 89×28 @(4,7) `6001:248`
+          - ▣ **Framex** (group) 57×13 @(32,8) `6001:256`
+    - ▣ **Frame 2147239653** (frame) 148×74 @(802,0) `6001:263` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 108×42 @(20,16) `6001:264`
+        - ▣ **Frame 17** (frame) 92×28 @(8,7) `6001:265`
+          - ▣ **Webora** (group) 60×13 @(31,8) `6001:274`
+            - ◆ icône/logo « Vector » 17×13 @(31,8) `6001:280`
+    - ▣ **Frame 2147239654** (frame) 137×74 @(950,0) `6001:281` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 97×42 @(20,16) `6001:282`
+        - ▣ **Frame 14** (frame) 84×28 @(7,7) `6001:283`
+          - ◆ icône/logo « Vector » 10×22 @(12,3) `6001:284`
+          - ▣ **Logiqo** (group) 52×18 @(32,7) `6001:286`
+    - ▣ **Frame 2147239655** (frame) 146×74 @(1087,0) `6001:293` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 106×42 @(20,16) `6001:294`
+        - ▣ **Frame 15** (frame) 95×28 @(6,7) `6001:295`
+          - ◆ icône/logo « Vector » 17×19 @(8,6) `6001:296`
+          - ▣ **Designo** (group) 63×18 @(32,7) `6001:298`
+            - ◆ icône/logo « Vector » 11×13 @(32,8) `6001:305`
+    - ▣ **Frame 2147239656** (frame) 135×74 @(1233,0) `6001:306` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 95×42 @(20,16) `6001:307`
+        - ▣ **Frame 16** (frame) 84×28 @(6,7) `6001:308`
+          - ◆ icône/logo « Group » 22×22 @(3,3) `6001:309`
+          - ◆ icône/logo « Vector » 11×11 @(3,3) `6001:312`
+          - ◆ icône/logo « Vector » 11×11 @(14,14) `6001:313`
+          - ◆ icône/logo « Group » 12×12 @(8,8) `6001:314`
+          - ▣ **Formix** (group) 52×14 @(32,7) `6001:317`
+    - ▣ **Frame 2147239657** (frame) 144×74 @(1368,0) `6001:324` — auto-layout ↓ écart 10 pad 16/20/16/20 align MIN/MIN
+      - ▣ **Logo** (frame) 104×42 @(20,16) `6001:325`
+        - ▣ **Frame 17** (frame) 92×28 @(6,7) `6001:326`
+          - ▣ **Webora** (group) 60×13 @(31,8) `6001:335`
+            - ◆ icône/logo « Vector » 17×13 @(31,8) `6001:341`
+  - ─ trait 1440×0 @(1441,798) #D6D0C8 `6001:342`
+  - ─ trait 1440×0 @(1441,723) #D6D0C8 `6001:343`
+  - ─ trait 1482×0 @(1448,0) #FFFFFF4D `6001:344`

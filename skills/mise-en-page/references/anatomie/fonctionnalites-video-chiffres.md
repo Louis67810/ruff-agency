@@ -1,0 +1,100 @@
+# fonctionnalites-video-chiffres · `6001:13775` · 1139 × 1342
+
+Résumé : {'blocs': 40, 'textes': 22, 'illustrations': 3, 'icones': 7, 'traits': 7, 'decors': 3, 'boutons': 1, 'jointures': 6}
+Textes par rôle : {'surtitre / étiquette mono': 4, 'titre de section': 1, 'texte d’intro': 5, 'texte / libellé': 8, 'titre de carte': 4}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147260601** (frame) 1139×1342 @(151,1061) `6001:13775` — auto-layout ↓ écart 60 align MIN/CENTER
+  - ▣ **Frame 2147239883** (frame) 1139×135 @(0,0) `6001:13776` — auto-layout → écart 150 pad 0/97/0/97 align MIN/MAX
+    - ▣ **Frame 2147239882** (frame) 398×135 @(97,0) `6001:13777` — auto-layout ↓ écart 8 align MIN/MIN
+      - **surtitre / étiquette mono** « Features » — DM Mono Medium 14, #3745F1, left, 68×21 @(0,0) `6001:13778`
+      - **titre de section** « AI Agents For Customer Support » — Switzer Semibold 48, #1A1A1A, left, 398×106 @(0,29) `6001:13779`
+    - **texte d’intro** « Automate replies, follow ups, and conversations using powerful AI agents across channels. » — Inter Tight Medium 17, #595959, left, 398×52 @(644,83) `6001:13780`
+  - ▣ **Frame 2147239900** (frame) 1139×1147 @(0,195) `6001:13781` — auto-layout ↓ écart 0 align MIN/MAX
+    - ▣ **Frame 2147239897** (frame) 1139×528 @(0,0) `6001:13782` — auto-layout ↓ écart 0 align MIN/MAX
+      - ▣ **Frame 2147239893** (frame) 1139×528 @(0,0) `6001:13783` — auto-layout → écart 1 align MIN/CENTER
+        - ▣ **Frame 2147239890** (frame) 378×528 @(0,0) `6001:13784` — auto-layout ↓ écart 0 align MIN/MIN
+          - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Frame 2147260777 » 380×372 @(0,0) `6001:13785` (32 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+          - ▣ **Frame 2147239888** (frame) 378×156 @(0,372) `6001:13891` — auto-layout ↓ écart 12 pad 0/40/50/40 align MIN/MIN
+            - ▣ **Frame 2147239884** (frame) 65×20 @(40,0) `6001:13892` — auto-layout → écart 2 align MIN/CENTER
+              - ◆ icône/logo « head-circuit-bold » 16×16 @(0,2) `6001:13893`
+              - **surtitre / étiquette mono** « Social » — DM Mono Medium 13, #1A1A1A, left, 47×20 @(18,0) `6001:13900`
+            - ▣ **Frame 2147239885** (frame) 298×74 @(40,32) `6001:13901` — auto-layout ↓ écart 4 align MIN/MIN
+              - **texte d’intro** « Unified Message Hub » — Switzer Semibold 18, #262626, left, 298×22 @(0,0) `6001:13902`
+              - **texte / libellé** « View and manage all conversations easily within one unified inbox » — Inter Tight Medium 16, #595959, left, 298×48 @(0,26) `6001:13903`
+        - ─ trait 528×0 @(379,0) #D6D0C8 `6001:13904`
+        - ▣ **Frame 2147239898** (frame) 378×527 @(380,0) `6001:13905` — auto-layout ↓ écart 0 align MIN/MIN
+          - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Frame 2147239888 » 378×371 @(0,0) `6001:13906` (1 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+          - ▣ **Frame 2147239889** (frame) 378×156 @(0,371) `6001:13939` — auto-layout ↓ écart 12 pad 0/40/50/40 align MIN/MIN
+            - ▣ **Frame 2147239884** (frame) 89×20 @(40,0) `6001:13940` — auto-layout → écart 2 align MIN/CENTER
+              - ◆ icône/logo « envelope-bold » 16×16 @(0,2) `6001:13941`
+              - **surtitre / étiquette mono** « Messaging » — DM Mono Medium 13, #1A1A1A, left, 71×20 @(18,0) `6001:13947`
+            - ▣ **Frame 2147239885** (frame) 298×74 @(40,32) `6001:13948` — auto-layout ↓ écart 4 align MIN/MIN
+              - **texte d’intro** « Multi Channel Messaging » — Switzer Semibold 18, #262626, left, 298×22 @(0,0) `6001:13949`
+              - **texte / libellé** « Manage customer conversations across multiple platforms automatically. » — Inter Tight Medium 16, #595959, left, 298×48 @(0,26) `6001:13950`
+        - ─ trait 528×0 @(760,0) #D6D0C8 `6001:13951`
+        - ▣ **Frame 2147239899** (frame) 378×527 @(761,0) `6001:13952` — auto-layout ↓ écart 0 align MIN/MIN
+          - ▣ **Frame 2147239891** (frame) 378×371 @(0,0) `6001:13953`
+            - ◆ icône/logo « Frame 2147261151 » 14×31 @(182,292) `6001:13958`
+            - ▣ **Frame 2147261150** (frame) 238×90 @(70,182) `6001:13964`
+              - ✦ décor / motif « Group » 238×51 @(0,0) `6001:13965` (déborde de la section : motif pixel, lumière ou forme)
+              - **titre de carte** « 00:03 » — Digital Numbers Regular 25.714284896850586, #262626, left, 101×31 @(68,62) `6001:13973`
+              - ▣ **Frame 2147261257** (frame) 56×12 @(91,14) `6001:13974`
+                - … (plus profond : voir le snapshot)
+            - 🖼 **EMPLACEMENT D’ILLUSTRATION** « Frame 2147261139 » 237×144 @(71,0) `6001:13977` (12 vecteurs) → à faire séparément (brief-illustration → illustrateur)
+            - 🔘 **bouton** « Botwise Generating Fast Reply... » fond #FFFFFF 286×42 rayon 100 @(46,144) `6001:14015`
+          - ▣ **Frame 2147239888** (frame) 378×156 @(0,371) `6001:14032` — auto-layout ↓ écart 12 pad 0/40/50/40 align MIN/MIN
+            - ▣ **Frame 2147239884** (frame) 112×20 @(40,0) `6001:14033` — auto-layout → écart 2 align MIN/CENTER
+              - ◆ icône/logo « bell-bold » 16×16 @(0,2) `6001:14034`
+              - **surtitre / étiquette mono** « Notification » — DM Mono Medium 13, #1A1A1A, left, 94×20 @(18,0) `6001:14038`
+            - ▣ **Frame 2147239885** (frame) 298×74 @(40,32) `6001:14039` — auto-layout ↓ écart 4 align MIN/MIN
+              - **texte d’intro** « Quick response » — Switzer Semibold 18, #262626, left, 298×22 @(0,0) `6001:14040`
+              - **texte / libellé** « Deliver faster responses using intelligent chatbot automation. » — Inter Tight Medium 16, #595959, left, 298×48 @(0,26) `6001:14041`
+      - ● jointure 8×8 @(376,537) `6001:14042`
+      - ● jointure 8×8 @(756,537) `6001:14043`
+      - ✦ décor / motif « Frame 2147240052 » 1440×15 @(-150,-14) `6001:14044` (déborde de la section : motif pixel, lumière ou forme)
+      - ● jointure 8×8 @(376,-3) `6001:14048`
+      - ● jointure 8×8 @(756,-3) `6001:14049`
+    - ▣ **Frame 2147240041** (frame) 1139×486 @(0,528) `6001:14050`
+      - ✦ décor / motif « Frame 2147240052 » 1440×15 @(-149,-14) `6001:14051` (déborde de la section : motif pixel, lumière ou forme)
+      - ▣ **Frame 2147239901** (frame) 1139×486 @(0,0) `6001:14055` — fond #161616
+        - ▣ **Frame 2147240039** (frame) 1140×486 @(0,0) `6001:14056`
+          - ▭ fond/forme « New Project (1) 2 » 1140×668 dégradé rayon  `6001:14057`
+          - ▣ **Frame 2147240038** (frame) 1139×486 @(0,0) `6001:14059`
+            - ▣ **Frame 2147239858** (frame) 386×1140 @(791,735) `6001:14060`
+          - ▣ **Frame 2147238791** (frame) 948×441 @(97,85) `6001:14088` — contour #FFFFFF66 1 · fond #FFFFFF1A · rayon 10.800000190734863
+            - ▣ **Frame 2147239307** (frame) 948×402 @(0,0) `6001:14089` — auto-layout ↓ écart 8 align CENTER/CENTER
+              - ▣ **Frame 2147239306** (frame) 948×32 @(0,0) `6001:14090` — trait #FFFFFF66 bottom · fond #FFFFFF · rayon mixed
+                - … (plus profond : voir le snapshot)
+              - ▣ **Frame 2147239548** (frame) 927×362 @(10,40) `6001:14100` — auto-layout ↓ écart 8 align MIN/CENTER
+                - … (plus profond : voir le snapshot)
+          - ─ trait 486×0 @(66,0) #FFFFFF4D `6001:14114`
+          - ─ trait 486×0 @(1075,0) #FFFFFF4D `6001:14115`
+          - ─ trait 1140×0 @(0,55) #FFFFFF4D `6001:14116`
+          - ▣ **Frame 2147239793** (frame) 149×33 @(901,12) `6001:14117` — auto-layout → écart 10 pad 4/4/4/4 align CENTER/CENTER
+            - **texte d’intro** « Future of CX Automation » — Caveat Regular 18, #FFFFFF, center, 141×25 @(4,4) `6001:14118`
+            - ▣ **arrow, hand drawn, scribble, doodle, 11** (frame) 42×42 @(-20,-7) `6001:14119`
+              - ◆ icône/logo « Vector » 23×37 @(10,2) `6001:14120`
+        - ▣ **Button** (frame) 80×80 @(530,283) `6001:14122` — auto-layout → écart 10 pad 12/12/12/12 align MIN/CENTER · fond #3C4AF1 · rayon 100
+          - ▣ **Button** (frame) 56×56 @(12,12) `6001:14123` — auto-layout → écart 10 pad 14/14/14/14 align MIN/MIN · fond #FFFFFF · rayon 100
+            - ◆ icône/logo « play-fill » 28×28 @(14,14) `6001:14124`
+      - ● jointure 8×8 @(-5,-3) `6001:14132`
+      - ● jointure 8×8 @(1136,-3) `6001:14133`
+    - ▣ **Frame 2147239880** (frame) 1139×133 @(0,1014) `6001:14134` — auto-layout → écart 118 pad 0/97/0/97 align SPACE_BETWEEN/CENTER · trait #D6D0C8 top/bottom
+      - ─ trait 1440×0 @(-150,1) #D6D0C8 `6001:14135`
+      - ▣ **Frame 2147239878** (frame) 236×105 @(97,14) `6001:14136` — auto-layout → écart 10 pad 30/30/30/0 align MIN/CENTER
+        - ◆ icône/logo « Frame 2147240272 » 34×28 @(0,38) `6001:14137`
+        - ▣ **Frame 2147239877** (frame) 90×45 @(44,30) `6001:14143` — auto-layout ↓ écart -3 align MIN/MIN
+          - **texte / libellé** « Botwise » — Inter Tight Medium 16, #605C70, left, 90×24 @(0,0) `6001:14144`
+          - **texte / libellé** « In Numbers » — Inter Tight Medium 16, #1D1C22, left, 90×24 @(0,21) `6001:14145`
+      - ▣ **Frame 2147239879** (frame) 236×133 @(333,0) `6001:14146` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER · trait #D6D0C8 left
+        - **titre de carte** « 2M+ » — Inter Tight SemiBold 33, #1A1A1A, left, 176×50 @(30,30) `6001:14147`
+        - **texte / libellé** « Conversations Automated » — Inter Tight Medium 15, #595959, left, 176×23 @(30,80) `6001:14148`
+      - ▣ **Frame 2147239880** (frame) 236×133 @(570,0) `6001:14149` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER · trait #D6D0C8 left
+        - **titre de carte** « 50K+ » — Inter Tight SemiBold 33, #1A1A1A, left, 176×50 @(30,30) `6001:14150`
+        - **texte / libellé** « Businesses Using Botwise » — Inter Tight Medium 15, #595959, left, 176×23 @(30,80) `6001:14151`
+      - ▣ **Frame 2147239881** (frame) 236×133 @(806,0) `6001:14152` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER · trait #D6D0C8 left
+        - **titre de carte** « 120+ » — Inter Tight SemiBold 33, #1A1A1A, left, 176×50 @(30,30) `6001:14153`
+        - **texte / libellé** « Countries Supported » — Inter Tight Medium 15, #595959, left, 176×23 @(30,80) `6001:14154`
+      - ─ trait 1440×0 @(-150,133) #D6D0C8 `6001:14155`

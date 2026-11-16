@@ -1,0 +1,515 @@
+{
+ "type": "bento-2x2",
+ "noeud": "6001:6161",
+ "w": 1139,
+ "h": 1303,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:6161",
+    "nom": "Frame 2147260606",
+    "w": 1139,
+    "h": 1303,
+    "x": 151,
+    "y": 7306,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:6162",
+    "nom": "Frame 2147240231",
+    "w": 1139,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:6165",
+    "nom": "Frame 2147240237",
+    "w": 1139,
+    "h": 1108,
+    "x": 0,
+    "y": 195,
+    "layout": "auto-layout ↓ écart 0 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:6166",
+    "nom": "Frame 2147240235",
+    "w": 1139,
+    "h": 554,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 1 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:6167",
+    "nom": "Frame 2147240233",
+    "w": 568,
+    "h": 554,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:6220",
+    "nom": "Frame 2147240231",
+    "w": 568,
+    "h": 156,
+    "x": 0,
+    "y": 398,
+    "layout": "auto-layout ↓ écart 12 pad 10/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:6221",
+    "nom": "Frame 2147239884",
+    "w": 488,
+    "h": 20,
+    "x": 40,
+    "y": 10,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:6228",
+    "nom": "Frame 2147239885",
+    "w": 488,
+    "h": 74,
+    "x": 40,
+    "y": 42,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:6232",
+    "nom": "Frame 2147240236",
+    "w": 568,
+    "h": 554,
+    "x": 571,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:6544",
+    "nom": "Frame 2147240233",
+    "w": 568,
+    "h": 156,
+    "x": 0,
+    "y": 398,
+    "layout": "auto-layout ↓ écart 12 pad 10/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:6545",
+    "nom": "Frame 2147239884",
+    "w": 488,
+    "h": 20,
+    "x": 40,
+    "y": 10,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:6551",
+    "nom": "Frame 2147239885",
+    "w": 488,
+    "h": 74,
+    "x": 40,
+    "y": 42,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:6555",
+    "nom": "Frame 2147240238",
+    "w": 1139,
+    "h": 554,
+    "x": 0,
+    "y": 554,
+    "layout": "auto-layout → écart 1 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:6556",
+    "nom": "Frame 2147240236",
+    "w": 568,
+    "h": 554,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:9850",
+    "nom": "Frame 2147240233",
+    "w": 568,
+    "h": 156,
+    "x": 0,
+    "y": 398,
+    "layout": "auto-layout ↓ écart 12 pad 10/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:9851",
+    "nom": "Frame 2147239884",
+    "w": 488,
+    "h": 20,
+    "x": 40,
+    "y": 10,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:9859",
+    "nom": "Frame 2147239885",
+    "w": 488,
+    "h": 74,
+    "x": 40,
+    "y": 42,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:9863",
+    "nom": "Frame 2147240237",
+    "w": 568,
+    "h": 554,
+    "x": 571,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:9962",
+    "nom": "Frame 2147240233",
+    "w": 568,
+    "h": 156,
+    "x": 0,
+    "y": 398,
+    "layout": "auto-layout ↓ écart 12 pad 10/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:9963",
+    "nom": "Frame 2147239884",
+    "w": 488,
+    "h": 20,
+    "x": 40,
+    "y": 10,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:9973",
+    "nom": "Frame 2147239885",
+    "w": 488,
+    "h": 74,
+    "x": 40,
+    "y": 42,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:6163",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Benefits",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 69,
+    "h": 21,
+    "x": 535,
+    "y": 0,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:6164",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Advanced AI / Driven Support Hub",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1139,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 32
+   },
+   {
+    "id": "6001:6227",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Insight",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 55,
+    "h": 20,
+    "x": 20,
+    "y": 0,
+    "nb_car": 7
+   },
+   {
+    "id": "6001:6229",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Conversation Intelligence",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 488,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 25
+   },
+   {
+    "id": "6001:6230",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Botwise analyzes customer intent and context to deliver accurate responses and smarter automated conversations.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 488,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 111
+   },
+   {
+    "id": "6001:6550",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Security",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 63,
+    "h": 20,
+    "x": 20,
+    "y": 0,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:6552",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "AI Fraud Prevention",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 488,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 19
+   },
+   {
+    "id": "6001:6553",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Detect suspicious activity instantly and prevent fraudulent actions across all customer interactions.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 488,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 101
+   },
+   {
+    "id": "6001:9858",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Global",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 47,
+    "h": 20,
+    "x": 20,
+    "y": 0,
+    "nb_car": 6
+   },
+   {
+    "id": "6001:9860",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Understand Every Language",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 488,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 25
+   },
+   {
+    "id": "6001:9861",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Automatically detect, translate, and respond to customer queries across multiple languages instantly.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 488,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 101
+   },
+   {
+    "id": "6001:9972",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Support",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 55,
+    "h": 20,
+    "x": 20,
+    "y": 0,
+    "nb_car": 7
+   },
+   {
+    "id": "6001:9974",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Publish Across Channels",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 488,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:9975",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Publish your AI agent to multiple platforms quickly without complex integrations or delays.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 488,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 91
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6001:6168",
+    "nom": "Frame 2147240233",
+    "w": 568,
+    "h": 398,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:6233",
+    "nom": "Frame 2147240232",
+    "w": 568,
+    "h": 398,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:6557",
+    "nom": "Frame 2147240235",
+    "w": 568,
+    "h": 398,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:9864",
+    "nom": "Frame 2147240232",
+    "w": 568,
+    "h": 398,
+    "x": 0,
+    "y": 0
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:6222",
+    "nom": "align-bottom-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:6546",
+    "nom": "shield-check-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:9852",
+    "nom": "globe-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:9964",
+    "nom": "handshake-bold",
+    "w": 16,
+    "h": 16
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:6231",
+    "w": 554,
+    "h": 0,
+    "x": 569,
+    "y": 0
+   },
+   {
+    "id": "6001:6554",
+    "w": 1139,
+    "h": 0,
+    "x": 0,
+    "y": 554
+   },
+   {
+    "id": "6001:9862",
+    "w": 554,
+    "h": 0,
+    "x": 569,
+    "y": 0
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:9976",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": -15
+   },
+   {
+    "id": "6001:9980",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 1108
+   }
+  ],
+  "jointures": [
+   {
+    "id": "6001:9984",
+    "x": 566,
+    "y": -5
+   },
+   {
+    "id": "6001:9985",
+    "x": 566,
+    "y": 1104
+   }
+  ]
+ }
+}

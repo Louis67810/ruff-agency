@@ -1,0 +1,44 @@
+{
+ "faq-q0-titre": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 600,
+   "interlettre": -0.36
+  }
+ },
+ "faq-q0-r0": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.32
+  }
+ },
+ "faq-q0-r1": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 500,
+   "interlettre": -0.32
+  }
+ },
+ "faq-q1-titre": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 600,
+   "interlettre": -0.36
+  }
+ },
+ "faq-q2-titre": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 600,
+   "interlettre": -0.36
+  }
+ },
+ "faq-q3-titre": {
+  "texte": {
+   "famille": "Inter",
+   "poids": 600,
+   "interlettre": -0.36
+  }
+ }
+}

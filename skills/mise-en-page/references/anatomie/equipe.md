@@ -1,0 +1,73 @@
+# equipe · `6029:13168` · 1140 × 687
+
+Résumé : {'blocs': 31, 'textes': 8, 'decors': 7, 'images': 3, 'traits': 7, 'boutons': 1}
+Textes par rôle : {'surtitre / étiquette mono': 1, 'titre de section': 1, 'texte d’intro': 3, 'texte / libellé': 3}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147260636** (frame) 1140×687 @(150,2748) `6029:13168` — auto-layout ↓ écart 60 align MIN/MIN
+  - ▣ **Frame 2147239882** (frame) 1140×82 @(0,0) `6029:13169` — auto-layout ↓ écart 8 align MIN/CENTER
+    - **surtitre / étiquette mono** « Our team » — DM Mono Medium 14, #3745F1, left, 69×21 @(536,0) `6029:13170`
+    - **titre de section** « People Behind Botwise » — Switzer Semibold 48, #1A1A1A, center, 1140×53 @(0,29) `6029:13171`
+  - ▣ **Frame 2147260635** (frame) 1140×545 @(0,142) `6029:13172` — auto-layout ↓ écart 30 pad 0/0/30/0 align MIN/CENTER · trait #D6D0C8 bottom
+    - ▣ **Frame 2147260592** (frame) 1140×434 @(0,0) `6029:13173` — auto-layout → écart 20 pad 0/30/0/30 align MIN/CENTER · trait #D6D0C8 top/bottom
+      - ▣ **Frame 2147260656** (frame) 333×434 @(30,0) `6029:13174` — auto-layout → écart 10 pad 30/0/30/0 align MIN/CENTER
+        - ▣ **Frame 2147260595** (frame) 333×374 @(0,30) `6029:13175` — auto-layout ↓ écart 0 align MIN/CENTER · fond #FFFFFF · rayon 20
+          - ✦ décor / motif « Group 1597880885 » 791×274 @(-228,-4) `6029:13176` (déborde de la section : motif pixel, lumière ou forme)
+          - 🖼 image/photo « New Project (1) 1 » 1442×413 @(-554,-39) `6029:13183`
+          - ▣ **Frame 2147260589** (frame) 333×284 @(0,0) `6029:13184` — auto-layout ↓ écart 30 pad 0/30/24/30 align MIN/CENTER
+            - ✦ décor / motif « Frame 2147260615 » 346×181 @(-6,0) `6029:13185` (déborde de la section : motif pixel, lumière ou forme)
+            - ▣ **Text Container** (frame) 273×49 @(30,211) `6029:13193` — auto-layout ↓ écart 1 align MIN/CENTER
+              - **texte d’intro** « Emily Carter » — Inter Tight SemiBold 18, #FFFFFF, center, 273×27 @(0,0) `6029:13194`
+              - **texte / libellé** « UX Research Lead » — Inter Tight Regular 16, #D6D0C8, center, 273×24 @(0,28) `6029:13195`
+          - ─ trait 333×0 @(0,284) #FFFFFF4D `6029:13196`
+          - ▣ **Frame 2147240273** (frame) 333×90 @(0,284) `6029:13197` — auto-layout ↓ écart 24 pad 20/30/30/30 align CENTER/CENTER · fond #FFFFFF · rayon mixed
+            - ▣ **Frame 2147238096** (frame) 273×40 @(30,20) `6029:13198` — auto-layout → écart 12 align MIN/CENTER
+              - ▣ **Frame 2147238093** (frame) 83×40 @(0,0) `6029:13199` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+              - ▣ **Frame 2147238094** (frame) 83×40 @(95,0) `6029:13202` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+              - ▣ **Frame 2147238095** (frame) 83×40 @(190,0) `6029:13205` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+      - ─ trait 434×0 @(383,0) #D6D0C8 `6029:13208`
+      - ▣ **Frame 2147260657** (frame) 333×434 @(403,0) `6029:13209` — auto-layout → écart 10 pad 30/0/30/0 align MIN/CENTER
+        - ▣ **Frame 2147260595** (frame) 333×374 @(0,30) `6029:13210` — auto-layout ↓ écart 0 align MIN/CENTER · fond #FFFFFF · rayon 20
+          - ✦ décor / motif « Group 1597880885 » 791×274 @(-228,-4) `6029:13211` (déborde de la section : motif pixel, lumière ou forme)
+          - 🖼 image/photo « New Project (1) 1 » 1442×413 @(-554,-39) `6029:13218`
+          - ▣ **Frame 2147260589** (frame) 333×284 @(0,0) `6029:13219` — auto-layout ↓ écart 30 pad 0/30/24/30 align MIN/CENTER
+            - ✦ décor / motif « Frame 2147260615 » 346×181 @(-6,0) `6029:13220` (déborde de la section : motif pixel, lumière ou forme)
+            - ▣ **Text Container** (frame) 273×49 @(30,211) `6029:13228` — auto-layout ↓ écart 1 align MIN/CENTER
+              - **texte d’intro** « Emily Carter » — Inter Tight SemiBold 18, #FFFFFF, center, 273×27 @(0,0) `6029:13229`
+              - **texte / libellé** « UX Research Lead » — Inter Tight Regular 16, #D6D0C8, center, 273×24 @(0,28) `6029:13230`
+          - ─ trait 333×0 @(0,284) #FFFFFF4D `6029:13231`
+          - ▣ **Frame 2147240273** (frame) 333×90 @(0,284) `6029:13232` — auto-layout ↓ écart 24 pad 20/30/30/30 align CENTER/CENTER · fond #FFFFFF · rayon mixed
+            - ▣ **Frame 2147238096** (frame) 273×40 @(30,20) `6029:13233` — auto-layout → écart 12 align MIN/CENTER
+              - ▣ **Frame 2147238093** (frame) 83×40 @(0,0) `6029:13234` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+              - ▣ **Frame 2147238094** (frame) 83×40 @(95,0) `6029:13237` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+              - ▣ **Frame 2147238095** (frame) 83×40 @(190,0) `6029:13240` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+      - ─ trait 434×0 @(757,0) #D6D0C8 `6029:13243`
+      - ▣ **Frame 2147260658** (frame) 333×434 @(777,0) `6029:13244` — auto-layout → écart 10 pad 30/0/30/0 align MIN/CENTER
+        - ▣ **Frame 2147260595** (frame) 333×374 @(0,30) `6029:13245` — auto-layout ↓ écart 0 align MIN/CENTER · fond #FFFFFF · rayon 20
+          - ✦ décor / motif « Group 1597880885 » 791×274 @(-228,-4) `6029:13246` (déborde de la section : motif pixel, lumière ou forme)
+          - 🖼 image/photo « New Project (1) 1 » 1442×413 @(-554,-39) `6029:13253`
+          - ▣ **Frame 2147260589** (frame) 333×284 @(0,0) `6029:13254` — auto-layout ↓ écart 30 pad 0/30/24/30 align MIN/CENTER
+            - ✦ décor / motif « Frame 2147260615 » 346×181 @(-6,0) `6029:13255` (déborde de la section : motif pixel, lumière ou forme)
+            - ▣ **Text Container** (frame) 273×49 @(30,211) `6029:13263` — auto-layout ↓ écart 1 align MIN/CENTER
+              - **texte d’intro** « Emily Carter » — Inter Tight SemiBold 18, #FFFFFF, center, 273×27 @(0,0) `6029:13264`
+              - **texte / libellé** « UX Research Lead » — Inter Tight Regular 16, #D6D0C8, center, 273×24 @(0,28) `6029:13265`
+          - ─ trait 333×0 @(0,284) #FFFFFF4D `6029:13266`
+          - ▣ **Frame 2147240273** (frame) 333×90 @(0,284) `6029:13267` — auto-layout ↓ écart 24 pad 20/30/30/30 align CENTER/CENTER · fond #FFFFFF · rayon mixed
+            - ▣ **Frame 2147238096** (frame) 273×40 @(30,20) `6029:13268` — auto-layout → écart 12 align MIN/CENTER
+              - ▣ **Frame 2147238093** (frame) 83×40 @(0,0) `6029:13269` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+              - ▣ **Frame 2147238094** (frame) 83×40 @(95,0) `6029:13272` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+              - ▣ **Frame 2147238095** (frame) 83×40 @(190,0) `6029:13275` — auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER · fond #FFFFFF33 · rayon 1000
+                - … (plus profond : voir le snapshot)
+      - ─ trait 1440×0 @(-150,1) #D6D0C8 `6029:13278`
+      - ─ trait 1440×0 @(-150,434) #D6D0C8 `6029:13279`
+    - 🔘 **bouton** « Join Our Team » fond #EFEBE7 143×51 rayon 100 @(498,464) `6029:13280`
+    - ✦ décor / motif « Frame 2147240116 » 1440×15 @(-150,544) `6029:13288` (déborde de la section : motif pixel, lumière ou forme)

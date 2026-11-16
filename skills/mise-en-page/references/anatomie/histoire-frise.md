@@ -1,0 +1,71 @@
+# histoire-frise · `4001:50134` · 1139 × 1658
+
+Résumé : {'blocs': 35, 'textes': 15, 'boutons': 1, 'traits': 5, 'images': 4}
+Textes par rôle : {'surtitre / étiquette mono': 1, 'titre de section': 5, 'texte d’intro': 5, 'texte / libellé': 4}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147260655** (frame) 1139×1658 @(152,1383) `4001:50134` — auto-layout → écart 0 align MIN/MIN · trait #D6D0C8 bottom
+  - ▣ **Frame 2147260654** (frame) 558×450 @(0,0) `4001:50135` — auto-layout ↓ écart 40 pad 80/80/80/80 align MIN/MIN
+    - ▣ **Frame 2147260653** (frame) 398×203 @(80,80) `4001:50136` — auto-layout ↓ écart 16 align MIN/MIN
+      - ▣ **Frame 2147239882** (frame) 398×135 @(0,0) `4001:50137` — auto-layout ↓ écart 8 align MIN/MIN
+        - **surtitre / étiquette mono** « OUR JOURNEY » — DM Mono Medium 14, #3745F1, left, 94×21 @(0,0) `4001:50138`
+        - **titre de section** « The Story / Behind Botwise » — Switzer Semibold 48, #1A1A1A, left, 398×106 @(0,29) `4001:50139`
+      - **texte d’intro** « Botwise began with a mission to simplify customer conversations using scalable AI automati » — Inter Tight Medium 17, #595959, left, 398×52 @(0,151) `4001:50140`
+    - 🔘 **bouton** « Contact us » fond #1A1A1A 110×47 rayon 100 @(80,323) `4001:50141`
+  - ▣ **Frame 2147260652** (frame) 581×1658 @(558,0) `4001:50143` — auto-layout → écart 0 align MIN/MIN
+    - ▣ **Frame 2147236986** (frame) 48×1658 @(0,0) `4001:50144` — auto-layout ↓ écart 1 pad 0/10/0/10 align MIN/CENTER · trait #D6D0C8 right/left · fond #F3F0ED
+      - ─ trait 94×0 @(24,0) #D6D0C8 `4001:50145`
+      - ▣ **Frame 2147236969** (frame) 28×28 @(10,95) `4001:50146` — auto-layout ↓ écart 10 pad 4/4/4/4 align CENTER/CENTER · fond #3745F1 · rayon 100
+        - **texte / libellé** « 1 » — Inter Tight Medium 16, #FFFFFF, center, 20×20 @(4,4) `4001:50147`
+      - ─ trait 380×0 @(24,124) #D6D0C8 `4001:50148`
+      - ▣ **Frame 2147236980** (frame) 28×28 @(10,505) `4001:50149` — auto-layout ↓ écart 10 pad 4/4/4/4 align CENTER/CENTER · fond #EBE5E0 · rayon 100
+        - **texte / libellé** « 2 » — Inter Tight Medium 16, #262626, center, 20×20 @(4,4) `4001:50150`
+      - ─ trait 380×0 @(24,534) #D6D0C8 `4001:50151`
+      - ▣ **Frame 2147236982** (frame) 28×28 @(10,915) `4001:50152` — auto-layout ↓ écart 10 pad 4/4/4/4 align CENTER/CENTER · fond #EBE5E0 · rayon 100
+        - **texte / libellé** « 3 » — Inter Tight Medium 16, #262626, center, 20×20 @(4,4) `4001:50153`
+      - ─ trait 380×0 @(24,944) #D6D0C8 `4001:50154`
+      - ▣ **Frame 2147236983** (frame) 28×28 @(10,1325) `4001:50155` — auto-layout ↓ écart 10 pad 4/4/4/4 align CENTER/CENTER · fond #EBE5E0 · rayon 100
+        - **texte / libellé** « 4 » — Inter Tight Medium 16, #262626, center, 20×20 @(4,4) `4001:50156`
+      - ─ trait 304×0 @(24,1354) dégradé `4001:50157`
+    - ▣ **Frame 2147260651** (frame) 533×1658 @(48,0) `4001:50158` — auto-layout ↓ écart 0 align MIN/MIN
+      - ▣ **Frame 2147260635** (frame) 533×419 @(0,0) `4001:50159` — auto-layout ↓ écart 30 pad 80/80/60/80 align MIN/MIN · trait #D6D0C8 bottom
+        - ▣ **Frame 2147240173** (frame) 64×56 @(80,80) `4001:50160` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · fond #FFFFFF · rayon 100
+          - ▣ **Frame 2147240057** (frame) 56×48 @(4,4) `4001:50161` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · contour #D6D0C8 1 · fond #F7F5F3 · rayon 100
+            - ▣ **Frame 2147240174** (frame) 48×40 @(4,4) `4001:50162` — auto-layout → écart 10 align MIN/CENTER
+              - ▣ **Frame 2147240054** (frame) 48×40 @(0,0) `4001:50163` — auto-layout → écart 10 pad 8/12/8/12 align MIN/CENTER · contour #FFFFFF 1 · fond dégradé · rayon 100
+                - … (plus profond : voir le snapshot)
+        - ▣ **Frame 2147260650** (frame) 373×193 @(80,166) `4001:50170` — auto-layout ↓ écart 8 align MIN/MIN
+          - **titre de section** « 2021 » — Switzer Regular 54, #262626, left, 373×81 @(0,0) `4001:50171`
+          - **texte d’intro** « Botwise was created to help modern teams automate customer conversations, improve response » — Inter Tight Medium 17, #404040, left, 373×104 @(0,89) `4001:50172`
+        - 🖼 image/photo « pin 1 » 58×87 @(561,58) `4001:50173`
+      - ▣ **Frame 2147260636** (frame) 533×399 @(0,433) `4001:50175` — auto-layout ↓ écart 30 pad 60/80/60/80 align MIN/MIN · trait #D6D0C8 bottom
+        - ▣ **Frame 2147240173** (frame) 64×56 @(80,60) `4001:50176` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · fond #FFFFFF · rayon 100
+          - ▣ **Frame 2147240057** (frame) 56×48 @(4,4) `4001:50177` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · contour #D6D0C8 1 · fond #F7F5F3 · rayon 100
+            - ▣ **Frame 2147240174** (frame) 48×40 @(4,4) `4001:50178` — auto-layout → écart 10 align MIN/CENTER
+              - ▣ **Frame 2147240054** (frame) 48×40 @(0,0) `4001:50179` — auto-layout → écart 10 pad 8/12/8/12 align MIN/CENTER · contour #FFFFFF 1 · fond dégradé · rayon 100
+                - … (plus profond : voir le snapshot)
+        - ▣ **Frame 2147260650** (frame) 373×193 @(80,146) `4001:50186` — auto-layout ↓ écart 8 align MIN/MIN
+          - **titre de section** « 2022 » — Switzer Regular 54, #262626, left, 373×81 @(0,0) `4001:50187`
+          - **texte d’intro** « Our journey began with a mission to simplify customer support by building intelligent AI t » — Inter Tight Medium 17, #404040, left, 373×104 @(0,89) `4001:50188`
+        - 🖼 image/photo « pin 1 » 58×87 @(561,57) `4001:50189`
+      - ▣ **Frame 2147260632** (frame) 533×399 @(0,846) `4001:50191` — auto-layout ↓ écart 30 pad 60/80/60/80 align MIN/MIN · trait #D6D0C8 bottom
+        - ▣ **Frame 2147240173** (frame) 64×56 @(80,60) `4001:50192` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · fond #FFFFFF · rayon 100
+          - ▣ **Frame 2147240057** (frame) 56×48 @(4,4) `4001:50193` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · contour #D6D0C8 1 · fond #F7F5F3 · rayon 100
+            - ▣ **Frame 2147240174** (frame) 48×40 @(4,4) `4001:50194` — auto-layout → écart 10 align MIN/CENTER
+              - ▣ **Frame 2147240054** (frame) 48×40 @(0,0) `4001:50195` — auto-layout → écart 10 pad 8/12/8/12 align MIN/CENTER · contour #FFFFFF 1 · fond dégradé · rayon 100
+                - … (plus profond : voir le snapshot)
+        - ▣ **Frame 2147260650** (frame) 373×193 @(80,146) `4001:50202` — auto-layout ↓ écart 8 align MIN/MIN
+          - **titre de section** « 2023 » — Switzer Regular 54, #262626, left, 373×81 @(0,0) `4001:50203`
+          - **texte d’intro** « We started Botwise to solve repetitive support challenges by creating AI automation that h » — Inter Tight Medium 17, #404040, left, 373×104 @(0,89) `4001:50204`
+        - 🖼 image/photo « pin 1 » 58×87 @(561,57) `4001:50205`
+      - ▣ **Frame 2147260637** (frame) 533×399 @(0,1259) `4001:50207` — auto-layout ↓ écart 30 pad 60/80/60/80 align MIN/MIN
+        - ▣ **Frame 2147240173** (frame) 64×56 @(80,60) `4001:50208` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · fond #FFFFFF · rayon 100
+          - ▣ **Frame 2147240057** (frame) 56×48 @(4,4) `4001:50209` — auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER · contour #D6D0C8 1 · fond #F7F5F3 · rayon 100
+            - ▣ **Frame 2147240174** (frame) 48×40 @(4,4) `4001:50210` — auto-layout → écart 10 align MIN/CENTER
+              - ▣ **Frame 2147240054** (frame) 48×40 @(0,0) `4001:50211` — auto-layout → écart 10 pad 8/12/8/12 align MIN/CENTER · contour #FFFFFF 1 · fond dégradé · rayon 100
+                - … (plus profond : voir le snapshot)
+        - ▣ **Frame 2147260650** (frame) 373×193 @(80,146) `4001:50218` — auto-layout ↓ écart 8 align MIN/MIN
+          - **titre de section** « 2024 » — Switzer Regular 54, #262626, left, 373×81 @(0,0) `4001:50219`
+          - **texte d’intro** « Botwise was built to empower businesses with AI-driven automation that simplifies conversa » — Inter Tight Medium 17, #404040, left, 373×104 @(0,89) `4001:50220`
+        - 🖼 image/photo « pin 1 » 58×87 @(561,57) `4001:50221`

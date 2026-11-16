@@ -1,0 +1,246 @@
+{
+ "source": "Figma « Botwise — AI-First SaaS Template (Copy) », page Design, section 6002:4",
+ "scenes": [
+  {
+   "nom": "connecter-outils",
+   "noeud": "6002:4968",
+   "description": "Pile de lignes d’intégration, marque lumineuse, orbites, curseur",
+   "methode": "mixte (marque en calque Figma) + curseur réparé",
+   "ecart_pct": 0.52
+  },
+  {
+   "nom": "trier-messages",
+   "noeud": "6002:360",
+   "description": "Carte de messages dans un cadre double, sur sa patte, app floutée derrière",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.58
+  },
+  {
+   "nom": "bouclier",
+   "noeud": "6002:669",
+   "description": "Bouclier métal, marque gravée, câbles, plateau d’avatars",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.13
+  },
+  {
+   "nom": "etape-capter",
+   "noeud": "4001:51967",
+   "description": "Logos ronds reliés à la marque, téléphone avec notification",
+   "methode": "mixte (marque en calque Figma)",
+   "ecart_pct": 1.09
+  },
+  {
+   "nom": "etape-repondre",
+   "noeud": "4001:52144",
+   "description": "Conversation dans un téléphone, analyse par la marque",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.1
+  },
+  {
+   "nom": "etape-passer-la-main",
+   "noeud": "4001:52274",
+   "description": "Pilule de transfert sur orbites, grille d’assistance humaine",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.22
+  },
+  {
+   "nom": "bento-courbe",
+   "noeud": "6002:721",
+   "description": "Courbe de tendance avec info-bulle blanche",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.06
+  },
+  {
+   "nom": "bento-fraude",
+   "noeud": "6002:786",
+   "description": "Carte du monde en points, alerte fraude, curseur",
+   "methode": "SVG nettoyé + curseur réparé",
+   "ecart_pct": 0.14
+  },
+  {
+   "nom": "bento-langues",
+   "noeud": "6002:1110",
+   "description": "Carte en points avec bulles de langues à drapeaux",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.03
+  },
+  {
+   "nom": "bento-canaux",
+   "noeud": "6002:4417",
+   "description": "Agent relié aux canaux, interrupteurs, curseur",
+   "methode": "SVG nettoyé + curseurs réparés",
+   "ecart_pct": 0.44
+  },
+  {
+   "nom": "probleme-solution",
+   "noeud": "6002:4543",
+   "description": "Deux courbes opposées, marque au centre, rayons rouges et bleus",
+   "methode": "mixte (rayons, marque, hachures en calque Figma)",
+   "ecart_pct": 0.52
+  },
+  {
+   "nom": "resume-notes-valide",
+   "noeud": "6019:6",
+   "description": "VALIDÉE par Louis : fenêtre de notes, marque, étiquettes, câbles fins dessous (sans trame)",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.05
+  },
+  {
+   "nom": "hub-messages",
+   "noeud": "6018:98",
+   "description": "Marque Gmail sur socle en verre, connexion verte lumineuse, liste de catégories",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.35
+  },
+  {
+   "nom": "messages-multicanal",
+   "noeud": "6018:218",
+   "description": "Pile de messages décalés avec logos (WhatsApp, Instagram, Shopify, X)",
+   "methode": "SVG nettoyé (écart = anticrénelage du texte)",
+   "ecart_pct": 1.66
+  },
+  {
+   "nom": "reponse-rapide",
+   "noeud": "6018:264",
+   "description": "Pile de notifications, pilule « génération », chrono 00:03 sur cadran",
+   "methode": "SVG nettoyé (écart = anticrénelage du texte)",
+   "ecart_pct": 1.51
+  },
+  {
+   "nom": "nuage-outils",
+   "noeud": "6018:354",
+   "description": "Nuage en relief contenant les logos, câbles fins vers la marque",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 0.0
+  },
+  {
+   "nom": "croissance",
+   "noeud": "6002:4770",
+   "description": "Courbe de croissance avec logos posés, zone hachurée",
+   "methode": "SVG nettoyé",
+   "ecart_pct": 1.43
+  }
+ ],
+ "elements": [
+  {
+   "nom": "bouclier-seul",
+   "noeud": "6002:690",
+   "fichier": "bouclier-seul.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "plateau-avatars",
+   "noeud": "6002:709",
+   "fichier": "plateau-avatars.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "carte-fraude",
+   "noeud": "6002:787",
+   "fichier": "carte-fraude.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "carte-points-langues",
+   "noeud": "6002:1111",
+   "fichier": "carte-points-langues.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "curseur",
+   "noeud": "6002:5054",
+   "fichier": "curseur.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "pastille-shopify",
+   "noeud": "4001:51997",
+   "fichier": "pastille-shopify.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "pastille-slack",
+   "noeud": "4001:51999",
+   "fichier": "pastille-slack.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "pastille-x",
+   "noeud": "4001:52002",
+   "fichier": "pastille-x.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "pastille-whatsapp",
+   "noeud": "4001:52005",
+   "fichier": "pastille-whatsapp.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "pastille-instagram",
+   "noeud": "4001:52011",
+   "fichier": "pastille-instagram.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "pastille-facebook",
+   "noeud": "4001:52013",
+   "fichier": "pastille-facebook.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "logo-slack",
+   "noeud": "6002:4998",
+   "fichier": "logo-slack.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "logo-linkedin",
+   "noeud": "6002:5021",
+   "fichier": "logo-linkedin.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "cables-eventail",
+   "noeud": "6019:460",
+   "fichier": "cables-eventail.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "pastille-verre-facebook",
+   "noeud": "6018:172",
+   "fichier": "pastille-verre-facebook.svg",
+   "format": "SVG vectoriel"
+  },
+  {
+   "nom": "connecteur-actif-vert",
+   "noeud": "6018:152",
+   "fichier": "connecteur-actif-vert.png",
+   "format": "PNG 3x (effets que le SVG rend mal)"
+  },
+  {
+   "nom": "curseur-hugo",
+   "noeud": "6018:96",
+   "fichier": "curseur-hugo.png",
+   "format": "PNG 3x (effets que le SVG rend mal)"
+  },
+  {
+   "nom": "marque-lumineuse",
+   "noeud": "6002:4973",
+   "fichier": "marque-lumineuse.png",
+   "format": "PNG 3x (effets que le SVG rend mal)"
+  },
+  {
+   "nom": "marque-lumineuse-grande",
+   "noeud": "4001:52015",
+   "fichier": "marque-lumineuse-grande.png",
+   "format": "PNG 3x (effets que le SVG rend mal)"
+  },
+  {
+   "nom": "marque-lumineuse-centre",
+   "noeud": "6002:4751",
+   "fichier": "marque-lumineuse-centre.png",
+   "format": "PNG 3x (effets que le SVG rend mal)"
+  }
+ ]
+}

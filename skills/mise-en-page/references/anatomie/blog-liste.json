@@ -1,0 +1,515 @@
+{
+ "type": "blog-liste",
+ "noeud": "4001:30377",
+ "w": 1139,
+ "h": 1245,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:30377",
+    "nom": "Frame 2147260510",
+    "w": 1139,
+    "h": 1245,
+    "x": 151,
+    "y": 1362,
+    "layout": "auto-layout ↓ écart 60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30378",
+    "nom": "Frame 2147239882",
+    "w": 1139,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30381",
+    "nom": "Frame 2147260407",
+    "w": 1139,
+    "h": 1050,
+    "x": 0,
+    "y": 195,
+    "layout": "auto-layout ↓ écart 30 pad 0/0/30/0 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "4001:30382",
+    "nom": "Frame 2147260404",
+    "w": 1139,
+    "h": 939,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30383",
+    "nom": "Frame 2147260401",
+    "w": 1139,
+    "h": 313,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 60 pad 30/60/30/0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30384",
+    "nom": "Frame 2147260402",
+    "w": 977,
+    "h": 253,
+    "x": 0,
+    "y": 30,
+    "layout": "auto-layout → écart 60 pad 0/0/0/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30385",
+    "nom": "Frame 2147240133",
+    "w": 366,
+    "h": 253,
+    "x": 30,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:30387",
+    "nom": "Frame 2147260400",
+    "w": 521,
+    "h": 212,
+    "x": 456,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 24 pad 0/0/0/20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30388",
+    "nom": "Frame 2147260457",
+    "w": 501,
+    "h": 165,
+    "x": 20,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30389",
+    "nom": "Frame 2147237685",
+    "w": 65,
+    "h": 25,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 2 pad 2/8/2/5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30393",
+    "nom": "Frame 2147260397",
+    "w": 501,
+    "h": 128,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout ↓ écart 8 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30396",
+    "nom": "Frame 2147260398",
+    "w": 148,
+    "h": 23,
+    "x": 20,
+    "y": 189,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30404",
+    "nom": "Frame 2147260399",
+    "w": 42,
+    "h": 32,
+    "x": 1037,
+    "y": 30,
+    "layout": "auto-layout → écart 10 pad 5/10/5/10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30410",
+    "nom": "Frame 2147260412",
+    "w": 1139,
+    "h": 313,
+    "x": 0,
+    "y": 313,
+    "layout": "auto-layout → écart 60 pad 30/60/30/0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30411",
+    "nom": "Frame 2147260402",
+    "w": 977,
+    "h": 253,
+    "x": 0,
+    "y": 30,
+    "layout": "auto-layout → écart 60 pad 0/0/0/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30412",
+    "nom": "Frame 2147240133",
+    "w": 366,
+    "h": 253,
+    "x": 30,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:30414",
+    "nom": "Frame 2147260400",
+    "w": 521,
+    "h": 212,
+    "x": 456,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 24 pad 0/0/0/20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30415",
+    "nom": "Frame 2147260457",
+    "w": 501,
+    "h": 165,
+    "x": 20,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30416",
+    "nom": "Frame 2147237685",
+    "w": 64,
+    "h": 25,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 2 pad 2/8/2/5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30420",
+    "nom": "Frame 2147260397",
+    "w": 501,
+    "h": 128,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout ↓ écart 8 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30423",
+    "nom": "Frame 2147260398",
+    "w": 148,
+    "h": 23,
+    "x": 20,
+    "y": 189,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30431",
+    "nom": "Frame 2147260403",
+    "w": 42,
+    "h": 32,
+    "x": 1037,
+    "y": 30,
+    "layout": "auto-layout → écart 10 pad 5/10/5/10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30437",
+    "nom": "Frame 2147260411",
+    "w": 1139,
+    "h": 313,
+    "x": 0,
+    "y": 626,
+    "layout": "auto-layout → écart 60 pad 30/60/30/0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30438",
+    "nom": "Frame 2147260402",
+    "w": 977,
+    "h": 253,
+    "x": 0,
+    "y": 30,
+    "layout": "auto-layout → écart 60 pad 0/0/0/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30439",
+    "nom": "Frame 2147240133",
+    "w": 366,
+    "h": 253,
+    "x": 30,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:30441",
+    "nom": "Frame 2147260400",
+    "w": 521,
+    "h": 212,
+    "x": 456,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 24 pad 0/0/0/20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30442",
+    "nom": "Frame 2147260457",
+    "w": 501,
+    "h": 165,
+    "x": 20,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30443",
+    "nom": "Frame 2147237685",
+    "w": 69,
+    "h": 25,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 2 pad 2/8/2/5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30447",
+    "nom": "Frame 2147260397",
+    "w": 501,
+    "h": 128,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout ↓ écart 8 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30450",
+    "nom": "Frame 2147260398",
+    "w": 151,
+    "h": 23,
+    "x": 20,
+    "y": 189,
+    "layout": "auto-layout → écart 4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30458",
+    "nom": "Frame 2147260399",
+    "w": 42,
+    "h": 32,
+    "x": 1037,
+    "y": 30,
+    "layout": "auto-layout → écart 10 pad 5/10/5/10 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:30379",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "All Blogs",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 77,
+    "h": 21,
+    "x": 531,
+    "y": 0,
+    "nb_car": 9
+   },
+   {
+    "id": "4001:30380",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Explore Latest / Botwise Insights",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1139,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 33
+   },
+   {
+    "id": "4001:30403",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "September 12, 2025",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 128,
+    "h": 23,
+    "x": 20,
+    "y": 0,
+    "nb_car": 18
+   },
+   {
+    "id": "4001:30430",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "September 18, 2025",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 128,
+    "h": 23,
+    "x": 20,
+    "y": 0,
+    "nb_car": 18
+   },
+   {
+    "id": "4001:30457",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "September 24, 2025",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 131,
+    "h": 23,
+    "x": 20,
+    "y": 0,
+    "nb_car": 18
+   }
+  ],
+  "images": [
+   {
+    "id": "4001:30386",
+    "nom": "image 2462",
+    "w": 366,
+    "h": 252
+   },
+   {
+    "id": "4001:30413",
+    "nom": "image 2487",
+    "w": 366,
+    "h": 256
+   },
+   {
+    "id": "4001:30440",
+    "nom": "image 2462",
+    "w": 366,
+    "h": 252
+   }
+  ],
+  "icones": [
+   {
+    "id": "4001:30397",
+    "nom": "calendar-blank-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "4001:30405",
+    "nom": "Icon",
+    "w": 22,
+    "h": 22
+   },
+   {
+    "id": "4001:30424",
+    "nom": "calendar-blank-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "4001:30432",
+    "nom": "Icon",
+    "w": 22,
+    "h": 22
+   },
+   {
+    "id": "4001:30451",
+    "nom": "calendar-blank-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "4001:30459",
+    "nom": "Icon",
+    "w": 22,
+    "h": 22
+   }
+  ],
+  "traits": [
+   {
+    "id": "4001:30408",
+    "w": 313,
+    "h": 0,
+    "x": 429,
+    "y": 0
+   },
+   {
+    "id": "4001:30409",
+    "w": 1139,
+    "h": 0,
+    "x": 0,
+    "y": 313
+   },
+   {
+    "id": "4001:30435",
+    "w": 313,
+    "h": 0,
+    "x": 429,
+    "y": 0
+   },
+   {
+    "id": "4001:30436",
+    "w": 1139,
+    "h": 0,
+    "x": 0,
+    "y": 626
+   },
+   {
+    "id": "4001:30462",
+    "w": 313,
+    "h": 0,
+    "x": 429,
+    "y": 0
+   },
+   {
+    "id": "4001:30463",
+    "w": 1139,
+    "h": 0,
+    "x": 0,
+    "y": 939
+   },
+   {
+    "id": "4001:30476",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 1
+   }
+  ],
+  "boutons": [
+   {
+    "id": "4001:30464",
+    "texte": "Load All Blogs",
+    "fond": "#EFEBE7",
+    "w": 140,
+    "h": 51,
+    "rayon": 100
+   }
+  ],
+  "decors": [
+   {
+    "id": "4001:30472",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 1049
+   }
+  ]
+ }
+}

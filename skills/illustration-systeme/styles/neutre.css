@@ -1,0 +1,19 @@
+/* Style « neutre » : celui qu'on utilise quand aucun style n'est demandé.
+   Gris légèrement froids, accent bleu, ombres teintées gris-bleu. Toute la mécanique
+   du moteur (couches d'ombre, cadres, décors) reste la même : seule la teinte change. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=DM+Mono:wght@400;500&display=swap");
+:root {
+  --s-bg: #f5f5f4; --s-surface: #fff; --s-sand: #f2f2f1; --s-tray: #ececeb; --s-field: #f1f1f0;
+  --s-line: #d9d9d7; --s-wire: #dcdcda; --s-hairline: #e5e5e4; --s-orbit: rgba(0,0,0,.055);
+  --s-ink: #18181b; --s-ink-2: #3f3f46; --s-ink-3: #85858c; --s-skeleton: #e7e7e9; --s-skeleton-2: #efeff0;
+  --s-accent: #2f5bea; --s-alert: #e5383b; --s-ok: #22a95a;
+  --s-steel: #e9ecef; --s-steel-shade: #8a96a3; --s-rim-base: #dfe1e4; --s-rim-1: #c9ccd1; --s-rim-2: #b6bac1;
+  --s-plinth-1: #efefee; --s-plinth-2: #e4e4e3; --s-plinth-3: #dddddc; --s-plinth-4: #c6c6c5;
+  --s-code-key: #6d4fd1; --s-code-str: #16804a; --s-code-fn: #b9541c;
+  --s-tint-cool: 15 23 42; --s-tint-ring: 47 91 234; --s-tint-warm: 190 192 198; --s-tint-panel: 40 44 56;
+  --s-tint-steel: 70 78 92; --s-tint-glow: 110 140 245; --s-tint-deep: 12 20 70;
+  --s-font-title: "Inter Tight", "Inter", sans-serif; --s-font-text: "Inter", sans-serif; --s-font-mono: "DM Mono", ui-monospace, monospace;
+  /* Police des étiquettes : mono pour un produit tech ; pour un autre secteur, mettre var(--s-font-text) */
+  --s-font-label: var(--s-font-mono);
+  --s-r-chip: 6px; --s-r-logo: 7px; --s-r-row: 12px; --s-r-inner: 14px; --s-r-frame: 18px;
+}

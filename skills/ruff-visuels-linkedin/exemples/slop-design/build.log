@@ -1,0 +1,6 @@
+[node] became FOLLOWER (leader @ http://127.0.0.1:3055)
+[figwright] server 0.4.0 (protocol 0.1.0) ready as follower, follower → http://127.0.0.1:3055
+prompt 1 414
+prompt 2 432
+prompt 3 270
+section 5477:1430 20

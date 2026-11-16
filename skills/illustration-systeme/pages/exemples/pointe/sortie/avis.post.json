@@ -1,0 +1,201 @@
+{
+"racine": {
+"kind": "frame",
+"w": 1440,
+"h": 500,
+"nom": "07 · Avis"
+},
+"noeuds": {
+"07 · Avis": {
+"kind": "frame",
+"w": 1440,
+"h": 500
+},
+"07 · Avis / Avis · trait milieu": {
+"kind": "vec"
+},
+"07 · Avis / Avis · trait chiffres": {
+"kind": "vec"
+},
+"07 · Avis / Avis · citation": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 28,
+"lh": 120,
+"ls": -3,
+"w": 490,
+"align": "start",
+"x": 182,
+"y": 112
+},
+"07 · Avis / Avis · avatar": {
+"kind": "frame",
+"w": 44,
+"h": 44,
+"fond": [
+"#DAD5CD",
+1
+],
+"rayon": 100
+},
+"07 · Avis / Avis · avatar / Avis · avatar · initiales": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 22,
+"y": 13
+},
+"07 · Avis / Avis · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 16,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 238,
+"y": 370
+},
+"07 · Avis / Avis · rôle": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 238,
+"y": 394
+},
+"07 · Avis / Avis · chiffre 1": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 34,
+"lh": 110,
+"ls": -3,
+"w": null,
+"align": "start",
+"x": 752,
+"y": 84
+},
+"07 · Avis / Avis · chiffre 1 · légende": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 752,
+"y": 132
+},
+"07 · Avis / Avis · chiffre 2": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 34,
+"lh": 110,
+"ls": -3,
+"w": null,
+"align": "start",
+"x": 752,
+"y": 334
+},
+"07 · Avis / Avis · chiffre 2 · légende": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 752,
+"y": 382
+},
+"07 · Avis / Avis · jointure m": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"07 · Avis / Avis · jointure d": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"07 · Avis / Avis · trait de fin": {
+"kind": "vec"
+},
+"07 · Avis / Avis · jointure 150": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"07 · Avis / Avis · jointure 1290": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"07 · Avis / Avis · jointure 720": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+}
+}
+}

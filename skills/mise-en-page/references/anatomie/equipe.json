@@ -1,0 +1,558 @@
+{
+ "type": "equipe",
+ "noeud": "6029:13168",
+ "w": 1140,
+ "h": 687,
+ "items": {
+  "blocs": [
+   {
+    "id": "6029:13168",
+    "nom": "Frame 2147260636",
+    "w": 1140,
+    "h": 687,
+    "x": 150,
+    "y": 2748,
+    "layout": "auto-layout ↓ écart 60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6029:13169",
+    "nom": "Frame 2147239882",
+    "w": 1140,
+    "h": 82,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13172",
+    "nom": "Frame 2147260635",
+    "w": 1140,
+    "h": 545,
+    "x": 0,
+    "y": 142,
+    "layout": "auto-layout ↓ écart 30 pad 0/0/30/0 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6029:13173",
+    "nom": "Frame 2147260592",
+    "w": 1140,
+    "h": 434,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 20 pad 0/30/0/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6029:13174",
+    "nom": "Frame 2147260656",
+    "w": 333,
+    "h": 434,
+    "x": 30,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 30/0/30/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13175",
+    "nom": "Frame 2147260595",
+    "w": 333,
+    "h": 374,
+    "x": 0,
+    "y": 30,
+    "layout": "auto-layout ↓ écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13184",
+    "nom": "Frame 2147260589",
+    "w": 333,
+    "h": 284,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 30 pad 0/30/24/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13193",
+    "nom": "Text Container",
+    "w": 273,
+    "h": 49,
+    "x": 30,
+    "y": 211,
+    "layout": "auto-layout ↓ écart 1 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13197",
+    "nom": "Frame 2147240273",
+    "w": 333,
+    "h": 90,
+    "x": 0,
+    "y": 284,
+    "layout": "auto-layout ↓ écart 24 pad 20/30/30/30 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13198",
+    "nom": "Frame 2147238096",
+    "w": 273,
+    "h": 40,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13199",
+    "nom": "Frame 2147238093",
+    "w": 83,
+    "h": 40,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13202",
+    "nom": "Frame 2147238094",
+    "w": 83,
+    "h": 40,
+    "x": 95,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13205",
+    "nom": "Frame 2147238095",
+    "w": 83,
+    "h": 40,
+    "x": 190,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13209",
+    "nom": "Frame 2147260657",
+    "w": 333,
+    "h": 434,
+    "x": 403,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 30/0/30/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13210",
+    "nom": "Frame 2147260595",
+    "w": 333,
+    "h": 374,
+    "x": 0,
+    "y": 30,
+    "layout": "auto-layout ↓ écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13219",
+    "nom": "Frame 2147260589",
+    "w": 333,
+    "h": 284,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 30 pad 0/30/24/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13228",
+    "nom": "Text Container",
+    "w": 273,
+    "h": 49,
+    "x": 30,
+    "y": 211,
+    "layout": "auto-layout ↓ écart 1 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13232",
+    "nom": "Frame 2147240273",
+    "w": 333,
+    "h": 90,
+    "x": 0,
+    "y": 284,
+    "layout": "auto-layout ↓ écart 24 pad 20/30/30/30 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13233",
+    "nom": "Frame 2147238096",
+    "w": 273,
+    "h": 40,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13234",
+    "nom": "Frame 2147238093",
+    "w": 83,
+    "h": 40,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13237",
+    "nom": "Frame 2147238094",
+    "w": 83,
+    "h": 40,
+    "x": 95,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13240",
+    "nom": "Frame 2147238095",
+    "w": 83,
+    "h": 40,
+    "x": 190,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13244",
+    "nom": "Frame 2147260658",
+    "w": 333,
+    "h": 434,
+    "x": 777,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 30/0/30/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13245",
+    "nom": "Frame 2147260595",
+    "w": 333,
+    "h": 374,
+    "x": 0,
+    "y": 30,
+    "layout": "auto-layout ↓ écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13254",
+    "nom": "Frame 2147260589",
+    "w": 333,
+    "h": 284,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 30 pad 0/30/24/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13263",
+    "nom": "Text Container",
+    "w": 273,
+    "h": 49,
+    "x": 30,
+    "y": 211,
+    "layout": "auto-layout ↓ écart 1 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13267",
+    "nom": "Frame 2147240273",
+    "w": 333,
+    "h": 90,
+    "x": 0,
+    "y": 284,
+    "layout": "auto-layout ↓ écart 24 pad 20/30/30/30 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13268",
+    "nom": "Frame 2147238096",
+    "w": 273,
+    "h": 40,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13269",
+    "nom": "Frame 2147238093",
+    "w": 83,
+    "h": 40,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13272",
+    "nom": "Frame 2147238094",
+    "w": 83,
+    "h": 40,
+    "x": 95,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6029:13275",
+    "nom": "Frame 2147238095",
+    "w": 83,
+    "h": 40,
+    "x": 190,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/12/8/12 align CENTER/CENTER",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6029:13170",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Our team",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 69,
+    "h": 21,
+    "x": 536,
+    "y": 0,
+    "nb_car": 8
+   },
+   {
+    "id": "6029:13171",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "People Behind Botwise",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 53,
+    "x": 0,
+    "y": 29,
+    "nb_car": 21
+   },
+   {
+    "id": "6029:13194",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "Emily Carter",
+    "couleur": "#FFFFFF",
+    "align": "CENTER",
+    "w": 273,
+    "h": 27,
+    "x": 0,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "6029:13195",
+    "role": "texte / libellé",
+    "police": "Inter Tight Regular 16",
+    "texte": "UX Research Lead",
+    "couleur": "#D6D0C8",
+    "align": "CENTER",
+    "w": 273,
+    "h": 24,
+    "x": 0,
+    "y": 28,
+    "nb_car": 16
+   },
+   {
+    "id": "6029:13229",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "Emily Carter",
+    "couleur": "#FFFFFF",
+    "align": "CENTER",
+    "w": 273,
+    "h": 27,
+    "x": 0,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "6029:13230",
+    "role": "texte / libellé",
+    "police": "Inter Tight Regular 16",
+    "texte": "UX Research Lead",
+    "couleur": "#D6D0C8",
+    "align": "CENTER",
+    "w": 273,
+    "h": 24,
+    "x": 0,
+    "y": 28,
+    "nb_car": 16
+   },
+   {
+    "id": "6029:13264",
+    "role": "texte d’intro",
+    "police": "Inter Tight SemiBold 18",
+    "texte": "Emily Carter",
+    "couleur": "#FFFFFF",
+    "align": "CENTER",
+    "w": 273,
+    "h": 27,
+    "x": 0,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "6029:13265",
+    "role": "texte / libellé",
+    "police": "Inter Tight Regular 16",
+    "texte": "UX Research Lead",
+    "couleur": "#D6D0C8",
+    "align": "CENTER",
+    "w": 273,
+    "h": 24,
+    "x": 0,
+    "y": 28,
+    "nb_car": 16
+   }
+  ],
+  "decors": [
+   {
+    "id": "6029:13176",
+    "w": 791,
+    "h": 274,
+    "x": -228,
+    "y": -4
+   },
+   {
+    "id": "6029:13185",
+    "w": 346,
+    "h": 181,
+    "x": -6,
+    "y": 0
+   },
+   {
+    "id": "6029:13211",
+    "w": 791,
+    "h": 274,
+    "x": -228,
+    "y": -4
+   },
+   {
+    "id": "6029:13220",
+    "w": 346,
+    "h": 181,
+    "x": -6,
+    "y": 0
+   },
+   {
+    "id": "6029:13246",
+    "w": 791,
+    "h": 274,
+    "x": -228,
+    "y": -4
+   },
+   {
+    "id": "6029:13255",
+    "w": 346,
+    "h": 181,
+    "x": -6,
+    "y": 0
+   },
+   {
+    "id": "6029:13288",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 544
+   }
+  ],
+  "images": [
+   {
+    "id": "6029:13183",
+    "nom": "New Project (1) 1",
+    "w": 1442,
+    "h": 413
+   },
+   {
+    "id": "6029:13218",
+    "nom": "New Project (1) 1",
+    "w": 1442,
+    "h": 413
+   },
+   {
+    "id": "6029:13253",
+    "nom": "New Project (1) 1",
+    "w": 1442,
+    "h": 413
+   }
+  ],
+  "traits": [
+   {
+    "id": "6029:13196",
+    "w": 333,
+    "h": 0,
+    "x": 0,
+    "y": 284
+   },
+   {
+    "id": "6029:13208",
+    "w": 434,
+    "h": 0,
+    "x": 383,
+    "y": 0
+   },
+   {
+    "id": "6029:13231",
+    "w": 333,
+    "h": 0,
+    "x": 0,
+    "y": 284
+   },
+   {
+    "id": "6029:13243",
+    "w": 434,
+    "h": 0,
+    "x": 757,
+    "y": 0
+   },
+   {
+    "id": "6029:13266",
+    "w": 333,
+    "h": 0,
+    "x": 0,
+    "y": 284
+   },
+   {
+    "id": "6029:13278",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 1
+   },
+   {
+    "id": "6029:13279",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 434
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6029:13280",
+    "texte": "Join Our Team",
+    "fond": "#EFEBE7",
+    "w": 143,
+    "h": 51,
+    "rayon": 100
+   }
+  ]
+ }
+}

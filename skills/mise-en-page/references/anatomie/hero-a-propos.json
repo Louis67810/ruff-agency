@@ -1,0 +1,569 @@
+{
+ "type": "hero-a-propos",
+ "noeud": "4001:49008",
+ "w": 1141,
+ "h": 1216,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:49008",
+    "nom": "Frame 2147260719",
+    "w": 1141,
+    "h": 1216,
+    "x": 150,
+    "y": 87,
+    "layout": "auto-layout ↓ écart -11 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49009",
+    "nom": "Frame 2147260631",
+    "w": 1141,
+    "h": 526,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 40 pad 60/0/60/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:49010",
+    "nom": "Frame 2147240173",
+    "w": 88,
+    "h": 76,
+    "x": 526,
+    "y": 60,
+    "layout": "auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:49011",
+    "nom": "Frame 2147240057",
+    "w": 80,
+    "h": 68,
+    "x": 4,
+    "y": 4,
+    "layout": "auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER",
+    "traits": "contour #D6D0C8 1"
+   },
+   {
+    "id": "4001:49012",
+    "nom": "Frame 2147240174",
+    "w": 72,
+    "h": 60,
+    "x": 4,
+    "y": 4,
+    "layout": "auto-layout → écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:49013",
+    "nom": "Frame 2147240054",
+    "w": 72,
+    "h": 60,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 10/12/10/12 align MIN/CENTER",
+    "traits": "contour #FFFFFF 1"
+   },
+   {
+    "id": "4001:49017",
+    "nom": "Frame 2147240273",
+    "w": 48,
+    "h": 40,
+    "x": 12,
+    "y": 10,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:49023",
+    "nom": "Frame 2147260649",
+    "w": 1141,
+    "h": 290,
+    "x": 0,
+    "y": 176,
+    "layout": "auto-layout ↓ écart 40 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:49024",
+    "nom": "Frame 2147260494",
+    "w": 1141,
+    "h": 203,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:49050",
+    "nom": "Frame 2147260617",
+    "w": 1141,
+    "h": 174,
+    "x": 0,
+    "y": 29,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49051",
+    "nom": "Frame 2147239882",
+    "w": 1141,
+    "h": 106,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:49056",
+    "nom": "Frame 2147260544",
+    "w": 570,
+    "h": 515,
+    "x": 571,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:49058",
+    "nom": "Frame 2147260545",
+    "w": 570,
+    "h": 515,
+    "x": 570,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:49061",
+    "nom": "Frame 2147260718",
+    "w": 1141,
+    "h": 701,
+    "x": 0,
+    "y": 515,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49063",
+    "nom": "Frame 2147260585",
+    "w": 1141,
+    "h": 142,
+    "x": 0,
+    "y": 559,
+    "layout": "auto-layout → écart 0 pad 0/30/0/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "4001:49064",
+    "nom": "Frame 2147260583",
+    "w": 270,
+    "h": 142,
+    "x": 30,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 pad 30/60/30/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49071",
+    "nom": "Frame 2147239885",
+    "w": 150,
+    "h": 50,
+    "x": 60,
+    "y": 62,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49075",
+    "nom": "Frame 2147260584",
+    "w": 270,
+    "h": 142,
+    "x": 300,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 pad 30/60/30/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49079",
+    "nom": "Frame 2147239885",
+    "w": 150,
+    "h": 50,
+    "x": 60,
+    "y": 62,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49083",
+    "nom": "Frame 2147260587",
+    "w": 270,
+    "h": 142,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 pad 30/60/30/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49087",
+    "nom": "Frame 2147239885",
+    "w": 150,
+    "h": 50,
+    "x": 60,
+    "y": 62,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49091",
+    "nom": "Frame 2147260585",
+    "w": 270,
+    "h": 142,
+    "x": 841,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 pad 30/60/30/60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49098",
+    "nom": "Frame 2147239885",
+    "w": 150,
+    "h": 50,
+    "x": 60,
+    "y": 62,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:49102",
+    "nom": "Frame 2147239883",
+    "w": 80,
+    "h": 96,
+    "x": 96,
+    "y": 81,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:49104",
+    "nom": "Mask Group",
+    "w": 94,
+    "h": 124,
+    "x": 78,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:49109",
+    "nom": "Frame 2147260586",
+    "w": 80,
+    "h": 96,
+    "x": 1045,
+    "y": 81,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:49111",
+    "nom": "Mask Group",
+    "w": 94,
+    "h": 124,
+    "x": 78,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   }
+  ],
+  "decors": [
+   {
+    "id": "4001:49025",
+    "w": 419,
+    "h": 400,
+    "x": 1141,
+    "y": -101
+   },
+   {
+    "id": "4001:49037",
+    "w": 419,
+    "h": 400,
+    "x": 1,
+    "y": -101
+   },
+   {
+    "id": "4001:49060",
+    "w": 367,
+    "h": 427,
+    "x": 773,
+    "y": -54
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:49049",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "About Botwise",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 111,
+    "h": 21,
+    "x": 515,
+    "y": 0,
+    "nb_car": 13
+   },
+   {
+    "id": "4001:49052",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "AI Chatbots Built / for Modern Teams",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1141,
+    "h": 106,
+    "x": 0,
+    "y": 0,
+    "nb_car": 36
+   },
+   {
+    "id": "4001:49053",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Botwise helps teams automate conversations, improve support efficiency, / and scale customer communication across multiple channels.",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 1141,
+    "h": 52,
+    "x": 0,
+    "y": 122,
+    "nb_car": 132
+   },
+   {
+    "id": "4001:49072",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Global Teams",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 150,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "4001:49073",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Trusted Worldwide",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 150,
+    "h": 24,
+    "x": 0,
+    "y": 26,
+    "nb_car": 17
+   },
+   {
+    "id": "4001:49080",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "AI Powered",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 150,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 10
+   },
+   {
+    "id": "4001:49081",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Smart Conversations",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 150,
+    "h": 24,
+    "x": 0,
+    "y": 26,
+    "nb_car": 19
+   },
+   {
+    "id": "4001:49088",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Fast Setup",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 150,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 10
+   },
+   {
+    "id": "4001:49089",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Launch in Minutes",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 150,
+    "h": 24,
+    "x": 0,
+    "y": 26,
+    "nb_car": 17
+   },
+   {
+    "id": "4001:49099",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Secure Platform",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 150,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 15
+   },
+   {
+    "id": "4001:49100",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Enterprise Ready",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 150,
+    "h": 24,
+    "x": 0,
+    "y": 26,
+    "nb_car": 16
+   }
+  ],
+  "boutons": [
+   {
+    "id": "4001:49054",
+    "texte": "Contact us",
+    "fond": "#1A1A1A",
+    "w": 118,
+    "h": 47,
+    "rayon": 100
+   }
+  ],
+  "images": [
+   {
+    "id": "4001:49057",
+    "nom": "Shadow Overlay",
+    "w": 1156,
+    "h": 974
+   },
+   {
+    "id": "4001:49059",
+    "nom": "Shadow Overlay",
+    "w": 1156,
+    "h": 974
+   },
+   {
+    "id": "4001:49062",
+    "nom": "Rectangle 34625303",
+    "w": 1141,
+    "h": 559
+   },
+   {
+    "id": "4001:49101",
+    "nom": "Rectangle 34624471",
+    "w": 15,
+    "h": 1140
+   },
+   {
+    "id": "4001:49108",
+    "nom": "Rectangle",
+    "w": 157,
+    "h": 158
+   },
+   {
+    "id": "4001:49115",
+    "nom": "Rectangle",
+    "w": 157,
+    "h": 158
+   }
+  ],
+  "icones": [
+   {
+    "id": "4001:49065",
+    "nom": "globe-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "4001:49076",
+    "nom": "star-four-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "4001:49084",
+    "nom": "lightning-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "4001:49092",
+    "nom": "security-camera-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "4001:49106",
+    "nom": "Vector 91",
+    "w": 33,
+    "h": 32
+   },
+   {
+    "id": "4001:49107",
+    "nom": "Vector 90",
+    "w": 36,
+    "h": 36
+   },
+   {
+    "id": "4001:49113",
+    "nom": "Vector 91",
+    "w": 33,
+    "h": 32
+   },
+   {
+    "id": "4001:49114",
+    "nom": "Vector 90",
+    "w": 36,
+    "h": 36
+   }
+  ],
+  "traits": [
+   {
+    "id": "4001:49074",
+    "w": 142,
+    "h": 0,
+    "x": 300,
+    "y": 0
+   },
+   {
+    "id": "4001:49082",
+    "w": 142,
+    "h": 0,
+    "x": 570,
+    "y": 0
+   },
+   {
+    "id": "4001:49090",
+    "w": 142,
+    "h": 0,
+    "x": 841,
+    "y": 0
+   }
+  ]
+ }
+}

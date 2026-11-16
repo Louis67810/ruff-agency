@@ -1,0 +1,716 @@
+{
+ "type": "comparatif",
+ "noeud": "6001:5652",
+ "w": 1139,
+ "h": 923,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:5652",
+    "nom": "Frame 2147260423",
+    "w": 1139,
+    "h": 923,
+    "x": 151,
+    "y": 8759,
+    "layout": "auto-layout ↓ écart 60 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:5653",
+    "nom": "Frame 2147240099",
+    "w": 1139,
+    "h": 137,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 305 pad 0/97/0/97 align SPACE_BETWEEN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:5654",
+    "nom": "Frame 2147239882",
+    "w": 386,
+    "h": 137,
+    "x": 97,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 5 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:5655",
+    "nom": "Frame 2147240042",
+    "w": 109,
+    "h": 26,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 4 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:5656",
+    "nom": "Group 43005",
+    "w": 6,
+    "h": 4,
+    "x": 0,
+    "y": 11,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:5662",
+    "nom": "Group 43004",
+    "w": 6,
+    "h": 4,
+    "x": 109,
+    "y": 11,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:5669",
+    "nom": "Frame 2147240061",
+    "w": 1139,
+    "h": 203,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 0/353/0/353 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:5670",
+    "nom": "Frame 2147239882",
+    "w": 433,
+    "h": 135,
+    "x": 353,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:5674",
+    "nom": "Frame 2147260421",
+    "w": 1139,
+    "h": 660,
+    "x": 0,
+    "y": 263,
+    "layout": "auto-layout ↓ écart 14 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:5675",
+    "nom": "Frame 2147260419",
+    "w": 1139,
+    "h": 512,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 0 align MIN/MIN",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:5676",
+    "nom": "Frame 2147260410",
+    "w": 386,
+    "h": 512,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:5677",
+    "nom": "Frame 2147260408",
+    "w": 386,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 20/30/20/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:5679",
+    "nom": "Frame 2147239768",
+    "w": 386,
+    "h": 56,
+    "x": 0,
+    "y": 64,
+    "layout": "auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:5687",
+    "nom": "Frame 2147260409",
+    "w": 386,
+    "h": 56,
+    "x": 0,
+    "y": 120,
+    "layout": "auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:5693",
+    "nom": "Frame 2147260410",
+    "w": 386,
+    "h": 56,
+    "x": 0,
+    "y": 176,
+    "layout": "auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:5703",
+    "nom": "Frame 2147260411",
+    "w": 386,
+    "h": 56,
+    "x": 0,
+    "y": 232,
+    "layout": "auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:5710",
+    "nom": "Frame 2147260412",
+    "w": 386,
+    "h": 56,
+    "x": 0,
+    "y": 288,
+    "layout": "auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:5718",
+    "nom": "Frame 2147260413",
+    "w": 386,
+    "h": 56,
+    "x": 0,
+    "y": 344,
+    "layout": "auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:5724",
+    "nom": "Frame 2147260416",
+    "w": 386,
+    "h": 56,
+    "x": 0,
+    "y": 400,
+    "layout": "auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:5730",
+    "nom": "Frame 2147260415",
+    "w": 386,
+    "h": 56,
+    "x": 0,
+    "y": 456,
+    "layout": "auto-layout → écart 6 pad 18/30/18/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:5951",
+    "nom": "Frame 2147240204",
+    "w": 1139,
+    "h": 134,
+    "x": 0,
+    "y": 526,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:5953",
+    "nom": "Frame 2147239879",
+    "w": 378,
+    "h": 132,
+    "x": 1,
+    "y": 1,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:5956",
+    "nom": "Frame 2147239883",
+    "w": 80,
+    "h": 96,
+    "x": 96,
+    "y": 80,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:5958",
+    "nom": "Mask Group",
+    "w": 94,
+    "h": 124,
+    "x": 78,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:5964",
+    "nom": "Frame 2147239880",
+    "w": 378,
+    "h": 132,
+    "x": 380,
+    "y": 1,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:5968",
+    "nom": "Frame 2147239881",
+    "w": 378,
+    "h": 132,
+    "x": 760,
+    "y": 1,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:5971",
+    "nom": "Frame 2147236603",
+    "w": 80,
+    "h": 96,
+    "x": 282,
+    "y": 80,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:5973",
+    "nom": "Mask Group",
+    "w": 94,
+    "h": 124,
+    "x": 78,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:5661",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Comparison",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 89,
+    "h": 26,
+    "x": 10,
+    "y": 0,
+    "nb_car": 10
+   },
+   {
+    "id": "6001:5667",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Smarter Than / Other platforms",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 386,
+    "h": 106,
+    "x": 0,
+    "y": 31,
+    "nb_car": 30
+   },
+   {
+    "id": "6001:5668",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "See how Chatbot compares on automation, accuracy, speed, and meeting intelligence.",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 343,
+    "h": 52,
+    "x": 699,
+    "y": 85,
+    "nb_car": 82
+   },
+   {
+    "id": "6001:5671",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Compare",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 60,
+    "h": 21,
+    "x": 186,
+    "y": 0,
+    "nb_car": 7
+   },
+   {
+    "id": "6001:5672",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Better Than Traditional Support",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 433,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 31
+   },
+   {
+    "id": "6001:5673",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Compare Botwise with other tools for faster replies, smarter automation, and better support.",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 433,
+    "h": 52,
+    "x": 353,
+    "y": 151,
+    "nb_car": 92
+   },
+   {
+    "id": "6001:5678",
+    "role": "texte / libellé",
+    "police": "Switzer Semibold 16",
+    "texte": "AI Support Features",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 141,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 19
+   },
+   {
+    "id": "6001:5686",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Multi-Channel Messaging Support",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 302,
+    "h": 19,
+    "x": 54,
+    "y": 18,
+    "nb_car": 31
+   },
+   {
+    "id": "6001:5692",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "AI Powered Auto Replies",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 302,
+    "h": 19,
+    "x": 54,
+    "y": 18,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:5702",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Conversation Context Memory",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 302,
+    "h": 19,
+    "x": 54,
+    "y": 18,
+    "nb_car": 27
+   },
+   {
+    "id": "6001:5709",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Smart Intent Detection",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 302,
+    "h": 19,
+    "x": 54,
+    "y": 18,
+    "nb_car": 22
+   },
+   {
+    "id": "6001:5717",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Knowledge Base Integration",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 302,
+    "h": 19,
+    "x": 54,
+    "y": 18,
+    "nb_car": 26
+   },
+   {
+    "id": "6001:5723",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Real-Time Customer Insights",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 302,
+    "h": 19,
+    "x": 54,
+    "y": 18,
+    "nb_car": 27
+   },
+   {
+    "id": "6001:5729",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Automated Workflow Actions",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 302,
+    "h": 19,
+    "x": 54,
+    "y": 18,
+    "nb_car": 26
+   },
+   {
+    "id": "6001:5737",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Team Collaboration Tools",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 302,
+    "h": 19,
+    "x": 54,
+    "y": 18,
+    "nb_car": 24
+   },
+   {
+    "id": "6001:5954",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "3M+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 318,
+    "h": 48,
+    "x": 30,
+    "y": 30,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:5955",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Messages Processed Monthly",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 318,
+    "h": 24,
+    "x": 30,
+    "y": 78,
+    "nb_car": 26
+   },
+   {
+    "id": "6001:5965",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "120+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 318,
+    "h": 48,
+    "x": 30,
+    "y": 30,
+    "nb_car": 4
+   },
+   {
+    "id": "6001:5966",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Countries Using Botwise",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 318,
+    "h": 24,
+    "x": 30,
+    "y": 78,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:5969",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "85%",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 318,
+    "h": 48,
+    "x": 30,
+    "y": 30,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:5970",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Support Queries Automated",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 318,
+    "h": 24,
+    "x": 30,
+    "y": 78,
+    "nb_car": 25
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:5680",
+    "nom": "globe-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:5688",
+    "nom": "chats-circle-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:5694",
+    "nom": "brain-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:5704",
+    "nom": "target-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:5711",
+    "nom": "files-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:5719",
+    "nom": "eye-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:5725",
+    "nom": "gear-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:5731",
+    "nom": "users-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:5960",
+    "nom": "Vector 91",
+    "w": 33,
+    "h": 32
+   },
+   {
+    "id": "6001:5961",
+    "nom": "Vector 90",
+    "w": 36,
+    "h": 36
+   },
+   {
+    "id": "6001:5975",
+    "nom": "Vector 91",
+    "w": 33,
+    "h": 32
+   },
+   {
+    "id": "6001:5976",
+    "nom": "Vector 90",
+    "w": 36,
+    "h": 36
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6001:5738",
+    "nom": "Frame 2147260413",
+    "w": 753,
+    "h": 512,
+    "x": 386,
+    "y": 0
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:5946",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 512
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:5950",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 0
+   },
+   {
+    "id": "6001:5952",
+    "w": 132,
+    "h": 0,
+    "x": 0,
+    "y": 1
+   },
+   {
+    "id": "6001:5963",
+    "w": 132,
+    "h": 0,
+    "x": 379,
+    "y": 1
+   },
+   {
+    "id": "6001:5967",
+    "w": 132,
+    "h": 0,
+    "x": 759,
+    "y": 1
+   },
+   {
+    "id": "6001:5978",
+    "w": 132,
+    "h": 0,
+    "x": 1138,
+    "y": 1
+   },
+   {
+    "id": "6001:5979",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 134
+   }
+  ],
+  "images": [
+   {
+    "id": "6001:5962",
+    "nom": "Rectangle",
+    "w": 157,
+    "h": 158
+   },
+   {
+    "id": "6001:5977",
+    "nom": "Rectangle",
+    "w": 157,
+    "h": 158
+   }
+  ]
+ }
+}

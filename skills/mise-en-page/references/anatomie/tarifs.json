@@ -1,0 +1,2786 @@
+{
+ "type": "tarifs",
+ "noeud": "6001:10682",
+ "w": 1140,
+ "h": 2426,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:10682",
+    "nom": "Frame 2147260470",
+    "w": 1140,
+    "h": 2426,
+    "x": 150,
+    "y": 11888,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10683",
+    "nom": "Frame 2147260446",
+    "w": 540,
+    "h": 222,
+    "x": 0,
+    "y": 1208,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:10684",
+    "nom": "Frame 2147260439",
+    "w": 540,
+    "h": 133,
+    "x": 540,
+    "y": 96,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:10695",
+    "nom": "Frame 2147260448",
+    "w": 540,
+    "h": 222,
+    "x": 1140,
+    "y": 1208,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:10696",
+    "nom": "Frame 2147260439",
+    "w": 540,
+    "h": 129,
+    "x": 540,
+    "y": 96,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:10707",
+    "nom": "Frame 2147240342",
+    "w": 1140,
+    "h": 1208,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 13 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10708",
+    "nom": "Frame 2147240341",
+    "w": 1140,
+    "h": 1063,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10709",
+    "nom": "Frame 2147240202",
+    "w": 1140,
+    "h": 267,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 30 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10710",
+    "nom": "Frame 2147240108",
+    "w": 1140,
+    "h": 181,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 20 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10711",
+    "nom": "Frame 2147239882",
+    "w": 1140,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10715",
+    "nom": "Frame 2147239699",
+    "w": 221,
+    "h": 56,
+    "x": 460,
+    "y": 211,
+    "layout": "auto-layout → écart 0 pad 5/5/5/5 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10722",
+    "nom": "Frame 2147240340",
+    "w": 1140,
+    "h": 736,
+    "x": 0,
+    "y": 327,
+    "layout": "auto-layout ↓ écart 30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10723",
+    "nom": "Frame 2147240339",
+    "w": 1140,
+    "h": 44,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 16 pad 10/0/10/0 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10725",
+    "nom": "Frame 2147240338",
+    "w": 568,
+    "h": 24,
+    "x": 350,
+    "y": 10,
+    "layout": "auto-layout → écart 16 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10726",
+    "nom": "Frame 2147240334",
+    "w": 86,
+    "h": 24,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10732",
+    "nom": "Frame 2147240335",
+    "w": 155,
+    "h": 24,
+    "x": 118,
+    "y": 0,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10738",
+    "nom": "Frame 2147240336",
+    "w": 112,
+    "h": 24,
+    "x": 305,
+    "y": 0,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10744",
+    "nom": "Frame 2147240337",
+    "w": 119,
+    "h": 24,
+    "x": 449,
+    "y": 0,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10749",
+    "nom": "Frame 2147240115",
+    "w": 1140,
+    "h": 662,
+    "x": 0,
+    "y": 74,
+    "layout": "auto-layout → écart 1 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:10755",
+    "nom": "Frame 2147240113",
+    "w": 379,
+    "h": 662,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10756",
+    "nom": "Frame 2147240330",
+    "w": 379,
+    "h": 314,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 24 pad 40/30/40/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10757",
+    "nom": "Frame 2147240112",
+    "w": 319,
+    "h": 159,
+    "x": 30,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10774",
+    "nom": "Frame 2147237182",
+    "w": 379,
+    "h": 348,
+    "x": 0,
+    "y": 314,
+    "layout": "auto-layout ↓ écart 4 pad 10/0/30/0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10775",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 10,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10780",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 62,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10785",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 114,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10790",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 166,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10795",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 218,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10800",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 270,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10806",
+    "nom": "Frame 2147240120",
+    "w": 379,
+    "h": 662,
+    "x": 381,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10807",
+    "nom": "Frame 2147240330",
+    "w": 379,
+    "h": 314,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 24 pad 40/30/40/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10808",
+    "nom": "Frame 2147240112",
+    "w": 319,
+    "h": 159,
+    "x": 30,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10825",
+    "nom": "Frame 2147237182",
+    "w": 379,
+    "h": 348,
+    "x": 0,
+    "y": 314,
+    "layout": "auto-layout ↓ écart 4 pad 10/0/30/0 align MIN/MIN",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10826",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 10,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10831",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 62,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10836",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 114,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10841",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 166,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10846",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 218,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10851",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 270,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10856",
+    "nom": "Frame 2147238029",
+    "w": 88,
+    "h": 26,
+    "x": 270,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 4/10/4/10 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10859",
+    "nom": "Frame 2147240119",
+    "w": 379,
+    "h": 662,
+    "x": 761,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10860",
+    "nom": "Frame 2147240330",
+    "w": 379,
+    "h": 314,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 24 pad 40/30/40/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10861",
+    "nom": "Frame 2147240112",
+    "w": 319,
+    "h": 159,
+    "x": 30,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10878",
+    "nom": "Frame 2147237182",
+    "w": 379,
+    "h": 348,
+    "x": 0,
+    "y": 314,
+    "layout": "auto-layout ↓ écart 4 pad 10/0/30/0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10879",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 10,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10884",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 62,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10889",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 114,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10894",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 166,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10899",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 218,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10904",
+    "nom": "Sub Container",
+    "w": 379,
+    "h": 48,
+    "x": 0,
+    "y": 270,
+    "layout": "auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10914",
+    "nom": "Frame 2147240118",
+    "w": 1140,
+    "h": 132,
+    "x": 0,
+    "y": 1076,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:10916",
+    "nom": "Frame 2147239879",
+    "w": 380,
+    "h": 132,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10920",
+    "nom": "Frame 2147239881",
+    "w": 380,
+    "h": 132,
+    "x": 380,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10924",
+    "nom": "Frame 2147239882",
+    "w": 380,
+    "h": 132,
+    "x": 760,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10927",
+    "nom": "Frame 2147240285",
+    "w": 358,
+    "h": 102,
+    "x": 391,
+    "y": 1268,
+    "layout": "auto-layout → écart 10 pad 30/60/30/60 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10929",
+    "nom": "Frame 2147240124",
+    "w": 1140,
+    "h": 996,
+    "x": 0,
+    "y": 1430,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10930",
+    "nom": "Frame 2147240122",
+    "w": 1140,
+    "h": 228,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 1 align MIN/MAX",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:10931",
+    "nom": "Frame 2147240120",
+    "w": 284,
+    "h": 135,
+    "x": 0,
+    "y": 93,
+    "layout": "auto-layout ↓ écart 30 pad 24/24/40/24 align MAX/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10932",
+    "nom": "Frame 2147240119",
+    "w": 236,
+    "h": 71,
+    "x": 24,
+    "y": 24,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10941",
+    "nom": "Frame 2147240123",
+    "w": 284,
+    "h": 228,
+    "x": 286,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 24 pad 40/24/40/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10942",
+    "nom": "Frame 2147240119",
+    "w": 236,
+    "h": 73,
+    "x": 24,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10944",
+    "nom": "Frame 75",
+    "w": 236,
+    "h": 36,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout → écart 6 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10953",
+    "nom": "Frame 2147240121",
+    "w": 284,
+    "h": 228,
+    "x": 571,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 24 pad 40/24/40/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10954",
+    "nom": "Frame 2147240119",
+    "w": 236,
+    "h": 73,
+    "x": 24,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10956",
+    "nom": "Frame 75",
+    "w": 236,
+    "h": 36,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout → écart 6 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10965",
+    "nom": "Frame 2147240122",
+    "w": 284,
+    "h": 228,
+    "x": 856,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 24 pad 40/24/40/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10966",
+    "nom": "Frame 2147240119",
+    "w": 236,
+    "h": 73,
+    "x": 24,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10968",
+    "nom": "Frame 75",
+    "w": 236,
+    "h": 36,
+    "x": 0,
+    "y": 37,
+    "layout": "auto-layout → écart 6 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10976",
+    "nom": "Frame 2147237738",
+    "w": 1140,
+    "h": 768,
+    "x": 0,
+    "y": 228,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10977",
+    "nom": "Frame 2147237734",
+    "w": 1140,
+    "h": 768,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:10978",
+    "nom": "Frame 2147237740",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10979",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10981",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:10985",
+    "nom": "Frame 2147237718",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:10989",
+    "nom": "Frame 2147237717",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:10994",
+    "nom": "Frame 2147237746",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 64,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10995",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:10997",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11001",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11005",
+    "nom": "Frame 2147237717",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11010",
+    "nom": "Frame 2147237747",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 128,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11011",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11013",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11017",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11021",
+    "nom": "Frame 2147237717",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11026",
+    "nom": "Frame 2147237748",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 192,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11027",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11029",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11033",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11037",
+    "nom": "Frame 2147237717",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11042",
+    "nom": "Frame 2147237749",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 256,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11043",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11045",
+    "nom": "Frame 2147237714",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11049",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11053",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11058",
+    "nom": "Frame 2147237750",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 320,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11059",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11061",
+    "nom": "Frame 2147237714",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11063",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11067",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11072",
+    "nom": "Frame 2147237751",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 384,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11073",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11075",
+    "nom": "Frame 2147237714",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11077",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11081",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11086",
+    "nom": "Frame 2147237752",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 448,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11087",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11089",
+    "nom": "Frame 2147237714",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11091",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11095",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11100",
+    "nom": "Frame 2147237753",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 512,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11101",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11103",
+    "nom": "Frame 2147237714",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11105",
+    "nom": "Frame 2147237715",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11109",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11114",
+    "nom": "Frame 2147237754",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 576,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11115",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11117",
+    "nom": "Frame 2147237714",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11119",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11121",
+    "nom": "Frame 2147237717",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11126",
+    "nom": "Frame 2147237755",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 640,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11127",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11129",
+    "nom": "Frame 2147237714",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11131",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11133",
+    "nom": "Frame 2147237717",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11138",
+    "nom": "Frame 2147237756",
+    "w": 1140,
+    "h": 64,
+    "x": 0,
+    "y": 704,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11139",
+    "nom": "Frame 2147237641",
+    "w": 285,
+    "h": 64,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:11141",
+    "nom": "Frame 2147237714",
+    "w": 285,
+    "h": 63,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11143",
+    "nom": "Frame 2147237716",
+    "w": 285,
+    "h": 63,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:11145",
+    "nom": "Frame 2147237717",
+    "w": 285,
+    "h": 63,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER",
+    "traits": "trait #D6D0C8 left"
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:10688",
+    "w": 540,
+    "h": 133,
+    "x": -93,
+    "y": 128
+   },
+   {
+    "id": "6001:10700",
+    "w": 540,
+    "h": 130,
+    "x": -93,
+    "y": 127
+   },
+   {
+    "id": "6001:10750",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 661
+   },
+   {
+    "id": "6001:11150",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 995
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:10712",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Pricing",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 60,
+    "h": 21,
+    "x": 540,
+    "y": 0,
+    "nb_car": 7
+   },
+   {
+    "id": "6001:10713",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Flexible plans that / grow with you",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 35
+   },
+   {
+    "id": "6001:10714",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Start for free, upgrade when you're ready.",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 26,
+    "x": 0,
+    "y": 155,
+    "nb_car": 42
+   },
+   {
+    "id": "6001:10724",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "All plans include:",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 112,
+    "h": 24,
+    "x": 222,
+    "y": 10,
+    "nb_car": 18
+   },
+   {
+    "id": "6001:10730",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "AI Replies",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 66,
+    "h": 24,
+    "x": 20,
+    "y": 0,
+    "nb_car": 10
+   },
+   {
+    "id": "6001:10736",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Channel Messaging",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 135,
+    "h": 24,
+    "x": 20,
+    "y": 0,
+    "nb_car": 17
+   },
+   {
+    "id": "6001:10742",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Chat Records",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 92,
+    "h": 24,
+    "x": 20,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "6001:10748",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Intent Analysis",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 99,
+    "h": 24,
+    "x": 20,
+    "y": 0,
+    "nb_car": 15
+   },
+   {
+    "id": "6001:10857",
+    "role": "petit texte",
+    "police": "Inter Tight Medium 12",
+    "texte": "Most popular",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 68,
+    "h": 18,
+    "x": 10,
+    "y": 4,
+    "nb_car": 12
+   },
+   {
+    "id": "6001:10917",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "2M+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 320,
+    "h": 48,
+    "x": 30,
+    "y": 30,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:10918",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Customer Messages Processed",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 320,
+    "h": 24,
+    "x": 30,
+    "y": 78,
+    "nb_car": 27
+   },
+   {
+    "id": "6001:10921",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "95%",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 320,
+    "h": 48,
+    "x": 30,
+    "y": 30,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:10922",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Automated Support Resolution",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 320,
+    "h": 24,
+    "x": 30,
+    "y": 78,
+    "nb_car": 28
+   },
+   {
+    "id": "6001:10925",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "24/7",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 320,
+    "h": 48,
+    "x": 30,
+    "y": 30,
+    "nb_car": 4
+   },
+   {
+    "id": "6001:10926",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "AI Support Availability",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 320,
+    "h": 24,
+    "x": 30,
+    "y": 78,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:10928",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 28",
+    "texte": "Pricing Comparison",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 238,
+    "h": 42,
+    "x": 60,
+    "y": 30,
+    "nb_car": 18
+   },
+   {
+    "id": "6001:10939",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 24",
+    "texte": "Features",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 236,
+    "h": 31,
+    "x": 0,
+    "y": 40,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:10943",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 21",
+    "texte": "Starter Plan",
+    "couleur": "#262626",
+    "align": "CENTER",
+    "w": 236,
+    "h": 27,
+    "x": 0,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "6001:10945",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 24",
+    "texte": "$0",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 30,
+    "h": 36,
+    "x": 60,
+    "y": 0,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:10946",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "/ per month",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 79,
+    "h": 24,
+    "x": 96,
+    "y": 6,
+    "nb_car": 11
+   },
+   {
+    "id": "6001:10955",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 21",
+    "texte": "Pro Plan",
+    "couleur": "#262626",
+    "align": "CENTER",
+    "w": 236,
+    "h": 27,
+    "x": 0,
+    "y": 0,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:10957",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 24",
+    "texte": "$39",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 44,
+    "h": 36,
+    "x": 53,
+    "y": 0,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:10958",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "/ per month",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 79,
+    "h": 24,
+    "x": 103,
+    "y": 6,
+    "nb_car": 11
+   },
+   {
+    "id": "6001:10967",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 21",
+    "texte": "Business Plan",
+    "couleur": "#262626",
+    "align": "CENTER",
+    "w": 236,
+    "h": 27,
+    "x": 0,
+    "y": 0,
+    "nb_car": 13
+   },
+   {
+    "id": "6001:10969",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 24",
+    "texte": "$199",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 52,
+    "h": 36,
+    "x": 49,
+    "y": 0,
+    "nb_car": 4
+   },
+   {
+    "id": "6001:10970",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "/ per month",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 79,
+    "h": 24,
+    "x": 107,
+    "y": 6,
+    "nb_car": 11
+   },
+   {
+    "id": "6001:10980",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "AI Smart Replies",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 113,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 16
+   },
+   {
+    "id": "6001:10984",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:10988",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:10992",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:10996",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Multi-Channel Message Support",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 224,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 29
+   },
+   {
+    "id": "6001:11000",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11004",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11008",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11012",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Website Chat Widget",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 146,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 19
+   },
+   {
+    "id": "6001:11016",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11020",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11024",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11028",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Conversation History Storage",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 203,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 28
+   },
+   {
+    "id": "6001:11032",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11036",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11040",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11044",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "AI Knowledge Base Training",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 192,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 26
+   },
+   {
+    "id": "6001:11048",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11052",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11056",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11060",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Lead Capture Automation",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 177,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:11062",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11066",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11070",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11074",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "CRM Integration Support",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 172,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:11076",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11080",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11084",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11088",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Workflow Automation Builder",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 201,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 27
+   },
+   {
+    "id": "6001:11090",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11094",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11098",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11102",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Team Collaboration Tools",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 174,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 24
+   },
+   {
+    "id": "6001:11104",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11108",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11112",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11116",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Advanced Analytics Dashboard",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 216,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 28
+   },
+   {
+    "id": "6001:11118",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11120",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11124",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11128",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "API & Webhook Access",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 161,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 20
+   },
+   {
+    "id": "6001:11130",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11132",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11136",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:11140",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Priority Customer Support",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 180,
+    "h": 24,
+    "x": 30,
+    "y": 20,
+    "nb_car": 25
+   },
+   {
+    "id": "6001:11142",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11144",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "--",
+    "couleur": "#707070",
+    "align": "CENTER",
+    "w": 13,
+    "h": 23,
+    "x": 136,
+    "y": 20,
+    "nb_car": 2
+   },
+   {
+    "id": "6001:11148",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Yes",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 24,
+    "h": 23,
+    "x": 142,
+    "y": 20,
+    "nb_car": 3
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6001:10716",
+    "texte": "Monthly",
+    "fond": "#262626",
+    "w": 88,
+    "h": 44,
+    "rayon": 100
+   },
+   {
+    "id": "6001:10718",
+    "texte": "Yearly -20%",
+    "fond": null,
+    "w": 123,
+    "h": 46,
+    "rayon": 20
+   },
+   {
+    "id": "6001:10768",
+    "texte": "Start For Free",
+    "fond": "#EFEBE7",
+    "w": 319,
+    "h": 51,
+    "rayon": 100
+   },
+   {
+    "id": "6001:10819",
+    "texte": "Go With Pro",
+    "fond": "#262626",
+    "w": 319,
+    "h": 51,
+    "rayon": 100
+   },
+   {
+    "id": "6001:10872",
+    "texte": "Go With Business",
+    "fond": "#EFEBE7",
+    "w": 319,
+    "h": 51,
+    "rayon": 100
+   },
+   {
+    "id": "6001:10947",
+    "texte": "Start For Free",
+    "fond": "#EFEBE7",
+    "w": 236,
+    "h": 51,
+    "rayon": 100
+   },
+   {
+    "id": "6001:10959",
+    "texte": "Go With Pro",
+    "fond": "#1A1A1A",
+    "w": 236,
+    "h": 51,
+    "rayon": 100
+   },
+   {
+    "id": "6001:10971",
+    "texte": "Go With Business",
+    "fond": "#EFEBE7",
+    "w": 236,
+    "h": 51,
+    "rayon": 100
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:10727",
+    "nom": "check",
+    "w": 14,
+    "h": 14
+   },
+   {
+    "id": "6001:10733",
+    "nom": "check",
+    "w": 14,
+    "h": 14
+   },
+   {
+    "id": "6001:10739",
+    "nom": "check",
+    "w": 14,
+    "h": 14
+   },
+   {
+    "id": "6001:10745",
+    "nom": "check",
+    "w": 14,
+    "h": 14
+   },
+   {
+    "id": "6001:10933",
+    "nom": "shooting-star-bold",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6001:10982",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:10986",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:10990",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:10998",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11002",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11006",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11014",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11018",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11022",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11030",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11034",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11038",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11046",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11050",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11054",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11064",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11068",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11078",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11082",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11092",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11096",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11106",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11110",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11122",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11134",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:11146",
+    "nom": "Check",
+    "w": 18,
+    "h": 18
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:10731",
+    "w": 14,
+    "h": 0,
+    "x": 102,
+    "y": 5
+   },
+   {
+    "id": "6001:10737",
+    "w": 14,
+    "h": 0,
+    "x": 289,
+    "y": 5
+   },
+   {
+    "id": "6001:10743",
+    "w": 14,
+    "h": 0,
+    "x": 433,
+    "y": 5
+   },
+   {
+    "id": "6001:10754",
+    "w": 1440,
+    "h": 0,
+    "x": -151,
+    "y": 1
+   },
+   {
+    "id": "6001:10773",
+    "w": 380,
+    "h": 0,
+    "x": -1,
+    "y": 314
+   },
+   {
+    "id": "6001:10805",
+    "w": 662,
+    "h": 0,
+    "x": 380,
+    "y": 0
+   },
+   {
+    "id": "6001:10824",
+    "w": 380,
+    "h": 0,
+    "x": -1,
+    "y": 314
+   },
+   {
+    "id": "6001:10858",
+    "w": 662,
+    "h": 0,
+    "x": 760,
+    "y": 0
+   },
+   {
+    "id": "6001:10877",
+    "w": 380,
+    "h": 0,
+    "x": -1,
+    "y": 314
+   },
+   {
+    "id": "6001:10915",
+    "w": 132,
+    "h": 0,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:10919",
+    "w": 132,
+    "h": 0,
+    "x": 380,
+    "y": 0
+   },
+   {
+    "id": "6001:10923",
+    "w": 132,
+    "h": 0,
+    "x": 760,
+    "y": 0
+   },
+   {
+    "id": "6001:10940",
+    "w": 228,
+    "h": 0,
+    "x": 284,
+    "y": 0
+   },
+   {
+    "id": "6001:10952",
+    "w": 228,
+    "h": 0,
+    "x": 570,
+    "y": 0
+   },
+   {
+    "id": "6001:10964",
+    "w": 228,
+    "h": 0,
+    "x": 856,
+    "y": 0
+   },
+   {
+    "id": "6001:10993",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 64
+   },
+   {
+    "id": "6001:11009",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 128
+   },
+   {
+    "id": "6001:11025",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 192
+   },
+   {
+    "id": "6001:11041",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 256
+   },
+   {
+    "id": "6001:11057",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 320
+   },
+   {
+    "id": "6001:11071",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 384
+   },
+   {
+    "id": "6001:11085",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 448
+   },
+   {
+    "id": "6001:11099",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 512
+   },
+   {
+    "id": "6001:11113",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 576
+   },
+   {
+    "id": "6001:11125",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 640
+   },
+   {
+    "id": "6001:11137",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 704
+   },
+   {
+    "id": "6001:11149",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 768
+   },
+   {
+    "id": "6001:11154",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 0
+   }
+  ],
+  "jointures": [
+   {
+    "id": "6001:10909",
+    "x": 377,
+    "y": -3
+   },
+   {
+    "id": "6001:10910",
+    "x": 377,
+    "y": 657
+   },
+   {
+    "id": "6001:10911",
+    "x": 757,
+    "y": 657
+   },
+   {
+    "id": "6001:10912",
+    "x": 757,
+    "y": 0
+   }
+  ],
+  "images": [
+   {
+    "id": "6001:10913",
+    "nom": "Rectangle 34624471",
+    "w": 15,
+    "h": 1138
+   }
+  ]
+ }
+}

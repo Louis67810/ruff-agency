@@ -1,0 +1,568 @@
+{
+ "type": "integrations",
+ "noeud": "6001:1587",
+ "w": 1140,
+ "h": 511,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:1587",
+    "nom": "Frame 2147260432",
+    "w": 1140,
+    "h": 511,
+    "x": 150,
+    "y": 10392,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1588",
+    "nom": "Frame 2147240107",
+    "w": 1140,
+    "h": 203,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1613",
+    "nom": "Frame 2147239882",
+    "w": 1140,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1617",
+    "nom": "Frame 2147260429",
+    "w": 1140,
+    "h": 248,
+    "x": 0,
+    "y": 263,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:1618",
+    "nom": "Frame 2147260427",
+    "w": 1140,
+    "h": 124,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1619",
+    "nom": "Frame 2147260425",
+    "w": 285,
+    "h": 124,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 20/30/20/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1620",
+    "nom": "Frame 2147240374",
+    "w": 44,
+    "h": 44,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1632",
+    "nom": "Frame 2147260434",
+    "w": 285,
+    "h": 124,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 20/30/20/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1633",
+    "nom": "Frame 2147240374",
+    "w": 44,
+    "h": 44,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1649",
+    "nom": "Frame 2147260432",
+    "w": 285,
+    "h": 124,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 20/30/20/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1650",
+    "nom": "Frame 2147240374",
+    "w": 44,
+    "h": 44,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1660",
+    "nom": "Frame 2147260433",
+    "w": 285,
+    "h": 124,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 20/30/20/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1661",
+    "nom": "Frame 2147240374",
+    "w": 44,
+    "h": 44,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1672",
+    "nom": "Frame 2147260429",
+    "w": 1140,
+    "h": 124,
+    "x": 0,
+    "y": 124,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1673",
+    "nom": "Frame 2147260433",
+    "w": 285,
+    "h": 124,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 20/30/20/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1674",
+    "nom": "Frame 2147240374",
+    "w": 44,
+    "h": 44,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1684",
+    "nom": "Frame 2147260425",
+    "w": 285,
+    "h": 124,
+    "x": 285,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 20/30/20/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1685",
+    "nom": "Frame 2147240374",
+    "w": 44,
+    "h": 44,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1691",
+    "nom": "Frame 2147260432",
+    "w": 285,
+    "h": 124,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 20/30/20/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1692",
+    "nom": "Frame 2147240374",
+    "w": 44,
+    "h": 44,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1706",
+    "nom": "Frame 2147260434",
+    "w": 285,
+    "h": 124,
+    "x": 855,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 20/30/20/30 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:1707",
+    "nom": "Frame 2147240374",
+    "w": 44,
+    "h": 44,
+    "x": 30,
+    "y": 20,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": ""
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:1589",
+    "w": 419,
+    "h": 396,
+    "x": 1140,
+    "y": -133
+   },
+   {
+    "id": "6001:1601",
+    "w": 419,
+    "h": 396,
+    "x": 1,
+    "y": -133
+   },
+   {
+    "id": "6001:1715",
+    "w": 1440,
+    "h": 15,
+    "x": -149,
+    "y": 247
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:1614",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "integration",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 94,
+    "h": 21,
+    "x": 523,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "6001:1615",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Connect seamlessly / with your service",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 38
+   },
+   {
+    "id": "6001:1616",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Works with the tools and frameworks you already know and love. Set up and start sending in minutes.",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 52,
+    "x": 0,
+    "y": 151,
+    "nb_car": 99
+   },
+   {
+    "id": "6001:1627",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Shopify",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 225,
+    "h": 24,
+    "x": 30,
+    "y": 80,
+    "nb_car": 7
+   },
+   {
+    "id": "6001:1644",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Gmail",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 225,
+    "h": 24,
+    "x": 30,
+    "y": 80,
+    "nb_car": 5
+   },
+   {
+    "id": "6001:1655",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Telegram",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 225,
+    "h": 24,
+    "x": 30,
+    "y": 80,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:1667",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Instagram",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 225,
+    "h": 24,
+    "x": 30,
+    "y": 80,
+    "nb_car": 9
+   },
+   {
+    "id": "6001:1679",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Facebook",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 225,
+    "h": 24,
+    "x": 30,
+    "y": 80,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:1688",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Slack",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 225,
+    "h": 24,
+    "x": 30,
+    "y": 80,
+    "nb_car": 5
+   },
+   {
+    "id": "6001:1689",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Coming soon",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 86,
+    "h": 21,
+    "x": 179,
+    "y": 28,
+    "nb_car": 11
+   },
+   {
+    "id": "6001:1701",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "LinkedIn",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 225,
+    "h": 24,
+    "x": 30,
+    "y": 80,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:1712",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Shopify.com",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 225,
+    "h": 24,
+    "x": 30,
+    "y": 80,
+    "nb_car": 11
+   },
+   {
+    "id": "6001:1713",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Coming soon",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 86,
+    "h": 21,
+    "x": 179,
+    "y": 28,
+    "nb_car": 11
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:1621",
+    "nom": "Frame",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6001:1628",
+    "nom": "Frame 2147260399",
+    "w": 36,
+    "h": 28
+   },
+   {
+    "id": "6001:1634",
+    "nom": "Frame 2147260709",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6001:1645",
+    "nom": "Frame 2147260399",
+    "w": 36,
+    "h": 28
+   },
+   {
+    "id": "6001:1651",
+    "nom": "Frame",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6001:1656",
+    "nom": "Frame 2147260399",
+    "w": 36,
+    "h": 28
+   },
+   {
+    "id": "6001:1662",
+    "nom": "Frame 2147240374",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6001:1668",
+    "nom": "Frame 2147260399",
+    "w": 36,
+    "h": 28
+   },
+   {
+    "id": "6001:1675",
+    "nom": "Frame",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6001:1680",
+    "nom": "Frame 2147260399",
+    "w": 36,
+    "h": 28
+   },
+   {
+    "id": "6001:1686",
+    "nom": "Slack Logomark",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6001:1693",
+    "nom": "fi_3536505",
+    "w": 24,
+    "h": 24
+   },
+   {
+    "id": "6001:1702",
+    "nom": "Frame 2147260399",
+    "w": 36,
+    "h": 28
+   },
+   {
+    "id": "6001:1708",
+    "nom": "Notion Logomark",
+    "w": 24,
+    "h": 24
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:1631",
+    "w": 124,
+    "h": 0,
+    "x": 285,
+    "y": 0
+   },
+   {
+    "id": "6001:1648",
+    "w": 124,
+    "h": 0,
+    "x": 570,
+    "y": 0
+   },
+   {
+    "id": "6001:1659",
+    "w": 124,
+    "h": 0,
+    "x": 855,
+    "y": 0
+   },
+   {
+    "id": "6001:1671",
+    "w": 1140,
+    "h": 0,
+    "x": 1140,
+    "y": 124
+   },
+   {
+    "id": "6001:1683",
+    "w": 124,
+    "h": 0,
+    "x": 285,
+    "y": 0
+   },
+   {
+    "id": "6001:1690",
+    "w": 124,
+    "h": 0,
+    "x": 570,
+    "y": 0
+   },
+   {
+    "id": "6001:1705",
+    "w": 124,
+    "h": 0,
+    "x": 855,
+    "y": 0
+   },
+   {
+    "id": "6001:1714",
+    "w": 1440,
+    "h": 0,
+    "x": -151,
+    "y": 1
+   }
+  ]
+ }
+}

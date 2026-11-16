@@ -1,0 +1,209 @@
+{
+ "type": "hero-produit-demo",
+ "noeud": "6001:345",
+ "w": 691,
+ "h": 525,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:345",
+    "nom": "Frame 2147239861",
+    "w": 691,
+    "h": 525,
+    "x": 375,
+    "y": 197,
+    "layout": "auto-layout ↓ écart 50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:346",
+    "nom": "Frame 2147239833",
+    "w": 691,
+    "h": 235,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:351",
+    "nom": "Frame 2147239830",
+    "w": 691,
+    "h": 190,
+    "x": 0,
+    "y": 45,
+    "layout": "auto-layout ↓ écart 20 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:354",
+    "nom": "Frame 2147239860",
+    "w": 691,
+    "h": 240,
+    "x": 0,
+    "y": 285,
+    "layout": "auto-layout ↓ écart 20 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:355",
+    "nom": "Frame 2147239847",
+    "w": 691,
+    "h": 189,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": "contour #FFFFFF4D 1"
+   },
+   {
+    "id": "6001:357",
+    "nom": "Frame 2147239831",
+    "w": 691,
+    "h": 76,
+    "x": 0,
+    "y": 113,
+    "layout": "auto-layout → écart 488 pad 20/20/20/20 align SPACE_BETWEEN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:370",
+    "nom": "Frame 2147239853",
+    "w": 691,
+    "h": 31,
+    "x": 0,
+    "y": 209,
+    "layout": "auto-layout → écart 10 align CENTER/CENTER",
+    "traits": ""
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6001:347",
+    "texte": "AI-First Mode Available New",
+    "fond": "#FFFFFF33",
+    "w": 199,
+    "h": 33,
+    "rayon": 100
+   },
+   {
+    "id": "6001:371",
+    "texte": "Account Help",
+    "fond": "#FFFFFF",
+    "w": 121,
+    "h": 31,
+    "rayon": 100
+   },
+   {
+    "id": "6001:377",
+    "texte": "Order Tracking",
+    "fond": "#FFFFFF",
+    "w": 128,
+    "h": 31,
+    "rayon": 100
+   },
+   {
+    "id": "6001:383",
+    "texte": "Refund Status",
+    "fond": "#FFFFFF",
+    "w": 124,
+    "h": 31,
+    "rayon": 100
+   },
+   {
+    "id": "6001:389",
+    "texte": "Technical Support",
+    "fond": "#FFFFFF",
+    "w": 148,
+    "h": 31,
+    "rayon": 100
+   },
+   {
+    "id": "6001:395",
+    "texte": "Delivery Status",
+    "fond": "#FFFFFF",
+    "w": 129,
+    "h": 31,
+    "rayon": 100
+   },
+   {
+    "id": "6001:401",
+    "texte": "Live Chat Help",
+    "fond": "#FFFFFF",
+    "w": 126,
+    "h": 31,
+    "rayon": 100
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:352",
+    "role": "titre de section",
+    "police": "Switzer Semibold 54",
+    "texte": "AI That Automates / Customer Experience",
+    "couleur": "#FFFFFF",
+    "align": "CENTER",
+    "w": 691,
+    "h": 118,
+    "x": 0,
+    "y": 0,
+    "nb_car": 39
+   },
+   {
+    "id": "6001:353",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Automate conversations, resolve customer questions instantly, / and deliver smarter support using Botwise AI.",
+    "couleur": "#D6D0C8",
+    "align": "CENTER",
+    "w": 691,
+    "h": 52,
+    "x": 0,
+    "y": 138,
+    "nb_car": 109
+   },
+   {
+    "id": "6001:356",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "I want to cancel my subscription",
+    "couleur": "#D6D0C8",
+    "align": "LEFT",
+    "w": 216,
+    "h": 24,
+    "x": 21,
+    "y": 20,
+    "nb_car": 32
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:358",
+    "nom": "Button",
+    "w": 36,
+    "h": 36
+   },
+   {
+    "id": "6001:363",
+    "nom": "Frame 2147261064",
+    "w": 36,
+    "h": 36
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:407",
+    "w": 159,
+    "h": 41,
+    "x": 532,
+    "y": -5
+   },
+   {
+    "id": "6001:410",
+    "w": 159,
+    "h": 41,
+    "x": 159,
+    "y": -5
+   }
+  ]
+ }
+}

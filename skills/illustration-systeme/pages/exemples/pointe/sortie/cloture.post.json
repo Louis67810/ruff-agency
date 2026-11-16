@@ -1,0 +1,548 @@
+{
+"racine": {
+"kind": "frame",
+"w": 1440,
+"h": 1020,
+"nom": "05 · La clôture"
+},
+"noeuds": {
+"05 · La clôture": {
+"kind": "frame",
+"w": 1440,
+"h": 1020
+},
+"05 · La clôture / Clôture · sur-titre": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 14,
+"lh": 150,
+"ls": 1,
+"w": null,
+"align": "center",
+"x": 720,
+"y": 100
+},
+"05 · La clôture / Clôture · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 48,
+"lh": 110,
+"ls": -3,
+"w": 760,
+"align": "center",
+"x": 720,
+"y": 132
+},
+"05 · La clôture / Clôture · intro": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 17,
+"lh": 150,
+"ls": -2,
+"w": 560,
+"align": "center",
+"x": 720,
+"y": 260
+},
+"05 · La clôture / Clôture · onglets": {
+"kind": "frame",
+"w": 530,
+"h": 52,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"05 · La clôture / Clôture · onglets / Clôture · onglet Rapprochement": {
+"kind": "frame",
+"w": 152,
+"h": 40,
+"rayon": 100
+},
+"05 · La clôture / Clôture · onglets / Clôture · onglet Rapprochement / Clôture · onglet Rapprochement · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 76.0,
+"y": 9
+},
+"05 · La clôture / Clôture · onglets / Clôture · onglet Relances": {
+"kind": "frame",
+"w": 106,
+"h": 40,
+"rayon": 100
+},
+"05 · La clôture / Clôture · onglets / Clôture · onglet Relances / Clôture · onglet Relances · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 53.0,
+"y": 9
+},
+"05 · La clôture / Clôture · onglets / Clôture · onglet TVA": {
+"kind": "frame",
+"w": 70,
+"h": 40,
+"rayon": 100
+},
+"05 · La clôture / Clôture · onglets / Clôture · onglet TVA / Clôture · onglet TVA · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 35.0,
+"y": 9
+},
+"05 · La clôture / Clôture · onglets / Clôture · onglet Export comptable": {
+"kind": "frame",
+"w": 166,
+"h": 40,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "badge"
+},
+"05 · La clôture / Clôture · onglets / Clôture · onglet Export comptable / Clôture · onglet Export comptable · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 83.0,
+"y": 9
+},
+"05 · La clôture / Clôture · carte": {
+"kind": "frame",
+"w": 1108,
+"h": 500,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 20,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-carte-avis"
+},
+"05 · La clôture / Clôture · carte / Clôture · icône": {
+"kind": "frame",
+"w": 32,
+"h": 32,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 10
+},
+"05 · La clôture / Clôture · carte / Clôture · icône / Clôture · icône · coche": {
+"kind": "vec"
+},
+"05 · La clôture / Clôture · carte / Clôture · carte · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 28,
+"lh": 120,
+"ls": -3,
+"w": 440,
+"align": "start",
+"x": 40,
+"y": 96
+},
+"05 · La clôture / Clôture · carte / Clôture · carte · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 16,
+"lh": 150,
+"ls": -2,
+"w": 430,
+"align": "start",
+"x": 40,
+"y": 178
+},
+"05 · La clôture / Clôture · carte / Clôture · bouton": {
+"kind": "frame",
+"w": 170,
+"h": 47,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"05 · La clôture / Clôture · carte / Clôture · bouton / Clôture · bouton · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 85,
+"y": 12
+},
+"05 · La clôture / Clôture · carte / Clôture · carte · trait": {
+"kind": "vec"
+},
+"05 · La clôture / Clôture · carte / Clôture · carte · trait chiffres": {
+"kind": "vec"
+},
+"05 · La clôture / Clôture · carte / Clôture · chiffre 1": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 34,
+"lh": 110,
+"ls": -3,
+"w": null,
+"align": "start",
+"x": 40,
+"y": 376
+},
+"05 · La clôture / Clôture · carte / Clôture · chiffre 1 · légende": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 40,
+"y": 424
+},
+"05 · La clôture / Clôture · carte / Clôture · chiffre 2": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 34,
+"lh": 110,
+"ls": -3,
+"w": null,
+"align": "start",
+"x": 317,
+"y": 376
+},
+"05 · La clôture / Clôture · carte / Clôture · chiffre 2 · légende": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 317,
+"y": 424
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration": {
+"kind": "frame",
+"w": 538,
+"h": 484,
+"fond": [
+"#F3F0ED",
+1
+],
+"rayon": 14
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · dossier": {
+"kind": "frame",
+"w": 264,
+"h": 128,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 16,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · dossier / Clôture · dossier · mois": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 11,
+"lh": 140,
+"ls": 2,
+"w": null,
+"align": "start",
+"x": 20,
+"y": 20
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · dossier / Clôture · dossier · lignes": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 20,
+"y": 42
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · dossier / Clôture · dossier · barre": {
+"kind": "frame",
+"w": 224,
+"h": 6,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 100
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · dossier / Clôture · dossier · barre / Clôture · dossier · barre pleine": {
+"kind": "frame",
+"w": 224,
+"h": 6,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · câble": {
+"kind": "vec"
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · prise départ": {
+"kind": "frame",
+"w": 10,
+"h": 10,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"contour": [
+"#D6D0C8",
+1
+]
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · prise départ / Clôture · prise départ · cœur": {
+"kind": "frame",
+"w": 4,
+"h": 4,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · prise arrivée": {
+"kind": "frame",
+"w": 10,
+"h": 10,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"contour": [
+"#D6D0C8",
+1
+]
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · prise arrivée / Clôture · prise arrivée · cœur": {
+"kind": "frame",
+"w": 4,
+"h": 4,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · cabinet": {
+"kind": "frame",
+"w": 208,
+"h": 68,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · cabinet / Clôture · cabinet · avatar": {
+"kind": "frame",
+"w": 32,
+"h": 32,
+"fond": [
+"#1A1A1A",
+1
+],
+"rayon": 100
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · cabinet / Clôture · cabinet · avatar / Clôture · cabinet · R": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 16,
+"y": 7
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · cabinet / Clôture · cabinet · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 60,
+"y": 15
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · cabinet / Clôture · cabinet · rôle": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 60,
+"y": 36
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · Envoyé au cabinet": {
+"kind": "frame",
+"w": 182,
+"h": 34,
+"fond": [
+"#1A1A1A",
+1
+],
+"rayon": 100,
+"effets": "bouton-noir"
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · Envoyé au cabinet / Clôture · Envoyé au cabinet · coche": {
+"kind": "frame",
+"w": 22,
+"h": 22,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · Envoyé au cabinet / Clôture · Envoyé au cabinet · coche / Clôture · Envoyé au cabinet · coche · tracé": {
+"kind": "vec"
+},
+"05 · La clôture / Clôture · carte / Clôture · illustration / Clôture · Envoyé au cabinet / Clôture · Envoyé au cabinet · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 36,
+"y": 7
+},
+"05 · La clôture / Clôture · trait de fin": {
+"kind": "vec"
+},
+"05 · La clôture / Clôture · jointure 150": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"05 · La clôture / Clôture · jointure 1290": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+}
+}
+}

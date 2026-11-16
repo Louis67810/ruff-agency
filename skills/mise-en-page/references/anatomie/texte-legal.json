@@ -1,0 +1,491 @@
+{
+ "type": "texte-legal",
+ "noeud": "4001:37167",
+ "w": 794,
+ "h": 2622,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:37167",
+    "nom": "Frame 2147260630",
+    "w": 794,
+    "h": 2622,
+    "x": 323,
+    "y": 167,
+    "layout": "auto-layout ↓ écart 80 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37168",
+    "nom": "Frame 2147240159",
+    "w": 794,
+    "h": 203,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37169",
+    "nom": "Frame 2147239882",
+    "w": 694,
+    "h": 109,
+    "x": 50,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37179",
+    "nom": "Frame 2147239347",
+    "w": 794,
+    "h": 2339,
+    "x": 0,
+    "y": 283,
+    "layout": "auto-layout ↓ écart 50 pad 0/0/80/0 align MIN/MIN",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "4001:37181",
+    "nom": "Frame 2147237681",
+    "w": 794,
+    "h": 226,
+    "x": 0,
+    "y": 50,
+    "layout": "auto-layout ↓ écart 16 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37186",
+    "nom": "Frame 2147238110",
+    "w": 794,
+    "h": 264,
+    "x": 0,
+    "y": 376,
+    "layout": "auto-layout ↓ écart 16 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37190",
+    "nom": "Frame 2147238111",
+    "w": 794,
+    "h": 269,
+    "x": 0,
+    "y": 740,
+    "layout": "auto-layout ↓ écart 16 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37196",
+    "nom": "Frame 2147238112",
+    "w": 794,
+    "h": 210,
+    "x": 0,
+    "y": 1109,
+    "layout": "auto-layout ↓ écart 16 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37200",
+    "nom": "Frame 2147238116",
+    "w": 794,
+    "h": 269,
+    "x": 0,
+    "y": 1419,
+    "layout": "auto-layout ↓ écart 16 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37206",
+    "nom": "Frame 2147238117",
+    "w": 794,
+    "h": 242,
+    "x": 0,
+    "y": 1788,
+    "layout": "auto-layout ↓ écart 16 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:37212",
+    "nom": "Frame 2147238115",
+    "w": 794,
+    "h": 129,
+    "x": 0,
+    "y": 2130,
+    "layout": "auto-layout ↓ écart 16 pad 0/50/0/50 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "boutons": [
+   {
+    "id": "4001:37170",
+    "texte": "Last Updated on August, 24, 2026",
+    "fond": null,
+    "w": 280,
+    "h": 40,
+    "rayon": 100
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:37177",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Our Privacy Policy",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 694,
+    "h": 53,
+    "x": 0,
+    "y": 56,
+    "nb_car": 18
+   },
+   {
+    "id": "4001:37178",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Botwise is committed to protecting your privacy and maintaining transparency about how we collect, use, and safeguard your data. This Privacy Policy explains how information is collected and processed when you use the Botwise platform and services.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 78,
+    "x": 50,
+    "y": 125,
+    "nb_car": 248
+   },
+   {
+    "id": "4001:37182",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "Information We Collect Through Botwise",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 32,
+    "x": 50,
+    "y": 0,
+    "nb_car": 38
+   },
+   {
+    "id": "4001:37183",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "When you use Botwise, we collect certain information that helps us provide reliable chatbot automation and improve your support workflows. This may include:",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 54,
+    "x": 50,
+    "y": 48,
+    "nb_car": 156
+   },
+   {
+    "id": "4001:37184",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "• Account details such as name, email address, company name, and user role  • Conversation data including chat transcripts, interaction metadata, and chatbot   • Usage information related to platform activity, features used, and performance metrics  • Communication details when you contact support or submit feedback",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 108,
+    "x": 50,
+    "y": 118,
+    "nb_car": 317
+   },
+   {
+    "id": "4001:37187",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "How Botwise Uses Your Data",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 32,
+    "x": 50,
+    "y": 0,
+    "nb_car": 26
+   },
+   {
+    "id": "4001:37188",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Botwise uses collected information to operate and improve the platform while maintaining privacy-focused practices. We use data to: /  / Deliver AI-powered chatbot automation and response generation / Improve system performance, accuracy, and reliability / Provide onboarding assistance, customer support, and service updates / Monitor platform health, detect misuse, and maintain security / Develop new features that improve automation workflows",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 216,
+    "x": 50,
+    "y": 48,
+    "nb_car": 446
+   },
+   {
+    "id": "4001:37191",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "AI Processing & Conversation Data Responsibility",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 32,
+    "x": 50,
+    "y": 0,
+    "nb_car": 48
+   },
+   {
+    "id": "4001:37192",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Botwise processes chatbot conversations using secure AI systems designed to support automated customer communication.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 54,
+    "x": 50,
+    "y": 48,
+    "nb_car": 117
+   },
+   {
+    "id": "4001:37193",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "• Limited to the features and services you actively use • Restricted to authorized systems and infrastructure • Governed by strict internal access and data protection policies",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 81,
+    "x": 50,
+    "y": 118,
+    "nb_car": 175
+   },
+   {
+    "id": "4001:37194",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Conversation data and customer interactions remain the property of the business using Botwise. We do not claim ownership of customer conversations or generated responses.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 54,
+    "x": 50,
+    "y": 215,
+    "nb_car": 170
+   },
+   {
+    "id": "4001:37197",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "Data Retention & User Control",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 32,
+    "x": 50,
+    "y": 0,
+    "nb_car": 29
+   },
+   {
+    "id": "4001:37198",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "We retain customer and platform data only for as long as necessary to provide services and meet legal or operational requirements. /  / Users may request deletion or export of their data according to applicable privacy regulations. Once data is removed from the system, it is permanently deleted from active infrastructure.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 162,
+    "x": 50,
+    "y": 48,
+    "nb_car": 323
+   },
+   {
+    "id": "4001:37201",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "Security & Infrastructure Protection",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 32,
+    "x": 50,
+    "y": 0,
+    "nb_car": 36
+   },
+   {
+    "id": "4001:37202",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Botwise applies modern security practices to ensure data protection and platform / integrity, including:",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 54,
+    "x": 50,
+    "y": 48,
+    "nb_car": 104
+   },
+   {
+    "id": "4001:37203",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "• End-to-end encryption for data in transit and storage  • Secure cloud infrastructure and strict access controls  • Continuous system monitoring and vulnerability management",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 81,
+    "x": 50,
+    "y": 118,
+    "nb_car": 174
+   },
+   {
+    "id": "4001:37204",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "While no digital system can guarantee absolute security, we actively maintain safeguards to protect your information.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 54,
+    "x": 50,
+    "y": 215,
+    "nb_car": 117
+   },
+   {
+    "id": "4001:37207",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "Cookies & Platform Analytics",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 32,
+    "x": 50,
+    "y": 0,
+    "nb_car": 28
+   },
+   {
+    "id": "4001:37208",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "Botwise uses cookies and analytics technologies to enhance platform performance and improve user experience.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 54,
+    "x": 50,
+    "y": 48,
+    "nb_car": 108
+   },
+   {
+    "id": "4001:37209",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "• Analyze product usage and feature adoption • Maintain session security and authentication • Identify performance improvements across the platform",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 81,
+    "x": 50,
+    "y": 118,
+    "nb_car": 147
+   },
+   {
+    "id": "4001:37210",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "You can control cookie preferences through your browser settings",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 27,
+    "x": 50,
+    "y": 215,
+    "nb_car": 64
+   },
+   {
+    "id": "4001:37213",
+    "role": "titre de carte",
+    "police": "Switzer Semibold 28",
+    "texte": "Contact Us",
+    "couleur": "#333333",
+    "align": "LEFT",
+    "w": 694,
+    "h": 32,
+    "x": 50,
+    "y": 0,
+    "nb_car": 10
+   },
+   {
+    "id": "4001:37214",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 18",
+    "texte": "If you have questions about privacy, data handling, or security at Botwise, contact us at: / hello@botwise.com We’re committed to transparency and responsible AI research practices.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 694,
+    "h": 81,
+    "x": 50,
+    "y": 48,
+    "nb_car": 181
+   }
+  ],
+  "traits": [
+   {
+    "id": "4001:37180",
+    "w": 794,
+    "h": 0,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "4001:37185",
+    "w": 794,
+    "h": 0,
+    "x": 0,
+    "y": 326
+   },
+   {
+    "id": "4001:37189",
+    "w": 794,
+    "h": 0,
+    "x": 0,
+    "y": 690
+   },
+   {
+    "id": "4001:37195",
+    "w": 794,
+    "h": 0,
+    "x": 0,
+    "y": 1059
+   },
+   {
+    "id": "4001:37199",
+    "w": 794,
+    "h": 0,
+    "x": 0,
+    "y": 1369
+   },
+   {
+    "id": "4001:37205",
+    "w": 794,
+    "h": 0,
+    "x": 0,
+    "y": 1738
+   },
+   {
+    "id": "4001:37211",
+    "w": 794,
+    "h": 0,
+    "x": 0,
+    "y": 2080
+   }
+  ],
+  "decors": [
+   {
+    "id": "4001:37215",
+    "w": 1440,
+    "h": 15,
+    "x": -323,
+    "y": 2621
+   }
+  ]
+ }
+}

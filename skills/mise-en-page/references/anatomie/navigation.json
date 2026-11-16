@@ -1,0 +1,297 @@
+{
+ "type": "navigation",
+ "noeud": "6001:21",
+ "w": 1440,
+ "h": 87,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:21",
+    "nom": "Frame 2147260474",
+    "w": 1440,
+    "h": 87,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 10 pad 0/150/0/150 align MIN/MIN",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:22",
+    "nom": "Frame 2147239845",
+    "w": 1140,
+    "h": 87,
+    "x": 150,
+    "y": 0,
+    "layout": "auto-layout → écart 322 pad 20/20/20/20 align SPACE_BETWEEN/CENTER",
+    "traits": "trait #D6D0C8 right/left"
+   },
+   {
+    "id": "6001:23",
+    "nom": "Frame 2147239844",
+    "w": 602,
+    "h": 39,
+    "x": 20,
+    "y": 24,
+    "layout": "auto-layout → écart 40 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:24",
+    "nom": "Frame 2147240273",
+    "w": 122,
+    "h": 28,
+    "x": 0,
+    "y": 5,
+    "layout": "auto-layout → écart 6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:31",
+    "nom": "Botwise",
+    "w": 81,
+    "h": 18,
+    "x": 40,
+    "y": 5,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:39",
+    "nom": "Buttons Container",
+    "w": 440,
+    "h": 39,
+    "x": 162,
+    "y": 0,
+    "layout": "auto-layout → écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:40",
+    "nom": "Button",
+    "w": 51,
+    "h": 35,
+    "x": 0,
+    "y": 2,
+    "layout": "auto-layout → écart 10 pad 6/6/6/6 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:43",
+    "nom": "Button",
+    "w": 60,
+    "h": 39,
+    "x": 59,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/8/8/8 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:45",
+    "nom": "Button",
+    "w": 55,
+    "h": 39,
+    "x": 127,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/8/8/8 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:47",
+    "nom": "Button",
+    "w": 52,
+    "h": 39,
+    "x": 190,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 8/8/8/8 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:49",
+    "nom": "Button",
+    "w": 90,
+    "h": 39,
+    "x": 250,
+    "y": 0,
+    "layout": "auto-layout → écart 4 pad 8/6/8/8 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:53",
+    "nom": "Button",
+    "w": 92,
+    "h": 39,
+    "x": 348,
+    "y": 0,
+    "layout": "auto-layout → écart 4 pad 8/6/8/8 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:57",
+    "nom": "Frame 2",
+    "w": 224,
+    "h": 47,
+    "x": 896,
+    "y": 20,
+    "layout": "auto-layout → écart 14 align MIN/CENTER",
+    "traits": ""
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:25",
+    "nom": "Frame 2147240272",
+    "w": 34,
+    "h": 28
+   },
+   {
+    "id": "6001:32",
+    "nom": "Vector",
+    "w": 12,
+    "h": 13
+   },
+   {
+    "id": "6001:33",
+    "nom": "Vector",
+    "w": 11,
+    "h": 13
+   },
+   {
+    "id": "6001:35",
+    "nom": "Vector",
+    "w": 19,
+    "h": 13
+   },
+   {
+    "id": "6001:37",
+    "nom": "Vector",
+    "w": 12,
+    "h": 13
+   },
+   {
+    "id": "6001:38",
+    "nom": "Vector",
+    "w": 13,
+    "h": 17
+   },
+   {
+    "id": "6001:51",
+    "nom": "Icon",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:55",
+    "nom": "Icon",
+    "w": 16,
+    "h": 16
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:41",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Home",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 39,
+    "h": 23,
+    "x": 6,
+    "y": 6,
+    "nb_car": 4
+   },
+   {
+    "id": "6001:44",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Pricing",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 44,
+    "h": 23,
+    "x": 8,
+    "y": 8,
+    "nb_car": 7
+   },
+   {
+    "id": "6001:46",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "About",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 39,
+    "h": 23,
+    "x": 8,
+    "y": 8,
+    "nb_car": 5
+   },
+   {
+    "id": "6001:48",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Blogs",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 36,
+    "h": 23,
+    "x": 8,
+    "y": 8,
+    "nb_car": 5
+   },
+   {
+    "id": "6001:50",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Sections",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 56,
+    "h": 23,
+    "x": 8,
+    "y": 8,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:54",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "All Pages",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 58,
+    "h": 23,
+    "x": 8,
+    "y": 8,
+    "nb_car": 9
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:42",
+    "w": 50,
+    "h": 2,
+    "x": 1,
+    "y": 33
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6001:58",
+    "texte": "Join Waitlist",
+    "fond": "#EFEBE7",
+    "w": 108,
+    "h": 47,
+    "rayon": 100
+   },
+   {
+    "id": "6001:60",
+    "texte": "Contact us",
+    "fond": "#1A1A1A",
+    "w": 102,
+    "h": 47,
+    "rayon": 100
+   }
+  ]
+ }
+}

@@ -1,0 +1,414 @@
+{
+ "type": "hero-blog",
+ "noeud": "4001:30233",
+ "w": 1140,
+ "h": 1025,
+ "items": {
+  "blocs": [
+   {
+    "id": "4001:30233",
+    "nom": "Frame 2147260518",
+    "w": 1140,
+    "h": 1025,
+    "x": 150,
+    "y": 187,
+    "layout": "auto-layout ↓ écart 60 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "4001:30234",
+    "nom": "Frame 2147240108",
+    "w": 1140,
+    "h": 203,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 16 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30263",
+    "nom": "Frame 2147239882",
+    "w": 1140,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30267",
+    "nom": "Frame 2147260462",
+    "w": 1140,
+    "h": 762,
+    "x": 0,
+    "y": 263,
+    "layout": "auto-layout ↓ écart 50 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30268",
+    "nom": "Search bar",
+    "w": 468,
+    "h": 56,
+    "x": 336,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 16/16/16/16 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30272",
+    "nom": "Frame 2147260463",
+    "w": 1140,
+    "h": 656,
+    "x": 0,
+    "y": 106,
+    "layout": "auto-layout ↓ écart 40 pad 0/0/40/0 align MIN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "4001:30274",
+    "nom": "Frame 2147260459",
+    "w": 1140,
+    "h": 525,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 0 pad 0/15/0/15 align SPACE_BETWEEN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "4001:30275",
+    "nom": "Frame 2147260459",
+    "w": 350,
+    "h": 525,
+    "x": 15,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 15/0/15/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30276",
+    "nom": "Card",
+    "w": 350,
+    "h": 495,
+    "x": 0,
+    "y": 15,
+    "layout": "auto-layout ↓ écart 0 pad 4/4/0/4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30277",
+    "nom": "Image",
+    "w": 342,
+    "h": 249,
+    "x": 4,
+    "y": 4,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:30279",
+    "nom": "Container",
+    "w": 342,
+    "h": 242,
+    "x": 4,
+    "y": 253,
+    "layout": "auto-layout ↓ écart 30 pad 24/24/24/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30280",
+    "nom": "Sub Container",
+    "w": 294,
+    "h": 121,
+    "x": 24,
+    "y": 24,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30304",
+    "nom": "Frame 2147260460",
+    "w": 360,
+    "h": 525,
+    "x": 390,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 15/0/15/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30305",
+    "nom": "Card",
+    "w": 360,
+    "h": 495,
+    "x": 0,
+    "y": 15,
+    "layout": "auto-layout ↓ écart 0 pad 4/4/0/4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30306",
+    "nom": "Image",
+    "w": 352,
+    "h": 249,
+    "x": 4,
+    "y": 4,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:30308",
+    "nom": "Container",
+    "w": 352,
+    "h": 242,
+    "x": 4,
+    "y": 253,
+    "layout": "auto-layout ↓ écart 30 pad 24/24/24/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30309",
+    "nom": "Sub Container",
+    "w": 304,
+    "h": 121,
+    "x": 24,
+    "y": 24,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30333",
+    "nom": "Frame 2147260461",
+    "w": 350,
+    "h": 525,
+    "x": 775,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 15/0/15/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "4001:30334",
+    "nom": "Card",
+    "w": 350,
+    "h": 495,
+    "x": 0,
+    "y": 15,
+    "layout": "auto-layout ↓ écart 0 pad 4/4/0/4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30335",
+    "nom": "Image",
+    "w": 342,
+    "h": 249,
+    "x": 4,
+    "y": 4,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "4001:30337",
+    "nom": "Container",
+    "w": 342,
+    "h": 242,
+    "x": 4,
+    "y": 253,
+    "layout": "auto-layout ↓ écart 30 pad 24/24/24/24 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "4001:30338",
+    "nom": "Sub Container",
+    "w": 294,
+    "h": 121,
+    "x": 24,
+    "y": 24,
+    "layout": "auto-layout ↓ écart 12 align MIN/MIN",
+    "traits": ""
+   }
+  ],
+  "decors": [
+   {
+    "id": "4001:30235",
+    "w": 488,
+    "h": 466,
+    "x": 1140,
+    "y": -97
+   },
+   {
+    "id": "4001:30249",
+    "w": 488,
+    "h": 466,
+    "x": 0,
+    "y": -97
+   },
+   {
+    "id": "4001:30373",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 655
+   }
+  ],
+  "textes": [
+   {
+    "id": "4001:30264",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "blogs",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 43,
+    "h": 21,
+    "x": 548,
+    "y": 0,
+    "nb_car": 5
+   },
+   {
+    "id": "4001:30265",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Insights, News / & Guides",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 25
+   },
+   {
+    "id": "4001:30266",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Explore insights on AI automation, chatbots, and / modern customer support strategies.",
+    "couleur": "#595959",
+    "align": "CENTER",
+    "w": 1140,
+    "h": 52,
+    "x": 0,
+    "y": 151,
+    "nb_car": 86
+   },
+   {
+    "id": "4001:30271",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Search for Blogs",
+    "couleur": "#666666",
+    "align": "LEFT",
+    "w": 406,
+    "h": 24,
+    "x": 46,
+    "y": 16,
+    "nb_car": 16
+   }
+  ],
+  "icones": [
+   {
+    "id": "4001:30269",
+    "nom": "Outline / Search / Magnifer",
+    "w": 20,
+    "h": 20
+   }
+  ],
+  "traits": [
+   {
+    "id": "4001:30273",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 1
+   },
+   {
+    "id": "4001:30303",
+    "w": 525,
+    "h": 0,
+    "x": 377,
+    "y": 0
+   },
+   {
+    "id": "4001:30332",
+    "w": 525,
+    "h": 0,
+    "x": 763,
+    "y": 0
+   }
+  ],
+  "images": [
+   {
+    "id": "4001:30278",
+    "nom": "image 27",
+    "w": 343,
+    "h": 249
+   },
+   {
+    "id": "4001:30307",
+    "nom": "image 27",
+    "w": 353,
+    "h": 249
+   },
+   {
+    "id": "4001:30336",
+    "nom": "image 27",
+    "w": 343,
+    "h": 249
+   }
+  ],
+  "boutons": [
+   {
+    "id": "4001:30298",
+    "texte": "Read Full Blog",
+    "fond": "#EFEBE7",
+    "w": 135,
+    "h": 43,
+    "rayon": 100
+   },
+   {
+    "id": "4001:30327",
+    "texte": "Read Full Blog",
+    "fond": "#1A1A1A",
+    "w": 135,
+    "h": 43,
+    "rayon": 100
+   },
+   {
+    "id": "4001:30356",
+    "texte": "Read Full Blog",
+    "fond": "#EFEBE7",
+    "w": 135,
+    "h": 43,
+    "rayon": 100
+   },
+   {
+    "id": "4001:30365",
+    "texte": "Load All Blogs",
+    "fond": "#EFEBE7",
+    "w": 140,
+    "h": 51,
+    "rayon": 100
+   }
+  ],
+  "jointures": [
+   {
+    "id": "4001:30361",
+    "x": 758,
+    "y": -4
+   },
+   {
+    "id": "4001:30362",
+    "x": 374,
+    "y": 521
+   },
+   {
+    "id": "4001:30363",
+    "x": 758,
+    "y": 521
+   },
+   {
+    "id": "4001:30364",
+    "x": 374,
+    "y": -4
+   }
+  ]
+ }
+}

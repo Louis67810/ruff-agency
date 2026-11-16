@@ -1,0 +1,570 @@
+{
+"racine": {
+"kind": "frame",
+"w": 1440,
+"h": 860,
+"nom": "09 · Appel final"
+},
+"noeuds": {
+"09 · Appel final": {
+"kind": "frame",
+"w": 1440,
+"h": 860
+},
+"09 · Appel final / Appel · cadre": {
+"kind": "frame",
+"w": 560,
+"h": 220,
+"contour": [
+"#D6D0C8",
+1
+]
+},
+"09 · Appel final / Appel · cadre / Appel · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 48,
+"lh": 110,
+"ls": -3,
+"w": 480,
+"align": "center",
+"x": 280,
+"y": 32
+},
+"09 · Appel final / Appel · jointure cadre 1": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"09 · Appel final / Appel · jointure cadre 2": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"09 · Appel final / Appel · jointure cadre 3": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"09 · Appel final / Appel · jointure cadre 4": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"09 · Appel final / Appel · case vide 0-0": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.36
+},
+"09 · Appel final / Appel · outil Qonto": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"09 · Appel final / Appel · outil Qonto / Appel · outil Qonto · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · outil Gmail": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"09 · Appel final / Appel · outil Gmail / Appel · outil Gmail · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · case vide 0-3": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.8
+},
+"09 · Appel final / Appel · outil Pennylane": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"09 · Appel final / Appel · outil Pennylane / Appel · outil Pennylane · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · case vide 0-5": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.36
+},
+"09 · Appel final / Appel · outil Shine": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne",
+"opacite": 0.35
+},
+"09 · Appel final / Appel · outil Shine / Appel · outil Shine · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · case vide 1-1": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.62
+},
+"09 · Appel final / Appel · outil BNP": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne",
+"opacite": 0.78
+},
+"09 · Appel final / Appel · outil BNP / Appel · outil BNP · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · outil Drive": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne",
+"opacite": 0.78
+},
+"09 · Appel final / Appel · outil Drive / Appel · outil Drive · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · case vide 1-4": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.62
+},
+"09 · Appel final / Appel · outil Outlook": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne",
+"opacite": 0.35
+},
+"09 · Appel final / Appel · outil Outlook / Appel · outil Outlook · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · case vide 2-0": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.2
+},
+"09 · Appel final / Appel · outil Tiime": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne",
+"opacite": 0.56
+},
+"09 · Appel final / Appel · outil Tiime / Appel · outil Tiime · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · case vide 2-2": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.45
+},
+"09 · Appel final / Appel · case vide 2-3": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.45
+},
+"09 · Appel final / Appel · outil Excel": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne",
+"opacite": 0.56
+},
+"09 · Appel final / Appel · outil Excel / Appel · outil Excel · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 60,
+"y": 18
+},
+"09 · Appel final / Appel · case vide 2-5": {
+"kind": "frame",
+"w": 120,
+"h": 56,
+"fond": [
+"#EFEBE7",
+1
+],
+"rayon": 14,
+"opacite": 0.2
+},
+"09 · Appel final / Appel · barre": {
+"kind": "frame",
+"w": 720,
+"h": 64,
+"fond": [
+"#1A1A1A",
+1
+],
+"rayon": 100,
+"effets": "ombre-panneau"
+},
+"09 · Appel final / Appel · barre / Appel · barre · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 16,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 32,
+"y": 20
+},
+"09 · Appel final / Appel · barre / Appel · barre · bouton": {
+"kind": "frame",
+"w": 196,
+"h": 48,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100
+},
+"09 · Appel final / Appel · barre / Appel · barre · bouton / Appel · barre · bouton · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 98,
+"y": 13
+},
+"09 · Appel final / Appel · garantie 1": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 560,
+"y": 748
+},
+"09 · Appel final / Appel · garantie 2": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 720,
+"y": 748
+},
+"09 · Appel final / Appel · garantie 3": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 15,
+"lh": 150,
+"ls": -2,
+"w": null,
+"align": "center",
+"x": 880,
+"y": 748
+},
+"09 · Appel final / Appel · séparateur 1": {
+"kind": "vec"
+},
+"09 · Appel final / Appel · séparateur 2": {
+"kind": "vec"
+},
+"09 · Appel final / Appel · trait de fin": {
+"kind": "vec"
+},
+"09 · Appel final / Appel · jointure 150": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"09 · Appel final / Appel · jointure 1290": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+}
+}
+}

@@ -1,0 +1,600 @@
+{
+ "type": "plateforme-liste",
+ "noeud": "6001:896",
+ "w": 1140,
+ "h": 744,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:896",
+    "nom": "Frame 2147260603",
+    "w": 1140,
+    "h": 744,
+    "x": 150,
+    "y": 3981,
+    "layout": "auto-layout ↓ écart 14 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:897",
+    "nom": "Frame 2147240071",
+    "w": 1140,
+    "h": 597,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 1 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:898",
+    "nom": "Frame 2147240069",
+    "w": 569,
+    "h": 597,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 60 pad 50/0/0/0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:899",
+    "nom": "Frame 2147240183",
+    "w": 569,
+    "h": 268,
+    "x": 0,
+    "y": 50,
+    "layout": "auto-layout ↓ écart 24 pad 0/0/0/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:900",
+    "nom": "Frame 2147240061",
+    "w": 519,
+    "h": 197,
+    "x": 50,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:902",
+    "nom": "Frame 2147240332",
+    "w": 519,
+    "h": 168,
+    "x": 0,
+    "y": 29,
+    "layout": "auto-layout ↓ écart 14 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:910",
+    "nom": "Frame 2147240063",
+    "w": 376,
+    "h": 47,
+    "x": 97,
+    "y": 294,
+    "layout": "auto-layout → écart 14 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:918",
+    "nom": "Frame 2147240068",
+    "w": 569,
+    "h": 219,
+    "x": 0,
+    "y": 378,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:919",
+    "nom": "Frame 2147240067",
+    "w": 569,
+    "h": 91,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 4 pad 20/50/20/50 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:920",
+    "nom": "Frame 2147240065",
+    "w": 469,
+    "h": 24,
+    "x": 50,
+    "y": 20,
+    "layout": "auto-layout → écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:925",
+    "nom": "Frame 2147240066",
+    "w": 329,
+    "h": 23,
+    "x": 50,
+    "y": 48,
+    "layout": "auto-layout → écart 10 pad 0/0/0/28 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:928",
+    "nom": "Frame 2147240064",
+    "w": 569,
+    "h": 64,
+    "x": 0,
+    "y": 91,
+    "layout": "auto-layout → écart 8 pad 20/50/20/50 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:935",
+    "nom": "Frame 2147240068",
+    "w": 569,
+    "h": 64,
+    "x": 0,
+    "y": 155,
+    "layout": "auto-layout → écart 8 pad 20/50/20/50 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1041",
+    "nom": "Frame 2147239880",
+    "w": 1139,
+    "h": 133,
+    "x": 1,
+    "y": 611,
+    "layout": "auto-layout → écart 118 align SPACE_BETWEEN/CENTER",
+    "traits": "trait #D6D0C8 bottom"
+   },
+   {
+    "id": "6001:1042",
+    "nom": "Frame 2147239879",
+    "w": 283,
+    "h": 131,
+    "x": 0,
+    "y": 1,
+    "layout": "auto-layout ↓ écart 0 pad 30/50/30/50 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1046",
+    "nom": "Frame 2147239882",
+    "w": 285,
+    "h": 133,
+    "x": 283,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 30/50/30/50 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1050",
+    "nom": "Frame 2147239880",
+    "w": 285,
+    "h": 131,
+    "x": 568,
+    "y": 1,
+    "layout": "auto-layout ↓ écart 0 pad 30/50/30/50 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1054",
+    "nom": "Frame 2147239881",
+    "w": 285,
+    "h": 131,
+    "x": 854,
+    "y": 1,
+    "layout": "auto-layout ↓ écart 0 pad 30/50/30/50 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:1058",
+    "nom": "Frame 2147236603",
+    "w": 80,
+    "h": 96,
+    "x": 1043,
+    "y": 80,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:1060",
+    "nom": "Mask Group",
+    "w": 94,
+    "h": 124,
+    "x": 78,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:1065",
+    "nom": "Frame 2147239883",
+    "w": 80,
+    "h": 96,
+    "x": 96,
+    "y": 80,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:1067",
+    "nom": "Mask Group",
+    "w": 94,
+    "h": 124,
+    "x": 78,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:901",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Platform",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 69,
+    "h": 21,
+    "x": 0,
+    "y": 0,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:903",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Unify Your Entire Support Stack",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 519,
+    "h": 106,
+    "x": 0,
+    "y": 0,
+    "nb_car": 31
+   },
+   {
+    "id": "6001:904",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Automate conversations and manage customer messages / across all channels effortlessly.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 519,
+    "h": 48,
+    "x": 0,
+    "y": 120,
+    "nb_car": 87
+   },
+   {
+    "id": "6001:924",
+    "role": "texte / libellé",
+    "police": "Inter Tight SemiBold 16",
+    "texte": "Seamless Integration",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 255,
+    "h": 24,
+    "x": 28,
+    "y": 0,
+    "nb_car": 20
+   },
+   {
+    "id": "6001:926",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Connect all tools without workflow interruptions",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 301,
+    "h": 23,
+    "x": 28,
+    "y": 0,
+    "nb_car": 48
+   },
+   {
+    "id": "6001:933",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Privacy first architecture ",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 441,
+    "h": 24,
+    "x": 78,
+    "y": 20,
+    "nb_car": 27
+   },
+   {
+    "id": "6001:939",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Advanced Filters",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 441,
+    "h": 24,
+    "x": 78,
+    "y": 20,
+    "nb_car": 16
+   },
+   {
+    "id": "6001:1043",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "3M+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 183,
+    "h": 48,
+    "x": 50,
+    "y": 30,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:1044",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Messages Processed",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 183,
+    "h": 23,
+    "x": 50,
+    "y": 78,
+    "nb_car": 18
+   },
+   {
+    "id": "6001:1047",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 33",
+    "texte": "150+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 185,
+    "h": 50,
+    "x": 50,
+    "y": 30,
+    "nb_car": 4
+   },
+   {
+    "id": "6001:1048",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Global Businesses",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 185,
+    "h": 23,
+    "x": 50,
+    "y": 80,
+    "nb_car": 17
+   },
+   {
+    "id": "6001:1051",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "90%",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 185,
+    "h": 48,
+    "x": 50,
+    "y": 30,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:1052",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Faster Response Time",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 185,
+    "h": 23,
+    "x": 50,
+    "y": 78,
+    "nb_car": 20
+   },
+   {
+    "id": "6001:1055",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 32",
+    "texte": "10K+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 185,
+    "h": 48,
+    "x": 50,
+    "y": 30,
+    "nb_car": 4
+   },
+   {
+    "id": "6001:1056",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Daily Conversations",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 185,
+    "h": 23,
+    "x": 50,
+    "y": 78,
+    "nb_car": 19
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6001:905",
+    "texte": "Get Started",
+    "fond": "#1A1A1A",
+    "w": 123,
+    "h": 47,
+    "rayon": 100
+   },
+   {
+    "id": "6001:911",
+    "texte": "Get Started",
+    "fond": "#161616",
+    "w": 127,
+    "h": 47,
+    "rayon": 100
+   },
+   {
+    "id": "6001:916",
+    "texte": "Book a demo",
+    "fond": "#EAE9E6",
+    "w": 112,
+    "h": 47,
+    "rayon": 100
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:921",
+    "nom": "puzzle-piece-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "6001:929",
+    "nom": "shield-check",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "6001:936",
+    "nom": "funnel-bold",
+    "w": 20,
+    "h": 20
+   },
+   {
+    "id": "6001:1062",
+    "nom": "Vector 91",
+    "w": 33,
+    "h": 32
+   },
+   {
+    "id": "6001:1063",
+    "nom": "Vector 90",
+    "w": 36,
+    "h": 36
+   },
+   {
+    "id": "6001:1069",
+    "nom": "Vector 91",
+    "w": 33,
+    "h": 32
+   },
+   {
+    "id": "6001:1070",
+    "nom": "Vector 90",
+    "w": 36,
+    "h": 36
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:927",
+    "w": 569,
+    "h": 0,
+    "x": 0,
+    "y": 91
+   },
+   {
+    "id": "6001:934",
+    "w": 569,
+    "h": 0,
+    "x": 0,
+    "y": 155
+   },
+   {
+    "id": "6001:940",
+    "w": 597,
+    "h": 0,
+    "x": 570,
+    "y": 0
+   },
+   {
+    "id": "6001:1040",
+    "w": 150,
+    "h": 0,
+    "x": -150,
+    "y": 1
+   },
+   {
+    "id": "6001:1045",
+    "w": 133,
+    "h": 0,
+    "x": 283,
+    "y": 0
+   },
+   {
+    "id": "6001:1049",
+    "w": 133,
+    "h": 0,
+    "x": 568,
+    "y": 0
+   },
+   {
+    "id": "6001:1053",
+    "w": 133,
+    "h": 0,
+    "x": 854,
+    "y": 0
+   },
+   {
+    "id": "6001:1057",
+    "w": 133,
+    "h": 0,
+    "x": 1139,
+    "y": 0
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6001:941",
+    "nom": "Frame 2147260987",
+    "w": 569,
+    "h": 597,
+    "x": 571,
+    "y": 0
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:1034",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 596
+   }
+  ],
+  "jointures": [
+   {
+    "id": "6001:1038",
+    "x": 566,
+    "y": -4
+   },
+   {
+    "id": "6001:1039",
+    "x": 566,
+    "y": 591
+   }
+  ],
+  "images": [
+   {
+    "id": "6001:1064",
+    "nom": "Rectangle",
+    "w": 157,
+    "h": 158
+   },
+   {
+    "id": "6001:1071",
+    "nom": "Rectangle",
+    "w": 157,
+    "h": 158
+   }
+  ]
+ }
+}

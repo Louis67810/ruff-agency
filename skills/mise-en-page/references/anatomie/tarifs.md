@@ -1,0 +1,314 @@
+# tarifs · `6001:10682` · 1140 × 2426
+
+Résumé : {'blocs': 130, 'decors': 4, 'textes': 74, 'boutons': 8, 'icones': 31, 'traits': 28, 'jointures': 4, 'images': 1}
+Textes par rôle : {'surtitre / étiquette mono': 1, 'titre de section': 1, 'texte d’intro': 4, 'texte / libellé': 59, 'petit texte': 1, 'titre de carte': 8}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147260470** (frame) 1140×2426 @(150,11888) `6001:10682` — auto-layout ↓ écart 60 align MIN/CENTER
+  - ▣ **Frame 2147260446** (frame) 540×222 @(0,1208) `6001:10683` — fond #F7F5F3
+    - ▣ **Frame 2147260439** (frame) 540×133 @(540,96) `6001:10684`
+    - ✦ décor / motif « Frame 2147260443 » 540×133 @(-93,128) `6001:10688` (déborde de la section : motif pixel, lumière ou forme)
+    - ▭ fond/forme « Rectangle 34625283 » 489×298 dégradé rayon  `6001:10692`
+    - ▭ fond/forme « Rectangle 34625284 » 442×298 dégradé rayon  `6001:10693`
+    - ▭ fond/forme « Rectangle 34625285 » 412×298 dégradé rayon  `6001:10694`
+  - ▣ **Frame 2147260448** (frame) 540×222 @(1140,1208) `6001:10695` — fond #F7F5F3
+    - ▣ **Frame 2147260439** (frame) 540×129 @(540,96) `6001:10696`
+    - ✦ décor / motif « Frame 2147260443 » 540×130 @(-93,127) `6001:10700` (déborde de la section : motif pixel, lumière ou forme)
+    - ▭ fond/forme « Rectangle 34625283 » 489×290 dégradé rayon  `6001:10704`
+    - ▭ fond/forme « Rectangle 34625284 » 442×290 dégradé rayon  `6001:10705`
+    - ▭ fond/forme « Rectangle 34625285 » 412×290 dégradé rayon  `6001:10706`
+  - ▣ **Frame 2147240342** (frame) 1140×1208 @(0,0) `6001:10707` — auto-layout ↓ écart 13 align MIN/MIN
+    - ▣ **Frame 2147240341** (frame) 1140×1063 @(0,0) `6001:10708` — auto-layout ↓ écart 60 align MIN/CENTER
+      - ▣ **Frame 2147240202** (frame) 1140×267 @(0,0) `6001:10709` — auto-layout ↓ écart 30 align CENTER/CENTER
+        - ▣ **Frame 2147240108** (frame) 1140×181 @(0,0) `6001:10710` — auto-layout ↓ écart 20 align MIN/CENTER
+          - ▣ **Frame 2147239882** (frame) 1140×135 @(0,0) `6001:10711` — auto-layout ↓ écart 8 align MIN/CENTER
+            - **surtitre / étiquette mono** « Pricing » — DM Mono Medium 14, #3745F1, left, 60×21 @(540,0) `6001:10712`
+            - **titre de section** « Flexible plans that / grow with you » — Switzer Semibold 48, #1A1A1A, center, 1140×106 @(0,29) `6001:10713`
+          - **texte d’intro** « Start for free, upgrade when you're ready. » — Inter Tight Medium 17, #595959, center, 1140×26 @(0,155) `6001:10714`
+        - ▣ **Frame 2147239699** (frame) 221×56 @(460,211) `6001:10715` — auto-layout → écart 0 pad 5/5/5/5 align MIN/CENTER · fond #FFFFFF · rayon 100
+          - 🔘 **bouton** « Monthly » fond #262626 88×44 rayon 100 @(5,6) `6001:10716`
+          - 🔘 **bouton** « Yearly -20% » fond None 123×46 rayon 20 @(93,5) `6001:10718`
+      - ▣ **Frame 2147240340** (frame) 1140×736 @(0,327) `6001:10722` — auto-layout ↓ écart 30 align MIN/CENTER
+        - ▣ **Frame 2147240339** (frame) 1140×44 @(0,0) `6001:10723` — auto-layout → écart 16 pad 10/0/10/0 align CENTER/CENTER
+          - **texte / libellé** « All plans include: » — Inter Tight Medium 16, #595959, left, 112×24 @(222,10) `6001:10724`
+          - ▣ **Frame 2147240338** (frame) 568×24 @(350,10) `6001:10725` — auto-layout → écart 16 align MIN/CENTER
+            - ▣ **Frame 2147240334** (frame) 86×24 @(0,0) `6001:10726` — auto-layout → écart 6 align MIN/CENTER
+              - ◆ icône/logo « check » 14×14 @(0,5) `6001:10727`
+              - **texte / libellé** « AI Replies » — Inter Tight Medium 16, #262626, left, 66×24 @(20,0) `6001:10730`
+            - ─ trait 14×0 @(102,5) #D6D0C8 `6001:10731`
+            - ▣ **Frame 2147240335** (frame) 155×24 @(118,0) `6001:10732` — auto-layout → écart 6 align MIN/CENTER
+              - ◆ icône/logo « check » 14×14 @(0,5) `6001:10733`
+              - **texte / libellé** « Channel Messaging » — Inter Tight Medium 16, #262626, left, 135×24 @(20,0) `6001:10736`
+            - ─ trait 14×0 @(289,5) #D6D0C8 `6001:10737`
+            - ▣ **Frame 2147240336** (frame) 112×24 @(305,0) `6001:10738` — auto-layout → écart 6 align MIN/CENTER
+              - ◆ icône/logo « check » 14×14 @(0,5) `6001:10739`
+              - **texte / libellé** « Chat Records » — Inter Tight Medium 16, #262626, left, 92×24 @(20,0) `6001:10742`
+            - ─ trait 14×0 @(433,5) #D6D0C8 `6001:10743`
+            - ▣ **Frame 2147240337** (frame) 119×24 @(449,0) `6001:10744` — auto-layout → écart 6 align MIN/CENTER
+              - ◆ icône/logo « check » 14×14 @(0,5) `6001:10745`
+              - **texte / libellé** « Intent Analysis » — Inter Tight Medium 16, #262626, left, 99×24 @(20,0) `6001:10748`
+        - ▣ **Frame 2147240115** (frame) 1140×662 @(0,74) `6001:10749` — auto-layout → écart 1 align CENTER/CENTER · trait #D6D0C8 top/bottom
+          - ✦ décor / motif « Frame 2147240116 » 1440×15 @(-150,661) `6001:10750` (déborde de la section : motif pixel, lumière ou forme)
+          - ─ trait 1440×0 @(-151,1) #D6D0C8 `6001:10754`
+          - ▣ **Frame 2147240113** (frame) 379×662 @(0,0) `6001:10755` — auto-layout ↓ écart 0 align CENTER/CENTER
+            - ▣ **Frame 2147240330** (frame) 379×314 @(0,0) `6001:10756` — auto-layout ↓ écart 24 pad 40/30/40/30 align MIN/MIN
+              - ▣ **Frame 2147240112** (frame) 319×159 @(30,40) `6001:10757` — auto-layout ↓ écart 16 align MIN/MIN
+                - … (plus profond : voir le snapshot)
+              - 🔘 **bouton** « Start For Free » fond #EFEBE7 319×51 rayon 100 @(30,223) `6001:10768`
+            - ─ trait 380×0 @(-1,314) #D6D0C8 `6001:10773`
+            - ▣ **Frame 2147237182** (frame) 379×348 @(0,314) `6001:10774` — auto-layout ↓ écart 4 pad 10/0/30/0 align MIN/MIN
+              - ▣ **Sub Container** (frame) 379×48 @(0,10) `6001:10775` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,62) `6001:10780` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,114) `6001:10785` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,166) `6001:10790` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,218) `6001:10795` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,270) `6001:10800` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER
+                - … (plus profond : voir le snapshot)
+          - ─ trait 662×0 @(380,0) #D6D0C8 `6001:10805`
+          - ▣ **Frame 2147240120** (frame) 379×662 @(381,0) `6001:10806` — auto-layout ↓ écart 0 align CENTER/CENTER
+            - ▣ **Frame 2147240330** (frame) 379×314 @(0,0) `6001:10807` — auto-layout ↓ écart 24 pad 40/30/40/30 align MIN/MIN
+              - ▣ **Frame 2147240112** (frame) 319×159 @(30,40) `6001:10808` — auto-layout ↓ écart 16 align MIN/MIN
+                - … (plus profond : voir le snapshot)
+              - 🔘 **bouton** « Go With Pro » fond #262626 319×51 rayon 100 @(30,223) `6001:10819`
+            - ─ trait 380×0 @(-1,314) #D6D0C8 `6001:10824`
+            - ▣ **Frame 2147237182** (frame) 379×348 @(0,314) `6001:10825` — auto-layout ↓ écart 4 pad 10/0/30/0 align MIN/MIN · trait #D6D0C8 bottom · fond #F3F0ED
+              - ▣ **Sub Container** (frame) 379×48 @(0,10) `6001:10826` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,62) `6001:10831` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,114) `6001:10836` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,166) `6001:10841` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,218) `6001:10846` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,270) `6001:10851` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER
+                - … (plus profond : voir le snapshot)
+            - ▣ **Frame 2147238029** (frame) 88×26 @(270,20) `6001:10856` — auto-layout → écart 10 pad 4/10/4/10 align CENTER/CENTER · fond #FFFFFF · rayon 100
+              - **petit texte** « Most popular » — Inter Tight Medium 12, #1A1A1A, left, 68×18 @(10,4) `6001:10857`
+          - ─ trait 662×0 @(760,0) #D6D0C8 `6001:10858`
+          - ▣ **Frame 2147240119** (frame) 379×662 @(761,0) `6001:10859` — auto-layout ↓ écart 0 align CENTER/CENTER
+            - ▣ **Frame 2147240330** (frame) 379×314 @(0,0) `6001:10860` — auto-layout ↓ écart 24 pad 40/30/40/30 align MIN/MIN
+              - ▣ **Frame 2147240112** (frame) 319×159 @(30,40) `6001:10861` — auto-layout ↓ écart 16 align MIN/MIN
+                - … (plus profond : voir le snapshot)
+              - 🔘 **bouton** « Go With Business » fond #EFEBE7 319×51 rayon 100 @(30,223) `6001:10872`
+            - ─ trait 380×0 @(-1,314) #D6D0C8 `6001:10877`
+            - ▣ **Frame 2147237182** (frame) 379×348 @(0,314) `6001:10878` — auto-layout ↓ écart 4 pad 10/0/30/0 align MIN/MIN
+              - ▣ **Sub Container** (frame) 379×48 @(0,10) `6001:10879` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,62) `6001:10884` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,114) `6001:10889` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,166) `6001:10894` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,218) `6001:10899` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER · trait #D6D0C8 bottom
+                - … (plus profond : voir le snapshot)
+              - ▣ **Sub Container** (frame) 379×48 @(0,270) `6001:10904` — auto-layout → écart 8 pad 12/30/12/30 align MIN/CENTER
+                - … (plus profond : voir le snapshot)
+          - ● jointure 8×8 @(377,-3) `6001:10909`
+          - ● jointure 8×8 @(377,657) `6001:10910`
+          - ● jointure 8×8 @(757,657) `6001:10911`
+          - ● jointure 8×8 @(757,0) `6001:10912`
+    - 🖼 image/photo « Rectangle 34624471 » 15×1138 @(1139,386) `6001:10913`
+    - ▣ **Frame 2147240118** (frame) 1140×132 @(0,1076) `6001:10914` — auto-layout → écart 0 align MIN/CENTER · trait #D6D0C8 bottom
+      - ─ trait 132×0 @(0,0) #D6D0C8 `6001:10915`
+      - ▣ **Frame 2147239879** (frame) 380×132 @(0,0) `6001:10916` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER
+        - **titre de carte** « 2M+ » — Inter Tight SemiBold 32, #1A1A1A, left, 320×48 @(30,30) `6001:10917`
+        - **texte / libellé** « Customer Messages Processed » — Inter Tight Medium 16, #666666, left, 320×24 @(30,78) `6001:10918`
+      - ─ trait 132×0 @(380,0) #D6D0C8 `6001:10919`
+      - ▣ **Frame 2147239881** (frame) 380×132 @(380,0) `6001:10920` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER
+        - **titre de carte** « 95% » — Inter Tight SemiBold 32, #1A1A1A, left, 320×48 @(30,30) `6001:10921`
+        - **texte / libellé** « Automated Support Resolution » — Inter Tight Medium 16, #666666, left, 320×24 @(30,78) `6001:10922`
+      - ─ trait 132×0 @(760,0) #D6D0C8 `6001:10923`
+      - ▣ **Frame 2147239882** (frame) 380×132 @(760,0) `6001:10924` — auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER
+        - **titre de carte** « 24/7 » — Inter Tight SemiBold 32, #1A1A1A, left, 320×48 @(30,30) `6001:10925`
+        - **texte / libellé** « AI Support Availability » — Inter Tight Medium 16, #666666, left, 320×24 @(30,78) `6001:10926`
+  - ▣ **Frame 2147240285** (frame) 358×102 @(391,1268) `6001:10927` — auto-layout → écart 10 pad 30/60/30/60 align CENTER/CENTER
+    - **titre de carte** « Pricing Comparison » — Inter Tight SemiBold 28, #1A1A1A, center, 238×42 @(60,30) `6001:10928`
+  - ▣ **Frame 2147240124** (frame) 1140×996 @(0,1430) `6001:10929` — auto-layout ↓ écart 0 align MIN/MIN
+    - ▣ **Frame 2147240122** (frame) 1140×228 @(0,0) `6001:10930` — auto-layout → écart 1 align MIN/MAX · trait #D6D0C8 top/bottom
+      - ▣ **Frame 2147240120** (frame) 284×135 @(0,93) `6001:10931` — auto-layout ↓ écart 30 pad 24/24/40/24 align MAX/MIN
+        - ▣ **Frame 2147240119** (frame) 236×71 @(24,24) `6001:10932` — auto-layout ↓ écart 16 align MIN/MIN
+          - ◆ icône/logo « shooting-star-bold » 24×24 @(0,0) `6001:10933`
+          - **titre de carte** « Features » — Inter Tight SemiBold 24, #1A1A1A, left, 236×31 @(0,40) `6001:10939`
+      - ─ trait 228×0 @(284,0) #D6D0C8 `6001:10940`
+      - ▣ **Frame 2147240123** (frame) 284×228 @(286,0) `6001:10941` — auto-layout ↓ écart 24 pad 40/24/40/24 align MIN/MIN · fond #F3F0ED
+        - ▣ **Frame 2147240119** (frame) 236×73 @(24,40) `6001:10942` — auto-layout ↓ écart 10 align MIN/CENTER
+          - **texte d’intro** « Starter Plan » — Inter Tight Medium 21, #262626, center, 236×27 @(0,0) `6001:10943`
+          - ▣ **Frame 75** (frame) 236×36 @(0,37) `6001:10944` — auto-layout → écart 6 align CENTER/CENTER
+            - **titre de carte** « $0 » — Inter Tight SemiBold 24, #1A1A1A, left, 30×36 @(60,0) `6001:10945`
+            - **texte / libellé** « / per month » — Inter Tight Medium 16, #595959, left, 79×24 @(96,6) `6001:10946`
+        - 🔘 **bouton** « Start For Free » fond #EFEBE7 236×51 rayon 100 @(24,137) `6001:10947`
+      - ─ trait 228×0 @(570,0) #D6D0C8 `6001:10952`
+      - ▣ **Frame 2147240121** (frame) 284×228 @(571,0) `6001:10953` — auto-layout ↓ écart 24 pad 40/24/40/24 align MIN/MIN · fond #F3F0ED
+        - ▣ **Frame 2147240119** (frame) 236×73 @(24,40) `6001:10954` — auto-layout ↓ écart 10 align MIN/CENTER
+          - **texte d’intro** « Pro Plan » — Inter Tight Medium 21, #262626, center, 236×27 @(0,0) `6001:10955`
+          - ▣ **Frame 75** (frame) 236×36 @(0,37) `6001:10956` — auto-layout → écart 6 align CENTER/CENTER
+            - **titre de carte** « $39 » — Inter Tight SemiBold 24, #1A1A1A, left, 44×36 @(53,0) `6001:10957`
+            - **texte / libellé** « / per month » — Inter Tight Medium 16, #595959, left, 79×24 @(103,6) `6001:10958`
+        - 🔘 **bouton** « Go With Pro » fond #1A1A1A 236×51 rayon 100 @(24,137) `6001:10959`
+      - ─ trait 228×0 @(856,0) #D6D0C8 `6001:10964`
+      - ▣ **Frame 2147240122** (frame) 284×228 @(856,0) `6001:10965` — auto-layout ↓ écart 24 pad 40/24/40/24 align MIN/MIN · fond #F3F0ED
+        - ▣ **Frame 2147240119** (frame) 236×73 @(24,40) `6001:10966` — auto-layout ↓ écart 10 align MIN/CENTER
+          - **texte d’intro** « Business Plan » — Inter Tight Medium 21, #262626, center, 236×27 @(0,0) `6001:10967`
+          - ▣ **Frame 75** (frame) 236×36 @(0,37) `6001:10968` — auto-layout → écart 6 align CENTER/CENTER
+            - **titre de carte** « $199 » — Inter Tight SemiBold 24, #1A1A1A, left, 52×36 @(49,0) `6001:10969`
+            - **texte / libellé** « / per month » — Inter Tight Medium 16, #595959, left, 79×24 @(107,6) `6001:10970`
+        - 🔘 **bouton** « Go With Business » fond #EFEBE7 236×51 rayon 100 @(24,137) `6001:10971`
+    - ▣ **Frame 2147237738** (frame) 1140×768 @(0,228) `6001:10976` — auto-layout ↓ écart 0 align MIN/MIN
+      - ▣ **Frame 2147237734** (frame) 1140×768 @(0,0) `6001:10977` — auto-layout ↓ écart 0 align MIN/MIN
+        - ▣ **Frame 2147237740** (frame) 1140×64 @(0,0) `6001:10978` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:10979` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « AI Smart Replies » — Inter Tight Medium 16, #1A1A1A, left, 113×24 @(30,20) `6001:10980`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(285,0) `6001:10981` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:10982`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:10984`
+          - ▣ **Frame 2147237718** (frame) 285×63 @(570,0) `6001:10985` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:10986`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:10988`
+          - ▣ **Frame 2147237717** (frame) 285×63 @(855,0) `6001:10989` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:10990`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:10992`
+        - ─ trait 1140×0 @(0,64) #D6D0C8 `6001:10993`
+        - ▣ **Frame 2147237746** (frame) 1140×64 @(0,64) `6001:10994` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:10995` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « Multi-Channel Message Support » — Inter Tight Medium 16, #1A1A1A, left, 224×24 @(30,20) `6001:10996`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(285,0) `6001:10997` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:10998`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11000`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(570,0) `6001:11001` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11002`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11004`
+          - ▣ **Frame 2147237717** (frame) 285×63 @(855,0) `6001:11005` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11006`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11008`
+        - ─ trait 1140×0 @(0,128) #D6D0C8 `6001:11009`
+        - ▣ **Frame 2147237747** (frame) 1140×64 @(0,128) `6001:11010` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11011` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « Website Chat Widget » — Inter Tight Medium 16, #1A1A1A, left, 146×24 @(30,20) `6001:11012`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(285,0) `6001:11013` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11014`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11016`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(570,0) `6001:11017` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11018`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11020`
+          - ▣ **Frame 2147237717** (frame) 285×63 @(855,0) `6001:11021` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11022`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11024`
+        - ─ trait 1140×0 @(0,192) #D6D0C8 `6001:11025`
+        - ▣ **Frame 2147237748** (frame) 1140×64 @(0,192) `6001:11026` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11027` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « Conversation History Storage » — Inter Tight Medium 16, #1A1A1A, left, 203×24 @(30,20) `6001:11028`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(285,0) `6001:11029` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11030`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11032`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(570,0) `6001:11033` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11034`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11036`
+          - ▣ **Frame 2147237717** (frame) 285×63 @(855,0) `6001:11037` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11038`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11040`
+        - ─ trait 1140×0 @(0,256) #D6D0C8 `6001:11041`
+        - ▣ **Frame 2147237749** (frame) 1140×64 @(0,256) `6001:11042` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11043` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « AI Knowledge Base Training » — Inter Tight Medium 16, #1A1A1A, left, 192×24 @(30,20) `6001:11044`
+          - ▣ **Frame 2147237714** (frame) 285×63 @(285,0) `6001:11045` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11046`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11048`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(570,0) `6001:11049` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11050`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11052`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(855,0) `6001:11053` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11054`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11056`
+        - ─ trait 1140×0 @(0,320) #D6D0C8 `6001:11057`
+        - ▣ **Frame 2147237750** (frame) 1140×64 @(0,320) `6001:11058` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11059` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « Lead Capture Automation » — Inter Tight Medium 16, #1A1A1A, left, 177×24 @(30,20) `6001:11060`
+          - ▣ **Frame 2147237714** (frame) 285×63 @(285,0) `6001:11061` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11062`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(570,0) `6001:11063` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11064`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11066`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(855,0) `6001:11067` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11068`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11070`
+        - ─ trait 1140×0 @(0,384) #D6D0C8 `6001:11071`
+        - ▣ **Frame 2147237751** (frame) 1140×64 @(0,384) `6001:11072` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11073` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « CRM Integration Support » — Inter Tight Medium 16, #1A1A1A, left, 172×24 @(30,20) `6001:11074`
+          - ▣ **Frame 2147237714** (frame) 285×63 @(285,0) `6001:11075` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11076`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(570,0) `6001:11077` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11078`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11080`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(855,0) `6001:11081` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11082`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11084`
+        - ─ trait 1140×0 @(0,448) #D6D0C8 `6001:11085`
+        - ▣ **Frame 2147237752** (frame) 1140×64 @(0,448) `6001:11086` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11087` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « Workflow Automation Builder » — Inter Tight Medium 16, #1A1A1A, left, 201×24 @(30,20) `6001:11088`
+          - ▣ **Frame 2147237714** (frame) 285×63 @(285,0) `6001:11089` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11090`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(570,0) `6001:11091` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11092`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11094`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(855,0) `6001:11095` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11096`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11098`
+        - ─ trait 1140×0 @(0,512) #D6D0C8 `6001:11099`
+        - ▣ **Frame 2147237753** (frame) 1140×64 @(0,512) `6001:11100` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11101` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « Team Collaboration Tools » — Inter Tight Medium 16, #1A1A1A, left, 174×24 @(30,20) `6001:11102`
+          - ▣ **Frame 2147237714** (frame) 285×63 @(285,0) `6001:11103` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11104`
+          - ▣ **Frame 2147237715** (frame) 285×63 @(570,0) `6001:11105` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11106`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11108`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(855,0) `6001:11109` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11110`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11112`
+        - ─ trait 1140×0 @(0,576) #D6D0C8 `6001:11113`
+        - ▣ **Frame 2147237754** (frame) 1140×64 @(0,576) `6001:11114` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11115` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « Advanced Analytics Dashboard » — Inter Tight Medium 16, #1A1A1A, left, 216×24 @(30,20) `6001:11116`
+          - ▣ **Frame 2147237714** (frame) 285×63 @(285,0) `6001:11117` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11118`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(570,0) `6001:11119` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11120`
+          - ▣ **Frame 2147237717** (frame) 285×63 @(855,0) `6001:11121` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11122`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11124`
+        - ─ trait 1140×0 @(0,640) #D6D0C8 `6001:11125`
+        - ▣ **Frame 2147237755** (frame) 1140×64 @(0,640) `6001:11126` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11127` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « API & Webhook Access » — Inter Tight Medium 16, #1A1A1A, left, 161×24 @(30,20) `6001:11128`
+          - ▣ **Frame 2147237714** (frame) 285×63 @(285,0) `6001:11129` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11130`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(570,0) `6001:11131` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11132`
+          - ▣ **Frame 2147237717** (frame) 285×63 @(855,0) `6001:11133` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11134`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11136`
+        - ─ trait 1140×0 @(0,704) #D6D0C8 `6001:11137`
+        - ▣ **Frame 2147237756** (frame) 1140×64 @(0,704) `6001:11138` — auto-layout → écart 0 align MIN/CENTER
+          - ▣ **Frame 2147237641** (frame) 285×64 @(0,0) `6001:11139` — auto-layout → écart 5 pad 20/30/20/30 align MIN/CENTER
+            - **texte / libellé** « Priority Customer Support » — Inter Tight Medium 16, #1A1A1A, left, 180×24 @(30,20) `6001:11140`
+          - ▣ **Frame 2147237714** (frame) 285×63 @(285,0) `6001:11141` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11142`
+          - ▣ **Frame 2147237716** (frame) 285×63 @(570,0) `6001:11143` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - **texte / libellé** « -- » — Inter Tight Medium 15, #707070, center, 13×23 @(136,20) `6001:11144`
+          - ▣ **Frame 2147237717** (frame) 285×63 @(855,0) `6001:11145` — auto-layout → écart 5 pad 20/30/20/30 align CENTER/CENTER · trait #D6D0C8 left
+            - ◆ icône/logo « Check » 18×18 @(119,22) `6001:11146`
+            - **texte / libellé** « Yes » — Inter Tight Medium 15, #1A1A1A, left, 24×23 @(142,20) `6001:11148`
+        - ─ trait 1140×0 @(0,768) #D6D0C8 `6001:11149`
+    - ✦ décor / motif « Frame 2147240116 » 1440×15 @(-150,995) `6001:11150` (déborde de la section : motif pixel, lumière ou forme)
+    - ─ trait 1440×0 @(-150,0) #D6D0C8 `6001:11154`

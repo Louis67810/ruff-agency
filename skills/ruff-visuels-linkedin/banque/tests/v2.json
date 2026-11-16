@@ -1,0 +1,49 @@
+{
+ "id": "v2",
+ "titre": "« La stratégie secrète… » — v2 après retours",
+ "statut": "Retours de Louis du 2026-10-20 appliqués (section Figma « TEST Claude — Carrousel stratégie secrète (v2) », 5411:11358). Avis global de Louis sur la v1 : style bien saisi.",
+ "slides": [
+  "tests/v2/slide-01.png",
+  "tests/v2/slide-02.png",
+  "tests/v2/slide-03.png",
+  "tests/v2/slide-04.png",
+  "tests/v2/slide-05.png",
+  "tests/v2/slide-06.png",
+  "tests/v2/slide-07.png",
+  "tests/v2/slide-08.png",
+  "tests/v2/slide-09.png"
+ ],
+ "decisions": [
+  [
+   "general",
+   "Pilule noire de couverture ajustée à son texte et centrée."
+  ],
+  [
+   "general",
+   "Tous les boutons (Continuer, Envoyer, Réserver mon appel) = clone du CTA source 5406:2442 mis à l'échelle."
+  ],
+  [
+   "general",
+   "Checks et croix réduits à ~30 px, mis à l'échelle calque par calque (redimensionner le groupe casse le pictogramme)."
+  ],
+  [
+   "general",
+   "Pastille bleue « Presque fini » remplacée par le tag blanc source 5406:6679, petit et accroché au coin supérieur droit de la carte (R16)."
+  ],
+  [
+   "general",
+   "Cadre de sélection retiré du point 2 (réservé aux couvertures)."
+  ],
+  [
+   "general",
+   "Couverture : trois cartes serrées, la première couvre davantage ; main plus centrale et visible aux 4/5."
+  ],
+  [
+   "local",
+   "Point 1 : la flèche avant → après est courbée dans l'autre sens (creux vers le bas, pointe qui remonte vers la carte)."
+  ]
+ ],
+ "questions": [
+  "Les questions de la v1 sur l'offre (1240 €), les arrondis et l'intertitre « Le secret » restent ouvertes."
+ ]
+}

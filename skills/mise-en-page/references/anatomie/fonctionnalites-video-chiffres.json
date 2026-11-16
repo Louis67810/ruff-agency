@@ -1,0 +1,884 @@
+{
+ "type": "fonctionnalites-video-chiffres",
+ "noeud": "6001:13775",
+ "w": 1139,
+ "h": 1342,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:13775",
+    "nom": "Frame 2147260601",
+    "w": 1139,
+    "h": 1342,
+    "x": 151,
+    "y": 1061,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:13776",
+    "nom": "Frame 2147239883",
+    "w": 1139,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 150 pad 0/97/0/97 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:13777",
+    "nom": "Frame 2147239882",
+    "w": 398,
+    "h": 135,
+    "x": 97,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:13781",
+    "nom": "Frame 2147239900",
+    "w": 1139,
+    "h": 1147,
+    "x": 0,
+    "y": 195,
+    "layout": "auto-layout ↓ écart 0 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:13782",
+    "nom": "Frame 2147239897",
+    "w": 1139,
+    "h": 528,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:13783",
+    "nom": "Frame 2147239893",
+    "w": 1139,
+    "h": 528,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 1 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:13784",
+    "nom": "Frame 2147239890",
+    "w": 378,
+    "h": 528,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:13891",
+    "nom": "Frame 2147239888",
+    "w": 378,
+    "h": 156,
+    "x": 0,
+    "y": 372,
+    "layout": "auto-layout ↓ écart 12 pad 0/40/50/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:13892",
+    "nom": "Frame 2147239884",
+    "w": 65,
+    "h": 20,
+    "x": 40,
+    "y": 0,
+    "layout": "auto-layout → écart 2 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:13901",
+    "nom": "Frame 2147239885",
+    "w": 298,
+    "h": 74,
+    "x": 40,
+    "y": 32,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:13905",
+    "nom": "Frame 2147239898",
+    "w": 378,
+    "h": 527,
+    "x": 380,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:13939",
+    "nom": "Frame 2147239889",
+    "w": 378,
+    "h": 156,
+    "x": 0,
+    "y": 371,
+    "layout": "auto-layout ↓ écart 12 pad 0/40/50/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:13940",
+    "nom": "Frame 2147239884",
+    "w": 89,
+    "h": 20,
+    "x": 40,
+    "y": 0,
+    "layout": "auto-layout → écart 2 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:13948",
+    "nom": "Frame 2147239885",
+    "w": 298,
+    "h": 74,
+    "x": 40,
+    "y": 32,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:13952",
+    "nom": "Frame 2147239899",
+    "w": 378,
+    "h": 527,
+    "x": 761,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:13953",
+    "nom": "Frame 2147239891",
+    "w": 378,
+    "h": 371,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:13964",
+    "nom": "Frame 2147261150",
+    "w": 238,
+    "h": 90,
+    "x": 70,
+    "y": 182,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:13974",
+    "nom": "Frame 2147261257",
+    "w": 56,
+    "h": 12,
+    "x": 91,
+    "y": 14,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:14032",
+    "nom": "Frame 2147239888",
+    "w": 378,
+    "h": 156,
+    "x": 0,
+    "y": 371,
+    "layout": "auto-layout ↓ écart 12 pad 0/40/50/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:14033",
+    "nom": "Frame 2147239884",
+    "w": 112,
+    "h": 20,
+    "x": 40,
+    "y": 0,
+    "layout": "auto-layout → écart 2 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:14039",
+    "nom": "Frame 2147239885",
+    "w": 298,
+    "h": 74,
+    "x": 40,
+    "y": 32,
+    "layout": "auto-layout ↓ écart 4 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:14050",
+    "nom": "Frame 2147240041",
+    "w": 1139,
+    "h": 486,
+    "x": 0,
+    "y": 528,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:14055",
+    "nom": "Frame 2147239901",
+    "w": 1139,
+    "h": 486,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:14056",
+    "nom": "Frame 2147240039",
+    "w": 1140,
+    "h": 486,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:14059",
+    "nom": "Frame 2147240038",
+    "w": 1139,
+    "h": 486,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:14060",
+    "nom": "Frame 2147239858",
+    "w": 386,
+    "h": 1140,
+    "x": 791,
+    "y": 735,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:14088",
+    "nom": "Frame 2147238791",
+    "w": 948,
+    "h": 441,
+    "x": 97,
+    "y": 85,
+    "layout": "",
+    "traits": "contour #FFFFFF66 1"
+   },
+   {
+    "id": "6001:14089",
+    "nom": "Frame 2147239307",
+    "w": 948,
+    "h": 402,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:14090",
+    "nom": "Frame 2147239306",
+    "w": 948,
+    "h": 32,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": "trait #FFFFFF66 bottom"
+   },
+   {
+    "id": "6001:14100",
+    "nom": "Frame 2147239548",
+    "w": 927,
+    "h": 362,
+    "x": 10,
+    "y": 40,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:14117",
+    "nom": "Frame 2147239793",
+    "w": 149,
+    "h": 33,
+    "x": 901,
+    "y": 12,
+    "layout": "auto-layout → écart 10 pad 4/4/4/4 align CENTER/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:14119",
+    "nom": "arrow, hand drawn, scribble, doodle, 11",
+    "w": 42,
+    "h": 42,
+    "x": -20,
+    "y": -7,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:14122",
+    "nom": "Button",
+    "w": 80,
+    "h": 80,
+    "x": 530,
+    "y": 283,
+    "layout": "auto-layout → écart 10 pad 12/12/12/12 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:14123",
+    "nom": "Button",
+    "w": 56,
+    "h": 56,
+    "x": 12,
+    "y": 12,
+    "layout": "auto-layout → écart 10 pad 14/14/14/14 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:14134",
+    "nom": "Frame 2147239880",
+    "w": 1139,
+    "h": 133,
+    "x": 0,
+    "y": 1014,
+    "layout": "auto-layout → écart 118 pad 0/97/0/97 align SPACE_BETWEEN/CENTER",
+    "traits": "trait #D6D0C8 top/bottom"
+   },
+   {
+    "id": "6001:14136",
+    "nom": "Frame 2147239878",
+    "w": 236,
+    "h": 105,
+    "x": 97,
+    "y": 14,
+    "layout": "auto-layout → écart 10 pad 30/30/30/0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:14143",
+    "nom": "Frame 2147239877",
+    "w": 90,
+    "h": 45,
+    "x": 44,
+    "y": 30,
+    "layout": "auto-layout ↓ écart -3 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:14146",
+    "nom": "Frame 2147239879",
+    "w": 236,
+    "h": 133,
+    "x": 333,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:14149",
+    "nom": "Frame 2147239880",
+    "w": 236,
+    "h": 133,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 left"
+   },
+   {
+    "id": "6001:14152",
+    "nom": "Frame 2147239881",
+    "w": 236,
+    "h": 133,
+    "x": 806,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 30/30/30/30 align MIN/CENTER",
+    "traits": "trait #D6D0C8 left"
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:13778",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Features",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 68,
+    "h": 21,
+    "x": 0,
+    "y": 0,
+    "nb_car": 8
+   },
+   {
+    "id": "6001:13779",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "AI Agents For Customer Support",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 398,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 30
+   },
+   {
+    "id": "6001:13780",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Automate replies, follow ups, and conversations using powerful AI agents across channels.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 398,
+    "h": 52,
+    "x": 644,
+    "y": 83,
+    "nb_car": 89
+   },
+   {
+    "id": "6001:13900",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Social",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 47,
+    "h": 20,
+    "x": 18,
+    "y": 0,
+    "nb_car": 6
+   },
+   {
+    "id": "6001:13902",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Unified Message Hub",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 298,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 19
+   },
+   {
+    "id": "6001:13903",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "View and manage all conversations easily within one unified inbox",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 298,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 65
+   },
+   {
+    "id": "6001:13947",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Messaging",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 71,
+    "h": 20,
+    "x": 18,
+    "y": 0,
+    "nb_car": 9
+   },
+   {
+    "id": "6001:13949",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Multi Channel Messaging",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 298,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:13950",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Manage customer conversations across multiple platforms automatically.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 298,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 70
+   },
+   {
+    "id": "6001:13973",
+    "role": "titre de carte",
+    "police": "Digital Numbers Regular 25.714284896850586",
+    "texte": "00:03",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 101,
+    "h": 31,
+    "x": 68,
+    "y": 62,
+    "nb_car": 5
+   },
+   {
+    "id": "6001:14038",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 13",
+    "texte": "Notification",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 94,
+    "h": 20,
+    "x": 18,
+    "y": 0,
+    "nb_car": 12
+   },
+   {
+    "id": "6001:14040",
+    "role": "texte d’intro",
+    "police": "Switzer Semibold 18",
+    "texte": "Quick response",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 298,
+    "h": 22,
+    "x": 0,
+    "y": 0,
+    "nb_car": 14
+   },
+   {
+    "id": "6001:14041",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Deliver faster responses using intelligent chatbot automation.",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 298,
+    "h": 48,
+    "x": 0,
+    "y": 26,
+    "nb_car": 62
+   },
+   {
+    "id": "6001:14118",
+    "role": "texte d’intro",
+    "police": "Caveat Regular 18",
+    "texte": "Future of CX Automation",
+    "couleur": "#FFFFFF",
+    "align": "CENTER",
+    "w": 141,
+    "h": 25,
+    "x": 4,
+    "y": 4,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:14144",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "Botwise",
+    "couleur": "#605C70",
+    "align": "LEFT",
+    "w": 90,
+    "h": 24,
+    "x": 0,
+    "y": 0,
+    "nb_car": 7
+   },
+   {
+    "id": "6001:14145",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 16",
+    "texte": "In Numbers",
+    "couleur": "#1D1C22",
+    "align": "LEFT",
+    "w": 90,
+    "h": 24,
+    "x": 0,
+    "y": 21,
+    "nb_car": 10
+   },
+   {
+    "id": "6001:14147",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 33",
+    "texte": "2M+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 176,
+    "h": 50,
+    "x": 30,
+    "y": 30,
+    "nb_car": 3
+   },
+   {
+    "id": "6001:14148",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Conversations Automated",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 176,
+    "h": 23,
+    "x": 30,
+    "y": 80,
+    "nb_car": 23
+   },
+   {
+    "id": "6001:14150",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 33",
+    "texte": "50K+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 176,
+    "h": 50,
+    "x": 30,
+    "y": 30,
+    "nb_car": 4
+   },
+   {
+    "id": "6001:14151",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Businesses Using Botwise",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 176,
+    "h": 23,
+    "x": 30,
+    "y": 80,
+    "nb_car": 24
+   },
+   {
+    "id": "6001:14153",
+    "role": "titre de carte",
+    "police": "Inter Tight SemiBold 33",
+    "texte": "120+",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 176,
+    "h": 50,
+    "x": 30,
+    "y": 30,
+    "nb_car": 4
+   },
+   {
+    "id": "6001:14154",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Countries Supported",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 176,
+    "h": 23,
+    "x": 30,
+    "y": 80,
+    "nb_car": 19
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6001:13785",
+    "nom": "Frame 2147260777",
+    "w": 380,
+    "h": 372,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:13906",
+    "nom": "Frame 2147239888",
+    "w": 378,
+    "h": 371,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:13977",
+    "nom": "Frame 2147261139",
+    "w": 237,
+    "h": 144,
+    "x": 71,
+    "y": 0
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:13893",
+    "nom": "head-circuit-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:13941",
+    "nom": "envelope-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:13958",
+    "nom": "Frame 2147261151",
+    "w": 14,
+    "h": 31
+   },
+   {
+    "id": "6001:14034",
+    "nom": "bell-bold",
+    "w": 16,
+    "h": 16
+   },
+   {
+    "id": "6001:14120",
+    "nom": "Vector",
+    "w": 23,
+    "h": 37
+   },
+   {
+    "id": "6001:14124",
+    "nom": "play-fill",
+    "w": 28,
+    "h": 28
+   },
+   {
+    "id": "6001:14137",
+    "nom": "Frame 2147240272",
+    "w": 34,
+    "h": 28
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:13904",
+    "w": 528,
+    "h": 0,
+    "x": 379,
+    "y": 0
+   },
+   {
+    "id": "6001:13951",
+    "w": 528,
+    "h": 0,
+    "x": 760,
+    "y": 0
+   },
+   {
+    "id": "6001:14114",
+    "w": 486,
+    "h": 0,
+    "x": 66,
+    "y": 0
+   },
+   {
+    "id": "6001:14115",
+    "w": 486,
+    "h": 0,
+    "x": 1075,
+    "y": 0
+   },
+   {
+    "id": "6001:14116",
+    "w": 1140,
+    "h": 0,
+    "x": 0,
+    "y": 55
+   },
+   {
+    "id": "6001:14135",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 1
+   },
+   {
+    "id": "6001:14155",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 133
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:13965",
+    "w": 238,
+    "h": 51,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:14044",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": -14
+   },
+   {
+    "id": "6001:14051",
+    "w": 1440,
+    "h": 15,
+    "x": -149,
+    "y": -14
+   }
+  ],
+  "boutons": [
+   {
+    "id": "6001:14015",
+    "texte": "Botwise Generating Fast Reply...",
+    "fond": "#FFFFFF",
+    "w": 286,
+    "h": 42,
+    "rayon": 100
+   }
+  ],
+  "jointures": [
+   {
+    "id": "6001:14042",
+    "x": 376,
+    "y": 537
+   },
+   {
+    "id": "6001:14043",
+    "x": 756,
+    "y": 537
+   },
+   {
+    "id": "6001:14048",
+    "x": 376,
+    "y": -3
+   },
+   {
+    "id": "6001:14049",
+    "x": 756,
+    "y": -3
+   },
+   {
+    "id": "6001:14132",
+    "x": -5,
+    "y": -3
+   },
+   {
+    "id": "6001:14133",
+    "x": 1136,
+    "y": -3
+   }
+  ]
+ }
+}

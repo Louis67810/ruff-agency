@@ -1,0 +1,126 @@
+# temoignages · `6027:2444` · 1440 × 509
+
+Résumé : {'blocs': 49, 'textes': 20, 'icones': 42, 'traits': 8}
+Textes par rôle : {'surtitre / étiquette mono': 1, 'titre de section': 1, 'texte d’intro': 12, 'texte / libellé': 6}
+
+## Arbre (blocs, puis items)
+
+- ▣ **Frame 2147260607** (frame) 1440×509 @(1,16330) `6027:2444` — auto-layout ↓ écart 60 align MIN/MAX
+  - ▣ **Frame 2147239882** (frame) 1440×82 @(0,0) `6027:2445` — auto-layout ↓ écart 8 align MIN/CENTER
+    - **surtitre / étiquette mono** « Testimonial » — DM Mono Medium 14, #3745F1, left, 94×21 @(673,0) `6027:2446`
+    - **titre de section** « What Our Users say » — Switzer Semibold 48, #1A1A1A, center, 1440×53 @(0,29) `6027:2447`
+  - ▣ **Frame 2147236648** (frame) 1440×367 @(0,142) `6027:2448` — auto-layout → écart 20 pad 20/20/20/20 align CENTER/CENTER · fond #F3F0ED
+    - ▣ **Frame 2147260823** (frame) 720×365 @(720,1) `6027:2449`
+    - ▣ **Frame 2147260824** (frame) 476×365 @(476,1) `6027:2453`
+    - ▣ **Frame 2147236669** (frame) 353×327 @(-390,20) `6027:2457` — auto-layout ↓ écart 0 align MIN/MIN · contour #D6D6D6 1 · fond #FFFFFF · rayon 20
+      - ▣ **Frame 2147236644** (frame) 353×237 @(0,0) `6027:2458` — auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN · fond #FFFFFF · rayon mixed
+        - ◆ icône/logo « quotes-fill » 24×24 @(24,24) `6027:2459`
+        - ▣ **Frame 2147240088** (frame) 305×139 @(24,68) `6027:2465` — auto-layout ↓ écart 20 align MIN/MIN
+          - **texte d’intro** « Botwise transformed how we manage customer conversations, helping our support team respond » — Inter Tight Medium 17, #595959, left, 305×104 @(0,0) `6027:2466`
+          - ▣ **Container** (frame) 95×15 @(0,124) `6027:2467` — auto-layout → écart 5 align MIN/CENTER
+            - ◆ icône/logo « Shape » 15×15 @(0,0) `6027:2468`
+            - ◆ icône/logo « Shape » 15×15 @(20,0) `6027:2469`
+            - ◆ icône/logo « Shape » 15×15 @(40,0) `6027:2470`
+            - ◆ icône/logo « Shape » 15×15 @(60,0) `6027:2471`
+            - ◆ icône/logo « Shape » 15×15 @(80,0) `6027:2472`
+      - ─ trait 353×0 @(0,237) #DEDAD3 `6027:2473`
+      - ▣ **Frame 2147236638** (frame) 353×90 @(0,237) `6027:2474` — auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER
+        - ▣ **Frame 2147236383** (frame) 50×50 @(24,16) `6027:2475` — auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER · contour #000000 2 · fond #F2704F · rayon 100
+          - ◆ icône/logo « lightning-fill » 24×24 @(10,10) `6027:2476`
+        - ▣ **Text Container** (frame) 241×48 @(88,17) `6027:2479` — auto-layout ↓ écart -1 align MIN/MIN
+          - **texte d’intro** « Daniel Carter » — Inter Tight SemiBold 17, #1A1A1A, left, 241×26 @(0,0) `6027:2480`
+          - **texte / libellé** « Operations Coordinator » — Inter Tight Medium 15, #707070, left, 241×23 @(0,25) `6027:2481`
+    - ▣ **Frame 2147260819** (frame) 353×327 @(-17,20) `6027:2482` — auto-layout ↓ écart 0 align MIN/MIN · contour #D6D6D6 1 · fond #FFFFFF · rayon 20
+      - ▣ **Frame 2147236644** (frame) 353×237 @(0,0) `6027:2483` — auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN · fond #FFFFFF · rayon mixed
+        - ◆ icône/logo « quotes-fill » 24×24 @(24,24) `6027:2484`
+        - ▣ **Frame 2147240088** (frame) 305×139 @(24,68) `6027:2490` — auto-layout ↓ écart 20 align MIN/MIN
+          - **texte d’intro** « Botwise transformed how we manage customer conversations, helping our support team respond » — Inter Tight Medium 17, #595959, left, 305×104 @(0,0) `6027:2491`
+          - ▣ **Container** (frame) 95×15 @(0,124) `6027:2492` — auto-layout → écart 5 align MIN/CENTER
+            - ◆ icône/logo « Shape » 15×15 @(0,0) `6027:2493`
+            - ◆ icône/logo « Shape » 15×15 @(20,0) `6027:2494`
+            - ◆ icône/logo « Shape » 15×15 @(40,0) `6027:2495`
+            - ◆ icône/logo « Shape » 15×15 @(60,0) `6027:2496`
+            - ◆ icône/logo « Shape » 15×15 @(80,0) `6027:2497`
+      - ─ trait 353×0 @(0,237) #DEDAD3 `6027:2498`
+      - ▣ **Frame 2147236638** (frame) 353×90 @(0,237) `6027:2499` — auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER
+        - ▣ **Frame 2147236383** (frame) 50×50 @(24,16) `6027:2500` — auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER · contour #000000 2 · fond #F2704F · rayon 100
+          - ◆ icône/logo « lightning-fill » 24×24 @(10,10) `6027:2501`
+        - ▣ **Text Container** (frame) 241×48 @(88,17) `6027:2504` — auto-layout ↓ écart -1 align MIN/MIN
+          - **texte d’intro** « Daniel Carter » — Inter Tight SemiBold 17, #1A1A1A, left, 241×26 @(0,0) `6027:2505`
+          - **texte / libellé** « Operations Coordinator » — Inter Tight Medium 15, #707070, left, 241×23 @(0,25) `6027:2506`
+    - ▣ **Frame 2147236665** (frame) 353×327 @(357,20) `6027:2507` — auto-layout ↓ écart 0 align MIN/MIN · contour #D6D6D6 1 · fond #FFFFFF · rayon 20
+      - ▣ **Frame 2147236644** (frame) 353×237 @(0,0) `6027:2508` — auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN · fond #FFFFFF · rayon mixed
+        - ◆ icône/logo « quotes-fill » 24×24 @(24,24) `6027:2509`
+        - ▣ **Frame 2147240088** (frame) 305×139 @(24,68) `6027:2515` — auto-layout ↓ écart 20 align MIN/MIN
+          - **texte d’intro** « Botwise helps our team handle thousands of conversations daily while maintaining consisten » — Inter Tight Medium 17, #595959, left, 305×104 @(0,0) `6027:2516`
+          - ▣ **Container** (frame) 95×15 @(0,124) `6027:2517` — auto-layout → écart 5 align MIN/CENTER
+            - ◆ icône/logo « Shape » 15×15 @(0,0) `6027:2518`
+            - ◆ icône/logo « Shape » 15×15 @(20,0) `6027:2519`
+            - ◆ icône/logo « Shape » 15×15 @(40,0) `6027:2520`
+            - ◆ icône/logo « Shape » 15×15 @(60,0) `6027:2521`
+            - ◆ icône/logo « Shape » 15×15 @(80,0) `6027:2522`
+      - ─ trait 353×0 @(0,237) #DEDAD3 `6027:2523`
+      - ▣ **Frame 2147236638** (frame) 353×90 @(0,237) `6027:2524` — auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER
+        - ▣ **Frame 2147236383** (frame) 50×50 @(24,16) `6027:2525` — auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER · contour #000000 2 · fond #F2CF4F · rayon 100
+          - ◆ icône/logo « lightning-fill » 24×24 @(10,10) `6027:2526`
+        - ▣ **Text Container** (frame) 241×48 @(88,17) `6027:2529` — auto-layout ↓ écart -1 align MIN/MIN
+          - **texte d’intro** « Sophia Bennett » — Inter Tight SemiBold 17, #1A1A1A, left, 241×26 @(0,0) `6027:2530`
+          - **texte / libellé** « Operations Lead » — Inter Tight Medium 15, #707070, left, 241×23 @(0,25) `6027:2531`
+    - ▣ **Frame 2147260820** (frame) 353×327 @(730,20) `6027:2532` — auto-layout ↓ écart 0 align MIN/MIN · contour #D6D6D6 1 · fond #FFFFFF · rayon 20
+      - ▣ **Frame 2147236644** (frame) 353×237 @(0,0) `6027:2533` — auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN · fond #FFFFFF · rayon mixed
+        - ◆ icône/logo « quotes-fill » 24×24 @(24,24) `6027:2534`
+        - ▣ **Frame 2147240088** (frame) 305×139 @(24,68) `6027:2540` — auto-layout ↓ écart 20 align MIN/MIN
+          - **texte d’intro** « Botwise helps our team handle thousands of conversations daily while maintaining consisten » — Inter Tight Medium 17, #595959, left, 305×104 @(0,0) `6027:2541`
+          - ▣ **Container** (frame) 95×15 @(0,124) `6027:2542` — auto-layout → écart 5 align MIN/CENTER
+            - ◆ icône/logo « Shape » 15×15 @(0,0) `6027:2543`
+            - ◆ icône/logo « Shape » 15×15 @(20,0) `6027:2544`
+            - ◆ icône/logo « Shape » 15×15 @(40,0) `6027:2545`
+            - ◆ icône/logo « Shape » 15×15 @(60,0) `6027:2546`
+            - ◆ icône/logo « Shape » 15×15 @(80,0) `6027:2547`
+      - ─ trait 353×0 @(0,237) #DEDAD3 `6027:2548`
+      - ▣ **Frame 2147236638** (frame) 353×90 @(0,237) `6027:2549` — auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER
+        - ▣ **Frame 2147236383** (frame) 50×50 @(24,16) `6027:2550` — auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER · contour #000000 2 · fond #F2CF4F · rayon 100
+          - ◆ icône/logo « lightning-fill » 24×24 @(10,10) `6027:2551`
+        - ▣ **Text Container** (frame) 241×48 @(88,17) `6027:2554` — auto-layout ↓ écart -1 align MIN/MIN
+          - **texte d’intro** « Sophia Bennett » — Inter Tight SemiBold 17, #1A1A1A, left, 241×26 @(0,0) `6027:2555`
+          - **texte / libellé** « Operations Lead » — Inter Tight Medium 15, #707070, left, 241×23 @(0,25) `6027:2556`
+    - ▣ **Frame 2147236670** (frame) 353×327 @(1103,20) `6027:2557` — auto-layout ↓ écart 0 align MIN/MIN · contour #D6D6D6 1 · fond #FFFFFF · rayon 20
+      - ▣ **Frame 2147236644** (frame) 353×237 @(0,0) `6027:2558` — auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN · fond #FFFFFF · rayon mixed
+        - ◆ icône/logo « quotes-fill » 24×24 @(24,24) `6027:2559`
+        - ▣ **Frame 2147240088** (frame) 305×139 @(24,68) `6027:2565` — auto-layout ↓ écart 20 align MIN/MIN
+          - **texte d’intro** « With Botwise automation managing routine questions, our support team can focus on complex  » — Inter Tight Medium 17, #595959, left, 305×104 @(0,0) `6027:2566`
+          - ▣ **Container** (frame) 95×15 @(0,124) `6027:2567` — auto-layout → écart 5 align MIN/CENTER
+            - ◆ icône/logo « Shape » 15×15 @(0,0) `6027:2568`
+            - ◆ icône/logo « Shape » 15×15 @(20,0) `6027:2569`
+            - ◆ icône/logo « Shape » 15×15 @(40,0) `6027:2570`
+            - ◆ icône/logo « Shape » 15×15 @(60,0) `6027:2571`
+            - ◆ icône/logo « Shape » 15×15 @(80,0) `6027:2572`
+      - ─ trait 353×0 @(0,237) #DEDAD3 `6027:2573`
+      - ▣ **Frame 2147236638** (frame) 353×90 @(0,237) `6027:2574` — auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER
+        - ▣ **Frame 2147236383** (frame) 50×50 @(24,16) `6027:2575` — auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER · contour #000000 2 · fond #2BAABD · rayon 100
+          - ◆ icône/logo « lightning-fill » 24×24 @(10,10) `6027:2576`
+        - ▣ **Text Container** (frame) 241×48 @(88,17) `6027:2579` — auto-layout ↓ écart -1 align MIN/MIN
+          - **texte d’intro** « Michael Torres » — Inter Tight SemiBold 17, #1A1A1A, left, 241×26 @(0,0) `6027:2580`
+          - **texte / libellé** « Product Manager » — Inter Tight Medium 15, #707070, left, 241×23 @(0,25) `6027:2581`
+    - ▣ **Frame 2147260821** (frame) 353×327 @(1477,20) `6027:2582` — auto-layout ↓ écart 0 align MIN/MIN · contour #D6D6D6 1 · fond #FFFFFF · rayon 20
+      - ▣ **Frame 2147236644** (frame) 353×237 @(0,0) `6027:2583` — auto-layout ↓ écart 20 pad 24/24/30/24 align MIN/MIN · fond #FFFFFF · rayon mixed
+        - ◆ icône/logo « quotes-fill » 24×24 @(24,24) `6027:2584`
+        - ▣ **Frame 2147240088** (frame) 305×139 @(24,68) `6027:2590` — auto-layout ↓ écart 20 align MIN/MIN
+          - **texte d’intro** « With Botwise automation managing routine questions, our support team can focus on complex  » — Inter Tight Medium 17, #595959, left, 305×104 @(0,0) `6027:2591`
+          - ▣ **Container** (frame) 95×15 @(0,124) `6027:2592` — auto-layout → écart 5 align MIN/CENTER
+            - ◆ icône/logo « Shape » 15×15 @(0,0) `6027:2593`
+            - ◆ icône/logo « Shape » 15×15 @(20,0) `6027:2594`
+            - ◆ icône/logo « Shape » 15×15 @(40,0) `6027:2595`
+            - ◆ icône/logo « Shape » 15×15 @(60,0) `6027:2596`
+            - ◆ icône/logo « Shape » 15×15 @(80,0) `6027:2597`
+      - ─ trait 353×0 @(0,237) #DEDAD3 `6027:2598`
+      - ▣ **Frame 2147236638** (frame) 353×90 @(0,237) `6027:2599` — auto-layout → écart 14 pad 16/24/24/24 align MIN/CENTER
+        - ▣ **Frame 2147236383** (frame) 50×50 @(24,16) `6027:2600` — auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER · contour #000000 2 · fond #2BAABD · rayon 100
+          - ◆ icône/logo « lightning-fill » 24×24 @(10,10) `6027:2601`
+        - ▣ **Text Container** (frame) 241×48 @(88,17) `6027:2604` — auto-layout ↓ écart -1 align MIN/MIN
+          - **texte d’intro** « Michael Torres » — Inter Tight SemiBold 17, #1A1A1A, left, 241×26 @(0,0) `6027:2605`
+          - **texte / libellé** « Product Manager » — Inter Tight Medium 15, #707070, left, 241×23 @(0,25) `6027:2606`
+    - ─ trait 1440×0 @(0,1) #D6D0C8 `6027:2607`
+    - ─ trait 1440×0 @(0,367) #D6D0C8 `6027:2608`
+    - ▣ **Frame 2147260818** (frame) 541×365 @(0,1) `6027:2609`
+    - ▣ **Frame 2147260822** (frame) 575×365 @(1440,1) `6027:2617`

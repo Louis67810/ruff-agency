@@ -1,0 +1,540 @@
+{
+"racine": {
+"kind": "frame",
+"w": 1440,
+"h": 1000,
+"nom": "04 · Les agents"
+},
+"noeuds": {
+"04 · Les agents": {
+"kind": "frame",
+"w": 1440,
+"h": 1000
+},
+"04 · Les agents / Agents · sur-titre": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 14,
+"lh": 150,
+"ls": 1,
+"w": null,
+"align": "center",
+"x": 720,
+"y": 100
+},
+"04 · Les agents / Agents · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 48,
+"lh": 110,
+"ls": -3,
+"w": 760,
+"align": "center",
+"x": 720,
+"y": 132
+},
+"04 · Les agents / Agents · intro": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 17,
+"lh": 150,
+"ls": -2,
+"w": 560,
+"align": "center",
+"x": 720,
+"y": 260
+},
+"04 · Les agents / Agents · trait haut": {
+"kind": "vec"
+},
+"04 · Les agents / Agents · trait milieu": {
+"kind": "vec"
+},
+"04 · Les agents / Agents · jointure g": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"04 · Les agents / Agents · jointure m": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"04 · Les agents / Agents · jointure d": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"04 · Les agents / Rapprochement · illustration": {
+"kind": "frame",
+"w": 538,
+"h": 380,
+"fond": [
+"#FBFAF9",
+1
+],
+"rayon": 16,
+"contour": [
+"#EBE5E0",
+1
+]
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · ligne de banque": {
+"kind": "frame",
+"w": 300,
+"h": 64,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · ligne de banque / Rapprochement · ligne · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 20,
+"y": 13
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · ligne de banque / Rapprochement · ligne · détail": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 20,
+"y": 34
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · ligne de banque / Rapprochement · ligne · montant": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "end",
+"x": 280,
+"y": 22
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · câble": {
+"kind": "vec"
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · prise haut": {
+"kind": "frame",
+"w": 10,
+"h": 10,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"contour": [
+"#D6D0C8",
+1
+]
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · prise haut / Rapprochement · prise haut · cœur": {
+"kind": "frame",
+"w": 4,
+"h": 4,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · prise bas": {
+"kind": "frame",
+"w": 10,
+"h": 10,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"contour": [
+"#D6D0C8",
+1
+]
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · prise bas / Rapprochement · prise bas · cœur": {
+"kind": "frame",
+"w": 4,
+"h": 4,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · facture": {
+"kind": "frame",
+"w": 300,
+"h": 72,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 14,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · facture / Rapprochement · facture · icône": {
+"kind": "frame",
+"w": 44,
+"h": 44,
+"fond": [
+"#F3F0ED",
+1
+],
+"rayon": 10
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · facture / Rapprochement · facture · icône / Rapprochement · facture · PDF": {
+"kind": "text",
+"font": [
+"DM Mono",
+"Medium"
+],
+"size": 11,
+"lh": 140,
+"ls": 2,
+"w": null,
+"align": "center",
+"x": 22,
+"y": 15
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · facture / Rapprochement · facture · nom": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 72,
+"y": 16
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · facture / Rapprochement · facture · détail": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 72,
+"y": 37
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · Facture trouvée": {
+"kind": "frame",
+"w": 154,
+"h": 34,
+"fond": [
+"#1A1A1A",
+1
+],
+"rayon": 100,
+"effets": "bouton-noir"
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · Facture trouvée / Rapprochement · Facture trouvée · coche": {
+"kind": "frame",
+"w": 22,
+"h": 22,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · Facture trouvée / Rapprochement · Facture trouvée · coche / Rapprochement · Facture trouvée · coche · tracé": {
+"kind": "vec"
+},
+"04 · Les agents / Rapprochement · illustration / Rapprochement · Facture trouvée / Rapprochement · Facture trouvée · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 36,
+"y": 7
+},
+"04 · Les agents / Rapprochement · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 182,
+"y": 804
+},
+"04 · Les agents / Rapprochement · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 16,
+"lh": 150,
+"ls": -2,
+"w": 480,
+"align": "start",
+"x": 182,
+"y": 840
+},
+"04 · Les agents / Relance · illustration": {
+"kind": "frame",
+"w": 538,
+"h": 380,
+"fond": [
+"#FBFAF9",
+1
+],
+"rayon": 16,
+"contour": [
+"#EBE5E0",
+1
+]
+},
+"04 · Les agents / Relance · illustration / Relance · message": {
+"kind": "frame",
+"w": 400,
+"h": 156,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 16,
+"contour": [
+"#EBE5E0",
+1
+],
+"effets": "ombre-ligne"
+},
+"04 · Les agents / Relance · illustration / Relance · message / Relance · message · agent": {
+"kind": "frame",
+"w": 32,
+"h": 32,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"04 · Les agents / Relance · illustration / Relance · message / Relance · message · agent / Relance · message · agent · coche": {
+"kind": "vec"
+},
+"04 · Les agents / Relance · illustration / Relance · message / Relance · message · de": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 64,
+"y": 17
+},
+"04 · Les agents / Relance · illustration / Relance · message / Relance · message · canal": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 12,
+"lh": 140,
+"ls": -1,
+"w": null,
+"align": "start",
+"x": 64,
+"y": 37
+},
+"04 · Les agents / Relance · illustration / Relance · message / Relance · message · trait": {
+"kind": "vec"
+},
+"04 · Les agents / Relance · illustration / Relance · message / Relance · message · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": 360,
+"align": "start",
+"x": 20,
+"y": 82
+},
+"04 · Les agents / Relance · illustration / Relance · Relance envoyée": {
+"kind": "frame",
+"w": 170,
+"h": 34,
+"fond": [
+"#1A1A1A",
+1
+],
+"rayon": 100,
+"effets": "bouton-noir"
+},
+"04 · Les agents / Relance · illustration / Relance · Relance envoyée / Relance · Relance envoyée · coche": {
+"kind": "frame",
+"w": 22,
+"h": 22,
+"fond": [
+"#3745F1",
+1
+],
+"rayon": 100
+},
+"04 · Les agents / Relance · illustration / Relance · Relance envoyée / Relance · Relance envoyée · coche / Relance · Relance envoyée · coche · tracé": {
+"kind": "vec"
+},
+"04 · Les agents / Relance · illustration / Relance · Relance envoyée / Relance · Relance envoyée · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 14,
+"lh": 140,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 36,
+"y": 7
+},
+"04 · Les agents / Relance · titre": {
+"kind": "text",
+"font": [
+"Inter",
+"Semi Bold"
+],
+"size": 20,
+"lh": 130,
+"ls": -2,
+"w": null,
+"align": "start",
+"x": 752,
+"y": 804
+},
+"04 · Les agents / Relance · texte": {
+"kind": "text",
+"font": [
+"Inter",
+"Medium"
+],
+"size": 16,
+"lh": 150,
+"ls": -2,
+"w": 480,
+"align": "start",
+"x": 752,
+"y": 840
+},
+"04 · Les agents / Agents · trait de fin": {
+"kind": "vec"
+},
+"04 · Les agents / Agents · jointure 150": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"04 · Les agents / Agents · jointure 1290": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+},
+"04 · Les agents / Agents · jointure 720": {
+"kind": "frame",
+"w": 8,
+"h": 8,
+"fond": [
+"#FFFFFF",
+1
+],
+"rayon": 100,
+"effets": "jointure"
+}
+}
+}

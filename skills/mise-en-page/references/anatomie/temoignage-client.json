@@ -1,0 +1,157 @@
+{
+ "type": "temoignage-client",
+ "noeud": "6001:572",
+ "w": 1141,
+ "h": 410,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:572",
+    "nom": "Frame 2147240050",
+    "w": 1141,
+    "h": 410,
+    "x": 150,
+    "y": 2552,
+    "layout": "auto-layout → écart 0 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:573",
+    "nom": "Frame 2147240045",
+    "w": 570,
+    "h": 410,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 120 pad 80/100/40/100 align MIN/MIN",
+    "traits": "trait #D6D0C8 right"
+   },
+   {
+    "id": "6001:575",
+    "nom": "Frame 2147240044",
+    "w": 236,
+    "h": 50,
+    "x": 100,
+    "y": 320,
+    "layout": "auto-layout → écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:576",
+    "nom": "Frame 2147236383",
+    "w": 50,
+    "h": 50,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 10/10/10/10 align MIN/CENTER",
+    "traits": "contour #000000 2"
+   },
+   {
+    "id": "6001:580",
+    "nom": "Frame 2147240043",
+    "w": 176,
+    "h": 47,
+    "x": 60,
+    "y": 2,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:583",
+    "nom": "Frame 2147260538",
+    "w": 19,
+    "h": 405,
+    "x": 0,
+    "y": 1,
+    "layout": "auto-layout ↓ écart 0 align MIN/MIN",
+    "traits": "trait #D6D0C8 right"
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:574",
+    "role": "texte d’intro",
+    "police": "Switzer Medium 20",
+    "texte": "Botwise simplified our customer support. AI responds instantly, understands customer questions, and saves our team hours managing conversations daily.",
+    "couleur": "#262626",
+    "align": "LEFT",
+    "w": 370,
+    "h": 120,
+    "x": 100,
+    "y": 80,
+    "nb_car": 150
+   },
+   {
+    "id": "6001:581",
+    "role": "texte / libellé",
+    "police": "Inter Tight SemiBold 16",
+    "texte": "Arun Antony",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 176,
+    "h": 24,
+    "x": 0,
+    "y": 0,
+    "nb_car": 11
+   },
+   {
+    "id": "6001:582",
+    "role": "texte / libellé",
+    "police": "Inter Tight Medium 15",
+    "texte": "Director of Framex",
+    "couleur": "#595959",
+    "align": "LEFT",
+    "w": 176,
+    "h": 23,
+    "x": 0,
+    "y": 24,
+    "nb_car": 18
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:577",
+    "nom": "lightning-fill",
+    "w": 24,
+    "h": 24
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6001:588",
+    "nom": "Frame 2147240049",
+    "w": 570,
+    "h": 410,
+    "x": 570,
+    "y": 0
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:661",
+    "w": 1440,
+    "h": 15,
+    "x": -149,
+    "y": 409
+   },
+   {
+    "id": "6001:665",
+    "w": 1440,
+    "h": 15,
+    "x": -149,
+    "y": -14
+   }
+  ],
+  "jointures": [
+   {
+    "id": "6001:669",
+    "x": 566,
+    "y": 404
+   },
+   {
+    "id": "6001:670",
+    "x": 566,
+    "y": -2
+   }
+  ]
+ }
+}

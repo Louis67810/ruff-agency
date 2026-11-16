@@ -1,0 +1,467 @@
+{
+ "type": "probleme-solution",
+ "noeud": "6001:671",
+ "w": 1139,
+ "h": 719,
+ "items": {
+  "blocs": [
+   {
+    "id": "6001:671",
+    "nom": "Frame 2147260602",
+    "w": 1139,
+    "h": 719,
+    "x": 151,
+    "y": 3112,
+    "layout": "auto-layout ↓ écart 60 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:672",
+    "nom": "Frame 2147239882",
+    "w": 1139,
+    "h": 135,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 8 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:675",
+    "nom": "Frame 2147240205",
+    "w": 1139,
+    "h": 524,
+    "x": 0,
+    "y": 195,
+    "layout": "auto-layout → écart 1 align MIN/CENTER",
+    "traits": "trait #D6D0C8 top"
+   },
+   {
+    "id": "6001:682",
+    "nom": "Frame 2147240055",
+    "w": 569,
+    "h": 524,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 1/0/0/0 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:770",
+    "nom": "Frame 2147239885",
+    "w": 569,
+    "h": 128,
+    "x": 0,
+    "y": 396,
+    "layout": "auto-layout ↓ écart 6 pad 0/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:773",
+    "nom": "Frame 2147240180",
+    "w": 105,
+    "h": 29,
+    "x": 465,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:774",
+    "nom": "Frame 2147240178",
+    "w": 105,
+    "h": 29,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:775",
+    "nom": "Frame 2147240177",
+    "w": 105,
+    "h": 29,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 2 pad 4/20/4/6 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:783",
+    "nom": "Frame 2147240182",
+    "w": 7,
+    "h": 66,
+    "x": 97,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:787",
+    "nom": "Frame 2147240056",
+    "w": 569,
+    "h": 524,
+    "x": 570,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 0 pad 1/0/0/0 align MIN/MAX",
+    "traits": ""
+   },
+   {
+    "id": "6001:851",
+    "nom": "Frame 2147240175",
+    "w": 225,
+    "h": 551,
+    "x": 226,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:853",
+    "nom": "Frame 2147240176",
+    "w": 225,
+    "h": 551,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:858",
+    "nom": "Group 42977",
+    "w": 225,
+    "h": 551,
+    "x": 0,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:862",
+    "nom": "Frame 2147239885",
+    "w": 569,
+    "h": 128,
+    "x": 0,
+    "y": 396,
+    "layout": "auto-layout ↓ écart 6 pad 0/40/40/40 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:865",
+    "nom": "Frame 2147240181",
+    "w": 114,
+    "h": 29,
+    "x": 0,
+    "y": 20,
+    "layout": "auto-layout ↓ écart 10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:866",
+    "nom": "Frame 2147240179",
+    "w": 114,
+    "h": 29,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout ↓ écart 10 align MIN/MIN",
+    "traits": ""
+   },
+   {
+    "id": "6001:867",
+    "nom": "Frame 2147240177",
+    "w": 114,
+    "h": 29,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 2 pad 4/12/4/14 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:877",
+    "nom": "Frame 2147240182",
+    "w": 7,
+    "h": 66,
+    "x": 9,
+    "y": 0,
+    "layout": "",
+    "traits": ""
+   },
+   {
+    "id": "6001:883",
+    "nom": "Frame 2147240173",
+    "w": 76,
+    "h": 98,
+    "x": 524,
+    "y": 180,
+    "layout": "auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:884",
+    "nom": "Frame 2147240057",
+    "w": 68,
+    "h": 90,
+    "x": 4,
+    "y": 4,
+    "layout": "auto-layout → écart 10 pad 4/4/4/4 align MIN/CENTER",
+    "traits": "contour #D6D0C8 1"
+   },
+   {
+    "id": "6001:885",
+    "nom": "Frame 2147240174",
+    "w": 60,
+    "h": 82,
+    "x": 4,
+    "y": 4,
+    "layout": "auto-layout → écart 10 align MIN/CENTER",
+    "traits": ""
+   },
+   {
+    "id": "6001:886",
+    "nom": "Frame 2147240054",
+    "w": 60,
+    "h": 82,
+    "x": 0,
+    "y": 0,
+    "layout": "auto-layout → écart 10 pad 24/16/24/16 align MIN/CENTER",
+    "traits": "contour #FFFFFF 1"
+   }
+  ],
+  "textes": [
+   {
+    "id": "6001:673",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "System",
+    "couleur": "#3745F1",
+    "align": "LEFT",
+    "w": 52,
+    "h": 21,
+    "x": 544,
+    "y": 0,
+    "nb_car": 6
+   },
+   {
+    "id": "6001:674",
+    "role": "titre de section",
+    "police": "Switzer Semibold 48",
+    "texte": "Your support systems / aren’t unified",
+    "couleur": "#1A1A1A",
+    "align": "CENTER",
+    "w": 1139,
+    "h": 106,
+    "x": 0,
+    "y": 29,
+    "nb_car": 37
+   },
+   {
+    "id": "6001:771",
+    "role": "titre de bloc",
+    "police": "Switzer Semibold 20",
+    "texte": "Too Many Disconnected Tools",
+    "couleur": "#262626",
+    "align": "CENTER",
+    "w": 489,
+    "h": 30,
+    "x": 40,
+    "y": 0,
+    "nb_car": 27
+   },
+   {
+    "id": "6001:772",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "You manage multiple disconnected tools that / constantly break workflows.",
+    "couleur": "#666666",
+    "align": "CENTER",
+    "w": 489,
+    "h": 52,
+    "x": 40,
+    "y": 36,
+    "nb_car": 73
+   },
+   {
+    "id": "6001:781",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "Problem",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 59,
+    "h": 21,
+    "x": 26,
+    "y": 4,
+    "nb_car": 7
+   },
+   {
+    "id": "6001:863",
+    "role": "titre de bloc",
+    "police": "Switzer Semibold 20",
+    "texte": "One Intelligent Unified Platform",
+    "couleur": "#262626",
+    "align": "CENTER",
+    "w": 489,
+    "h": 30,
+    "x": 40,
+    "y": 0,
+    "nb_car": 32
+   },
+   {
+    "id": "6001:864",
+    "role": "texte d’intro",
+    "police": "Inter Tight Medium 17",
+    "texte": "Unify conversations, automation, and actions into / one intelligent system.",
+    "couleur": "#666666",
+    "align": "CENTER",
+    "w": 489,
+    "h": 52,
+    "x": 40,
+    "y": 36,
+    "nb_car": 75
+   },
+   {
+    "id": "6001:875",
+    "role": "surtitre / étiquette mono",
+    "police": "DM Mono Medium 14",
+    "texte": "SOLUTION",
+    "couleur": "#1A1A1A",
+    "align": "LEFT",
+    "w": 68,
+    "h": 21,
+    "x": 34,
+    "y": 4,
+    "nb_car": 8
+   }
+  ],
+  "traits": [
+   {
+    "id": "6001:676",
+    "w": 518,
+    "h": 0,
+    "x": 569,
+    "y": 0
+   },
+   {
+    "id": "6001:681",
+    "w": 1440,
+    "h": 0,
+    "x": -150,
+    "y": 1
+   },
+   {
+    "id": "6001:784",
+    "w": 1,
+    "h": 56,
+    "x": 4,
+    "y": 0
+   },
+   {
+    "id": "6001:785",
+    "w": 1,
+    "h": 66,
+    "x": 6,
+    "y": 0
+   },
+   {
+    "id": "6001:786",
+    "w": 2,
+    "h": 56,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "6001:878",
+    "w": 1,
+    "h": 56,
+    "x": 4,
+    "y": 0
+   },
+   {
+    "id": "6001:879",
+    "w": 1,
+    "h": 66,
+    "x": 6,
+    "y": 0
+   },
+   {
+    "id": "6001:880",
+    "w": 2,
+    "h": 56,
+    "x": 0,
+    "y": 0
+   }
+  ],
+  "decors": [
+   {
+    "id": "6001:677",
+    "w": 1440,
+    "h": 15,
+    "x": -150,
+    "y": 524
+   },
+   {
+    "id": "6001:759",
+    "w": 225,
+    "h": 551,
+    "x": 344,
+    "y": 0
+   },
+   {
+    "id": "6001:854",
+    "w": 220,
+    "h": 327,
+    "x": 65,
+    "y": -30
+   }
+  ],
+  "illustrations": [
+   {
+    "id": "6001:683",
+    "nom": "Frame 2147240182",
+    "w": 570,
+    "h": 395,
+    "x": 0,
+    "y": 1
+   },
+   {
+    "id": "6001:788",
+    "nom": "Frame 2147261125",
+    "w": 570,
+    "h": 395,
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "icones": [
+   {
+    "id": "6001:776",
+    "nom": "warning-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:868",
+    "nom": "rocket-bold",
+    "w": 18,
+    "h": 18
+   },
+   {
+    "id": "6001:890",
+    "nom": "Frame 2147240272",
+    "w": 34,
+    "h": 28
+   }
+  ],
+  "jointures": [
+   {
+    "id": "6001:881",
+    "x": 565,
+    "y": -3
+   },
+   {
+    "id": "6001:882",
+    "x": 565,
+    "y": 519
+   }
+  ]
+ }
+}

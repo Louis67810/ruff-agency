@@ -1,0 +1,586 @@
+{
+ "version": "2026-10-22 — v2.2 (R15-R18)",
+ "statuts": {
+  "regle": "Règle explicite de Louis (transmission ou retour). Prime sur ce qu'on voit dans un ancien post.",
+  "observation": "Observé dans le corpus Figwright. À confirmer ; ce n'est pas une règle.",
+  "proposition": "Proposition de Claude, non validée.",
+  "local": "Choix propre à une composition précise. Ne pas généraliser.",
+  "ambigu": "Plusieurs lectures possibles. Ne pas trancher sans Louis."
+ },
+ "familles": [
+  {
+   "groupe": "5406:3563",
+   "titre": "Guide en étapes — « Le guide ultime pour créer des CTA qui vendent »",
+   "type": "guide",
+   "theme": "bleu",
+   "structure": "Couverture → [Étape N + bloc bleu → points numérotés 1..n (la numérotation repart à chaque étape)] ×3 → Merci → Offre",
+   "notes": [
+    [
+     "observation",
+     "Chaque point = numéro + cartouche bleu, une phrase d'explication, puis une démonstration avant/après : élément faible (croix rouge) → élément corrigé (check vert), reliés par une flèche bleue courbe."
+    ],
+    [
+     "observation",
+     "Les illustrations sont presque toujours de vrais composants d'interface (boutons, champs) agrandis, sans fond de panneau."
+    ],
+    [
+     "observation",
+     "Couverture : main + bouton tourné + étiquettes « Erreur » rouges reliées à des points par des tirets."
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:3564",
+   "titre": "Guide en étapes — « La technique pour écrire une landing page qui vend »",
+   "type": "guide",
+   "theme": "bleu",
+   "structure": "Couverture → Contexte → Étape 1 (+ phrase) → 1..4 → Étape 2 → 1..5 (pyramide d'awareness) → Étape 3 → 1..4 avec cartouche « Exemple : » → Merci → Offre",
+   "notes": [
+    [
+     "observation",
+     "Contexte : cartouche blanc « Contexte », texte gros en noir, pilule noire centrée « Voici les 3 étapes pour y remédier »."
+    ],
+    [
+     "observation",
+     "Sous le bloc Étape, une phrase d'introduction noire est possible."
+    ],
+    [
+     "observation",
+     "Collages photo inclinés avec étiquettes blanches (« Métier », « Ville », « Être aisé ») : les photos servent à incarner un persona, pas à décorer."
+    ],
+    [
+     "observation",
+     "La pyramide colorée touche le bas de la slide et se fond : usage cohérent avec la règle du fondu."
+    ],
+    [
+     "observation",
+     "Cartouche blanc « Exemple : » suivi d'une citation entre guillemets."
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:5992",
+   "titre": "Étude de cas — « Comment j'ai créé le site parfait pour mon agence »",
+   "type": "etude-de-cas",
+   "theme": "rouge puis bleu",
+   "structure": "Couverture → Étape 1 « Noter tous les problèmes » → problèmes 1..4 en ROUGE → Étape 2 « Faire une maquette » → avant/après empilé → Étape 3 « Refaire une nouvelle version » → avant/après → intertitre bleu « Pourquoi ce design fonctionne mieux ? » + flèche → solutions 1..4 en BLEU → Offre",
+   "notes": [
+    [
+     "observation",
+     "Dans une étude de cas, la couleur suit l'angle de la section : problèmes de l'ancien site en rouge, choix du nouveau site en bleu, dans le même carrousel."
+    ],
+    [
+     "observation",
+     "Captures réelles du site (cas nommé) : ancienne version / maquette / nouvelle version empilées, étiquettes blanches « Ancienne version du site », « Maquette du nouveau site », flèche bleue courbe à gauche."
+    ],
+    [
+     "observation",
+     "Repères de problème dessinés à la main sur la capture : ellipse rouge, points d'interrogation rouges."
+    ],
+    [
+     "observation",
+     "Ligne de conclusion « → Résultat : … » sous l'illustration."
+    ],
+    [
+     "regle",
+     "Les titres « ÉTAPE N°1 » du corpus sont en capitales : la règle « pas de texte éditorial en capitales » de Louis prime. Écrire « Étape 1 » ou une formule en casse normale."
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:5353",
+   "titre": "Étude de cas — « Comment j'ai créé le site parfait pour ce SaaS » (Rentala)",
+   "type": "etude-de-cas",
+   "theme": "rouge puis bleu",
+   "structure": "Couverture → Étape 1 → problèmes 1..5 rouges → Étape 2 (maquette) → avant/après → Étape 3 → avant/après → « Pourquoi ce design fonctionne mieux ? » → solutions 1..4 bleues → Offre",
+   "notes": [
+    [
+     "observation",
+     "Même ossature que l'étude de cas agence : c'est un vrai gabarit récurrent d'étude de cas."
+    ],
+    [
+     "observation",
+     "Les captures peuvent sortir par la droite ou le bas de la slide (cadrage serré), avec ombre."
+    ],
+    [
+     "observation",
+     "Couverture : capture floutée + vraie capture + pastille « 4x plus de conversion » + main + flèche bleue. Le chiffre appartient à ce cas : ne pas le réutiliser."
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:5994",
+   "titre": "Comparatif / analyse VS — « Anthony Bourbon VS Hakim Benotmane »",
+   "type": "comparatif",
+   "theme": "bleu (forces) / rouge (faiblesses)",
+   "structure": "Couverture VS (photos détourées) → Contexte → Étape 1 bloc bleu « Analyse des points forts de A » → 1..4 bleus → Étape 2 bloc ROUGE « points faibles de A » → 1..2 rouges → Étape 3 bleu (B) → 1..2 → Étape 4 rouge (B) → 1..5 → Résultat (photos + « Dis-moi ton avis en commentaire ») → Offre",
+   "notes": [
+    [
+     "observation",
+     "Le bloc d'étape prend la couleur de la section qu'il ouvre (bleu = forces, rouge = faiblesses)."
+    ],
+    [
+     "observation",
+     "Personnes réelles détourées en couverture et en résultat ; captures réelles des sites analysés."
+    ],
+    [
+     "observation",
+     "Cartouche « VS » rouge en pastille entre deux cartouches blancs."
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:7201",
+   "titre": "Quiz + liste d'erreurs — « Arrête de mettre des humains sur ton site »",
+   "type": "quiz-erreurs",
+   "theme": "rouge",
+   "structure": "Couverture (« Arrête » rouge) → « Regarde ces 2 images » + pilule « Laquelle convertit le plus ? » → « Réponse » + Pourquoi ? → 2e quiz → Réponse → intertitre rouge « Les 5 erreurs à ne pas faire » → 1..5 « À ne pas faire » rouges + cartouche blanc nommant l'erreur → comparatif final « Ne rien changer » (rouge) / « Cliquer sur mon lien en bio » (bleu)",
+   "notes": [
+    [
+     "regle",
+     "Dans ce corpus ancien, « Pourquoi ? » est bleu : Louis a demandé depuis que « Pourquoi ? » soit TOUJOURS un cartouche blanc, texte sombre."
+    ],
+    [
+     "observation",
+     "Mécanique de quiz : deux mini-pages identiques sauf une variable (regard, couleur de vêtement), puis la réponse avec cadre rouge « Focus » et ligne pointillée du regard vers le CTA."
+    ],
+    [
+     "observation",
+     "Le cartouche rouge répète « À ne pas faire » et c'est le cartouche blanc sous l'illustration qui nomme l'erreur."
+    ],
+    [
+     "observation",
+     "Texte d'explication avec flèches bleues inline « → » entre cause et conséquence."
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:6521",
+   "titre": "Règles — « Les 9 règles d'or pour une landing page »",
+   "type": "liste-regles",
+   "theme": "or",
+   "structure": "Couverture (« 9 règles d'or » en cartouche doré) → 1..9 (touche dorée + cartouche blanc « A > B ») → Offre",
+   "notes": [
+    [
+     "observation",
+     "Troisième thème coloré : or / bronze dégradé, utilisé quand le titre parle de « règles d'or ». Le thème suit le vocabulaire du titre, pas seulement positif/négatif."
+    ],
+    [
+     "observation",
+     "Titres de points en comparaison « Vitesse > Animation » dans des cartouches blancs."
+    ],
+    [
+     "observation",
+     "Texte gris avec mots-clés en noir gras pour l'emphase."
+    ],
+    [
+     "observation",
+     "Illustrations légères : listes de cartouches blancs avec checks bleus, badges « ? » noirs, barre de chargement rouge."
+    ],
+    [
+     "ambigu",
+     "Le check bleu de cette série est l'ancien style ; le check vert est la sélection récente. Lequel garder pour un thème or ?"
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:8011",
+   "titre": "Lois de psychologie UX (Fitts, Hick, Von Restorff, Occam, Weber)",
+   "type": "liste-concepts",
+   "theme": "bleu",
+   "structure": "(couverture absente du groupe) 1..3 → PAUSE (offre en milieu de carrousel) → 4..5 → Merci (avatar illustré)",
+   "notes": [
+    [
+     "observation",
+     "Format 575 × 718 (légèrement plus haut que 690)."
+    ],
+    [
+     "observation",
+     "Panneau gris clair contenant deux mini-interfaces côte à côte, croix rouge sous la mauvaise et check bleu sous la bonne."
+    ],
+    [
+     "observation",
+     "Slide « PAUSE ⏸ » : l'offre insérée au milieu, avant la fin."
+    ],
+    [
+     "observation",
+     "Ancien pied de page : avatar illustré + « Louis @Ruff agency ». Louis préfère la version PP photo + « Louis Staub » + promesse."
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:5995",
+   "titre": "Groupe mixte (dark mode + preuves sociales)",
+   "type": "mixte",
+   "theme": "—",
+   "structure": "Couverture « Faut-il mettre son site en dark mode ? » + Contexte « la méfiance explose » + « 1 Ajoute une date »",
+   "notes": [
+    [
+     "observation",
+     "Preuve qu'un groupe n'est pas un carrousel : la couverture dark mode et les slides sur les avis appartiennent à deux sujets différents."
+    ],
+    [
+     "observation",
+     "Couverture question : titre sur deux cartouches blancs, capture sombre inclinée, croix, main tenant un tag « Conversion » avec flèche de baisse rouge."
+    ],
+    [
+     "observation",
+     "Contexte suivi d'un « PS : la dernière astuce inconnue peut doubler ta conversion » en gris : accroche de rétention."
+    ]
+   ]
+  },
+  {
+   "groupe": "5406:10802",
+   "titre": "Couverture seule — « Comment j'ai créé le site parfait pour ce SaaS » (actions IA)",
+   "type": "couverture",
+   "theme": "bleu",
+   "structure": "Couverture isolée",
+   "notes": [
+    [
+     "observation",
+     "Fond de pilules d'actions IA (ChatGPT, Claude, Grok, Gemini, Deepseek) avec la main qui en choisit une : c'est l'usage justifié des CTA IA."
+    ]
+   ]
+  }
+ ],
+ "typesDeSlides": [
+  [
+   "Couverture",
+   "2 rangées max de cartouches (blanc / bleu / rouge / or), éventuel sous-titre noir centré sans boîte, illustration qui descend sous la pilule noire et se fond, pilule noire CTA en bas.",
+   "regle+observation"
+  ],
+  [
+   "Contexte",
+   "Cartouche blanc « Contexte », texte gros (≈34 px) en noir, pilule noire centrée vers la suite.",
+   "observation"
+  ],
+  [
+   "Étape / intertitre",
+   "Cartouche blanc (« Étape 1 »…) + bloc plein bleu ou rouge, éventuelle phrase noire dessous. Centré verticalement, sans illustration.",
+   "observation"
+  ],
+  [
+   "Intertitre question",
+   "Bloc bleu seul « Pourquoi ce design fonctionne mieux ? » + petite capsule blanche avec flèche.",
+   "observation"
+  ],
+  [
+   "Point numéroté",
+   "Touche numéro grise/blanche (ou dorée) + cartouche de couleur, 1-3 lignes d'explication noires (≈22 px), illustration, éventuel « → Résultat : … ».",
+   "regle+observation"
+  ],
+  [
+   "Réponse / Pourquoi",
+   "Cartouche blanc « Réponse » ou « Pourquoi ? » (toujours blanc), puis explication.",
+   "regle"
+  ],
+  [
+   "Exemple",
+   "Cartouche blanc « Exemple : » + citation entre guillemets.",
+   "observation"
+  ],
+  [
+   "Résultat (étude de cas)",
+   "Cartouche blanc « Résultat : » + verdict + visuel + CTA commentaire.",
+   "observation"
+  ],
+  [
+   "Pause / offre",
+   "Fond bleu plein, prix, liste à puces cochées, captures de sites inclinées à droite, bouton blanc « Réserver un appel sur mon profil ».",
+   "observation"
+  ],
+  [
+   "Merci",
+   "PP ronde, cartouche blanc « Merci d'avoir regardé, ça m'aide énormément », like/commentaire/enregistrer avec icônes, bloc bleu « Besoin d'un site qui convertit vraiment ? ».",
+   "observation"
+  ]
+ ],
+ "composants": [
+  [
+   "5406-1590.png",
+   "5406:1590",
+   "Cartouche bleu de couverture",
+   "Plus Jakarta Sans Bold 37,25, blanc, ombre de texte légère ; dégradé #0147FF → #376EFF → #0147FF ; ombres bleues en 5 couches ; rayon 17,8 pour 84,9 de haut (≈0,21).",
+   "observation"
+  ],
+  [
+   "5406-1588.png",
+   "5406:1588",
+   "Cartouche blanc de couverture (rangée 2)",
+   "Plus Jakarta Sans Bold 33,4, #161616 ; contour noir 27 % ; rayon 13,9 pour 75,8 (≈0,18). Une seule ligne.",
+   "regle+observation"
+  ],
+  [
+   "5406-1584.png",
+   "5406:1584",
+   "Pilule noire CTA de couverture",
+   "Plus Jakarta Sans Bold 28, blanc ; rayon 44 ; capsule blanche + flèche à droite ; largeur selon le texte. Toujours ajustée à son texte (hug) et centrée, jamais sur toute la largeur.",
+   "observation"
+  ],
+  [
+   "5406-2480.png",
+   "5406:2480",
+   "Touche numérotée",
+   "Extérieur #E5E5E5 66 × 64,5 r 14,7 ; intérieur blanc 55,7 r 11,1 en relief ; chiffre Inter Bold 31,9 centré.",
+   "regle+observation"
+  ],
+  [
+   "5406-6144.png",
+   "5406:6144",
+   "Touche numérotée dorée",
+   "Variante or de la touche pour les « règles d'or ».",
+   "observation"
+  ],
+  [
+   "5406-2484.png",
+   "5406:2484",
+   "Cartouche de titre de point — bleu",
+   "Plus Jakarta Sans Bold 28,6 blanc ; dégradé bleu ; rayon 13,7 pour 65 (≈0,21).",
+   "observation"
+  ],
+  [
+   "5406-5426.png",
+   "5406:5426",
+   "Cartouche de titre de point — rouge",
+   "Même gabarit en rouge pour problèmes / erreurs.",
+   "regle+observation"
+  ],
+  [
+   "5406-6124.png",
+   "5406:6124",
+   "Cartouche de titre blanc « A > B »",
+   "Utilisé avec la touche dorée.",
+   "observation"
+  ],
+  [
+   "5406-3163.png",
+   "5406:3163",
+   "Cartouche « Étape » blanc",
+   "Plus Jakarta Sans Bold 56,7 ; rayon 26 pour 96. Le texte source est en capitales : à écrire en casse normale.",
+   "regle+observation"
+  ],
+  [
+   "5406-3165.png",
+   "5406:3165",
+   "Bloc d'étape bleu",
+   "Plein #0147FF, Plus Jakarta Sans Bold 34,5 blanc, rayon 18,9 ; ombres bleues très douces.",
+   "observation"
+  ],
+  [
+   "5406-4099.png",
+   "5406:4099",
+   "Bloc d'étape rouge",
+   "Ouvre une section de faiblesses / problèmes.",
+   "observation"
+  ],
+  [
+   "5406-3320.png",
+   "5406:3320",
+   "Cartouche « Contexte »",
+   "Même famille que « Pourquoi ? », « Réponse », « Exemple : », « Résultat : » — toujours blanc.",
+   "regle+observation"
+  ],
+  [
+   "5406-2441.png",
+   "5406:2442",
+   "CTA bleu source (référence choisie par Louis)",
+   "Enveloppe #E1E5EE r 23,5, padding 9,4 + bouton dégradé #4E7EFA → #0147FF r 15,7, contour #2F4D9D 1,6, ombres internes claire/sombre + ombres portées ; Inter Medium 25 ; auto-layout. TOUS les boutons d'une illustration (Continuer, Envoyer, Réserver…) le reprennent à l'échelle, sauf pour montrer un mauvais CTA. Ne jamais le reconstruire : le cloner (kit.sourceCTA).",
+   "regle"
+  ],
+  [
+   "5406-6679.png",
+   "5406:6679",
+   "Tag blanc d'illustration",
+   "Pilule blanche, contour noir 17 %, ombres grises douces, Inter Medium 9,8 (à l'échelle de l'illustration). C'est LA forme d'annotation dans une illustration ; pas de pastille bleue en dégradé (kit.tag). Petit (texte ≈ 10 px) et placé au coin supérieur droit de l'élément qu'il qualifie, en léger débordement.",
+   "regle"
+  ],
+  [
+   "5424-3826.png",
+   "5424:3826",
+   "Template de site (archétype de landing page)",
+   "Design de site que Louis utilise souvent pour représenter une page générique : carte blanche r 15, contour noir 19 %, ombre neutre douce ; seuls les titres sont du vrai texte (Plus Jakarta Sans Bold #0D1E26, interlettrage -3 %, interligne 105 %) ; texte en barres #E8E8E8 arrondies ; boutons en pilules #383838 sans libellé ; images #F3F3F3 r 5,6 (image de hero #D9D9D9 à 37 %) ; bandeaux #FBFBFB ; sections en zigzag image / texte. Pas de fond bleu.",
+   "regle"
+  ],
+  [
+   "5406-2504.png",
+   "5406:2504",
+   "Check vert source",
+   "#28B738, rotation −25°. Positif, parcimonieux, accroché au coin de l'objet jugé. Taille proportionnée à l'objet : environ 30 px pour une carte de 200-300 px (la taille source 43 est trop grande).",
+   "regle"
+  ],
+  [
+   "5406-2510.png",
+   "5406:2510",
+   "Croix rouge source",
+   "Dégradé #F45151 → #EF0C0C, légère rotation. Au coin de l'élément jugé, en léger débordement. Même règle de taille que le check.",
+   "regle"
+  ],
+  [
+   "5406-2509.png",
+   "5406:2509",
+   "Flèche courbe source",
+   "Trait bleu dégradé (opaque côté pointe), extrémités rondes. À reconstruire de A vers B pour chaque usage.",
+   "regle+observation"
+  ],
+  [
+   "5406-1613.png",
+   "5406:1613",
+   "Main pointeur",
+   "Silhouette blanche, contour noir 8,9, ombre floue. Toujours opaque et au premier plan ; sort souvent par la droite. Doit être bien visible (environ 4/5 de la silhouette) et plutôt vers le centre : jamais juste un bout qui dépasse.",
+   "regle+observation"
+  ],
+  [
+   "5406-2487.png",
+   "5406:2487",
+   "Bouton Swipe",
+   "Pied de page, à droite. Inter Medium 14.",
+   "observation"
+  ],
+  [
+   "5406-2493.png",
+   "5406:2493",
+   "PP de signature",
+   "Photo ronde 38,7 + « Louis Staub » Inter Semi Bold 13,3 + promesse Plus Jakarta Bold 13.",
+   "regle"
+  ],
+  [
+   "5406-5424.png",
+   "5406:5424",
+   "Ancien avatar illustré",
+   "Ancienne signature « Louis @Ruff agency » : ne plus utiliser par défaut.",
+   "regle"
+  ],
+  [
+   "5406-2466.png",
+   "5406:2466",
+   "Logo Ruff Agency",
+   "Pastille noire RUFF + « Agency » en Eudoxus Sans Bold 12,8.",
+   "observation"
+  ],
+  [
+   "5406-7900.png",
+   "5406:7900",
+   "Panneau gris de comparaison",
+   "« Petit changement / Grand changement » : deux mini-interfaces, croix / check dessous.",
+   "observation"
+  ],
+  [
+   "5406-6552.png",
+   "5406:6552",
+   "Illustration humaine de couverture",
+   "Photo de personne réelle en carte, avec croix et main : les humains sont autorisés quand le sujet les concerne.",
+   "observation"
+  ],
+  [
+   "5406-5433.png",
+   "5406:5433",
+   "Capture réelle annotée",
+   "Capture de site d'un cas nommé, croix au coin, ellipse rouge à main levée sur la zone en défaut.",
+   "observation"
+  ],
+  [
+   "5406-6146.png",
+   "5406:6146",
+   "Couverture : page empilée + main",
+   "Pages génériques empilées et main : archétype de landing page.",
+   "observation"
+  ],
+  [
+   "5406-6548.png",
+   "5406:6548",
+   "Pilule noire (variante)",
+   "« À moins que tu fasses ça » : le CTA de couverture peut être une suite de phrase.",
+   "observation"
+  ]
+ ],
+ "imageUnique": [
+  [
+   "5294:1354",
+   "Ressource offerte (lead magnet)",
+   "Titre bleu + blanc comme une couverture, collage de documents inclinés avec étiquettes « offert », pilule noire « Commente : “Guide” pour tout obtenir ». Format 1950 × 2340."
+  ],
+  [
+   "5402:1406",
+   "Histoire sur capture plein cadre",
+   "Capture réelle (conversation WhatsApp) en fond ; cartouches blancs + bleu en bas sur un voile blanc ; signature PP sans logo. Accroche personnelle."
+  ],
+  [
+   "5406:3565",
+   "Photo d'ambiance + titre",
+   "Photo réelle (écran LinkedIn) assombrie, cartouches blanc + rouge avec logo LinkedIn, signature. Format 2056 × 2340."
+  ],
+  [
+   "5406:8012",
+   "Photo d'ambiance + titre (variante)",
+   "Même famille : photo plein cadre, cartouches en bas, logo LinkedIn intégré au cartouche."
+  ],
+  [
+   "5406:7245",
+   "Capture de site + titre",
+   "Capture du site Ruff Agency en fond, cartouche bleu + blanc dessous."
+  ],
+  [
+   "5406:7202",
+   "Avant / après personnel",
+   "Avatar illustré « Avant » et photo « Après », main, flèche bleue ; cartouches avec logo LinkedIn."
+  ],
+  [
+   "5406:7261",
+   "Fiche mémo (grille 2 × 2)",
+   "Cartouche bleu titre + sous-titre « Avec ces 4 astuces », quatre mini-schémas en panneaux gris avec légende. Format 575 × 718."
+  ],
+  [
+   "5406:7369",
+   "Tableau mauvais / bon",
+   "Titre en trois cartouches (blanc / rouge / blanc), carte « Mauvais CTA / Bon CTA » section par section avec flèches. Format 575 × 783."
+  ],
+  [
+   "5406:7456",
+   "Schéma annoté",
+   "Page générique verticale avec échelle d'intérêt (Peu / Moyen / Fort), étiquettes des sections."
+  ],
+  [
+   "5406:7516",
+   "Sondage visuel",
+   "« Tu préfères quelle version ? », deux captures de site, réactions (applaudir / cœur) et main : appel au commentaire."
+  ]
+ ],
+ "observationsTransversales": [
+  [
+   "observation",
+   "Format dominant 575 × 690 (5:6) ; quelques séries en 575 × 718 ; image unique en 1950 × 2340, 2056 × 2340 ou 575 × 690/718/783."
+  ],
+  [
+   "observation",
+   "Fond #FBFBFB (parfois #F6F6F6 sur les étapes), bandelettes grises latérales en dégradé + filets noirs fondus."
+  ],
+  [
+   "observation",
+   "Plus Jakarta Sans Bold pour tout l'éditorial ; Inter pour les chiffres, les boutons d'interface, le nom ; Eudoxus Sans pour « Agency »."
+  ],
+  [
+   "observation",
+   "Rayons des cartouches mesurés dans ce corpus ≈ 0,18–0,27 × hauteur, plus petits que le ratio 0,33 retenu d'après « Le déclic »."
+  ],
+  [
+   "ambigu",
+   "Faut-il recaler le ratio d'arrondi sur ces nouvelles mesures (≈0,21) ou garder la référence « Le déclic » demandée par Louis ? Pour le test v1, les cartouches clonés gardent leurs rayons sources."
+  ],
+  [
+   "observation",
+   "Les sections d'un carrousel changent de couleur selon leur angle (rouge → bleu) dans les études de cas et comparatifs."
+  ],
+  [
+   "observation",
+   "Fin de carrousel : « Merci » puis l'offre ; l'offre peut aussi apparaître au milieu (« PAUSE »)."
+  ],
+  [
+   "regle",
+   "Cadre de sélection bleu : presque uniquement en couverture, pour évoquer l'édition d'une page. Jamais au milieu d'une explication où il n'a pas de sens."
+  ],
+  [
+   "regle",
+   "Empilement : trois cartes plutôt que deux, écarts serrés, la première couvre davantage ; on doit moins voir l'empilement (préférence fréquente de Louis)."
+  ]
+ ]
+}
