@@ -1,0 +1,501 @@
+<title>Banque d'illustrations</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&family=Red+Hat+Mono:wght@300;400&display=swap">
+<style>
+/* Layout: one phone-width column — stats on top, swipe deck in the middle, floating nav pill + round button at the bottom. Dark only, like the reference. */
+:root{
+  --bg:#1c1c1c;
+  --card:#2a2927;
+  --card-back:#232221;
+  --line:rgba(255,255,255,.09);
+  --glass:rgba(255,255,255,.13);
+  --glass-strong:rgba(255,255,255,.2);
+  --fg:#f4f2ef;
+  --muted:#8d8a86;
+  --dim:#5f5c59;
+  --accent:#f08a3e;
+  --accent-bg:rgba(240,138,62,.16);
+  --reject:#ff6b5e;
+  --like:#ff8fb1;
+  --star:#ffc24a;
+  --font:"Lexend",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Red Hat Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.app{height:100%;max-width:560px;margin:0 auto;display:flex;flex-direction:column;position:relative}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);padding-top:44px;padding-bottom:6px;text-align:center}
+.stat b{display:block;font-family:var(--mono);font-weight:300;font-size:34px;line-height:1;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:9px;font-size:11px;color:var(--muted);font-weight:300}
+
+/* ---------- views ---------- */
+.view{flex:1;min-height:0;display:flex;flex-direction:column}
+.view[hidden]{display:none!important}
+
+/* ---------- deck ---------- */
+.deck{flex:1;min-height:0;position:relative;margin-top:28px}
+.card{position:absolute;inset:0 6px 0 6px;border-radius:30px;background:var(--card);border:1px solid var(--line);
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.65),0 2px 0 rgba(255,255,255,.04) inset;
+  display:flex;flex-direction:column;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;will-change:transform}
+.card.back{background:var(--card-back);transform:translate(-14px,10px) rotate(-4deg) scale(.95);opacity:.55;filter:saturate(.4) brightness(.7)}
+.card.back2{background:var(--card-back);transform:translate(-22px,18px) rotate(-6deg) scale(.91);opacity:.25;filter:saturate(.2) brightness(.6)}
+.card.front{cursor:grab;transition:box-shadow .2s}
+.card.front.dragging{cursor:grabbing}
+.card.anim{transition:transform .38s cubic-bezier(.2,.8,.2,1),opacity .38s}
+.shot{position:relative;flex:1;min-height:0;margin:10px 10px 0;border-radius:22px;background:#121212;overflow:hidden}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
+.chip{position:absolute;left:12px;top:12px;padding:7px 13px;border-radius:999px;font-size:12px;font-weight:400;
+  background:rgba(28,28,28,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zoom{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(28,28,28,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line)}
+.zoom svg{width:16px;height:16px}
+.stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);padding:10px 18px;border-radius:14px;font-weight:600;font-size:17px;
+  background:rgba(20,20,20,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:2px solid currentColor;opacity:0;white-space:nowrap;pointer-events:none}
+.stamp.reject{color:var(--reject)}.stamp.like{color:var(--like)}.stamp.star{color:var(--star)}
+.meta{padding:16px 20px 0}
+.meta h2{margin:0;font-size:23px;line-height:1.16;font-weight:500;letter-spacing:-.01em;text-wrap:balance;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta h2 em{font-style:normal;color:var(--muted)}
+.quote{margin:12px 0 0;padding-left:12px;border-left:1.5px solid rgba(255,255,255,.28);font-size:12.5px;line-height:1.45;color:rgba(244,242,239,.72);font-weight:300;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.actions{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;padding:16px 14px 14px;align-items:center}
+.act{height:56px;border-radius:999px;background:var(--glass);display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:400;
+  border:1px solid rgba(255,255,255,.06);transition:background .15s,transform .15s}
+.act:hover{background:var(--glass-strong)}
+.act:active{transform:scale(.96)}
+.act svg{width:19px;height:19px;flex:none}
+.act.mid{width:56px;padding:0}
+.act.reject svg{color:var(--fg)}
+.act.mid svg{color:var(--like)}
+.act.star svg{color:var(--star)}
+.hint{margin:16px 0 0;text-align:center;font-size:12px;line-height:1.55;color:var(--dim);font-weight:300}
+.hint b{font-weight:400;color:var(--muted)}
+
+.empty{position:absolute;inset:0 6px;border-radius:30px;border:1px dashed rgba(255,255,255,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;gap:10px}
+.empty h3{margin:0;font-size:20px;font-weight:500}
+.empty p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;max-width:30ch;font-weight:300}
+
+/* ---------- bank ---------- */
+.head{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.head h1{margin:0;font-size:22px;font-weight:500}
+.filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.filter{flex:none;padding:9px 14px;border-radius:999px;background:var(--glass);font-size:13px;display:flex;gap:7px;align-items:center;border:1px solid transparent}
+.filter i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.filter[aria-pressed="true"]{background:var(--accent-bg);color:var(--accent);border-color:rgba(240,138,62,.3)}
+.filter[aria-pressed="true"] i{color:var(--accent)}
+.grid{flex:1;min-height:0;overflow-y:auto;margin-top:14px;padding-bottom:120px;columns:2 160px;column-gap:10px}
+.tile{break-inside:avoid;margin-bottom:10px;border-radius:16px;overflow:hidden;background:#121212;position:relative;display:block;width:100%;padding:0;border:1px solid var(--line)}
+.tile img{display:block;width:100%;height:auto}
+.tile .dot{position:absolute;left:8px;top:8px;padding:4px 8px;border-radius:999px;font-size:10.5px;background:rgba(20,20,20,.8);backdrop-filter:blur(8px)}
+.dot.project{color:var(--star)}.dot.like{color:var(--like)}.dot.reject{color:var(--reject)}.dot.todo{color:var(--muted)}
+.none{color:var(--muted);font-size:13px;padding:40px 0;text-align:center;column-span:all;font-weight:300}
+
+/* ---------- share ---------- */
+.scroll{flex:1;min-height:0;overflow-y:auto;padding-bottom:120px}
+.panel{margin-top:14px;padding:18px;border-radius:22px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.panel h3{margin:0;font-size:15px;font-weight:500}
+.panel p{margin:0;font-size:13px;line-height:1.55;color:var(--muted);font-weight:300}
+.panel code,.mono{font-family:var(--mono);font-size:12px}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.btn{padding:11px 16px;border-radius:999px;background:var(--glass);font-size:13px;border:1px solid rgba(255,255,255,.06)}
+.btn:hover{background:var(--glass-strong)}
+.btn.primary{background:var(--accent);color:#1c1c1c;font-weight:500}
+.box{width:100%;min-height:96px;resize:vertical;border-radius:14px;background:#151515;border:1px solid var(--line);color:var(--fg);padding:12px;font-family:var(--mono);font-size:11.5px;line-height:1.5}
+.sync{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.sync::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--dim)}
+.sync.ok::before{background:#5fd38d}.sync.warn::before{background:var(--star)}
+
+/* ---------- bottom bar ---------- */
+.bar{position:absolute;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;justify-content:center;pointer-events:none;z-index:5}
+.nav{pointer-events:auto;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(44,43,41,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);box-shadow:0 14px 30px -10px rgba(0,0,0,.6)}
+.tab{min-width:78px;height:50px;padding:0 18px;border-radius:999px;font-size:13px;color:var(--muted);font-weight:400;transition:background .2s,color .2s}
+.tab[aria-current="page"]{background:var(--accent-bg);color:var(--accent)}
+.round{pointer-events:auto;width:62px;height:62px;border-radius:50%;background:rgba(44,43,41,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.6)}
+.round svg{width:21px;height:21px}
+.round:disabled{opacity:.35;cursor:default}
+.home-ind{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);width:120px;height:4px;border-radius:4px;background:rgba(255,255,255,.22);display:none}
+.view.deck-view{padding-bottom:104px}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:20;background:rgba(10,10,10,.94);display:flex;flex-direction:column;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));gap:14px}
+.lb .pic{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.lb .pic img{max-width:100%;max-height:100%;object-fit:contain;border-radius:14px}
+.lb .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lb .top p{margin:0;font-size:13px;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb .top a{color:var(--fg)}
+.lb .acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.lb .acts .btn[aria-pressed="true"]{background:var(--accent-bg);color:var(--accent);border-color:rgba(240,138,62,.35)}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-30px);opacity:0;padding:10px 16px;border-radius:999px;background:#33312f;border:1px solid var(--line);font-size:13px;z-index:30;transition:all .25s;pointer-events:none;white-space:nowrap}
+.toast.on{transform:translate(-50%,0);opacity:1}
+@media (min-height:900px){.stats{padding-top:56px}}
+@media (max-height:700px){.stats{padding-top:18px}.stat b{font-size:28px}.deck{margin-top:16px}.meta h2{font-size:18px}.quote{display:none}.hint{margin-top:10px}}
+@media (prefers-reduced-motion:reduce){.card.anim{transition:none}.toast{transition:none}}
+</style>
+
+<div class="app">
+  <div class="stats" aria-live="polite">
+    <div class="stat"><b id="sProject">00</b><span>Ce projet</span></div>
+    <div class="stat"><b id="sLike">00</b><span>J'aime</span></div>
+    <div class="stat"><b id="sLeft">00</b><span>À trier</span></div>
+  </div>
+
+  <!-- TRIER -->
+  <section class="view deck-view" id="v-deck">
+    <div class="deck" id="deck">
+      <div class="empty" id="loading"><h3>Chargement de la banque…</h3><p>Les illustrations et tes choix arrivent depuis la sauvegarde en ligne.</p></div>
+    </div>
+    <p class="hint">Glisse à gauche pour <b>rejeter</b>, à droite pour <b>ce projet</b><br>vers le haut pour <b>j'aime</b> · touche l'œil pour agrandir</p>
+  </section>
+
+  <!-- BANQUE -->
+  <section class="view" id="v-bank" hidden>
+    <div class="head">
+      <h1>Banque</h1>
+      <div class="filters" role="group" aria-label="Filtrer">
+        <button class="filter" data-f="project" aria-pressed="true">★ Bon pour ce projet <i id="cProject">0</i></button>
+        <button class="filter" data-f="like" aria-pressed="false">♥ J'aime, pas ce projet <i id="cLike">0</i></button>
+        <button class="filter" data-f="reject" aria-pressed="false">✕ Rejetées <i id="cReject">0</i></button>
+        <button class="filter" data-f="todo" aria-pressed="false">À trier <i id="cTodo">0</i></button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- PARTAGE -->
+  <section class="view" id="v-share" hidden>
+    <div class="scroll">
+      <div class="head"><h1>Partage &amp; sauvegarde</h1></div>
+      <div class="panel">
+        <div class="sync" id="sync">Connexion à la sauvegarde…</div>
+        <p>Chaque choix est enregistré en ligne à l'instant où tu swipes. Ouvre ce même lien sur ton téléphone ou ton ordinateur : tu retrouves exactement le même tri. Les nouvelles images ajoutées plus tard arrivent dans « À trier », jamais en double.</p>
+      </div>
+      <div class="panel">
+        <h3>Envoyer à un agent ou dans Figma</h3>
+        <p>Donne simplement le lien de cette page à un agent Claude, avec la consigne ci-dessous. Il lit les choix et les images directement, sans téléchargement.</p>
+        <textarea class="box" id="agentText" readonly aria-label="Consigne pour un agent"></textarea>
+        <div class="row">
+          <button class="btn primary" data-copy="agentText">Copier la consigne</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Liens des images</h3>
+        <p>Liens publics des images d'origine, un par ligne. À coller dans Figma (plugin d'import par URL) ou à donner à un agent.</p>
+        <div class="filters" role="group" aria-label="Choisir la liste">
+          <button class="filter" data-l="project" aria-pressed="true">★ Ce projet</button>
+          <button class="filter" data-l="like" aria-pressed="false">♥ J'aime</button>
+          <button class="filter" data-l="all" aria-pressed="false">Toutes gardées</button>
+        </div>
+        <textarea class="box" id="linksText" readonly aria-label="Liens des images"></textarea>
+        <div class="row">
+          <button class="btn primary" data-copy="linksText">Copier les liens</button>
+          <button class="btn" id="copyJson">Copier le JSON complet</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bar">
+    <nav class="nav" aria-label="Onglets">
+      <button class="tab" data-v="bank">Banque</button>
+      <button class="tab" data-v="deck" aria-current="page">Trier</button>
+      <button class="tab" data-v="share">Partage</button>
+    </nav>
+    <button class="round" id="undo" aria-label="Annuler le dernier choix" title="Annuler (Z)" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="lb" id="lb" hidden>
+  <div class="top"><p id="lbInfo"></p><button class="btn" id="lbClose">Fermer</button></div>
+  <div class="pic"><img id="lbImg" alt=""></div>
+  <div class="acts" id="lbActs">
+    <button class="btn" data-s="reject">✕ Rejeter</button>
+    <button class="btn" data-s="like">♥ J'aime, pas ce projet</button>
+    <button class="btn" data-s="project">★ Bon pour ce projet</button>
+    <button class="btn" data-s="todo">Remettre à trier</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const ARTIFACT_URL = "https://claude.ai/artifact/JG98tyNgWMHBcassVQsgiy";
+const LABEL = {project:"Bon pour ce projet", like:"J'aime, pas ce projet", reject:"Rejetée", todo:"À trier"};
+const ICON = {
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  heart:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.6 7.6 4 4.5 7.3 4.5c2 0 3.6 1.1 4.7 2.7 1.1-1.6 2.7-2.7 4.7-2.7 3.3 0 5.7 3.1 4.5 6.6-1.7 4.8-9.2 9.4-9.2 9.4z"/></svg>',
+  star:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>',
+  eye:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>'
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+let bank = [];                 // images from bank.json
+let byId = new Map();
+let decisions = {};            // id -> {status, at}
+let history = [];              // ids decided this session, for undo
+let db = null, col = null, online = false;
+let bankFilter = "project", linkFilter = "project";
+
+/* ---------- storage ---------- */
+const LS = "ill-bank-decisions";
+function lsLoad(){ try { return JSON.parse(localStorage.getItem(LS) || "{}"); } catch { return {}; } }
+function lsSave(){ try { localStorage.setItem(LS, JSON.stringify(decisions)); } catch {} }
+
+async function setStatus(id, status){
+  if (status === "todo") delete decisions[id]; else decisions[id] = {status, at: Date.now()};
+  lsSave(); renderAll();
+  if (!col) return;
+  try {
+    if (status === "todo") await col.doc(id).delete();
+    else await col.doc(id).set({status, at: decisions[id].at});
+  } catch (e) { toast("Pas enregistré en ligne : " + (e.message || e.code) + ". Réessaie."); setSync("warn","Sauvegarde en ligne en erreur, choix gardés sur cet appareil"); }
+}
+
+function setSync(kind, text){ const el = $("#sync"); el.className = "sync " + kind; el.textContent = text; }
+
+async function connect(){
+  try {
+    db = await window.claude?.use?.("db");
+  } catch { db = null; }
+  if (!db) { setSync("warn", "Sauvegarde en ligne indisponible ici : tes choix restent sur cet appareil. Ouvre la page depuis claude.ai, connecté."); return; }
+  col = db.collection("decisions");
+  let got = false;
+  const timer = setTimeout(() => { if (!got) setSync("warn","La sauvegarde en ligne met du temps à répondre…"); }, 10000);
+  col.onSnapshot(snap => {
+    got = true; clearTimeout(timer);
+    const remote = {};
+    snap.docs.forEach(d => { const v = d.data(); if (v && v.status) remote[d.id] = {status: v.status, at: v.at || 0}; });
+    // first sync: push choices made offline on this device that the server doesn't have yet
+    if (!online) {
+      const local = lsLoad();
+      Object.entries(local).forEach(([id, v]) => { if (!remote[id] && byId.has(id)) { remote[id] = v; col.doc(id).set(v).catch(()=>{}); } });
+    }
+    online = true;
+    decisions = remote; lsSave();
+    setSync("ok", "Synchronisé en ligne · " + Object.keys(remote).length + " choix enregistrés");
+    renderAll();
+  }, err => { clearTimeout(timer); setSync("warn", "Sauvegarde en ligne coupée (" + (err.code || "erreur") + "). Recharge la page."); });
+}
+
+/* ---------- deck ---------- */
+const deckEl = $("#deck");
+let shownId = null;
+function queue(){ return bank.filter(b => !decisions[b.id]); }
+
+function cardHTML(it, cls){
+  return `<article class="card ${cls}" data-id="${it.id}">
+    <div class="shot">
+      <img src="${esc(it.file)}" alt="${esc(it.title)}" draggable="false" ${cls==="front" ? "" : 'loading="lazy"'}>
+      <span class="chip">${esc(it.source)} · ${esc(it.tag || it.query)}</span>
+      <button class="zoom" aria-label="Agrandir l'image">${ICON.eye}</button>
+      <span class="stamp reject">✕ Rejeter</span><span class="stamp like">♥ J'aime</span><span class="stamp star">★ Ce projet</span>
+    </div>
+    <div class="meta">
+      <h2>${esc(it.title)}</h2>
+      <p class="quote">Recherche « ${esc(it.query)} » · ${esc(it.author || it.source)}</p>
+    </div>
+    <div class="actions">
+      <button class="act reject" data-a="reject" aria-label="Rejeter">${ICON.x}<span>Rejeter</span></button>
+      <button class="act mid" data-a="like" aria-label="J'aime, mais pas pour ce projet">${ICON.heart}</button>
+      <button class="act star" data-a="project" aria-label="Bon pour ce projet">${ICON.star}<span>Ce projet</span></button>
+    </div>
+  </article>`;
+}
+
+function renderDeck(force){
+  const q = queue();
+  const top = q[0];
+  if (!force && top && top.id === shownId && deckEl.querySelector(".card.front")) return;
+  shownId = top ? top.id : null;
+  if (!bank.length) return;
+  if (!top) {
+    deckEl.innerHTML = `<div class="empty"><h3>Tout est trié</h3><p>${bank.length} illustrations passées en revue. Retrouve-les dans l'onglet Banque. Les prochaines images ajoutées apparaîtront ici.</p></div>`;
+    return;
+  }
+  deckEl.innerHTML = (q[2] ? cardHTML(q[2], "back2") : "") + (q[1] ? cardHTML(q[1], "back") : "") + cardHTML(top, "front");
+  // preload the next few
+  q.slice(3, 6).forEach(n => { const i = new Image(); i.src = n.file; });
+  bindCard(deckEl.querySelector(".card.front"));
+}
+
+function bindCard(card){
+  const id = card.dataset.id;
+  let sx = 0, sy = 0, dx = 0, dy = 0, dragging = false, moved = false, pid = null;
+  const stamps = {reject: card.querySelector(".stamp.reject"), like: card.querySelector(".stamp.like"), star: card.querySelector(".stamp.star")};
+  const W = () => card.offsetWidth;
+  function paint(){
+    card.style.transform = `translate(${dx}px,${dy}px) rotate(${dx / W() * 14}deg)`;
+    const r = Math.max(0, Math.min(1, -dx / 110)), s = Math.max(0, Math.min(1, dx / 110)), l = Math.max(0, Math.min(1, -dy / 110)) * (Math.abs(dx) < 70 ? 1 : 0);
+    stamps.reject.style.opacity = r; stamps.star.style.opacity = s; stamps.like.style.opacity = l;
+  }
+  card.addEventListener("pointerdown", e => {
+    if (e.target.closest("button")) return;
+    dragging = true; moved = false; pid = e.pointerId; sx = e.clientX; sy = e.clientY; dx = dy = 0;
+    card.setPointerCapture(pid); card.classList.add("dragging"); card.classList.remove("anim");
+  });
+  card.addEventListener("pointermove", e => {
+    if (!dragging || e.pointerId !== pid) return;
+    dx = e.clientX - sx; dy = e.clientY - sy; if (Math.hypot(dx, dy) > 6) moved = true; paint();
+  });
+  const end = e => {
+    if (!dragging || e.pointerId !== pid) return;
+    dragging = false; card.classList.remove("dragging");
+    if (!moved) { if (e.target.closest(".shot")) openLb(id); return; }
+    if (dx < -110) return fling(card, "reject");
+    if (dx > 110) return fling(card, "project");
+    if (dy < -110 && Math.abs(dx) < 90) return fling(card, "like");
+    card.classList.add("anim"); dx = dy = 0; paint();
+  };
+  card.addEventListener("pointerup", end);
+  card.addEventListener("pointercancel", end);
+  card.querySelector(".zoom").addEventListener("click", () => openLb(id));
+  card.querySelectorAll(".act").forEach(b => b.addEventListener("click", () => fling(card, b.dataset.a)));
+}
+
+function fling(card, status){
+  if (!card || card.dataset.gone) return;
+  card.dataset.gone = "1";
+  const id = card.dataset.id;
+  const st = card.querySelector(".stamp." + (status === "project" ? "star" : status));
+  if (st) st.style.opacity = 1;
+  card.classList.add("anim");
+  const W = window.innerWidth;
+  card.style.transform = status === "reject" ? `translate(${-W}px,40px) rotate(-22deg)` :
+                         status === "project" ? `translate(${W}px,40px) rotate(22deg)` :
+                         `translate(0,-${window.innerHeight}px) rotate(0deg)`;
+  card.style.opacity = "0";
+  history.push(id); $("#undo").disabled = false;
+  setTimeout(() => setStatus(id, status), 260);
+}
+
+function undo(){
+  const id = history.pop();
+  if (!id) return;
+  $("#undo").disabled = !history.length;
+  setStatus(id, "todo");
+  bank = [byId.get(id), ...bank.filter(b => b.id !== id)];
+  shownId = null; renderDeck(true);
+  toast("Choix annulé");
+}
+
+/* ---------- stats & bank ---------- */
+function counts(){
+  const c = {project:0, like:0, reject:0, todo:0};
+  bank.forEach(b => { c[decisions[b.id]?.status || "todo"]++; });
+  return c;
+}
+const pad = n => String(n).padStart(2, "0");
+function renderStats(){
+  const c = counts();
+  $("#sProject").textContent = pad(c.project); $("#sLike").textContent = pad(c.like); $("#sLeft").textContent = pad(c.todo);
+  $("#cProject").textContent = c.project; $("#cLike").textContent = c.like; $("#cReject").textContent = c.reject; $("#cTodo").textContent = c.todo;
+}
+function listFor(f){
+  return bank.filter(b => (decisions[b.id]?.status || "todo") === f)
+             .sort((a, b) => (decisions[b.id]?.at || 0) - (decisions[a.id]?.at || 0));
+}
+function renderBank(){
+  if ($("#v-bank").hidden) return;
+  const list = listFor(bankFilter);
+  $("#grid").innerHTML = list.length ? list.map(b => `<button class="tile" data-id="${b.id}"><img src="${esc(b.file)}" alt="${esc(b.title)}" loading="lazy" width="${b.w}" height="${b.h}"><span class="dot ${bankFilter}">${LABEL[bankFilter]}</span></button>`).join("")
+    : `<p class="none">Rien ici pour l'instant.</p>`;
+}
+function renderShare(){
+  if ($("#v-share").hidden) return;
+  const keep = linkFilter === "all" ? [...listFor("project"), ...listFor("like")] : listFor(linkFilter);
+  $("#linksText").value = keep.map(b => b.src).join("\n");
+  const c = counts();
+  $("#agentText").value =
+`Banque d'illustrations : ${ARTIFACT_URL}
+
+Lis cette banque avec l'outil Artifact / ArtifactData sur ce lien :
+- les images et leurs infos sont dans le fichier publié "bank.json" (id, file, src = lien public de l'image d'origine, page = page source, title, query, batch) ;
+- mes choix sont dans la collection "decisions" de la base : un document par id d'image, champ status = "project" (bon pour ce projet), "like" (j'aime mais pas pour ce projet) ou "reject" (rejetée). Une image sans document est encore à trier.
+
+État actuel : ${c.project} bon pour ce projet, ${c.like} j'aime, ${c.reject} rejetées, ${c.todo} à trier.
+
+Pour Figma : prends les images status="project", et place-les dans un frame "Banque · Ce projet" en grille (utilise le champ src pour l'image). Fais un deuxième frame "Banque · J'aime" pour status="like".
+Pour ajouter de nouvelles images : n'ajoute jamais un src ou une image déjà présente dans bank.json.`;
+}
+function renderAll(){ renderStats(); renderDeck(); renderBank(); renderShare(); }
+
+/* ---------- lightbox ---------- */
+let lbId = null;
+function openLb(id){
+  const b = byId.get(id); if (!b) return;
+  lbId = id;
+  $("#lbImg").src = b.file; $("#lbImg").alt = b.title;
+  $("#lbInfo").innerHTML = `${esc(b.title)} · <a href="${esc(b.page)}" target="_blank" rel="noopener">voir la source</a>`;
+  const s = decisions[id]?.status || "todo";
+  $("#lbActs").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.s === s)));
+  $("#lb").hidden = false; $("#lbClose").focus();
+}
+function closeLb(){ $("#lb").hidden = true; lbId = null; }
+$("#lbClose").addEventListener("click", closeLb);
+$("#lb").addEventListener("click", e => { if (e.target.id === "lb" || e.target.classList.contains("pic")) closeLb(); });
+$("#lbActs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b || !lbId) return;
+  setStatus(lbId, b.dataset.s); toast(b.dataset.s === "todo" ? "Remise à trier" : "Rangée dans « " + LABEL[b.dataset.s] + " »"); closeLb();
+});
+$("#grid").addEventListener("click", e => { const t = e.target.closest(".tile"); if (t) openLb(t.dataset.id); });
+
+/* ---------- tabs, filters, copy ---------- */
+function show(v){
+  ["deck","bank","share"].forEach(n => $("#v-" + n).hidden = n !== v);
+  document.querySelectorAll(".tab").forEach(t => { if (t.dataset.v === v) t.setAttribute("aria-current","page"); else t.removeAttribute("aria-current"); });
+  try { localStorage.setItem("ill-bank-tab", v); } catch {}
+  renderAll();
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => show(t.dataset.v)));
+document.querySelectorAll("[data-f]").forEach(b => b.addEventListener("click", () => {
+  bankFilter = b.dataset.f; document.querySelectorAll("[data-f]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); renderBank();
+}));
+document.querySelectorAll("[data-l]").forEach(b => b.addEventListener("click", () => {
+  linkFilter = b.dataset.l; document.querySelectorAll("[data-l]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); renderShare();
+}));
+async function copy(text, el){
+  try { await navigator.clipboard.writeText(text); toast("Copié"); }
+  catch { if (el) { el.focus(); el.select(); } toast("Sélectionné : fais Copier"); }
+}
+document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", () => { const el = $("#" + b.dataset.copy); copy(el.value, el); }));
+$("#copyJson").addEventListener("click", () => {
+  const out = bank.map(b => ({...b, status: decisions[b.id]?.status || "todo"}));
+  copy(JSON.stringify(out, null, 1));
+});
+$("#undo").addEventListener("click", undo);
+document.addEventListener("keydown", e => {
+  if (!$("#lb").hidden) { if (e.key === "Escape") closeLb(); return; }
+  if ($("#v-deck").hidden) return;
+  const card = deckEl.querySelector(".card.front");
+  if (e.key === "ArrowLeft") fling(card, "reject");
+  else if (e.key === "ArrowRight") fling(card, "project");
+  else if (e.key === "ArrowUp") { e.preventDefault(); fling(card, "like"); }
+  else if (e.key.toLowerCase() === "z") undo();
+});
+let tt; function toast(t){ const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => el.classList.remove("on"), 1800); }
+
+/* ---------- boot ---------- */
+(async function boot(){
+  decisions = lsLoad();
+  try {
+    const r = await fetch("bank.json", {cache: "no-store"});
+    bank = await r.json();
+  } catch {
+    deckEl.innerHTML = `<div class="empty"><h3>Banque introuvable</h3><p>Le fichier des images n'a pas pu être chargé. Recharge la page.</p></div>`;
+    return;
+  }
+  bank.forEach(b => byId.set(b.id, b));
+  let tab = "deck"; try { tab = localStorage.getItem("ill-bank-tab") || "deck"; } catch {}
+  show(["deck","bank","share"].includes(tab) ? tab : "deck");
+  connect();
+})();
+</script>
