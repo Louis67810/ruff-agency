@@ -30,8 +30,13 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;-webki
 button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .app{height:100%;max-width:560px;margin:0 auto;display:flex;flex-direction:column;position:relative}
 
+/* ---------- mode toggle ---------- */
+.modes{margin-top:calc(14px + env(safe-area-inset-top,0px));align-self:center;display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--line)}
+.mode{padding:8px 18px;border-radius:999px;font-size:13px;color:var(--muted);font-weight:400;transition:background .2s,color .2s}
+.mode[aria-pressed="true"]{background:var(--glass-strong);color:var(--fg)}
+
 /* ---------- stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);padding-top:44px;padding-bottom:6px;text-align:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);padding-top:26px;padding-bottom:6px;text-align:center}
 .stat b{display:block;font-family:var(--mono);font-weight:300;font-size:34px;line-height:1;letter-spacing:.01em;font-variant-numeric:tabular-nums}
 .stat span{display:block;margin-top:9px;font-size:11px;color:var(--muted);font-weight:300}
 
@@ -135,12 +140,16 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-off
 .lb .acts .btn[aria-pressed="true"]{background:var(--accent-bg);color:var(--accent);border-color:rgba(240,138,62,.35)}
 .toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-30px);opacity:0;padding:10px 16px;border-radius:999px;background:#33312f;border:1px solid var(--line);font-size:13px;z-index:30;transition:all .25s;pointer-events:none;white-space:nowrap}
 .toast.on{transform:translate(-50%,0);opacity:1}
-@media (min-height:900px){.stats{padding-top:56px}}
-@media (max-height:700px){.stats{padding-top:18px}.stat b{font-size:28px}.deck{margin-top:16px}.meta h2{font-size:18px}.quote{display:none}.hint{margin-top:10px}}
+@media (min-height:900px){.stats{padding-top:40px}}
+@media (max-height:700px){.stats{padding-top:12px}.stat b{font-size:28px}.deck{margin-top:16px}.meta h2{font-size:18px}.quote{display:none}.hint{margin-top:10px}}
 @media (prefers-reduced-motion:reduce){.card.anim{transition:none}.toast{transition:none}}
 </style>
 
 <div class="app">
+  <div class="modes" role="group" aria-label="Type de banque">
+    <button class="mode" data-m="illustration" aria-pressed="true">Illustrations</button>
+    <button class="mode" data-m="section" aria-pressed="false">Sections</button>
+  </div>
   <div class="stats" aria-live="polite">
     <div class="stat"><b id="sProject">00</b><span>Ce projet</span></div>
     <div class="stat"><b id="sLike">00</b><span>J'aime</span></div>
@@ -238,7 +247,9 @@ const ICON = {
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-let bank = [];                 // images from bank.json
+let allBank = [];              // illustrations (bank.json) + sections (sections.json)
+let bank = [];                 // the items of the current mode
+let mode = "illustration";
 let byId = new Map();
 let decisions = {};            // id -> {status, at}
 let history = [];              // ids decided this session, for undo
@@ -301,7 +312,7 @@ function cardHTML(it, cls){
     </div>
     <div class="meta">
       <h2>${esc(it.title)}</h2>
-      <p class="quote">Recherche « ${esc(it.query)} » · ${esc(it.author || it.source)}</p>
+      <p class="quote">${it.kind === "section" ? "Section « " + esc(it.query) + " » · " + esc(it.source) : "Recherche « " + esc(it.query) + " » · " + esc(it.author || it.source)}</p>
     </div>
     <div class="actions">
       <button class="act reject" data-a="reject" aria-label="Rejeter">${ICON.x}<span>Rejeter</span></button>
@@ -316,7 +327,10 @@ function renderDeck(force){
   const top = q[0];
   if (!force && top && top.id === shownId && deckEl.querySelector(".card.front")) return;
   shownId = top ? top.id : null;
-  if (!bank.length) return;
+  if (!bank.length) {
+    deckEl.innerHTML = `<div class="empty"><h3>Banque vide</h3><p>Aucune image dans cette banque pour l'instant.</p></div>`;
+    return;
+  }
   if (!top) {
     deckEl.innerHTML = `<div class="empty"><h3>Tout est trié</h3><p>${bank.length} illustrations passées en revue. Retrouve-les dans l'onglet Banque. Les prochaines images ajoutées apparaîtront ici.</p></div>`;
     return;
@@ -415,16 +429,16 @@ function renderShare(){
   $("#linksText").value = keep.map(b => b.src).join("\n");
   const c = counts();
   $("#agentText").value =
-`Banque d'illustrations : ${ARTIFACT_URL}
+`Banque d'illustrations et de sections : ${ARTIFACT_URL}
 
 Lis cette banque avec l'outil Artifact / ArtifactData sur ce lien :
-- les images et leurs infos sont dans le fichier publié "bank.json" (id, file, src = lien public de l'image d'origine, page = page source, title, query, batch) ;
-- mes choix sont dans la collection "decisions" de la base : un document par id d'image, champ status = "project" (bon pour ce projet), "like" (j'aime mais pas pour ce projet) ou "reject" (rejetée). Une image sans document est encore à trier.
+- il y a deux banques : les illustrations dans le fichier publié "bank.json" et les sections de sites dans "sections.json" (champs : id, kind = "illustration" ou "section", file, src = lien public de l'image d'origine, page = page source, title, query, batch) ;
+- mes choix sont dans la collection "decisions" de la base : un document par id, champ status = "project" (bon pour ce projet), "like" (j'aime mais pas pour ce projet) ou "reject" (rejetée). Un élément sans document est encore à trier.
 
-État actuel : ${c.project} bon pour ce projet, ${c.like} j'aime, ${c.reject} rejetées, ${c.todo} à trier.
+Banque affichée (${mode === "section" ? "sections" : "illustrations"}) : ${c.project} bon pour ce projet, ${c.like} j'aime, ${c.reject} rejetées, ${c.todo} à trier.
 
-Pour Figma : prends les images status="project", et place-les dans un frame "Banque · Ce projet" en grille (utilise le champ src pour l'image). Fais un deuxième frame "Banque · J'aime" pour status="like".
-Pour ajouter de nouvelles images : n'ajoute jamais un src ou une image déjà présente dans bank.json.`;
+Pour Figma : prends les éléments status="project", et place-les dans un frame "Banque · Ce projet" en grille (utilise le champ src pour l'image). Fais un deuxième frame "Banque · J'aime" pour status="like". Sépare les illustrations et les sections.
+Pour ajouter de nouveaux éléments : n'ajoute jamais un src ou une image déjà présente dans bank.json ou sections.json.`;
 }
 function renderAll(){ renderStats(); renderDeck(); renderBank(); renderShare(); }
 
@@ -447,6 +461,19 @@ $("#lbActs").addEventListener("click", e => {
   setStatus(lbId, b.dataset.s); toast(b.dataset.s === "todo" ? "Remise à trier" : "Rangée dans « " + LABEL[b.dataset.s] + " »"); closeLb();
 });
 $("#grid").addEventListener("click", e => { const t = e.target.closest(".tile"); if (t) openLb(t.dataset.id); });
+
+/* ---------- mode: illustrations / sections ---------- */
+function applyMode(rerender = true){
+  bank = allBank.filter(b => b.kind === mode);
+  document.querySelectorAll(".mode").forEach(m => m.setAttribute("aria-pressed", String(m.dataset.m === mode)));
+  history = []; $("#undo").disabled = true;
+  try { localStorage.setItem("ill-bank-mode", mode); } catch {}
+  if (rerender) { shownId = null; renderStats(); renderDeck(true); renderBank(); renderShare(); }
+}
+document.querySelectorAll(".mode").forEach(m => m.addEventListener("click", () => {
+  if (mode === m.dataset.m) return;
+  mode = m.dataset.m; applyMode();
+}));
 
 /* ---------- tabs, filters, copy ---------- */
 function show(v){
@@ -488,12 +515,18 @@ let tt; function toast(t){ const el = $("#toast"); el.textContent = t; el.classL
   decisions = lsLoad();
   try {
     const r = await fetch("bank.json", {cache: "no-store"});
-    bank = await r.json();
+    allBank = (await r.json()).map(b => ({kind: "illustration", ...b}));
   } catch {
     deckEl.innerHTML = `<div class="empty"><h3>Banque introuvable</h3><p>Le fichier des images n'a pas pu être chargé. Recharge la page.</p></div>`;
     return;
   }
-  bank.forEach(b => byId.set(b.id, b));
+  try {
+    const r2 = await fetch("sections.json", {cache: "no-store"});
+    if (r2.ok) allBank = allBank.concat((await r2.json()).map(b => ({...b, kind: "section"})));
+  } catch {}
+  allBank.forEach(b => byId.set(b.id, b));
+  try { const m = localStorage.getItem("ill-bank-mode"); if (m === "section" || m === "illustration") mode = m; } catch {}
+  applyMode(false);
   let tab = "deck"; try { tab = localStorage.getItem("ill-bank-tab") || "deck"; } catch {}
   show(["deck","bank","share"].includes(tab) ? tab : "deck");
   connect();
