@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gagnez du temps · Variante B — Ruff</title>
+<!-- Variante B (24/11/2026) : brief dans brief.md, section « Variante B ».
+     Références : bg72cab160 (Better Stack), bgef4759a8 (time blocking), bg15371cdc (Medusa), bg3a4415f8 (Family). -->
+<link rel="stylesheet" href="../../brand/design/ruff-tokens.css">
+<link rel="stylesheet" href="carte.css">
+<style>
+  .gb-list { padding: 20px 22px 0; display: flex; flex-direction: column; border-radius: 24px; }
+  .gb-head { display: flex; align-items: center; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid rgba(0,0,0,.06); }
+  .gb-head b { font: 600 17px/1.2 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .gb-count { margin-left: auto; padding: 6px 10px; border-radius: 99px; background: #f4f4f5; font: 500 12px/1 var(--rf-font-text); color: var(--rf-ink-70); }
+  .gb-row { display: flex; align-items: center; gap: 12px; height: 48px; border-bottom: 1px solid rgba(0,0,0,.06); }
+  .gb-row .gt-txt { flex: 1; color: rgba(18,26,46,.4); text-decoration: line-through; text-decoration-color: rgba(18,26,46,.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gb-done { display: grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 50%; background: #d4d4d4; color: #fff; }
+  .gb-done .gt-ico { width: 12px; height: 12px; }
+  .gb-auto { display: flex; align-items: center; gap: 4px; flex: none; padding: 5px 8px; border-radius: 99px; background: #f4f4f5; font: 500 12px/1 var(--rf-font-text); color: rgba(18,26,46,.55); }
+  .gb-auto .gt-ico { width: 12px; height: 12px; }
+  .gb-gap { height: 72px; border-bottom: 1px solid rgba(0,0,0,.06); }
+  .gb-focus { display: flex; align-items: center; gap: 14px; height: 76px; padding: 0 20px; border-radius: 18px; }
+  .gb-box { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--rf-blue); background: #fff; }
+  .gb-focus > div { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .gb-focus b { font: 600 16px/1.2 var(--rf-font-text); letter-spacing: -0.03em; color: var(--rf-ink); }
+  .gb-you { flex: none; padding: 7px 11px; border-radius: 99px; border: 1px solid rgba(0,0,0,.12); font: 600 12px/1 var(--rf-font-text); color: var(--rf-ink); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Heroicons outline 24 -->
+    <symbol id="hi-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></symbol>
+    <symbol id="hi-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/></symbol>
+    <symbol id="hi-envelope" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></symbol>
+    <symbol id="hi-folder" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"/></symbol>
+    <symbol id="hi-bell" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></symbol>
+    <symbol id="hi-pencil" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/></symbol>
+    <symbol id="hi-doccheck" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 0 1 9 9v.375M10.125 2.25A3.375 3.375 0 0 1 13.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 0 1 3.375 3.375M9 15l2.25 2.25L15 12"/></symbol>
+    <symbol id="hi-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></symbol>
+    <symbol id="hi-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/></symbol>
+  </defs>
+</svg>
+<article class="rf-bento rf-bento--white gt-card">
+  <!-- CONCEPT (point qui ressort, Choisir) : Objet central : la liste « Aujourd'hui » du client.
+       On voit : six tâches répétitives grisées, cochées, barrées, marquées « Auto » ; une seule ligne
+       sort, nette et plus large : « Rencontrer Maison Durand », sa case encore vide. Le contraste :
+       tout est fait en gris → il reste une seule chose, la vôtre. Ça prouve : les tâches répétitives
+       sont faites ; votre temps va à ce qui compte. Accent unique : le cercle bleu de la case vide. -->
+  <div class="rf-bento__art" role="img" aria-label="La liste du jour : six tâches répétitives déjà faites automatiquement, grisées ; une seule ligne reste, nette : Rencontrer Maison Durand à 14 h">
+    <div class="gt-scene" style="--w:500px;--h:470px;--top:184px">
+      <div class="rf-wire gb-list" style="left:34px;top:0;width:432px;height:520px">
+        <div class="gb-head"><b>Aujourd'hui</b><span class="gt-txt gt-muted">Mardi</span><span class="gb-count">6 faites pour vous</span></div>
+        <div class="gb-row"><span class="gb-done"><svg class="gt-ico"><use href="#hi-check"/></svg></span><span class="gt-txt">Répondre à la demande de Camille R.</span><span class="gb-auto"><svg class="gt-ico"><use href="#hi-bolt"/></svg>Auto</span></div>
+        <div class="gb-row"><span class="gb-done"><svg class="gt-ico"><use href="#hi-check"/></svg></span><span class="gt-txt">Ajouter la demande au tableau de suivi</span><span class="gb-auto"><svg class="gt-ico"><use href="#hi-bolt"/></svg>Auto</span></div>
+        <div class="gb-gap"></div>
+        <div class="gb-row"><span class="gb-done"><svg class="gt-ico"><use href="#hi-check"/></svg></span><span class="gt-txt">Relancer le devis envoyé lundi</span><span class="gb-auto"><svg class="gt-ico"><use href="#hi-bolt"/></svg>Auto</span></div>
+        <div class="gb-row"><span class="gb-done"><svg class="gt-ico"><use href="#hi-check"/></svg></span><span class="gt-txt">Envoyer la facture de mars</span><span class="gb-auto"><svg class="gt-ico"><use href="#hi-bolt"/></svg>Auto</span></div>
+        <div class="gb-row"><span class="gb-done"><svg class="gt-ico"><use href="#hi-check"/></svg></span><span class="gt-txt">Confirmer le rendez-vous de jeudi</span><span class="gb-auto"><svg class="gt-ico"><use href="#hi-bolt"/></svg>Auto</span></div>
+        <div class="gb-row"><span class="gb-done"><svg class="gt-ico"><use href="#hi-check"/></svg></span><span class="gt-txt">Demander un avis au dernier client</span><span class="gb-auto"><svg class="gt-ico"><use href="#hi-bolt"/></svg>Auto</span></div>
+      </div>
+      <div class="rf-wire gb-focus" style="left:0;top:150px;width:500px">
+        <span class="gb-box"></span>
+        <div><b>Rencontrer Maison Durand</b><span class="gt-txt gt-muted" style="font-size:13px">14 h · Rendez-vous sur place</span></div>
+        <span class="gb-you">À vous</span>
+      </div>
+    </div>
+  </div>
+  <div class="rf-bento__fade" style="--rf-fade-h:90px;top:auto"></div>
+  <div class="rf-bento__copy">
+    <p class="rf-bento__title">Gagnez du temps au quotidien</p>
+    <p class="rf-bento__body">Automatisez les tâches répétitives et concentrez-vous sur ce qui compte vraiment pour votre activité.</p>
+  </div>
+</article>
+</body>
+</html>

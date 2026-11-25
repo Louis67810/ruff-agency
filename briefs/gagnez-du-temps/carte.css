@@ -1,0 +1,15 @@
+/* Cadre commun des 3 variantes « Gagnez du temps au quotidien ».
+   Carte bento blanche 620 × 660, texte en haut, illustration qui descend en fondu
+   (même grammaire que brand/design/sections/benefices-v9.html). */
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f5f5f5; }
+.gt-card.rf-bento { width: 620px; height: 660px; padding: 44px 44px 0; justify-content: flex-start; }
+.gt-card .rf-bento__copy { max-width: 470px; }
+.gt-card .rf-bento__art { overflow: hidden; }
+.gt-scene { position: absolute; left: 50%; top: var(--top, 214px); width: var(--w); height: var(--h); transform: translateX(-50%); }
+.gt-scene > * { position: absolute; }
+.gt-txt { margin: 0; font: 500 14px/1.35 var(--rf-font-text); letter-spacing: -0.02em; color: var(--rf-ink); }
+.gt-muted { color: var(--rf-ink-70); }
+.gt-ico { width: 18px; height: 18px; flex: none; }
+.gt-tile { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 12px; background: #f4f4f5; color: var(--rf-ink); }
+.gt-tile .gt-ico { width: 20px; height: 20px; }
+@media (max-width: 660px) { .gt-card.rf-bento { transform: scale(.58); transform-origin: top center; margin-bottom: -270px; } }
